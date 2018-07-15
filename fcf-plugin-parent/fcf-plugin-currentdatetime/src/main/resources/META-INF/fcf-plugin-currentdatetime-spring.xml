@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:fcp="http://www.fujionclinical.org/schema/plugin"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation=
+		"http://www.springframework.org/schema/beans 
+		 http://www.springframework.org/schema/beans/spring-beans.xsd
+		 http://www.fujionclinical.org/schema/plugin
+		 http://www.fujionclinical.org/schema/plugin/plugin-extensions.xsd">
+
+	<beans profile="root">
+		
+		<fcp:plugin id="fcfCurrentDateTime" name="Current Date and Time" 
+			url="web/org/fujionclinical/plugin/currentdatetime/main.fsp">
+			<fcp:serialization>
+				<fcp:property id="color" name="Color" type="color" default="blue"
+					description="The font color." />
+				<fcp:property id="format" name="Display Format" default="dd-MMM-yyyy HH:mm zzz"
+					description="Format in which to display date/time.  For example, 'dd-MMM-yyyy HH:mm zzz'" />
+			</fcp:serialization>
+		</fcp:plugin>
+		
+		<bean id="fcfCurrentDateTimeController" scope="prototype" 
+			class="org.fujionclinical.plugin.currentdatetime.MainController" />
+			
+	</beans>
+</beans>

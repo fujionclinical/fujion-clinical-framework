@@ -1,0 +1,18 @@
+<page>
+	<toolbar width="100%">
+		<textbox name="txtSearch" flex="1" />
+		<button name="btnSearch" width="16px"
+			class="glyphicon glyphicon-search" />
+	</toolbar>
+	<label name="lblNoResultsFound" visible="false"
+		value="${@msg.fcf.help.tab.search.noresults}" />
+	<grid name="tblSrchResults" visible="false" flex="1">
+		<columns>
+			<column label="" width="30px" sort="auto(confidence)"/>
+			<column label="${@msg.fcf.help.tab.search.topic.header}" />
+			<column label="${@msg.fcf.help.tab.search.source.header}" />
+		</columns>
+		<rows>
+		</rows>
+	</grid>
+</page>

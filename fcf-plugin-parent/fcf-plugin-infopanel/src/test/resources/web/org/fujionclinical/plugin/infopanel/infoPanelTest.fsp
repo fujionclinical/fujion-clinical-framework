@@ -1,0 +1,52 @@
+<page>
+	<hbox controller="${@infoPanelTestController}" width="100%"
+		height="100%">
+		<cell hflex="1">
+			<groupbox>
+				<caption label="Drag-and-Drop Test" />
+				<label
+					value="Double-click or drag to add to info panel." />
+				<separator />
+				<label label="* means action event subscriber." />
+				<listbox name="listbox" rows="5" />
+			</groupbox>
+			<groupbox>
+				<caption label="Push Tests" />
+				<toolbar>
+					<button name="btnPushAlert" label="Push Alert" />
+					<button name="btnPushDrop" label="Push Drop" />
+					<separator />
+					<checkbox name="chkEvents" label="Send as Events" />
+					<checkbox name="chkAssociate" label="Subscribe to action events." />
+				</toolbar>
+			</groupbox>
+			<groupbox>
+				<caption label="Misc Functions" />
+				<toolbar>
+					<button name="btnAddMenu" label="Add Menu Item" />
+					<button name="btnDisable" label="Disable Drop" />
+					<button name="btnClearAlerts" label="Clear Alerts" />
+				</toolbar>
+			</groupbox>
+			<groupbox>
+				<caption label="Test Events" />
+				<listbox name="actions" rows="6">
+					<listitem label="REMOVE" />
+					<listitem label="HIDE" />
+					<listitem label="SHOW" />
+					<listitem label="COLLAPSE" />
+					<listitem label="EXPAND" />
+					<listitem label="TOP" />
+				</listbox>
+				<toolbar>
+					<button name="btnSendEvent" label="Send Action Event" />
+				</toolbar>
+			</groupbox>
+		</cell>
+		<splitter />
+		<cell hflex="1">
+			<include name="include"
+				src="web/org/fujionclinical/plugin/infopanel/infoPanel.fcf" />
+		</cell>
+	</hbox>
+</page>

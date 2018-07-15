@@ -1,0 +1,30 @@
+<div name="errorContent" controller="${@exceptionController}" class="fujion-layout-vertical">
+	<html content="${@msg.fcf.error.dialog.message}" />
+	<detail name="detail" label="${@msg.fcf.error.dialog.detail.closed.label}">
+		<grid>
+			<columns visible="false">
+				<column width="20%" />
+				<column width="80%" />
+			</columns>
+			<rows>
+				<row>
+					<label label="${@msg.fcf.error.dialog.cls.label}" />
+					<label name="lblExceptionClass" />
+				</row>
+				<row>
+					<label label="${@msg.fcf.error.dialog.msg.label}" />
+					<label name="lblMessage" />
+				</row>
+				<row>
+					<label label="${@msg.fcf.error.dialog.status.label}" />
+					<label name="lblStatusCode" />
+				</row>
+				<row style="vertical-align:top">
+					<label label="${@msg.fcf.error.dialog.trace.label}" />
+					<memobox name="txtStackTrace" rows="15" flex="1"
+						readonly="true" />
+				</row>
+			</rows>
+		</grid>
+	</detail>
+</div>

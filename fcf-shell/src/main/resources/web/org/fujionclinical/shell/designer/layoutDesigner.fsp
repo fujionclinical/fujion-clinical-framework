@@ -1,0 +1,56 @@
+<?taglib uri="http://www.fujion.org/tld/icons-core" prefix="icons"?>
+
+<window width="500px" height="450px"
+	title="${@msg.fcf.shell.designer.layout.designer.caption}"
+	controller="org.fujionclinical.shell.designer.LayoutDesigner">
+	<toolbar alignment="start" width="100%" style="border:none"
+		css="##{id}>button {background:transparent;padding:5px}">
+			<button name="btnCut" class="flavor:btn-link"
+				hint="${@msg.fcf.shell.designer.layout.designer.cut.hint}"
+				image="${icons.getIconPath('fujionclinical:cut')}" />
+			<button name="btnCopy" class="flavor:btn-link"
+				hint="${@msg.fcf.shell.designer.layout.designer.copy.hint}"
+				image="${icons.getIconPath('fujionclinical:copy')}" />
+			<button name="btnPaste" class="flavor:btn-link"
+				hint="${@msg.fcf.shell.designer.layout.designer.paste.hint}"
+				image="${icons.getIconPath('fujionclinical:paste')}" />
+			<button name="btnView" class="flavor:btn-link"
+				hint="${@msg.fcf.shell.designer.layout.designer.view.hint}"
+				image="${icons.getIconPath('fujionclinical:view')}" />
+
+			<button name="btnAdd" class="flavor:btn-link"
+				hint="${@msg.fcf.shell.designer.layout.designer.add.hint}"
+				image="${icons.getIconPath('fujionclinical:add')}" />
+			<button name="btnDelete" class="flavor:btn-link"
+				hint="${@msg.fcf.shell.designer.layout.designer.delete.hint}"
+				image="${icons.getIconPath('fujionclinical:delete')}" />
+
+			<button name="btnUp" class="flavor:btn-link"
+				hint="${@msg.fcf.shell.designer.layout.designer.up.hint}"
+				image="${icons.getIconPath('fujionclinical:arrowU')}" />
+			<button name="btnDown" class="flavor:btn-link"
+				hint="${@msg.fcf.shell.designer.layout.designer.down.hint}"
+				image="${icons.getIconPath('fujionclinical:arrowD')}" />
+			<button name="btnLeft" class="flavor:btn-link"
+				hint="${@msg.fcf.shell.designer.layout.designer.promote.hint}"
+				image="${icons.getIconPath('fujionclinical:arrowL')}" />
+			<button name="btnRight" class="flavor:btn-link"
+				hint="${@msg.fcf.shell.designer.layout.designer.demote.hint}"
+				image="${icons.getIconPath('fujionclinical:arrowR')}" />
+
+			<button name="btnProperties" class="flavor:btn-link"
+				hint="${@msg.fcf.shell.designer.layout.designer.properties.hint}"
+				image="${icons.getIconPath('fujionclinical:properties')}" />
+			<button name="btnAbout" class="flavor:btn-link"
+				hint="${@msg.fcf.shell.designer.layout.designer.about.hint}"
+				image="${icons.getIconPath('fujionclinical:about')}" />
+
+			<button name="btnToFront" class="flavor:btn-link"
+				hint="${@msg.fcf.shell.designer.layout.designer.tofront.hint}"
+				image="${icons.getIconPath('fujionclinical:bringToFront')}" />
+			<button name="btnRefresh" class="flavor:btn-link"
+				hint="${@msg.fcf.shell.designer.layout.designer.refresh.hint}"
+				image="${icons.getIconPath('fujionclinical:refresh')}" />
+		</toolbar>
+	<treeview name="tree" />
+</window>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:fcf="http://www.fujionclinical.org/schema/spring"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.fujionclinical.org/schema/spring
+	http://www.fujionclinical.org/schema/spring/spring-extensions.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-4.2.xsd">
+	
+	<!-- Mock Security Configuration -->
+	
+	<beans profile="root">
+
+		<bean id="securityMockUser"
+			depends-on="securityMockDomainLoader"
+			class="org.fujionclinical.api.security.mock.MockUser">
+			<constructor-arg value="${org.fujionclinical.security.mock.userid}" />
+			<constructor-arg value="${org.fujionclinical.security.mock.fullname}" />
+			<constructor-arg value="${org.fujionclinical.security.mock.username}" />
+			<constructor-arg value="${org.fujionclinical.security.mock.password}" />
+			<constructor-arg value="${org.fujionclinical.security.mock.domain:1}" />
+		</bean>
+		
+		<bean id="securityService" 
+			class="org.fujionclinical.security.mock.service.MockSecurityService"
+			fcf:override="never">
+			<constructor-arg ref="securityMockUser" />
+		</bean>
+		
+		<bean id="securityMockDomainLoader"
+			class="org.fujionclinical.api.security.mock.MockSecurityDomainLoader"
+			fcf:override="never">
+			<constructor-arg value="${org.fujionclinical.security.mock.domains}" />
+			<constructor-arg value="${org.fujionclinical.security.mock.authorities}" />
+		</bean>
+
+	</beans>
+
+</beans>

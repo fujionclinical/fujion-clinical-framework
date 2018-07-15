@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fcp="http://www.fujionclinical.org/schema/plugin"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.fujionclinical.org/schema/plugin
+		http://www.fujionclinical.org/schema/plugin/plugin-extensions.xsd">
+
+	<beans profile="root-test">
+
+		<fcp:plugin id="testplugin1" name="Test Plugin 1"
+			url="web/org/fujionclinical/shell/test/testplugin1.fsp"
+			description="Plugin for unit tests">
+			<fcp:serialization>
+				<fcp:property id="prop1" name="Test Property #1"
+					description="Test text property" />
+				<fcp:property id="prop2" name="Test Property #2" type="integer"
+					description="Test integer property" />
+				<fcp:property id="prop3" name="Test Property #3" type="boolean"
+					description="Test Boolean property" getter="isProp3" />
+			</fcp:serialization>
+			<fcp:resource>
+				<fcp:bean-resource bean="pluginTestController" />
+			</fcp:resource>
+		</fcp:plugin>
+
+		<fcp:plugin id="testAction" name="Test trigger action"
+			class="org.fujionclinical.shell.test.TestTriggerAction" />
+		
+	</beans>
+	
+	<beans profile="child-test">
+		
+		<bean id="pluginTestController" scope="prototype" 
+			class="org.fujionclinical.shell.test.TestPluginController" />
+		
+	</beans>
+
+</beans>

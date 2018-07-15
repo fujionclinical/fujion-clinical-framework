@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:fcf="http://www.fujionclinical.org/schema/spring"
+	xmlns:ffc="http://www.fujion.org/schema/component"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.fujionclinical.org/schema/spring
+		http://www.fujionclinical.org/schema/spring/spring-extensions.xsd
+		http://www.fujion.org/schema/component
+		http://www.fujion.org/schema/component-extensions.xsd">
+
+	<beans profile="root">
+
+		<!-- Allows the application to locate the Spring application context. -->
+		
+		<bean id="appContextFinder" class="org.fujionclinical.ui.spring.AppContextFinder"
+			fcf:override="always" />
+
+		<!-- List of shortcut bindings for commands. -->
+		
+		<bean id="commandShortcuts" class="org.fujionclinical.ui.command.CommandShortcuts">
+			<constructor-arg value="${org.fujionclinical.location.shortcuts}" />
+		</bean>
+
+		<!-- Theme support -->
+		
+		<bean class="org.fujionclinical.ui.spring.PropertyThemeResolver" />
+		
+		<!-- Default controller for framework-aware applications. -->
+		
+		<bean id="frameworkController" class="org.fujionclinical.ui.controller.FrameworkController"
+			scope="prototype" />
+
+		<!-- Controller for exception dialog. -->
+		
+		<bean id="exceptionController" class="org.fujionclinical.ui.controller.ExceptionController"
+			scope="prototype" />
+
+		<!-- Action support -->
+		
+		<bean class="org.fujionclinical.ui.action.ActionTypeRegistry" 
+			factory-method="getInstance" />
+		
+		<bean class="org.fujionclinical.ui.action.ActionTypeUrl" />
+		
+		<bean class="org.fujionclinical.ui.action.ActionTypeJavascript" />
+		
+		<bean class="org.fujionclinical.ui.action.ActionTypeServerScript" />
+		
+		<!-- Client-side messaging support -->	
+		
+		<bean class="org.fujionclinical.ui.messaging.PublishRequestHandler">
+			<constructor-arg ref="messageProducerService" />
+		</bean>
+		
+		<bean class="org.fujionclinical.ui.messaging.SubscribeRequestHandler">
+			<constructor-arg ref="messageConsumerService" />
+		</bean>
+		
+		<!-- Thymeleaf template configuration -->
+		
+		<bean id="thymeleafTemplateResolver"
+			class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
+			<property name="prefix" value="" />
+			<property name="suffix" value="" />
+			<property name="templateMode" value="HTML" />
+		</bean>
+		
+		<bean id="thymeleafMessageResolver"
+			class="org.fujionclinical.ui.thymeleaf.ThymeleafMessageResolver" />
+		
+		<bean id="thymeleafTemplateEngine"
+			class="org.thymeleaf.spring5.SpringTemplateEngine">
+			<property name="templateResolver" ref="thymeleafTemplateResolver" />
+			<property name="messageResolver" ref="thymeleafMessageResolver" />
+		</bean>
+		
+		<bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+			<property name="templateEngine" ref="thymeleafTemplateEngine" />
+			<property name="order" value="-99" />
+			<property name="viewNames" value="*.htm,*.html" />
+		</bean>
+		
+		<!-- Component scans -->
+		
+		<ffc:component-scan package="org.fujionclinical.ui.dialog" />
+		
+	</beans>
+
+	<beans profile="child">
+		<!-- Provides access to the active page and session -->
+		
+		<bean id="fcf_Page" factory-method="getPage" class="org.fujion.client.ExecutionContext" />
+		
+		<bean id="fcf_Session" factory-method="getSession" class="org.fujion.client.ExecutionContext" />
+		
+		<!-- A registry of all supported commands. -->
+		
+		<bean id="commandRegistry" class="org.fujionclinical.ui.command.CommandRegistry">
+			<constructor-arg ref="commandShortcuts" />
+		</bean>
+
+		<!-- Monitors a page for inactivity -->
+		
+		<bean id="sessionMonitorController" scope="prototype"
+			class="org.fujionclinical.ui.session.SessionMonitor">
+			<property name="baselineInactivityDuration"
+				value="${org.fujionclinical.ui.session.inactivity.duration.baseline}" />
+			<property name="lockInactivityDuration"
+				value="${org.fujionclinical.ui.session.inactivity.duration.lock}" />
+			<property name="baselineCountdownDuration"
+				value="${org.fujionclinical.ui.session.countdown.duration.baseline}" />
+			<property name="lockCountdownDuration"
+				value="${org.fujionclinical.ui.session.countdown.duration.lock}" />
+			<property name="securityService" ref="securityService" />
+		</bean>
+		
+	</beans>
+</beans>
+

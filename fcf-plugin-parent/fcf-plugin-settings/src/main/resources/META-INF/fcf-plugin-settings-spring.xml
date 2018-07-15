@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:fcp="http://www.fujionclinical.org/schema/plugin" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.fujionclinical.org/schema/plugin
+		http://www.fujionclinical.org/schema/plugin/plugin-extensions.xsd">
+
+	<beans profile="root">
+
+		<fcp:plugin id="fcfSettingsEditor" name="Settings Editor"
+			url="web/org/fujionclinical/plugin/settings/main.fsp">
+			<fcp:serialization>
+				<fcp:property name="Settings Provider" id="provider" type="enum" 
+					description="This is the bean id of the settings provider to use.">
+					<fcp:config>
+						<fcp:entry key="bean">fcfSettingsProviderEnumerator</fcp:entry>
+					</fcp:config>
+				</fcp:property>
+				<fcp:property name="Settings Group" id="group"
+					description="This is the id of the settings group to edit." />
+			</fcp:serialization>
+		</fcp:plugin>
+
+	</beans>
+
+	<beans profile="child">
+
+		<bean name="fcfSettingsController" class="org.fujionclinical.plugin.settings.MainController"
+			scope="prototype" />
+
+		<bean name="fcfSettingsProviderEnumerator" class="org.fujionclinical.api.spring.BeanEnumerator">
+			<constructor-arg value="org.fujionclinical.plugin.settings.ISettingsProvider" />
+		</bean>
+
+	</beans>
+
+</beans>

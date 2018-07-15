@@ -1,0 +1,21 @@
+
+<window width="500px" css="##{id} > .panel-body {overflow:visible}"
+	controller="org.fujionclinical.shell.designer.LayoutPrompt">
+	<label name="lblPrompt" class="flavor:text-primary" />
+	<textbox name="txtLayout" width="100%" synchronized="true"/>
+	<span height="5px" />
+	<toolbar alignment="end" width="100%">
+		<radiogroup name="radioGroup">
+			<radiobutton name="rbShared" checked="true"
+				label="${@msg.fcf.shell.designer.layout.manager.radio.shared.label}" />
+			<radiobutton name="rbPrivate"
+				label="${@msg.fcf.shell.designer.layout.manager.radio.private.label}" />
+		</radiogroup>
+		<span flex="1" />
+		<button name="btnOK" class="flavor:btn-success"
+			label="${@msg.fcf.shell.designer.layout.manager.btn.ok.label}" />
+		<button name="btnCancel" class="flavor:btn-danger"
+			label="${@msg.fcf.shell.designer.layout.manager.btn.cancel.label}"
+			forward="click=^.close" />
+	</toolbar>
+</window>

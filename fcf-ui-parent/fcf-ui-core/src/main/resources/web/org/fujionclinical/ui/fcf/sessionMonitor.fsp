@@ -1,0 +1,28 @@
+<div class="fcf-sessionmonitor fujion-layout-vertical" visible="false"
+	controller="${@sessionMonitorController}">
+	<timer name="timer" />
+	<div name="timeoutPanel" class="fcf-sessionmonitor-countdown-panel alert">
+		<label name="lblDuration" class="alert-link"/>
+		<button name="btnKeepOpen" class="flavor:btn-primary pull-right"
+			label="${@msg.fcf.sessionmonitor.keepalive.label}"/>
+	</div>
+	<div class="fcf-sessionmonitor-lock-panel">
+		<div name="lockPanel" class="fujion-layout-vertical">
+			<label label="${@msg.fcf.sessionmonitor.lock.title}"/>
+			<div class="fujion-layout-horizontal">
+				<span class="glyphicon glyphicon-lock text-danger"/>
+				<label name="lblLocked"/>
+				<span class="glyphicon glyphicon-lock text-danger"/>
+			</div>
+			<toolbar alignment="center">
+				<textbox name="txtPassword" masked="true" focus="true" forward="enter=btnUnlock.click"/>
+				<button name="btnUnlock" class="flavor:btn-success"
+					label="${@msg.fcf.sessionmonitor.unlock.label}"/>
+				<div width="20px"/>
+				<button name="btnLogout" class="flavor:btn-danger"
+					label="${@msg.fcf.sessionmonitor.logout.label}"/>
+			</toolbar>
+			<label name="lblInfo" class="fcf-sessionmonitor-info"/>
+		</div>
+	</div>
+</div>

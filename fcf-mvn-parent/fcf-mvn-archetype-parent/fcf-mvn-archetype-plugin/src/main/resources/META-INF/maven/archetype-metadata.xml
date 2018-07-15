@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor
+	name="fcf-plugin"
+	xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0 
+		http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd">
+
+	<requiredProperties>
+		<requiredProperty key="pluginName"  >
+			<!-- Descriptive Name -->
+		</requiredProperty>
+		<requiredProperty key="pluginId">
+			<!-- Use Camel Case Name : No Spaces -->
+			<validationRegex>^[a-zA-Z][a-zA-Z0-9_]*$</validationRegex>
+		</requiredProperty>
+		<requiredProperty key="version">
+			<!-- Plugin Version -->
+			<defaultValue>1.0.0-SNAPSHOT</defaultValue>
+		</requiredProperty>
+		<requiredProperty key="fcfVersion">
+			<defaultValue>${project.parent.version}</defaultValue>
+			<!-- Fujion Clinical Framework Version -->
+		</requiredProperty>
+	</requiredProperties>
+	<fileSets>
+		<fileSet filtered="true" packaged="true" encoding="UTF-8">
+			<directory>src/main/java</directory>
+		</fileSet>
+		<fileSet filtered="true" packaged="false" encoding="UTF-8">
+			<directory>src/main/resources/META-INF</directory>
+		</fileSet>
+		<fileSet filtered="true" packaged="true" encoding="UTF-8">
+			<directory>src/main/resources/web</directory>
+		</fileSet>
+		<fileSet filtered="true" packaged="false" encoding="UTF-8">
+			<directory>src/main/help</directory>
+		</fileSet>
+		<fileSet filtered="true" packaged="false" encoding="UTF-8">
+			<directory>src/main/assembly</directory>
+		</fileSet>
+		<fileSet filtered="true" packaged="true" encoding="UTF-8">
+			<directory>src/test/java</directory>
+		</fileSet>
+		<fileSet filtered="true" packaged="false" encoding="UTF-8">
+			<directory>src/test/resources</directory>
+		</fileSet>
+	</fileSets>
+</archetype-descriptor>

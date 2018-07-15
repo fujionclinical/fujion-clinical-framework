@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:fcf="http://www.fujionclinical.org/schema/spring"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.fujionclinical.org/schema/spring
+		http://www.fujionclinical.org/schema/spring/spring-extensions.xsd">
+
+	<beans profile="root">
+		<!-- Builds a lucene index for searching help content. -->
+		<bean id="helpSearchService" class="org.fujionclinical.help.lucene.HelpSearchService"
+			factory-method="getInstance" init-method="init" destroy-method="destroy"
+			fcf:override="always">
+			<property name="indexDirectoryPath" value="${org.fujionclinical.help.index.dir:}" />
+		</bean>
+	</beans>
+</beans>

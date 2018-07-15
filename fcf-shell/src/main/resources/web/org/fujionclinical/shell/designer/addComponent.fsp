@@ -1,0 +1,15 @@
+<window width="400px" height="400px" class="fcf-addcomponent"
+	controller="org.fujionclinical.shell.designer.AddComponent">
+	<treeview name="tree" flex="1" >
+		<treenode name="tnFavorites" visible="false"
+			label="${@msg.fcf.shell.plugin.category.favorite}" />
+	</treeview>
+	<toolbar alignment="end">
+		<button name="btnOK" class="flavor:btn-success"
+			label="${@msg.fcf.shell.designer.add.component.btn.ok.label}"
+			disabled="true" />
+		<button name="btnCancel" class="flavor:btn-danger"
+			label="${@msg.fcf.shell.designer.add.component.btn.cancel.label}" />
+		<span width="20px" />
+	</toolbar>
+</window>

@@ -1,0 +1,25 @@
+<window width="500px" closable="true"
+	title="${@msg.fcf.shell.about.title}" 
+	controller="${@aboutDialogController}">
+	<div style="display:flex;flex:1">
+		<grid style="border:none">
+			<columns css="##{id} th {text-align:center;vertical-align:middle;width:50%}">
+				<column>
+					<image name="imgIcon" style="max-height:50px;max-width:100px"/>
+				</column>
+				<column>
+					<label name="lblSource" class="fcf-about-header" />
+				</column>
+			</columns>
+			<rows name="rows" />
+		</grid>
+	</div>
+	<toolbar width="100%" alignment="center">
+		<button
+			name="btnCustom" visible="false" />
+		<button class="flavor:btn-danger"
+			name="btnClose"
+			label="${@msg.fcf.shell.about.btn.close.label}" width="80px"
+			focus="true" />
+	</toolbar>
+</window>

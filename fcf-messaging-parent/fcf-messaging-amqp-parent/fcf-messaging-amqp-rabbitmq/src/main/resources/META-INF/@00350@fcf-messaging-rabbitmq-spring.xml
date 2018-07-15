@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:fcf="http://www.fujionclinical.org/schema/spring"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.fujionclinical.org/schema/spring
+        http://www.fujionclinical.org/schema/spring/spring-extensions.xsd">
+
+	<beans profile="root">
+
+		<bean id="amqpExchange" class="org.springframework.amqp.core.TopicExchange">
+			<constructor-arg value="${org.fujionclinical.messaging.rabbitmq.exchange.id}" />
+		</bean>
+
+		<!-- AMQP ConnectionFactory to use. -->
+		<bean id="amqpConnectionFactory"
+			class="org.springframework.amqp.rabbit.connection.CachingConnectionFactory">
+			<property name="username"
+				value="${org.fujionclinical.messaging.rabbitmq.broker.username}" />
+			<property name="password"
+				value="${org.fujionclinical.messaging.rabbitmq.broker.password}" />
+			<property name="virtualHost"
+				value="${org.fujionclinical.messaging.rabbitmq.broker.virtualhost}" />
+			<property name="host" value="${org.fujionclinical.messaging.rabbitmq.broker.host}" />
+			<property name="port" value="${org.fujionclinical.messaging.rabbitmq.broker.port}" />
+			<property name="channelCacheSize"
+				value="${org.fujionclinical.messaging.rabbitmq.channel.cache.size}" />
+		</bean>
+
+		<bean id="amqpBroker" class="org.fujionclinical.messaging.amqp.rabbitmq.Broker">
+			<constructor-arg ref="amqpConnectionFactory" />
+			<constructor-arg ref="amqpExchange" />
+		</bean>
+
+		<bean id="amqpMessagingSupport" class="org.fujionclinical.messaging.amqp.rabbitmq.MessagingSupport">
+			<constructor-arg ref="amqpBroker" />
+		</bean>
+
+	</beans>
+
+	<beans profile="child">
+
+		<!-- globalEventDispatcher: Mediates communications between the local and 
+			the global event manager, in this case a AMQP messaging server. -->
+		<bean id="globalEventDispatcher" init-method="init"
+			destroy-method="destroy" fcf:override="always"
+			class="org.fujionclinical.messaging.amqp.rabbitmq.GlobalEventDispatcher">
+			<property name="localEventDispatcher" ref="eventManager" />
+			<property name="broker" ref="amqpBroker" />
+		</bean>
+
+	</beans>
+
+</beans>

@@ -1,0 +1,159 @@
+#fcf-login-root {
+	width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+	border:2px solid black;
+}
+
+#fcf-login-root * {
+	min-height: 0;
+}
+
+.fcf-login-disabled #fcf-info,
+.fcf-login-disabled #fcf-form-container {
+    display: none;
+}
+
+#fcf-header {
+	width: 100%;
+	height: 90px;
+	background: white;
+}
+
+#fcf-title-img {
+	max-height: 90px;
+	padding: 5px;
+	float: left;
+	text-align: right;
+}
+
+#fcf-header > div {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+	float: right;
+	color: #405C69;
+	font-style: italic;
+	padding: 5px;
+	margin-right: 10px;
+}
+
+#fcf-header-text:empty {
+	display: none;
+}
+
+#fcf-domain-name {
+	font-size: 1.2em;
+	font-weight: bold;
+	display: block;
+}
+
+#fcf-body {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	border-top: solid 2px;
+}
+
+#fcf-form-container {
+	display: flex;
+	flex-direction: column;
+	margin: 30px 80px 0 80px;
+	padding: 10px;
+	background: white !important;
+	border: solid 2px #405C69 !important;
+}
+
+.fcf-prompt {
+     display: flex;
+     flex-direction: row;
+     padding-bottom: 10px;
+}
+
+.fcf-prompt > div {
+    width: 20%; 
+    text-align: right;
+    padding-right: 10px;
+}
+
+.fcf-prompt > input,
+.fcf-prompt > select {
+    width: 50%;
+    height: 2em;
+}
+
+
+.fcf-layout-vertical {
+    display: flex;
+    flex-direction: column;   
+}
+
+.fcf-layout-horizontal {
+	display: flex;
+	flex-direction: row;
+}
+
+#fcf-info {
+	max-height: 200px;
+    overflow: auto;
+    padding: 10px;
+    margin: 10px;
+    background: white !important;
+    border: solid 2px #405C69 !important;
+}
+
+#fcf-info *:empty {
+    display: none;
+}
+
+#fcf-info-title {
+    text-align: center;
+    font-weight: bold; 
+    font-size: 1.1em; 
+    display: block;
+}
+
+#fcf-info-content {
+    padding: 20px;
+}
+
+#fcf-copyright {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	padding-left: 20px; 
+}
+
+#fcf-copyright-prefix {
+    font-style: italic;
+}
+
+#fcf-copyright-img {
+    width: 30px;
+    height: 30px;
+	text-align: center;
+	background: transparent;
+	margin:1px 5px 1px 5px;
+}
+
+#fcf-copyright-text {
+    font-weight: bold;
+}
+
+#fcf-error {
+	height: 2em;
+	padding-top: 4px;
+    border-top: 1px solid;
+    border-bottom: 1px solid;}
+
+#fcf-error:empty {
+	visibility: hidden;
+}
+
+body {
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	padding-top: 40px;
+}

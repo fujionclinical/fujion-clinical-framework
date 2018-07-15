@@ -1,0 +1,52 @@
+/*
+ * #%L
+ * Fujion Clinical Framework
+ * %%
+ * Copyright (C) 2018 fujionclinical.org
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ * This Source Code Form is also subject to the terms of the Health-Related
+ * Additional Disclaimer of Warranty and Limitation of Liability available at
+ *
+ *      http://www.fujionclinical.org/licensing/disclaimer
+ *
+ * #L%
+ */
+package org.fujionclinical.ui.dialog;
+
+import org.fujionclinical.ui.util.FCFUtil;
+
+public class DialogConstants {
+    
+    static final String STYLE_FIXED_FONT = "|fcf-fixed-font";
+    
+    static final String LABEL_ID_OK = "@fcf.btn.ok.label";
+    
+    static final String LABEL_ID_CANCEL = "@fcf.btn.cancel.label";
+    
+    static final String LABEL_IDS_OK_CANCEL = LABEL_ID_OK + "|" + LABEL_ID_CANCEL;
+    
+    static final String STYLES_INFO = "glyphicon-info-sign alert-info||panel-info";
+    
+    static final String STYLES_WARNING = "glyphicon-warning-sign alert-warning||panel-warning";
+    
+    static final String STYLES_ERROR = "glyphicon-exclamation-sign alert-danger||panel-danger";
+    
+    static final String STYLES_QUESTION = "glyphicon-question-sign alert-success||panel-success";
+    
+    static final String RESOURCE_PREFIX = FCFUtil.getResourcePath(DialogConstants.class);
+    
+    private DialogConstants() {
+    }
+}

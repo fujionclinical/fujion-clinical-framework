@@ -1,0 +1,28 @@
+<window title="${@msg.fcf.date.range.win.title}" width="200px"
+	class="fcf-daterangedialog"
+	controller="org.fujionclinical.ui.dialog.DateRangeDialog">
+	<label class="flavor:label-info"
+		label="${@msg.fcf.date.range.start.date.label}" />
+	<div>
+		<datebox name="startDate"
+			hint="${@msg.fcf.date.range.start.date.dbx.hint}" />
+		<link name="btnSameAsEnd" 
+			class="glyphicon glyphicon-chevron-left"
+			hint="${@msg.fcf.date.range.start.date.btn.hint}" />
+	</div>
+	<label class="flavor:label-info"
+		label="${@msg.fcf.date.range.end.date.label}" />
+	<div>
+		<datebox name="endDate"
+			hint="${@msg.fcf.date.range.end.date.dbx.hint}" />
+		<link name="btnSameAsStart" 
+			class="glyphicon glyphicon-chevron-left"
+			hint="${@msg.fcf.date.range.end.date.btn.hint}" />
+	</div>
+	<toolbar alignment="center" width="100%">
+		<button name="btnOK" class="flavor:btn-success"
+			label="${@msg.fcf.date.range.btn.ok.label}" />
+		<button name="btnCancel" class="flavor:btn-danger"
+			label="${@msg.fcf.date.range.btn.cancel.label}" />
+	</toolbar>
+</window>

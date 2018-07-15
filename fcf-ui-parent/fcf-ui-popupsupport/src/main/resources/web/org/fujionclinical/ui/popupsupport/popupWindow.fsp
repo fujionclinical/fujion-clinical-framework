@@ -1,0 +1,24 @@
+<page>
+	<window closable="true" maximizable="true" sizable="true"
+		border="normal" class="panel-info fcf-popup" mold="bootstrap"
+		left="50%" top="50%" title="Popup Message"
+		contentSclass="bg-warning text-center" mode="highlighted"
+		style="position:absolute">
+		<label name="messagetext" value="message text" multiline="true" />
+	</window>
+
+	<style>
+		.fcf-popup {
+			min-height: 50px;
+			min-width: 200px;
+		}
+		
+		.fcf-popup .panel-caption {
+			padding: 5px;
+		}	
+		
+		.fcf-popup .panel-title {
+			zoom: 80%;
+		}	
+	</style>
+</page>

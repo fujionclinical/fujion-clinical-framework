@@ -1,0 +1,39 @@
+<?taglib uri="http://www.fujion.org/tld/icons-core" prefix="icons"?>
+
+<paneview orientation="horizontal" height="400px" width="600px">
+	<pane flex="3">
+		<toolbar alignment="start" width="100%"
+			style="border:none;border-bottom:1px solid lightgray" 
+			css="##{id}>button {background:transparent;padding:2px}">
+			<button name="btnUp" class="flavor:btn-link"
+				hint="${@msg.fcf.shell.designer.propedit.custom.btn.up.hint}" 
+				style="background:transparent"
+				image="${icons.getIconPath('fujionclinical:arrowU')}" />
+			<button name="btnDown" class="flavor:btn-link"
+				hint="${@msg.fcf.shell.designer.propedit.custom.btn.down.hint}"
+				style="background:transparent" 
+				image="${icons.getIconPath('fujionclinical:arrowD')}" />
+			<button name="btnLeft" class="flavor:btn-link"
+				hint="${@msg.fcf.shell.designer.propedit.custom.btn.promote.hint}"
+				style="background:transparent" 
+				image="${icons.getIconPath('fujionclinical:arrowL')}" />
+			<button name="btnRight" class="flavor:btn-link"
+				hint="${@msg.fcf.shell.designer.propedit.custom.btn.demote.hint}"
+				style="background:transparent" 
+				image="${icons.getIconPath('fujionclinical:arrowR')}" />
+			<button name="btnAdd" class="flavor:btn-link"
+				hint="${@msg.fcf.shell.designer.propedit.custom.btn.add.hint}"
+				style="background:transparent" 
+				image="${icons.getIconPath('fujionclinical:add')}" />
+			<button name="btnDelete" class="flavor:btn-link"
+				hint="${@msg.fcf.shell.designer.propedit.custom.btn.delete.hint}"
+				style="background:transparent" 
+				image="${icons.getIconPath('fujionclinical:delete')}" />
+		</toolbar>
+		<treeview name="tree" flex="1" />
+		<popup name="popLabel">
+			<textbox name="txtLabel" />
+		</popup>
+	</pane>
+	<pane name="gridParent" flex="7" />
+</paneview>

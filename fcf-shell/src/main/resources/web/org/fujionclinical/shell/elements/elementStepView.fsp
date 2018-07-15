@@ -1,0 +1,19 @@
+<div name="outer" namespace="true" class="panel flavor:panel-default fcf-stepview">
+	<div class="panel-heading">
+		<div class="fcf-stepview-taskbar">
+			<div name="tbarLeft" class="fcf-stepview-taskbar-left">
+				<label class="fcf-step-title" name="lblTitle" />
+				<link name="btnHome" style="margin-bottom:2px"
+					image="web/org/fujionclinical/shell/images/home.png" />
+				<link name="btnLeft"
+					image="web/org/fujionclinical/shell/images/16x16/arrowL.png" />
+				<link name="btnRight"
+					image="web/org/fujionclinical/shell/images/16x16/arrowR.png" />
+			</div>
+			<div name="tbarCenter"
+				class="fcf-stepview-taskbar-center container-fluid" />
+			<div name="tbarRight" class="fcf-stepview-taskbar-right" />
+		</div>
+	</div>
+	<div name="inner" class="panel-body" />
+</div>

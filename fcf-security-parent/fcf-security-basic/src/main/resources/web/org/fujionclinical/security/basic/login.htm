@@ -1,0 +1,104 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title th:text="#{security.login.form.title.label}"></title>
+	<base th:href='${baseUrl}' target='#'>
+	<style th:inline="css">
+		body {
+			background-image: url("[[#{security.login.form.background.image}]]");
+		}
+	</style>
+</head>
+
+<body style="display:none">
+	<script type="text/javascript" src='webjars/systemjs/dist/system.js'></script>
+	
+	<script th:inline="javascript">
+    	System.config(
+    		[(${webjarInit})]
+        );
+	        
+		System.import('fcf-login').then(function(sec) {
+			var msg = [[#{security.login.form.timeout.message}]],
+			logout = 'security/logout_success?target=./login&message=' + encodeURIComponent(msg);
+			sec.init(
+				[(${timeout})], 
+				logout, 
+				[[#{security.login.required.fields}]],
+				[[${disabled}]]);	
+		});
+	</script>
+	
+	<div id="fcf-login-root">
+		<div id="fcf-header">
+			<img id="fcf-title-img" th:src="#{security.login.form.title.image}" />
+			<div>
+				<label id="fcf-domain-name"
+					th:text="#{security.login.form.domain.name.label}"></label> 
+				<label id="fcf-title" 
+					th:text="#{security.login.form.title.label}"></label>
+			</div>
+		</div>
+		<div id="fcf-body" class="bg-success">
+			<div id="fcf-form-container">
+				<form id="fcf-form" name="loginForm" th:action="${action}" method="POST"
+					target="_self" autocomplete="off">
+					<div id="fcf-domains" class="fcf-prompt" style="display:none">
+						<div th:text="#{security.login.form.domain.label}"></div>
+						<select id="fcf-domain" name="domain">
+							<option 
+							 	th:each="domain: ${domains}"
+								th:text="${domain.name}" 
+								th:value="${domain.logicalId}"
+								th:selected="${domain.getAttribute('default')}"
+								th:attr="data-logo=${domain.getAttribute('LOGIN.LOGO')},data-header=${domain.getAttribute('LOGIN.HEADER')},data-info=${domain.getAttribute('LOGIN.INFO')}">
+							</option>
+						</select>
+						<div></div>
+					</div>
+					<div class="fcf-prompt">
+						<div th:text="#{security.login.form.username.label}"></div>
+						<input id="fcf-username" type="text" autofocus />
+						<div></div>
+					</div>
+					<div class="fcf-prompt">
+						<div th:text="#{security.login.form.password.label}"></div>
+						<input id="fcf-password" type="password" name="password" />
+						<div style="flex:1">
+							<input id="fcf-submit" type="submit" class="btn btn-success"
+								th:value="#{security.login.form.button.login.label}" />
+						</div>
+					</div>
+					<div style="flex: 1" th:class="${domainCount} > 1 ? '' : 'hidden'">
+						<a id="fcf-alternate" class="btn btn-link"
+							th:text="#{security.login.form.domain.alternate.label}"></a>
+					</div>
+					<input id="fcf-username-real" type="hidden" name="username" />
+				</form>
+			</div>
+			<label id="fcf-status"></label>
+			<label id="fcf-error" class="bg-danger text-center text-danger"
+				th:text="${error}">
+			</label>
+			<label id="fcf-header-text" style="margin: 20px"></label>
+			<div style="height: 20px; border-top: 1px solid black"></div>
+			<div id="fcf-info">
+				<label id="fcf-info-title"
+					th:text="#{security.login.form.info.title}"></label>
+				<div id="fcf-info-content"
+					th:text="#{security.login.form.info.content}"></div>
+			</div>
+			<label class="text-center" 
+				th:text="#{security.login.form.footer.label}"></label>
+			<div id="fcf-copyright" class="fcf-layout-horizontal panel-footer">
+				<label id="fcf-copyright-prefix"
+					th:text="#{security.login.form.copyright.prefix}"></label> <img
+					id="fcf-copyright-img"
+					th:src="#{security.login.form.copyright.image}" /> <label
+					id="fcf-copyright-text"
+					th:text="#{security.login.form.copyright.label}"></label>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

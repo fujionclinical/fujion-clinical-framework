@@ -1,0 +1,6 @@
+<page>
+	<window closable="true" minimizable="true" width="100%"
+		impl="org.fujionclinical.plugin.infopanel.controller.DropContainer">
+		<div />
+	</window>
+</page>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:fch="http://www.fujionclinical.org/schema/help" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.fujionclinical.org/schema/help
+		http://www.fujionclinical.org/schema/help/help-extensions.xsd">
+
+*info*	<!-- Assembled by {0} (v{1}) on {2}. -->
+
+	<beans profile="root">
+
+*help*		<fch:help id="{0}" url="{1}" title="{2}" version="{3}" format="{4}" locale="{5}" />
+	
+	</beans>
+	
+</beans>

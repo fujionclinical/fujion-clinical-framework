@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:fcp="http://www.fujionclinical.org/schema/plugin"
+	xmlns:ffc="http://www.fujion.org/schema/component"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.fujionclinical.org/schema/plugin
+		http://www.fujionclinical.org/schema/plugin/plugin-extensions.xsd
+		http://www.fujion.org/schema/component
+		http://www.fujion.org/schema/component-extensions.xsd">
+
+	<beans profile="root">
+		<!-- Register shell components -->
+		<ffc:component-scan package="org.fujionclinical.shell" />
+		
+		<!-- A registry of all known Fujion Clinical plugins. -->
+		<bean id="pluginRegistry" class="org.fujionclinical.shell.plugins.PluginRegistry"
+			factory-method="getInstance" />
+		
+		<!-- A registry of layout loaders. -->
+		<bean id="layoutLoaderRegistry" class="org.fujionclinical.shell.layout.LayoutLoaderRegistry"
+			factory-method="getInstance" />
+		
+		<!-- Layout loaders -->
+		
+		<bean class="org.fujionclinical.shell.layout.LayoutLoaderApp" />
+		
+		<bean class="org.fujionclinical.shell.layout.LayoutLoaderPrivate" />
+		
+		<bean class="org.fujionclinical.shell.layout.LayoutLoaderShared" />
+		
+		<!-- Default layout service implementation. -->
+		<bean id="layoutService" class="org.fujionclinical.shell.layout.LayoutService">
+			<constructor-arg ref="propertyService" />
+		</bean>
+
+		<!-- Default icon library -->
+		<bean class="org.fujionclinical.shell.designer.IconLibrary"/>
+		
+		<!-- Controller for about dialog. -->
+		<bean id="aboutDialogController" class="org.fujionclinical.shell.AboutDialog"
+			scope="prototype">
+			<property name="icon" value="${@msg.fcf.shell.about.icon}" />
+			<property name="source" value="${@msg.fcf.shell.about.source}" />
+		</bean>
+
+		<!-- Stock UI plugin definitions follow. -->
+		
+		<fcp:plugin id="_desktop"
+			class="org.fujionclinical.shell.elements.ElementDesktop" name="${@msg.fcf.shell.plugin._desktop.name}"
+			description="${@msg.fcf.shell.plugin._desktop.description}">
+			<fcp:serialization>
+				<fcp:property id="style" type="enum"
+					name="${@msg.fcf.shell.plugin._desktop.style.name}" description="${@msg.fcf.shell.plugin._desktop.style.description}">
+					<fcp:config>
+						<fcp:entry key="class">org.fujionclinical.ui.util.ThemeUtil$PanelStyle</fcp:entry>
+					</fcp:config>
+				</fcp:property>
+				<fcp:property id="icon" type="icon"
+					name="${@msg.fcf.shell.plugin._desktop.icon.name}" description="${@msg.fcf.shell.plugin._desktop.icon.description}" />
+				<fcp:property id="title"
+					name="${@msg.fcf.shell.plugin._desktop.title.name}" description="${@msg.fcf.shell.plugin._desktop.title.description}" />
+				<fcp:property id="helpViewerMode" type="enum"
+					name="${@msg.fcf.shell.plugin._desktop.helpviewermode.name}" description="${@msg.fcf.shell.plugin._desktop.helpviewermode.description}">
+					<fcp:config>
+						<fcp:entry key="class">org.fujionclinical.help.viewer.HelpViewer$HelpViewerMode</fcp:entry>
+					</fcp:config>
+				</fcp:property>
+				<fcp:property id="menubar" type="menuitems"
+					name="${@msg.fcf.shell.plugin._desktop.menubar.name}" description="${@msg.fcf.shell.plugin._desktop.menubar.description}" />
+				<fcp:property id="toolbar" type="children"
+					name="${@msg.fcf.shell.plugin._desktop.toolbar.name}" description="${@msg.fcf.shell.plugin._desktop.toolbar.description}" />
+			</fcp:serialization>
+			<fcp:resource>
+				<fcp:help-resource module="${org.fujionclinical.help.module.shell:fcfShellHelp}"/>
+			</fcp:resource>
+		</fcp:plugin>
+
+		<fcp:plugin id="tabview" category="${@msg.fcf.shell.plugin.category.stock}"
+			class="org.fujionclinical.shell.elements.ElementTabView" name="${@msg.fcf.shell.plugin.tabview.name}"
+			description="${@msg.fcf.shell.plugin.tabview.description}">
+			<fcp:serialization>
+				<fcp:property id="orientation" type="choice"
+					name="${@msg.fcf.shell.plugin.tabview.orientation.name}" description="${@msg.fcf.shell.plugin.tabview.orientation.description}">
+					<fcp:config>
+						<fcp:entry key="values">top,bottom,right,left,accordion</fcp:entry>
+					</fcp:config>
+				</fcp:property>
+				<fcp:property id="color" type="color"
+					name="${@msg.fcf.shell.plugin.tabview.color.name}" description="${@msg.fcf.shell.plugin.tabview.color.description}" />
+				<fcp:property id="" type="tabs"
+					name="${@msg.fcf.shell.plugin.tabview.tabs.name}" description="${@msg.fcf.shell.plugin.tabview.tabs.description}" />
+			</fcp:serialization>
+		</fcp:plugin>
+
+		<fcp:plugin id="tabpane" category="${@msg.fcf.shell.plugin.category.stock}"
+			class="org.fujionclinical.shell.elements.ElementTabPane" name="${@msg.fcf.shell.plugin.tabpane.name}"
+			description="${@msg.fcf.shell.plugin.tabpane.description}">
+			<fcp:serialization>
+				<fcp:property id="label"
+					default="${@msg.fcf.shell.plugin.tabpane.label.default}" name="${@msg.fcf.shell.plugin.tabpane.label.name}"
+					description="${@msg.fcf.shell.plugin.tabpane.label.description}" />
+				<fcp:property id="icon" type="icon"
+					name="${@msg.fcf.shell.plugin.tabpane.icon.name}" description="${@msg.fcf.shell.plugin.tabpane.icon.description}" />
+				<fcp:property id="hint"
+					name="${@msg.fcf.shell.plugin.tabpane.hint.name}" description="${@msg.fcf.shell.plugin.tabpane.hint.description}" />
+				<fcp:property id="color" type="color"
+					name="${@msg.fcf.shell.plugin.tabpane.color.name}" description="${@msg.fcf.shell.plugin.tabpane.color.description}" />
+				<fcp:property id="" type="triggers"
+					name="Triggers" description="Triggers" />
+			</fcp:serialization>
+		</fcp:plugin>
+
+		<fcp:plugin id="treeview" category="${@msg.fcf.shell.plugin.category.stock}"
+			class="org.fujionclinical.shell.elements.ElementTreeView" name="${@msg.fcf.shell.plugin.treeview.name}"
+			description="${@msg.fcf.shell.plugin.treeview.description}">
+			<fcp:serialization>
+				<fcp:property id="caption"
+					name="${@msg.fcf.shell.plugin.treeview.caption.name}" description="${@msg.fcf.shell.plugin.treeview.caption.description}" />
+				<fcp:property id="color" type="color"
+					name="${@msg.fcf.shell.plugin.treeview.color.name}"
+					description="${@msg.fcf.shell.plugin.treeview.color.description}" />
+				<fcp:property id="open" type="boolean"
+					name="${@msg.fcf.shell.plugin.treeview.open.name}"
+					getter="isOpen" description="${@msg.fcf.shell.plugin.treeview.open.description}">
+					<fcp:config>
+						<fcp:entry key="true">${@msg.fcf.shell.plugin.treeview.open.expanded}</fcp:entry>
+						<fcp:entry key="false">${@msg.fcf.shell.plugin.treeview.open.collapsed}</fcp:entry>
+					</fcp:config>
+				</fcp:property>
+				<fcp:property id="selectionStyle" type="enum"
+					name="${@msg.fcf.shell.plugin.treeview.selection.style.name}" description="${@msg.fcf.shell.plugin.treeview.selection.style.description}">
+					<fcp:config>
+						<fcp:entry key="class">org.fujionclinical.ui.util.ThemeUtil$ButtonStyle</fcp:entry>
+					</fcp:config>
+				</fcp:property>
+				<fcp:property id="" type="nodes"
+					name="${@msg.fcf.shell.plugin.treeview.nodes.name}"
+					description="${@msg.fcf.shell.plugin.treeview.nodes.description}" />
+			</fcp:serialization>
+		</fcp:plugin>
+
+		<fcp:plugin id="treepane" category="${@msg.fcf.shell.plugin.category.stock}"
+			class="org.fujionclinical.shell.elements.ElementTreePane" name="${@msg.fcf.shell.plugin.treepane.name}"
+			description="${@msg.fcf.shell.plugin.treepane.description}">
+			<fcp:serialization>
+				<fcp:property id="label"
+					default="${@msg.fcf.shell.plugin.treepane.label.default}" name="${@msg.fcf.shell.plugin.treepane.label.name}"
+					description="${@msg.fcf.shell.plugin.treepane.label.description}" />
+				<fcp:property id="hint"
+					name="${@msg.fcf.shell.plugin.treepane.hint.name}" description="${@msg.fcf.shell.plugin.treepane.hint.description}" />
+				<fcp:property id="color" type="color"
+					name="${@msg.fcf.shell.plugin.treepane.color.name}"
+					description="${@msg.fcf.shell.plugin.treepane.color.description}" />
+			</fcp:serialization>
+		</fcp:plugin>
+
+		<fcp:plugin id="splitterview" category="${@msg.fcf.shell.plugin.category.stock}"
+			class="org.fujionclinical.shell.elements.ElementSplitterView" name="${@msg.fcf.shell.plugin.splitterview.name}"
+			description="${@msg.fcf.shell.plugin.splitterview.description}">
+			<fcp:serialization>
+				<fcp:property id="orientation" type="choice"
+					name="${@msg.fcf.shell.plugin.splitterview.orientation.name}"
+					description="${@msg.fcf.shell.plugin.splitterview.orientation.description}">
+					<fcp:config>
+						<fcp:entry key="values">horizontal,vertical</fcp:entry>
+					</fcp:config>
+				</fcp:property>
+				<fcp:property id="color" type="color"
+					name="${@msg.fcf.shell.plugin.splitterview.color.name}" description="${@msg.fcf.shell.plugin.splitterview.color.description}" />
+				<fcp:property id="" type="panes"
+					name="${@msg.fcf.shell.plugin.splitterview.panes.name}" description="${@msg.fcf.shell.plugin.splitterview.panes.description}" />
+			</fcp:serialization>
+		</fcp:plugin>
+
+		<fcp:plugin id="splitterpane" category="${@msg.fcf.shell.plugin.category.stock}"
+			class="org.fujionclinical.shell.elements.ElementSplitterPane" name="${@msg.fcf.shell.plugin.splitterpane.name}"
+			description="${@msg.fcf.shell.plugin.splitterpane.description}">
+			<fcp:serialization>
+				<fcp:property id="caption"
+					name="${@msg.fcf.shell.plugin.splitterpane.caption.name}" description="${@msg.fcf.shell.plugin.splitterpane.caption.description}" />
+				<fcp:property id="color" type="color"
+					name="${@msg.fcf.shell.plugin.splitterpane.color.name}" description="${@msg.fcf.shell.plugin.splitterpane.color.description}" />
+				<fcp:property id="relative" type="boolean" getter="isRelative"
+					name="${@msg.fcf.shell.plugin.splitterpane.relative.name}" description="${@msg.fcf.shell.plugin.splitterpane.relative.description}">
+					<fcp:config>
+						<fcp:entry key="true">${@msg.fcf.shell.plugin.splitterpane.relative.yes}</fcp:entry>
+						<fcp:entry key="false">${@msg.fcf.shell.plugin.splitterpane.relative.no}</fcp:entry>
+					</fcp:config>
+				</fcp:property>
+				<fcp:property id="size" type="double" editable="false"
+					name="${@msg.fcf.shell.plugin.splitterpane.size.name}" description="${@msg.fcf.shell.plugin.splitterpane.size.description}" />
+				<fcp:property id="resizable" type="boolean" getter="isResizable"
+					name="${@msg.fcf.shell.plugin.splitterpane.resizable.name}" description="${@msg.fcf.shell.plugin.splitterpane.resizable.description}" />
+			</fcp:serialization>
+		</fcp:plugin>
+
+		<fcp:plugin id="stepview" category="${@msg.fcf.shell.plugin.category.stock}"
+			class="org.fujionclinical.shell.elements.ElementStepView" name="${@msg.fcf.shell.plugin.stepview.name}"
+			description="${@msg.fcf.shell.plugin.stepview.description}">
+			<fcp:serialization>
+				<fcp:property id="caption"
+					name="${@msg.fcf.shell.plugin.stepview.caption.name}" description="${@msg.fcf.shell.plugin.stepview.caption.description}" />
+				<fcp:property id="style" type="enum"
+					name="${@msg.fcf.shell.plugin.stepview.style.name}" description="${@msg.fcf.shell.plugin._desktop.style.description}">
+					<fcp:config>
+						<fcp:entry key="class">org.fujionclinical.ui.util.ThemeUtil$PanelStyle</fcp:entry>
+					</fcp:config>
+				</fcp:property>
+				<fcp:property id="noHome" type="boolean"
+					name="${@msg.fcf.shell.plugin.stepview.nohome.name}" description="${@msg.fcf.shell.plugin.stepview.nohome.description}">
+					<fcp:config>
+						<fcp:entry key="true">${@msg.fcf.shell.plugin.stepview.nohome.hide}</fcp:entry>
+						<fcp:entry key="false">${@msg.fcf.shell.plugin.stepview.nohome.show}</fcp:entry>
+					</fcp:config>
+				</fcp:property>
+				<fcp:property id="noNavigation" type="boolean"
+					name="${@msg.fcf.shell.plugin.stepview.nonav.name}" description="${@msg.fcf.shell.plugin.stepview.nonav.description}">
+					<fcp:config>
+						<fcp:entry key="true">${@msg.fcf.shell.plugin.stepview.nonav.hide}</fcp:entry>
+						<fcp:entry key="false">${@msg.fcf.shell.plugin.stepview.nonav.show}</fcp:entry>
+					</fcp:config>
+				</fcp:property>
+				<fcp:property id="" type="step"
+					name="${@msg.fcf.shell.plugin.stepview.step.name}" description="${@msg.fcf.shell.plugin.stepview.step.description}" />
+			</fcp:serialization>
+		</fcp:plugin>
+
+		<fcp:plugin id="steppane" category="${@msg.fcf.shell.plugin.category.stock}"
+			class="org.fujionclinical.shell.elements.ElementStepPane" name="${@msg.fcf.shell.plugin.steppane.name}"
+			description="${@msg.fcf.shell.plugin.steppane.description}">
+			<fcp:serialization>
+				<fcp:property id="label"
+					name="${@msg.fcf.shell.plugin.steppane.label.name}" description="${@msg.fcf.shell.plugin.steppane.label.description}" />
+				<fcp:property id="icon" type="icon"
+					name="${@msg.fcf.shell.plugin.steppane.icon.name}" description="${@msg.fcf.shell.plugin.steppane.icon.description}" />
+				<fcp:property id="hint"
+					name="${@msg.fcf.shell.plugin.steppane.hint.name}" description="${@msg.fcf.shell.plugin.steppane.hint.description}" />
+				<fcp:property id="color" type="color"
+					name="${@msg.fcf.shell.plugin.steppane.color.name}" description="${@msg.fcf.shell.plugin.steppane.color.description}" />
+			</fcp:serialization>
+		</fcp:plugin>
+
+		<fcp:plugin id="toolbar" category="${@msg.fcf.shell.plugin.category.stock}"
+			class="org.fujionclinical.shell.elements.ElementToolbar" name="${@msg.fcf.shell.plugin.toolbar.name}"
+			description="${@msg.fcf.shell.plugin.toolbar.description}">
+			<fcp:serialization>
+				<fcp:property id="alignment" type="enum"
+					name="${@msg.fcf.shell.plugin.toolbar.alignment.name}"
+					description="${@msg.fcf.shell.plugin.toolbar.alignment.description}">
+					<fcp:config>
+						<fcp:entry key="class">org.fujion.component.Toolbar$Alignment</fcp:entry>
+					</fcp:config>
+				</fcp:property>
+				<fcp:property id="" type="children"
+					name="${@msg.fcf.shell.plugin.toolbar.children.name}"
+					description="${@msg.fcf.shell.plugin.toolbar.children.description}" />
+			</fcp:serialization>
+		</fcp:plugin>
+
+		<fcp:plugin id="_toolbar" category="${@msg.fcf.shell.plugin.category.internal}"
+			class="org.fujionclinical.shell.elements.ElementToolbar" name="${@msg.fcf.shell.plugin._toolbar.name}"
+			description="${@msg.fcf.shell.plugin.toolbar.description}">
+			<fcp:serialization>
+				<fcp:property id="alignment" type="enum"
+					name="${@msg.fcf.shell.plugin.toolbar.alignment.name}"
+					description="${@msg.fcf.shell.plugin.toolbar.alignment.description}">
+					<fcp:config>
+						<fcp:entry key="class">org.fujion.component.Toolbar$Alignment</fcp:entry>
+					</fcp:config>
+				</fcp:property>
+				<fcp:property id="" type="children"
+					name="${@msg.fcf.shell.plugin._toolbar.children.name}" description="${@msg.fcf.shell.plugin._toolbar.children.description}" />
+			</fcp:serialization>
+		</fcp:plugin>
+
+		<fcp:plugin id="menubar" category="${@msg.fcf.shell.plugin.category.stock}"
+			class="org.fujionclinical.shell.elements.ElementMenubar" name="${@msg.fcf.shell.plugin.menubar.name}"
+			description="${@msg.fcf.shell.plugin.menubar.description}">
+			<fcp:serialization>
+				<fcp:property id="" type="menuitems"
+					name="${@msg.fcf.shell.plugin.menubar.menuitems.name}"
+					description="${@msg.fcf.shell.plugin.menubar.menuitems.description}" />
+			</fcp:serialization>
+		</fcp:plugin>
+
+		<fcp:plugin id="_menubar" category="${@msg.fcf.shell.plugin.category.internal}"
+			class="org.fujionclinical.shell.elements.ElementMenubar" name="${@msg.fcf.shell.plugin._menubar.name}"
+			description="${@msg.fcf.shell.plugin._menubar.description}">
+			<fcp:serialization>
+				<fcp:property id="" type="menuitems"
+					name="${@msg.fcf.shell.plugin._menubar.menuitems.name}" description="${@msg.fcf.shell.plugin._menubar.menuitems.description}" />
+			</fcp:serialization>
+		</fcp:plugin>
+
+		<fcp:plugin id="menuitem" category="${@msg.fcf.shell.plugin.category.stock}"
+			class="org.fujionclinical.shell.elements.ElementMenuItem" name="${@msg.fcf.shell.plugin.menuitem.name}"
+			description="${@msg.fcf.shell.plugin.menuitem.description}">
+			<fcp:serialization>
+				<fcp:property id="label"
+					default="${@msg.fcf.shell.plugin.menuitem.label.default}" name="${@msg.fcf.shell.plugin.menuitem.label.name}"
+					description="${@msg.fcf.shell.plugin.menuitem.label.description}" />
+				<fcp:property id="hint"
+					name="${@msg.fcf.shell.plugin.menuitem.hint.name}" description="${@msg.fcf.shell.plugin.menuitem.hint.description}" />
+				<fcp:property id="action" type="action"
+					name="${@msg.fcf.shell.plugin.menuitem.action.name}" description="${@msg.fcf.shell.plugin.menuitem.action.description}" />
+				<fcp:property id="color" type="color"
+					name="${@msg.fcf.shell.plugin.menuitem.color.name}" description="${@msg.fcf.shell.plugin.menuitem.color.description}" />
+			</fcp:serialization>
+		</fcp:plugin>
+
+		<fcp:plugin id="frame" category="${@msg.fcf.shell.plugin.category.stock}"
+			class="org.fujionclinical.shell.elements.ElementFrame" name="${@msg.fcf.shell.plugin.frame.name}"
+			description="${@msg.fcf.shell.plugin.frame.description}">
+			<fcp:serialization>
+				<fcp:property id="url" name="${@msg.fcf.shell.plugin.frame.url.name}"
+					description="${@msg.fcf.shell.plugin.frame.url.description}" />
+			</fcp:serialization>
+		</fcp:plugin>
+
+		<fcp:plugin id="image" category="${@msg.fcf.shell.plugin.category.stock}"
+			class="org.fujionclinical.shell.elements.ElementImage" name="${@msg.fcf.shell.plugin.image.name}"
+			description="${@msg.fcf.shell.plugin.image.description}">
+			<fcp:serialization>
+				<fcp:property id="url"
+					name="${@msg.fcf.shell.plugin.image.url.name}" description="${@msg.fcf.shell.plugin.image.url.description}" />
+				<fcp:property id="stretch" type="boolean"
+					name="${@msg.fcf.shell.plugin.image.stretch.name}" description="${@msg.fcf.shell.plugin.image.stretch.description}" />
+				<fcp:property id="hint"
+					name="${@msg.fcf.shell.plugin.image.hint.name}" description="${@msg.fcf.shell.plugin.image.hint.description}" />
+			</fcp:serialization>
+		</fcp:plugin>
+
+		<fcp:plugin id="label" category="${@msg.fcf.shell.plugin.category.stock}"
+			class="org.fujionclinical.shell.elements.ElementLabel" name="${@msg.fcf.shell.plugin.label.name}"
+			description="${@msg.fcf.shell.plugin.label.description}">
+			<fcp:serialization>
+				<fcp:property id="label"
+					default="${@msg.fcf.shell.plugin.label.label.default}" name="${@msg.fcf.shell.plugin.label.label.name}"
+					description="${@msg.fcf.shell.plugin.label.label.description}" />
+				<fcp:property id="hint"
+					name="${@msg.fcf.shell.plugin.label.hint.name}" description="${@msg.fcf.shell.plugin.label.hint.description}" />
+				<fcp:property id="size" type="enum"
+					name="${@msg.fcf.shell.plugin.label.size.name}" description="${@msg.fcf.shell.plugin.label.size.description}">
+					<fcp:config>
+						<fcp:entry key="class">org.fujionclinical.ui.util.ThemeUtil$LabelSize</fcp:entry>
+					</fcp:config>
+				</fcp:property>
+				<fcp:property id="style" type="enum"
+					name="${@msg.fcf.shell.plugin.label.style.name}" description="${@msg.fcf.shell.plugin.label.style.description}">
+					<fcp:config>
+						<fcp:entry key="class">org.fujionclinical.ui.util.ThemeUtil$LabelStyle</fcp:entry>
+					</fcp:config>
+				</fcp:property>
+			</fcp:serialization>
+		</fcp:plugin>
+
+		<fcp:plugin id="button" category="${@msg.fcf.shell.plugin.category.stock}"
+			class="org.fujionclinical.shell.elements.ElementButton" name="${@msg.fcf.shell.plugin.button.name}"
+			description="${@msg.fcf.shell.plugin.button.description}">
+			<fcp:serialization>
+				<fcp:property id="label"
+					default="${@msg.fcf.shell.plugin.button.label.default}" name="${@msg.fcf.shell.plugin.button.label.name}"
+					description="${@msg.fcf.shell.plugin.button.label.description}" />
+				<fcp:property id="position" type="enum"
+					name="${@msg.fcf.shell.plugin.button.position.name}" description="${@msg.fcf.shell.plugin.button.position.description}">
+					<fcp:config>
+						<fcp:entry key="class">org.fujion.component.BaseLabeledComponent$LabelPositionHorz</fcp:entry>
+					</fcp:config>
+				</fcp:property>
+				<fcp:property id="icon" type="icon"
+					name="${@msg.fcf.shell.plugin.button.icon.name}" description="${@msg.fcf.shell.plugin.button.icon.description}" />
+				<fcp:property id="hint"
+					name="${@msg.fcf.shell.plugin.button.hint.name}" description="${@msg.fcf.shell.plugin.button.hint.description}" />
+				<fcp:property id="size" type="enum"
+					name="${@msg.fcf.shell.plugin.button.size.name}" description="${@msg.fcf.shell.plugin.button.size.description}">
+					<fcp:config>
+						<fcp:entry key="class">org.fujionclinical.ui.util.ThemeUtil$ButtonSize</fcp:entry>
+					</fcp:config>
+				</fcp:property>
+				<fcp:property id="style" type="enum"
+					name="${@msg.fcf.shell.plugin.button.style.name}" description="${@msg.fcf.shell.plugin.button.style.description}">
+					<fcp:config>
+						<fcp:entry key="class">org.fujionclinical.ui.util.ThemeUtil$ButtonStyle</fcp:entry>
+					</fcp:config>
+				</fcp:property>
+				<fcp:property id="action" type="action"
+					name="${@msg.fcf.shell.plugin.button.action.name}" description="${@msg.fcf.shell.plugin.button.action.description}" />
+			</fcp:serialization>
+		</fcp:plugin>
+
+		<fcp:plugin id="link" category="${@msg.fcf.shell.plugin.category.stock}"
+			class="org.fujionclinical.shell.elements.ElementLink" name="${@msg.fcf.shell.plugin.link.name}"
+			description="${@msg.fcf.shell.plugin.link.description}">
+			<fcp:serialization>
+				<fcp:property id="label"
+					default="${@msg.fcf.shell.plugin.link.label.default}" name="${@msg.fcf.shell.plugin.link.label.name}"
+					description="${@msg.fcf.shell.plugin.link.label.description}" />
+				<fcp:property id="position" type="enum"
+					name="${@msg.fcf.shell.plugin.link.position.name}" description="${@msg.fcf.shell.plugin.link.position.description}">
+					<fcp:config>
+						<fcp:entry key="class">org.fujion.component.BaseLabeledComponent$LabelPositionHorz</fcp:entry>
+					</fcp:config>
+				</fcp:property>
+				<fcp:property id="color" type="color"
+					default="${@msg.fcf.shell.plugin.link.color.default}" name="${@msg.fcf.shell.plugin.link.color.name}"
+					description="${@msg.fcf.shell.plugin.link.color.description}" />
+				<fcp:property id="icon" type="icon"
+					name="${@msg.fcf.shell.plugin.link.icon.name}" description="${@msg.fcf.shell.plugin.link.icon.description}" />
+				<fcp:property id="hint" name="${@msg.fcf.shell.plugin.link.hint.name}"
+					description="${@msg.fcf.shell.plugin.link.hint.description}" />
+				<fcp:property id="size" type="enum"
+					name="${@msg.fcf.shell.plugin.link.size.name}" description="${@msg.fcf.shell.plugin.link.size.description}">
+					<fcp:config>
+						<fcp:entry key="class">org.fujionclinical.ui.util.ThemeUtil$ButtonSize</fcp:entry>
+					</fcp:config>
+				</fcp:property>
+				<fcp:property id="action" type="action"
+					name="${@msg.fcf.shell.plugin.link.action.name}" description="${@msg.fcf.shell.plugin.link.action.description}" />
+			</fcp:serialization>
+		</fcp:plugin>
+
+		<fcp:plugin id="layout"
+			class="org.fujionclinical.shell.elements.ElementLayout" name="${@msg.fcf.shell.plugin.layout.name}"
+			description="${@msg.fcf.shell.plugin.layout.description}">
+			<fcp:serialization>
+				<fcp:property id="shared" type="boolean" editable="false"
+					name="${@msg.fcf.shell.plugin.layout.shared.name}" description="${@msg.fcf.shell.plugin.layout.shared.description}" />
+				<fcp:property id="layoutName" editable="false"
+					name="${@msg.fcf.shell.plugin.layout.layoutname.name}" description="${@msg.fcf.shell.plugin.layout.layoutname.description}" />
+				<fcp:property id="linked" type="boolean"
+					name="${@msg.fcf.shell.plugin.layout.linked.name}" description="${@msg.fcf.shell.plugin.layout.linked.description}" />
+			</fcp:serialization>
+		</fcp:plugin>
+
+		<!-- Trigger elements -->
+		
+		<fcp:plugin id="trigger"
+			class="org.fujionclinical.shell.elements.ElementTrigger" name="Trigger" description="Trigger">
+		</fcp:plugin>
+		
+		<fcp:plugin id="action"
+			class="org.fujionclinical.shell.elements.ElementTriggerAction" name="Trigger Action" description="Trigger action">
+		</fcp:plugin>
+		
+		<fcp:plugin id="condition"
+			class="org.fujionclinical.shell.elements.ElementTriggerCondition" name="Trigger Condition" description="Trigger condition">
+		</fcp:plugin>
+		
+		<!-- Trigger Action plugins -->
+		
+		<fcp:plugin id="action-hide" name="Hide a component"
+			class="org.fujionclinical.shell.triggers.TriggerActionHide" />
+		
+		<fcp:plugin id="action-show" name="Show a component"
+			class="org.fujionclinical.shell.triggers.TriggerActionShow" />
+		
+		<fcp:plugin id="action-logout" name="Logout"
+			class="org.fujionclinical.shell.triggers.TriggerActionLogout" />
+		
+		<!-- Trigger Condition plugins -->
+		
+		<fcp:plugin id="condition-activate" name="A component is activated"
+			class="org.fujionclinical.shell.triggers.TriggerConditionActivate" />
+		
+	</beans>
+
+	<beans profile="child">
+
+		<!-- A registry of startup routines. -->
+		<bean id="fcfStartup" class="org.fujionclinical.shell.ShellStartup" />
+
+	</beans>
+</beans>

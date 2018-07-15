@@ -1,0 +1,277 @@
+@charset "UTF-8";
+
+/*
+	Global stylesheet for Fujion Clinical Framework.  Styles here will be applied to all components.
+*/
+
+.fcf-desktop {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    margin: 0;
+}
+
+.fcf-desktop-toolbar {
+    flex: 1;
+    border: none;
+}
+
+.fcf-desktop-toolbar.fcf-designmode-active {
+    min-height: 20px;
+}
+
+.fcf-desktop > .panel-heading {
+    display: flex;
+    align-items: center;
+}
+
+.fcf-desktop > .panel-heading > * {
+	padding-right: 5px
+}
+
+.fcf-desktop > .panel-body {
+     display: inline-flex;  
+     padding: 0;
+}
+
+.fcf-desktop-notitle {
+ 	display: none;
+}
+
+.fcf-plugin-container {
+    display: block;
+	position: relative;
+	overflow: auto;
+	padding: 0!important;
+}
+
+.fcf-anchor {
+	background: transparent!important;
+	border: none!important;
+	text-decoration: underline!important;
+	margin: 4px!important;
+}
+
+.fcf-topToolbar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+
+.fcf-pluginWithToolbar {
+	position: absolute;
+	overflow: auto;
+	top: 30px;
+	bottom: 0;
+	right: 0;
+	left: 0;
+}
+
+.fcf-pluginWithoutToolbar {
+	position: absolute;
+	overflow: auto;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+}
+
+.fcf-tab-panel {
+	padding: 0;
+}
+
+.fcf-menubar.fcf-designmode-active {
+    min-height: 20px;
+    min-width: 80px;
+}
+
+.fcf-treeview-selector {
+	overflow: auto;
+	height: 100%;
+	width: 100%;
+}
+
+.fcf-treeview-pane {
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+.fcf-treeview-node {
+	text-align: left;
+	display: block;
+}
+
+.fcf-treeview-node > .fcf-treeview-node {
+	margin-left: 8px;
+}
+
+.fcf-treeview-node > a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+	background-image: none;
+	width: 100%;
+	border: none;
+	text-align: left;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	font-size: 90%;
+}	
+
+.fcf-treeview-node > a:before {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	margin-right: 5px;
+	margin-left: -5px;
+	vertical-align: middle;
+	border: 6px solid transparent;
+	content: " ";
+}
+
+.fcf-treeview-node > a > .badge {
+	margin-left: 5px;
+}
+
+.fcf-treeview-node-disabled {
+	opacity: 0.5;
+}
+
+.fcf-treeview-node-exp > a:before {
+	border-top: 6px solid;
+}
+
+.fcf-treeview-node-col > a:before {
+	border-left: 6px solid;
+	margin-top: -4px;
+}
+
+.fcf-treeview-node-col > span {
+	display: none;
+}
+		
+.fcf-header-cell * {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	background: none!important;
+	border: none!important;
+}
+
+.fcf-header-row {
+	padding: 0 5px 0 5px;
+	overflow: hidden;
+}
+
+.fcf-header-row * {
+	text-overflow: ellipsis!important;
+	white-space: nowrap!important;
+	vertical-align: middle!important;
+	overflow: visible;
+}
+
+.fcf-stepview {
+    display: flex;
+    flex-direction: row;
+}
+
+.fcf-stepview-taskbar {
+	width: 100%;
+	display: flex;
+}
+
+.fcf-stepview-taskbar > * {
+	display: inline-block;
+}
+
+.fcf-stepview-taskbar-left img {
+	max-height: 20px;
+}
+
+.fcf-stepview-taskbar-center {
+	text-align: center;
+	padding-left: 0;
+	padding-right: 0;
+	flex: 1;
+}
+
+.fcf-stepview-title {
+	margin-right: 10px;
+}
+
+.fcf-stepview-title:empty {
+	display: none;
+}
+
+.fcf-stepview-button.btn-primary {
+	outline: solid 1px;
+}
+
+.fcf-stepview-button:hover {
+	outline: 2px solid #CDE9FD;
+}
+
+.fcf-stepview-separator:after {
+	margin: 0 5px 0 5px;
+  	font-family: 'Glyphicons Halflings';
+  	font-size: 50%;
+	content: "\e080\e080";
+}
+
+.fcf-stepview-nonav .fcf-stepview-taskbar-left .fcf-link {
+	visibility: hidden;
+	margin: 0;
+}
+
+.fcf-stepview-home-selected {
+    border: 1px solid lightgray!important;
+    border-radius: 5px;
+}
+
+.fcf-propertygrid > .panel-body {
+	overflow: visible;
+}
+
+.fcf-propertygrid-embedded .panel-heading {
+	zoom: 0.75;
+	min-height: 43px;
+}
+
+.fcf-propertygrid table td {
+    padding: 4px!important;
+}
+
+.fcf-propertygrid-info {
+	border: none;
+}
+
+*.fcf-designmode-active {
+	outline: 2px dotted lightgray;
+	position: relative;
+}
+
+.fcf-designmode-active > .fcf_mask {
+	font-size: 75%;
+}
+
+.fcf-about-header {
+	font-size: 150%;
+	white-space: normal;
+	font-weight: bold;
+	color: darkblue;
+}
+
+.fcf-about-description {
+	background: lightyellow;
+	border-top: 1px solid gray;
+}
+
+.fcf-addcomponent .fcf_treenode img {
+    opacity: .7;    
+}
+
+.fcf-addcomponent .fcf_treenode img:hover {
+    opacity: 1;    
+}
+
+

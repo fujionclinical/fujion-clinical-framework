@@ -1,0 +1,19 @@
+<div width="100%" height="100%" class="fujion-layout-vertical"
+		controller="${@fcfSessionTrackerController}">
+	<toolbar width="100%">
+		<label name="lblSessionSummary" style="font-weight:bold"/>
+		<div flex="1"/>
+		<checkbox name="chkAutoRefresh" label="${@msg.fcf.sessiontracker.autorefresh.label}" />
+		<button name="btnRefreshSessionView" label="${@msg.fcf.btn.refresh.label}"/>
+	</toolbar>
+	<grid name="grid" flex="1">
+		<columns>
+			<column flex="1" label="${@msg.fcf.sessiontracker.master.session_id.label}"/>
+			<column flex="1" label="${@msg.fcf.sessiontracker.master.client_address.label}"/>
+			<column label="${@msg.fcf.sessiontracker.master.creation_time.label}"/>
+			<column label="${@msg.fcf.sessiontracker.master.last_accessed.label}"/>
+			<column label="${@msg.fcf.sessiontracker.master.timeout.label}"/>
+		</columns>
+		<rows/>
+	</grid>
+</div>

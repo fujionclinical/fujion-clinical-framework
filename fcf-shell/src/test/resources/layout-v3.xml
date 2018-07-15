@@ -1,0 +1,19 @@
+<layout name="test" title="Layout Title" version="3.0">
+	<_menubar />
+	<_toolbar />
+	<splitterview orientation="vertical">
+		<splitterpane relative="true" size="90">
+			<tabview orientation="top">
+				<tabpane label="Tabpane Label">
+					<treeview caption="Treeview Caption" open="true">
+						<treepane label="Pane 1" />
+						<treepane label="Pane 2" />
+					</treeview>
+				</tabpane>
+			</tabview>
+		</splitterpane>
+		<splitterpane relative="false" size="85">
+			<testplugin1 prop1="value1" prop2="123" prop3="true" />
+		</splitterpane>
+	</splitterview>
+</layout>

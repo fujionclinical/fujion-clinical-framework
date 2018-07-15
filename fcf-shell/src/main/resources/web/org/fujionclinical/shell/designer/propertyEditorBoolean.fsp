@@ -1,0 +1,7 @@
+<radiogroup>
+	<radiobutton name="rbTrue"
+		label=" ${@msg.fcf.shell.designer.propedit.bool.radio.true.label}" />	
+	<span width="20px" />
+	<radiobutton name="rbFalse"
+		label=" ${@msg.fcf.shell.designer.propedit.bool.radio.false.label}" />	
+</radiogroup>

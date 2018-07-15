@@ -1,0 +1,621 @@
+/*
+ * #%L
+ * Fujion Clinical Framework
+ * %%
+ * Copyright (C) 2018 fujionclinical.org
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ * This Source Code Form is also subject to the terms of the Health-Related
+ * Additional Disclaimer of Warranty and Limitation of Liability available at
+ *
+ *      http://www.fujionclinical.org/licensing/disclaimer
+ *
+ * #L%
+ */
+package org.fujionclinical.shell.designer;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
+import org.fujion.common.StrUtil;
+import org.fujionclinical.shell.elements.ElementBase;
+import org.fujionclinical.shell.elements.ElementUI;
+import org.fujionclinical.shell.layout.Layout;
+import org.fujionclinical.shell.layout.LayoutParser;
+import org.fujionclinical.shell.plugins.PluginDefinition;
+import org.fujionclinical.ui.dialog.DialogUtil;
+import org.fujion.ancillary.IAutoWired;
+import org.fujion.annotation.EventHandler;
+import org.fujion.annotation.WiredComponent;
+import org.fujion.client.ExecutionContext;
+import org.fujion.component.BaseComponent;
+import org.fujion.component.BaseUIComponent;
+import org.fujion.component.Button;
+import org.fujion.component.Page;
+import org.fujion.component.Treenode;
+import org.fujion.component.Treeview;
+import org.fujion.component.Window;
+import org.fujion.component.Window.CloseAction;
+import org.fujion.event.ClickEvent;
+import org.fujion.event.DblclickEvent;
+import org.fujion.event.DropEvent;
+import org.fujion.event.EventUtil;
+import org.fujion.event.IEventListener;
+
+/**
+ * Controller for dialog for managing the current layout.
+ */
+public class LayoutDesigner implements IAutoWired {
+    
+    private static final String DIALOG = DesignConstants.RESOURCE_PREFIX + "layoutDesigner.fsp";
+    
+    private static final String ATTR_BRING_TO_FRONT = DIALOG + ".BTF";
+    
+    private final String noDescriptionHint = StrUtil.getLabel("fcf.shell.designer.add.component.description.missing.hint");
+    
+    private enum MovementType {
+        INVALID, // Invalid movement type
+        EXCHANGE, // Exchange position of two siblings
+        FIRST, // Move ahead of all siblings
+        RELOCATE // Move to a different parent
+    }
+    
+    private ElementBase rootElement;
+    
+    private Window window;
+    
+    @WiredComponent
+    private Treeview tree;
+    
+    @WiredComponent
+    private Button btnCut;
+    
+    @WiredComponent
+    private Button btnCopy;
+    
+    @WiredComponent
+    private Button btnPaste;
+    
+    @WiredComponent
+    private Button btnAdd;
+    
+    @WiredComponent
+    private Button btnDelete;
+    
+    @WiredComponent
+    private Button btnUp;
+    
+    @WiredComponent
+    private Button btnDown;
+    
+    @WiredComponent
+    private Button btnLeft;
+    
+    @WiredComponent
+    private Button btnRight;
+    
+    @WiredComponent
+    private Button btnToFront;
+    
+    @WiredComponent
+    private Button btnProperties;
+    
+    @WiredComponent
+    private Button btnAbout;
+    
+    private final Clipboard clipboard = Clipboard.getInstance();
+    
+    private final DesignContextMenu contextMenu = DesignContextMenu.create();
+    
+    private int dragId;
+    
+    private LayoutChangedEvent layoutChangedEvent;
+    
+    private boolean refreshPending;
+    
+    private boolean bringToFront;
+    
+    /**
+     * Listens for changes to the UI, filtering out all but those associated with a UI element.
+     */
+    private final IEventListener layoutListener = (event) -> {
+        if (ElementUI.getAssociatedElement(event.getRelatedTarget()) != null) {
+            requestRefresh();
+        }
+    };
+    
+    /**
+     * Display the Layout Manager dialog
+     *
+     * @param rootElement The root UI element.
+     */
+    public static void execute(ElementBase rootElement) {
+        Window dlg = getInstance(true);
+        dlg.getAttribute("controller", LayoutDesigner.class).init(rootElement);
+        dlg.popup(null);
+    }
+    
+    /**
+     * Close the dialog if it is open.
+     */
+    public static void closeDialog() {
+        Window dlg = getInstance(false);
+        
+        if (dlg != null) {
+            dlg.close();
+        }
+    }
+    
+    /**
+     * Returns an instance of the layout manager. If the layout manager is open, returns that
+     * instance. If not and autoCreate is true, creates a new one.
+     *
+     * @param autoCreate If true and dialog does not exist, it is created.
+     * @return The layout manager.
+     */
+    private static Window getInstance(boolean autoCreate) {
+        Page page = ExecutionContext.getPage();
+        Window dlg = page.getAttribute(DIALOG, Window.class);
+        
+        if (autoCreate && dlg == null) {
+            dlg = DialogUtil.popup(DIALOG, true, true, false);
+            page.setAttribute(DIALOG, dlg);
+        }
+        
+        return dlg;
+    }
+    
+    @Override
+    public void afterInitialized(BaseComponent comp) {
+        window = (Window) comp;
+        window.setCloseAction(CloseAction.HIDE);
+        comp.setAttribute("controller", this);
+        bringToFront = comp.getPage().getAttribute(ATTR_BRING_TO_FRONT, true);
+        layoutChangedEvent = new LayoutChangedEvent(comp, null);
+        contextMenu.setListener(comp);
+        clipboard.addListener(comp);
+        comp.getPage().addEventListener("register unregister", layoutListener);
+    }
+    
+    /**
+     * Initialize the tree view based on the current layout.
+     *
+     * @param rootElement The root UI element.
+     */
+    private void init(ElementBase rootElement) {
+        if (this.rootElement != rootElement) {
+            this.rootElement = rootElement;
+            refresh();
+        }
+    }
+    
+    /**
+     * Highlights a component.
+     *
+     * @param comp Component to highlight.
+     */
+    private void highlight(BaseComponent comp) {
+        comp.invoke("widget$.effect", "pulsate", Collections.singletonMap("times", 1));
+    }
+    
+    /**
+     * Submits an asynchronous refresh request if one is not already pending.
+     */
+    public void requestRefresh() {
+        if (!refreshPending) {
+            refreshPending = true;
+            EventUtil.post(layoutChangedEvent);
+        }
+    }
+    
+    /**
+     * Refreshes the component tree.
+     */
+    private void refresh() {
+        refreshPending = false;
+        ElementBase selectedElement = selectedElement();
+        tree.destroyChildren();
+        dragId = 0;
+        buildTree(rootElement, null, selectedElement);
+        updateDroppable();
+        updateControls();
+    }
+    
+    /**
+     * Refresh a subtree of the component tree. Called recursively.
+     *
+     * @param root Root UI element of the subtree.
+     * @param parentNode Tree node that will be the parent node of the subtree.
+     * @param selectedElement The currently selected element.
+     */
+    private void buildTree(ElementBase root, Treenode parentNode, ElementBase selectedElement) {
+        Treenode node = createNode(root);
+        node.setParent(parentNode == null ? tree : parentNode);
+        
+        if (root == selectedElement) {
+            tree.setSelectedNode(node);
+        }
+        
+        for (ElementBase child : root.getChildren()) {
+            buildTree(child, node, selectedElement);
+        }
+    }
+    
+    /**
+     * Creates a tree node associated with the specified UI element.
+     *
+     * @param ele UI element
+     * @return Newly created tree node.
+     */
+    private Treenode createNode(ElementBase ele) {
+        String label = ele.getDisplayName();
+        String instanceName = ele.getInstanceName();
+        PluginDefinition def = ele.getDefinition();
+        
+        if (!label.equalsIgnoreCase(instanceName)) {
+            label += " - " + instanceName;
+        }
+        
+        Treenode node = new Treenode();
+        node.setLabel(label);
+        node.setData(ele);
+        node.setHint(StringUtils.defaultString(def.getDescription(), noDescriptionHint));
+        node.addEventForward(DropEvent.class, window, null);
+        node.addEventForward(DblclickEvent.class, btnProperties, ClickEvent.TYPE);
+        
+        if (!ele.isLocked() && !def.isInternal()) {
+            node.setDragid("d" + dragId++);
+        }
+        
+        return node;
+    }
+    
+    /**
+     * Returns the tree node containing the component.
+     *
+     * @param comp The component whose containing tree node is sought.
+     * @return The tree node.
+     */
+    private Treenode getTreenode(BaseComponent comp) {
+        return (Treenode) (comp instanceof Treenode ? comp : comp.getAncestor(Treenode.class));
+    }
+    
+    /**
+     * Returns currently selected UI element, or null if none selected.
+     *
+     * @return Currently selected element (may be null).
+     */
+    private ElementUI selectedElement() {
+        return getElement(tree.getSelectedNode());
+    }
+    
+    /**
+     * Returns the UI element associated with the given tree node.
+     *
+     * @param node A tree node.
+     * @return The UI element associated with the tree node.
+     */
+    private ElementUI getElement(Treenode node) {
+        return (ElementUI) (node == null ? rootElement : node.getData());
+    }
+    
+    /**
+     * Update control states for current selection.
+     */
+    private void updateControls() {
+        Treenode selectedNode = tree.getSelectedNode();
+        ElementUI selectedElement = getElement(selectedNode);
+        contextMenu.updateStates(selectedElement, btnAdd, btnDelete, btnCopy, btnCut, btnPaste, btnProperties, btnAbout);
+        BaseComponent parent = selectedNode == null ? null : selectedNode.getParent();
+        //parent = parent == null ? null : parent.getParent();
+        Treenode target = parent instanceof Treenode ? (Treenode) parent : null;
+        btnLeft.setDisabled(movementType(selectedNode, target, false) == MovementType.INVALID);
+        target = selectedNode == null ? null : (Treenode) selectedNode.getPreviousSibling();
+        btnRight.setDisabled(movementType(selectedNode, target, false) == MovementType.INVALID);
+        btnUp.setDisabled(movementType(selectedNode, target, true) == MovementType.INVALID);
+        target = selectedNode == null ? null : (Treenode) selectedNode.getNextSibling();
+        btnDown.setDisabled(movementType(selectedNode, target, true) == MovementType.INVALID);
+        btnToFront.addStyle("opacity", bringToFront ? null : "0.5");
+        
+        if (selectedElement != null) {
+            window.setContext(contextMenu.getMenupopup());
+            contextMenu.setOwner(selectedElement);
+        }
+        
+        if (selectedNode != null) {
+            selectedNode.setSelected(false);
+            selectedNode.setSelected(true);
+        }
+    }
+    
+    /**
+     * Returns the type of movement being requested.
+     *
+     * @param child The node to be moved.
+     * @param target The proposed target.
+     * @param allowExchange If true and child and target are siblings, this is an exchange.
+     *            Otherwise, it will be evaluated as a potential relocation.
+     * @return The movement type.
+     */
+    private MovementType movementType(Treenode child, Treenode target, boolean allowExchange) {
+        if (!canMove(child) || target == null) {
+            return MovementType.INVALID;
+        }
+        
+        ElementBase eleChild = getElement(child);
+        ElementBase eleTarget = getElement(target);
+        
+        if (eleChild == eleTarget) {
+            return MovementType.INVALID;
+        }
+        
+        if (eleChild.getParent() == eleTarget.getParent() && allowExchange) {
+            return canMove(target) ? MovementType.EXCHANGE : MovementType.INVALID;
+        }
+        
+        if (eleChild.getParent() == eleTarget) {
+            return MovementType.FIRST;
+        }
+        
+        if (eleTarget.canAcceptChild(eleChild) && eleChild.canAcceptParent(eleTarget)) {
+            return MovementType.RELOCATE;
+        }
+        
+        return MovementType.INVALID;
+    }
+    
+    private boolean canMove(Treenode node) {
+        return node != null && node.getDragid() != null;
+    }
+    
+    private void enumerateNodes(BaseUIComponent parent, List<Treenode> nodes) {
+        for (Treenode child : parent.getChildren(Treenode.class)) {
+            nodes.add(child);
+            enumerateNodes(child, nodes);
+        }
+    }
+
+    /**
+     * Updates the drop ids for all tree nodes.
+     */
+    private void updateDroppable() {
+        List<Treenode> nodes = new ArrayList<>();
+        enumerateNodes(tree, nodes);
+
+        for (Treenode target : nodes) {
+            if (canMove(target)) {
+                StringBuilder sb = new StringBuilder();
+                
+                for (Treenode node : nodes) {
+                    if (node != target && movementType(node, target, true) != MovementType.INVALID) {
+                        String id = node.getDragid();
+
+                        if (id != null) {
+                            sb.append(sb.length() > 0 ? " " : "").append(id);
+                        }
+                    }
+                }
+                
+                target.setDropid(sb.toString());
+            }
+        }
+    }
+    
+    /**
+     * Refreshes tree when layout has changed.
+     */
+    @EventHandler(value = "layoutChanged", target = "^")
+    private void onLayoutChanged() {
+        refresh();
+    }
+    
+    /**
+     * Updates tool bar controls when selected changes.
+     */
+    @EventHandler(value = "change", target = "@tree")
+    private void onChange$tree() {
+        ElementUI ele = selectedElement();
+        Object obj = ele == null ? null : ele.getOuterComponent();
+        
+        if (bringToFront && ele != null) {
+            ele.bringToFront();
+        }
+        
+        if (obj instanceof BaseComponent) {
+            highlight((BaseComponent) obj);
+        }
+        updateControls();
+    }
+    
+    /**
+     * Performs a cut operation on the selected node.
+     */
+    @EventHandler(value = "click", target = "@btnCut")
+    private void onClick$btnCut() {
+        onClick$btnCopy();
+        onClick$btnDelete();
+    }
+    
+    /**
+     * Performs a copy operation on the selected node.
+     */
+    @EventHandler(value = "click", target = "@btnCopy")
+    private void onClick$btnCopy() {
+        clipboard.copy(LayoutParser.parseElement(selectedElement()));
+    }
+    
+    /**
+     * Performs a paste operation, inserted the pasted elements under the current selection.
+     */
+    @EventHandler(value = "click", target = "@btnPaste")
+    private void onClick$btnPaste() {
+        Object data = clipboard.getData();
+        
+        if (data instanceof Layout) {
+            ((Layout) data).materialize(selectedElement());
+            requestRefresh();
+        }
+    }
+    
+    /**
+     * Shows clipboard contents.
+     */
+    @EventHandler(value = "click", target = "btnView")
+    private void onClick$btnView() {
+        clipboard.view();
+    }
+    
+    /**
+     * Refreshes the tree view.
+     */
+    @EventHandler(value = "click", target = "btnRefresh")
+    private void onClick$btnRefresh() {
+        refresh();
+    }
+    
+    @EventHandler(value = "click", target = "@btnToFront")
+    private void onClick$btnToFront() {
+        bringToFront = !bringToFront;
+        updateControls();
+    }
+    
+    /**
+     * Displays the property grid for the currently selected node.
+     */
+    @EventHandler(value = "click", target = "@btnProperties")
+    private void onClick$btnProperties() {
+        if (!btnProperties.isDisabled()) {
+            PropertyGrid.create(selectedElement(), null);
+        }
+    }
+    
+    /**
+     * Invokes the add component dialog. Any newly added component will be placed under the current
+     * selection.
+     */
+    @EventHandler(value = "click", target = "@btnAdd")
+    private void onClick$btnAdd() {
+        AddComponent.newChild(selectedElement(), (result) -> {
+            if (result != null) {
+                requestRefresh();
+            }
+        });
+    }
+    
+    /**
+     * Removes the currently selected element and any children.
+     */
+    @EventHandler(value = "click", target = "@btnDelete")
+    private void onClick$btnDelete() {
+        ElementBase child = selectedElement();
+        ElementBase parent = child.getParent();
+        parent.removeChild(child, true);
+        tree.getSelectedNode().destroy();
+        updateDroppable();
+        updateControls();
+    }
+    
+    @EventHandler(value = "click", target = "@btnUp")
+    private void onClick$btnUp() {
+        Treenode node = tree.getSelectedNode();
+        doDrop(node, (Treenode) node.getPreviousSibling(), true);
+    }
+    
+    @EventHandler(value = "click", target = "@btnDown")
+    private void onClick$btnDown() {
+        Treenode node = tree.getSelectedNode();
+        doDrop((Treenode) node.getNextSibling(), node, true);
+    }
+    
+    @EventHandler(value = "click", target = "@btnRight")
+    private void onClick$btnRight() {
+        Treenode node = tree.getSelectedNode();
+        doDrop(node, (Treenode) node.getPreviousSibling(), false);
+    }
+    
+    @EventHandler(value = "click", target = "@btnLeft")
+    private void onClick$btnLeft() {
+        Treenode node = tree.getSelectedNode();
+        doDrop(node, (Treenode) node.getParent().getParent(), false);
+    }
+    
+    /**
+     * Display the About dialog for the selected element.
+     */
+    @EventHandler(value = "click", target = "@btnAbout")
+    private void onClick$btnAbout() {
+        selectedElement().about();
+    }
+    
+    /**
+     * Invoked when the clipboard contents changes.
+     */
+    @EventHandler(value = Clipboard.CLIPBOARD_CHANGE_EVENT)
+    private void onClipboardChange() {
+        updateControls();
+    }
+    
+    /**
+     * Handles drop events.
+     *
+     * @param event The drop event.
+     */
+    @EventHandler(value = "drop", target = "^")
+    private void onDrop(DropEvent event) {
+        Treenode target = getTreenode(event.getTarget());
+        Treenode dragged = getTreenode(event.getDraggable());
+        doDrop(dragged, target, true);
+    }
+    
+    private void doDrop(Treenode dragged, Treenode target, boolean allowExchange) {
+        ElementBase eleTarget = getElement(target);
+        ElementBase eleDragged = getElement(dragged);
+        
+        switch (movementType(dragged, target, allowExchange)) {
+            case INVALID:
+                return;
+            
+            case EXCHANGE:
+                eleDragged.setIndex(eleTarget.getIndex());
+                target.getParent().addChild(dragged, target);
+                break;
+            
+            case FIRST:
+                eleDragged.setIndex(0);
+                target.addChild(dragged, 0);
+                break;
+            
+            case RELOCATE:
+                eleDragged.setParent(eleTarget);
+                getTreenode(target).addChild(dragged);
+                break;
+        }
+        updateDroppable();
+        updateControls();
+    }
+    
+    /**
+     * Remove all listeners upon close.
+     */
+    @EventHandler("close")
+    private void onClose() {
+        Page page = window.getPage();
+        page.removeEventListener("register unregister", layoutListener);
+        page.removeAttribute(DIALOG);
+        page.setAttribute(ATTR_BRING_TO_FRONT, bringToFront);
+        clipboard.removeListener(window);
+    }
+}

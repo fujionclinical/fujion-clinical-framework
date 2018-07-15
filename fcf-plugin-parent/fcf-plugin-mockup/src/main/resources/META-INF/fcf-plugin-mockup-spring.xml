@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:fcp="http://www.fujionclinical.org/schema/plugin"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation=
+		"http://www.springframework.org/schema/beans 
+		 http://www.springframework.org/schema/beans/spring-beans.xsd
+		 http://www.fujionclinical.org/schema/plugin
+		 http://www.fujionclinical.org/schema/plugin/plugin-extensions.xsd">
+
+	<beans profile="root">
+		
+		<fcp:plugin id="fcfMockupViewer" name="Mockup Viewer" 
+			url="web/org/fujionclinical/plugin/mockup/main.fsp"
+			description="Plugin to allow embedding third-party wireframes for quick UI prototyping.">
+			<fcp:serialization>
+				<fcp:property id="mockupType" name="${@msg.fcf.mockup.type.name}" type="enum"
+					description="${@msg.fcf.mockup.type.description}">
+					<fcp:config>
+						<fcp:entry key="bean">fcfMockupTypeEnumerator</fcp:entry>
+					</fcp:config>
+				</fcp:property>
+				<fcp:property id="mockupId" name="${@msg.fcf.mockup.identifier.name}" type="text"
+					description="${@msg.fcf.mockup.identifier.description}" />
+			</fcp:serialization>
+		</fcp:plugin>
+		
+		<bean id="fcfMockupController" scope="prototype"
+			class="org.fujionclinical.plugin.mockup.MainController">
+			<constructor-arg ref="fcfMockupTypeEnumerator" />
+		</bean>
+		
+		<bean id="fcfMockupTypeEnumerator" 
+			class="org.fujionclinical.plugin.mockup.MockupTypeEnumerator">
+			<constructor-arg value="classpath*:**/fcf-plugin-mockup.properties" />
+		</bean>
+	</beans>
+</beans>

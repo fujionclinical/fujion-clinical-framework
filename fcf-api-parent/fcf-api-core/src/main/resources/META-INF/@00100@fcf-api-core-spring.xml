@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/task
+		http://www.springframework.org/schema/task/spring-task.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<beans profile="root">
+
+		<context:annotation-config />
+
+		<!-- 
+		The intent here is for property 'org.fujionclinical.location.properties' to purposely 
+		not exist in any *-default.properties so that a System property could be consulted first, 
+		thus overriding the default 'classpath:fcf*.properties'.  One can start a JVM/tomcat with
+		that property pointing to an external property file (i.e. outside the WAR) where the 
+		embedded fcf.properties file is not used.
+		-->
+ 		<context:property-placeholder
+			location="classpath*:/META-INF/*-default.properties,${org.fujionclinical.location.properties:classpath:fcf*.properties}"
+			ignore-resource-not-found="true"  />
+
+		<bean id="appContextFinder" class="org.fujionclinical.api.spring.AppContextFinder">
+			<property name="appFramework" ref="appFramework" />
+		</bean>
+
+		<bean class="org.fujionclinical.api.spring.BeanResolver">
+			<constructor-arg ref="appContextFinder" />
+		</bean>
+		
+		<!-- Maintains an iterable list of all manifests in the class path. -->
+		<bean id="manifestIterator" class="org.fujionclinical.api.ManifestIterator"
+			factory-method="getInstance" init-method="init" />
+
+		<!-- Maintains a registry of all context serializers. -->
+		<bean id="contextSerializerRegistry"
+			class="org.fujionclinical.api.context.ContextSerializerRegistry"
+			factory-method="getInstance" />
+
+		<!-- Maintains a registry of all alias types. -->
+		<bean id="aliasTypeRegistry" class="org.fujionclinical.api.alias.AliasTypeRegistry"
+			factory-method="getInstance">
+			<property name="propertyFile" value="classpath*:/META-INF/alias.properties,${org.fujionclinical.location.aliases}" />
+		</bean>
+		
+		<!-- Maintains a registry of all domain factories. -->
+		<bean id="domainFactoryRegistry" class="org.fujionclinical.api.domain.DomainFactoryRegistry"
+			factory-method="getInstance">
+		</bean>
+
+		<!-- Maintains a registry of all security domains. -->
+		<bean id="securityDomainRegistry" class="org.fujionclinical.api.security.SecurityDomainRegistry"
+			factory-method="getInstance">
+		</bean>
+
+		<task:annotation-driven executor="taskExecutor"
+			scheduler="taskScheduler" />
+
+		<!-- Unbound queues (default) can lead to memory exceptions. Shutdown is 
+			called upon bean destruction. taskExecutor and taskScheduler will be of types 
+			ExecutorService and ScheduledExecutorService respectively. When a task is 
+			rejected, a thread pool executor will throw a RejectedExecutionException 
+			(default policy). -->
+		<bean id="taskExecutor"
+			class="org.springframework.scheduling.concurrent.ThreadPoolExecutorFactoryBean"
+			init-method="initialize" destroy-method="destroy">
+			<property name="threadNamePrefix"
+				value="${org.fujionclinical.thread.executor.thread.name.prefix}" />
+			<property name="corePoolSize" value="${org.fujionclinical.thread.executor.core.pool.size}" />
+			<property name="maxPoolSize" value="${org.fujionclinical.thread.executor.max.pool.size}" />
+			<property name="queueCapacity" value="${org.fujionclinical.thread.executor.queue.capacity}" />
+			<property name="waitForTasksToCompleteOnShutdown"
+				value="${org.fujionclinical.thread.executor.shutdown.wait}" />
+			<property name="awaitTerminationSeconds" value="${org.fujionclinical.thread.executor.shutdown.timeout}" />
+		</bean>
+
+		<bean id="taskScheduler"
+			class="org.springframework.scheduling.concurrent.ScheduledExecutorFactoryBean"
+			init-method="initialize" destroy-method="destroy">
+			<property name="threadNamePrefix"
+				value="${org.fujionclinical.thread.scheduler.thread.name.prefix}" />
+			<property name="poolSize" value="${org.fujionclinical.thread.scheduler.pool.size}" />
+			<property name="waitForTasksToCompleteOnShutdown"
+				value="${org.fujionclinical.thread.scheduler.shutdown.wait}" />
+			<property name="awaitTerminationSeconds" value="${org.fujionclinical.thread.scheduler.shutdown.timeout}" />
+		</bean>
+		
+		<!-- JMX Management -->
+		<bean id="mbeanServer" class="org.springframework.jmx.support.MBeanServerFactoryBean">
+			<!-- indicate to first look for a server -->
+			<property name="locateExistingServerIfPossible" value="true" />
+			<!-- search for the MBeanServer instance with the given agentId <property 
+				name="agentId" value=""/> -->
+		</bean>
+
+		<!-- Decorate your beans with Spring's @ManagedXXX annotations. This exporter 
+			will discover beans that implement the MBean interface as well as those annotated 
+			with @ManagedResource -->
+		<bean id="mbeanExporter"
+			class="org.springframework.jmx.export.annotation.AnnotationMBeanExporter">
+			<property name="server" ref="mbeanServer" />
+			<property name="namingStrategy" ref="mbeanNamingStrategy" />
+			<property name="registrationPolicy" value="IGNORE_EXISTING" />
+		</bean>
+
+		<!-- Default NamingStrategy -->
+		<bean id="mbeanNamingStrategy" class="org.springframework.jmx.export.naming.IdentityNamingStrategy" />
+
+		<!-- Caching Support -->
+		<bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+			<property name="configLocation">
+				<bean class="org.fujionclinical.api.spring.PropertyAwareResource">
+				 	<constructor-arg value="classpath:/META-INF/fcf-ehcache.xml" />
+				</bean>
+			</property>
+			<property name="shared" value="true" />
+		</bean>
+		
+		<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+			<property name="cacheManager" ref="cacheManagerFactory" />
+		</bean>
+
+		<!-- Messaging Support -->
+		<bean id="messageProducerService" class="org.fujionclinical.api.messaging.ProducerService" />
+
+		<bean id="messageConsumerService" class="org.fujionclinical.api.messaging.ConsumerService">
+			<constructor-arg ref="cacheManager" />
+		</bean>
+		
+		<bean class="org.fujionclinical.api.messaging.SimpleConsumerProducer" />
+		
+	</beans>
+
+	<beans profile="child">
+
+		<context:annotation-config />
+
+		<!-- Framework support -->
+		<bean id="appFramework" class="org.fujionclinical.api.AppFramework">
+		</bean>
+
+		<!-- Manages subscription and publication of generic events. -->
+		<bean id="eventManager" class="org.fujionclinical.api.event.EventManager"
+			destroy-method="destroy">
+		</bean>
+
+		<bean id="globalEventDispatcher" class="org.fujionclinical.api.event.GlobalEventDispatcher"
+			init-method="init" destroy-method="destroy" depends-on="securityService">
+			<constructor-arg ref="eventManager" />
+			<constructor-arg ref="messageProducerService" />
+			<constructor-arg ref="messageConsumerService" />
+		</bean>
+
+		<!-- Manages all shared contexts. -->
+		<bean id="contextManager" class="org.fujionclinical.api.context.ContextManager">
+			<property name="eventManager" ref="eventManager" />
+			<property name="appFramework" ref="appFramework" />
+		</bean>
+
+		<!-- Template for managed contexts. -->
+		<bean id="managedContext" abstract="true">
+			<property name="contextManager" ref="contextManager" />
+			<property name="eventManager" ref="eventManager" />
+			<property name="appFramework" ref="appFramework" />
+		</bean>
+
+		<!-- Shared user context. -->
+		<bean id="userContext" parent="managedContext"
+			class="org.fujionclinical.api.context.UserContext">
+			<constructor-arg value="#{securityService.authenticatedUser}" />
+		</bean>
+
+	</beans>
+</beans>

@@ -1,0 +1,49 @@
+<window name="win" height="80%" class="fcf-help-viewer flavor:panel-info"
+	controller="org.fujionclinical.help.viewer.HelpViewer">
+	<paneview height="100%" width="100%">
+		<pane width="33%" splittable="true">
+			<div height="100%" width="100%">
+				<tabview name="tvNavigator" height="100%" visible="false" />
+				<label name="lblLoading"
+					class="fcf-help-viewer-loading" label="Loading..." />
+			</div>
+		</pane>
+		<pane flex="1">
+			<div height="100%" width="100%" class="fcf-help-viewer-content">
+				<toolbar class="fcf-help-viewer-navbar" width="100%">
+					<button name="btnPrevious"
+						class="glyphicon glyphicon-chevron-left"
+						hint="${@msg.fcf.help.viewer.btn.previous.hint}" />
+					<button name="btnNext"
+						class="glyphicon glyphicon-chevron-right"
+						hint="${@msg.fcf.help.viewer.btn.next.hint}" />
+					<div width="40px" />
+					<button name="btnOpen" 
+						class="glyphicon glyphicon-new-window"
+						hint="${@msg.fcf.help.viewer.btn.open.hint}" />
+					<button name="btnPrint" 
+						class="glyphicon glyphicon-print"
+						hint="${@msg.fcf.help.viewer.btn.print.hint}" />
+				</toolbar>
+				<iframe name="iframe" flex="1" width="100%" />
+			</div>
+		</pane>
+	</paneview>
+	<style>
+		.fcf-help-viewer-content {
+			display: flex;
+			flex-direction: column;
+		}
+			
+		.fcf-help-viewer-loading {
+			font-size: 1.25em;
+			padding-top: 40px;
+			height: 100%;
+			text-align: center		}
+		
+		.fcf-help-viewer-navbar .glyphicon {
+			font-size: large;
+			color: green;
+		}
+	</style>
+</window>

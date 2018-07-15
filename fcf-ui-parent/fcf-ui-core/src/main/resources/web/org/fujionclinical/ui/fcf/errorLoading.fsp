@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Error page for errors that occur during the loading of a request, this window is not modal. -->
+<window sizable="true" height="100%" width="100%" class="flavor:panel-danger"
+	title="${@msg.fcf.error.dialog.title}">
+	<import src="web/org/fujionclinical/ui/fcf/errorContent.fsp"
+		class="panel-body" />
+</window>

@@ -1,0 +1,33 @@
+<namespace controller="org.fujionclinical.shell.designer.DesignMenu">
+	<menu name="menu">
+		<menuitem name="mnuDesignMode" checkable="true"
+			label="${@msg.fcf.shell.designer.menu.designmode.label}" 
+			hint="${@msg.fcf.shell.designer.menu.designmode.hint}" />
+		<menuitem name="mnuDesktopProperties"
+			label="${@msg.fcf.shell.designer.menu.desktop.properties.label}" 
+			hint="${@msg.fcf.shell.designer.menu.desktop.properties.hint}" />
+		<menuitem name="mnuClearDesktop"
+			label="${@msg.fcf.shell.designer.menu.desktop.clear.label}" 
+			hint="${@msg.fcf.shell.designer.menu.desktop.clear.hint}" />
+		<menuitem name="mnuLayoutDesigner"
+			label="${@msg.fcf.shell.designer.menu.layout.designer.label}" 
+			hint="${@msg.fcf.shell.designer.menu.layout.designer.hint}" />
+		<menuitem name="mnuLayoutManager"
+			label="${@msg.fcf.shell.designer.menu.layout.manager.label}" 
+			hint="${@msg.fcf.shell.designer.menu.layout.manager.hint}" />
+		<menuitem name="mnuLoadLayout"
+			label="${@msg.fcf.shell.designer.menu.layout.load.label}" 
+			hint="${@msg.fcf.shell.designer.menu.layout.load.hint}" />
+		<menuitem name="mnuSaveLayout"
+			label="${@msg.fcf.shell.designer.menu.layout.save.label}" 
+			hint="${@msg.fcf.shell.designer.menu.layout.save.hint}" />
+		<menuitem name="mnuShowMarkup"
+			label="${@msg.fcf.shell.designer.menu.markup.viewer.label}" 
+			hint="${@msg.fcf.shell.designer.menu.markup.viewer.hint}" />
+		<menuseparator />
+		<menuitem name="mnuLogout" 
+			label="${@msg.fcf.shell.designer.menu.logout.label}"
+			hint="${@msg.fcf.shell.designer.menu.logout.hint}" />
+	</menu>
+</namespace>
+

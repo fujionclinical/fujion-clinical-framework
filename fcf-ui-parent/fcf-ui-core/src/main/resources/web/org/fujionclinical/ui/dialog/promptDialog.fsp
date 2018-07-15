@@ -1,0 +1,14 @@
+
+<window closable="true" class="fcf-promptdialog"
+	controller="org.fujionclinical.ui.dialog.PromptDialog">
+	<span>
+		<span name="icon" class="glyphicon" />
+		<cell name="message" />
+		<div>
+			<listbox name="listbox" visible="false" />
+			<checkbox name="chkRemember" visible="false"
+				label="${@msg.fcf.prompt.chx.reminder.label}" />
+		</div>
+	</span>
+	<toolbar name="toolbar" alignment="center" width="100%" />
+</window>

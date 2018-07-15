@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:fcf="http://www.fujionclinical.org/schema/spring"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.fujionclinical.org/schema/spring
+		http://www.fujionclinical.org/schema/spring/spring-extensions.xsd">
+
+	<beans profile="root-test">
+		<bean id="securityService" class="org.fujionclinical.api.security.mock.MockSecurityService"
+			fcf:override="ignore">
+			<constructor-arg>
+				<bean class="org.fujionclinical.api.security.mock.MockUser" />
+			</constructor-arg>
+		</bean>
+
+		<bean id="keystore-test" class="org.fujionclinical.api.security.DigitalSignature">
+			<constructor-arg value="${org.fujionclinical.keystore.path}" />
+			<property name="keyName" value="${org.fujionclinical.keystore.keyname}" />
+			<property name="privateKeyPassword" value="${org.fujionclinical.keystore.private}" />
+		</bean>
+	</beans>
+</beans>

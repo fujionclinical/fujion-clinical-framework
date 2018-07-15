@@ -1,0 +1,43 @@
+<window width="400px" height="500px" style="overflow:visible"
+	class="fcf-propertygrid"
+	controller="org.fujionclinical.shell.designer.PropertyGrid">
+	<paneview orientation="vertical" height="100%" width="100%" style="overflow: visible">
+		<pane flex="75" splittable="true">
+			<grid name="gridProperties" width="100%">
+				<columns>
+					<column name="colProperty" sortBy="propInfo.name"
+						sortToggle="tristate"
+						label="${@msg.fcf.shell.designer.property.grid.column.name}"
+						style="text-align:center" width="50%" />
+					<column name="colValue"
+						label="${@msg.fcf.shell.designer.property.grid.column.value}"
+						style="text-align:center" width="50%" />
+				</columns>
+				<rows name="rowProperties" selectable="single" />
+			</grid>
+		</pane>
+		<pane name="propInfo" class="fcf-propertygrid-info" flex="25"
+			title="${@msg.fcf.shell.designer.property.grid.info.caption}">
+			<div class="help-block" style="margin:0;overflow:auto" flex="1">
+				<label name="lblPropertyInfo" />
+			</div>
+		</pane>
+		<pane name="toolbar">
+			<toolbar alignment="end" width="100%" style="border:none">
+				<button name="btnApply" 
+					class="flavor:btn-primary"
+					label="${@msg.fcf.shell.designer.property.grid.btn.apply.label}" />
+				<button name="btnRestore"
+					class="flavor:btn-warning"
+					label="${@msg.fcf.shell.designer.property.grid.btn.restore.label}" />
+				<span width="20px" />
+				<button name="btnOK"
+					class="flavor:btn-success"
+					label="${@msg.fcf.shell.designer.property.grid.btn.ok.label}" />
+				<button name="btnCancel"
+					class="flavor:btn-danger"
+					label="${@msg.fcf.shell.designer.property.grid.btn.cancel.label}" />
+			</toolbar>
+		</pane>
+	</paneview>
+</window>

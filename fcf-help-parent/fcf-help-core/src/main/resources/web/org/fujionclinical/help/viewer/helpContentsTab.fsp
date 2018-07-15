@@ -1,0 +1,17 @@
+<page>
+	<treeview name="tree" flex="1" showLines="false" showToggles="false" class="fcf-help-toc-tree" />
+	
+	<style>
+		.fcf-help-toc-tree {
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: auto;
+			border: none
+		}
+		
+		.fcf-help-toc-top > a {
+			font-weight: bold;
+			text-decoration: underline;
+		}
+	</style>
+</page>

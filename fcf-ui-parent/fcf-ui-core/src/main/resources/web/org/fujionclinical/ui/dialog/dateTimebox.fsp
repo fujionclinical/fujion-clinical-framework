@@ -1,0 +1,28 @@
+<popupbox impl="org.fujionclinical.ui.dialog.DateTimebox" controller="self">
+	<popup name="popup">
+		<grid class="fcf-datetimebox" width="350px">
+			<rows>
+				<row>
+					<datebox name="datebox" />
+					<timebox name="timebox" />
+					<button name="btnOK" width="100%"
+						label="${@msg.fcf.datetime.btn.ok.label}"
+						class="flavor:btn-success" />
+				</row>
+				<row>
+					<link name="btnToday" 
+						label="${@msg.fcf.datetime.btn.today.label}" />
+					<div>
+						<link name="btnNow" 
+							label="${@msg.fcf.datetime.btn.now.label}" />
+						<link name="btnTimeClear" 
+							label="${@msg.fcf.datetime.btn.clear.label}" />
+					</div>
+					<button name="btnCancel"
+						label="${@msg.fcf.datetime.btn.cancel.label}" 
+						class="flavor:btn-danger" />
+				</row>
+			</rows>
+		</grid>
+	</popup>
+</popupbox>

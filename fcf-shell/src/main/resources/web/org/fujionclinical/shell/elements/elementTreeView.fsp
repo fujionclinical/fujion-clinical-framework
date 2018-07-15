@@ -1,0 +1,8 @@
+<paneview orientation="horizontal" namespace="true" width="100%" height="100%">
+	<pane name="selectorPane" splittable="true" width="200px">
+		<div name="selector" class="fcf-treeview-selector" />
+	</pane>
+	<pane flex="1">
+		<div name="innerPane" class="fcf-treeview-pane" />
+	</pane>
+</paneview>

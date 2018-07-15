@@ -1,0 +1,5 @@
+<popupbox name="popupbox" synchronized="true">
+	<popup name="popup">
+		<textbox name="textbox" width="500px" synchronized="true" />
+	</popup>
+</popupbox>

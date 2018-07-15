@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:fcf="http://www.fujionclinical.org/schema/spring"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.fujionclinical.org/schema/spring
+        http://www.fujionclinical.org/schema/spring/spring-extensions.xsd">
+
+	<beans profile="root">
+		
+		<bean id="fcfHibernateDataSource" 
+			class="org.apache.commons.dbcp2.BasicDataSource"
+			destroy-method="close" fcf:override="always">
+			<property name="driverClassName" value="${org.fujionclinical.hibernate.driverclassname}" />
+			<property name="url" value="${org.fujionclinical.hibernate.url}" />
+			<property name="username" value="${org.fujionclinical.hibernate.username:}" />
+			<property name="password" value="${org.fujionclinical.hibernate.password:}" />
+			<property name="connectionProperties" value="${org.fujionclinical.hibernate.connectionproperties:" />
+		</bean>
+		
+		<bean id="fcfHibernateSessionFactory" 
+			class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		    <property name="dataSource" ref="fcfHibernateDataSource"/>
+		    <property name="packagesToScan" value="org.fujionclinical.hibernate"/>
+		    <property name="hibernateProperties">
+		        <props>
+		            <prop key="hibernate.dialect">${org.fujionclinical.hibernate.dialect}</prop>
+		            <prop key="hibernate.current_session_context_class">thread</prop>
+		            <prop key="hibernate.hbm2ddl.auto">${org.fujionclinical.hibernate.hbm2ddl.auto:update}</prop>
+		        </props>
+		    </property>
+		</bean>
+
+		<bean id="fcfHibernateTransactionManager" 
+			class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		    <property name="sessionFactory" ref="fcfHibernateSessionFactory"/>
+		</bean>
+		
+		<bean id="fcfHibernateAbstractDAO" 
+			class="org.fujionclinical.hibernate.core.AbstractDAO" 
+			abstract="true">
+			<constructor-arg ref="fcfHibernateSessionFactory" />
+		</bean>
+		
+	</beans>
+
+</beans>
