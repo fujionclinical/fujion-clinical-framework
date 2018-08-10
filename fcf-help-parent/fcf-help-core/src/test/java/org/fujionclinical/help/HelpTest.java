@@ -7,15 +7,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * This Source Code Form is also subject to the terms of the Health-Related
  * Additional Disclaimer of Warranty and Limitation of Liability available at
  *
@@ -29,11 +29,13 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
+import org.fujion.common.AbstractRegistry;
 import org.fujion.common.MiscUtil;
 import org.fujion.common.StrUtil;
 import org.junit.Test;
@@ -43,8 +45,8 @@ public class HelpTest {
     private static final HelpModuleRegistry registry = HelpModuleRegistry.getInstance();
 
     @Test
-    public void testRegistry() {
-        registry.clear();
+    public void testRegistry() throws Exception {
+        clearRegistry();
         HelpModule moduleDef = createHelpModule("helpModuleDefault.xml");
         HelpModule moduleEn = createHelpModule("helpModuleEn.xml");
         HelpModule moduleFr = createHelpModule("helpModuleFr.xml");
@@ -57,7 +59,13 @@ public class HelpTest {
         Locale.setDefault(new Locale("de"));
         assertTrue(registry.get("testModule") == moduleDef);
         assertNull(registry.get("otherModule"));
-        registry.clear();
+        clearRegistry();
+    }
+
+    private void clearRegistry() throws Exception {
+        Method method = AbstractRegistry.class.getDeclaredMethod("clear");
+        method.setAccessible(true);
+        method.invoke(registry);
     }
 
     private HelpModule createHelpModule(String file) {

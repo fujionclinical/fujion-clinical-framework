@@ -3,8 +3,8 @@
 	
 	<parent>
 		<groupId>org.fujion</groupId>
-		<artifactId>fujion-parent</artifactId>
-		<version>2.0.0</version>
+		<artifactId>fujion-root</artifactId>
+		<version>2.1.1</version>
 	</parent>
 	<groupId>org.fujionclinical</groupId>
 	<artifactId>fcf-parent</artifactId>
@@ -54,9 +54,9 @@
 	</licenses>
 
 	<properties>
-		<org.fujion.version>2.0.0</org.fujion.version>
+		<org.fujion.version>2.1.0</org.fujion.version>
 		<org.thymeleaf.version>3.0.9.RELEASE</org.thymeleaf.version>
-		<org.springframework.security.version>5.0.5.RELEASE</org.springframework.security.version>
+		<org.springframework.security.version>5.0.7.RELEASE</org.springframework.security.version>
 		<ehcache.version>2.10.4</ehcache.version>
 	</properties>
 
