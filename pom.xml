@@ -54,9 +54,9 @@
 	</licenses>
 
 	<properties>
-		<org.fujion.version>2.1.0</org.fujion.version>
+		<org.fujion.version>2.2.1</org.fujion.version>
 		<org.thymeleaf.version>3.0.9.RELEASE</org.thymeleaf.version>
-		<org.springframework.security.version>5.0.7.RELEASE</org.springframework.security.version>
+		<org.springframework.security.version>5.1.0.RELEASE</org.springframework.security.version>
 		<ehcache.version>2.10.4</ehcache.version>
 	</properties>
 
