@@ -136,7 +136,7 @@ public class ManifestViewer implements IAutoWired {
 
         renderer.init(grid);
         filterChanged(null);
-        grid.getColumns().getChild(Column.class).sort();
+        grid.getColumns().getFirstChild(Column.class).sort();
     }
 
     /**

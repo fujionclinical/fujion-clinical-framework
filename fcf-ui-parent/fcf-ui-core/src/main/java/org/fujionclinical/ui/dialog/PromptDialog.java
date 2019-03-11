@@ -185,7 +185,7 @@ public class PromptDialog implements IAutoWired {
         }
         
         if (listbox.getSelectedCount() == 0) {
-            listbox.setSelectedItem(listbox.getChild(Listitem.class));
+            listbox.setSelectedItem(listbox.getFirstChild(Listitem.class));
         }
         
         addButton(LABEL_ID_CANCEL, "danger", (event) -> {

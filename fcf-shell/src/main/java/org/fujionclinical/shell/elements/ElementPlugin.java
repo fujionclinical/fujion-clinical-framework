@@ -846,7 +846,7 @@ public class ElementPlugin extends ElementUI implements IDisable, IPropertyAcces
      */
     @Override
     protected void applyColor() {
-        applyColor(container.getChild(BaseUIComponent.class));
+        applyColor(container.getFirstChild(BaseUIComponent.class));
     }
     
     /**

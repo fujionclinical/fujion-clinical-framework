@@ -67,7 +67,7 @@ public class PopupDialog extends Window {
         
         try {
             PageUtil.createPage(dialog, parent, args);
-            window = parent.getChild(Window.class);
+            window = parent.getFirstChild(Window.class);
             
             if (window != null) { // If any top component is a window, discard temp parent
                 window.setParent(null);

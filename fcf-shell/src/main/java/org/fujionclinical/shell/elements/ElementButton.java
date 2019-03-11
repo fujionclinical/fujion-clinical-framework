@@ -26,7 +26,7 @@
 package org.fujionclinical.shell.elements;
 
 import org.fujionclinical.ui.util.ThemeUtil;
-import org.fujion.component.BaseLabeledComponent.LabelPositionHorz;
+import org.fujion.component.BaseLabeledComponent.LabelPositionAll;
 import org.fujion.component.Hyperlink;
 
 /**
@@ -101,11 +101,11 @@ public class ElementButton extends ElementActionBase {
         return component.getImage();
     }
 
-    public LabelPositionHorz getPosition() {
+    public LabelPositionAll getPosition() {
         return component.getPosition();
     }
 
-    public void setPosition(LabelPositionHorz position) {
+    public void setPosition(LabelPositionAll position) {
         component.setPosition(position);
     }
 

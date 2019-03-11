@@ -262,7 +262,7 @@ public class SessionMonitor extends FrameworkController {
         if (shutdown) {
             updateShutdown(0);
             message = StringUtils.isEmpty(message) ? StrUtil.getLabel("fcf.sessionmonitor.shutdown.abort.message") : message;
-            MessageWindow mw = page.getChild(MessageWindow.class);
+            MessageWindow mw = page.getFirstChild(MessageWindow.class);
             
             if (mw != null) {
                 MessagePane mp = new MessagePane();
