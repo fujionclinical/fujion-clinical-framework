@@ -1,0 +1,32 @@
+@CHARSET "UTF-8";
+
+/* CSS for printing of results display. */
+	
+.fcf-reports-drillDown-link {
+	display: none;
+}
+
+.fcf-reports-abnormalResult, .fcf-reports-abnormalResult * {
+	color: #000 !important;
+	font-weight: 900 !important;
+	font-style: italic !important;
+}
+
+.fcf-reports-report-all {
+	border: 0;
+	overflow: visible !important;
+	zoom: normal !important;
+}
+	
+.fcf-reports-header-title, .fcf-reports-header-title * {
+	text-align: center;
+	font-size: 110%;
+	font-weight: bold;
+	background-color: lightblue;
+}
+	
+.fcf-reports-header {
+	display: block !important;
+}
+
+

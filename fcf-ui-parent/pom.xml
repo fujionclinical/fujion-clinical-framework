@@ -17,5 +17,6 @@
 		<module>fcf-ui-test</module>
 		<module>fcf-ui-popupsupport</module>
 		<module>fcf-ui-sharedforms</module>
+		<module>fcf-ui-reports</module>
 	</modules>
 </project>
