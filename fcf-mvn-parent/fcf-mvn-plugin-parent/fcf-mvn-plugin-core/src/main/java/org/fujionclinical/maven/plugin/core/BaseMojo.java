@@ -25,11 +25,6 @@
  */
 package org.fujionclinical.maven.plugin.core;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.util.Date;
-import java.util.List;
-
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.apache.commons.lang.StringUtils;
 import org.apache.maven.archiver.MavenArchiveConfiguration;
@@ -43,11 +38,14 @@ import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.MavenProjectHelper;
-import org.fujionclinical.maven.plugin.processor.ResourceProcessor;
 import org.codehaus.plexus.archiver.jar.JarArchiver;
 import org.codehaus.plexus.util.FileUtils;
+import org.fujionclinical.maven.plugin.processor.ResourceProcessor;
 
-import com.google.common.io.Files;
+import java.io.File;
+import java.io.FileFilter;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Base plugin.
@@ -288,7 +286,7 @@ public abstract class BaseMojo extends AbstractMojo {
             if ("war".equalsIgnoreCase(mavenProject.getPackaging()) && this.warInclusion) {
                 webappLibDirectory.mkdirs();
                 File webappLibArchive = new File(this.webappLibDirectory, archive.getName());
-                Files.copy(archive, webappLibArchive);
+                FileUtils.copyFile(archive, webappLibArchive);
             }
         } catch (Exception e) {
             throw new RuntimeException("Exception occurred assembling archive.", e);

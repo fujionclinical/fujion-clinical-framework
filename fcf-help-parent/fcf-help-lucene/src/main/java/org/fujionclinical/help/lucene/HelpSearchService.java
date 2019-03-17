@@ -25,20 +25,6 @@
  */
 package org.fujionclinical.help.lucene;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Properties;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
@@ -48,37 +34,28 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field.Store;
 import org.apache.lucene.document.TextField;
-import org.apache.lucene.index.DirectoryReader;
-import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.IndexWriterConfig;
-import org.apache.lucene.index.Term;
+import org.apache.lucene.index.*;
 import org.apache.lucene.search.BooleanClause.Occur;
-import org.apache.lucene.search.BooleanQuery;
-import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.search.Query;
-import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.search.*;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.QueryBuilder;
 import org.apache.lucene.util.Version;
 import org.apache.tika.Tika;
 import org.apache.tika.parser.html.HtmlParser;
-
 import org.fujion.common.MiscUtil;
 import org.fujion.common.StrUtil;
-import org.fujionclinical.help.HelpModule;
-import org.fujionclinical.help.HelpSearchHit;
-import org.fujionclinical.help.HelpTopic;
-import org.fujionclinical.help.IHelpSearch;
-import org.fujionclinical.help.IHelpSet;
-
+import org.fujionclinical.help.*;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.io.Resource;
 import org.springframework.util.StringUtils;
+
+import java.io.*;
+import java.net.URL;
+import java.text.ParseException;
+import java.util.*;
 
 /**
  * Service for managing the search index and providing search capabilities using Lucene.
@@ -105,7 +82,7 @@ public class HelpSearchService implements IHelpSearch, ApplicationContextAware {
         IndexTracker(File indexDirectoryPath) throws IOException {
             this.propertyFile = new File(indexDirectoryPath, "tracker.properties");
             
-            try (InputStream is = new FileInputStream(propertyFile);) {
+            try (InputStream is = new FileInputStream(propertyFile)) {
                 properties.load(is);
             } catch (Exception e) {
                 // Just ignore since we can recreate the property file.
@@ -291,7 +268,7 @@ public class HelpSearchService implements IHelpSearch, ApplicationContextAware {
             writer.commit();
             indexTracker.remove(helpModule);
         } catch (IOException e) {
-            MiscUtil.toUnchecked(e);
+            throw MiscUtil.toUnchecked(e);
         }
     }
     
@@ -365,11 +342,14 @@ public class HelpSearchService implements IHelpSearch, ApplicationContextAware {
             
             Query searchForWords = queryBuilder.createBooleanQuery("content", words, Occur.MUST);
             Query searchForModules = queryBuilder.createBooleanQuery("module", StrUtil.fromList(helpSets, " "));
-            BooleanQuery query = new BooleanQuery();
-            query.add(searchForModules, Occur.MUST);
-            query.add(searchForWords, Occur.MUST);
+
+            BooleanQuery query = new BooleanQuery.Builder()
+                .add(searchForModules, Occur.MUST)
+                .add(searchForWords, Occur.MUST)
+                .build();
+
             TopDocs docs = indexSearcher.search(query, 9999);
-            List<HelpSearchHit> hits = new ArrayList<>(docs.totalHits);
+            List<HelpSearchHit> hits = new ArrayList<>((int) docs.totalHits.value);
             
             for (ScoreDoc sdoc : docs.scoreDocs) {
                 Document doc = indexSearcher.doc(sdoc.doc);
@@ -383,7 +363,7 @@ public class HelpSearchService implements IHelpSearch, ApplicationContextAware {
             
             listener.onSearchComplete(hits);
         } catch (Exception e) {
-            MiscUtil.toUnchecked(e);
+            throw MiscUtil.toUnchecked(e);
         }
     }
     
@@ -395,10 +375,10 @@ public class HelpSearchService implements IHelpSearch, ApplicationContextAware {
     public void init() throws IOException {
         File path = resolveIndexDirectoryPath();
         indexTracker = new IndexTracker(path);
-        indexDirectory = FSDirectory.open(path);
+        indexDirectory = FSDirectory.open(path.toPath());
         tika = new Tika(null, new HtmlParser());
         Analyzer analyzer = new StandardAnalyzer();
-        IndexWriterConfig config = new IndexWriterConfig(Version.LATEST, analyzer);
+        IndexWriterConfig config = new IndexWriterConfig(analyzer);
         writer = new IndexWriter(indexDirectory, config);
     }
     
