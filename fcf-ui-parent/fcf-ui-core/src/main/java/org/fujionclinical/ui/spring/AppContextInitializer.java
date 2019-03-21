@@ -33,7 +33,7 @@ import javax.servlet.ServletContext;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.fujionclinical.api.spring.Constants;
-import org.fujionclinical.api.spring.DomainPropertySource;
+import org.fujionclinical.api.spring.ExternalPropertySource;
 import org.fujionclinical.api.spring.LabelPropertySource;
 import org.fujion.client.ExecutionContext;
 import org.fujion.component.Page;
@@ -88,7 +88,7 @@ public class AppContextInitializer implements ApplicationContextInitializer<XmlW
             Collections.addAll(aps, testConfig ? Constants.PROFILES_ROOT_TEST : Constants.PROFILES_ROOT_PROD);
             env.setActiveProfiles(aps.toArray(new String[aps.size()]));
             env.getPropertySources().addFirst(new LabelPropertySource());
-            env.getPropertySources().addLast(new DomainPropertySource(ctx));
+            env.getPropertySources().addLast(new ExternalPropertySource(ctx));
             env.setDefaultProfiles(Constants.PROFILE_ROOT_DEFAULT);
             ctx.setConfigLocations((String[]) ArrayUtils.addAll(Constants.DEFAULT_LOCATIONS, ctx.getConfigLocations()));
             ClasspathMessageSource.getInstance().setResourceLoader(ctx);

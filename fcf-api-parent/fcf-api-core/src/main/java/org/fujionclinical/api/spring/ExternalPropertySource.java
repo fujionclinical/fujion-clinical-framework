@@ -34,14 +34,14 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.PropertySource;
 
 /**
- * Allows domain properties (via the IPropertyService API) to be referenced in Spring configuration
+ * Allows properties obtained from the IPropertyService API to be referenced in Spring configuration
  * files.
  */
-public class DomainPropertySource extends PropertySource<Object> {
+public class ExternalPropertySource extends PropertySource<Object> {
     
-    private static final Log log = LogFactory.getLog(DomainPropertySource.class);
+    private static final Log log = LogFactory.getLog(ExternalPropertySource.class);
     
-    private static final String PREFIX = "domain.";
+    private static final String PREFIX = "external.";
     
     private static final int PREFIX_LEN = PREFIX.length();
     
@@ -49,15 +49,15 @@ public class DomainPropertySource extends PropertySource<Object> {
     
     private final ApplicationContext appContext;
     
-    public DomainPropertySource(ApplicationContext appContext) {
-        super("Domain Properties");
+    public ExternalPropertySource(ApplicationContext appContext) {
+        super("External Properties");
         this.appContext = appContext;
     }
     
     /**
      * Returns a property value from the underlying data store.
      * 
-     * @param name Property name prefixed with "domain.".
+     * @param name Property name prefixed with "external.".
      */
     @Override
     public String getProperty(String name) {

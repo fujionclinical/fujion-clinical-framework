@@ -43,7 +43,7 @@ import org.springframework.core.convert.support.DefaultConversionService;
  * Base class for configurators that derive values from the application context's property store via
  * field-based annotations.
  */
-public abstract class PropertyBasedConfigurator implements ApplicationContextAware {
+public abstract class PropertyAwareConfigurator implements ApplicationContextAware {
 
     private static final String NULL_VALUE = "@@null@@";
 
@@ -110,7 +110,7 @@ public abstract class PropertyBasedConfigurator implements ApplicationContextAwa
     }
 
     /**
-     * Wire {@link PropertyBasedConfigurator.Param @Param}-annotated fields.
+     * Wire {@link PropertyAwareConfigurator.Param @Param}-annotated fields.
      *
      * @param object Object whose fields are to be wired.
      */

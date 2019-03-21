@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.ui.test;
 
-import org.fujionclinical.api.spring.DomainPropertySource;
+import org.fujionclinical.api.spring.ExternalPropertySource;
 import org.fujionclinical.api.spring.LabelPropertySource;
 import org.fujionclinical.ui.spring.AppContextFinder;
 import org.fujionclinical.ui.spring.FrameworkAppContext;
@@ -61,7 +61,7 @@ public class MockUIEnvironment extends MockEnvironment {
         if (parent == null) {
             ConfigurableEnvironment env = ctx.getEnvironment();
             env.getPropertySources().addFirst(new LabelPropertySource());
-            env.getPropertySources().addLast(new DomainPropertySource(ctx));
+            env.getPropertySources().addLast(new ExternalPropertySource(ctx));
             MockAppContextFinder.setRootContext(ctx);
         } else {
             MockAppContextFinder.initPage(getSession().getPage(), ctx);
