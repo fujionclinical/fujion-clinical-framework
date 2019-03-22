@@ -1,6 +1,6 @@
 <page>
 	<window closable="true" maximizable="true" sizable="true"
-		border="normal" class="panel-info fcf-popup" mold="bootstrap"
+		border="normal" class="alert-info fcf-popup" mold="bootstrap"
 		left="50%" top="50%" title="Popup Message"
 		contentSclass="bg-warning text-center" mode="highlighted"
 		style="position:absolute">
@@ -13,11 +13,11 @@
 			min-width: 200px;
 		}
 		
-		.fcf-popup .panel-caption {
+		.fcf-popup .card-caption {
 			padding: 5px;
 		}	
 		
-		.fcf-popup .panel-title {
+		.fcf-popup .card-title {
 			zoom: 80%;
 		}	
 	</style>

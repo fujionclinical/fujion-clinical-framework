@@ -1,6 +1,6 @@
 <window width="700px" height="80%"
 	title="${@msg.fcf.manifest.viewer.title}"
-	class="flavor:panel-primary" 
+	class="flavor:alert-primary"
 	controller="org.fujionclinical.ui.manifest.ManifestViewer">
 	<div name="printRoot" flex="1">
 		<label name="caption" />

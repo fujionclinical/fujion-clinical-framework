@@ -25,7 +25,10 @@
  */
 package org.fujionclinical.shell.elements;
 
-import org.apache.commons.lang.StringUtils; 
+import org.apache.commons.lang.StringUtils;
+import org.fujion.annotation.EventHandler;
+import org.fujion.annotation.WiredComponent;
+import org.fujion.component.*;
 import org.fujionclinical.api.security.SecurityUtil;
 import org.fujionclinical.help.viewer.HelpUtil;
 import org.fujionclinical.help.viewer.HelpViewer.HelpViewerMode;
@@ -33,21 +36,9 @@ import org.fujionclinical.shell.Shell;
 import org.fujionclinical.shell.designer.DesignConstants;
 import org.fujionclinical.shell.designer.DesignMenu;
 import org.fujionclinical.shell.plugins.PluginResourceHelp;
-import org.fujionclinical.ui.util.ThemeUtil;
 import org.fujionclinical.ui.action.ActionUtil;
 import org.fujionclinical.ui.util.MenuUtil;
-import org.fujion.annotation.EventHandler;
-import org.fujion.annotation.WiredComponent;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.BaseMenuComponent;
-import org.fujion.component.BaseUIComponent;
-import org.fujion.component.Cell;
-import org.fujion.component.Image;
-import org.fujion.component.Menu;
-import org.fujion.component.Menuitem;
-import org.fujion.component.Menuseparator;
-import org.fujion.component.Span;
-import org.fujion.component.Toolbar;
+import org.fujionclinical.ui.util.ThemeUtil;
 
 /**
  * This is the topmost component of the layout.
@@ -102,7 +93,7 @@ public class ElementDesktop extends ElementUI {
 
     private boolean sortHelpMenu;
 
-    private ThemeUtil.PanelStyle style = ThemeUtil.PanelStyle.DEFAULT;
+    private ThemeUtil.PanelStyle style = ThemeUtil.PanelStyle.INFO;
 
     private final ElementMenubar menubar;
 

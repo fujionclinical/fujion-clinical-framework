@@ -141,11 +141,11 @@ public class ThemeUtil {
      * Corresponds to Bootstrap panel style classes.
      */
     public enum PanelStyle implements IThemeClass {
-        DEFAULT, PRIMARY, SUCCESS, INFO, WARNING, DANGER;
+        PRIMARY, SUCCESS, INFO, WARNING, DANGER;
 
         @Override
         public String getThemeClass() {
-            return "flavor:panel-" + name().toLowerCase();
+            return "flavor:card-" + name().toLowerCase();
         }
 
         @Override

@@ -37,13 +37,13 @@ public class DialogConstants {
     
     static final String LABEL_IDS_OK_CANCEL = LABEL_ID_OK + "|" + LABEL_ID_CANCEL;
     
-    static final String STYLES_INFO = "glyphicon-info-sign alert-info||panel-info";
+    static final String STYLES_INFO = "fa-info-circle alert-info";
     
-    static final String STYLES_WARNING = "glyphicon-warning-sign alert-warning||panel-warning";
+    static final String STYLES_WARNING = "fa-exclamation-triangle alert-warning";
     
-    static final String STYLES_ERROR = "glyphicon-exclamation-sign alert-danger||panel-danger";
+    static final String STYLES_ERROR = "fa-exclamation-circle alert-danger";
     
-    static final String STYLES_QUESTION = "glyphicon-question-sign alert-success||panel-success";
+    static final String STYLES_QUESTION = "fa-question-circle alert-success";
     
     static final String RESOURCE_PREFIX = FCFUtil.getResourcePath(DialogConstants.class);
     

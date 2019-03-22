@@ -1,5 +1,5 @@
 
-<window width="500px" css="##{id} > .panel-body {overflow:visible}"
+<window width="500px" css="##{id} > .card-body {overflow:visible}"
 	controller="org.fujionclinical.shell.designer.LayoutPrompt">
 	<label name="lblPrompt" class="flavor:text-primary" />
 	<textbox name="txtLayout" width="100%" synchronized="true"/>

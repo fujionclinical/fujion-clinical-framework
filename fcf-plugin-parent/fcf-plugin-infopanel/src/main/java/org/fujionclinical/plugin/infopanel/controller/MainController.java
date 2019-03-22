@@ -25,25 +25,19 @@
  */
 package org.fujionclinical.plugin.infopanel.controller;
 
-import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.fujion.annotation.WiredComponent;
+import org.fujion.component.*;
+import org.fujion.event.DropEvent;
+import org.fujion.event.Event;
 import org.fujionclinical.api.event.IGenericEvent;
 import org.fujionclinical.plugin.infopanel.model.IInfoPanel;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.shell.plugins.PluginController;
 import org.fujionclinical.ui.util.MenuUtil;
-import org.fujion.annotation.WiredComponent;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.BaseUIComponent;
-import org.fujion.component.Grid;
-import org.fujion.component.Label;
-import org.fujion.component.Menuitem;
-import org.fujion.component.Rows;
-import org.fujion.component.Toolbar;
-import org.fujion.event.DropEvent;
-import org.fujion.event.Event;
+
+import java.util.List;
 
 /**
  * Controller for the main info panel.
@@ -215,7 +209,7 @@ public class MainController extends PluginController implements IInfoPanel {
         //alertPanel.setMinsize(open ? 70 : 0);
         //alertPanel.setSplittable(open);
         alertPanel.setHeight(open ? this.openAlertPanelHeight : this.collapsedAlertPanelHeight);
-        alertIcon.addClass(open ? "chevron:glyphicon-chevron-down" : "chevron:glyphicon-chevron-up");
+        alertIcon.addClass(open ? "chevron:fa-chevron-down" : "chevron:fa-chevron-up");
         
         if (alertCount != lastAlertCount) {
             lastAlertCount = alertCount;

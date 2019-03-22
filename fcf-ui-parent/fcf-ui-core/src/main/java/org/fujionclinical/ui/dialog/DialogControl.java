@@ -25,12 +25,12 @@
  */
 package org.fujionclinical.ui.dialog;
 
+import org.apache.commons.lang.math.NumberUtils;
+import org.fujion.common.StrUtil;
+import org.fujionclinical.api.property.PropertyUtil;
+
 import java.util.Arrays;
 import java.util.List;
-
-import org.apache.commons.lang.math.NumberUtils;
-import org.fujionclinical.api.property.PropertyUtil;
-import org.fujion.common.StrUtil;
 
 public class DialogControl<T> {
     
@@ -174,7 +174,7 @@ public class DialogControl<T> {
         String[] sclass = styles == null ? null : StrUtil.split(styles, "|", 3, false);
         iconClass = sclass == null ? null : sclass[0];
         textClass = sclass == null ? null : sclass[1];
-        panelClass = sclass == null || sclass[2] == null ? "panel-primary" : sclass[2];
+        panelClass = sclass == null || sclass[2] == null ? "alert-primary" : sclass[2];
     }
     
     public String getMessage() {

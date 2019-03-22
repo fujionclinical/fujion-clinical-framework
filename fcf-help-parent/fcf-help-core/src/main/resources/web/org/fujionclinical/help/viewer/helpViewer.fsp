@@ -1,4 +1,4 @@
-<window name="win" height="80%" class="fcf-help-viewer flavor:panel-info"
+<window name="win" height="80%" class="fcf-help-viewer flavor:alert-info"
 	controller="org.fujionclinical.help.viewer.HelpViewer">
 	<paneview height="100%" width="100%">
 		<pane width="33%" splittable="true">
@@ -12,17 +12,17 @@
 			<div height="100%" width="100%" class="fcf-help-viewer-content">
 				<toolbar class="fcf-help-viewer-navbar" width="100%">
 					<button name="btnPrevious"
-						class="glyphicon glyphicon-chevron-left"
+						class="fa fa-chevron-left"
 						hint="${@msg.fcf.help.viewer.btn.previous.hint}" />
 					<button name="btnNext"
-						class="glyphicon glyphicon-chevron-right"
+						class="fa fa-chevron-right"
 						hint="${@msg.fcf.help.viewer.btn.next.hint}" />
 					<div width="40px" />
 					<button name="btnOpen" 
-						class="glyphicon glyphicon-new-window"
+						class="fa fa-external-link"
 						hint="${@msg.fcf.help.viewer.btn.open.hint}" />
 					<button name="btnPrint" 
-						class="glyphicon glyphicon-print"
+						class="fa fa-print"
 						hint="${@msg.fcf.help.viewer.btn.print.hint}" />
 				</toolbar>
 				<iframe name="iframe" flex="1" width="100%" />
@@ -41,7 +41,7 @@
 			height: 100%;
 			text-align: center		}
 		
-		.fcf-help-viewer-navbar .glyphicon {
+		.fcf-help-viewer-navbar .fa {
 			font-size: large;
 			color: green;
 		}

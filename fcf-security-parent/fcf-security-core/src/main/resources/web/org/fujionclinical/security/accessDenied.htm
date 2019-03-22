@@ -3,14 +3,14 @@
 		 href="../webjars/bootstrap/css/bootstrap.css" />
 	
 	<body>
-		<div class="panel panel-danger text-center" style="width:50%;margin-left:25%">
-			<div class="panel-heading">
-				<label class="panel-title" th:text="${title}"></label> 
+		<div class="card card-danger text-center" style="width:50%;margin-left:25%">
+			<div class="card-heading">
+				<label class="card-title" th:text="${title}"></label>
 			</div>
-			<div class="panel-body">
+			<div class="card-body">
 				<div class="text-info" th:text="${message}"></div>
 			</div>
-			<div class="panel-footer">
+			<div class="card-footer">
 				<div class="btn-toolbar" role="toolbar" style="display:flex;justify-content:center">
 					<a class="btn btn-success" 
 						th:unless="${authenticated}" 

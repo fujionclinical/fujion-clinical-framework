@@ -2,25 +2,25 @@
 
 /* Shared Forms */
 
-.sharedForms-captioned .panel-heading {
+.sharedForms-captioned .card-header {
 	font-size: 100%;
 	font-family: arial;
 	font-weight: bold;
 }
 
-.sharedForms-captioned-caption-left .panel-heading {
+.sharedForms-captioned-caption-left .card-header {
 	text-align: left;	
 	width: 100%;
 	padding-left: 5px;
 }
 
-.sharedForms-captioned-caption-right .panel-heading {
+.sharedForms-captioned-caption-right .card-header {
 	text-align: right;	
 	width: 100%;
 	padding-right: 5px;
 }
 
-.sharedForms-captioned-caption-center .panel-heading {
+.sharedForms-captioned-caption-center .card-header {
 	text-align: center;
 	width: 100%;
 }

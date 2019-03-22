@@ -24,7 +24,7 @@
 			label="${@msg.fcf.shell.designer.layout.manager.btn.import.label}" />
 		<button name="btnExport"
 			label="${@msg.fcf.shell.designer.layout.manager.btn.export.label}" />
-		<span class="glyphicon glyphicon-option-vertical" style="opacity:.5"/>
+		<span class="fa fa-option-vertical" style="opacity:.5"/>
 		<button name="btnClone"
 			label="${@msg.fcf.shell.designer.layout.manager.btn.clone.label}" />
 		<button name="btnRename"

@@ -34,10 +34,6 @@ public class ReportConstants {
 
     public static final String RESOURCE_PREFIX = FCFUtil.getResourcePath(ReportConstants.class, 1);
 
-    public static final String SCLASS_ABNORMAL_RESULT = "fcf-reporting-abnormalResult";
-
-    public static final String SCLASS_NORMAL_RANGE = "fcf-reporting-normalRange";
-
     public static final String SCLASS_DRILLDOWN_LINK = "fcf-reporting-drillDown-link";
 
     public static final String SCLASS_DRILLDOWN_GRID = "fcf-reporting-drillDown-grid";

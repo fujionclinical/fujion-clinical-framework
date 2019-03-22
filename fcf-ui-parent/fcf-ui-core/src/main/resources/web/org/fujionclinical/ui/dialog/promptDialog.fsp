@@ -2,7 +2,7 @@
 <window closable="true" class="fcf-promptdialog"
 	controller="org.fujionclinical.ui.dialog.PromptDialog">
 	<span>
-		<span name="icon" class="glyphicon" />
+		<span name="icon" class="fa" />
 		<cell name="message" />
 		<div>
 			<listbox name="listbox" visible="false" />

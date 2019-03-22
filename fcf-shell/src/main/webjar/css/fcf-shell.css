@@ -20,16 +20,16 @@
     min-height: 20px;
 }
 
-.fcf-desktop > .panel-heading {
+.fcf-desktop > .card-header {
     display: flex;
     align-items: center;
 }
 
-.fcf-desktop > .panel-heading > * {
+.fcf-desktop > .card-header > * {
 	padding-right: 5px
 }
 
-.fcf-desktop > .panel-body {
+.fcf-desktop > .card-body {
      display: inline-flex;  
      padding: 0;
 }
@@ -228,11 +228,11 @@
     border-radius: 5px;
 }
 
-.fcf-propertygrid > .panel-body {
+.fcf-propertygrid > .card-body {
 	overflow: visible;
 }
 
-.fcf-propertygrid-embedded .panel-heading {
+.fcf-propertygrid-embedded .card-header {
 	zoom: 0.75;
 	min-height: 43px;
 }

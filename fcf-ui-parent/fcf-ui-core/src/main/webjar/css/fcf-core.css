@@ -7,19 +7,19 @@
 	max-width: 50%;
 }
 
-.fcf-promptdialog > .panel-body > span > .glyphicon {
+.fcf-promptdialog > .card-body > span > .fa {
 	margin: 0 10px 10px;
 	cursor: default;
 	font-size: 26px;
 	background: transparent;
 }
 
-.fcf-promptdialog > .panel-body > span > div:first-of-type {
+.fcf-promptdialog > .card-body > span > div:first-of-type {
 	white-space: pre-wrap;
 	display: inline;
 }
 
-.fcf-promptdialog > .panel-body > span > div:last-of-type {
+.fcf-promptdialog > .card-body > span > div:last-of-type {
 	clear: both;
 	margin: 10px 0 5px 0;
 	text-align: center;
@@ -149,7 +149,7 @@
 	padding: 10px;
 }
 
-.fcf-sessionmonitor-lock-panel .glyphicon {
+.fcf-sessionmonitor-lock-panel .fa {
     font-size: 300%;
     margin: 20px 0 0 0;
 }
@@ -207,7 +207,7 @@
 .fcf-daterangedialog .fujion_datebox {
 	flex: 1;
 }
-.fcf-daterangedialog .glyphicon {
+.fcf-daterangedialog .fa {
 	margin-top: 3px;
 }
 

@@ -1,5 +1,5 @@
 
-<window class="flavor:panel-primary"
+<window class="flavor:alert-primary"
 	controller="org.fujionclinical.ui.dialog.ReportDialog">
 	<paneview class="fcf-reportdialog" orientation="vertical">
 		<pane name="printRoot">

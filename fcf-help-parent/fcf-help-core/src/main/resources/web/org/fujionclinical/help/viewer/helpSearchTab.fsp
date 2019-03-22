@@ -2,7 +2,7 @@
 	<toolbar width="100%">
 		<textbox name="txtSearch" flex="1" />
 		<button name="btnSearch" width="16px"
-			class="glyphicon glyphicon-search" />
+			class="fa fa-search" />
 	</toolbar>
 	<label name="lblNoResultsFound" visible="false"
 		value="${@msg.fcf.help.tab.search.noresults}" />

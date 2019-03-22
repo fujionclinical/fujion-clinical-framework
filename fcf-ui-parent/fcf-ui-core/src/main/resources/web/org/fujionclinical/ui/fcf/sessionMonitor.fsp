@@ -10,9 +10,9 @@
 		<div name="lockPanel" class="fujion-layout-vertical">
 			<label label="${@msg.fcf.sessionmonitor.lock.title}"/>
 			<div class="fujion-layout-horizontal">
-				<span class="glyphicon glyphicon-lock text-danger"/>
+				<span class="fa fa-lock text-danger"/>
 				<label name="lblLocked"/>
-				<span class="glyphicon glyphicon-lock text-danger"/>
+				<span class="fa fa-lock text-danger"/>
 			</div>
 			<toolbar alignment="center">
 				<textbox name="txtPassword" masked="true" focus="true" forward="enter=btnUnlock.click"/>

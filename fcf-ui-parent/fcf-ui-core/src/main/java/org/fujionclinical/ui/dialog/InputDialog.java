@@ -25,21 +25,17 @@
  */
 package org.fujionclinical.ui.dialog;
 
-import java.util.Map;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.ancillary.IAutoWired;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.client.ExecutionContext;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.Button;
-import org.fujion.component.Cell;
-import org.fujion.component.Textbox;
-import org.fujion.component.Window;
+import org.fujion.component.*;
 import org.fujion.page.PageUtil;
 import org.springframework.util.StringUtils;
+
+import java.util.Map;
 
 /**
  * Implements a simple dialog for prompting for user input.
@@ -87,7 +83,7 @@ public class InputDialog implements IAutoWired {
         this.root = (Window) comp;
         root.setAttribute("controller", this);
         root.setTitle(root.getAttribute("title", ""));
-        root.addClass("flavor:" + root.getAttribute("panelClass", "panel-primary"));
+        root.addClass("flavor:" + root.getAttribute("panelClass", "alert-primary"));
         prompt.setLabel(root.getAttribute("prompt", ""));
         textbox.setValue(root.getAttribute("oldValue", null));
         textbox.selectAll();

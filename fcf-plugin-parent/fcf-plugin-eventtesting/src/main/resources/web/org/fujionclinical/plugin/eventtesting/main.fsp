@@ -1,6 +1,6 @@
 <page>
 	<window title="Event Testing - Warning:  Do not use this in a production system."
-		class="flavor:panel-danger" height="100%" width="100%"
+		class="flavor:alert-danger" height="100%" width="100%"
 		controller="${@fcfEventTestingController}">
 		<paneview height="100%">
 			<pane splittable="true" width="50%" title="Publish Test Events">

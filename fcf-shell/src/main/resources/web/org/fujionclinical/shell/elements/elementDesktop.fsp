@@ -1,5 +1,5 @@
-<div class="fcf-desktop panel panel-default">
-	<div name="titlebar" class="panel-heading">
+<div class="fcf-desktop card alert-info">
+	<div name="titlebar" class="card-header">
 		<span name="menubar0" />
 		<span visible="false">
 			<image name="icon" style="padding:5px" />
@@ -18,5 +18,5 @@
 		</span>
 		<toolbar name="toolbar1" alignment="end" />
 	</div>
-	<div name="desktopInner" class="panel-body" />
+	<div name="desktopInner" class="card-body" />
 </div>

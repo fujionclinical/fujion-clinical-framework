@@ -7,7 +7,7 @@
 		<datebox name="startDate"
 			hint="${@msg.fcf.date.range.start.date.dbx.hint}" />
 		<link name="btnSameAsEnd" 
-			class="glyphicon glyphicon-chevron-left"
+			class="fa fa-chevron-left"
 			hint="${@msg.fcf.date.range.start.date.btn.hint}" />
 	</div>
 	<label class="flavor:label-info"
@@ -16,7 +16,7 @@
 		<datebox name="endDate"
 			hint="${@msg.fcf.date.range.end.date.dbx.hint}" />
 		<link name="btnSameAsStart" 
-			class="glyphicon glyphicon-chevron-left"
+			class="fa fa-chevron-left"
 			hint="${@msg.fcf.date.range.end.date.btn.hint}" />
 	</div>
 	<toolbar alignment="center" width="100%">

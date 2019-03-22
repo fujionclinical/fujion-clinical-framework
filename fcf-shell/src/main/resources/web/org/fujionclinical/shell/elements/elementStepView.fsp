@@ -1,5 +1,5 @@
-<div name="outer" namespace="true" class="panel flavor:panel-default fcf-stepview">
-	<div class="panel-heading">
+<div name="outer" namespace="true" class="card flavor:alert-info fcf-stepview">
+	<div class="card-header">
 		<div class="fcf-stepview-taskbar">
 			<div name="tbarLeft" class="fcf-stepview-taskbar-left">
 				<label class="fcf-step-title" name="lblTitle" />
@@ -15,5 +15,5 @@
 			<div name="tbarRight" class="fcf-stepview-taskbar-right" />
 		</div>
 	</div>
-	<div name="inner" class="panel-body" />
+	<div name="inner" class="card-body" />
 </div>
