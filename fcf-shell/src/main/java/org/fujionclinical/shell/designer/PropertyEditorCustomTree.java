@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,32 +25,23 @@
  */
 package org.fujionclinical.shell.designer;
 
-import java.beans.PropertyDescriptor;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.fujion.annotation.EventHandler;
+import org.fujion.annotation.WiredComponent;
+import org.fujion.component.*;
+import org.fujion.event.*;
 import org.fujionclinical.shell.elements.ElementBase;
 import org.fujionclinical.shell.elements.ElementProxy;
 import org.fujionclinical.shell.plugins.PluginDefinition;
 import org.fujionclinical.shell.property.PropertyInfo;
 import org.fujionclinical.ui.util.TreeUtil;
-import org.fujion.annotation.EventHandler;
-import org.fujion.annotation.WiredComponent;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.Button;
-import org.fujion.component.Popup;
-import org.fujion.component.Textbox;
-import org.fujion.component.Treenode;
-import org.fujion.component.Treeview;
-import org.fujion.event.ChangeEvent;
-import org.fujion.event.DblclickEvent;
-import org.fujion.event.Event;
-import org.fujion.event.EventUtil;
-import org.fujion.event.IEventListener;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.Assert;
+
+import java.beans.PropertyDescriptor;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Abstract class for implementing a custom property editor based on a tree view display of child

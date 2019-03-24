@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,11 +25,11 @@
  */
 package org.fujionclinical.plugin.chat;
 
-import java.util.Collection;
-
-import org.fujionclinical.api.messaging.IPublisherInfo;
 import org.fujion.component.Listitem;
 import org.fujion.model.IComponentRenderer;
+import org.fujionclinical.api.messaging.IPublisherInfo;
+
+import java.util.Collection;
 
 /**
  * Renderer for participant list.

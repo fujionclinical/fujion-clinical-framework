@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,17 @@
  */
 package org.fujionclinical.ui.xml;
 
+import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.lang.StringUtils;
+import org.fujion.annotation.ComponentDefinition;
+import org.fujion.common.XMLUtil;
+import org.fujion.component.BaseComponent;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -32,18 +43,6 @@ import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
-
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.commons.lang.StringUtils;
-import org.fujion.common.XMLUtil;
-import org.fujion.annotation.ComponentDefinition;
-import org.fujion.component.BaseComponent;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 
 /**
  * Converts a FCF component tree to XML format.

@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,13 +25,6 @@
  */
 package org.fujionclinical.api.spring;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URL;
-import java.util.Iterator;
-
 import org.apache.commons.io.IOUtils;
 import org.fujion.common.MiscUtil;
 import org.springframework.beans.BeansException;
@@ -41,6 +34,13 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.support.AbstractRefreshableApplicationContext;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
+import java.util.Iterator;
 
 /**
  * Takes an input resource and transforms it by resolving any embedded property values.

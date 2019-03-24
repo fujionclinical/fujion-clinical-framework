@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,19 +25,18 @@
  */
 package org.fujionclinical.help.javahelp;
 
-import java.net.MalformedURLException;
+import org.apache.commons.beanutils.MethodUtils;
+import org.fujionclinical.help.HelpTopic;
+import org.fujionclinical.help.HelpTopicNode;
+import org.fujionclinical.help.HelpViewType;
+import org.fujionclinical.help.IHelpView;
 
 import javax.help.Map.ID;
 import javax.help.NavigatorView;
 import javax.help.TreeItem;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
-
-import org.apache.commons.beanutils.MethodUtils;
-import org.fujionclinical.help.HelpTopic;
-import org.fujionclinical.help.HelpTopicNode;
-import org.fujionclinical.help.HelpViewType;
-import org.fujionclinical.help.IHelpView;
+import java.net.MalformedURLException;
 
 /**
  * IHelpView implementation for JavaHelp navigator views.

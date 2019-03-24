@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,12 +25,12 @@
  */
 package org.fujionclinical.ui.util;
 
-import static org.junit.Assert.assertEquals;
+import org.fujion.core.WebUtil;
+import org.junit.Test;
 
 import java.util.Map;
 
-import org.fujion.core.WebUtil;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class UtilTest {
     

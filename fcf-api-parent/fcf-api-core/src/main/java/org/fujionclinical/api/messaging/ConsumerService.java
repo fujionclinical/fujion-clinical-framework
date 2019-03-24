@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,20 +25,14 @@
  */
 package org.fujionclinical.api.messaging;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
 import org.fujionclinical.api.messaging.IMessageConsumer.IMessageCallback;
 import org.fujionclinical.api.messaging.Recipient.RecipientType;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.DestructionAwareBeanPostProcessor;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
+
+import java.util.*;
 
 /**
  * Aggregator for multiple consumers.

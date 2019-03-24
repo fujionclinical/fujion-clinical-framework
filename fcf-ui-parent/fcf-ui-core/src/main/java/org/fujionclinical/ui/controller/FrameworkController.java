@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,11 @@
  */
 package org.fujionclinical.ui.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.fujion.ancillary.IAutoWired;
+import org.fujion.component.BaseComponent;
+import org.fujion.component.BaseUIComponent;
+import org.fujion.event.Event;
+import org.fujion.event.IEventListener;
 import org.fujionclinical.api.AppFramework;
 import org.fujionclinical.api.FrameworkUtil;
 import org.fujionclinical.api.event.EventManager;
@@ -38,12 +40,10 @@ import org.fujionclinical.api.thread.IAbortable;
 import org.fujionclinical.ui.Constants;
 import org.fujionclinical.ui.thread.ThreadEx;
 import org.fujionclinical.ui.thread.ThreadEx.IRunnable;
-import org.fujion.ancillary.IAutoWired;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.BaseUIComponent;
-import org.fujion.event.Event;
-import org.fujion.event.IEventListener;
 import org.springframework.context.ApplicationContext;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Can be subclassed to be used as a controller with convenience methods for accessing the

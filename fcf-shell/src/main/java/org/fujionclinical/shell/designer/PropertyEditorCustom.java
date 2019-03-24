@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,12 +27,12 @@ package org.fujionclinical.shell.designer;
 
 import org.fujion.common.MiscUtil;
 import org.fujion.common.StrUtil;
-import org.fujionclinical.shell.property.PropertyInfo;
 import org.fujion.component.Popup;
 import org.fujion.component.Popupbox;
 import org.fujion.event.CloseEvent;
 import org.fujion.event.OpenEvent;
 import org.fujion.page.PageUtil;
+import org.fujionclinical.shell.property.PropertyInfo;
 
 /**
  * Allows registration of custom editors for complex property types.

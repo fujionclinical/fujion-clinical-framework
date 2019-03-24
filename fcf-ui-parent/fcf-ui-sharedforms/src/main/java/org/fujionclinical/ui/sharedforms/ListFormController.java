@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,33 +25,24 @@
  */
 package org.fujionclinical.ui.sharedforms;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.math.NumberUtils;
-import org.fujion.common.StrUtil;
-import org.fujionclinical.shell.elements.ElementPlugin;
-import org.fujionclinical.ui.command.CommandUtil;
-import org.fujionclinical.ui.util.FCFUtil;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.Column;
-import org.fujion.component.Columns;
-import org.fujion.component.Grid;
-import org.fujion.component.Label;
-import org.fujion.component.Pane;
-import org.fujion.component.Paneview;
+import org.fujion.common.StrUtil;
+import org.fujion.component.*;
 import org.fujion.component.Paneview.Orientation;
-import org.fujion.component.Row;
-import org.fujion.component.Rowcell;
-import org.fujion.component.Rows;
 import org.fujion.event.ChangeEvent;
 import org.fujion.event.ClickEvent;
 import org.fujion.event.DblclickEvent;
 import org.fujion.model.IComponentRenderer;
 import org.fujion.model.ListModel;
+import org.fujionclinical.shell.elements.ElementPlugin;
+import org.fujionclinical.ui.command.CommandUtil;
+import org.fujionclinical.ui.util.FCFUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Controller for list view based forms.

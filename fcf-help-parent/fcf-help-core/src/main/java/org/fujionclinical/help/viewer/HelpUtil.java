@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,16 +25,6 @@
  */
 package org.fujionclinical.help.viewer;
 
-import javax.servlet.ServletContext;
-
-import org.fujionclinical.api.spring.SpringUtil;
-import org.fujionclinical.help.HelpContext;
-import org.fujionclinical.help.HelpViewType;
-import org.fujionclinical.help.IHelpSearch;
-import org.fujionclinical.help.IHelpViewer;
-import org.fujionclinical.help.viewer.HelpViewer.HelpViewerMode;
-import org.fujionclinical.ui.command.CommandUtil;
-import org.fujionclinical.ui.util.FCFUtil;
 import org.fujion.client.ClientUtil;
 import org.fujion.client.ExecutionContext;
 import org.fujion.component.BaseComponent;
@@ -43,6 +33,16 @@ import org.fujion.component.Image;
 import org.fujion.component.Page;
 import org.fujion.ipc.InvocationRequest;
 import org.fujion.page.PageUtil;
+import org.fujionclinical.api.spring.SpringUtil;
+import org.fujionclinical.help.HelpContext;
+import org.fujionclinical.help.HelpViewType;
+import org.fujionclinical.help.IHelpSearch;
+import org.fujionclinical.help.IHelpViewer;
+import org.fujionclinical.help.viewer.HelpViewer.HelpViewerMode;
+import org.fujionclinical.ui.command.CommandUtil;
+import org.fujionclinical.ui.util.FCFUtil;
+
+import javax.servlet.ServletContext;
 
 /**
  * Utility class containing helper methods in support of online help infrastructure.

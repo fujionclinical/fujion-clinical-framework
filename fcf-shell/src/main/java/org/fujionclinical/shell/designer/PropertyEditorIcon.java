@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,10 +25,10 @@
  */
 package org.fujionclinical.shell.designer;
 
-import org.fujionclinical.shell.property.PropertyInfo;
-import org.fujionclinical.ui.dialog.IconPicker;
 import org.fujion.icon.IconLibraryRegistry;
 import org.fujion.icon.IconUtil;
+import org.fujionclinical.shell.property.PropertyInfo;
+import org.fujionclinical.ui.dialog.IconPicker;
 
 /**
  * Property editor for icon properties. If the associated property has defined choices, the icon

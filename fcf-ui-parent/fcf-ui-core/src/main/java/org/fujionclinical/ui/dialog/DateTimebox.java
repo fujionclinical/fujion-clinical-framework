@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,24 +25,19 @@
  */
 package org.fujionclinical.ui.dialog;
 
-import java.util.Date;
-
 import org.apache.commons.lang.time.DateUtils;
-import org.fujion.common.DateUtil;
-import org.fujion.common.StrUtil;
-import org.fujionclinical.ui.util.DateTimeUtil;
 import org.fujion.ancillary.IAutoWired;
 import org.fujion.ancillary.INamespace;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.OnFailure;
 import org.fujion.annotation.WiredComponent;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.BaseUIComponent;
-import org.fujion.component.Datebox;
-import org.fujion.component.Popup;
-import org.fujion.component.Popupbox;
-import org.fujion.component.Timebox;
+import org.fujion.common.DateUtil;
+import org.fujion.common.StrUtil;
+import org.fujion.component.*;
 import org.fujion.event.Event;
+import org.fujionclinical.ui.util.DateTimeUtil;
+
+import java.util.Date;
 
 /**
  * Presents a date/time input element.

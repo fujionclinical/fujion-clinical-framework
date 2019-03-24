@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,15 +25,15 @@
  */
 package org.fujionclinical.maven.plugin.iterator;
 
+import org.fujionclinical.maven.plugin.resource.IResource;
+import org.fujionclinical.maven.plugin.resource.ZipEntryResource;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
-
-import org.fujionclinical.maven.plugin.resource.IResource;
-import org.fujionclinical.maven.plugin.resource.ZipEntryResource;
 
 /**
  * Used where source archive is a zip (jar) file format.

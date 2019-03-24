@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,18 +25,15 @@
  */
 package org.fujionclinical.maven.plugin.help.chm;
 
-import static org.junit.Assert.assertTrue;
+import org.apache.commons.io.FileUtils;
+import org.fujionclinical.maven.plugin.help.HelpConverterMojo;
+import org.fujionclinical.maven.plugin.help.HelpProcessor;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.commons.io.FileUtils;
-
-import org.fujionclinical.maven.plugin.help.HelpConverterMojo;
-import org.fujionclinical.maven.plugin.help.HelpProcessor;
-import org.fujionclinical.maven.plugin.help.chm.ChmSourceLoader;
-
-import org.junit.Test;
+import static org.junit.Assert.assertTrue;
 
 public class TestCHM {
     

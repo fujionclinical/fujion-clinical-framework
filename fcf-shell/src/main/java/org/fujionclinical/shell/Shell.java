@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,16 +25,19 @@
  */
 package org.fujionclinical.shell;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.fujion.ancillary.INamespace;
+import org.fujion.annotation.Component;
+import org.fujion.annotation.Component.ChildTag;
+import org.fujion.annotation.Component.PropertyGetter;
+import org.fujion.annotation.Component.PropertySetter;
+import org.fujion.common.MiscUtil;
+import org.fujion.common.StrUtil;
+import org.fujion.component.*;
+import org.fujion.event.KeycaptureEvent;
 import org.fujionclinical.api.AppFramework;
 import org.fujionclinical.api.FrameworkUtil;
 import org.fujionclinical.api.context.ISurveyResponse;
@@ -60,21 +63,8 @@ import org.fujionclinical.ui.command.CommandRegistry;
 import org.fujionclinical.ui.command.CommandUtil;
 import org.fujionclinical.ui.dialog.DialogUtil;
 import org.fujionclinical.ui.session.SessionControl;
-import org.fujion.ancillary.INamespace;
-import org.fujion.annotation.Component;
-import org.fujion.annotation.Component.ChildTag;
-import org.fujion.annotation.Component.PropertyGetter;
-import org.fujion.annotation.Component.PropertySetter;
-import org.fujion.common.MiscUtil;
-import org.fujion.common.StrUtil;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.BaseMenuComponent;
-import org.fujion.component.Div;
-import org.fujion.component.MessageWindow;
-import org.fujion.component.Page;
-import org.fujion.component.Span;
-import org.fujion.component.Style;
-import org.fujion.event.KeycaptureEvent;
+
+import java.util.*;
 
 /**
  * Implements a generic UI shell that can be dynamically extended with plug-ins.

@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,29 +25,21 @@
  */
 package org.fujionclinical.shell.designer;
 
-import static org.fujionclinical.shell.designer.DesignConstants.CAP_LAYOUT_OVERWRITE;
-import static org.fujionclinical.shell.designer.DesignConstants.MSG_LAYOUT_BADNAME;
-import static org.fujionclinical.shell.designer.DesignConstants.MSG_LAYOUT_DUP;
-import static org.fujionclinical.shell.designer.DesignConstants.MSG_LAYOUT_OVERWRITE;
+import org.fujion.ancillary.IAutoWired;
+import org.fujion.annotation.EventHandler;
+import org.fujion.annotation.WiredComponent;
+import org.fujion.common.StrUtil;
+import org.fujion.component.*;
+import org.fujion.event.IEventListener;
+import org.fujion.page.PageUtil;
+import org.fujionclinical.shell.layout.LayoutIdentifier;
+import org.fujionclinical.shell.layout.LayoutUtil;
+import org.fujionclinical.ui.dialog.DialogUtil;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.fujion.common.StrUtil;
-import org.fujionclinical.shell.layout.LayoutIdentifier;
-import org.fujionclinical.shell.layout.LayoutUtil;
-import org.fujionclinical.ui.dialog.DialogUtil;
-import org.fujion.ancillary.IAutoWired;
-import org.fujion.annotation.EventHandler;
-import org.fujion.annotation.WiredComponent;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.Label;
-import org.fujion.component.Radiobutton;
-import org.fujion.component.Radiogroup;
-import org.fujion.component.Textbox;
-import org.fujion.component.Window;
-import org.fujion.event.IEventListener;
-import org.fujion.page.PageUtil;
+import static org.fujionclinical.shell.designer.DesignConstants.*;
 
 /**
  * Supports selection and management of existing layouts.

@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,13 +25,9 @@
  */
 package org.fujionclinical.shell.elements;
 
-import org.fujionclinical.ui.util.ThemeUtil;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.Div;
-import org.fujion.component.Hyperlink;
-import org.fujion.component.Menupopup;
-import org.fujion.component.Span;
+import org.fujion.component.*;
 import org.fujion.event.IEventListener;
+import org.fujionclinical.ui.util.ThemeUtil;
 
 /**
  * A child of a ElementTreeView, this UI element specifies the tree path where its associated tree
@@ -99,7 +95,7 @@ public class ElementTreePane extends ElementUI {
      */
     private void setSelected(boolean selected) {
         this.selected = selected;
-        anchor.toggleClass(treeView.getSelectionStyle().getThemeClass(), "btn-default", selected);
+        anchor.toggleClass(treeView.getSelectionStyle().getThemeClass(), "btn-secondary", selected);
     }
 
     /**

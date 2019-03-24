@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,8 +26,8 @@
 package org.fujionclinical.ui.manifest;
 
 import org.fujion.component.BaseComponent;
-import org.fujion.component.Row;
 import org.fujion.component.Grid;
+import org.fujion.component.Row;
 import org.fujion.event.ClickEvent;
 import org.fujion.event.Event;
 import org.fujion.event.EventUtil;

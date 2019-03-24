@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,35 +25,27 @@
  */
 package org.fujionclinical.ui.dialog;
 
-import static org.fujionclinical.ui.dialog.DialogConstants.LABEL_ID_CANCEL;
-import static org.fujionclinical.ui.dialog.DialogConstants.LABEL_ID_OK;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.fujion.common.MiscUtil;
-import org.fujion.common.StrUtil;
-import org.fujionclinical.ui.dialog.DialogControl.ChoiceFormat;
 import org.fujion.ancillary.IAutoWired;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.client.ExecutionContext;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.BaseUIComponent;
-import org.fujion.component.Button;
-import org.fujion.component.Cell;
-import org.fujion.component.Checkbox;
-import org.fujion.component.Listbox;
-import org.fujion.component.Listitem;
-import org.fujion.component.Toolbar;
-import org.fujion.component.Window;
+import org.fujion.common.MiscUtil;
+import org.fujion.common.StrUtil;
+import org.fujion.component.*;
 import org.fujion.event.ClickEvent;
 import org.fujion.event.DblclickEvent;
 import org.fujion.event.Event;
 import org.fujion.event.IEventListener;
 import org.fujion.page.PageUtil;
+import org.fujionclinical.ui.dialog.DialogControl.ChoiceFormat;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import static org.fujionclinical.ui.dialog.DialogConstants.LABEL_ID_CANCEL;
+import static org.fujionclinical.ui.dialog.DialogConstants.LABEL_ID_OK;
 
 /**
  * Implements a simple, generic dialog to prompt for specified responses.

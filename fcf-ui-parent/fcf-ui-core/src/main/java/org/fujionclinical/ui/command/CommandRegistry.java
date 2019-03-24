@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,14 +25,14 @@
  */
 package org.fujionclinical.ui.command;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
-import org.fujionclinical.api.spring.SpringUtil;
 import org.fujion.component.BaseUIComponent;
 import org.fujion.event.Event;
 import org.fujion.event.KeyEvent;
+import org.fujionclinical.api.spring.SpringUtil;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Registry for commands.
@@ -46,7 +46,7 @@ public class CommandRegistry implements Iterable<Command> {
      * 
      * @return Command registry instance.
      */
-    public static final CommandRegistry getInstance() {
+    public static CommandRegistry getInstance() {
         return SpringUtil.getBean("commandRegistry", CommandRegistry.class);
     }
     

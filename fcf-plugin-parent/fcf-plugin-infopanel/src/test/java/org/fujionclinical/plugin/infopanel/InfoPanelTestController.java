@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,24 +25,16 @@
  */
 package org.fujionclinical.plugin.infopanel;
 
+import org.fujion.component.*;
+import org.fujion.dragdrop.DropUtil;
+import org.fujion.event.ClickEvent;
+import org.fujion.event.DblclickEvent;
 import org.fujionclinical.api.event.EventManager;
 import org.fujionclinical.api.event.IEventManager;
 import org.fujionclinical.plugin.infopanel.model.IInfoPanel;
 import org.fujionclinical.plugin.infopanel.model.IInfoPanel.Action;
 import org.fujionclinical.plugin.infopanel.service.InfoPanelService;
 import org.fujionclinical.ui.controller.FrameworkController;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.Button;
-import org.fujion.component.Checkbox;
-import org.fujion.component.Div;
-import org.fujion.component.Import;
-import org.fujion.component.Label;
-import org.fujion.component.Listbox;
-import org.fujion.component.Listitem;
-import org.fujion.component.Menuitem;
-import org.fujion.dragdrop.DropUtil;
-import org.fujion.event.ClickEvent;
-import org.fujion.event.DblclickEvent;
 
 /**
  * Controller for the test component. This component provides a list box of draggable list items for

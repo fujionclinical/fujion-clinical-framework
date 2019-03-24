@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,23 +25,14 @@
  */
 package org.fujionclinical.help.ohj;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.fujionclinical.help.HelpModule;
-import org.fujionclinical.help.HelpSetBase;
-import org.fujionclinical.help.HelpTopic;
-import org.fujionclinical.help.HelpViewType;
-import org.fujionclinical.help.IHelpView;
-
 import oracle.help.common.View;
 import oracle.help.library.helpset.HelpSet;
 import oracle.help.library.helpset.HelpSetParseException;
+import org.fujionclinical.help.*;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.*;
 
 /**
  * Oracle Help for Java implementation.

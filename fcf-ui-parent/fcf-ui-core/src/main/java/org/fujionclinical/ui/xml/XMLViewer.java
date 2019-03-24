@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,14 +25,14 @@
  */
 package org.fujionclinical.ui.xml;
 
-import java.util.Collections;
-import java.util.Map;
-
-import org.fujionclinical.ui.dialog.PopupDialog;
 import org.fujion.component.BaseComponent;
 import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Window;
+import org.fujionclinical.ui.dialog.PopupDialog;
 import org.w3c.dom.Document;
+
+import java.util.Collections;
+import java.util.Map;
 
 /**
  * Static utility class for XML viewing functions.

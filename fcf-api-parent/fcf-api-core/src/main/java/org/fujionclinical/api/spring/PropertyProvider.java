@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,6 @@
  */
 package org.fujionclinical.api.spring;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.fujionclinical.api.property.IPropertyProvider;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -35,6 +32,9 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.PropertySource;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Property provider that retrieves its data from Spring properties. If a prefix is supplied, it is

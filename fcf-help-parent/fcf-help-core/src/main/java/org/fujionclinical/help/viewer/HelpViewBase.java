@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,16 +25,16 @@
  */
 package org.fujionclinical.help.viewer;
 
-import org.fujion.common.MiscUtil;
-import org.fujionclinical.help.HelpTopic;
-import org.fujionclinical.help.HelpViewType;
-import org.fujionclinical.help.IHelpView;
-import org.fujionclinical.help.viewer.HelpHistory.ITopicListener;
 import org.fujion.ancillary.IAutoWired;
+import org.fujion.common.MiscUtil;
 import org.fujion.component.BaseComponent;
 import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Namespace;
 import org.fujion.page.PageUtil;
+import org.fujionclinical.help.HelpTopic;
+import org.fujionclinical.help.HelpViewType;
+import org.fujionclinical.help.IHelpView;
+import org.fujionclinical.help.viewer.HelpHistory.ITopicListener;
 
 /**
  * Abstract base class for all help tabs. It descends from Tab.

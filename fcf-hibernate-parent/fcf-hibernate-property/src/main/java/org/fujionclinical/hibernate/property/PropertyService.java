@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,13 +25,13 @@
  */
 package org.fujionclinical.hibernate.property;
 
-import java.util.List;
-
+import org.fujion.common.StrUtil;
 import org.fujionclinical.api.domain.IUser;
 import org.fujionclinical.api.property.IPropertyService;
 import org.fujionclinical.api.security.ISecurityService;
 import org.fujionclinical.api.security.SecurityUtil;
-import org.fujion.common.StrUtil;
+
+import java.util.List;
 
 /**
  * H2-based implementation of a property service.

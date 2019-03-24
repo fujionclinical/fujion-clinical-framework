@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,22 +25,16 @@
  */
 package org.fujionclinical.help.ohj;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.List;
-
+import oracle.help.common.*;
 import org.fujionclinical.help.HelpTopic;
 import org.fujionclinical.help.HelpTopicNode;
 import org.fujionclinical.help.HelpViewType;
 import org.fujionclinical.help.IHelpView;
 
-import oracle.help.common.KeywordTopicTreeNode;
-import oracle.help.common.Target;
-import oracle.help.common.Topic;
-import oracle.help.common.TopicTree;
-import oracle.help.common.TopicTreeNode;
-import oracle.help.common.View;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
 
 /**
  * Adaptor for Oracle help view.

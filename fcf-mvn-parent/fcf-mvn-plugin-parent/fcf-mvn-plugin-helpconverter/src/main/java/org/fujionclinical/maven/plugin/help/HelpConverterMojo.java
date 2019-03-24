@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,22 +25,20 @@
  */
 package org.fujionclinical.maven.plugin.help;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Execute;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-
+import org.codehaus.plexus.util.FileUtils;
 import org.fujionclinical.maven.plugin.core.BaseMojo;
 import org.fujionclinical.maven.plugin.help.chm.ChmSourceLoader;
 import org.fujionclinical.maven.plugin.iterator.ZipIterator;
 
-import org.codehaus.plexus.util.FileUtils;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Goal which prepares a Help module in native format for repackaging into a FCF-compliant help

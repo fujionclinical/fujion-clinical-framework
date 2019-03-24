@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,13 +25,15 @@
  */
 package org.fujionclinical.security;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
 import org.apache.commons.lang.CharEncoding;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.fujion.client.ClientUtil;
+import org.fujion.client.ExecutionContext;
+import org.fujion.common.StrUtil;
+import org.fujion.core.WebUtil;
+import org.fujion.websocket.Session;
 import org.fujionclinical.api.alias.AliasType;
 import org.fujionclinical.api.alias.AliasTypeRegistry;
 import org.fujionclinical.api.context.ContextManager;
@@ -39,19 +41,17 @@ import org.fujionclinical.api.context.IContextManager;
 import org.fujionclinical.api.domain.IUser;
 import org.fujionclinical.api.security.ISecurityService;
 import org.fujionclinical.api.security.SecurityUtil;
-import org.fujion.common.StrUtil;
 import org.fujionclinical.security.controller.PasswordChangeController;
 import org.fujionclinical.ui.dialog.DialogUtil;
-import org.fujion.client.ClientUtil;
-import org.fujion.client.ExecutionContext;
-import org.fujion.core.WebUtil;
-import org.fujion.websocket.Session;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.socket.WebSocketSession;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 /**
  * Base Spring Security implementation.

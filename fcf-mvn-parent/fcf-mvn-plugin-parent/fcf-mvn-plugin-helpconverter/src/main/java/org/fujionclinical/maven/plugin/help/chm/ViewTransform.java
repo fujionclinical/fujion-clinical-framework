@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,15 +25,14 @@
  */
 package org.fujionclinical.maven.plugin.help.chm;
 
+import org.apache.commons.lang.ArrayUtils;
+import org.fujionclinical.maven.plugin.core.BaseMojo;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Stack;
-
-import org.apache.commons.lang.ArrayUtils;
-
-import org.fujionclinical.maven.plugin.core.BaseMojo;
 
 /**
  * Extracts the topic tree from a view, converting from window-1252 to UTF-8 encoding and

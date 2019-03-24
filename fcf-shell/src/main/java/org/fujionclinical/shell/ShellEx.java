@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,25 +28,18 @@ package org.fujionclinical.shell;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.fujion.annotation.Component;
+import org.fujion.annotation.Component.ChildTag;
+import org.fujion.common.MiscUtil;
 import org.fujionclinical.api.property.IPropertyProvider;
 import org.fujionclinical.api.property.PropertyUtil;
 import org.fujionclinical.shell.ancillary.FCFException;
-import org.fujionclinical.shell.elements.ElementBase;
-import org.fujionclinical.shell.elements.ElementMenuItem;
-import org.fujionclinical.shell.elements.ElementPlugin;
-import org.fujionclinical.shell.elements.ElementTabPane;
-import org.fujionclinical.shell.elements.ElementTabView;
-import org.fujionclinical.shell.elements.ElementTreePane;
-import org.fujionclinical.shell.elements.ElementTreeView;
-import org.fujionclinical.shell.elements.ElementUI;
+import org.fujionclinical.shell.elements.*;
 import org.fujionclinical.shell.layout.Layout;
 import org.fujionclinical.shell.layout.LayoutParser;
 import org.fujionclinical.shell.plugins.PluginDefinition;
 import org.fujionclinical.shell.plugins.PluginException;
 import org.fujionclinical.shell.plugins.PluginRegistry;
-import org.fujion.annotation.Component;
-import org.fujion.annotation.Component.ChildTag;
-import org.fujion.common.MiscUtil;
 
 /**
  * This class is provided primarily for backward compatibility with the old fixed layout of tab

@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,10 +25,10 @@
  */
 package org.fujionclinical.shell.plugins;
 
+import org.fujion.component.BaseMenuComponent;
 import org.fujionclinical.shell.Shell;
 import org.fujionclinical.shell.elements.ElementBase;
 import org.fujionclinical.shell.elements.ElementPlugin;
-import org.fujion.component.BaseMenuComponent;
 
 /**
  * Resource for declaring items to appear on the common menu.

@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,46 +25,13 @@
  */
 package org.fujionclinical.shell.designer;
 
-import static org.fujionclinical.shell.designer.DesignConstants.CAP_LAYOUT_CLONE;
-import static org.fujionclinical.shell.designer.DesignConstants.CAP_LAYOUT_LOAD;
-import static org.fujionclinical.shell.designer.DesignConstants.CAP_LAYOUT_MANAGE;
-import static org.fujionclinical.shell.designer.DesignConstants.CAP_LAYOUT_RENAME;
-import static org.fujionclinical.shell.designer.DesignConstants.CAP_LAYOUT_SAVE;
-import static org.fujionclinical.shell.designer.DesignConstants.MSG_LAYOUT_CLONE;
-import static org.fujionclinical.shell.designer.DesignConstants.MSG_LAYOUT_DELETE;
-import static org.fujionclinical.shell.designer.DesignConstants.MSG_LAYOUT_LOAD;
-import static org.fujionclinical.shell.designer.DesignConstants.MSG_LAYOUT_MANAGE;
-import static org.fujionclinical.shell.designer.DesignConstants.MSG_LAYOUT_RENAME;
-import static org.fujionclinical.shell.designer.DesignConstants.MSG_LAYOUT_SAVE;
-import static org.fujionclinical.shell.designer.DesignConstants.RESOURCE_PREFIX;
-
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.fujionclinical.api.FrameworkUtil;
-import org.fujion.common.StrUtil;
-import org.fujionclinical.shell.layout.Layout;
-import org.fujionclinical.shell.layout.LayoutIdentifier;
-import org.fujionclinical.shell.layout.LayoutParser;
-import org.fujionclinical.shell.layout.LayoutUtil;
-import org.fujionclinical.ui.dialog.DialogUtil;
-import org.fujionclinical.ui.dialog.PopupDialog;
 import org.fujion.ancillary.IAutoWired;
 import org.fujion.ancillary.IResponseCallback;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.client.ClientUtil;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.BaseUIComponent;
-import org.fujion.component.Button;
-import org.fujion.component.Label;
-import org.fujion.component.Listbox;
-import org.fujion.component.Listitem;
-import org.fujion.component.Radiobutton;
-import org.fujion.component.Radiogroup;
-import org.fujion.component.Upload;
-import org.fujion.component.Window;
+import org.fujion.common.StrUtil;
+import org.fujion.component.*;
 import org.fujion.event.ClickEvent;
 import org.fujion.event.DblclickEvent;
 import org.fujion.event.IEventListener;
@@ -73,6 +40,19 @@ import org.fujion.event.UploadEvent.UploadState;
 import org.fujion.model.IComponentRenderer;
 import org.fujion.model.IModelAndView;
 import org.fujion.model.ListModel;
+import org.fujionclinical.api.FrameworkUtil;
+import org.fujionclinical.shell.layout.Layout;
+import org.fujionclinical.shell.layout.LayoutIdentifier;
+import org.fujionclinical.shell.layout.LayoutParser;
+import org.fujionclinical.shell.layout.LayoutUtil;
+import org.fujionclinical.ui.dialog.DialogUtil;
+import org.fujionclinical.ui.dialog.PopupDialog;
+
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.fujionclinical.shell.designer.DesignConstants.*;
 
 /**
  * Supports selection and management of existing layouts.

@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,14 +25,10 @@
  */
 package org.fujionclinical.ui.manifest;
 
-import org.fujionclinical.ui.util.FCFUtil;
-import org.fujion.component.Cell;
-import org.fujion.component.Column;
-import org.fujion.component.Row;
-import org.fujion.component.Span;
-import org.fujion.component.Grid;
+import org.fujion.component.*;
 import org.fujion.model.IComponentRenderer;
 import org.fujion.model.Sorting.SortOrder;
+import org.fujionclinical.ui.util.FCFUtil;
 
 /**
  * Base renderer.

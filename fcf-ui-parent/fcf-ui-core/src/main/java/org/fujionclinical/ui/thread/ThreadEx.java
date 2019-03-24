@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,18 +25,18 @@
  */
 package org.fujionclinical.ui.thread;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.fujionclinical.api.thread.IAbortable;
-import org.fujionclinical.api.thread.ThreadUtil;
 import org.fujion.client.ExecutionContext;
 import org.fujion.component.BaseComponent;
 import org.fujion.component.Page;
 import org.fujion.event.Event;
+import org.fujionclinical.api.thread.IAbortable;
+import org.fujionclinical.api.thread.ThreadUtil;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Used to run long operations in the background. Uses events to notify the requester of completion.

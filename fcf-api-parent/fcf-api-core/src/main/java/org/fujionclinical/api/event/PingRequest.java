@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,13 +25,12 @@
  */
 package org.fujionclinical.api.event;
 
-import java.io.Serializable;
-import java.util.List;
-
-import org.fujionclinical.api.messaging.Recipient;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.fujionclinical.api.messaging.Recipient;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Represents a ping request.

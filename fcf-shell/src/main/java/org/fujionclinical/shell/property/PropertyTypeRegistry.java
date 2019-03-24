@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,17 +26,7 @@
 package org.fujionclinical.shell.property;
 
 import org.fujion.common.AbstractRegistry;
-import org.fujionclinical.shell.designer.PropertyEditorAction;
-import org.fujionclinical.shell.designer.PropertyEditorBase;
-import org.fujionclinical.shell.designer.PropertyEditorBoolean;
-import org.fujionclinical.shell.designer.PropertyEditorChoiceList;
-import org.fujionclinical.shell.designer.PropertyEditorColor;
-import org.fujionclinical.shell.designer.PropertyEditorDate;
-import org.fujionclinical.shell.designer.PropertyEditorDouble;
-import org.fujionclinical.shell.designer.PropertyEditorEnum;
-import org.fujionclinical.shell.designer.PropertyEditorIcon;
-import org.fujionclinical.shell.designer.PropertyEditorInteger;
-import org.fujionclinical.shell.designer.PropertyEditorText;
+import org.fujionclinical.shell.designer.*;
 
 /**
  * Registry of all supported property types.

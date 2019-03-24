@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,6 @@
  */
 package org.fujionclinical.ui.render;
 
-import java.util.Collection;
-import java.util.Date;
-
 import org.apache.commons.lang.StringUtils;
 import org.fujion.common.DateUtil;
 import org.fujion.common.StrUtil;
@@ -36,6 +33,9 @@ import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Image;
 import org.fujion.component.Label;
 import org.fujion.model.IComponentRenderer;
+
+import java.util.Collection;
+import java.util.Date;
 
 /**
  * Base for renderers.

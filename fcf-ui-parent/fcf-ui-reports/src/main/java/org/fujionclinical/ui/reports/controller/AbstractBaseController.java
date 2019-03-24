@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,9 +42,9 @@ import org.fujionclinical.api.query.DateQueryFilter;
 import org.fujionclinical.api.query.DateQueryFilter.DateType;
 import org.fujionclinical.api.query.DateQueryFilter.IDateTypeExtractor;
 import org.fujionclinical.api.query.IQueryService;
+import org.fujionclinical.ui.dialog.DateRangePicker;
 import org.fujionclinical.ui.reports.common.ReportConstants;
 import org.fujionclinical.ui.reports.common.ReportUtil;
-import org.fujionclinical.ui.dialog.DateRangePicker;
 import org.fujionclinical.ui.util.FCFUtil;
 import org.springframework.beans.BeanUtils;
 

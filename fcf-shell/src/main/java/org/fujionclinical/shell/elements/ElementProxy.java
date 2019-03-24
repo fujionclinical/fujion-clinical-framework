@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,11 +25,11 @@
  */
 package org.fujionclinical.shell.elements;
 
-import java.util.HashMap;
-
 import org.fujionclinical.shell.plugins.PluginDefinition;
 import org.fujionclinical.shell.property.IPropertyAccessor;
 import org.fujionclinical.shell.property.PropertyInfo;
+
+import java.util.HashMap;
 
 /**
  * Proxy for an arbitrary UI element that can store and return property values. This is used by the

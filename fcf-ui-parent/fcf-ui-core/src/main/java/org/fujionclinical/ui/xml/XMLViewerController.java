@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,17 +25,13 @@
  */
 package org.fujionclinical.ui.xml;
 
-import java.util.Iterator;
-
 import org.fujion.ancillary.IAutoWired;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.Label;
-import org.fujion.component.Textbox;
-import org.fujion.component.Treenode;
-import org.fujion.component.Treeview;
+import org.fujion.component.*;
 import org.w3c.dom.Document;
+
+import java.util.Iterator;
 
 /**
  * Controller for XMLViewer.

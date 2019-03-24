@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,15 +25,15 @@
  */
 package org.fujionclinical.plugin.infopanel.controller;
 
-import java.util.List;
-
-import org.fujionclinical.plugin.infopanel.model.IActionTarget;
-import org.fujionclinical.plugin.infopanel.model.IInfoPanel.Action;
-import org.fujionclinical.plugin.infopanel.service.InfoPanelService;
 import org.fujion.ancillary.INamespace;
 import org.fujion.component.BaseComponent;
 import org.fujion.component.Row;
 import org.fujion.event.EventUtil;
+import org.fujionclinical.plugin.infopanel.model.IActionTarget;
+import org.fujionclinical.plugin.infopanel.model.IInfoPanel.Action;
+import org.fujionclinical.plugin.infopanel.service.InfoPanelService;
+
+import java.util.List;
 
 /**
  * Container for receiving components rendered by drop renderer.

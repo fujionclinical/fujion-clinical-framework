@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,25 +25,15 @@
  */
 package org.fujionclinical.help.chm;
 
-import java.io.InputStream;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-
+import org.fujion.client.ExecutionContext;
 import org.fujion.common.StrUtil;
 import org.fujion.common.XMLUtil;
-import org.fujionclinical.help.HelpModule;
-import org.fujionclinical.help.HelpSetBase;
-import org.fujionclinical.help.HelpTopic;
-import org.fujionclinical.help.HelpTopicNode;
-import org.fujionclinical.help.HelpViewType;
-import org.fujionclinical.help.IHelpView;
-import org.fujion.client.ExecutionContext;
+import org.fujionclinical.help.*;
 import org.w3c.dom.Node;
+
+import java.io.InputStream;
+import java.net.URL;
+import java.util.*;
 
 public class HelpSet_CHMHelp extends HelpSetBase {
     

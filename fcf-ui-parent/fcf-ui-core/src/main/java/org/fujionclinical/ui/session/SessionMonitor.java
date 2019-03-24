@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,39 +25,32 @@
  */
 package org.fujionclinical.ui.session;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.fujionclinical.api.domain.IUser;
-import org.fujionclinical.api.event.IGenericEvent;
-import org.fujionclinical.api.security.ISecurityService;
-import org.fujion.common.DateUtil;
-import org.fujion.common.DateUtil.TimeUnit;
-import org.fujion.common.StrUtil;
-import org.fujionclinical.ui.controller.FrameworkController;
-import org.fujionclinical.ui.dialog.DialogUtil;
 import org.fujion.ancillary.ConvertUtil;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.client.ClientInvocation;
 import org.fujion.client.ClientRequest;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.BaseUIComponent;
-import org.fujion.component.Label;
-import org.fujion.component.MessagePane;
-import org.fujion.component.MessageWindow;
-import org.fujion.component.Page;
-import org.fujion.component.Textbox;
-import org.fujion.component.Timer;
+import org.fujion.common.DateUtil;
+import org.fujion.common.DateUtil.TimeUnit;
+import org.fujion.common.StrUtil;
+import org.fujion.component.*;
 import org.fujion.event.EventUtil;
 import org.fujion.event.TimerEvent;
 import org.fujion.websocket.ISessionListener;
 import org.fujion.websocket.Session;
+import org.fujionclinical.api.domain.IUser;
+import org.fujionclinical.api.event.IGenericEvent;
+import org.fujionclinical.api.security.ISecurityService;
+import org.fujionclinical.ui.controller.FrameworkController;
+import org.fujionclinical.ui.dialog.DialogUtil;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Session inactivity timeout controller. Used to notify user regarding impending inactivity timeout

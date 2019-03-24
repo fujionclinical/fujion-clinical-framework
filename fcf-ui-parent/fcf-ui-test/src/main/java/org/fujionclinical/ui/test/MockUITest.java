@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ public class MockUITest extends MockTest {
     private static final String[] CHILD_PROFILES = { "child", "child-test" };
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         MockTest.rootConfig = new MockConfig(ROOT_CONFIG_LOCATIONS, ROOT_PROFILES);
         MockTest.childConfig = new MockConfig(CHILD_CONFIG_LOCATIONS, CHILD_PROFILES);
         MockTest.mockEnvironmentClass = MockUIEnvironment.class;

@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,15 +25,14 @@
  */
 package org.fujionclinical.help;
 
-import java.lang.reflect.Constructor;
-import java.util.Map;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.fujion.common.MiscUtil;
 import org.fujion.common.RegistryMap;
 import org.fujion.common.RegistryMap.DuplicateAction;
+
+import java.lang.reflect.Constructor;
+import java.util.Map;
 
 /**
  * Factory class for creating help sets using registered implementations.

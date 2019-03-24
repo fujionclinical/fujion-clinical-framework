@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,12 +25,12 @@
  */
 package org.fujionclinical.shell.elements;
 
+import org.fujionclinical.shell.plugins.PluginException;
+import org.fujionclinical.shell.triggers.ITriggerCallback;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-
-import org.fujionclinical.shell.plugins.PluginException;
-import org.fujionclinical.shell.triggers.ITriggerCallback;
 
 /**
  * A trigger is a condition/action pair with zero or more plugin targets. When a condition is

@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,13 +25,13 @@
  */
 package org.fujionclinical.maven.plugin.iterator;
 
+import org.fujionclinical.maven.plugin.resource.FileResource;
+import org.fujionclinical.maven.plugin.resource.IResource;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import org.fujionclinical.maven.plugin.resource.FileResource;
-import org.fujionclinical.maven.plugin.resource.IResource;
 
 /**
  * Used where source archive is a simple folder structure.

@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,15 +25,15 @@
  */
 package org.fujionclinical.help.viewer;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.fujionclinical.help.HelpViewType;
-import org.fujionclinical.help.IHelpSet;
-import org.fujionclinical.help.IHelpViewer;
 import org.fujion.component.Page;
 import org.fujion.ipc.InvocationRequest;
 import org.fujion.ipc.InvocationRequestQueue;
+import org.fujionclinical.help.HelpViewType;
+import org.fujionclinical.help.IHelpSet;
+import org.fujionclinical.help.IHelpViewer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Acts as a proxy for a help viewer instance residing in another browser window. Uses event queues

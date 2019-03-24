@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,16 +25,7 @@
  */
 package org.fujionclinical.ui.spring;
 
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.Set;
-
-import javax.servlet.ServletContext;
-
 import org.apache.commons.lang.ArrayUtils;
-import org.fujionclinical.api.spring.Constants;
-import org.fujionclinical.api.spring.ExternalPropertySource;
-import org.fujionclinical.api.spring.LabelPropertySource;
 import org.fujion.client.ExecutionContext;
 import org.fujion.component.Page;
 import org.fujion.spring.ClasspathMessageSource;
@@ -42,9 +33,17 @@ import org.fujion.websocket.ISessionLifecycle;
 import org.fujion.websocket.Session;
 import org.fujion.websocket.SessionInitException;
 import org.fujion.websocket.Sessions;
+import org.fujionclinical.api.spring.Constants;
+import org.fujionclinical.api.spring.ExternalPropertySource;
+import org.fujionclinical.api.spring.LabelPropertySource;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.web.context.support.XmlWebApplicationContext;
+
+import javax.servlet.ServletContext;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class AppContextInitializer implements ApplicationContextInitializer<XmlWebApplicationContext> {
     

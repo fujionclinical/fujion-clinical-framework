@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,13 +25,13 @@
  */
 package org.fujionclinical.shell.elements;
 
-import org.fujionclinical.shell.designer.PropertyEditorOrderedChildren;
-import org.fujionclinical.shell.property.PropertyTypeRegistry;
-import org.fujionclinical.ui.action.ActionUtil;
 import org.fujion.component.BaseComponent;
 import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Toolbar;
 import org.fujion.component.Toolbar.Alignment;
+import org.fujionclinical.shell.designer.PropertyEditorOrderedChildren;
+import org.fujionclinical.shell.property.PropertyTypeRegistry;
+import org.fujionclinical.ui.action.ActionUtil;
 
 /**
  * Implements a shared toolbar.

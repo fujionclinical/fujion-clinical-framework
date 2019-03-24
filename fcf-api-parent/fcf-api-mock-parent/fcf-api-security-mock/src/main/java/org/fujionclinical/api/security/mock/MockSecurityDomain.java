@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,13 +25,13 @@
  */
 package org.fujionclinical.api.security.mock;
 
-import java.util.List;
-import java.util.Map;
-
+import org.fujion.common.StrUtil;
 import org.fujionclinical.api.domain.IUser;
 import org.fujionclinical.api.security.ISecurityDomain;
 import org.fujionclinical.api.spring.SpringUtil;
-import org.fujion.common.StrUtil;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Mock user for testing.

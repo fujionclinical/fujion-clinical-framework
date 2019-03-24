@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,12 +25,11 @@
  */
 package org.fujionclinical.maven.plugin.transform;
 
+import org.apache.commons.io.IOUtils;
+import org.fujionclinical.maven.plugin.core.BaseMojo;
+
 import java.io.InputStream;
 import java.io.OutputStream;
-
-import org.apache.commons.io.IOUtils;
-
-import org.fujionclinical.maven.plugin.core.BaseMojo;
 
 /**
  * Performs a simple copy of a resource from the source to the destination.

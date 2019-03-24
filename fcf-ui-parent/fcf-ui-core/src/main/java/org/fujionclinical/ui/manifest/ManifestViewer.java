@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,33 +25,26 @@
  */
 package org.fujionclinical.ui.manifest;
 
+import org.apache.commons.lang.StringUtils;
+import org.fujion.ancillary.IAutoWired;
+import org.fujion.annotation.EventHandler;
+import org.fujion.annotation.WiredComponent;
+import org.fujion.component.*;
+import org.fujion.event.ChangeEvent;
+import org.fujion.event.Event;
+import org.fujion.model.IListModel;
+import org.fujion.model.IModelAndView;
+import org.fujion.model.ListModel;
+import org.fujionclinical.api.ManifestIterator;
+import org.fujionclinical.ui.dialog.PopupDialog;
+import org.fujionclinical.ui.util.FCFUtil;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.jar.Manifest;
-
-import org.apache.commons.lang.StringUtils;
-import org.fujionclinical.api.ManifestIterator;
-import org.fujionclinical.ui.dialog.PopupDialog;
-import org.fujionclinical.ui.util.FCFUtil;
-import org.fujion.ancillary.IAutoWired;
-import org.fujion.annotation.EventHandler;
-import org.fujion.annotation.WiredComponent;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.BaseUIComponent;
-import org.fujion.component.Column;
-import org.fujion.component.Grid;
-import org.fujion.component.Label;
-import org.fujion.component.Row;
-import org.fujion.component.Textbox;
-import org.fujion.component.Window;
-import org.fujion.event.ChangeEvent;
-import org.fujion.event.Event;
-import org.fujion.model.IListModel;
-import org.fujion.model.IModelAndView;
-import org.fujion.model.ListModel;
 
 /**
  * Displays a dialog showing all known manifests or details about a single manifest.

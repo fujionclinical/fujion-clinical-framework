@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,9 @@
  */
 package org.fujionclinical.security.controller;
 
+import org.fujion.common.StrUtil;
 import org.fujionclinical.api.domain.IUser;
 import org.fujionclinical.api.security.SecurityUtil;
-import org.fujion.common.StrUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;

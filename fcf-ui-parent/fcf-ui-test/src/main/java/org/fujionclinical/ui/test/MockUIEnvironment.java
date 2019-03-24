@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,13 +25,13 @@
  */
 package org.fujionclinical.ui.test;
 
+import org.fujion.component.Page;
+import org.fujion.test.MockConfig;
+import org.fujion.test.MockEnvironment;
 import org.fujionclinical.api.spring.ExternalPropertySource;
 import org.fujionclinical.api.spring.LabelPropertySource;
 import org.fujionclinical.ui.spring.AppContextFinder;
 import org.fujionclinical.ui.spring.FrameworkAppContext;
-import org.fujion.component.Page;
-import org.fujion.test.MockConfig;
-import org.fujion.test.MockEnvironment;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.web.context.support.XmlWebApplicationContext;

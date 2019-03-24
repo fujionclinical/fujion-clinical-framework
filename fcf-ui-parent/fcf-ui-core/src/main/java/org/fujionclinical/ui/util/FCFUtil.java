@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,10 +25,6 @@
  */
 package org.fujionclinical.ui.util;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
@@ -38,15 +34,14 @@ import org.apache.commons.lang.reflect.FieldUtils;
 import org.fujion.ancillary.IDisable;
 import org.fujion.client.ExecutionContext;
 import org.fujion.common.MiscUtil;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.BaseInputboxComponent;
-import org.fujion.component.Cell;
-import org.fujion.component.Html;
-import org.fujion.component.Hyperlink;
-import org.fujion.component.Page;
+import org.fujion.component.*;
 import org.fujion.event.Event;
 import org.fujion.event.EventUtil;
 import org.fujion.event.IEventListener;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class FCFUtil {
     
@@ -100,7 +95,7 @@ public class FCFUtil {
      * @param clazz Class to evaluate
      * @return String representing resource path
      */
-    public static final String getResourcePath(Class<?> clazz) {
+    public static String getResourcePath(Class<?> clazz) {
         return getResourcePath(clazz.getPackage());
     }
     
@@ -111,7 +106,7 @@ public class FCFUtil {
      * @param up Number of path levels to remove
      * @return String representing resource path
      */
-    public static final String getResourcePath(Class<?> clazz, int up) {
+    public static String getResourcePath(Class<?> clazz, int up) {
         return getResourcePath(clazz.getPackage(), up);
     }
     
@@ -121,7 +116,7 @@ public class FCFUtil {
      * @param pkg Package to evaluate
      * @return String representing resource path
      */
-    public static final String getResourcePath(Package pkg) {
+    public static String getResourcePath(Package pkg) {
         return getResourcePath(pkg.getName());
     }
     
@@ -132,7 +127,7 @@ public class FCFUtil {
      * @param up Number of path levels to remove
      * @return String representing resource path
      */
-    public static final String getResourcePath(Package pkg, int up) {
+    public static String getResourcePath(Package pkg, int up) {
         return getResourcePath(pkg.getName(), up);
     }
     
@@ -142,7 +137,7 @@ public class FCFUtil {
      * @param name Package name
      * @return String representing resource path
      */
-    public static final String getResourcePath(String name) {
+    public static String getResourcePath(String name) {
         return getResourcePath(name, 0);
     }
     
@@ -153,7 +148,7 @@ public class FCFUtil {
      * @param up Number of path levels to remove
      * @return String representing resource path
      */
-    public static final String getResourcePath(String name, int up) {
+    public static String getResourcePath(String name, int up) {
         String path = StringUtils.chomp(name.replace('.', '/'), "/");
         
         while (up > 0) {

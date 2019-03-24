@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,21 +25,12 @@
  */
 package org.fujionclinical.hibernate.security;
 
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
+import org.fujion.common.StrUtil;
 import org.fujionclinical.api.domain.IUser;
 import org.fujionclinical.api.security.ISecurityDomain;
-import org.fujion.common.StrUtil;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "FCF_USER")

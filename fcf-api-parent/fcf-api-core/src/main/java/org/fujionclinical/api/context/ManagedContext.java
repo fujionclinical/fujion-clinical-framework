@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,12 +25,6 @@
  */
 package org.fujionclinical.api.context;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -42,6 +36,8 @@ import org.fujionclinical.api.context.ISurveyResponse.ISurveyCallback;
 import org.fujionclinical.api.context.SurveyResponse.ResponseState;
 import org.fujionclinical.api.event.IEventManager;
 import org.fujionclinical.api.event.IGenericEvent;
+
+import java.util.*;
 
 /**
  * Base class for creating context objects. Descendant classes wrap domain objects such as patient

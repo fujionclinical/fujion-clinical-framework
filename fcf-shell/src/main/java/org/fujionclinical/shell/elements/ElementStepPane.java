@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,11 +25,7 @@
  */
 package org.fujionclinical.shell.elements;
 
-import org.fujion.component.BaseComponent;
-import org.fujion.component.Div;
-import org.fujion.component.Hyperlink;
-import org.fujion.component.Menupopup;
-import org.fujion.component.Span;
+import org.fujion.component.*;
 
 /**
  * A step-oriented UI Element. This is a composite element consisting of a button and its separator
@@ -155,14 +151,14 @@ public class ElementStepPane extends ElementUI {
      */
     private void updateButtonStyle() {
         button.addStyle("disabled", isEnabled() ? "true" : null);
-        button.addClass(isActivated() ? "flavor:btn-primary" : "flavor:btn-default");
+        button.addClass(isActivated() ? "flavor:btn-primary" : "flavor:btn-secondary");
     }
     
     @Override
     protected void updateVisibility(boolean visible, boolean activated) {
         super.updateVisibility(visible, activated);
         step.setVisible(visible && !isHomePane);
-        step.toggleClass("fcf-stepview-separator", null, getNextSibling(true) != null);
+        step.toggleClass("fa-angle-double-right", null, getNextSibling(true) != null);
         updateButtonStyle();
     }
     

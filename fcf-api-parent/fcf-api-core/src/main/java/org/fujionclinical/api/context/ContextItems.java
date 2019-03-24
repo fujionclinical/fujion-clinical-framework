@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,12 +25,12 @@
  */
 package org.fujionclinical.api.context;
 
+import org.fujion.common.DateUtil;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
-import org.fujion.common.DateUtil;
 
 /**
  * Encapsulates a set of context items. Internally, these are stored in a hash map with a separate

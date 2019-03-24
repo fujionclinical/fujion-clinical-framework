@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,13 @@
  */
 package org.fujionclinical.maven.plugin.processor;
 
+import org.apache.commons.io.filefilter.WildcardFileFilter;
+import org.apache.commons.lang.StringUtils;
+import org.fujionclinical.maven.plugin.core.BaseMojo;
+import org.fujionclinical.maven.plugin.iterator.IResourceIterator;
+import org.fujionclinical.maven.plugin.resource.IResource;
+import org.fujionclinical.maven.plugin.transform.AbstractTransform;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileOutputStream;
@@ -33,14 +40,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.commons.io.filefilter.WildcardFileFilter;
-import org.apache.commons.lang.StringUtils;
-
-import org.fujionclinical.maven.plugin.core.BaseMojo;
-import org.fujionclinical.maven.plugin.iterator.IResourceIterator;
-import org.fujionclinical.maven.plugin.resource.IResource;
-import org.fujionclinical.maven.plugin.transform.AbstractTransform;
 
 /**
  * Processes input resources via one or more transforms copying each result into the staging folder.

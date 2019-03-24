@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,11 +25,11 @@
  */
 package org.fujionclinical.shell.elements;
 
-import org.fujionclinical.shell.designer.PropertyEditorTabView;
-import org.fujionclinical.shell.property.PropertyTypeRegistry;
 import org.fujion.component.Tabview;
 import org.fujion.component.Tabview.TabPosition;
 import org.fujion.event.ChangeEvent;
+import org.fujionclinical.shell.designer.PropertyEditorTabView;
+import org.fujionclinical.shell.property.PropertyTypeRegistry;
 
 /**
  * Wraps the Tabview component. This UI element can only accept ElementTabPane elements as children

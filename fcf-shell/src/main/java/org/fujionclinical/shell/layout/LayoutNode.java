@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,16 +25,12 @@
  */
 package org.fujionclinical.shell.layout;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.fujionclinical.api.property.IPropertyProvider;
 import org.fujion.common.MiscUtil;
+import org.fujionclinical.api.property.IPropertyProvider;
 import org.fujionclinical.shell.plugins.PluginDefinition;
 import org.w3c.dom.Element;
+
+import java.util.*;
 
 /**
  * Base class for all node types within a layout.

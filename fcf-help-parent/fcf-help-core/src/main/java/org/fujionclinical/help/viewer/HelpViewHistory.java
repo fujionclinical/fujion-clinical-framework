@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,8 +25,6 @@
  */
 package org.fujionclinical.help.viewer;
 
-import org.fujionclinical.help.HelpTopic;
-import org.fujionclinical.help.HelpViewType;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.component.BaseComponent;
@@ -37,6 +35,8 @@ import org.fujion.event.ChangeEvent;
 import org.fujion.model.IListModel;
 import org.fujion.model.IModelAndView;
 import org.fujion.model.ListModel;
+import org.fujionclinical.help.HelpTopic;
+import org.fujionclinical.help.HelpViewType;
 
 /**
  * Tab that implements a view of the current topic selection history. Unlike other help tabs, this

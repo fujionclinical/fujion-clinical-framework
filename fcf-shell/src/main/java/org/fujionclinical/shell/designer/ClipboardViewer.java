@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,19 +25,19 @@
  */
 package org.fujionclinical.shell.designer;
 
-import java.util.Collections;
-import java.util.Map;
-
-import org.fujion.common.StrUtil;
-import org.fujionclinical.ui.util.FCFUtil;
 import org.fujion.ancillary.IAutoWired;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
+import org.fujion.common.StrUtil;
 import org.fujion.component.BaseComponent;
 import org.fujion.component.Button;
 import org.fujion.component.Memobox;
 import org.fujion.component.Window;
 import org.fujion.page.PageUtil;
+import org.fujionclinical.ui.util.FCFUtil;
+
+import java.util.Collections;
+import java.util.Map;
 
 /**
  * Allows viewing and editing of clipboard contents.

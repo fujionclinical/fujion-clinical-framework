@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,38 +25,27 @@
  */
 package org.fujionclinical.help.viewer;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.lang.StringUtils;
-import org.fujion.common.MiscUtil;
-import org.fujion.common.StrUtil;
-import org.fujionclinical.help.HelpTopic;
-import org.fujionclinical.help.HelpViewType;
-import org.fujionclinical.help.IHelpSet;
-import org.fujionclinical.help.IHelpView;
-import org.fujionclinical.help.IHelpViewer;
-import org.fujionclinical.help.viewer.HelpHistory.ITopicListener;
 import org.fujion.ancillary.IAutoWired;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.client.ClientUtil;
 import org.fujion.client.ExecutionContext;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.Button;
-import org.fujion.component.Iframe;
-import org.fujion.component.Label;
-import org.fujion.component.Page;
-import org.fujion.component.Tab;
-import org.fujion.component.Tabview;
-import org.fujion.component.Window;
+import org.fujion.common.MiscUtil;
+import org.fujion.common.StrUtil;
+import org.fujion.component.*;
 import org.fujion.component.Window.CloseAction;
 import org.fujion.component.Window.Size;
 import org.fujion.event.Event;
 import org.fujion.event.ResizeEvent;
 import org.fujion.ipc.InvocationRequestQueue;
 import org.fujion.ipc.InvocationRequestQueueRegistry;
+import org.fujionclinical.help.*;
+import org.fujionclinical.help.viewer.HelpHistory.ITopicListener;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Help content viewer. Supports multiple help formats.

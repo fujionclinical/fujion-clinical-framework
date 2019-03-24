@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,18 +25,14 @@
  */
 package org.fujionclinical.help.chm;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import org.fujion.test.MockTest;
+import org.fujionclinical.help.*;
+import org.junit.Test;
 
 import java.util.Collection;
 
-import org.fujionclinical.help.HelpModule;
-import org.fujionclinical.help.HelpTopicNode;
-import org.fujionclinical.help.HelpViewType;
-import org.fujionclinical.help.IHelpSet;
-import org.fujionclinical.help.IHelpView;
-import org.fujion.test.MockTest;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class TestCHM extends MockTest {
     

@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,10 @@ package org.fujionclinical.plugin.userheader;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.fujion.annotation.EventHandler;
+import org.fujion.annotation.WiredComponent;
+import org.fujion.component.Hyperlink;
+import org.fujion.component.Label;
 import org.fujionclinical.api.context.UserContext;
 import org.fujionclinical.api.domain.IUser;
 import org.fujionclinical.api.event.IGenericEvent;
@@ -34,10 +38,6 @@ import org.fujionclinical.api.security.SecurityUtil;
 import org.fujionclinical.shell.ShellUtil;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.shell.plugins.PluginController;
-import org.fujion.annotation.EventHandler;
-import org.fujion.annotation.WiredComponent;
-import org.fujion.component.Hyperlink;
-import org.fujion.component.Label;
 
 /**
  * Controller for user header plugin.

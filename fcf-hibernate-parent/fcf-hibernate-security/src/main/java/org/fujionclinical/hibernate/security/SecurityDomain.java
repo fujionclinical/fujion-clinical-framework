@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,22 +25,15 @@
  */
 package org.fujionclinical.hibernate.security;
 
-import java.io.StringReader;
-import java.util.List;
-import java.util.Properties;
-
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
 import org.fujionclinical.api.domain.IUser;
 import org.fujionclinical.api.security.ISecurityDomain;
 import org.fujionclinical.api.spring.SpringUtil;
-
 import org.springframework.security.authentication.BadCredentialsException;
+
+import javax.persistence.*;
+import java.io.StringReader;
+import java.util.List;
+import java.util.Properties;
 
 @Entity
 @Table(name = "FCF_DOMAIN")

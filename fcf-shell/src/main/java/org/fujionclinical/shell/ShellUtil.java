@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,12 +25,12 @@
  */
 package org.fujionclinical.shell;
 
+import org.fujion.client.ExecutionContext;
+import org.fujion.component.BaseUIComponent;
 import org.fujionclinical.api.ManifestIterator;
 import org.fujionclinical.help.HelpContext;
 import org.fujionclinical.help.viewer.HelpUtil;
 import org.fujionclinical.ui.action.ActionRegistry;
-import org.fujion.client.ExecutionContext;
-import org.fujion.component.BaseUIComponent;
 
 /**
  * Static utility methods.

@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,11 +25,11 @@
  */
 package org.fujionclinical.hibernate.h2;
 
-import java.sql.SQLException;
-
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.h2.tools.Server;
 import org.springframework.util.StringUtils;
+
+import java.sql.SQLException;
 
 /**
  * H2-based data source that also handles starting the database in the appropriate mode.

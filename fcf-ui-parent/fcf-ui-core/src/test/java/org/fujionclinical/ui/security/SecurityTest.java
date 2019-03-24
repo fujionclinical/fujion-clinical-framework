@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,14 +25,14 @@
  */
 package org.fujionclinical.ui.security;
 
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-
 import org.apache.commons.codec.binary.Base64;
 import org.fujion.common.StrUtil;
 import org.fujion.core.WebUtil;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 /**
  * Unit tests for security implementation

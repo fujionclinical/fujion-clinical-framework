@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,10 +25,12 @@
  */
 package org.fujionclinical.shell.layout;
 
-import java.io.InputStream;
-
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.ObjectUtils;
+import org.fujion.client.ExecutionContext;
+import org.fujion.common.MiscUtil;
+import org.fujion.common.Version;
+import org.fujion.common.XMLUtil;
 import org.fujionclinical.shell.ancillary.FCFException;
 import org.fujionclinical.shell.elements.ElementBase;
 import org.fujionclinical.shell.elements.ElementDesktop;
@@ -36,13 +38,11 @@ import org.fujionclinical.shell.layout.LayoutElement.LayoutRoot;
 import org.fujionclinical.shell.plugins.PluginDefinition;
 import org.fujionclinical.shell.plugins.PluginRegistry;
 import org.fujionclinical.shell.property.PropertyInfo;
-import org.fujion.client.ExecutionContext;
-import org.fujion.common.MiscUtil;
-import org.fujion.common.Version;
-import org.fujion.common.XMLUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+
+import java.io.InputStream;
 
 /**
  * Parses an XML layout. A number of data sources are supported.

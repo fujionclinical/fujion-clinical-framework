@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,29 +25,24 @@
  */
 package org.fujionclinical.plugin.chat;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
-import org.fujionclinical.api.messaging.IPublisherInfo;
-import org.fujionclinical.plugin.chat.SessionService.ISessionUpdate;
-import org.fujionclinical.ui.controller.FrameworkController;
-import org.fujionclinical.ui.dialog.PopupDialog;
-import org.fujionclinical.ui.util.FCFUtil;
 import org.fujion.ancillary.IResponseCallback;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.common.DateUtil;
 import org.fujion.common.StrUtil;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.Button;
-import org.fujion.component.Label;
-import org.fujion.component.Listbox;
-import org.fujion.component.Memobox;
-import org.fujion.component.Window;
+import org.fujion.component.*;
 import org.fujion.event.ChangeEvent;
 import org.fujion.model.ListModel;
+import org.fujionclinical.api.messaging.IPublisherInfo;
+import org.fujionclinical.plugin.chat.SessionService.ISessionUpdate;
+import org.fujionclinical.ui.controller.FrameworkController;
+import org.fujionclinical.ui.dialog.PopupDialog;
+import org.fujionclinical.ui.util.FCFUtil;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Controller for an individual chat session.

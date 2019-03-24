@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,11 +25,11 @@
  */
 package org.fujionclinical.shell.designer;
 
-import java.util.Date;
-
 import org.fujion.common.DateUtil;
-import org.fujionclinical.shell.property.PropertyInfo;
 import org.fujion.component.Datebox;
+import org.fujionclinical.shell.property.PropertyInfo;
+
+import java.util.Date;
 
 /**
  * Editor for dates.

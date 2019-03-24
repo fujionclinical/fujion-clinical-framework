@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,16 +25,12 @@
  */
 package org.fujionclinical.shell.elements;
 
+import org.fujion.annotation.EventHandler;
+import org.fujion.annotation.WiredComponent;
+import org.fujion.component.*;
 import org.fujionclinical.shell.designer.PropertyEditorStepView;
 import org.fujionclinical.shell.property.PropertyTypeRegistry;
 import org.fujionclinical.ui.util.ThemeUtil;
-import org.fujion.annotation.EventHandler;
-import org.fujion.annotation.WiredComponent;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.BaseUIComponent;
-import org.fujion.component.Div;
-import org.fujion.component.Hyperlink;
-import org.fujion.component.Label;
 
 /**
  * A step-oriented UI Element. This is implemented as a window component with a top toolbar

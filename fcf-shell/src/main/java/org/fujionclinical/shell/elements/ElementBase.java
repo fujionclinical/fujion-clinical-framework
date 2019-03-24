@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,14 +25,12 @@
  */
 package org.fujionclinical.shell.elements;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.fujion.common.MiscUtil;
+import org.fujion.component.BaseUIComponent;
 import org.fujionclinical.api.event.EventManager;
 import org.fujionclinical.api.event.IEventManager;
-import org.fujion.common.MiscUtil;
 import org.fujionclinical.shell.AboutDialog;
 import org.fujionclinical.shell.Shell;
 import org.fujionclinical.shell.ShellUtil;
@@ -47,7 +45,9 @@ import org.fujionclinical.shell.plugins.PluginDefinition;
 import org.fujionclinical.shell.plugins.PluginRegistry;
 import org.fujionclinical.shell.property.PropertyInfo;
 import org.fujionclinical.ui.dialog.DialogUtil;
-import org.fujion.component.BaseUIComponent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is the base class for all layout elements supported by the Fujion Clinical Framework.

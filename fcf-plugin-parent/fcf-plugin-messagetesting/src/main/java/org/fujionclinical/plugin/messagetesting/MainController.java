@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,8 +25,13 @@
  */
 package org.fujionclinical.plugin.messagetesting;
 
-import java.util.Collection;
-
+import org.fujion.annotation.EventHandler;
+import org.fujion.annotation.WiredComponent;
+import org.fujion.component.*;
+import org.fujion.event.ChangeEvent;
+import org.fujion.event.Event;
+import org.fujion.event.IEventListener;
+import org.fujion.model.ListModel;
 import org.fujionclinical.api.event.EventMessage;
 import org.fujionclinical.api.event.EventUtil;
 import org.fujionclinical.api.messaging.ConsumerService;
@@ -38,20 +43,8 @@ import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.shell.plugins.PluginController;
 import org.fujionclinical.ui.dialog.DialogUtil;
 import org.fujionclinical.ui.util.FCFUtil;
-import org.fujion.annotation.EventHandler;
-import org.fujion.annotation.WiredComponent;
-import org.fujion.component.Button;
-import org.fujion.component.Checkbox;
-import org.fujion.component.Combobox;
-import org.fujion.component.Comboitem;
-import org.fujion.component.Grid;
-import org.fujion.component.Listbox;
-import org.fujion.component.Listitem;
-import org.fujion.component.Memobox;
-import org.fujion.event.ChangeEvent;
-import org.fujion.event.Event;
-import org.fujion.event.IEventListener;
-import org.fujion.model.ListModel;
+
+import java.util.Collection;
 
 /**
  * Controller class for ActiveMQ Tester.

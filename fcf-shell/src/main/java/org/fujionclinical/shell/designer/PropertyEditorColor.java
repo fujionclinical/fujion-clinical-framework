@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,12 +25,14 @@
  */
 package org.fujionclinical.shell.designer;
 
-import java.awt.Color;
-
 import org.fujion.common.ColorUtil;
-import org.fujionclinical.shell.property.PropertyInfo;
 import org.fujion.component.ColorPicker;
-import org.fujion.component.ColorPicker.ColorPickeritem;;
+import org.fujion.component.ColorPicker.ColorPickeritem;
+import org.fujionclinical.shell.property.PropertyInfo;
+
+import java.awt.*;
+
+;
 
 /**
  * Property editor for color properties. If the associated property has defined choices, the color

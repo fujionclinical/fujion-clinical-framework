@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,34 +25,14 @@
  */
 package org.fujionclinical.shell.designer;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.fujion.common.StrUtil;
-import org.fujionclinical.shell.ancillary.FCFException;
-import org.fujionclinical.shell.elements.ElementBase;
-import org.fujionclinical.shell.plugins.PluginDefinition;
-import org.fujionclinical.shell.property.PropertyInfo;
-import org.fujionclinical.shell.property.PropertyType;
-import org.fujionclinical.ui.util.FCFUtil;
 import org.fujion.ancillary.IAutoWired;
 import org.fujion.ancillary.INamespace;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.BaseUIComponent;
-import org.fujion.component.Button;
-import org.fujion.component.Cell;
-import org.fujion.component.Column;
-import org.fujion.component.Grid;
-import org.fujion.component.Label;
-import org.fujion.component.Pane;
-import org.fujion.component.Row;
-import org.fujion.component.Rows;
-import org.fujion.component.Window;
+import org.fujion.common.StrUtil;
+import org.fujion.component.*;
 import org.fujion.event.ChangeEvent;
 import org.fujion.event.ClickEvent;
 import org.fujion.event.EventUtil;
@@ -61,6 +41,16 @@ import org.fujion.model.IListModel;
 import org.fujion.model.IModelAndView;
 import org.fujion.model.ListModel;
 import org.fujion.page.PageUtil;
+import org.fujionclinical.shell.ancillary.FCFException;
+import org.fujionclinical.shell.elements.ElementBase;
+import org.fujionclinical.shell.plugins.PluginDefinition;
+import org.fujionclinical.shell.property.PropertyInfo;
+import org.fujionclinical.shell.property.PropertyType;
+import org.fujionclinical.ui.util.FCFUtil;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Dialog for managing property values of UI elements within the designer. Each editable property of

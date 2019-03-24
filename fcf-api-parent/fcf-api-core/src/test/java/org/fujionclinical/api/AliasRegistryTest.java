@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,12 +25,11 @@
  */
 package org.fujionclinical.api;
 
+import org.fujionclinical.api.alias.AliasTypeRegistry;
+import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-
-import org.fujionclinical.api.alias.AliasTypeRegistry;
-
-import org.junit.Test;
 
 public class AliasRegistryTest {
     

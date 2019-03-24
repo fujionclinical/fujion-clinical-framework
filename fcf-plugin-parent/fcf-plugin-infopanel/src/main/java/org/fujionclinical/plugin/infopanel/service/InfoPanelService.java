@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,7 @@
  */
 package org.fujionclinical.plugin.infopanel.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.fujion.component.BaseComponent;
 import org.fujionclinical.plugin.infopanel.controller.ActionListener;
 import org.fujionclinical.plugin.infopanel.model.IInfoPanel;
 import org.fujionclinical.plugin.infopanel.model.IInfoPanel.Action;
@@ -36,7 +34,9 @@ import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.shell.elements.ElementPlugin.PluginContainer;
 import org.fujionclinical.shell.elements.ElementUI;
 import org.fujionclinical.ui.controller.FrameworkController;
-import org.fujion.component.BaseComponent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Static methods for interacting with an info panel.

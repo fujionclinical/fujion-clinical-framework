@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,31 +25,7 @@
  */
 package org.fujionclinical.shell.elements;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.lang.WordUtils;
-import org.fujionclinical.api.spring.SpringUtil;
-import org.fujionclinical.shell.AboutDialog;
-import org.fujionclinical.shell.Shell;
-import org.fujionclinical.shell.ShellUtil;
-import org.fujionclinical.shell.Constants;
-import org.fujionclinical.shell.designer.DesignMask.MaskMode;
-import org.fujionclinical.shell.plugins.IPluginController;
-import org.fujionclinical.shell.plugins.IPluginEvent;
-import org.fujionclinical.shell.plugins.IPluginEventListener;
-import org.fujionclinical.shell.plugins.PluginDefinition;
-import org.fujionclinical.shell.plugins.PluginEvent;
-import org.fujionclinical.shell.plugins.PluginEvent.PluginAction;
-import org.fujionclinical.shell.plugins.PluginException;
-import org.fujionclinical.shell.property.IPropertyAccessor;
-import org.fujionclinical.shell.property.PropertyInfo;
-import org.fujionclinical.shell.property.PropertyProxy;
-import org.fujionclinical.ui.command.CommandEvent;
-import org.fujionclinical.ui.command.CommandUtil;
-import org.fujionclinical.ui.controller.FrameworkController;
 import org.fujion.ancillary.IDisable;
 import org.fujion.annotation.EventHandler;
 import org.fujion.client.ClientUtil;
@@ -59,7 +35,26 @@ import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Namespace;
 import org.fujion.event.EventUtil;
 import org.fujion.page.PageUtil;
+import org.fujionclinical.api.spring.SpringUtil;
+import org.fujionclinical.shell.AboutDialog;
+import org.fujionclinical.shell.Constants;
+import org.fujionclinical.shell.Shell;
+import org.fujionclinical.shell.ShellUtil;
+import org.fujionclinical.shell.designer.DesignMask.MaskMode;
+import org.fujionclinical.shell.plugins.*;
+import org.fujionclinical.shell.plugins.PluginEvent.PluginAction;
+import org.fujionclinical.shell.property.IPropertyAccessor;
+import org.fujionclinical.shell.property.PropertyInfo;
+import org.fujionclinical.shell.property.PropertyProxy;
+import org.fujionclinical.ui.command.CommandEvent;
+import org.fujionclinical.ui.command.CommandUtil;
+import org.fujionclinical.ui.controller.FrameworkController;
 import org.springframework.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * This class is used for all container-hosted plugins.

@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,15 +25,15 @@
  */
 package org.fujionclinical.messaging.amqp.rabbitmq;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.fujionclinical.api.messaging.IMessageConsumer;
 import org.fujionclinical.api.messaging.Message;
 import org.fujionclinical.api.thread.ThreadUtil;
 import org.springframework.amqp.core.MessageListener;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * AMQP implementation of a message consumer.

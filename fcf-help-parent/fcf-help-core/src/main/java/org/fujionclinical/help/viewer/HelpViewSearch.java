@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,32 +25,25 @@
  */
 package org.fujionclinical.help.viewer;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import org.apache.commons.lang.StringUtils;
-import org.fujion.common.StrUtil;
-import org.fujionclinical.help.HelpSearchHit;
-import org.fujionclinical.help.HelpTopic;
-import org.fujionclinical.help.HelpViewType;
-import org.fujionclinical.help.IHelpSearch.IHelpSearchListener;
-import org.fujionclinical.help.IHelpSet;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.Cell;
-import org.fujion.component.Grid;
-import org.fujion.component.Image;
-import org.fujion.component.Label;
-import org.fujion.component.Listitem;
-import org.fujion.component.Row;
-import org.fujion.component.Textbox;
+import org.fujion.common.StrUtil;
+import org.fujion.component.*;
 import org.fujion.event.Event;
 import org.fujion.event.EventUtil;
 import org.fujion.model.IComponentRenderer;
 import org.fujion.model.IModelAndView;
 import org.fujion.model.ListModel;
+import org.fujionclinical.help.HelpSearchHit;
+import org.fujionclinical.help.HelpTopic;
+import org.fujionclinical.help.HelpViewType;
+import org.fujionclinical.help.IHelpSearch.IHelpSearchListener;
+import org.fujionclinical.help.IHelpSet;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Tab supporting the help system search function. Consists of a text box into which the user may

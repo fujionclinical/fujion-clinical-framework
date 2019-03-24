@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,6 @@
  */
 package org.fujionclinical.ui.dialog;
 
-import java.util.List;
-
-import org.fujionclinical.ui.Constants;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.OnFailure;
 import org.fujion.annotation.WiredComponent;
@@ -40,6 +37,9 @@ import org.fujion.event.ChangeEvent;
 import org.fujion.icon.IIconLibrary;
 import org.fujion.icon.IconLibraryRegistry;
 import org.fujion.page.PageUtil;
+import org.fujionclinical.ui.Constants;
+
+import java.util.List;
 
 /**
  * Extends the icon picker by adding the ability to pick an icon library from which to choose.

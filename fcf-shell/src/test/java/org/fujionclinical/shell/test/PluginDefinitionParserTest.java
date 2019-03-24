@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,17 +25,13 @@
  */
 package org.fujionclinical.shell.test;
 
+import org.fujion.test.MockTest;
+import org.fujionclinical.shell.plugins.*;
+import org.fujionclinical.ui.test.MockUITest;
+import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
-import org.fujionclinical.shell.plugins.PluginDefinition;
-import org.fujionclinical.shell.plugins.PluginResourceButton;
-import org.fujionclinical.shell.plugins.PluginResourceHelp;
-import org.fujionclinical.shell.plugins.PluginResourcePropertyGroup;
-import org.fujionclinical.shell.plugins.PluginXmlParser;
-import org.fujionclinical.ui.test.MockUITest;
-import org.fujion.test.MockTest;
-import org.junit.Test;
 
 public class PluginDefinitionParserTest extends MockUITest {
     

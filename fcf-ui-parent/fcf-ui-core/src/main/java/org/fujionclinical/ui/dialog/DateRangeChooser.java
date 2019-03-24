@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,18 +25,18 @@
  */
 package org.fujionclinical.ui.dialog;
 
-import java.util.Date;
-import java.util.List;
-
-import org.fujionclinical.api.property.PropertyUtil;
-import org.fujion.common.DateRange;
 import org.fujion.annotation.EventHandler;
+import org.fujion.common.DateRange;
 import org.fujion.component.BaseComponent;
 import org.fujion.component.Listbox;
 import org.fujion.component.Listitem;
 import org.fujion.event.ChangeEvent;
 import org.fujion.event.Event;
 import org.fujion.event.EventUtil;
+import org.fujionclinical.api.property.PropertyUtil;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * Generic component for choosing date ranges.

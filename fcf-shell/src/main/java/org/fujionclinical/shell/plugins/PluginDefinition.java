@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,22 +25,22 @@
  */
 package org.fujionclinical.shell.plugins;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.jar.Manifest;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.fujion.common.MiscUtil;
 import org.fujionclinical.api.ManifestIterator;
 import org.fujionclinical.api.property.IPropertyProvider;
 import org.fujionclinical.api.security.SecurityUtil;
-import org.fujion.common.MiscUtil;
 import org.fujionclinical.shell.ancillary.FCFException;
 import org.fujionclinical.shell.elements.ElementBase;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.shell.property.PropertyInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.jar.Manifest;
 
 /**
  * Each instance of this class defines a complete definition of a FCF plugin. A definition

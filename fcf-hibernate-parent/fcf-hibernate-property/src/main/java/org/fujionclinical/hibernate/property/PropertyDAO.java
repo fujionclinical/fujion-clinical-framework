@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,6 @@
  */
 package org.fujionclinical.hibernate.property;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.fujionclinical.api.domain.IUser;
 import org.fujionclinical.hibernate.core.AbstractDAO;
 import org.fujionclinical.hibernate.property.Property.PropertyId;
@@ -35,6 +32,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
+
+import java.util.Collections;
+import java.util.List;
 
 public class PropertyDAO extends AbstractDAO<Property> {
 

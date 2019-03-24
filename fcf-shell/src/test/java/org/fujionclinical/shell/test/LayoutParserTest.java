@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,27 +25,14 @@
  */
 package org.fujionclinical.shell.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import org.apache.commons.beanutils.PropertyUtils;
+import org.fujion.common.StrUtil;
+import org.fujion.event.ClickEvent;
+import org.fujion.event.EventUtil;
+import org.fujion.test.MockTest;
 import org.fujionclinical.shell.Shell;
-import org.fujionclinical.shell.elements.ElementBase;
-import org.fujionclinical.shell.elements.ElementDesktop;
-import org.fujionclinical.shell.elements.ElementMenubar;
-import org.fujionclinical.shell.elements.ElementPlugin;
+import org.fujionclinical.shell.elements.*;
 import org.fujionclinical.shell.elements.ElementPlugin.PluginContainer;
-import org.fujionclinical.shell.elements.ElementSplitterPane;
-import org.fujionclinical.shell.elements.ElementSplitterView;
-import org.fujionclinical.shell.elements.ElementTabPane;
-import org.fujionclinical.shell.elements.ElementTabView;
-import org.fujionclinical.shell.elements.ElementToolbar;
-import org.fujionclinical.shell.elements.ElementTreePane;
-import org.fujionclinical.shell.elements.ElementTreeView;
-import org.fujionclinical.shell.elements.ElementTrigger;
-import org.fujionclinical.shell.elements.ElementUI;
 import org.fujionclinical.shell.layout.Layout;
 import org.fujionclinical.shell.layout.LayoutParser;
 import org.fujionclinical.shell.plugins.PluginDefinition;
@@ -53,11 +40,9 @@ import org.fujionclinical.shell.property.PropertyInfo;
 import org.fujionclinical.shell.triggers.TriggerConditionActivate;
 import org.fujionclinical.ui.controller.FrameworkController;
 import org.fujionclinical.ui.test.MockUITest;
-import org.fujion.common.StrUtil;
-import org.fujion.event.ClickEvent;
-import org.fujion.event.EventUtil;
-import org.fujion.test.MockTest;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class LayoutParserTest extends MockUITest {
     

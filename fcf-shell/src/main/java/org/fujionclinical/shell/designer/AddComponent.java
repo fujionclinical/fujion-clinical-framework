@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,12 +25,19 @@
  */
 package org.fujionclinical.shell.designer;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.lang.StringUtils;
+import org.fujion.ancillary.IAutoWired;
+import org.fujion.ancillary.IResponseCallback;
+import org.fujion.annotation.EventHandler;
+import org.fujion.annotation.WiredComponent;
+import org.fujion.common.StrUtil;
+import org.fujion.component.*;
+import org.fujion.event.ClickEvent;
+import org.fujion.event.DblclickEvent;
+import org.fujion.event.EventUtil;
+import org.fujion.event.IEventListener;
+import org.fujion.icon.IconUtil;
+import org.fujion.page.PageUtil;
 import org.fujionclinical.api.property.PropertyUtil;
 import org.fujionclinical.shell.elements.ElementBase;
 import org.fujionclinical.shell.elements.ElementLayout;
@@ -40,22 +47,11 @@ import org.fujionclinical.shell.layout.LayoutUtil;
 import org.fujionclinical.shell.plugins.PluginDefinition;
 import org.fujionclinical.shell.plugins.PluginRegistry;
 import org.fujionclinical.ui.util.TreeUtil;
-import org.fujion.ancillary.IAutoWired;
-import org.fujion.ancillary.IResponseCallback;
-import org.fujion.annotation.EventHandler;
-import org.fujion.annotation.WiredComponent;
-import org.fujion.common.StrUtil;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.Button;
-import org.fujion.component.Treenode;
-import org.fujion.component.Treeview;
-import org.fujion.component.Window;
-import org.fujion.event.ClickEvent;
-import org.fujion.event.DblclickEvent;
-import org.fujion.event.EventUtil;
-import org.fujion.event.IEventListener;
-import org.fujion.icon.IconUtil;
-import org.fujion.page.PageUtil;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Dialog for adding new component to UI.
@@ -65,8 +61,6 @@ public class AddComponent implements IAutoWired {
     private static final String ON_FAVORITE = "favorite";
 
     private ElementBase parentElement;
-
-    private ElementBase childElement;
 
     private Window window;
 
@@ -314,7 +308,7 @@ public class AddComponent implements IAutoWired {
 
     private void returnResult(PluginDefinition definition) {
         if (definition != null) {
-            childElement = createChild ? definition.createElement(parentElement, null, false) : null;
+            ElementBase childElement = createChild ? definition.createElement(parentElement, null, false) : null;
 
             if (childElement instanceof ElementUI) {
                 ((ElementUI) childElement).bringToFront();

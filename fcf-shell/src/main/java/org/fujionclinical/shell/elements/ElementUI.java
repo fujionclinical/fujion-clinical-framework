@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,27 +25,27 @@
  */
 package org.fujionclinical.shell.elements;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.fujion.component.BaseComponent;
+import org.fujion.component.BaseLabeledComponent;
+import org.fujion.component.BaseUIComponent;
+import org.fujion.component.Menupopup;
+import org.fujion.page.PageUtil;
 import org.fujionclinical.shell.Constants;
-import org.fujionclinical.shell.ancillary.SavedState;
 import org.fujionclinical.shell.ancillary.FCFException;
+import org.fujionclinical.shell.ancillary.SavedState;
 import org.fujionclinical.shell.designer.DesignContextMenu;
 import org.fujionclinical.shell.designer.DesignMask;
 import org.fujionclinical.shell.designer.DesignMask.MaskMode;
 import org.fujionclinical.shell.designer.PropertyEditorTriggers;
 import org.fujionclinical.shell.property.PropertyTypeRegistry;
 import org.fujionclinical.ui.util.FCFUtil;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.BaseLabeledComponent;
-import org.fujion.component.BaseUIComponent;
-import org.fujion.component.Menupopup;
-import org.fujion.page.PageUtil;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * This is the base class for all layout elements supported by the Fujion Clinical Framework.

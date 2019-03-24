@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,23 +25,16 @@
  */
 package org.fujionclinical.api.event;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.UUID;
-
 import org.apache.commons.lang.StringUtils;
 import org.fujionclinical.api.FrameworkUtil;
 import org.fujionclinical.api.domain.IUser;
-import org.fujionclinical.api.messaging.ConsumerService;
-import org.fujionclinical.api.messaging.IMessageConsumer;
-import org.fujionclinical.api.messaging.IPublisherInfo;
-import org.fujionclinical.api.messaging.Message;
-import org.fujionclinical.api.messaging.MessageUtil;
-import org.fujionclinical.api.messaging.ProducerService;
-import org.fujionclinical.api.messaging.PublisherInfo;
-import org.fujionclinical.api.messaging.Recipient;
+import org.fujionclinical.api.messaging.*;
 import org.fujionclinical.api.messaging.Recipient.RecipientType;
 import org.fujionclinical.api.security.SecurityUtil;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Handles global dispatch of events via the messaging framework.

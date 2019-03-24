@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,13 +25,6 @@
  */
 package org.fujionclinical.ui.popupsupport;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import org.fujionclinical.api.event.EventManager;
-import org.fujionclinical.api.event.IGenericEvent;
-import org.fujionclinical.ui.util.FCFUtil;
 import org.fujion.client.ExecutionContext;
 import org.fujion.component.Label;
 import org.fujion.component.Page;
@@ -41,6 +34,13 @@ import org.fujion.event.Event;
 import org.fujion.event.IEventListener;
 import org.fujion.page.PageDefinition;
 import org.fujion.page.PageParser;
+import org.fujionclinical.api.event.EventManager;
+import org.fujionclinical.api.event.IGenericEvent;
+import org.fujionclinical.ui.util.FCFUtil;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Displays a popup message when a POPUP generic event is received.

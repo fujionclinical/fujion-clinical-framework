@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,10 +25,10 @@
  */
 package org.fujionclinical.api.context;
 
+import org.fujionclinical.api.security.IDigitalSignature;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import org.fujionclinical.api.security.IDigitalSignature;
 
 /**
  * Class for secure marshaling and unmarshaling of contexts for passing in a url.

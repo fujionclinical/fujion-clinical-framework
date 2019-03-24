@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,35 +25,25 @@
  */
 package org.fujionclinical.shell.designer;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import org.apache.commons.lang.StringUtils;
+import org.fujion.ancillary.IAutoWired;
+import org.fujion.annotation.EventHandler;
+import org.fujion.annotation.WiredComponent;
+import org.fujion.client.ExecutionContext;
 import org.fujion.common.StrUtil;
+import org.fujion.component.*;
+import org.fujion.component.Window.CloseAction;
+import org.fujion.event.*;
 import org.fujionclinical.shell.elements.ElementBase;
 import org.fujionclinical.shell.elements.ElementUI;
 import org.fujionclinical.shell.layout.Layout;
 import org.fujionclinical.shell.layout.LayoutParser;
 import org.fujionclinical.shell.plugins.PluginDefinition;
 import org.fujionclinical.ui.dialog.DialogUtil;
-import org.fujion.ancillary.IAutoWired;
-import org.fujion.annotation.EventHandler;
-import org.fujion.annotation.WiredComponent;
-import org.fujion.client.ExecutionContext;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.BaseUIComponent;
-import org.fujion.component.Button;
-import org.fujion.component.Page;
-import org.fujion.component.Treenode;
-import org.fujion.component.Treeview;
-import org.fujion.component.Window;
-import org.fujion.component.Window.CloseAction;
-import org.fujion.event.ClickEvent;
-import org.fujion.event.DblclickEvent;
-import org.fujion.event.DropEvent;
-import org.fujion.event.EventUtil;
-import org.fujion.event.IEventListener;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Controller for dialog for managing the current layout.

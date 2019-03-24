@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,17 +25,17 @@
  */
 package org.fujionclinical.ui.sharedforms;
 
-import static org.junit.Assert.assertEquals;
-
-import org.fujionclinical.shell.elements.ElementPlugin;
-import org.fujionclinical.ui.test.MockUITest;
 import org.fujion.ancillary.ILabeled;
 import org.fujion.component.BaseComponent;
 import org.fujion.component.Column;
 import org.fujion.component.Grid;
 import org.fujion.component.Rows;
 import org.fujion.page.PageUtil;
+import org.fujionclinical.shell.elements.ElementPlugin;
+import org.fujionclinical.ui.test.MockUITest;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class TestForms extends MockUITest {
     

@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,10 +25,9 @@
  */
 package org.fujionclinical.hibernate.h2;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import org.apache.commons.beanutils.BeanUtils;
+import org.fujionclinical.hibernate.h2.H2DataSource.DBMode;
+import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
@@ -37,9 +36,7 @@ import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.beanutils.BeanUtils;
-import org.fujionclinical.hibernate.h2.H2DataSource.DBMode;
-import org.junit.Test;
+import static org.junit.Assert.*;
 
 public class TestH2 {
     

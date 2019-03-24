@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,14 +25,13 @@
  */
 package org.fujionclinical.maven.plugin.help;
 
-import java.io.File;
-import java.io.FileFilter;
-
 import org.apache.commons.io.filefilter.WildcardFileFilter;
-
 import org.fujionclinical.maven.plugin.iterator.DirectoryIterator;
 import org.fujionclinical.maven.plugin.iterator.IResourceIterator;
 import org.fujionclinical.maven.plugin.transform.CopyTransform;
+
+import java.io.File;
+import java.io.FileFilter;
 
 /**
  * Generic source loader. Used for JavaHelp and OHJ formats. May be extended to support other

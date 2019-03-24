@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,14 +25,14 @@
  */
 package org.fujionclinical.plugin.infopanel.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.fujionclinical.api.event.EventManager;
 import org.fujionclinical.api.event.IEventManager;
 import org.fujionclinical.api.event.IGenericEvent;
 import org.fujionclinical.plugin.infopanel.model.IActionTarget;
 import org.fujionclinical.plugin.infopanel.model.IInfoPanel.Action;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Listens for a generic event and executes the associated action on the target when the event is

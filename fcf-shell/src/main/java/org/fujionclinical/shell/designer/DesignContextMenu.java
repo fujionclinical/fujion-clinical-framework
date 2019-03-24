@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,24 +25,19 @@
  */
 package org.fujionclinical.shell.designer;
 
-import org.fujion.common.StrUtil;
-import org.fujionclinical.shell.elements.ElementBase;
-import org.fujionclinical.shell.elements.ElementUI;
-import org.fujionclinical.shell.layout.Layout;
-import org.fujionclinical.shell.layout.LayoutParser;
 import org.fujion.ancillary.IAutoWired;
 import org.fujion.ancillary.IDisable;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.client.ExecutionContext;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.BaseUIComponent;
-import org.fujion.component.Menuheader;
-import org.fujion.component.Menuitem;
-import org.fujion.component.Menupopup;
-import org.fujion.component.Page;
+import org.fujion.common.StrUtil;
+import org.fujion.component.*;
 import org.fujion.event.Event;
 import org.fujion.page.PageUtil;
+import org.fujionclinical.shell.elements.ElementBase;
+import org.fujionclinical.shell.elements.ElementUI;
+import org.fujionclinical.shell.layout.Layout;
+import org.fujionclinical.shell.layout.LayoutParser;
 
 /**
  * Context menu for designer.

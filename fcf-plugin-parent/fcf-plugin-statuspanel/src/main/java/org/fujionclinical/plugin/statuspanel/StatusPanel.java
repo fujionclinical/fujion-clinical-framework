@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,13 +25,13 @@
  */
 package org.fujionclinical.plugin.statuspanel;
 
-import org.fujionclinical.api.event.EventUtil;
-import org.fujionclinical.api.event.IGenericEvent;
 import org.fujion.common.StrUtil;
-import org.fujionclinical.shell.plugins.PluginController;
 import org.fujion.component.BaseComponent;
 import org.fujion.component.Label;
 import org.fujion.component.Pane;
+import org.fujionclinical.api.event.EventUtil;
+import org.fujionclinical.api.event.IGenericEvent;
+import org.fujionclinical.shell.plugins.PluginController;
 
 /**
  * Controller for status panel plugin.

@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,9 +39,9 @@ import org.fujion.event.Event;
 import org.fujion.event.EventUtil;
 import org.fujionclinical.api.query.*;
 import org.fujionclinical.api.thread.IAbortable;
-import org.fujionclinical.ui.reports.common.ReportConstants;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.shell.plugins.PluginController;
+import org.fujionclinical.ui.reports.common.ReportConstants;
 import org.fujionclinical.ui.util.FCFUtil;
 
 import java.util.ArrayList;
@@ -213,21 +213,6 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
         }
     };
     
-    /**
-     * Listener for query filter changes.
-     */
-    private final IQueryFilterChanged<M> queryFilterChangedListener = new IQueryFilterChanged<M>() {
-        
-        @Override
-        public void onFilterChanged(IQueryFilter<M> filter) {
-            if (filter.updateContext(queryContext)) {
-                refresh(); // hit database
-            } else {
-                applyFilters();
-            }
-        }
-    };
-    
     @WiredComponent(onFailure = OnFailure.IGNORE)
     /*package*/Label lblMessage;
     
@@ -252,7 +237,18 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
     private boolean fetchPending;
     
     private BaseUIComponent hideOnShowMessage;
-    
+
+    /**
+     * Listener for query filter changes.
+     */
+    private final IQueryFilterChanged<M> queryFilterChangedListener = filter -> {
+        if (filter.updateContext(queryContext)) {
+            refresh(); // hit database
+        } else {
+            applyFilters();
+        }
+    };
+
     /**
      * Create the controller.
      *
@@ -263,7 +259,13 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
         super();
         this.service = service;
         this.labelPrefix = labelPrefix;
-        queryFilters.addListener(queryFilterChangedListener);
+        queryFilters.addListener(filter -> {
+            if (filter.updateContext(queryContext)) {
+                refresh(); // hit database
+            } else {
+                applyFilters();
+            }
+        });
         supplementalQueryParams.register(params);
     }
     

@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,29 +25,24 @@
  */
 package org.fujionclinical.ui.controller;
 
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.fujionclinical.api.IThrowableContext;
-import org.fujionclinical.api.security.SecurityUtil;
-import org.fujion.common.StrUtil;
 import org.fujion.ancillary.IAutoWired;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.client.ExecutionContext;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.Detail;
-import org.fujion.component.Label;
-import org.fujion.component.Memobox;
-import org.fujion.component.Window;
+import org.fujion.common.StrUtil;
+import org.fujion.component.*;
 import org.fujion.core.RequestUtil;
+import org.fujionclinical.api.IThrowableContext;
+import org.fujionclinical.api.security.SecurityUtil;
 import org.springframework.core.NestedCheckedException;
 import org.springframework.core.NestedRuntimeException;
 import org.springframework.web.util.WebUtils;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * Controller to handle exceptions caught by the framework.

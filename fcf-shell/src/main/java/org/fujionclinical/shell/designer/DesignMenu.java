@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,11 +25,17 @@
  */
 package org.fujionclinical.shell.designer;
 
-import java.util.Collections;
-import java.util.Map;
-
-import org.fujionclinical.api.security.SecurityUtil;
+import org.fujion.ancillary.IAutoWired;
+import org.fujion.annotation.EventHandler;
+import org.fujion.annotation.WiredComponent;
 import org.fujion.common.StrUtil;
+import org.fujion.component.BaseComponent;
+import org.fujion.component.BaseUIComponent;
+import org.fujion.component.Menu;
+import org.fujion.component.Menuitem;
+import org.fujion.core.WebUtil;
+import org.fujion.page.PageUtil;
+import org.fujionclinical.api.security.SecurityUtil;
 import org.fujionclinical.shell.Shell;
 import org.fujionclinical.shell.elements.ElementDesktop;
 import org.fujionclinical.shell.layout.Layout;
@@ -37,15 +43,9 @@ import org.fujionclinical.shell.layout.LayoutIdentifier;
 import org.fujionclinical.shell.layout.LayoutParser;
 import org.fujionclinical.ui.dialog.DialogUtil;
 import org.fujionclinical.ui.xml.XMLViewer;
-import org.fujion.ancillary.IAutoWired;
-import org.fujion.annotation.EventHandler;
-import org.fujion.annotation.WiredComponent;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.BaseUIComponent;
-import org.fujion.component.Menu;
-import org.fujion.component.Menuitem;
-import org.fujion.core.WebUtil;
-import org.fujion.page.PageUtil;
+
+import java.util.Collections;
+import java.util.Map;
 
 /**
  * This is the controller for the design menu that appears in the desktop's menu bar.

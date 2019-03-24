@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,15 +25,11 @@
  */
 package org.fujionclinical.plugin.mockup;
 
+import org.springframework.core.io.Resource;
+
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Properties;
-
-import org.springframework.core.io.Resource;
+import java.util.*;
 
 /**
  * An enumerator for supported UI mockup frameworks. These are loaded from one or more property

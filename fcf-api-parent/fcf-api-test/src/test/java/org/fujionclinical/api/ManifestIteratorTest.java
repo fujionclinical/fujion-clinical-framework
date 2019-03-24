@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,20 +25,17 @@
  */
 package org.fujionclinical.api;
 
-import static org.junit.Assert.assertNotNull;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.fujionclinical.api.test.CommonTest;
+import org.junit.Test;
 
 import java.util.Map.Entry;
 import java.util.jar.Attributes;
 import java.util.jar.Attributes.Name;
 import java.util.jar.Manifest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.fujionclinical.api.ManifestIterator;
-import org.fujionclinical.api.test.CommonTest;
-
-import org.junit.Test;
+import static org.junit.Assert.assertNotNull;
 
 public class ManifestIteratorTest extends CommonTest {
     

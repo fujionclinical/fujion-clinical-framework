@@ -6,11 +6,11 @@
 			<pane splittable="true" width="50%" title="Publish Test Events">
 				<toolbar alignment="end">
 					<button name="btnPing" label="Send Ping Request"
-						class="size:btn-xs flavor:btn-primary"/>
+						class="size:btn-sm flavor:btn-primary"/>
 					<div width="20px"/>
-					<button name="btnReset" label="Reset" class="size:btn-xs flavor:btn-danger"/>
+					<button name="btnReset" label="Reset" class="size:btn-sm flavor:btn-danger"/>
 					<div width="20px"/>
-					<button name="btnSend" label="Send" class="size:btn-xs flavor:btn-success"/>
+					<button name="btnSend" label="Send" class="size:btn-sm flavor:btn-success"/>
 					<div width="15px"/>
 				</toolbar>
 				<grid>
@@ -42,7 +42,7 @@
 				<toolbar>
 					<textbox name="tboxNewEvent" flex="1"/>
 					<button name="btnNewEvent" label="Add Event" 
-						class="size:btn-xs flavor:btn-success"/>
+						class="size:btn-sm flavor:btn-success"/>
 				</toolbar>
 				<listbox name="lboxEventList" multiple="true" height="100%">
 					<listitem label="PING"/>
@@ -55,7 +55,7 @@
 					<checkbox name="chkScrollLock" label="Scroll Lock"/>
 					<div width="20px"/>
 					<button name="btnClear" label="Clear" 
-						class="size:btn-xs flavor:btn-danger"/>
+						class="size:btn-sm flavor:btn-danger"/>
 					<div width="15px"/>
 				</toolbar>
 				<memobox name="tboxEventResults" style="white-space:pre"

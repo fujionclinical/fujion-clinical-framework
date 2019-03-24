@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,10 +27,9 @@ package org.fujionclinical.plugin.sessiontracker;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.fujion.common.StrUtil;
-import org.fujionclinical.shell.plugins.PluginController;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
+import org.fujion.common.StrUtil;
 import org.fujion.component.Checkbox;
 import org.fujion.component.Grid;
 import org.fujion.component.Row;
@@ -42,6 +41,7 @@ import org.fujion.model.ListModel;
 import org.fujion.websocket.ISessionLifecycle;
 import org.fujion.websocket.Session;
 import org.fujion.websocket.Sessions;
+import org.fujionclinical.shell.plugins.PluginController;
 
 /**
  * Controller class for session tracker.

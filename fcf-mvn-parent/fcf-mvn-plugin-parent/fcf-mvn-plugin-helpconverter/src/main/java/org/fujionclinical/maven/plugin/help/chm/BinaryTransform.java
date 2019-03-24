@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,14 +25,14 @@
  */
 package org.fujionclinical.maven.plugin.help.chm;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
 import org.apache.poi.util.IOUtils;
 import org.fujionclinical.maven.plugin.core.BaseMojo;
 import org.fujionclinical.maven.plugin.help.chm.ChmSource.ChmEntry;
 import org.fujionclinical.maven.plugin.resource.IResource;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * Base transform for accessing structured data from a binary source.

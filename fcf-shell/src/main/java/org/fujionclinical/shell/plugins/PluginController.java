@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,13 +25,13 @@
  */
 package org.fujionclinical.shell.plugins;
 
+import org.fujion.ancillary.IAutoWired;
+import org.fujion.component.BaseComponent;
 import org.fujionclinical.api.thread.IAbortable;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.shell.elements.ElementPlugin.PluginContainer;
 import org.fujionclinical.shell.elements.ElementUI;
 import org.fujionclinical.ui.controller.FrameworkController;
-import org.fujion.ancillary.IAutoWired;
-import org.fujion.component.BaseComponent;
 
 /**
  * Base controller for plugins. Offers convenience methods for determining activation state,

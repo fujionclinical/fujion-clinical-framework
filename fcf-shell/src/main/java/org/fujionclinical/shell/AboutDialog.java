@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,33 +25,25 @@
  */
 package org.fujionclinical.shell;
 
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.jar.Attributes;
-import java.util.jar.Manifest;
-
 import org.apache.commons.lang.StringUtils;
+import org.fujion.annotation.EventHandler;
+import org.fujion.annotation.WiredComponent;
 import org.fujion.common.StrUtil;
+import org.fujion.component.*;
+import org.fujion.page.PageUtil;
 import org.fujionclinical.shell.elements.ElementBase;
 import org.fujionclinical.shell.plugins.PluginDefinition;
 import org.fujionclinical.ui.controller.FrameworkController;
 import org.fujionclinical.ui.dialog.DialogUtil;
 import org.fujionclinical.ui.manifest.ManifestViewer;
 import org.fujionclinical.ui.util.FCFUtil;
-import org.fujion.annotation.EventHandler;
-import org.fujion.annotation.WiredComponent;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.Button;
-import org.fujion.component.Cell;
-import org.fujion.component.Image;
-import org.fujion.component.Label;
-import org.fujion.component.Row;
-import org.fujion.component.Rowcell;
-import org.fujion.component.Rows;
-import org.fujion.component.Window;
-import org.fujion.page.PageUtil;
+
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.jar.Attributes;
+import java.util.jar.Manifest;
 
 /**
  * Displays an "about" dialog for a given UI element.
@@ -210,9 +202,7 @@ public class AboutDialog extends FrameworkController {
             DialogUtil.showError(FCFUtil.formatExceptionForDisplay(e));
         }
     }
-    
-    private AboutParams aboutParams;
-    
+
     private Window window;
     
     private String defaultIcon;
@@ -235,7 +225,7 @@ public class AboutDialog extends FrameworkController {
     public void afterInitialized(BaseComponent comp) {
         super.afterInitialized(comp);
         window = (Window) comp;
-        aboutParams = comp.getAttribute("params", AboutParams.class);
+        AboutParams aboutParams = comp.getAttribute("params", AboutParams.class);
         imgIcon.setSrc(aboutParams.icon == null ? defaultIcon : aboutParams.icon);
         lblSource.setLabel(aboutParams.source == null ? defaultSource : aboutParams.source);
         btnCustom.setLabel(aboutParams.custom);

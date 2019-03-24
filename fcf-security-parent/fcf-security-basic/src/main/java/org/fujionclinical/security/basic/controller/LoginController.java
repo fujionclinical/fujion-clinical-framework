@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,20 +25,19 @@
  */
 package org.fujionclinical.security.basic.controller;
 
-import java.util.Collection;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.fujionclinical.api.security.ISecurityDomain;
-import org.fujionclinical.api.security.ISecurityService;
-import org.fujionclinical.api.security.SecurityDomainRegistry;
 import org.fujion.common.StrUtil;
 import org.fujion.core.RequestUtil;
 import org.fujion.webjar.WebJarLocator;
+import org.fujionclinical.api.security.ISecurityDomain;
+import org.fujionclinical.api.security.ISecurityService;
+import org.fujionclinical.api.security.SecurityDomainRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Collection;
 
 /**
  * Controller for login page.

@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,20 +25,20 @@
  */
 package org.fujionclinical.ui.dialog;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.fujion.common.DateRange;
-import org.fujion.common.DateUtil;
 import org.fujion.ancillary.IAutoWired;
 import org.fujion.ancillary.IResponseCallback;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
+import org.fujion.common.DateRange;
+import org.fujion.common.DateUtil;
 import org.fujion.component.BaseComponent;
 import org.fujion.component.Datebox;
 import org.fujion.component.Window;
 import org.fujion.page.PageUtil;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Presents a date range dialog.

@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,23 +25,16 @@
  */
 package org.fujionclinical.ui.dialog;
 
-import static org.fujionclinical.ui.dialog.DialogConstants.LABEL_IDS_OK_CANCEL;
-import static org.fujionclinical.ui.dialog.DialogConstants.LABEL_ID_CANCEL;
-import static org.fujionclinical.ui.dialog.DialogConstants.LABEL_ID_OK;
-import static org.fujionclinical.ui.dialog.DialogConstants.STYLES_ERROR;
-import static org.fujionclinical.ui.dialog.DialogConstants.STYLES_INFO;
-import static org.fujionclinical.ui.dialog.DialogConstants.STYLES_QUESTION;
-import static org.fujionclinical.ui.dialog.DialogConstants.STYLES_WARNING;
-import static org.fujionclinical.ui.dialog.DialogConstants.STYLE_FIXED_FONT;
+import org.fujion.ancillary.IResponseCallback;
+import org.fujion.component.Window;
+import org.fujion.event.IEventListener;
+import org.fujionclinical.ui.dialog.InputDialog.IInputCallback;
+import org.fujionclinical.ui.util.FCFUtil;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.fujionclinical.ui.dialog.InputDialog.IInputCallback;
-import org.fujionclinical.ui.util.FCFUtil;
-import org.fujion.ancillary.IResponseCallback;
-import org.fujion.component.Window;
-import org.fujion.event.IEventListener;
+import static org.fujionclinical.ui.dialog.DialogConstants.*;
 
 /**
  * Static convenience methods for displaying dialogs.

@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2018 fujionclinical.org
+ * Copyright (C) 2019 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,23 +25,23 @@
  */
 package org.fujionclinical.ui.controller;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
-import org.fujion.common.StrUtil;
-import org.fujionclinical.ui.dialog.DialogUtil;
-import org.fujionclinical.ui.dialog.PopupDialog;
-import org.fujionclinical.ui.util.FCFUtil;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
+import org.fujion.common.StrUtil;
 import org.fujion.component.BaseComponent;
 import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Button;
 import org.fujion.event.Event;
 import org.fujion.event.EventUtil;
 import org.fujion.event.IEventListener;
+import org.fujionclinical.ui.dialog.DialogUtil;
+import org.fujionclinical.ui.dialog.PopupDialog;
+import org.fujionclinical.ui.util.FCFUtil;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Base controller for creating/editing a domain object.
