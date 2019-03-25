@@ -51,9 +51,7 @@ public class ElementTrigger extends ElementBase {
 
     private final Set<ElementUI> targets = new HashSet<>();
 
-    private final ITriggerCallback callback = () -> {
-        onTrigger();
-    };
+    private final ITriggerCallback callback = this::onTrigger;
     
     public ElementTrigger() {
     }

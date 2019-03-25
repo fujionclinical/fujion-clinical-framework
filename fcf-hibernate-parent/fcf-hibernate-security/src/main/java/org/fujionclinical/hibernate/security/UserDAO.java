@@ -48,7 +48,7 @@ public class UserDAO extends AbstractDAO<User> {
     public IUser authenticate(String username, String password, SecurityDomain domain) {
         Session session = getSession();
         Transaction tx = session.beginTransaction();
-        User user = null;
+        User user;
         
         try {
             @SuppressWarnings("unchecked")

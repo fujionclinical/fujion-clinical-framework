@@ -58,10 +58,10 @@ public class ThreadedQueryStrategy<T> implements IAsyncQueryStrategy<T> {
             try {
                 result = service.fetch(context);
             } catch (Throwable t) {
-                result = QueryUtil.<T> errorResult(t);
+                result = QueryUtil.errorResult(t);
             }
             
-            callback.onQueryFinish(this, abort ? QueryUtil.<T> abortResult(null) : result);
+            callback.onQueryFinish(this, abort ? QueryUtil.abortResult(null) : result);
         }
         
         @Override

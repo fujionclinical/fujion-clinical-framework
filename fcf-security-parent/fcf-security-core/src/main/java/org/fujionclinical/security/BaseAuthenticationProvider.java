@@ -72,7 +72,7 @@ public class BaseAuthenticationProvider implements AuthenticationProvider {
     }
     
     @Override
-    public boolean supports(Class<? extends Object> authentication) {
+    public boolean supports(Class<?> authentication) {
         return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);
     }
     
@@ -93,11 +93,11 @@ public class BaseAuthenticationProvider implements AuthenticationProvider {
         
         if (log.isDebugEnabled()) {
             log.debug("User: " + username);
-            log.debug("Details, RA: " + details == null ? "null" : details.getRemoteAddress());
+            log.debug("Details, RA: " + (details == null ? "null" : details.getRemoteAddress()));
         }
         
         if (username != null && username.contains("\\")) {
-            String pcs[] = username.split("\\\\", 2);
+            String[] pcs = username.split("\\\\", 2);
             domain = pcs[0];
             username = pcs.length > 1 ? pcs[1] : null;
         }

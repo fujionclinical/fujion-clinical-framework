@@ -43,7 +43,6 @@ import org.fujion.ipc.InvocationRequestQueueRegistry;
 import org.fujionclinical.help.*;
 import org.fujionclinical.help.viewer.HelpHistory.ITopicListener;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -519,8 +518,6 @@ public class HelpViewer implements IAutoWired, IHelpViewer, ITopicListener {
      */
     @Override
     public void onTopicSelected(HelpTopic topic) {
-        URL url = null;
-        
         try {
             String src = topic == null ? null : HelpUtil.getUrl(topic.getURL().toString());
             iframe.setSrc(src);
@@ -531,8 +528,8 @@ public class HelpViewer implements IAutoWired, IHelpViewer, ITopicListener {
         lastURL = iframe.getSrc();
         btnPrevious.setDisabled(!history.hasPrevious());
         btnNext.setDisabled(!history.hasNext());
-        btnPrint.setDisabled(url == null);
-        btnOpen.setDisabled(url == null);
+        btnPrint.setDisabled(lastURL == null);
+        btnOpen.setDisabled(lastURL == null);
         
         for (HelpViewBase view : views) {
             view.onTopicSelected(topic);

@@ -10,8 +10,9 @@ define('fcf-login', ['jquery', 'lodash', 'fcf-login-css', 'bootstrap-css'], func
 			this._logo = $('#fcf-title-img').attr('src');
 			this._infoTitle = $('#fcf-info-title').text();
 			this._infoContent = $('#fcf-info-content').text();
+			var body$ = $('body');
 			
-			$('body').on('click keydown', this.resetTimeout.bind(this));
+			body$.on('click keydown', this.resetTimeout.bind(this));
 			$('#fcf-form').on('submit', this.submitHandler.bind(this));
 			$('#fcf-domain').on('change', this.domainHandler.bind(this));
 			$('#fcf-alternate').one('click', this.alternateHandler.bind(this));
@@ -23,7 +24,7 @@ define('fcf-login', ['jquery', 'lodash', 'fcf-login-css', 'bootstrap-css'], func
 				$('#fcf-error').text(disabled);
 			}
 			
-			$('body').show();
+			body$.show();
 		},
 		
 		resetTimeout: function() {

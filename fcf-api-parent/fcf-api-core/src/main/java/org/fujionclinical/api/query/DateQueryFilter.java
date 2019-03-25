@@ -43,7 +43,7 @@ public class DateQueryFilter<T> extends AbstractQueryFilter<T> {
     public enum DateType {
         MEASURED, // When the entity was measured
         UPDATED, // When the entity was last updated
-        CREATED; // When the entity was first created
+        CREATED // When the entity was first created
     }
     
     private DateType dateType = DateType.MEASURED;

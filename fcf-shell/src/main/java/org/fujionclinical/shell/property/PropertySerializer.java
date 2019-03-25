@@ -158,8 +158,8 @@ public abstract class PropertySerializer<T> {
             return Arrays.asList(enumClass.getEnumConstants()).iterator();
         }
         
-    };
-    
+    }
+
     /**
      * Serializer class for iterables.
      */
@@ -205,6 +205,6 @@ public abstract class PropertySerializer<T> {
             return getIterator().iterator();
         }
         
-    };
-    
+    }
+
 }

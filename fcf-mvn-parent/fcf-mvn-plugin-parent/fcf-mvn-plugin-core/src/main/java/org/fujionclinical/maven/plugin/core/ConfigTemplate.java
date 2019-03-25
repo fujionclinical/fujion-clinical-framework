@@ -43,11 +43,11 @@ public class ConfigTemplate {
 
     private static class ConfigEntry {
 
-        String template;
+        final String template;
 
-        int placeholder;
+        final int placeholder;
 
-        List<String> buffer = new ArrayList<>();
+        final List<String> buffer = new ArrayList<>();
 
         ConfigEntry(String template, int placeholder) {
             this.template = template;
@@ -125,7 +125,7 @@ public class ConfigTemplate {
         File targetDirectory = newSubdirectory(stagingDirectory, "META-INF");
         File newEntry = new File(targetDirectory, filename);
 
-        try (FileOutputStream out = new FileOutputStream(newEntry); PrintStream ps = new PrintStream(out);) {
+        try (FileOutputStream out = new FileOutputStream(newEntry); PrintStream ps = new PrintStream(out)) {
             
             Iterator<ConfigEntry> iter = entries.values().iterator();
             ConfigEntry entry = null;

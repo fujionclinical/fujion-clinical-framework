@@ -40,7 +40,7 @@ import static org.junit.Assert.assertEquals;
 public class TestForms extends MockUITest {
     
     @Test
-    public void testForm() throws Exception {
+    public void testForm() {
         BaseComponent root = PageUtil.createPage("web/org/fujionclinical/ui/sharedforms/listviewForm.fsp", null).get(0);
         TestController controller = new TestController();
         root.wireController(controller);

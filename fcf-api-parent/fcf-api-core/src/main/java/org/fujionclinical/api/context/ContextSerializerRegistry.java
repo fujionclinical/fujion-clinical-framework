@@ -35,7 +35,7 @@ import org.springframework.beans.factory.config.DestructionAwareBeanPostProcesso
  */
 public class ContextSerializerRegistry extends AbstractRegistry<Class<?>, ISerializer<?>> implements DestructionAwareBeanPostProcessor {
 
-    private static ContextSerializerRegistry instance = new ContextSerializerRegistry();
+    private static final ContextSerializerRegistry instance = new ContextSerializerRegistry();
 
     public static ContextSerializerRegistry getInstance() {
         return instance;

@@ -143,7 +143,7 @@ public class AboutDialog extends FrameworkController {
          * @return The label value, or the original key value if no label value found.
          */
         private String getLabel(String key) {
-            String label = StrUtil.getLabel("fcf.shell.about." + key.toString());
+            String label = StrUtil.getLabel("fcf.shell.about." + key);
             return label == null ? key : label;
         }
     }

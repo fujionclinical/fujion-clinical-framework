@@ -69,7 +69,7 @@ public class HelpTest {
     }
 
     private HelpModule createHelpModule(String file) {
-        try (InputStream is = HelpTest.class.getResourceAsStream("/" + file);) {
+        try (InputStream is = HelpTest.class.getResourceAsStream("/" + file)) {
             List<String> xml = IOUtils.readLines(is, StandardCharsets.UTF_8);
             HelpModule module = HelpXmlParser.fromXml(StrUtil.fromList(xml));
             registry.register(module);

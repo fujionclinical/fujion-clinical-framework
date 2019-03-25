@@ -34,7 +34,11 @@ public class TestController extends ListFormController<TestItem> {
     
     public class TestItem {
         
-        String item1, item2, item3;
+        final String item1;
+
+        final String item2;
+
+        final String item3;
         
         public TestItem(String data) {
             String[] pcs = data.split("\\^", 3);

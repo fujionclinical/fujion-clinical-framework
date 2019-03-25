@@ -44,7 +44,7 @@ public class DirectoryIterator implements IResourceIterator {
     
     public DirectoryIterator(File root) {
         this.root = root;
-        this.iter = listFiles(root, new ArrayList<File>()).iterator();
+        this.iter = listFiles(root, new ArrayList<>()).iterator();
     }
     
     /**

@@ -372,7 +372,7 @@ public class PluginDefinition {
             // Force execution of static initializers
             Class.forName(clazz.getName());
         } catch (ClassNotFoundException e) {
-            MiscUtil.toUnchecked(e);
+           throw MiscUtil.toUnchecked(e);
         }
     }
 

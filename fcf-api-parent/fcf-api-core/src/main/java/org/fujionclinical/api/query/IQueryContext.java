@@ -37,7 +37,7 @@ public interface IQueryContext {
      * @param value Parameter value
      * @return True if the value was changed.
      */
-    public boolean setParam(String name, Object value);
+    boolean setParam(String name, Object value);
     
     /**
      * Gets a query parameter value.
@@ -45,7 +45,7 @@ public interface IQueryContext {
      * @param name Parameter name
      * @return Parameter value
      */
-    public Object getParam(String name);
+    Object getParam(String name);
     
     /**
      * Returns true if the current context state has changed from the previous snapshot.

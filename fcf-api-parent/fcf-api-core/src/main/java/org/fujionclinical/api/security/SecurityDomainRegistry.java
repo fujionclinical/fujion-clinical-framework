@@ -33,7 +33,7 @@ import org.springframework.util.StringUtils;
  */
 public class SecurityDomainRegistry extends AbstractRegistry<String, ISecurityDomain> {
     
-    private static SecurityDomainRegistry instance = new SecurityDomainRegistry();
+    private static final SecurityDomainRegistry instance = new SecurityDomainRegistry();
     
     public static SecurityDomainRegistry getInstance() {
         return instance;

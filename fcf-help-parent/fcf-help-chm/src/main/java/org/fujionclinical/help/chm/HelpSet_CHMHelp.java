@@ -91,7 +91,7 @@ public class HelpSet_CHMHelp extends HelpSetBase {
     }
     
     private void loadSystemInfo() throws Exception {
-        try (InputStream is = openStream("helpset.xml");) {
+        try (InputStream is = openStream("helpset.xml")) {
             Node root = XMLUtil.parseXMLFromStream(is).getFirstChild();
             
             for (int i = 0; i < root.getChildNodes().getLength(); i++) {
@@ -110,7 +110,7 @@ public class HelpSet_CHMHelp extends HelpSetBase {
         return ExecutionContext.getSession().getServletContext().getResource(baseURL + file);
     }
     
-    protected InputStream openStream(String file) throws Exception {
+    protected InputStream openStream(String file) {
         return getClass().getResourceAsStream(baseURL + file);
     }
     

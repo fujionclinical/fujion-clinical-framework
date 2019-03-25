@@ -32,7 +32,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
 /**
@@ -44,12 +43,12 @@ public class ZipIterator implements IResourceIterator {
     
     private final Enumeration<? extends ZipEntry> zipEntries;
     
-    public ZipIterator(File file) throws ZipException, IOException {
+    public ZipIterator(File file) throws IOException {
         zipFile = new ZipFile(file);
         zipEntries = zipFile.entries();
     }
     
-    public ZipIterator(String file) throws ZipException, IOException {
+    public ZipIterator(String file) throws IOException {
         zipFile = new ZipFile(file);
         zipEntries = zipFile.entries();
     }

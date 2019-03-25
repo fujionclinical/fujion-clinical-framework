@@ -59,7 +59,7 @@ public class QueryContext implements IQueryContext {
     @Override
     public boolean setParam(String name, Object newValue) {
         Object oldValue = params.get(name);
-        boolean change = false;
+        boolean change;
         
         if (oldValue == null || newValue == null) {
             change = oldValue != newValue;

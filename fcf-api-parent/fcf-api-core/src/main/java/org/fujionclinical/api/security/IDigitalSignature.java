@@ -35,7 +35,7 @@ public interface IDigitalSignature {
      * 
      * @return Key name.
      */
-    public String getKeyName();
+    String getKeyName();
     
     /**
      * Returns a digital signature for the content string.
@@ -44,7 +44,7 @@ public interface IDigitalSignature {
      * @return A base 64-encoded digital signature.
      * @throws Exception Unspecified exception.
      */
-    public String sign(String content) throws Exception;
+    String sign(String content) throws Exception;
     
     /**
      * Verifies the validity of the digital signature.
@@ -56,5 +56,5 @@ public interface IDigitalSignature {
      * @return True if the signature is valid.
      * @throws Exception Unspecified exception.
      */
-    public boolean verify(String base64Signature, String content, String timestamp, String keyName) throws Exception;
+    boolean verify(String base64Signature, String content, String timestamp, String keyName) throws Exception;
 }

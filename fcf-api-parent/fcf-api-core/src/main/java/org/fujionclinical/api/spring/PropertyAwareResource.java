@@ -124,7 +124,7 @@ public class PropertyAwareResource implements Resource, ApplicationContextAware 
      */
     @Override
     public void setApplicationContext(ApplicationContext appContext) throws BeansException {
-        try (InputStream is = originalResource.getInputStream();) {
+        try (InputStream is = originalResource.getInputStream()) {
             ConfigurableListableBeanFactory beanFactory = ((AbstractRefreshableApplicationContext) appContext)
                     .getBeanFactory();
             StringBuilder sb = new StringBuilder();

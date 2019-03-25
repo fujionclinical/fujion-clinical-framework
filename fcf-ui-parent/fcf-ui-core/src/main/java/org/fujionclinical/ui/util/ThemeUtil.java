@@ -34,7 +34,7 @@ public class ThemeUtil {
 
     public interface IThemeClass {
 
-        public String getThemeClass();
+        String getThemeClass();
     }
 
     /**
@@ -78,7 +78,7 @@ public class ThemeUtil {
         public String toString() {
             return name().toLowerCase();
         }
-    };
+    }
 
     /**
      * Corresponds to Bootstrap button style classes.
@@ -95,7 +95,7 @@ public class ThemeUtil {
         public String toString() {
             return name().toLowerCase();
         }
-    };
+    }
 
     /**
      * Corresponds to Bootstrap button size classes.
@@ -118,7 +118,7 @@ public class ThemeUtil {
         public String toString() {
             return name().toLowerCase();
         }
-    };
+    }
 
     /**
      * Corresponds to Bootstrap label style classes.
@@ -135,7 +135,7 @@ public class ThemeUtil {
         public String toString() {
             return name().toLowerCase();
         }
-    };
+    }
 
     /**
      * Corresponds to Bootstrap panel style classes.
@@ -152,7 +152,7 @@ public class ThemeUtil {
         public String toString() {
             return name().toLowerCase();
         }
-    };
+    }
 
     /**
      * Enforce static class.

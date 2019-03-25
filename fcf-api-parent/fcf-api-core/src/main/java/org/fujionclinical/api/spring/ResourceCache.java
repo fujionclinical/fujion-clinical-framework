@@ -26,6 +26,7 @@
 package org.fujionclinical.api.spring;
 
 import org.fujion.common.MiscUtil;
+import org.fujion.common.StrUtil;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -51,15 +52,10 @@ public class ResourceCache implements ResourcePatternResolver {
     /**
      * Provides a predictable ordering of context configuration resources.
      */
-    public static final Comparator<Resource> resourceComparator = new Comparator<Resource>() {
-
-        @Override
-        public int compare(Resource r1, Resource r2) {
-            String f1 = r1.getFilename();
-            String f2 = r2.getFilename();
-            return f1 == f2 ? 0 : f1 == null ? -1 : f2 == null ? 1 : f1.compareToIgnoreCase(f2);
-        }
-
+    public static final Comparator<Resource> resourceComparator = (r1, r2) -> {
+        String f1 = r1.getFilename();
+        String f2 = r2.getFilename();
+        return StrUtil.compareToIgnoreCase(f1, f2);
     };
 
     public ResourceCache(ResourceLoader resourceLoader) {

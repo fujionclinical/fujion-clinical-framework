@@ -44,7 +44,6 @@ public interface IClipboardAware<T> {
      * 
      * @param data String data from clipboard.
      * @return Instance of original class.
-     * @throws Exception Unspecified exception.
      */
-    T fromClipboard(String data) throws Exception;
+    T fromClipboard(String data);
 }

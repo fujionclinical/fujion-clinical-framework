@@ -37,7 +37,7 @@ public interface IPropertyAccessor {
      * @return The value of the property.
      * @throws Exception Unspecified exception.
      */
-    public Object getPropertyValue(PropertyInfo propInfo) throws Exception;
+    Object getPropertyValue(PropertyInfo propInfo) throws Exception;
     
     /**
      * Sets the value of the specified property.
@@ -46,6 +46,6 @@ public interface IPropertyAccessor {
      * @param value The new value of the property.
      * @throws Exception Unspecified exception.
      */
-    public void setPropertyValue(PropertyInfo propInfo, Object value) throws Exception;
+    void setPropertyValue(PropertyInfo propInfo, Object value) throws Exception;
     
 }

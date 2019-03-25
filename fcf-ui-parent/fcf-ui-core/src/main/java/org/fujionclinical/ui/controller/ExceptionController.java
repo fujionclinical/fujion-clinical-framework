@@ -149,7 +149,7 @@ public class ExceptionController implements IAutoWired {
 
             for (StackTraceElement element : err.getStackTrace()) {
                 this.txtStackTrace
-                        .setValue(StringUtils.defaultString(this.txtStackTrace.getValue()) + String.valueOf(element) + "\n");
+                        .setValue(StringUtils.defaultString(this.txtStackTrace.getValue()) + element + "\n");
             }
         }
     }

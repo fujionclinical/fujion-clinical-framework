@@ -31,6 +31,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class CommandTest {
@@ -47,7 +48,7 @@ public class CommandTest {
 
     private void testShortcutValidation(String[] shortcuts, boolean areValid) {
         for (String shortcut : shortcuts) {
-            assertTrue(CommandUtil.validateShortcut(shortcut) != null == areValid);
+            assertEquals(CommandUtil.validateShortcut(shortcut) != null, areValid);
         }
     }
 
@@ -58,8 +59,7 @@ public class CommandTest {
     }
 
     private void testShortcutParsing(String[] shortcuts, boolean areValid) {
-        Set<String> sc1 = new HashSet<>();
-        sc1.addAll(Arrays.asList(shortcuts));
+        Set<String> sc1 = new HashSet<>(Arrays.asList(shortcuts));
         String concat_sc1 = CommandUtil.concatShortcuts(sc1);
         Set<String> sc2 = CommandUtil.parseShortcuts(concat_sc1, null);
         assertTrue(sc1.size() == sc2.size() == areValid);

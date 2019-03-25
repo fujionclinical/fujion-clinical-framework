@@ -54,8 +54,8 @@ public class BaseXmlParser extends AbstractSingleBeanDefinitionParser {
         
         while (result != null) {
             if (result instanceof Element
-                    && (tagName.equals(((Element) result).getNodeName()) || tagName
-                            .equals(((Element) result).getLocalName()))) {
+                    && (tagName.equals(result.getNodeName()) || tagName
+                            .equals(result.getLocalName()))) {
                 break;
             }
             result = result.getNextSibling();

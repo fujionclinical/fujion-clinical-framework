@@ -36,7 +36,7 @@ public interface ILocalEventDispatcher {
      * @param globalEventDispatcher The global event dispatcher to register. This may be null if
      *            global event propagation is not supported.
      */
-    public void setGlobalEventDispatcher(IGlobalEventDispatcher globalEventDispatcher);
+    void setGlobalEventDispatcher(IGlobalEventDispatcher globalEventDispatcher);
     
     /**
      * Returns the global event dispatcher.
@@ -44,7 +44,7 @@ public interface ILocalEventDispatcher {
      * @return The global event dispatcher. This may be null if global event propagation is not
      *         supported.
      */
-    public IGlobalEventDispatcher getGlobalEventDispatcher();
+    IGlobalEventDispatcher getGlobalEventDispatcher();
     
     /**
      * Fires the specified event locally.

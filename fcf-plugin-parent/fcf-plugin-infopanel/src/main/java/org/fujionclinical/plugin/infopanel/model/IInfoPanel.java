@@ -34,18 +34,18 @@ import org.fujion.dragdrop.IDropHandler;
  */
 public interface IInfoPanel extends IDropHandler {
     
-    static final String EVENT_NAME = "INFOPANEL";
+    String EVENT_NAME = "INFOPANEL";
     
-    static final String DROP_EVENT_NAME = EVENT_NAME + ".DROP";
+    String DROP_EVENT_NAME = EVENT_NAME + ".DROP";
     
-    static final String ALERT_EVENT_NAME = EVENT_NAME + ".ALERT";
+    String ALERT_EVENT_NAME = EVENT_NAME + ".ALERT";
     
-    static final String DROP_ID = "infopanel";
+    String DROP_ID = "infopanel";
     
     enum Action {
         REMOVE, HIDE, SHOW, COLLAPSE, EXPAND, TOP
-    };
-    
+    }
+
     /**
      * Registers a menu item with the drop panel using the specified menu path.
      * 

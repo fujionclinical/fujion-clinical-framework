@@ -47,32 +47,16 @@ import java.util.List;
  */
 public class TestHarnessController extends FrameworkController {
     
-    private static final Comparator<PluginDefinition> pluginComparator = new Comparator<PluginDefinition>() {
-        
-        @Override
-        public int compare(PluginDefinition def1, PluginDefinition def2) {
-            return def1.getName().compareToIgnoreCase(def2.getName());
-        }
-        
-    };
+    private static final Comparator<PluginDefinition> pluginComparator = (def1, def2) -> def1.getName().compareToIgnoreCase(def2.getName());
     
-    private static final Comparator<IAction> actionComparator = new Comparator<IAction>() {
-        
-        @Override
-        public int compare(IAction act1, IAction act2) {
-            return act1.toString().compareToIgnoreCase(act2.toString());
-        }
-        
-    };
-    
-    private ShellEx shell;
-    
+    private static final Comparator<IAction> actionComparator = (act1, act2) -> act1.toString().compareToIgnoreCase(act2.toString());
+
     @Override
     public void afterInitialized(BaseComponent comp) {
         super.afterInitialized(comp);
         
         try {
-            shell = (ShellEx) comp;
+            ShellEx shell = (ShellEx) comp;
             
             if (shell.getLayout() == null) {
                 shell.setLayout(FCFUtil.getResourcePath(TestHarnessController.class) + "testharness-layout.xml");
@@ -92,7 +76,7 @@ public class TestHarnessController extends FrameworkController {
                 shell.register("Test Harness\\" + plugin.getName(), plugin);
             }
             
-            List<IAction> actions = new ArrayList<IAction>(ActionRegistry.getRegisteredActions(ActionScope.BOTH));
+            List<IAction> actions = new ArrayList<>(ActionRegistry.getRegisteredActions(ActionScope.BOTH));
             Collections.sort(actions, actionComparator);
             
             for (IAction action : actions) {

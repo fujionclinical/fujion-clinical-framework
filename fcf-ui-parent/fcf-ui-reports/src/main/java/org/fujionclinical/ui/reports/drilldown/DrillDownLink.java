@@ -66,7 +66,7 @@ public class DrillDownLink<T> extends DrillDownIconBase<T> {
     
     @Override
     protected void attachEventListener() {
-        new DrillDownListener<T>(this, dataObject, drillDownDisplayClass);
+        new DrillDownListener<>(this, dataObject, drillDownDisplayClass);
     }
     
 }

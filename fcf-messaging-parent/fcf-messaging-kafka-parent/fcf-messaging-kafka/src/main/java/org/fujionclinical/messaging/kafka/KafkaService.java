@@ -58,19 +58,17 @@ public class KafkaService {
     
     /**
      * Start Services
-     * 
-     * @throws Exception when problem occurs starting {@linkplain #KafkaService}
+     *
      */
-    public void start() throws Exception {
+    public void start() {
         log.info("Starting Kafka producer service");
     }
     
     /**
      * Stop BrokerService
-     * 
-     * @throws Exception when problem occurs starting {@linkplain #KafkaService}
+     *
      */
-    public void stop() throws Exception {
+    public void stop() {
         log.info("Stopping Kafka services");
         producer.close();
     }

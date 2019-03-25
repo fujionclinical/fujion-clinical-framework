@@ -268,9 +268,8 @@ public class Shell extends Div implements INamespace {
      * Loads a layout from the specified resource.
      *
      * @param resource The layout resource to load.
-     * @throws Exception Unspecified exception.
      */
-    public void loadLayout(String resource) throws Exception {
+    public void loadLayout(String resource) {
         layout = LayoutParser.parseResource(resource);
         FrameworkUtil.setAppName(layout.getName());
         

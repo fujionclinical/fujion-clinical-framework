@@ -111,7 +111,7 @@ public class PopupSupport implements IGenericEvent<Object>, IEventListener {
     @Override
     public void eventCallback(String eventName, Object eventData) {
         try {
-            PopupData popupData = null;
+            PopupData popupData;
             
             if (eventData instanceof PopupData) {
                 popupData = (PopupData) eventData;
@@ -153,16 +153,15 @@ public class PopupSupport implements IGenericEvent<Object>, IEventListener {
      */
     private synchronized String getPosition() {
         position = position < 80 ? position + 5 : 10;
-        return Integer.toString(position) + "%";
+        return position + "%";
     }
     
     /**
      * Return a popup window instance.
      *
      * @return A popup window instance.
-     * @throws Exception Unspecified exception.
      */
-    private synchronized Window getPopupWindow() throws Exception {
+    private synchronized Window getPopupWindow() {
         if (popupDefinition == null) {
             popupDefinition = PageParser.getInstance().parse(RESOURCE_PREFIX + "popupWindow.fsp");
         }

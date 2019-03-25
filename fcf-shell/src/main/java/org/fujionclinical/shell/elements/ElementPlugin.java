@@ -73,7 +73,7 @@ public class ElementPlugin extends ElementUI implements IDisable, IPropertyAcces
         }
     }
 
-    public class PluginContainer extends Namespace {};
+    public class PluginContainer extends Namespace {}
 
     private final PluginContainer container = new PluginContainer();
 
@@ -232,10 +232,9 @@ public class ElementPlugin extends ElementUI implements IDisable, IPropertyAcces
      *
      * @param propInfo Property info.
      * @return The property value.
-     * @throws Exception Unspecified exception.
      */
     @Override
-    public Object getPropertyValue(PropertyInfo propInfo) throws Exception {
+    public Object getPropertyValue(PropertyInfo propInfo) {
         Object obj = registeredProperties == null ? null : registeredProperties.get(propInfo.getId());
 
         if (obj instanceof PropertyProxy) {
@@ -251,10 +250,9 @@ public class ElementPlugin extends ElementUI implements IDisable, IPropertyAcces
      *
      * @param propInfo Property info.
      * @param value The value to set.
-     * @throws Exception Unspecified exception.
      */
     @Override
-    public void setPropertyValue(PropertyInfo propInfo, Object value) throws Exception {
+    public void setPropertyValue(PropertyInfo propInfo, Object value) {
         String propId = propInfo.getId();
         Object obj = registeredProperties == null ? null : registeredProperties.get(propId);
 

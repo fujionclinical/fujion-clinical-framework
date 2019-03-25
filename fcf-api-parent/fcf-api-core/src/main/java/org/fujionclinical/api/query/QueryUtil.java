@@ -59,7 +59,7 @@ public class QueryUtil {
         
         @Override
         public List<T> getResults() {
-            return results == null ? Collections.<T> emptyList() : results;
+            return results == null ? Collections.emptyList() : results;
         }
         
         @Override
@@ -78,7 +78,7 @@ public class QueryUtil {
      */
     public static <T> IQueryResult<T> abortResult(String reason) {
         return packageResult(null, CompletionStatus.ABORTED,
-            reason == null ? null : Collections.singletonMap("reason", (Object) reason));
+            reason == null ? null : Collections.singletonMap("reason", reason));
     }
     
     /**
@@ -90,7 +90,7 @@ public class QueryUtil {
      */
     public static <T> IQueryResult<T> errorResult(Throwable exception) {
         return packageResult(null, CompletionStatus.ERROR,
-            exception == null ? null : Collections.singletonMap("exception", (Object) exception));
+            exception == null ? null : Collections.singletonMap("exception", exception));
     }
     
     /**
@@ -126,7 +126,7 @@ public class QueryUtil {
      * @return Packaged results and metadata.
      */
     public static <T> IQueryResult<T> packageResult(List<T> results, CompletionStatus status, Map<String, Object> metadata) {
-        return new QueryResult<T>(results, status, metadata);
+        return new QueryResult<>(results, status, metadata);
     }
     
     /**

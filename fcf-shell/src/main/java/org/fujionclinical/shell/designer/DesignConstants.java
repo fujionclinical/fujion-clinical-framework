@@ -80,8 +80,8 @@ public class DesignConstants {
     
     public static final String DESIGN_ICON_INACTIVE = Constants.ICON_PATH + "designOff.png";
     
-    public static final String DESIGN_ICON_ACTIVE = Constants.ICON_PATH + "designOn.png";;
-    
+    public static final String DESIGN_ICON_ACTIVE = Constants.ICON_PATH + "designOn.png";
+
     public static final String DESIGN_MODE_PRIVS = "PRIV_FCF_DESIGNER";
     
     public static final String DESIGN_FAVORITES_PROPERTY = "FCF.DESIGN.FAVORITES";
@@ -90,5 +90,5 @@ public class DesignConstants {
      * Enforce static class.
      */
     private DesignConstants() {
-    };
+    }
 }

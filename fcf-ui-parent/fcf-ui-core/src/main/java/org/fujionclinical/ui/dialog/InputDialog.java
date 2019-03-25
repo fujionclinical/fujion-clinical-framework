@@ -42,7 +42,7 @@ import java.util.Map;
  */
 public class InputDialog implements IAutoWired {
 
-    protected static final Log log = LogFactory.getLog(InputDialog.class.getClass());
+    protected static final Log log = LogFactory.getLog(InputDialog.class);
 
     public interface IInputCallback {
 

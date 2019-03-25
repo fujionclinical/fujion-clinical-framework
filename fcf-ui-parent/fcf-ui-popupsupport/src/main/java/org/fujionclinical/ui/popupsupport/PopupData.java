@@ -51,7 +51,7 @@ public class PopupData implements Serializable {
      */
     @Deprecated
     public PopupData(String value) {
-        String pcs[] = value.toString().split("\\^", 2);
+        String[] pcs = value.split("\\^", 2);
         
         if (pcs.length == 0) {
             return;

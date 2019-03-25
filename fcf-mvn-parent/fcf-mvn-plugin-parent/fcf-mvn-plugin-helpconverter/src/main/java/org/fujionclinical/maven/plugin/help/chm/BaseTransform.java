@@ -107,9 +107,8 @@ public abstract class BaseTransform extends AbstractTransform {
      * @param name The setting name.
      * @param value The setting value.
      * @param level The indent level.
-     * @throws IOException Exception while writing to the output stream.
      */
-    protected void writeSetting(OutputStream outputStream, String name, Object value, int level) throws IOException {
+    protected void writeSetting(OutputStream outputStream, String name, Object value, int level) {
         write(outputStream, "<" + name + ">" + value + "</" + name + ">", true, level);
     }
     

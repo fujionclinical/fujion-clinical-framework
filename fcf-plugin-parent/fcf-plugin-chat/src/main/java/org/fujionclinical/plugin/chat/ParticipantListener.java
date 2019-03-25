@@ -66,8 +66,8 @@ public class ParticipantListener {
     
     private enum EventSubType {
         PING, ADD, REMOVE
-    };
-    
+    }
+
     /**
      * Listener for a specific event subtype.
      */

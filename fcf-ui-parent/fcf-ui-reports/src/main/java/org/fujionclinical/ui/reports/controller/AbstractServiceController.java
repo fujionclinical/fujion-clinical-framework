@@ -172,7 +172,7 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
         }
 
         void destroy() {
-            params.forEach(param -> param.destroy());
+            params.forEach(SupplementalQueryParam::destroy);
             params.clear();
         }
     }
@@ -305,7 +305,7 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
     // End override section.
     
     protected void setModel(List<M> model) {
-        this.model = model == null ? Collections.<M> emptyList() : model;
+        this.model = model == null ? Collections.emptyList() : model;
         applyFilters();
     }
     

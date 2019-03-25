@@ -85,19 +85,14 @@ public class MainController extends PluginController implements IInfoPanel {
     /**
      * Listener for event-based drop and alert requests.
      */
-    private final IGenericEvent<BaseComponent> dropListener = new IGenericEvent<BaseComponent>() {
-        
-        @Override
-        public void eventCallback(String eventName, BaseComponent comp) {
-            if (isActive()) {
-                if (eventName.equals(DROP_EVENT_NAME)) {
-                    drop(comp);
-                } else if (eventName.equals(ALERT_EVENT_NAME)) {
-                    showAlert(comp);
-                }
+    private final IGenericEvent<BaseComponent> dropListener = (eventName, comp) -> {
+        if (isActive()) {
+            if (eventName.equals(DROP_EVENT_NAME)) {
+                drop(comp);
+            } else if (eventName.equals(ALERT_EVENT_NAME)) {
+                showAlert(comp);
             }
         }
-        
     };
     
     /**

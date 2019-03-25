@@ -143,6 +143,6 @@ public class PropertyUtil {
      */
     public static List<String> getInstances(String propertyName, boolean asGlobal) {
         return getPropertyService().getInstances(propertyName, asGlobal);
-    };
-    
+    }
+
 }

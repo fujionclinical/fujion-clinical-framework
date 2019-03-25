@@ -85,8 +85,4 @@ abstract class BaseRenderer<M> implements IComponentRenderer<Row, M> {
         return column;
     }
     
-    public int compareStr(String s1, String s2) {
-        return s1 == s2 ? 0 : s1 == null ? -1 : s2 == null ? 1 : s1.compareToIgnoreCase(s2);
-    }
-    
 }

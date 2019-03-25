@@ -43,8 +43,8 @@ public class CCOWContextManager {
     
     public enum CCOWState {
         csUnknown, csParticipating, csSuspended
-    };
-    
+    }
+
     /**
      * Returns true if actively participating in the CCOW context.
      * 

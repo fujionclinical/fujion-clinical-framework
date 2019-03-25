@@ -58,9 +58,9 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
     
     private final Object[] domainObject = new Object[2];
     
-    private Class<? extends IContextEvent> eventInterface;
+    private final Class<? extends IContextEvent> eventInterface;
     
-    private String contextName;
+    private final String contextName;
     
     private boolean isPending;
     
@@ -74,7 +74,7 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
     
     protected AppFramework appFramework;
     
-    protected ContextItems contextItems = new ContextItems();
+    protected final ContextItems contextItems = new ContextItems();
     
     /**
      * Every managed context must specify a unique context name and the context change event

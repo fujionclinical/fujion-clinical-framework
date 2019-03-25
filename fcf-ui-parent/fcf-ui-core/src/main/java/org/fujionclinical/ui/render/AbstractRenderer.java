@@ -150,7 +150,6 @@ public abstract class AbstractRenderer<T extends BaseComponent, M> implements IC
             }
 
         } catch (Exception e) {}
-        ;
 
         return container;
     }

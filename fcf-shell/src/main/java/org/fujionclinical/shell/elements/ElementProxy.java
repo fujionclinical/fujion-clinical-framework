@@ -67,7 +67,7 @@ public class ElementProxy extends ElementBase implements IPropertyAccessor {
      * @see org.fujionclinical.shell.property.IPropertyAccessor#getPropertyValue
      */
     @Override
-    public Object getPropertyValue(PropertyInfo propInfo) throws Exception {
+    public Object getPropertyValue(PropertyInfo propInfo) {
         return getPropertyValue(propInfo.getId());
     }
     

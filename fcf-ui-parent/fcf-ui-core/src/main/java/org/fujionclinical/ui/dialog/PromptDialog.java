@@ -52,7 +52,7 @@ import static org.fujionclinical.ui.dialog.DialogConstants.LABEL_ID_OK;
  */
 public class PromptDialog implements IAutoWired {
     
-    private static final Log log = LogFactory.getLog(PromptDialog.class.getClass());
+    private static final Log log = LogFactory.getLog(PromptDialog.class);
     
     /**
      * Display the prompt dialog.

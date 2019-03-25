@@ -80,7 +80,7 @@ public abstract class BaseMojo extends AbstractMojo {
     protected boolean noclassifier;
     
     @Parameter(property = "archive", alias = "archive", required = false)
-    protected MavenArchiveConfiguration archiveConfig = new MavenArchiveConfiguration();
+    protected final MavenArchiveConfiguration archiveConfig = new MavenArchiveConfiguration();
     
     /**
      * Excluded files.

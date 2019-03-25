@@ -37,6 +37,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface IRequestProcessor {
     
-    void process(HttpServletRequest req, HttpServletResponse res) throws Exception;
+    void process(HttpServletRequest req, HttpServletResponse res);
     
 }

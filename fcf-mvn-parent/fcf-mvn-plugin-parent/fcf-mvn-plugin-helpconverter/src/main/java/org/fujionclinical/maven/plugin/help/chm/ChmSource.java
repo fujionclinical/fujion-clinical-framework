@@ -140,7 +140,7 @@ public class ChmSource implements IResourceIterator {
      * @param chmFile The chm file.
      */
     public ChmSource(String chmFile) {
-        try (InputStream inp = FileUtils.openInputStream(new File(chmFile));) {
+        try (InputStream inp = FileUtils.openInputStream(new File(chmFile))) {
             chmExtractor = new ChmExtractor(inp);
             entries = buildEntryList();
             iterator = entries.iterator();

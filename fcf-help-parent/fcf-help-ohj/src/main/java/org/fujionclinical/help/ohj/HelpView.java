@@ -81,7 +81,6 @@ public class HelpView implements IHelpView {
             initTopicTree(baseNode, topicTree.getRoot());
             
         } catch (IOException e) {
-            return;
         }
         
     }

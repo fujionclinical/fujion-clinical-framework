@@ -86,7 +86,7 @@ public class FilteredQueryService<T> implements IQueryService<T> {
     private IQueryResult<T> filteredResult(IQueryResult<T> unfilteredResult) {
         List<T> unfilteredList = unfilteredResult.getResults();
         List<T> filteredList = unfilteredList == null ? null : filters.filter(unfilteredList);
-        Map<String, Object> metadata = Collections.<String, Object> singletonMap("unfiltered", unfilteredResult);
+        Map<String, Object> metadata = Collections.singletonMap("unfiltered", unfilteredResult);
         return QueryUtil.packageResult(filteredList, unfilteredResult.getStatus(), metadata);
     }
     

@@ -333,9 +333,8 @@ public class ShellEx extends Shell {
      *
      * @param name Label text of tab to find.
      * @return Tab corresponding to label text.
-     * @throws Exception Unspecified exception.
      */
-    private ElementTabPane findTabPane(String name) throws Exception {
+    private ElementTabPane findTabPane(String name) {
         ElementTabView tabView = getTabView();
         ElementTabPane tabPane = null;
         

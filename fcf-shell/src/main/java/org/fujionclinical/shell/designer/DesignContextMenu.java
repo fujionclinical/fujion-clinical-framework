@@ -159,9 +159,7 @@ public class DesignContextMenu implements IAutoWired {
         root.setAttribute("controller", this);
         mnuHeader.setImage(DesignConstants.DESIGN_ICON_ACTIVE);
         clipboard.addListener(mnuHeader);
-        menuPopup.addEventListener("open", (event) -> {
-            onOpen(event);
-        });
+        menuPopup.addEventListener("open", this::onOpen);
     }
 
     /**

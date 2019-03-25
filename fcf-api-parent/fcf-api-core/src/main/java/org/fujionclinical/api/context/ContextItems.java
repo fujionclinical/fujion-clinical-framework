@@ -307,9 +307,8 @@ public class ContextItems {
      * Adds context items from a serialized string.
      *
      * @param values Serialized context items to add.
-     * @throws Exception Unspecified exception.
      */
-    public void addItems(String values) throws Exception {
+    public void addItems(String values) {
         for (String line : values.split("[\\r\\n]")) {
             String[] pcs = line.split("\\=", 2);
 

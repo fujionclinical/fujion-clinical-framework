@@ -78,19 +78,15 @@ public class ManifestItem implements IMatchable<ManifestItem> {
     
     @Override
     public int compareTo(ManifestItem o) {
-        int result = compare(implModule, o.implModule);
-        result = result == 0 ? compare(implVendor, o.implVendor) : result;
-        result = result == 0 ? compare(implVersion, o.implVersion) : result;
+        int result = StrUtil.compareToIgnoreCase(implModule, o.implModule);
+        result = result == 0 ? StrUtil.compareToIgnoreCase(implVendor, o.implVendor) : result;
+        result = result == 0 ? StrUtil.compareToIgnoreCase(implVersion, o.implVersion) : result;
         return result;
     }
     
     @Override
     public boolean equals(Object o) {
         return o instanceof ManifestItem && compareTo((ManifestItem) o) == 0;
-    }
-    
-    private int compare(String s1, String s2) {
-        return s1 == s2 ? 0 : s1 == null ? -1 : s2 == null ? 1 : s1.compareToIgnoreCase(s2);
     }
     
     @Override

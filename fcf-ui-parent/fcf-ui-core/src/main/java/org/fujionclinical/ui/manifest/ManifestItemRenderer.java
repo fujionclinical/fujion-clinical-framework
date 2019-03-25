@@ -35,15 +35,10 @@ import org.fujion.event.IEventListener;
 
 public class ManifestItemRenderer extends BaseRenderer<ManifestItem> {
     
-    private final IEventListener listener = new IEventListener() {
-        
-        @Override
-        public void onEvent(Event event) {
-            BaseComponent target = event.getCurrentTarget();
-            Event newEvent = new Event("showManifest", target.getAncestor(Grid.class), target.getData());
-            EventUtil.send(newEvent);
-        }
-        
+    private final IEventListener listener = event -> {
+        BaseComponent target = event.getCurrentTarget();
+        Event newEvent = new Event("showManifest", target.getAncestor(Grid.class), target.getData());
+        EventUtil.send(newEvent);
     };
     
     @Override

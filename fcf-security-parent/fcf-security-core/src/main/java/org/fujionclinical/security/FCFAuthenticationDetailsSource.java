@@ -46,8 +46,7 @@ public class FCFAuthenticationDetailsSource implements AuthenticationDetailsSour
     @Override
     public FCFAuthenticationDetails buildDetails(HttpServletRequest request) {
         log.trace("Building details");
-        FCFAuthenticationDetails details = new FCFAuthenticationDetails(request);
-        return details;
+        return new FCFAuthenticationDetails(request);
     }
     
 }

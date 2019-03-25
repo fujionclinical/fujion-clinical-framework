@@ -25,7 +25,6 @@
  */
 package org.fujionclinical.api.spring;
 
-import org.springframework.expression.AccessException;
 import org.springframework.expression.EvaluationContext;
 
 public class BeanResolver implements org.springframework.expression.BeanResolver {
@@ -37,7 +36,7 @@ public class BeanResolver implements org.springframework.expression.BeanResolver
     }
     
     @Override
-    public Object resolve(EvaluationContext context, String beanName) throws AccessException {
+    public Object resolve(EvaluationContext context, String beanName) {
         return appContextFinder.getChildAppContext().getBean(beanName);
     }
     

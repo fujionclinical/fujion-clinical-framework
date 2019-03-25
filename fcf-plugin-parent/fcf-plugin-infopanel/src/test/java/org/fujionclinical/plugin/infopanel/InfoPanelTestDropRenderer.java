@@ -27,7 +27,6 @@ package org.fujionclinical.plugin.infopanel;
 
 import org.fujion.component.BaseComponent;
 import org.fujion.component.Label;
-import org.fujion.component.Listitem;
 import org.fujion.dragdrop.IDropRenderer;
 
 /**
@@ -45,7 +44,7 @@ public class InfoPanelTestDropRenderer implements IDropRenderer {
      * @return The associated drop item.
      */
     private DroppedItem getDroppedItem(BaseComponent comp) {
-        return (DroppedItem) ((Listitem) comp).getData();
+        return (DroppedItem) comp.getData();
     }
     
     /**

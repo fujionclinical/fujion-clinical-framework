@@ -302,6 +302,6 @@ public class Command {
      */
     @Override
     public boolean equals(Object command) {
-        return command instanceof Command ? name.equalsIgnoreCase(((Command) command).name) : false;
+        return command instanceof Command && name.equalsIgnoreCase(((Command) command).name);
     }
 }

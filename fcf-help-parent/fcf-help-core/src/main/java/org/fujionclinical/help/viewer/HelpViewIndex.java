@@ -66,14 +66,7 @@ public class HelpViewIndex extends HelpViewBase {
     
     private IModelAndView<Listitem, HelpTopic> modelAndView;
     
-    private final IComponentRenderer<Listitem, String> keywordRenderer = new IComponentRenderer<Listitem, String>() {
-        
-        @Override
-        public Listitem render(String term) {
-            return new Listitem(term);
-        }
-        
-    };
+    private final IComponentRenderer<Listitem, String> keywordRenderer = term -> new Listitem(term);
     
     /**
      * Create the help tab for the specified viewer and viewType.
@@ -178,7 +171,7 @@ public class HelpViewIndex extends HelpViewBase {
     protected void init() {
         super.init();
         keywordList = new ListModel<>(topicIndex.keySet());
-        new ModelAndView<Listitem, String>(lstKeywords, keywordList, keywordRenderer);
+        new ModelAndView<>(lstKeywords, keywordList, keywordRenderer);
     }
     
     /**
@@ -237,13 +230,8 @@ public class HelpViewIndex extends HelpViewBase {
      * @return Topic list for key word.
      */
     private List<HelpTopic> getTopics(String keyword) {
-        List<HelpTopic> topics = topicIndex.get(keyword);
-        
-        if (topics == null) {
-            topics = new ArrayList<>();
-            topicIndex.put(keyword, topics);
-        }
-        
+        List<HelpTopic> topics = topicIndex.computeIfAbsent(keyword, k -> new ArrayList<>());
+
         return topics;
     }
     

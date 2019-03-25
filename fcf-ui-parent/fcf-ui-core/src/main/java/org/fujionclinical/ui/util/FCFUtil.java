@@ -55,9 +55,7 @@ public class FCFUtil {
         CASE_INSENSITIVE // Case insensitive by node label.
     }
     
-    private static final IEventListener deferredDelivery = (event) -> {
-        EventUtil.send(event);
-    };
+    private static final IEventListener deferredDelivery = EventUtil::send;
     
     /**
      * Fires an event, deferring delivery if the desktop of the target is not currently active.

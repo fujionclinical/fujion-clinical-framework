@@ -36,7 +36,7 @@ public interface IHelpSearch {
     /**
      * Callback interface for receiving search results.
      */
-    public interface IHelpSearchListener {
+    interface IHelpSearchListener {
         
         /**
          * Called by search engine to report results.

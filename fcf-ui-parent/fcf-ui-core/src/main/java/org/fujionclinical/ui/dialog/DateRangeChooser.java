@@ -274,15 +274,12 @@ public class DateRangeChooser extends Listbox {
     }
     
     /**
-     * onSelect event handler.
+     * When the custom range item is selected, triggers the display of the date range dialog.
      * 
      * @param event The change event.
      */
     @EventHandler("change")
     private void onChange(ChangeEvent event) {
-        /**
-         * When the custom range item is selected, triggers the display of the date range dialog.
-         */
         if (getSelectedItem() == customItem) {
             event.stopPropagation();
             DateRangeDialog.show((range) -> {

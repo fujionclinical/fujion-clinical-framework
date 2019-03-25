@@ -26,6 +26,7 @@
 package org.fujionclinical.ui.util;
 
 import org.fujion.common.MiscUtil;
+import org.fujion.common.StrUtil;
 import org.fujion.component.BaseComponent;
 import org.fujion.component.Treenode;
 import org.fujion.component.Treeview;
@@ -54,14 +55,9 @@ public class TreeUtil {
     /**
      * Default logic for tree item search.
      */
-    private static final ITreenodeSearch defaultTreenodeSearch = new ITreenodeSearch() {
-
-        @Override
-        public boolean isMatch(Treenode item, String text) {
-            String label = item.getLabel();
-            return label != null && label.toLowerCase().contains(text.toLowerCase());
-        }
-
+    private static final ITreenodeSearch defaultTreenodeSearch = (item, text) -> {
+        String label = item.getLabel();
+        return label != null && label.toLowerCase().contains(text.toLowerCase());
     };
 
     /**
@@ -134,7 +130,7 @@ public class TreeUtil {
      */
     public static Treenode findNodeByLabel(Treenode parent, String label, boolean create, Class<? extends Treenode> clazz,
                                            boolean caseSensitive) {
-        Treenode item = null;
+        Treenode item;
 
         for (BaseComponent comp : parent.getChildren()) {
             if (comp instanceof Treenode) {
@@ -258,7 +254,7 @@ public class TreeUtil {
     private static int compare(Treenode item1, Treenode item2) {
         String label1 = item1.getLabel();
         String label2 = item2.getLabel();
-        return label1 == label2 ? 0 : label1 == null ? -1 : label2 == null ? -1 : label1.compareToIgnoreCase(label2);
+        return StrUtil.compareToIgnoreCase(label1, label2);
     }
 
     /**
@@ -348,7 +344,8 @@ public class TreeUtil {
      *
      * @param nodes Treenode components
      */
-    /*TODO:
+    /*
+    /* TODO:
     public static void adjustVisibility(Iterable<Treenode> nodes) {
         if (nodes != null) {
             boolean visibleChildren = parent.getVisibleItemCount() > 0;
@@ -372,6 +369,6 @@ public class TreeUtil {
      * Enforces static class.
      */
     private TreeUtil() {
-    };
+    }
 
 }

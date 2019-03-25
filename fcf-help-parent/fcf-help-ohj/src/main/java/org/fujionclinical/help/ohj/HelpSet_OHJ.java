@@ -39,7 +39,7 @@ import java.util.*;
  */
 public class HelpSet_OHJ extends HelpSetBase {
     
-    private static final Map<String, HelpViewType> viewMap = new HashMap<String, HelpViewType>();
+    private static final Map<String, HelpViewType> viewMap = new HashMap<>();
     
     static {
         viewMap.put("oracle.help.navigator.tocNavigator.TOCNavigator", HelpViewType.TOC);
@@ -49,7 +49,7 @@ public class HelpSet_OHJ extends HelpSetBase {
     
     private final HelpSet helpSet;
     
-    private final List<IHelpView> helpViews = new ArrayList<IHelpView>();
+    private final List<IHelpView> helpViews = new ArrayList<>();
     
     private final String rootURL;
     

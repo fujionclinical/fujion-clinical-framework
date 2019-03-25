@@ -34,7 +34,7 @@ public class SecurityService extends AbstractSecurityService {
     
     private final UserDAO userDAO;
 
-    public SecurityService(UserDAO userDAO) throws Exception {
+    public SecurityService(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
 

@@ -75,7 +75,7 @@ public class GenericEventTest extends CommonTest {
             try {
                 log.info("Received: " + testPacket);
                 assertTrue(testPacket + ": unexpected test packet", tests.remove(testPacket));
-                assertTrue(testPacket + ": name does not match.", testPacket.getEventName().equals(eventName));
+                assertEquals(testPacket + ": name does not match.", testPacket.getEventName(), eventName);
                 assertTrue(testPacket + ": should not have been received.", testPacket.isShouldReceive());
             } catch (AssertionError e) {
                 if (assertionError == null) {

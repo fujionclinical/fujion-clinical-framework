@@ -62,8 +62,8 @@ public class PropertyGrid implements IAutoWired {
     
     private static final String EDITOR_ATTR = "editor";
     
-    private static class RowEx extends Row implements INamespace {};
-    
+    private static class RowEx extends Row implements INamespace {}
+
     @WiredComponent
     private Grid gridProperties;
     

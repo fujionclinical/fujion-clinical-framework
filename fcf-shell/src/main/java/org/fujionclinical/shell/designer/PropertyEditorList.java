@@ -118,8 +118,7 @@ public class PropertyEditorList extends PropertyEditorBase<Combobox> {
     @Override
     protected Object getValue() {
         Comboitem item = editor.getSelectedItem();
-        Object value = item != null ? item.getData() : editor.isReadonly() ? null : editor.getValue();
-        return value;
+        return item != null ? item.getData() : editor.isReadonly() ? null : editor.getValue();
     }
 
     @Override

@@ -32,7 +32,7 @@ import org.fujionclinical.api.domain.IUser;
  */
 public interface ISecurityService {
     
-    static final String ALIAS_TYPE_AUTHORITY = "AUTHORITY";
+    String ALIAS_TYPE_AUTHORITY = "AUTHORITY";
     
     /**
      * Logout out the current desktop instance.
@@ -117,7 +117,7 @@ public interface ISecurityService {
      * @param authority String representation of an authority
      * @return boolean true if found
      */
-    public boolean isGranted(String authority);
+    boolean isGranted(String authority);
     
     /**
      * Checks the current SecurityContext for the specified authorities.
@@ -127,13 +127,13 @@ public interface ISecurityService {
      *            authorities must be granted.
      * @return True if Authentication is granted authorities
      */
-    public boolean isGranted(String authorities, boolean requiresAll);
+    boolean isGranted(String authorities, boolean requiresAll);
     
     /**
      * Returns a non-null value if logins are disabled.
      * 
      * @return Returns the login disabled message if logins are disabled; null otherwise.
      */
-    public String loginDisabled();
+    String loginDisabled();
     
 }

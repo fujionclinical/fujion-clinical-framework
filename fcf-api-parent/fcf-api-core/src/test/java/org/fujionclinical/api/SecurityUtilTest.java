@@ -34,7 +34,7 @@ public class SecurityUtilTest {
     
     private static final Log log = LogFactory.getLog(SecurityUtilTest.class);
     
-    private static String[] CONSTRAINTS = { "1,ABCDEFGHIJKLMNOPQURSTUVWXYZ", "1,abcdefghijklmnopqurstuvwxyz",
+    private static final String[] CONSTRAINTS = { "1,ABCDEFGHIJKLMNOPQURSTUVWXYZ", "1,abcdefghijklmnopqurstuvwxyz",
             "1,!@#$%^&*_-+" };
     
     @Test

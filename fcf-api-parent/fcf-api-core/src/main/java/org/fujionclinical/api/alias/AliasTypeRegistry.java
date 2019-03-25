@@ -169,7 +169,7 @@ public class AliasTypeRegistry extends AbstractRegistry<String, AliasType> imple
                 continue;
             }
 
-            try (InputStream is = resource.getInputStream();) {
+            try (InputStream is = resource.getInputStream()) {
 
                 Properties props = new Properties();
                 props.load(is);

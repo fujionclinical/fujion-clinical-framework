@@ -227,7 +227,7 @@ public class PropertyInfo {
                 return;
             }
             
-            Method method = null;
+            Method method;
             
             try {
                 method = PropertyUtil.findSetter(setter, instance, value == null ? null : value.getClass());

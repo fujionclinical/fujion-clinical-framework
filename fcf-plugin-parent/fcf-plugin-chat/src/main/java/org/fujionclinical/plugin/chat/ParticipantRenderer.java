@@ -80,4 +80,4 @@ public class ParticipantRenderer implements IComponentRenderer<Listitem, IPublis
         this.hideExclusions = hideExclusions;
     }
 
-};
+}

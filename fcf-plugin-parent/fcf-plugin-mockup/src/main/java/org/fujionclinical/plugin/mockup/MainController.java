@@ -31,8 +31,6 @@ import org.fujion.component.Iframe;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.shell.plugins.PluginController;
 
-import java.io.IOException;
-
 /**
  * Simple component to display third-party UI mockups.
  */
@@ -47,7 +45,7 @@ public class MainController extends PluginController {
     
     private final MockupTypeEnumerator mockupTypes;
     
-    public MainController(MockupTypeEnumerator mockupTypes) throws IOException {
+    public MainController(MockupTypeEnumerator mockupTypes) {
         this.mockupTypes = mockupTypes;
     }
     

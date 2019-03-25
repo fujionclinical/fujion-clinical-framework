@@ -32,8 +32,6 @@ import org.fujionclinical.shell.property.PropertyInfo;
 
 import java.awt.*;
 
-;
-
 /**
  * Property editor for color properties. If the associated property has defined choices, the color
  * picker will be limited to those values only. Otherwise, the color palette is considered
@@ -61,8 +59,8 @@ public class PropertyEditorColor extends PropertyEditorBase<ColorPicker> {
             for (String choice : values) {
                 String[] color = choice.split("\\:", 2);
 
-                for (int i = 0; i < color.length; i++) {
-                    ColorPickeritem item = new ColorPickeritem(ColorUtil.toColor(color[i]));
+                for (String s : color) {
+                    ColorPickeritem item = new ColorPickeritem(ColorUtil.toColor(s));
                     editor.addChild(item);
                 }
             }

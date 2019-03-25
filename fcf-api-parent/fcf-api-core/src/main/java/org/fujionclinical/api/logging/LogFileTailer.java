@@ -143,15 +143,13 @@ public class LogFileTailer implements Runnable {
      */
     protected void fireNewFileLine(String line) {
         for (LogFileTailerListener fileTailerListener : this.listeners) {
-            LogFileTailerListener l = fileTailerListener;
-            l.newFileLine(line);
+            fileTailerListener.newFileLine(line);
         }
     }
     
     protected void fireMaxActiveIntervalExceeded() {
         for (LogFileTailerListener fileTailerListener : this.listeners) {
-            LogFileTailerListener l = fileTailerListener;
-            l.tailerTerminated();
+            fileTailerListener.tailerTerminated();
         }
     }
     
@@ -200,7 +198,7 @@ public class LogFileTailer implements Runnable {
     @Override
     public void run() {
         // The file pointer keeps track of where we are in the file
-        long filePointer = 0;
+        long filePointer;
         long startTime = new Date().getTime();
         
         // Determine start point

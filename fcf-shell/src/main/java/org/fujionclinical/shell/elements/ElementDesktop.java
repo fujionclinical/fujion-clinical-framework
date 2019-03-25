@@ -40,6 +40,8 @@ import org.fujionclinical.ui.action.ActionUtil;
 import org.fujionclinical.ui.util.MenuUtil;
 import org.fujionclinical.ui.util.ThemeUtil;
 
+import java.util.Objects;
+
 /**
  * This is the topmost component of the layout.
  */
@@ -101,7 +103,7 @@ public class ElementDesktop extends ElementUI {
 
     private final Shell shell;
 
-    public ElementDesktop(Shell shell) throws Exception {
+    public ElementDesktop(Shell shell) {
         super();
         this.shell = shell;
         desktopOuter = createFromTemplate();
@@ -215,7 +217,7 @@ public class ElementDesktop extends ElementUI {
      * @return True if the application ids match.
      */
     public boolean hasAppId(String appId) {
-        return appId == null ? this.appId == null : appId.equals(this.appId);
+        return Objects.equals(appId, this.appId);
     }
 
     /**

@@ -45,11 +45,11 @@ public class HelpHistory {
         void onTopicSelected(HelpTopic topic);
     }
 
+    private static final int MAXSIZE = 50;
+
     private final IListModel<HelpTopic> history;
 
     private final List<ITopicListener> topicListeners = new ArrayList<>();
-
-    private final int maxsize = 50;
 
     private int position = -1;
 
@@ -88,7 +88,7 @@ public class HelpHistory {
     public void add(HelpTopic topic) {
         if (topic != null && topic.getURL() != null && !sameTopic(topic, getCurrentItem())) {
             removeRange(position + 1, history.size());
-            removeRange(0, history.size() - maxsize);
+            removeRange(0, history.size() - MAXSIZE);
             position = history.size();
             history.add(topic);
         }
@@ -114,7 +114,7 @@ public class HelpHistory {
      * @return True if topics are equal.
      */
     private boolean sameTopic(HelpTopic topic1, HelpTopic topic2) {
-        return topic1 == topic2 || (topic1 != null && topic2 != null && topic1.equals(topic2));
+        return topic1 == topic2 || (topic1 != null && topic1.equals(topic2));
     }
 
     /**

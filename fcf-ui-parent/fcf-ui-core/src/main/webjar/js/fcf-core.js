@@ -50,17 +50,17 @@ var fcf = {
 		this.evt = evt || 'STATUS.TIMING';
 		this.fnc = fnc || fcf.stopwatch.format;
 	}
-}
+};
 
 fcf.stopwatch.prototype.start = function() {
 	this.begin = new Date();
 	this.elapsed = null;
-},
+};
 
 fcf.stopwatch.prototype.stop = function() {
 	this.elapsed = new Date() - this.begin;
 	fcf.fireLocalEvent(this.evt, this.fnc(this));
-},
+};
 
 fcf.stopwatch.format = function(sw) {
 	var tm = sw.elapsed;

@@ -110,7 +110,7 @@ public class SecurityDomain implements ISecurityDomain {
             properties = new Properties();
             
             if (attributes != null) {
-                try (StringReader reader = new StringReader(attributes.replace(';', '\n'));) {
+                try (StringReader reader = new StringReader(attributes.replace(';', '\n'))) {
                     this.properties.load(reader);
                 } catch (Exception e) {
                     

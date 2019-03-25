@@ -677,7 +677,7 @@ public abstract class ElementBase {
      *
      * @return The class of the associated property editor.
      */
-    public Class<? extends Object> getPropEditClass() {
+    public Class<?> getPropEditClass() {
         return null;
     }
     

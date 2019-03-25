@@ -220,5 +220,5 @@ public class SecurityUtil {
      * Enforce static class.
      */
     private SecurityUtil() {
-    };
+    }
 }

@@ -38,7 +38,7 @@ public class TestProperty extends CommonTest {
     
     
     @Test
-    public void testService() throws Exception {
+    public void testService() {
         String dir = System.getProperty("java.io.tmpdir") + "fcf";
         System.out.println("Test database is at: " + dir);
         PropertyService service = appContext.getBean(PropertyService.class);

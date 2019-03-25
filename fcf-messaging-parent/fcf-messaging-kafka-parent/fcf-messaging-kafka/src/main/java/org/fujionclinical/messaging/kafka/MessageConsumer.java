@@ -33,6 +33,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.fujionclinical.api.messaging.IMessageConsumer;
 import org.fujionclinical.api.messaging.Message;
 
+import java.time.Duration;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -134,7 +135,7 @@ public class MessageConsumer implements IMessageConsumer {
             ConsumerRecords<Object, Object> records;
             
             synchronized (consumer) {
-                records = consumer.poll(0);
+                records = consumer.poll(Duration.ZERO);
                 consumer.commitAsync();
             }
             

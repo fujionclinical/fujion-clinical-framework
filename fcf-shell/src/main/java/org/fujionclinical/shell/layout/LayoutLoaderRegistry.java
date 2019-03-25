@@ -32,7 +32,7 @@ import org.fujionclinical.api.spring.BeanRegistry;
  */
 public class LayoutLoaderRegistry extends BeanRegistry<String, ILayoutLoader> {
 
-    private static LayoutLoaderRegistry instance = new LayoutLoaderRegistry();
+    private static final LayoutLoaderRegistry instance = new LayoutLoaderRegistry();
 
     public static LayoutLoaderRegistry getInstance() {
         return instance;

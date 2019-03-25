@@ -132,7 +132,7 @@ public class AliasType {
                 pos = key.indexOf(srcx, pos);
                 
                 if (pos > start) {
-                    sb.append(key.substring(start, pos));
+                    sb.append(key, start, pos);
                 }
                 
                 start = pos += srcx.length();
@@ -144,4 +144,4 @@ public class AliasType {
         return sb.toString();
     }
     
-};
+}

@@ -116,6 +116,6 @@ public class FrameworkUtil {
      * Enforce static class.
      */
     private FrameworkUtil() {
-    };
-    
+    }
+
 }

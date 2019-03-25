@@ -123,7 +123,6 @@ public abstract class BinaryTransform extends BaseTransform {
 
         int i = offset;
         while (data[i++] != 0x00) {
-            ;
         }
         return getString(data, offset, i - offset - 1);
     }

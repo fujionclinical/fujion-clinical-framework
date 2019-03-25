@@ -71,9 +71,8 @@ public abstract class AbstractProcessor<T extends BaseMojo> {
     
     /**
      * @param mojo The Maven base mojo.
-     * @throws Exception Unspecified exception.
      */
-    public AbstractProcessor(T mojo) throws Exception {
+    public AbstractProcessor(T mojo) {
         this.mojo = mojo;
     }
     
@@ -151,7 +150,7 @@ public abstract class AbstractProcessor<T extends BaseMojo> {
         
         if (targetPath != null) {
             File out = mojo.newStagingFile(relocateResource(targetPath), resource.getTime());
-            try (OutputStream outputStream = new FileOutputStream(out);) {
+            try (OutputStream outputStream = new FileOutputStream(out)) {
                 transform.transform(resource, outputStream);
                 return true;
             }

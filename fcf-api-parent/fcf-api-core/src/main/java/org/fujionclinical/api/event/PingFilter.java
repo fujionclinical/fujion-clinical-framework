@@ -39,8 +39,8 @@ public class PingFilter implements Serializable {
     
     public enum PingFilterType {
         APP_NAME, SENTINEL_EVENT
-    };
-    
+    }
+
     public final PingFilterType type;
     
     public final String value;

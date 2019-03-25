@@ -37,7 +37,7 @@ import static org.junit.Assert.assertNull;
 public class TestSecurity extends MockUITest {
     
     @Test
-    public void testService() throws Exception {
+    public void testService() {
         String dir = System.getProperty("java.io.tmpdir") + "fcf";
         System.out.println("Test database is at: " + dir);
         SecurityDomainDAO sdao = SpringUtil.getAppContext().getBean(SecurityDomainDAO.class);

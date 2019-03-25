@@ -70,7 +70,7 @@ public class TestH2 {
         try (H2DataSource ds = h2.init();
                 Connection connection = ds.getConnection();
                 PreparedStatement ps = connection.prepareStatement("SELECT X FROM SYSTEM_RANGE(1, 9);");
-                ResultSet rs = ps.executeQuery();) {
+                ResultSet rs = ps.executeQuery()) {
             int i = 0;
 
             while (rs.next()) {

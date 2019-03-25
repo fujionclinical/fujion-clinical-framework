@@ -47,8 +47,8 @@ public abstract class DrillDownIconBase<T> extends Image {
     
     public enum StockIcons {
         standard, report, image
-    };
-    
+    }
+
     /**
      * Constructor for DrillDownLink
      *

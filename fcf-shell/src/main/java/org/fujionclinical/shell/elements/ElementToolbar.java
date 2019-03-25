@@ -88,13 +88,9 @@ public class ElementToolbar extends ElementUI {
     @Override
     protected void beforeAddChild(ElementBase child) {
         super.beforeAddChild(child);
-        Object cmp = ((ElementUI) child).getOuterComponent();
-        
-        if (cmp instanceof BaseUIComponent) {
-            BaseUIComponent comp = (BaseUIComponent) cmp;
-            comp.setWidth(null);
-            comp.setHeight(null);
-        }
+        BaseUIComponent comp = ((ElementUI) child).getOuterComponent();
+        comp.setWidth(null);
+        comp.setHeight(null);
     }
     
     public Alignment getAlignment() {

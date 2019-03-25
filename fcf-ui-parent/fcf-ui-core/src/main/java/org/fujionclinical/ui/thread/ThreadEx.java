@@ -62,9 +62,8 @@ public class ThreadEx implements IAbortable {
          * Run method
          *
          * @param thread The thread.
-         * @throws Exception Unspecified exception.
          */
-        void run(ThreadEx thread) throws Exception;
+        void run(ThreadEx thread);
         
         /**
          * Abort the running thread.

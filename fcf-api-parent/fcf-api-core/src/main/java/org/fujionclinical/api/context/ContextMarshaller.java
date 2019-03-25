@@ -41,7 +41,7 @@ public class ContextMarshaller {
     
     private final IDigitalSignature signer;
     
-    public ContextMarshaller(IDigitalSignature signer) throws Exception {
+    public ContextMarshaller(IDigitalSignature signer) {
         super();
         this.signer = signer;
     }

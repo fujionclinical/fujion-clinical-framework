@@ -36,8 +36,8 @@ public interface IQueryResult<T> {
     
     enum CompletionStatus {
         COMPLETED, ABORTED, ERROR
-    };
-    
+    }
+
     /**
      * Returns the completion status of the query.
      * 

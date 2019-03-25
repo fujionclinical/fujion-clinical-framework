@@ -35,7 +35,7 @@ public interface ISurveyResponse {
     /**
      * Callback interface for asynchronous responses.
      */
-    public interface ISurveyCallback {
+    interface ISurveyCallback {
         
         void response(ISurveyResponse response);
     }

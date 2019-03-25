@@ -43,8 +43,8 @@ public class UserContext extends ManagedContext<IUser> {
     protected static final String CCOW_FULLNAME = SUBJECT_NAME + ".Co.Name";
     
     // This is the interface that every user context subscriber must implement.
-    public interface IUserContextEvent extends IContextEvent {};
-    
+    public interface IUserContextEvent extends IContextEvent {}
+
     /**
      * Request a user context change.
      * 

@@ -59,22 +59,6 @@ public class ElementTreePane extends ElementUI {
 
     private boolean canOpen;
 
-    /**
-     * Handler for node click events. Click will select the node and associated pane.
-     */
-    private final IEventListener clickListener = (event) -> {
-        treeView.setActivePane(ElementTreePane.this);
-    };
-
-    /**
-     * Handler for node double click events. Double click will toggle the node's drop down state
-     */
-    private final IEventListener dblclickListener = (event) -> {
-        if (canOpen) {
-            setOpen(!open);
-        }
-    };
-
     public ElementTreePane() {
         super();
         pane.setFlex("1");
@@ -83,7 +67,21 @@ public class ElementTreePane extends ElementUI {
         node = (Span) createFromTemplate();
         associateComponent(node);
         anchor = (Hyperlink) node.getFirstChild();
+        /**
+         * Handler for node click events. Click will select the node and associated pane.
+         */
+        IEventListener clickListener = event -> {
+            treeView.setActivePane(ElementTreePane.this);
+        };
         anchor.addEventListener("click", clickListener);
+        /**
+         * Handler for node double click events. Double click will toggle the node's drop down state
+         */
+        IEventListener dblclickListener = event -> {
+            if (canOpen) {
+                setOpen(!open);
+            }
+        };
         anchor.addEventListener("dblclick", dblclickListener);
         associateComponent(anchor);
     }

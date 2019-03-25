@@ -29,6 +29,6 @@ package org.fujionclinical.help;
  * Enum for representing known view types.
  */
 public enum HelpViewType {
-    UNKNOWN, TOC, KEYWORD, INDEX, SEARCH, HISTORY, GLOSSARY;
-    
+    UNKNOWN, TOC, KEYWORD, INDEX, SEARCH, HISTORY, GLOSSARY
+
 }

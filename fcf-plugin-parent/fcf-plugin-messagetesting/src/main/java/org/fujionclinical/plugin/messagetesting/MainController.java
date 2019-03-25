@@ -31,6 +31,7 @@ import org.fujion.component.*;
 import org.fujion.event.ChangeEvent;
 import org.fujion.event.Event;
 import org.fujion.event.IEventListener;
+import org.fujion.model.IComponentRenderer;
 import org.fujion.model.ListModel;
 import org.fujionclinical.api.event.EventMessage;
 import org.fujionclinical.api.event.EventUtil;
@@ -118,13 +119,9 @@ public class MainController extends PluginController {
         gridReceived.getRows().setRenderer(new ReceivedMessageRenderer(gridReceived));
         //channels.setMultiple(true);
         lboxSubscriptions.setModel(channels);
-        lboxSubscriptions.setRenderer((String channel) -> {
-            return new Listitem(channel);
-        });
+        lboxSubscriptions.setRenderer((IComponentRenderer<Listitem, String>) Listitem::new);
         cboxChannels.setModel(channels2);
-        cboxChannels.setRenderer((String channel) -> {
-            return new Comboitem(channel);
-        });
+        cboxChannels.setRenderer((IComponentRenderer<Comboitem, String>) Comboitem::new);
     }
 
     private Collection<IMessageProducer> getProviders() {

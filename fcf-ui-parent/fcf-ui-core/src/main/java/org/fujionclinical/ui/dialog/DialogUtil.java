@@ -41,8 +41,8 @@ import static org.fujionclinical.ui.dialog.DialogConstants.*;
  */
 public class DialogUtil {
     
-    public interface IConfirmCallback extends IResponseCallback<Boolean> {};
-    
+    public interface IConfirmCallback extends IResponseCallback<Boolean> {}
+
     /* ---------------------- Confirmation Dialogs ---------------------- */
     
     /**

@@ -34,7 +34,7 @@ import org.springframework.beans.factory.FactoryBean;
 public class NullFactoryBean implements FactoryBean<Void> {
     
     @Override
-    public Void getObject() throws Exception {
+    public Void getObject() {
         return null;
     }
     

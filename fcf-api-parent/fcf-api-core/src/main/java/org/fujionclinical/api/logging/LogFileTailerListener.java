@@ -39,11 +39,11 @@ public interface LogFileTailerListener {
      * 
      * @param line The new line that has been added to the tailed file
      */
-    public void newFileLine(String line);
+    void newFileLine(String line);
     
     /**
      * FileTailer exceeded {@link LogFileTailer#getMaxActiveInterval()} Note that this means that
      * {@link LogFileTailer#stopTailing()} was called
      */
-    public void tailerTerminated();
+    void tailerTerminated();
 }

@@ -335,7 +335,7 @@ public class LayoutParser {
      */
     private Tag getTag(Element node, Tag... tags) {
         String name = node.getTagName();
-        String error = null;
+        String error;
         
         try {
             Tag tag = Tag.valueOf(name.toUpperCase());

@@ -39,14 +39,7 @@ public class ActionUtil {
     /**
      * Comparator for sorting actions alphabetically by display text.
      */
-    public static final Comparator<IAction> comparator = new Comparator<IAction>() {
-        
-        @Override
-        public int compare(IAction a1, IAction a2) {
-            return a1.toString().compareToIgnoreCase(a2.toString());
-        }
-        
-    };
+    public static final Comparator<IAction> comparator = (a1, a2) -> a1.toString().compareToIgnoreCase(a2.toString());
     
     /**
      * Creates an action object from fields.

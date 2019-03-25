@@ -39,7 +39,7 @@ public class TestCHM {
     
     class TestMojo extends HelpConverterMojo {
         
-        TestMojo() throws Exception {
+        TestMojo() {
             this.stagingDirectory = getTargetDir();
         }
         

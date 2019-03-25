@@ -265,7 +265,7 @@ public abstract class ListFormController<DAO> extends CaptionedFormController {
      */
     private Column getColumnByIndex(int index) {
         for (BaseComponent comp : columns.getChildren()) {
-            if (((Integer) comp.getAttribute(COL_INDEX_ATTR)).intValue() == index) {
+            if ((Integer) comp.getAttribute(COL_INDEX_ATTR) == index) {
                 return (Column) comp;
             }
         }

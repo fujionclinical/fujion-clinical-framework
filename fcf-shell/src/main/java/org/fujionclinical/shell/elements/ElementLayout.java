@@ -53,9 +53,7 @@ public class ElementLayout extends ElementUI {
     private boolean linked = true;
     
     private Layout layout;
-    
-    private final Div div = new Div();
-    
+
     private PluginDefinition def;
     
     private boolean loaded;
@@ -63,6 +61,7 @@ public class ElementLayout extends ElementUI {
     private boolean initializing;
     
     public ElementLayout() {
+        Div div = new Div();
         fullSize(div);
         div.addStyle("display", "flex");
         setOuterComponent(div);
@@ -100,7 +99,7 @@ public class ElementLayout extends ElementUI {
         return (linked ? "Linked" : "Embedded") + " Layout - " + layoutName;
     }
     
-    public Layout getLayout() throws Exception {
+    public Layout getLayout() {
         if (layout == null) {
             String xml = LayoutUtil.getLayoutContent(new LayoutIdentifier(layoutName, shared));
             
@@ -158,7 +157,7 @@ public class ElementLayout extends ElementUI {
      */
     @Override
     public Iterable<ElementBase> getSerializableChildren() {
-        return linked ? Collections.<ElementBase> emptyList() : super.getSerializableChildren();
+        return linked ? Collections.emptyList() : super.getSerializableChildren();
     }
     
     /**

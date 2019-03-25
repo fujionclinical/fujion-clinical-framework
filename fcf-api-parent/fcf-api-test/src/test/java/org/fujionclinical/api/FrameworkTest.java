@@ -33,8 +33,8 @@ import static org.junit.Assert.*;
 
 public class FrameworkTest extends CommonTest {
     
-    private class TestBean {};
-    
+    private class TestBean {}
+
     @Test
     public void testObjectRegistration() {
         // Testing simple object registration/unregistration

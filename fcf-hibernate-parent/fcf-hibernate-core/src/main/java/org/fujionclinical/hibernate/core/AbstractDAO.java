@@ -41,8 +41,8 @@ public class AbstractDAO<T> {
     
     public enum Operation {
         PERSIST, DELETE, SAVE, UPDATE, SAVEORUPDATE, LOAD
-    };
-    
+    }
+
     private final SessionFactory sessionFactory;
     
     public AbstractDAO(SessionFactory sessionFactory) {
@@ -76,10 +76,9 @@ public class AbstractDAO<T> {
     public T get(Class<T> clazz, Serializable id) {
         Session session = getSession();
         Transaction tx = session.beginTransaction();
-        T result = null;
-        
+
         try {
-            result = getSession().get(clazz, id);
+            T result = getSession().get(clazz, id);
             tx.commit();
             return result;
         } catch (Exception e) {

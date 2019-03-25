@@ -149,7 +149,7 @@ public class FCF2XML {
                         continue;
                     }
 
-                    properties.put(name, value.toString());
+                    properties.put(name, value);
                 } catch (Exception e) {}
             }
         }
@@ -159,8 +159,6 @@ public class FCF2XML {
             child.getAttributes().setNamedItem(attr);
             attr.setValue(entry.getValue());
         }
-
-        properties = null;
 
         for (BaseComponent cmp : root.getChildren()) {
             toXML(cmp, child);

@@ -43,9 +43,8 @@ public class HelpView implements IHelpView {
      * 
      * @param topicTree The associated topic tree.
      * @param viewType View type.
-     * @throws Exception An exception.
      */
-    public HelpView(HelpTopicTree topicTree, HelpViewType viewType) throws Exception {
+    public HelpView(HelpTopicTree topicTree, HelpViewType viewType) {
         this.viewType = viewType;
         
         if (viewType == HelpViewType.TOC) {

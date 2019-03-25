@@ -32,7 +32,7 @@ import java.util.List;
  */
 public interface IPropertyService {
     
-    static final String ALIAS_TYPE_PROPERTY = "PROPERTY";
+    String ALIAS_TYPE_PROPERTY = "PROPERTY";
     
     /**
      * Returns true if the service is available.

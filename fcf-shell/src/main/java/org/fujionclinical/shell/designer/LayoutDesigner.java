@@ -424,7 +424,7 @@ public class LayoutDesigner implements IAutoWired {
             ele.bringToFront();
         }
         
-        if (obj instanceof BaseComponent) {
+        if (obj != null) {
             highlight((BaseComponent) obj);
         }
         updateControls();

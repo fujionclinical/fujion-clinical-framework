@@ -53,7 +53,7 @@ public class MenuUtil {
      */
     public static BaseMenuComponent addMenuOrMenuItem(String path, BaseMenuComponent ele, BaseComponent parent,
                                                       BaseComponent insertBefore) {
-        String pcs[] = path == null ? NULL_PATH : path.split("\\\\");
+        String[] pcs = path == null ? NULL_PATH : path.split("\\\\");
         int last = pcs.length - 1;
 
         for (int i = 0; i < last; i++) {
@@ -73,7 +73,7 @@ public class MenuUtil {
      * @param parent The starting menu container.
      */
     public static void pruneMenus(BaseComponent parent) {
-        while (parent != null && parent instanceof BaseMenuComponent) {
+        while (parent instanceof BaseMenuComponent) {
             if (parent.getChildren().isEmpty()) {
                 BaseComponent newParent = parent.getParent();
                 parent.destroy();

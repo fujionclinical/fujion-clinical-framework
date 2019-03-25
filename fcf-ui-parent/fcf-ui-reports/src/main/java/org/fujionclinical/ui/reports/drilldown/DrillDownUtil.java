@@ -103,10 +103,10 @@ public class DrillDownUtil {
         if (drillDownDisplayClass != null) {
             if (showIcons()) {
                 if (iconParent != null) {
-                    new DrillDownLink<Object>(dataObject, drillDownDisplayClass).setParent(iconParent);
+                    new DrillDownLink<>(dataObject, drillDownDisplayClass).setParent(iconParent);
                 }
             } else if (clickTarget != null) {
-                new DrillDownListener<Object>(clickTarget, dataObject, drillDownDisplayClass);
+                new DrillDownListener<>(clickTarget, dataObject, drillDownDisplayClass);
             }
         }
     }

@@ -97,7 +97,7 @@ public class DrillDownDisplay extends PopupDialog {
      */
     private class MultiListbox extends Listbox implements IEventListener {
         
-        private String defaultValue = null;
+        private String defaultValue;
         
         /**
          * Creates the list box to fill the parent cell. Capture select and click events to undo any
@@ -125,8 +125,6 @@ public class DrillDownDisplay extends PopupDialog {
             if (getSelectedIndex() != -1) {
                 setSelectedIndex(-1);
             }
-            
-            return;
         }
         
         /**

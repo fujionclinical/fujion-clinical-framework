@@ -51,15 +51,15 @@ public abstract class AbstractQueryService<T> implements IQueryService<T> {
             return null;
         }
         
-    };
-    
+    }
+
     private final IAsyncQueryStrategy<T> strategy;
     
     /**
      * Create the query service using the default async query strategy.
      */
     public AbstractQueryService() {
-        this(new ThreadedQueryStrategy<T>());
+        this(new ThreadedQueryStrategy<>());
     }
     
     /**
