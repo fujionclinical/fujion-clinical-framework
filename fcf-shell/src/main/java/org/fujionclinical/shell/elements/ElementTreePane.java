@@ -26,7 +26,6 @@
 package org.fujionclinical.shell.elements;
 
 import org.fujion.component.*;
-import org.fujion.event.IEventListener;
 import org.fujionclinical.ui.util.ThemeUtil;
 
 /**
@@ -43,9 +42,9 @@ public class ElementTreePane extends ElementUI {
 
     private final Div pane = new Div();
 
-    private final Span node;
+    private final BaseUIComponent node;
 
-    private final Hyperlink anchor;
+    private final BaseLabeledComponent anchor;
 
     private ElementUI mainChild;
 
@@ -64,25 +63,18 @@ public class ElementTreePane extends ElementUI {
         pane.setFlex("1");
         pane.setVisible(false);
         setOuterComponent(pane);
-        node = (Span) createFromTemplate();
+        node = createFromTemplate();
         associateComponent(node);
-        anchor = (Hyperlink) node.getFirstChild();
-        /**
-         * Handler for node click events. Click will select the node and associated pane.
-         */
-        IEventListener clickListener = event -> {
-            treeView.setActivePane(ElementTreePane.this);
-        };
-        anchor.addEventListener("click", clickListener);
-        /**
-         * Handler for node double click events. Double click will toggle the node's drop down state
-         */
-        IEventListener dblclickListener = event -> {
+        anchor = node.getFirstChild(BaseLabeledComponent.class);
+        // Handler for node click events. Click will select the node and associated pane.
+        anchor.addEventListener("click", event ->
+                treeView.setActivePane(ElementTreePane.this));
+        // Handler for node double click events. Double click will toggle the node's drop down state
+        anchor.addEventListener("dblclick", event -> {
             if (canOpen) {
                 setOpen(!open);
             }
-        };
-        anchor.addEventListener("dblclick", dblclickListener);
+        });
         associateComponent(anchor);
     }
 
@@ -93,7 +85,7 @@ public class ElementTreePane extends ElementUI {
      */
     private void setSelected(boolean selected) {
         this.selected = selected;
-        anchor.toggleClass(treeView.getSelectionStyle().getThemeClass(), "btn-secondary", selected);
+        anchor.toggleClass(treeView.getSelectionStyle().getThemeClass(), null, selected);
     }
 
     /**
@@ -295,7 +287,7 @@ public class ElementTreePane extends ElementUI {
         moveChild(childpane.node, beforepane.node);
     }
 
-    /*package*/ Span getNode() {
+    /*package*/ BaseUIComponent getNode() {
         return node;
     }
 

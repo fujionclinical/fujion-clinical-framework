@@ -1,5 +1,19 @@
 @CHARSET "UTF-8";
 
+/* Bootstrap Extensions */
+
+.label-lg {
+	font-size: 1.25rem;
+}
+
+.label-md {
+	font-size: 1rem;
+}
+
+.label-sm {
+	font-size: 0.875rem;
+}
+
 /* Prompt Dialog */
 
 .fcf-promptdialog {
@@ -128,7 +142,7 @@
     display: none;
 }
 
-.fcf-sessionmonitor-lock-panel .fcf-toolbar {
+.fcf-sessionmonitor-lock-panel .fujion_toolbar {
 	border: none;
 }
 

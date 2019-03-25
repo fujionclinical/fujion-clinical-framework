@@ -246,6 +246,7 @@ public class AboutDialog extends FrameworkController {
             Row row = new Row();
             Rowcell cell = new Rowcell();
             cell.setColspan(2);
+            cell.addClass("fcf-about-description");
             row.addChild(cell);
             cell.addChild(FCFUtil.getTextComponent(aboutParams.description));
             rows.addChild(row);

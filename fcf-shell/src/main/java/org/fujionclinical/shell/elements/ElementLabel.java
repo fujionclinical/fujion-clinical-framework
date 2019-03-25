@@ -39,7 +39,7 @@ public class ElementLabel extends ElementUI {
     
     private final Label label = new Label();
     
-    private ThemeUtil.LabelSize size = ThemeUtil.LabelSize.DEFAULT;
+    private ThemeUtil.LabelSize size = ThemeUtil.LabelSize.MEDIUM;
     
     private ThemeUtil.LabelStyle style = ThemeUtil.LabelStyle.DEFAULT;
     

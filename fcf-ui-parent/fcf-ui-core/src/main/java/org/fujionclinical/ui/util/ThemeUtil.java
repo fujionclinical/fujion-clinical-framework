@@ -61,7 +61,7 @@ public class ThemeUtil {
      * Corresponds to Bootstrap button size classes.
      */
     public enum ButtonSize implements IThemeClass {
-        LARGE("lg"), MEDIUM("md"), SMALL("sm"), TINY("xs");
+        LARGE("lg"), MEDIUM("md"), SMALL("sm");
 
         private final String themeClass;
 
@@ -84,7 +84,7 @@ public class ThemeUtil {
      * Corresponds to Bootstrap button style classes.
      */
     public enum ButtonStyle implements IThemeClass {
-        DEFAULT, PRIMARY, SUCCESS, INFO, WARNING, DANGER, LINK;
+        PRIMARY, SECONDARY, SUCCESS, INFO, WARNING, DANGER, LINK;
 
         @Override
         public String getThemeClass() {
@@ -101,7 +101,7 @@ public class ThemeUtil {
      * Corresponds to Bootstrap button size classes.
      */
     public enum LabelSize implements IThemeClass {
-        XLARGE("xl"), LARGE("lg"), DEFAULT("rg"), SMALL("sm"), TINY("xs");
+        LARGE("lg"), MEDIUM("md"), SMALL("sm");
 
         private final String themeClass;
 

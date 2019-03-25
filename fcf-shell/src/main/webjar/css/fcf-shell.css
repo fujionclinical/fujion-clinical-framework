@@ -35,51 +35,11 @@
      padding: 0;
 }
 
-.fcf-desktop-notitle {
- 	display: none;
-}
-
 .fcf-plugin-container {
     display: block;
 	position: relative;
 	overflow: auto;
 	padding: 0!important;
-}
-
-.fcf-anchor {
-	background: transparent!important;
-	border: none!important;
-	text-decoration: underline!important;
-	margin: 4px!important;
-}
-
-.fcf-topToolbar {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-}
-
-.fcf-pluginWithToolbar {
-	position: absolute;
-	overflow: auto;
-	top: 30px;
-	bottom: 0;
-	right: 0;
-	left: 0;
-}
-
-.fcf-pluginWithoutToolbar {
-	position: absolute;
-	overflow: auto;
-	top: 0;
-	bottom: 0;
-	right: 0;
-	left: 0;
-}
-
-.fcf-tab-panel {
-	padding: 0;
 }
 
 .fcf-menubar.fcf-designmode-active {
@@ -151,26 +111,6 @@
 	display: none;
 }
 		
-.fcf-header-cell * {
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
-	background: none!important;
-	border: none!important;
-}
-
-.fcf-header-row {
-	padding: 0 5px 0 5px;
-	overflow: hidden;
-}
-
-.fcf-header-row * {
-	text-overflow: ellipsis!important;
-	white-space: nowrap!important;
-	vertical-align: middle!important;
-	overflow: visible;
-}
-
 .fcf-stepview {
     display: flex;
     flex-direction: row;
@@ -242,10 +182,6 @@
 *.fcf-designmode-active {
 	outline: 2px dotted lightgray;
 	position: relative;
-}
-
-.fcf-designmode-active > .fcf_mask {
-	font-size: 75%;
 }
 
 .fcf-about-header {

@@ -58,7 +58,7 @@ public class ElementStepPane extends ElementUI {
         associateComponent(step);
         pane.setVisible(false);
         step.addChild(button);
-        button.addClass("fcf-step-button");
+        button.addClass("fcf-stepview-button");
         button.addClass("btn btn-sm");
         button.addEventListener("click", (event) -> {
             ((ElementStepView) getParent()).setActivePane(ElementStepPane.this);

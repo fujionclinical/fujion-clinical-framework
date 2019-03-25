@@ -45,7 +45,7 @@ public class ElementButton extends ElementActionBase {
     private ThemeUtil.ButtonStyle style;
 
     public ElementButton() {
-        this(new Hyperlink(), ThemeUtil.ButtonSize.SMALL, ThemeUtil.ButtonStyle.DEFAULT);
+        this(new Hyperlink(), ThemeUtil.ButtonSize.SMALL, ThemeUtil.ButtonStyle.PRIMARY);
     }
 
     public ElementButton(Hyperlink component, ThemeUtil.ButtonSize size, ThemeUtil.ButtonStyle style) {
