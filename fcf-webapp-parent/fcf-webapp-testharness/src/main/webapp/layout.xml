@@ -2,7 +2,7 @@
 	<element _type="_menubar" />
 	<element _type="_toolbar" />
 	<element _type="splitterview" orientation="vertical">
-		<element _type="splitterpane" size="47" relative="false">
+		<element _type="splitterpane" size="65" relative="false">
 			<element _type="fcfUserHeader" />
 		</element>
 		<element _type="splitterpane" size="90" relative="true">

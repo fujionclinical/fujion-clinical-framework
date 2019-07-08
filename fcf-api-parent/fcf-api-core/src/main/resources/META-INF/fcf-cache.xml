@@ -1,0 +1,25 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns="http://www.ehcache.org/v3"
+		xsi:schemaLocation="
+            http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd">
+
+	<persistence directory="${org.fujionclinical.dir.cache}" />
+
+	<cache alias="org.fujionclinical.api.messaging">
+		<!--
+		eternal="false"
+		diskSpoolBufferSizeMB="10"
+		memoryStoreEvictionPolicy="LRU"
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+		-->
+		<expiry>
+			<ttl unit="seconds">${org.fujionclinical.messaging.cache.life}</ttl>
+		</expiry>
+		<resources>
+			<heap unit="entries">${org.fujionclinical.messaging.cache.size}</heap>
+			<disk unit="MB" persistent="true">100</disk>
+		</resources>
+	</cache>
+
+</config>

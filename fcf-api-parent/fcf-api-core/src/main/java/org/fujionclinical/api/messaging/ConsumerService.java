@@ -29,9 +29,10 @@ import org.fujionclinical.api.messaging.IMessageConsumer.IMessageCallback;
 import org.fujionclinical.api.messaging.Recipient.RecipientType;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.DestructionAwareBeanPostProcessor;
-import org.springframework.cache.Cache;
-import org.springframework.cache.CacheManager;
+import org.springframework.util.Assert;
 
+import javax.cache.Cache;
+import javax.cache.CacheManager;
 import java.util.*;
 
 /**
@@ -51,11 +52,10 @@ public class ConsumerService implements IMessageCallback, DestructionAwareBeanPo
     
     /**
      * Access the cache for tracking delivered messages.
-     * 
-     * @param cacheManager Cache manager used to retrieve instance of delivered message cache.
      */
     public ConsumerService(CacheManager cacheManager) {
         deliveredMessageCache = cacheManager.getCache(CACHE_NAME);
+        Assert.notNull(deliveredMessageCache, "Unable to locate message cache");
     }
     
     /**
@@ -167,7 +167,7 @@ public class ConsumerService implements IMessageCallback, DestructionAwareBeanPo
         }
         
         String pubid = (String) message.getMetadata("fcf.pub.event");
-        return deliveredMessageCache.putIfAbsent(pubid, "") == null;
+        return deliveredMessageCache.putIfAbsent(pubid, "");
     }
     
     /**

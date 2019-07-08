@@ -56,7 +56,7 @@ public interface ISecurityDomain extends Serializable {
      * @param name The attribute name.
      * @return The attribute value, or null if not found.
      */
-    String getAttribute(String name);
+    Object getAttribute(String name);
     
     /**
      * Authenticates a user.

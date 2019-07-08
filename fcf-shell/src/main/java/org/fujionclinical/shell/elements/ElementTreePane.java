@@ -68,7 +68,7 @@ public class ElementTreePane extends ElementUI {
         anchor = node.getFirstChild(BaseLabeledComponent.class);
         // Handler for node click events. Click will select the node and associated pane.
         anchor.addEventListener("click", event ->
-                treeView.setActivePane(ElementTreePane.this));
+                treeView.setActivePane(this));
         // Handler for node double click events. Double click will toggle the node's drop down state
         anchor.addEventListener("dblclick", event -> {
             if (canOpen) {
@@ -305,6 +305,8 @@ public class ElementTreePane extends ElementUI {
      * @param active Desired activation state.
      */
     /*package*/void makeActivePane(boolean active) {
+        setSelected(active);
+
         if (!active) {
             activate(false);
             activeChild = null;
@@ -321,8 +323,6 @@ public class ElementTreePane extends ElementUI {
 
             parent.activate(true);
         }
-
-        setSelected(active);
     }
 
     /**

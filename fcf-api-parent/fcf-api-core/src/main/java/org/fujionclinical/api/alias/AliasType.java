@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.alias;
 
-import org.apache.commons.digester.SimpleRegexMatcher;
+import org.apache.commons.digester3.SimpleRegexMatcher;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.common.StrUtil;

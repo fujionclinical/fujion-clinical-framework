@@ -33,7 +33,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.support.AbstractRefreshableApplicationContext;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
+import org.springframework.util.FileCopyUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,16 +50,26 @@ import java.util.Iterator;
 public class PropertyAwareResource implements Resource, ApplicationContextAware {
     
     private final Resource originalResource;
-    
+
+    private final boolean asFile;
+
     private Resource transformedResource;
-    
+
     /**
      * @param resource Resource to be transformed.
      */
     public PropertyAwareResource(Resource resource) {
-        originalResource = resource;
+        this(resource, false);
     }
-    
+
+    /**
+     * @param resource Resource to be transformed.
+     */
+    public PropertyAwareResource(Resource resource, boolean asFile) {
+        originalResource = resource;
+        this.asFile = asFile;
+    }
+
     @Override
     public InputStream getInputStream() throws IOException {
         return transformedResource.getInputStream();
@@ -139,13 +151,24 @@ public class PropertyAwareResource implements Resource, ApplicationContextAware 
                     line = beanFactory.resolveEmbeddedValue(line);
                 }
                 
-                sb.append(line);
+                sb.append(line).append('\n');
             }
             
-            transformedResource = !transformed ? originalResource : new ByteArrayResource(sb.toString().getBytes());
+            transformedResource = !transformed ? originalResource : createResource(sb.toString().getBytes());
         } catch (IOException e) {
             throw MiscUtil.toUnchecked(e);
         }
+    }
+
+    private Resource createResource(byte[] content) throws IOException {
+        if (!asFile) {
+            return new ByteArrayResource(content);
+        }
+
+        File out = File.createTempFile("fcf-cache-", ".xml");
+        out.deleteOnExit();
+        FileCopyUtils.copy(content, out);
+        return new FileSystemResource(out);
     }
     
 }

@@ -61,7 +61,7 @@ public class ElementStepPane extends ElementUI {
         button.addClass("fcf-stepview-button");
         button.addClass("btn btn-sm");
         button.addEventListener("click", (event) -> {
-            ((ElementStepView) getParent()).setActivePane(ElementStepPane.this);
+            ((ElementStepView) getParent()).setActivePane(this);
             pane.setFocus(true);
         });
     }

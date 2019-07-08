@@ -113,17 +113,13 @@
 		<bean id="mbeanNamingStrategy" class="org.springframework.jmx.export.naming.IdentityNamingStrategy" />
 
 		<!-- Caching Support -->
-		<bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
-			<property name="configLocation">
+		<bean id="cacheManager" class="org.fujionclinical.api.cache.CacheManagerFactory" factory-method="newCacheManager">
+			<constructor-arg>
 				<bean class="org.fujionclinical.api.spring.PropertyAwareResource">
-				 	<constructor-arg value="classpath:/META-INF/fcf-ehcache.xml" />
+					<constructor-arg value="classpath:/META-INF/fcf-cache.xml" />
+					<constructor-arg value="true" />
 				</bean>
-			</property>
-			<property name="shared" value="true" />
-		</bean>
-		
-		<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
-			<property name="cacheManager" ref="cacheManagerFactory" />
+			</constructor-arg>
 		</bean>
 
 		<!-- Messaging Support -->
