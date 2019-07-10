@@ -36,6 +36,7 @@ import org.fujion.websocket.Sessions;
 import org.fujionclinical.api.spring.Constants;
 import org.fujionclinical.api.spring.ExternalPropertySource;
 import org.fujionclinical.api.spring.LabelPropertySource;
+import org.fujionclinical.api.spring.RandomPropertySource;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.web.context.support.XmlWebApplicationContext;
@@ -88,6 +89,7 @@ public class AppContextInitializer implements ApplicationContextInitializer<XmlW
             env.setActiveProfiles(aps.toArray(new String[aps.size()]));
             env.getPropertySources().addFirst(new LabelPropertySource());
             env.getPropertySources().addLast(new ExternalPropertySource(ctx));
+            env.getPropertySources().addLast(new RandomPropertySource());
             env.setDefaultProfiles(Constants.PROFILE_ROOT_DEFAULT);
             ctx.setConfigLocations((String[]) ArrayUtils.addAll(Constants.DEFAULT_LOCATIONS, ctx.getConfigLocations()));
             ClasspathMessageSource.getInstance().setResourceLoader(ctx);
