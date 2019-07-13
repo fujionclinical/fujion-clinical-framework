@@ -1,22 +1,24 @@
 <window width="400px" height="400px" sizable="true" closable="true"
 	title="${@msg.fcf.shell.clipboard.viewer.title}"
 	controller="org.fujionclinical.shell.designer.ClipboardViewer">
-	<memobox name="txtData" synchronized="true" width="100%" flex="1"  />
-	<toolbar alignment="end" width="100%">
-		<button name="btnSave"
-			label="${@msg.fcf.shell.clipboard.viewer.btn.save.label}"
-			hint="${@msg.fcf.shell.clipboard.viewer.btn.save.hint}" />
-		<button name="btnRestore"
-			label="${@msg.fcf.shell.clipboard.viewer.btn.restore.label}"
-			hint="${@msg.fcf.shell.clipboard.viewer.btn.restore.hint}" />
-		<span width="40px" />
-		<button name="btnOK"
-			class="flavor:btn-success"
-			label="${@msg.fcf.shell.clipboard.viewer.btn.ok.label}"
-			hint="${@msg.fcf.shell.clipboard.viewer.btn.ok.hint}" />
-		<button name="btnCancel"
-			class="flavor:btn-danger"
-			label="${@msg.fcf.shell.clipboard.viewer.btn.cancel.label}"
-			hint="${@msg.fcf.shell.clipboard.viewer.btn.cancel.hint}" />
-	</toolbar>
+	<div class="fujion-layout-vertical" height="100%">
+		<memobox name="txtData" synchronized="true" width="100%" flex="1"  />
+		<toolbar alignment="end" width="100%">
+			<button name="btnSave"
+				label="${@msg.fcf.shell.clipboard.viewer.btn.save.label}"
+				hint="${@msg.fcf.shell.clipboard.viewer.btn.save.hint}" />
+			<button name="btnRestore"
+				label="${@msg.fcf.shell.clipboard.viewer.btn.restore.label}"
+				hint="${@msg.fcf.shell.clipboard.viewer.btn.restore.hint}" />
+			<span width="40px" />
+			<button name="btnOK"
+				class="flavor:btn-success"
+				label="${@msg.fcf.shell.clipboard.viewer.btn.ok.label}"
+				hint="${@msg.fcf.shell.clipboard.viewer.btn.ok.hint}" />
+			<button name="btnCancel"
+				class="flavor:btn-danger"
+				label="${@msg.fcf.shell.clipboard.viewer.btn.cancel.label}"
+				hint="${@msg.fcf.shell.clipboard.viewer.btn.cancel.hint}" />
+		</toolbar>
+	</div>
 </window>
