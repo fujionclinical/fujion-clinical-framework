@@ -337,13 +337,21 @@ public class FCFUtil {
     }
     
     public static void disableChildren(BaseComponent parent, boolean disable) {
+        disableChildren(parent, disable, false);
+    }
+
+    public static void disableChildren(BaseComponent parent, boolean disable, boolean recurse) {
         for (BaseComponent child : parent.getChildren()) {
             if (child instanceof IDisable) {
                 ((IDisable) child).setDisabled(disable);
             }
+
+            if (recurse) {
+                disableChildren(child, disable, recurse);
+            }
         }
     }
-    
+
     private FCFUtil() {
     }
 }
