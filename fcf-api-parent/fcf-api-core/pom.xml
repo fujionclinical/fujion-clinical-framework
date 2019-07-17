@@ -13,7 +13,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.fujion</groupId>
-			<artifactId>fujion-common</artifactId>
+			<artifactId>fujion-core</artifactId>
 			<version>${org.fujion.version}</version>
 		</dependency>
 		<dependency>

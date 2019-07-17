@@ -26,7 +26,7 @@
 package org.fujionclinical.api.query;
 
 import org.fujionclinical.api.thread.IAbortable;
-import org.fujionclinical.api.thread.ThreadUtil;
+import org.fujion.thread.ThreadUtil;
 
 /**
  * Implements a fetch strategy based on a simple background thread.
@@ -77,7 +77,7 @@ public class ThreadedQueryStrategy<T> implements IAsyncQueryStrategy<T> {
     @Override
     public IAbortable fetch(IQueryService<T> service, IQueryContext context, IQueryCallback<T> callback) {
         Query query = new Query(service, context, callback);
-        ThreadUtil.startThread(query);
+        ThreadUtil.execute(query);
         return query;
     }
 }

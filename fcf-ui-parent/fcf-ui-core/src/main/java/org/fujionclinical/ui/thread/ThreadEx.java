@@ -33,7 +33,7 @@ import org.fujion.component.BaseComponent;
 import org.fujion.component.Page;
 import org.fujion.event.Event;
 import org.fujionclinical.api.thread.IAbortable;
-import org.fujionclinical.api.thread.ThreadUtil;
+import org.fujion.thread.ThreadUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -148,7 +148,7 @@ public class ThreadEx implements IAbortable {
         if (log.isDebugEnabled()) {
             log.debug("Executing ThreadEx [target=" + target.getClass().getName() + "]");
         }
-        ThreadUtil.startThread(this.thread);
+        ThreadUtil.execute(this.thread);
     }
     
     /**

@@ -32,11 +32,6 @@
 		<!-- Fujion Framework -->
 		<dependency>
 			<groupId>org.fujion</groupId>
-			<artifactId>fujion-core</artifactId>
-			<version>${org.fujion.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.fujion</groupId>
 			<artifactId>fujion-icons-core</artifactId>
 			<version>${org.fujion.version}</version>
 		</dependency>
