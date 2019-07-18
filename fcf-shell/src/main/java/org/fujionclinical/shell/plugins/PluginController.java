@@ -27,7 +27,7 @@ package org.fujionclinical.shell.plugins;
 
 import org.fujion.ancillary.IAutoWired;
 import org.fujion.component.BaseComponent;
-import org.fujionclinical.api.thread.IAbortable;
+import org.fujion.thread.ICancellable;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.shell.elements.ElementPlugin.PluginContainer;
 import org.fujionclinical.shell.elements.ElementUI;
@@ -110,7 +110,7 @@ public class PluginController extends FrameworkController implements IPluginCont
      * @return The thread that was removed.
      */
     @Override
-    protected IAbortable removeThread(IAbortable thread) {
+    protected ICancellable removeThread(ICancellable thread) {
         super.removeThread(thread);
 
         if (!hasActiveThreads()) {

@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.query;
 
-import org.fujionclinical.api.thread.IAbortable;
+import org.fujion.thread.ICancellable;
 
 /**
  * Data query services may either directly implement this interface or be wrapped by a class that
@@ -56,7 +56,7 @@ public interface IQueryService<T> {
      *
      * @param context The service context that supplies the query parameters.
      * @param callback The callback to receive the query result.
-     * @return An object implementing IAbortable, or null if no such implementation is available.
+     * @return An object implementing ICancellable, or null if no such implementation is available.
      */
-    IAbortable fetch(IQueryContext context, IQueryCallback<T> callback);
+    ICancellable fetch(IQueryContext context, IQueryCallback<T> callback);
 }

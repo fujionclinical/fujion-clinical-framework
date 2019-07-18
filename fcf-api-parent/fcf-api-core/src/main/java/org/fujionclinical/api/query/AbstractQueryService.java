@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.query;
 
-import org.fujionclinical.api.thread.IAbortable;
+import org.fujion.thread.ICancellable;
 
 /**
  * Base class for implementing a data query service implementing both synchronous and asynchronous
@@ -40,12 +40,12 @@ public abstract class AbstractQueryService<T> implements IQueryService<T> {
     
     /**
      * A null asynchronous strategy invokes the service synchronously, performing callbacks just as
-     * a real asynchronous strategy would do, but returning null for the IAbortable instance.
+     * a real asynchronous strategy would do, but returning null for the ICancellable instance.
      */
     private class NullAsyncQueryStrategy implements IAsyncQueryStrategy<T> {
         
         @Override
-        public IAbortable fetch(IQueryService<T> service, IQueryContext context, IQueryCallback<T> callback) {
+        public ICancellable fetch(IQueryService<T> service, IQueryContext context, IQueryCallback<T> callback) {
             callback.onQueryStart(null);
             callback.onQueryFinish(null, service.fetch(context));
             return null;
@@ -73,7 +73,7 @@ public abstract class AbstractQueryService<T> implements IQueryService<T> {
     }
     
     @Override
-    public IAbortable fetch(IQueryContext context, IQueryCallback<T> callback) {
+    public ICancellable fetch(IQueryContext context, IQueryCallback<T> callback) {
         context.reset();
         return strategy.fetch(this, context, callback);
     }

@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.query;
 
-import org.fujionclinical.api.thread.IAbortable;
+import org.fujion.thread.ICancellable;
 
 /**
  * Callback interface used by a query invoked in asynchronous mode.
@@ -37,20 +37,20 @@ public interface IQueryCallback<T> {
     /**
      * Called when the asynchronous query has just been started.
      * 
-     * @param thread An IAbortable instance which can be used to abort the query in progress. Note
+     * @param thread An ICancellable instance which can be used to abort the query in progress. Note
      *            that this can be null if the underlying query service does not support an
      *            abortable asynchronous operation.
      */
-    void onQueryStart(IAbortable thread);
+    void onQueryStart(ICancellable thread);
     
     /**
      * Called when the asynchronous query has terminated, whether by normal completion or by an
      * error or abort request.
      * 
-     * @param thread The IAbortable instance associated with the asynchronous query. This may be
-     *            null (see {@link #onQueryStart(IAbortable)}).
+     * @param thread The ICancellable instance associated with the asynchronous query. This may be
+     *            null (see {@link #onQueryStart(ICancellable)}).
      * @param result The result of the asynchronous query.
      */
-    void onQueryFinish(IAbortable thread, IQueryResult<T> result);
+    void onQueryFinish(ICancellable thread, IQueryResult<T> result);
     
 }

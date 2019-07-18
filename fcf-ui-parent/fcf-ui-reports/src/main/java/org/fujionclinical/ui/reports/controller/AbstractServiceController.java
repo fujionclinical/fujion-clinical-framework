@@ -37,8 +37,8 @@ import org.fujion.component.Label;
 import org.fujion.component.Style;
 import org.fujion.event.Event;
 import org.fujion.event.EventUtil;
+import org.fujion.thread.ICancellable;
 import org.fujionclinical.api.query.*;
-import org.fujionclinical.api.thread.IAbortable;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.shell.plugins.PluginController;
 import org.fujionclinical.ui.reports.common.ReportConstants;
@@ -179,14 +179,14 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
 
     protected class QueryFinishedEvent extends Event {
         
-        private final IAbortable thread;
+        private final ICancellable thread;
         
-        public QueryFinishedEvent(IAbortable thread, IQueryResult<T> result, BaseComponent target) {
+        public QueryFinishedEvent(ICancellable thread, IQueryResult<T> result, BaseComponent target) {
             super("queryFinished", target, result);
             this.thread = thread;
         }
         
-        public IAbortable getThread() {
+        public ICancellable getThread() {
             return thread;
         }
         
@@ -203,12 +203,12 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
     private final IQueryCallback<T> queryListener = new IQueryCallback<T>() {
         
         @Override
-        public void onQueryFinish(IAbortable thread, IQueryResult<T> result) {
+        public void onQueryFinish(ICancellable thread, IQueryResult<T> result) {
             EventUtil.post(new QueryFinishedEvent(thread, result, root));
         }
         
         @Override
-        public void onQueryStart(IAbortable thread) {
+        public void onQueryStart(ICancellable thread) {
             addThread(thread);
         }
     };

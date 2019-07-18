@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.query;
 
-import org.fujionclinical.api.thread.IAbortable;
+import org.fujion.thread.ICancellable;
 
 import java.util.Collections;
 import java.util.List;
@@ -50,12 +50,12 @@ public class FilteredQueryService<T> implements IQueryService<T> {
         }
         
         @Override
-        public void onQueryStart(IAbortable thread) {
+        public void onQueryStart(ICancellable thread) {
             realCallback.onQueryStart(thread);
         }
         
         @Override
-        public void onQueryFinish(IAbortable thread, IQueryResult<T> result) {
+        public void onQueryFinish(ICancellable thread, IQueryResult<T> result) {
             realCallback.onQueryFinish(thread, filteredResult(result));
         }
         
@@ -102,7 +102,7 @@ public class FilteredQueryService<T> implements IQueryService<T> {
     }
     
     @Override
-    public IAbortable fetch(IQueryContext context, IQueryCallback<T> callback) {
+    public ICancellable fetch(IQueryContext context, IQueryCallback<T> callback) {
         filters.updateContext(context);
         return service.fetch(context, new QueryCallback(callback));
     }

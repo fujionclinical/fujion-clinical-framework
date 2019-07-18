@@ -30,16 +30,16 @@ import org.fujion.component.BaseComponent;
 import org.fujion.component.BaseUIComponent;
 import org.fujion.event.Event;
 import org.fujion.event.IEventListener;
+import org.fujion.thread.ICancellable;
+import org.fujion.thread.ThreadUtil;
+import org.fujion.thread.ThreadedTask;
 import org.fujionclinical.api.AppFramework;
 import org.fujionclinical.api.FrameworkUtil;
 import org.fujionclinical.api.event.EventManager;
 import org.fujionclinical.api.event.IEventManager;
 import org.fujionclinical.api.event.IGenericEvent;
 import org.fujionclinical.api.spring.SpringUtil;
-import org.fujionclinical.api.thread.IAbortable;
 import org.fujionclinical.ui.Constants;
-import org.fujionclinical.ui.thread.ThreadEx;
-import org.fujionclinical.ui.thread.ThreadEx.IRunnable;
 import org.springframework.context.ApplicationContext;
 
 import java.util.ArrayList;
@@ -63,7 +63,7 @@ public class FrameworkController implements IAutoWired {
     
     private BaseUIComponent comp;
     
-    private final List<IAbortable> threads = new ArrayList<>();
+    private final List<ICancellable> threads = new ArrayList<>();
     
     private final IEventListener threadCompletionListener = new IEventListener() {
         
@@ -75,12 +75,12 @@ public class FrameworkController implements IAutoWired {
          */
         @Override
         public void onEvent(Event event) {
-            ThreadEx thread = (ThreadEx) event.getData();
+            ThreadedTask thread = (ThreadedTask) event.getData();
             
             if (thread != null) {
                 removeThread(thread);
                 
-                if (thread.isAborted()) {
+                if (thread.isCancelled()) {
                     threadAborted(thread);
                 } else {
                     threadFinished(thread);
@@ -177,7 +177,7 @@ public class FrameworkController implements IAutoWired {
         root = (BaseUIComponent) comp;
         this.comp = root;
         comp.setAttribute(Constants.ATTR_COMPOSER, this);
-        comp.addEventListener(ThreadEx.ON_THREAD_COMPLETE, threadCompletionListener);
+        comp.addEventListener(ThreadedTask.DEFAULT_EVENT_NAME, threadCompletionListener);
         appContext = SpringUtil.getAppContext();
         appFramework = FrameworkUtil.getAppFramework();
         eventManager = EventManager.getInstance();
@@ -231,8 +231,8 @@ public class FrameworkController implements IAutoWired {
      *
      * @param thread Thread to abort.
      */
-    protected void abortBackgroundThread(IAbortable thread) {
-        removeThread(thread).abort();
+    protected void abortBackgroundThread(ICancellable thread) {
+        removeThread(thread).cancel();
     }
     
     /**
@@ -241,7 +241,7 @@ public class FrameworkController implements IAutoWired {
      * @param thread Thread to add.
      * @return The thread that was added.
      */
-    protected IAbortable addThread(IAbortable thread) {
+    protected ICancellable addThread(ICancellable thread) {
         threads.add(thread);
         return thread;
     }
@@ -252,7 +252,7 @@ public class FrameworkController implements IAutoWired {
      * @param thread Thread to remove.
      * @return The thread that was removed.
      */
-    protected IAbortable removeThread(IAbortable thread) {
+    protected ICancellable removeThread(ICancellable thread) {
         threads.remove(thread);
         return thread;
     }
@@ -269,13 +269,13 @@ public class FrameworkController implements IAutoWired {
     /**
      * Starts a background thread.
      *
-     * @param runnable The runnable to be executed in the background thread.
+     * @param task The task to be executed in the background thread.
      * @return The new thread.
      */
-    protected ThreadEx startBackgroundThread(IRunnable runnable) {
-        ThreadEx thread = new ThreadEx(runnable, comp);
+    protected ThreadedTask startBackgroundThread(ThreadedTask.TaskExecutor task) {
+        ThreadedTask thread = new ThreadedTask(task, comp);
         addThread(thread);
-        thread.start();
+        ThreadUtil.execute(thread);
         return thread;
     }
     
@@ -284,7 +284,7 @@ public class FrameworkController implements IAutoWired {
      *
      * @param thread The background thread.
      */
-    protected void threadFinished(ThreadEx thread) {
+    protected void threadFinished(ICancellable thread) {
         removeThread(thread);
     }
     
@@ -293,7 +293,7 @@ public class FrameworkController implements IAutoWired {
      *
      * @param thread The background thread.
      */
-    protected void threadAborted(ThreadEx thread) {
+    protected void threadAborted(ICancellable thread) {
         removeThread(thread);
     }
     

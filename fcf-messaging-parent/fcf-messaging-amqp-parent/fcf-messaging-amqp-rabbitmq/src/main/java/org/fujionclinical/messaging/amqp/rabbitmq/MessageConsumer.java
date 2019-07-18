@@ -25,7 +25,6 @@
  */
 package org.fujionclinical.messaging.amqp.rabbitmq;
 
-import org.fujion.thread.ThreadPoolFactory;
 import org.fujionclinical.api.messaging.IMessageConsumer;
 import org.fujionclinical.api.messaging.Message;
 import org.fujion.thread.ThreadUtil;
@@ -47,7 +46,7 @@ public class MessageConsumer implements IMessageConsumer {
         
         Subscriber(String channel) {
             this.channel = channel;
-            setTaskExecutor(ThreadPoolFactory.getInstance().getApplicationThreadPool());
+            setTaskExecutor(ThreadUtil.getApplicationThreadPool());
             setMessageListener(this);
             setConnectionFactory(broker.getConnectionFactory());
             setQueueNames(channel);

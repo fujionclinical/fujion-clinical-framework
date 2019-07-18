@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.query;
 
-import org.fujionclinical.api.thread.IAbortable;
+import org.fujion.thread.ICancellable;
 import org.fujion.thread.ThreadUtil;
 
 /**
@@ -35,7 +35,7 @@ import org.fujion.thread.ThreadUtil;
  */
 public class ThreadedQueryStrategy<T> implements IAsyncQueryStrategy<T> {
     
-    private class Query extends Thread implements IAbortable {
+    private class Query extends Thread implements ICancellable {
         
         private final IQueryService<T> service;
         
@@ -43,7 +43,7 @@ public class ThreadedQueryStrategy<T> implements IAsyncQueryStrategy<T> {
         
         private final IQueryCallback<T> callback;
         
-        private boolean abort;
+        private boolean cancelled;
         
         private Query(IQueryService<T> service, IQueryContext context, IQueryCallback<T> callback) {
             this.service = service;
@@ -61,12 +61,18 @@ public class ThreadedQueryStrategy<T> implements IAsyncQueryStrategy<T> {
                 result = QueryUtil.errorResult(t);
             }
             
-            callback.onQueryFinish(this, abort ? QueryUtil.abortResult(null) : result);
+            callback.onQueryFinish(this, cancelled ? QueryUtil.abortResult(null) : result);
         }
-        
+
         @Override
-        public void abort() {
-            abort = true;
+        public boolean isCancelled() {
+            return cancelled;
+        }
+
+        @Override
+        public boolean cancel(boolean mayInterrupt) {
+            cancelled = true;
+            return true;
         }
     }
     
@@ -75,7 +81,7 @@ public class ThreadedQueryStrategy<T> implements IAsyncQueryStrategy<T> {
     }
     
     @Override
-    public IAbortable fetch(IQueryService<T> service, IQueryContext context, IQueryCallback<T> callback) {
+    public ICancellable fetch(IQueryService<T> service, IQueryContext context, IQueryCallback<T> callback) {
         Query query = new Query(service, context, callback);
         ThreadUtil.execute(query);
         return query;
