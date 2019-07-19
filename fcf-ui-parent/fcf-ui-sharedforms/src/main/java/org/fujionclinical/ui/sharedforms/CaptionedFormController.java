@@ -61,6 +61,7 @@ public class CaptionedFormController extends PluginController {
         //panel = (Window) root;
         super.onLoad(plugin);
         plugin.registerProperties(this, "caption", "captionStyle", "icon", "color1", "color2");
+        panel.addClass("sharedForms-captioned");
         updateStyle();
     }
     
@@ -101,7 +102,7 @@ public class CaptionedFormController extends PluginController {
             
         }
         
-        panel.addClass("sharedForms-captioned sharedForms-captioned-caption-" + cs.name().toLowerCase());
+        panel.addClass("caption-style:sharedForms-captioned-caption-" + cs.name().toLowerCase());
         String css = "##{id}-titlebar ";
         
         if (cs == CaptionStyle.HIDDEN) {
