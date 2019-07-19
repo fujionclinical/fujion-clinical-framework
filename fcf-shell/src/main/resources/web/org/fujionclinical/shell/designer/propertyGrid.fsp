@@ -2,7 +2,7 @@
 	class="fcf-propertygrid"
 	controller="org.fujionclinical.shell.designer.PropertyGrid">
 	<paneview orientation="vertical" height="100%" width="100%" style="overflow: visible">
-		<pane flex="75" splittable="true">
+		<pane flex="75" splittable="true" style="overflow:auto">
 			<grid name="gridProperties" width="100%">
 				<columns>
 					<column name="colProperty" sortBy="propInfo.name"
