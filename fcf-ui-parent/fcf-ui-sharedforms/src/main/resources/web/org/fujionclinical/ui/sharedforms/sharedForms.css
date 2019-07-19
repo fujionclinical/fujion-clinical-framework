@@ -25,3 +25,8 @@
 	width: 100%;
 }
 
+.sharedForms-captioned-caption-hidden .card-header {
+	display: none;
+}
+
+

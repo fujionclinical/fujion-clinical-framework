@@ -5,7 +5,7 @@
 				<columns name="columns" />
 				<rows name="rows" selectable="single" />
 			</grid>
-			<label name="status" visible="false" width="100%"/>
+			<label name="status" visible="false" width="100%" style="padding: 10px"/>
 		</pane>
 		<pane name="detailPane" visible="false" width="50%">
 			<html name="detailView" />
