@@ -1,0 +1,12 @@
+<page name="PrintPreview" title="${@msg.fcf.print.dialog.title}">
+	<window>
+		<div name="printPreviewRoot" />
+
+		<script type="text/javascript" defer="true">
+			window.fcf_print = opener.fcf_print;
+			opener.fcf_print = null;
+			window.fcf_print('#${printPreviewRoot.id}');
+		</script>
+
+	</window>
+</page>

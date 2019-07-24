@@ -1,0 +1,35 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+#set( $PLUGINID = $pluginId.toUpperCase() )
+#set( $pluginid = $pluginId.toLowerCase() )
+#set( $PluginId = $pluginId.substring(0,1).toUpperCase() + $pluginId.substring(1) )
+#set( $pluginId = $pluginId.substring(0,1).toLowerCase() + $pluginId.substring(1) )
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.fujionclinical</groupId>
+		<artifactId>plugin</artifactId>
+		<version>${fcfVersion}</version>
+	</parent>
+	
+	<groupId>${groupId}</groupId>
+	<artifactId>${artifactId}</artifactId>
+	<version>${version}</version>
+	<name>${pluginName}</name>
+	
+	<properties>
+		<!-- Uncomment and update these properties if your plugin has help content -->
+		<!-- <maven.fujionclinical.help.moduleId>${pluginid}Help</maven.fujionclinical.help.moduleId> -->
+		<!-- <maven.fujionclinical.help.moduleName>${pluginId} Help</maven.fujionclinical.help.moduleName> -->
+		<!-- <maven.fujionclinical.help.moduleSource>${pluginId}-help.jar</fujionclinical.help.moduleSource> -->
+		<!-- <maven.fujionclinical.help.moduleFormat>javahelp</fujionclinical.help.moduleFormat> -->
+	</properties>
+	
+	<dependencies>
+	</dependencies>
+</project>

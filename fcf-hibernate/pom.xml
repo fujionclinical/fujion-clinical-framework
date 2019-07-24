@@ -1,0 +1,20 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>org.fujionclinical</groupId>
+		<artifactId>fcf-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	
+	<artifactId>fcf-hibernate</artifactId>
+	<packaging>pom</packaging>
+	<name>FCF Hibernate Components Aggregator POM</name>
+	
+	<modules>
+		<module>fcf-hibernate-core</module>
+		<module>fcf-hibernate-h2</module>
+		<module>fcf-hibernate-property</module>
+		<module>fcf-hibernate-security</module>
+	</modules>
+</project>

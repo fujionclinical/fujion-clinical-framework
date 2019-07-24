@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>org.fujionclinical</groupId>
+		<artifactId>fcf-mvn-plugin</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	
+	<artifactId>fcf-mvn-plugin-helpconverter</artifactId>
+	<packaging>maven-plugin</packaging>
+	<name>FCF Help Converter Maven Plugin</name>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-plugin-plugin</artifactId>
+				<configuration>
+					<goalPrefix>help-extensions</goalPrefix>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.fujionclinical</groupId>
+			<artifactId>fcf-mvn-plugin-core</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tika</groupId>
+			<artifactId>tika-parsers</artifactId>
+			<version>1.20</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+	</dependencies>
+</project>

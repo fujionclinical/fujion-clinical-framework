@@ -1,9 +1,0 @@
-<window title="XML Viewer" closable="true" sizable="true" width="75%"
-	height="75%" controller="org.fujionclinical.ui.xml.XMLViewerController">
-	<treeview name="tree" flex="1" />
-	<toolbar alignment="end" width="100%">
-		<label name="lblNotFound" label="Text not found" style="color: gray" visible="false" />
-		<textbox name="txtSearch" flex="1" focus="true" forward="enter=btnSearch.click"/>
-		<button name="btnSearch" label="Search" />
-	</toolbar>
-</window>

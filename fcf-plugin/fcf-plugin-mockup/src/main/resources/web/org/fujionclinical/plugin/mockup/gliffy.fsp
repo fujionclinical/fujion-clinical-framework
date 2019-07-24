@@ -1,0 +1,17 @@
+
+<page>
+	<style>
+		.fujion_page {
+			display: none;
+		}
+	</style>
+	
+	<cscript>
+		System.import('gliffy').then(
+			function(embedGliffy) {
+				embedGliffy();
+			}
+		);
+	</cscript>
+				
+</page>

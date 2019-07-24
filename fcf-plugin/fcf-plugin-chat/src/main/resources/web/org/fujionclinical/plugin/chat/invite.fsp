@@ -1,0 +1,16 @@
+<window title="${@msg.fcf.chat.invite.title}" width="500px" closeAction="destroy" 
+	controller="${@fcfChatInviteController}">
+	<style src="web/org/fujionclinical/plugin/chat/chat.css" />
+	<label label="${@msg.fcf.chat.participant.header.user}" />
+	<listbox name="lstSessions" flex="1" multiple="true" />
+	<toolbar width="100%" alignment="start">
+		<checkbox name="chkHideActive"
+			label="${@msg.fcf.chat.invite.check.hide.label}" />
+		<div flex="1" />
+		<button name="btnInvite"
+			label="${@msg.fcf.chat.invite.button.invite.label}" />
+		<button name="btnCancel" class="flavor:btn-danger"
+			forward="click=^.close"
+			label="${@msg.fcf.chat.invite.button.cancel.label}" />
+	</toolbar>
+</window>

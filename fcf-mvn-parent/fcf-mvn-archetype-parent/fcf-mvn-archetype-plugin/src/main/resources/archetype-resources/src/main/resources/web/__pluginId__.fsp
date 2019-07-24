@@ -1,6 +1,0 @@
-<?taglib uri="http://www.fujionclinical.org/tld/security" prefix="sec"?>
-<?taglib uri="http://www.fujionclinical.org/tld/core" prefix="rc"?>
-
-	<div controller="${symbol_dollar}{@${pluginId}Controller}">
-		<label label="Hello World!"/>
-	</div>

@@ -62,17 +62,17 @@
 	</properties>
 
 	<modules>
-		<module>fcf-mvn-parent</module>
-		<module>fcf-api-parent</module>
-		<module>fcf-ui-parent</module>
-		<module>fcf-help-parent</module>
+		<module>fcf-mvn</module>
+		<module>fcf-api</module>
+		<module>fcf-ui</module>
+		<module>fcf-help</module>
 		<module>fcf-shell</module>
-		<module>fcf-security-parent</module>
-		<module>fcf-messaging-parent</module>
-		<module>fcf-hibernate-parent</module>
-		<module>fcf-plugin-parent</module>
+		<module>fcf-security</module>
+		<module>fcf-messaging</module>
+		<module>fcf-hibernate</module>
+		<module>fcf-plugin</module>
 		<module>fcf-testharness</module>
-		<module>fcf-webapp-parent</module>
+		<module>fcf-webapp</module>
 	</modules>
 
 	<dependencyManagement>
