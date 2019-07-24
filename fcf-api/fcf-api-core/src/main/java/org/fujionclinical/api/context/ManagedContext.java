@@ -374,8 +374,7 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
     }
     
     /**
-     * @see org.fujionclinical.api.context.IManagedContext#surveySubscribers(boolean,
-     *      ISurveyCallback)
+     * @see org.fujionclinical.api.context.IManagedContext#surveySubscribers
      */
     @Override
     public void surveySubscribers(boolean silent, ISurveyCallback callback) {

@@ -52,6 +52,8 @@ public class ConsumerService implements IMessageCallback, DestructionAwareBeanPo
     
     /**
      * Access the cache for tracking delivered messages.
+     *
+     * @param cacheManager The cache manager.
      */
     public ConsumerService(CacheManager cacheManager) {
         deliveredMessageCache = cacheManager.getCache(CACHE_NAME);

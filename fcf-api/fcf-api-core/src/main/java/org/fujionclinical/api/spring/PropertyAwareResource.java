@@ -64,6 +64,7 @@ public class PropertyAwareResource implements Resource, ApplicationContextAware 
 
     /**
      * @param resource Resource to be transformed.
+     * @param asFile If true, the resource will be transformed into a local file resource.
      */
     public PropertyAwareResource(Resource resource, boolean asFile) {
         originalResource = resource;
