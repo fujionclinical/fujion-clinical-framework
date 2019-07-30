@@ -22,37 +22,37 @@
 		<!-- Fujion Clinical Framework Components -->
 		<dependency>
 			<groupId>org.fujionclinical</groupId>
-			<artifactId>plugin-userheader</artifactId>
+			<artifactId>fcf-plugin-userheader</artifactId>
 			<version>${fcfVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.fujionclinical</groupId>
-			<artifactId>plugin-statuspanel</artifactId>
+			<artifactId>fcf-plugin-statuspanel</artifactId>
 			<version>${fcfVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.fujionclinical</groupId>
-			<artifactId>ui-popupsupport</artifactId>
+			<artifactId>fcf-ui-popupsupport</artifactId>
 			<version>${fcfVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.fujionclinical</groupId>
-			<artifactId>security-mock</artifactId>
+			<artifactId>fcf-security-mock</artifactId>
 			<version>${fcfVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.fujionclinical</groupId>
-			<artifactId>hibernate-h2</artifactId>
+			<artifactId>fcf-hibernate-h2</artifactId>
 			<version>${fcfVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.fujionclinical</groupId>
-			<artifactId>hibernate-property</artifactId>
+			<artifactId>fcf-hibernate-property</artifactId>
 			<version>${fcfVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.fujionclinical</groupId>
-			<artifactId>testharness</artifactId>
+			<artifactId>fcf-testharness</artifactId>
 			<version>${fcfVersion}</version>
 		</dependency>
 		<dependency>

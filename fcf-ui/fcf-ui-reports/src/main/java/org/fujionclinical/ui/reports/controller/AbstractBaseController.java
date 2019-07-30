@@ -99,6 +99,7 @@ public abstract class AbstractBaseController<T, M> extends AbstractServiceContro
      * @param labelPrefix Prefix used to resolve label id's with placeholders.
      * @param propertyPrefix Prefix for property names.
      * @param printStyleSheet Optional style sheet to apply when printing.
+     * @param reportHeader The text header for the report.
      * @param params Optional supplemental query parameters.
      */
     public AbstractBaseController(IQueryService<T> service, String labelPrefix, String propertyPrefix,

@@ -48,4 +48,18 @@
 			<version>${help-share.version}</version>
 		</dependency>
 	</dependencies>
+
+	<profiles>
+		<!-- Prevents Maven from creating spurious project folder. -->
+		<profile>
+			<activation>
+				<property>
+					<name>!basedir</name>
+				</property>
+			</activation>
+			<properties>
+				<basedir>${java.io.tmpdir}/repo</basedir>
+			</properties>
+		</profile>
+	</profiles>
 </project>

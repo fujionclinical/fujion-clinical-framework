@@ -254,6 +254,7 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
      *
      * @param service The is the data query service.
      * @param labelPrefix Prefix used to resolve label id's with placeholders.
+     * @param params Additional parameters to pass to the query.
      */
     public AbstractServiceController(IQueryService<T> service, String labelPrefix, SupplementalQueryParam<?> ...params) {
         super();

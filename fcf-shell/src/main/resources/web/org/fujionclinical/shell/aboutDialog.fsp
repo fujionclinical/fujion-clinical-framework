@@ -1,4 +1,4 @@
-<window width="500px" closable="true"
+<window width="500px" closable="true" resizable="true"
 	title="${@msg.fcf.shell.about.title}" 
 	controller="${@aboutDialogController}">
 	<div style="display:flex;flex:1">
