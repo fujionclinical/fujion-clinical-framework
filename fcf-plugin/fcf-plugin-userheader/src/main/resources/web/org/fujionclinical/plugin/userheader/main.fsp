@@ -1,4 +1,4 @@
-<div controller="${@fcfUserHeaderController}" class="fujion-layout-vertical">
+<div controller="${@fcfUserHeaderController}" class="fujion-layout-vertical" style="padding:0 5px 0 5px">
 	<div class="fujion-layout-horizontal" flex="1">
 		<label name="userHeader" />
 	</div>
