@@ -23,7 +23,7 @@
  *
  * #L%
  */
-package org.fujionclinical.ui.reports.controller;
+package org.fujionclinical.ui.sharedforms.controller;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -43,7 +43,7 @@ import org.fujionclinical.api.query.DateQueryFilter.DateType;
 import org.fujionclinical.api.query.DateQueryFilter.IDateTypeExtractor;
 import org.fujionclinical.api.query.IQueryService;
 import org.fujionclinical.ui.dialog.DateRangePicker;
-import org.fujionclinical.ui.reports.common.ReportConstants;
+import org.fujionclinical.ui.sharedforms.common.FormConstants;
 import org.fujionclinical.ui.reports.common.ReportUtil;
 import org.fujionclinical.ui.util.FCFUtil;
 import org.springframework.beans.BeanUtils;
@@ -182,7 +182,7 @@ public abstract class AbstractBaseController<T, M> extends AbstractServiceContro
      */
     private void updateModel(IListModel<M> model) {
         if (model == null || model.isEmpty()) {
-            String msg = getLabel(ReportConstants.LABEL_ID_NO_DATA);
+            String msg = getLabel(FormConstants.LABEL_ID_NO_DATA);
             log.trace(msg);
             showMessage(msg);
         } else {
@@ -271,19 +271,19 @@ public abstract class AbstractBaseController<T, M> extends AbstractServiceContro
         super.initializeController();
 
         if (dateRangePicker != null) {
-            String deflt = getPropertyValue(ReportConstants.PROPERTY_ID_DATE_RANGE, String.class, "Last Two Years");
+            String deflt = getPropertyValue(FormConstants.PROPERTY_ID_DATE_RANGE, String.class, "Last Two Years");
             dateRangePicker.setSelectedItem(dateRangePicker.findMatchingItem(deflt));
             initDateFilter().setDateRange(dateRangePicker.getSelectedRange());
         }
 
         if (dateTypePicker != null) {
             for (DateType dt : DateType.values()) {
-                String lbl = getLabel(ReportConstants.LABEL_ID_SORT_MODE.replace("$", dt.name().toLowerCase()));
+                String lbl = getLabel(FormConstants.LABEL_ID_SORT_MODE.replace("$", dt.name().toLowerCase()));
                 Comboitem item = new Comboitem(lbl);
                 item.setData(dt);
                 dateTypePicker.addChild(item);
             }
-            DateType sortModePref = getPropertyValue(ReportConstants.PROPERTY_ID_SORT_MODE, DateType.class, DateType.MEASURED);
+            DateType sortModePref = getPropertyValue(FormConstants.PROPERTY_ID_SORT_MODE, DateType.class, DateType.MEASURED);
             Comboitem item = (Comboitem) dateTypePicker.findChildByData(sortModePref);
             dateTypePicker.setSelectedItem(item == null ? (Comboitem) dateTypePicker.getFirstChild() : item);
             dateTypePicker.setReadonly(true);
@@ -390,7 +390,7 @@ public abstract class AbstractBaseController<T, M> extends AbstractServiceContro
     }
 
     protected void print(BaseComponent root) {
-        String printTitle = getLabel(ReportConstants.LABEL_ID_TITLE);
+        String printTitle = getLabel(FormConstants.LABEL_ID_TITLE);
         ReportUtil.print((BaseUIComponent) (root == null ? baseComponent.getParent() : root), printTitle,
             reportHeader, printStyleSheet);
     }

@@ -10,7 +10,7 @@
 	<artifactId>fcf-ui</artifactId>
 	<packaging>pom</packaging>
 	
-	<name>FCF UI Support Aggregator POM</name>
+	<name>FCF UI Component Aggregator POM</name>
 	
 	<modules>
 		<module>fcf-ui-core</module>

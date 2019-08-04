@@ -23,7 +23,7 @@
  *
  * #L%
  */
-package org.fujionclinical.ui.reports.controller;
+package org.fujionclinical.ui.sharedforms.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -41,7 +41,7 @@ import org.fujion.thread.ICancellable;
 import org.fujionclinical.api.query.*;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.shell.plugins.PluginController;
-import org.fujionclinical.ui.reports.common.ReportConstants;
+import org.fujionclinical.ui.sharedforms.common.FormConstants;
 import org.fujionclinical.ui.util.FCFUtil;
 
 import java.util.ArrayList;
@@ -430,7 +430,7 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
      */
     protected String hasRequired() {
         String labelId = supplementalQueryParams.hasRequired();
-        return labelId != null ? labelId : service.hasRequired(queryContext) ? null : ReportConstants.LABEL_ID_MISSING_PARAMETER;
+        return labelId != null ? labelId : service.hasRequired(queryContext) ? null : FormConstants.LABEL_ID_MISSING_PARAMETER;
     }
     
     /**
@@ -445,7 +445,7 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
             return;
         }
         
-        showBusy(getLabel(ReportConstants.LABEL_ID_FETCHING));
+        showBusy(getLabel(FormConstants.LABEL_ID_FETCHING));
         queryContext.reset();
         supplementalQueryParams.initContext(queryContext);
         queryFilters.updateContext(queryContext);

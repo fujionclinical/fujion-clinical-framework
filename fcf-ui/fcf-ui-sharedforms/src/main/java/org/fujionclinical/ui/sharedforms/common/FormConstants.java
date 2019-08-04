@@ -23,36 +23,16 @@
  *
  * #L%
  */
-package org.fujionclinical.ui.reports.common;
+package org.fujionclinical.ui.sharedforms.common;
 
 import org.fujionclinical.ui.util.FCFUtil;
 
 /**
  * Package-specific constants.
  */
-public class ReportConstants {
+public class FormConstants {
 
-    public static final String RESOURCE_PREFIX = FCFUtil.getResourcePath(ReportConstants.class, 1);
-
-    public static final String SCLASS_DRILLDOWN_LINK = "fcf-reporting-drillDown-link";
-
-    public static final String SCLASS_DRILLDOWN_GRID = "fcf-reporting-drillDown-grid";
-
-    public static final String SCLASS_DRILLDOWN_DOCUMENT_TITLE = "fcf-reporting-drillDown-document-title";
-
-    public static final String SCLASS_REPORT_ALL = "fcf-reporting-report-all";
-
-    public static final String SCLASS_REPORT_HEADER = "fcf-reporting-header";
-
-    public static final String SCLASS_REPORT_TITLE = "fcf-reporting-header-title";
-
-    public static final String SCLASS_TEXT_REPORT_TITLE = "fcf-reporting-textReport-title";
-
-    public static final String SCLASS_TEXT_REPORT_BODY = "fcf-reporting-textReport-body";
-
-    public static final String SCLASS_TEXT_REPORT_HEADER = "fcf-reporting-textReport-header";
-
-    public static final String PROPERTY_ID_DRILLDOWN = "FUJION.ENABLE.DRILLDOWN";
+    public static final String RESOURCE_PREFIX = FCFUtil.getResourcePath(FormConstants.class, 1);
 
     public static final String PROPERTY_ID_DATE_RANGE = "%.DATERANGE";
 
@@ -83,6 +63,6 @@ public class ReportConstants {
     /**
      * Enforce static class.
      */
-    private ReportConstants() {
+    private FormConstants() {
     }
 }

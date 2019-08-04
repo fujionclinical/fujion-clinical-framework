@@ -2,31 +2,31 @@
 
 /* Shared Forms */
 
-.sharedForms-captioned .card-header {
+.fcf-sharedforms-captioned .card-header {
 	font-size: 100%;
 	font-family: arial;
 	font-weight: bold;
 	padding: 0;
 }
 
-.sharedForms-captioned-caption-left .card-header {
+.fcf-sharedforms-captioned-caption-left .card-header {
 	text-align: left;	
 	width: 100%;
 	padding-left: 5px;
 }
 
-.sharedForms-captioned-caption-right .card-header {
+.fcf-sharedforms-captioned-caption-right .card-header {
 	text-align: right;	
 	width: 100%;
 	padding-right: 5px;
 }
 
-.sharedForms-captioned-caption-center .card-header {
+.fcf-sharedforms-captioned-caption-center .card-header {
 	text-align: center;
 	width: 100%;
 }
 
-.sharedForms-captioned-caption-hidden .card-header {
+.fcf-sharedforms-captioned-caption-hidden .card-header {
 	display: none;
 }
 

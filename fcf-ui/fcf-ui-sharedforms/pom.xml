@@ -7,13 +7,18 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	
-	<name>FCF SharedForms</name>
+	<name>FCF Shared Forms</name>
 	<artifactId>fcf-ui-sharedforms</artifactId>
 	
 	<dependencies>
 		<dependency>
 			<groupId>org.fujionclinical</groupId>
 			<artifactId>fcf-shell</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.fujionclinical</groupId>
+			<artifactId>fcf-ui-reports</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
 		<!-- Tests -->

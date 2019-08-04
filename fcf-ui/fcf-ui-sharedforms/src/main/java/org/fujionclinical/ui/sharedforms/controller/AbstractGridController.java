@@ -23,7 +23,7 @@
  *
  * #L%
  */
-package org.fujionclinical.ui.reports.controller;
+package org.fujionclinical.ui.sharedforms.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -35,7 +35,7 @@ import org.fujion.component.Grid;
 import org.fujion.component.Row;
 import org.fujion.component.Rows;
 import org.fujionclinical.api.query.IQueryService;
-import org.fujionclinical.ui.reports.common.ReportConstants;
+import org.fujionclinical.ui.sharedforms.common.FormConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +73,7 @@ public abstract class AbstractGridController<T, M> extends AbstractBaseControlle
         setComponents(grid, grid.getRows());
         super.initializeController();
         
-        boolean expandAll = getPropertyValue(ReportConstants.PROPERTY_ID_EXPAND_DETAIL, Boolean.class,
+        boolean expandAll = getPropertyValue(FormConstants.PROPERTY_ID_EXPAND_DETAIL, Boolean.class,
             chkExpandAll != null && chkExpandAll.isChecked());
         
         if (this.chkExpandAll != null) {

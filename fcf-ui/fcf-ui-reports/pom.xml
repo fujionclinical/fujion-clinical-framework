@@ -7,13 +7,13 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	
-	<name>Report Generation Support</name>
+	<name>FCF Report Generation</name>
 	<artifactId>fcf-ui-reports</artifactId>
 	
 	<dependencies>
 		<dependency>
 			<groupId>org.fujionclinical</groupId>
-			<artifactId>fcf-ui-sharedforms</artifactId>
+			<artifactId>fcf-ui-core</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>

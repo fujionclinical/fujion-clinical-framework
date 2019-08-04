@@ -30,7 +30,7 @@ import org.fujion.annotation.WiredComponent;
 import org.fujion.component.Label;
 import org.fujionclinical.api.context.UserContext;
 import org.fujionclinical.api.domain.IUser;
-import org.fujionclinical.ui.reports.common.ReportConstants;
+import org.fujionclinical.ui.util.FCFUtil;
 
 /**
  * This is a user-based header for reports.
@@ -38,7 +38,7 @@ import org.fujionclinical.ui.reports.common.ReportConstants;
 public class ReportHeaderUser extends ReportHeaderBase {
 
     static {
-        ReportHeaderRegistry.getInstance().register("user", ReportConstants.RESOURCE_PREFIX + "userReportHeader.fsp");
+        ReportHeaderRegistry.getInstance().register("user", FCFUtil.getResourcePath(ReportHeaderUser.class) + "userReportHeader.fsp");
     }
 
     @WiredComponent(onFailure = OnFailure.IGNORE)

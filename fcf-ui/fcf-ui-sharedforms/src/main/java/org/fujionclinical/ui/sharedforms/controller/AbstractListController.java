@@ -23,7 +23,7 @@
  *
  * #L%
  */
-package org.fujionclinical.ui.reports.controller;
+package org.fujionclinical.ui.sharedforms.controller;
 
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.OnFailure;
