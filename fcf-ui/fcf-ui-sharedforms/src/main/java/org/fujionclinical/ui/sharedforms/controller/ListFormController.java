@@ -23,7 +23,7 @@
  *
  * #L%
  */
-package org.fujionclinical.ui.sharedforms;
+package org.fujionclinical.ui.sharedforms.controller;
 
 import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.math.NumberUtils;

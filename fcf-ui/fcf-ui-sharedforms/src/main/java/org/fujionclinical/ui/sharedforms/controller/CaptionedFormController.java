@@ -23,7 +23,7 @@
  *
  * #L%
  */
-package org.fujionclinical.ui.sharedforms;
+package org.fujionclinical.ui.sharedforms.controller;
 
 import org.fujion.annotation.WiredComponent;
 import org.fujion.common.StrUtil;

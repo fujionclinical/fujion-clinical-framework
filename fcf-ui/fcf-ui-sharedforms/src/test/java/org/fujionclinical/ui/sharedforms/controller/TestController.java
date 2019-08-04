@@ -23,10 +23,10 @@
  *
  * #L%
  */
-package org.fujionclinical.ui.sharedforms;
+package org.fujionclinical.ui.sharedforms.controller;
 
 import org.fujionclinical.shell.elements.ElementPlugin;
-import org.fujionclinical.ui.sharedforms.TestController.TestItem;
+import org.fujionclinical.ui.sharedforms.controller.TestController.TestItem;
 
 import java.util.List;
 

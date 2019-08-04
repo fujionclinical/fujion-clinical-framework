@@ -23,7 +23,7 @@
  *
  * #L%
  */
-package org.fujionclinical.ui.sharedforms;
+package org.fujionclinical.ui.sharedforms.controller;
 
 import org.fujion.ancillary.ILabeled;
 import org.fujion.component.BaseComponent;
@@ -32,6 +32,7 @@ import org.fujion.component.Grid;
 import org.fujion.component.Rows;
 import org.fujion.page.PageUtil;
 import org.fujionclinical.shell.elements.ElementPlugin;
+import org.fujionclinical.ui.sharedforms.controller.TestController;
 import org.fujionclinical.ui.test.MockUITest;
 import org.junit.Test;
 

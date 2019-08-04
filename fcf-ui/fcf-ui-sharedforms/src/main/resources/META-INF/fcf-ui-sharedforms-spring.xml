@@ -8,7 +8,7 @@
 	<beans profile="root">
 
 		<bean name="sharedFormCaptionedController" scope="prototype"
-			class="org.fujionclinical.ui.sharedforms.CaptionedFormController" />
+			class="org.fujionclinical.ui.sharedforms.controller.CaptionedFormController" />
 
 		<bean name="sharedFormListViewController" scope="prototype"
 			destroy-method="destroy" abstract="true">
