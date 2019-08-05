@@ -30,4 +30,13 @@
 	display: none;
 }
 
+.fcf-sharedforms-title {
+	font-weight: bold;
+	font-size: 125%;
+	text-align: center;
+	background-color: lightblue;
+	margin-bottom: 5px;
+	margin-top: 5px;
+	padding: 5px;
+}
 

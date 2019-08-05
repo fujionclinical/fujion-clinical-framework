@@ -60,6 +60,8 @@ public class FormConstants {
 
     public static final String LABEL_ID_WAITING = "%.plugin.status.waiting";
 
+    public static final String SCLASS_DOCUMENT_TITLE = "fcf-sharedforms-title";
+
     /**
      * Enforce static class.
      */
