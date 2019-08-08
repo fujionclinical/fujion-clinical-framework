@@ -31,6 +31,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.support.DefaultConversionService;
+import org.springframework.util.Assert;
 
 import java.lang.annotation.*;
 import java.lang.reflect.Field;
@@ -128,11 +129,8 @@ public abstract class PropertyAwareConfigurator implements ApplicationContextAwa
                     }
                     
                     if (value == null) {
-                        if (annot.required()) {
-                            throw new RuntimeException("Required configuration property not specified: " + propName);
-                        } else {
-                            continue;
-                        }
+                        Assert.isTrue(!annot.required(), () -> "Required configuration parameter not specified: " + propName);
+                        continue;
                     }
 
                     try {
