@@ -30,6 +30,7 @@ import org.fujion.test.MockConfig;
 import org.fujion.test.MockEnvironment;
 import org.fujionclinical.api.spring.ExternalPropertySource;
 import org.fujionclinical.api.spring.LabelPropertySource;
+import org.fujionclinical.api.spring.RandomPropertySource;
 import org.fujionclinical.ui.spring.AppContextFinder;
 import org.fujionclinical.ui.spring.FrameworkAppContext;
 import org.springframework.context.ApplicationContext;
@@ -60,6 +61,7 @@ public class MockUIEnvironment extends MockEnvironment {
 
         if (parent == null) {
             ConfigurableEnvironment env = ctx.getEnvironment();
+            env.getPropertySources().addFirst(new RandomPropertySource());
             env.getPropertySources().addFirst(new LabelPropertySource());
             env.getPropertySources().addLast(new ExternalPropertySource(ctx));
             MockAppContextFinder.setRootContext(ctx);
