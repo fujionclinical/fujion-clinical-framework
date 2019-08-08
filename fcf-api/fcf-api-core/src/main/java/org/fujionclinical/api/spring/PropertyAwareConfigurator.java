@@ -72,6 +72,7 @@ public abstract class PropertyAwareConfigurator implements ApplicationContextAwa
          * @return The default value.
          */
         String defaultValue() default NULL_VALUE;
+
     }
 
     private PropertyProvider propertyProvider;
@@ -102,8 +103,20 @@ public abstract class PropertyAwareConfigurator implements ApplicationContextAwa
         afterInitialized();
     }
 
+    /**
+     * Override for special post-initialization requirements.
+     */
     protected void afterInitialized() {
-        // Override for special post-initialization requirements.
+    }
+
+    /**
+     * Override to preprocess raw parameters values.
+     * @param annotation The parameter annotation.
+     * @param value The raw value.
+     * @return The processed value.
+     */
+    protected String preprocess(Param annotation, String value) {
+        return value;
     }
 
     /**
@@ -134,6 +147,7 @@ public abstract class PropertyAwareConfigurator implements ApplicationContextAwa
                     }
 
                     try {
+                        value = preprocess(annot, value);
                         field.set(object, conversionService.convert(value, field.getType()));
                     } catch (Exception e) {
                         throw MiscUtil.toUnchecked(e);
