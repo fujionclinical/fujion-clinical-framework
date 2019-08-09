@@ -1,18 +1,31 @@
 <html xmlns:th="http://www.thymeleaf.org">
-	<link rel="stylesheet" type="text/css"
-	 	href="../webjars/bootstrap/css/bootstrap.css" />
+	<head>
+		<link rel="stylesheet" type="text/css" href="../webjars/webjar-bootstrap/dist/css/bootstrap.css">
+		<style th:inline="css">
+			#fcf-container {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				height: 100%;
+			}
 
+			#fcf-toolbar {
+				display: flex;
+				justify-content: center;		}
+		</style>
+	</head>
 	<body class="text-center">
-		<div style="display:inline-block;height:100%;width:100%">
-			<div class="card alert-primary" style="display:inline-block;position:relative;top:20px">
-				<div class="card-heading text-left">
-					<div class="card-title" th:text="#{security.logout.window.title}"></div>
+		<div id="fcf-container">
+			<div style="flex: 1"></div>
+			<div class="card">
+				<div class="card-heading alert-primary">
+					<div class="card-title font-weight-bold" th:text="#{security.logout.window.title}"></div>
 				</div>
-				<div class="card-body text-center">
+				<div class="card-body">
 					<span class="text-danger" th:text="${message}"></span>
 				</div>
 				<div class="card-footer">
-					<div class="btn-toolbar" role="toolbar" style="display:flex;justify-content:center">
+					<div id="fcf-toolbar" class="btn-toolbar" role="toolbar">
 						<a class="btn btn-primary" 
 							th:href="${target}"
 							th:text="#{security.logout.form.button.login.label}">
@@ -20,6 +33,7 @@
 					</div>
 				</div>
 			</div>
+			<div style="flex: 1"></div>
 		</div>
 	</body>
 </html>
