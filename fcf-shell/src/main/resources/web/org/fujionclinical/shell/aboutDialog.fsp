@@ -1,7 +1,7 @@
 <window width="500px" closable="true" sizable="true"
 	title="${@msg.fcf.shell.about.title}" 
 	controller="${@aboutDialogController}">
-	<div style="display:flex;flex:1">
+	<div style="flex:1">
 		<grid style="border:none">
 			<columns css="##{id} th {text-align:center;vertical-align:middle;width:50%}">
 				<column>
