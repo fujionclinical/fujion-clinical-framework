@@ -7,6 +7,10 @@
 		body {
 			background-image: url("[[#{security.login.form.background.image}]]");
 		}
+
+		#fcf-copyright {
+			background: white;
+		}
 	</style>
 </head>
 
@@ -70,7 +74,7 @@
 						</div>
 					</div>
 					<div style="flex: 1" th:class="${domainCount} > 1 ? '' : 'hidden'">
-						<a id="fcf-alternate" class="btn btn-link"
+						<a id="fcf-alternate" class="btn btn-link" tabindex="0"
 							th:text="#{security.login.form.domain.alternate.label}"></a>
 					</div>
 					<input id="fcf-username-real" type="hidden" name="username" />
