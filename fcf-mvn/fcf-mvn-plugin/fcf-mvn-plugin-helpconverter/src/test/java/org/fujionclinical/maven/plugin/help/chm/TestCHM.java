@@ -94,7 +94,7 @@ public class TestCHM {
             if (isDirectory) {
                 compareFiles(file, refFile, msg);
             } else {
-                assertTrue("File contents is not valid: " + name, FileUtils.contentEquals(file, refFile));
+                assertTrue("File contents is not valid: " + name, FileUtils.contentEqualsIgnoreEOL(file, refFile, null));
             }
         }
     }
