@@ -11,6 +11,15 @@
 		#fcf-copyright {
 			background: white;
 		}
+
+		#fcf-header-text {
+			margin: 20px;
+		}
+
+		#fcf-header-separator {
+			height: 20px;
+			border-top: 1px solid black;
+		}
 	</style>
 </head>
 
@@ -84,8 +93,8 @@
 			<label id="fcf-error" class="bg-danger text-center text-danger"
 				th:text="${error}">
 			</label>
-			<label id="fcf-header-text" style="margin: 20px"></label>
-			<div style="height: 20px; border-top: 1px solid black"></div>
+			<label id="fcf-header-text"></label>
+			<div id="fcf-header-separator"></div>
 			<div id="fcf-info">
 				<label id="fcf-info-title"
 					th:text="#{security.login.form.info.title}"></label>
