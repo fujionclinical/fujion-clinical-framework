@@ -39,8 +39,17 @@
 	margin-right: 10px;
 }
 
+#fcf-header-text {
+	margin: 20px;
+}
+
 #fcf-header-text:empty {
 	display: none;
+}
+
+#fcf-header-separator {
+	height: 20px;
+	border-top: 1px solid black;
 }
 
 #fcf-domain-name {
@@ -122,7 +131,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-	padding-left: 20px; 
+	padding-left: 20px;
+	background: white;
 }
 
 #fcf-copyright-prefix {
@@ -154,6 +164,6 @@
 body {
 	background-repeat: no-repeat;
 	background-position: center;
-	background-size: cover;
+	background-size: 100% 100%;
 	padding-top: 40px;
 }
