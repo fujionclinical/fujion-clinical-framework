@@ -92,11 +92,13 @@
 				th:text="#{security.login.form.footer.label}"></label>
 			<div id="fcf-copyright" class="fcf-layout-horizontal card-footer">
 				<label id="fcf-copyright-prefix"
-					th:text="#{security.login.form.copyright.prefix}"></label> <img
-					id="fcf-copyright-img"
-					th:src="#{security.login.form.copyright.image}" /> <label
-					id="fcf-copyright-text"
-					th:text="#{security.login.form.copyright.label}"></label>
+					th:utext="#{security.login.form.copyright.prefix}">
+				</label>
+				<img id="fcf-copyright-img"
+					 th:src="#{security.login.form.copyright.image}" />
+				<label id="fcf-copyright-text"
+					th:utext="#{security.login.form.copyright.label}">
+				</label>
 			</div>
 		</div>
 	</div>
