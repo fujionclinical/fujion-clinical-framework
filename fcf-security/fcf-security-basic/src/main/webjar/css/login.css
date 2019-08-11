@@ -75,9 +75,10 @@
 }
 
 .fcf-prompt {
-     display: flex;
-     flex-direction: row;
-     padding-bottom: 10px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding-bottom: 10px;
 }
 
 .fcf-prompt > div {
