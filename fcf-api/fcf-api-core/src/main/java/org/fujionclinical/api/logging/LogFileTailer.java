@@ -27,6 +27,7 @@ package org.fujionclinical.api.logging;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.util.Assert;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -171,16 +172,14 @@ public class LogFileTailer implements Runnable {
      * @throws FileNotFoundException Thrown when <code>file</code> argument does not exist
      */
     public void changeFile(File file) throws FileNotFoundException {
-        if (isTailing()) {
-            throw new IllegalStateException("Cannot Change FileTailer.file while current instance is tailing");
-        } else {
-            if (file == null) {
-                throw new NullPointerException("changeFile(File argument) cannot be null");
-            } else if (!file.exists()) {
-                throw new FileNotFoundException("File does not exist: " + file.getAbsolutePath());
-            }
-            this.file = file;
+        Assert.state(!isTailing(), "Cannot change FileTailer.file while current instance is tailing");
+        Assert.notNull(file, "changeFile (File argument) cannot be null");
+
+        if (!file.exists()) {
+            throw new FileNotFoundException("File does not exist: " + file.getAbsolutePath());
         }
+
+        this.file = file;
     }
     
     /**

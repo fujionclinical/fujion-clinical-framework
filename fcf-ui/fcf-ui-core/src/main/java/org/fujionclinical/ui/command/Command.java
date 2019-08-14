@@ -34,6 +34,7 @@ import org.fujion.event.IEventListener;
 import org.fujion.event.KeyEvent;
 import org.fujionclinical.ui.action.ActionUtil;
 import org.fujionclinical.ui.action.IAction;
+import org.springframework.util.Assert;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -144,11 +145,8 @@ public class Command {
      */
     /*package*/void bind(String shortcut) {
         String normalized = CommandUtil.validateShortcut(shortcut);
-        
-        if (normalized == null) {
-            throw new IllegalArgumentException("Invalid shortcut specifier: " + shortcut);
-        }
-        
+        Assert.notNull(normalized, () -> "Invalid shortcut specifier: " + shortcut);
+
         if (shortcutBindings.add(normalized)) {
             shortcutChanged(normalized, false);
         }

@@ -33,6 +33,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.io.Resource;
+import org.springframework.util.Assert;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -198,11 +199,7 @@ public class AliasTypeRegistry extends AbstractRegistry<String, AliasType> imple
      */
     private void register(String key, String alias) {
         String[] pcs = key.split(PREFIX_DELIM_REGEX, 2);
-
-        if (pcs.length != 2) {
-            throw new IllegalArgumentException("Illegal key value: " + key);
-        }
-
+        Assert.isTrue(pcs.length == 2, () -> "Illegal key value: " + key);
         register(pcs[0], pcs[1], alias);
     }
 

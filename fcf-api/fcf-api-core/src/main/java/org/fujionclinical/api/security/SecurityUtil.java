@@ -29,6 +29,7 @@ import org.apache.commons.lang.math.RandomUtils;
 import org.fujionclinical.api.domain.IUser;
 import org.fujionclinical.api.spring.SpringUtil;
 import org.springframework.util.AntPathMatcher;
+import org.springframework.util.Assert;
 
 import java.util.Map;
 
@@ -190,11 +191,8 @@ public class SecurityUtil {
             chars[i] = pcs[1];
             totalRequired += min[i];
         }
-        
-        if (totalRequired > maxLength) {
-            throw new IllegalArgumentException("Maximum length and constraints in conflict.");
-        }
-        
+
+        Assert.isTrue(totalRequired <= maxLength, "Maximum length and constraints in conflict");
         int grp = 0;
         
         while (pwdLength-- > 0) {

@@ -36,6 +36,7 @@ import org.fujion.common.StrUtil;
 import org.fujion.component.*;
 import org.fujion.event.Event;
 import org.fujionclinical.ui.util.DateTimeUtil;
+import org.springframework.util.Assert;
 
 import java.util.Date;
 
@@ -161,9 +162,7 @@ public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
      * @param value The date value.
      */
     public void validateDate(Date value) {
-        if (requireTime && !DateUtil.hasTime(value)) {
-            throw new IllegalArgumentException(requireTimeError);
-        }
+        Assert.isTrue(!requireTime || DateUtil.hasTime(value), requireTimeError);
     }
     
     /**

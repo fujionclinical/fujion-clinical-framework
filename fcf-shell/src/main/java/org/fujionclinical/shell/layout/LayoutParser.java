@@ -38,6 +38,7 @@ import org.fujionclinical.shell.layout.LayoutElement.LayoutRoot;
 import org.fujionclinical.shell.plugins.PluginDefinition;
 import org.fujionclinical.shell.plugins.PluginRegistry;
 import org.fujionclinical.shell.property.PropertyInfo;
+import org.springframework.util.Assert;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -253,13 +254,9 @@ public class LayoutParser {
     }
     
     private PluginDefinition getDefinition(String type, Element node) {
-        type = type != null ? type : getRequiredAttribute(node, "_type");
-        PluginDefinition pluginDefinition = PluginRegistry.getInstance().get(type);
-
-        if (pluginDefinition == null) {
-            throw new IllegalArgumentException("Unrecognized " + node.getTagName() + " type: " + type);
-        }
-
+        String type2 = type != null ? type : getRequiredAttribute(node, "_type");
+        PluginDefinition pluginDefinition = PluginRegistry.getInstance().get(type2);
+        Assert.notNull(pluginDefinition, () -> "Unrecognized " + node.getTagName() + " type: " + type2);
         return pluginDefinition;
     }
 
@@ -285,11 +282,7 @@ public class LayoutParser {
      */
     private String getRequiredAttribute(Element node, String name) {
         String value = node.getAttribute(name);
-        
-        if (value.isEmpty()) {
-            throw new IllegalArgumentException("Missing " + name + " attribute on node: " + node.getTagName());
-        }
-        
+        Assert.isTrue(!value.isEmpty(), () -> "Missing " + name + " attribute on node: " + node.getTagName());
         return value;
     }
     

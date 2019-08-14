@@ -29,6 +29,7 @@ import org.fujion.component.BaseUIComponent;
 import org.fujion.event.Event;
 import org.fujion.event.KeyEvent;
 import org.fujionclinical.api.spring.SpringUtil;
+import org.springframework.util.Assert;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -62,10 +63,7 @@ public class CommandRegistry implements Iterable<Command> {
     }
     
     public void add(Command command) {
-        if (commands.containsValue(command)) {
-            throw new IllegalArgumentException("Command already exists: " + command.getName());
-        }
-        
+        Assert.isTrue(!commands.containsValue(command), () -> "Command already exists: " + command.getName());
         commands.put(command.getName(), command);
     }
     

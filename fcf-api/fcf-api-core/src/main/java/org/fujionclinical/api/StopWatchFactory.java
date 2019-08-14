@@ -25,6 +25,8 @@
  */
 package org.fujionclinical.api;
 
+import org.springframework.util.Assert;
+
 import java.util.Map;
 
 /**
@@ -58,14 +60,8 @@ public class StopWatchFactory {
     private final Class<? extends IStopWatch> clazz;
     
     public static StopWatchFactory createFactory(Class<? extends IStopWatch> clazz) {
-        if (clazz == null) {
-            throw new IllegalArgumentException("Stopwatch class must not be null.");
-        }
-        
-        if (factory != null) {
-            throw new IllegalStateException("Stopwatch factory already registered.");
-        }
-        
+        Assert.notNull(clazz, "Stopwatch class must not be null");
+        Assert.isNull(factory, "Stopwatch factory already registered");
         return factory = new StopWatchFactory(clazz);
     }
     
@@ -89,14 +85,12 @@ public class StopWatchFactory {
      *         initialized.
      */
     public static IStopWatch create() {
-        if (factory == null) {
-            throw new IllegalStateException("No stopwatch factory registered.");
-        }
-        
+        Assert.state(factory != null, "No stopwatch factory registered");
+
         try {
             return factory.clazz.newInstance();
         } catch (Exception e) {
-            throw new RuntimeException("Could not create stopwatch instance.", e);
+            throw new RuntimeException("Could not create stopwatch instance", e);
         }
     }
     

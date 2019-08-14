@@ -27,6 +27,7 @@ package org.fujionclinical.shell.property;
 
 import org.fujion.common.AbstractRegistry;
 import org.fujionclinical.shell.designer.*;
+import org.springframework.util.Assert;
 
 /**
  * Registry of all supported property types.
@@ -131,11 +132,8 @@ public class PropertyTypeRegistry extends AbstractRegistry<String, PropertyType>
                 throw new IllegalArgumentException(e);
             }
         }
-        
-        if (serializer == null) {
-            throw new IllegalArgumentException("Not an enumerable type: " + key);
-        }
-        
+
+        Assert.notNull(serializer, () -> "Not an enumerable type: " + key);
         propType = new PropertyType(key, serializer, PropertyEditorEnum.class);
         register(propType);
         return propType;
