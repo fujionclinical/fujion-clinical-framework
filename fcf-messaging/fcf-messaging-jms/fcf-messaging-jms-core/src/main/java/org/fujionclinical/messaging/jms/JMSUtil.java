@@ -90,7 +90,7 @@ public final class JMSUtil {
     /**
      * Creates a message selector which considers JMSType and recipients properties.
      * 
-     * @param eventName The event name (i.e. DESKTOP.LOCK).
+     * @param eventName The event name (e.g., SESSION.LOCK).
      * @param publisherInfo Info on the publisher. If null, then no recipients properties are added.
      * @return The message selector.
      */

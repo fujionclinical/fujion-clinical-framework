@@ -35,7 +35,7 @@ public interface ISecurityService {
     String ALIAS_TYPE_AUTHORITY = "AUTHORITY";
     
     /**
-     * Logout out the current desktop instance.
+     * Logout out the current session.
      * 
      * @param force If true, force logout without user interaction.
      * @param target Optional target url for next login.

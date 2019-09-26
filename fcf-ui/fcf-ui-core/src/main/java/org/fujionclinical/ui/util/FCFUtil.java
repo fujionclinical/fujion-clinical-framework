@@ -57,7 +57,7 @@ public class FCFUtil {
     private static final IEventListener deferredDelivery = EventUtil::send;
     
     /**
-     * Fires an event, deferring delivery if the desktop of the target is not currently active.
+     * Fires an event, deferring delivery if the page of the target is not currently active.
      *
      * @param event The event to fire.
      */

@@ -149,7 +149,7 @@ public class FrameworkController implements IAutoWired {
     }
     
     /**
-     * Returns the application framework associated with the active desktop.
+     * Returns the application framework associated with the active session.
      *
      * @return An application framework instance.
      */
@@ -158,7 +158,7 @@ public class FrameworkController implements IAutoWired {
     }
     
     /**
-     * Returns the event manager associated with the active desktop.
+     * Returns the event manager associated with the active page.
      *
      * @return The event manager.
      */
