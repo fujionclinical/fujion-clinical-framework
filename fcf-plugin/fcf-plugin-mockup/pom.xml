@@ -12,12 +12,5 @@
 	
 	<properties>
 		<webjar.name>fcf-mockup</webjar.name>
-		<systemjs>
-			{
-				'map': {
-					'gliffy': 'gliffy/diagramEmbed.js'
-				}
-			}
-		</systemjs>
 	</properties>
 </project>

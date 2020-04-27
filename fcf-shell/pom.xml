@@ -12,13 +12,6 @@
 
 	<properties>
 		<webjar.name>fcf-shell</webjar.name>
-        <systemjs>
-        {	'map': {
-				'fcf-shell': 'js/fcf-shell',
-				'fcf-shell-css': 'css/fcf-shell'
-			}
-		}
-        </systemjs>
 	</properties>
 
 	<build>

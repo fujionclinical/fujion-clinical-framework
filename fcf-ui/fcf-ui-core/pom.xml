@@ -13,13 +13,6 @@
 
 	<properties>
 		<webjar.name>fcf-core</webjar.name>
-        <systemjs>
-        {	'map': {
-				'fcf-core': 'js/fcf-core',
-				'fcf-core-css': 'css/fcf-core'
-			}
-		}
-        </systemjs>
 	</properties>
 
 	<dependencies>
