@@ -52,7 +52,7 @@ public class LoginController {
     public String login(ModelMap model, HttpServletRequest request) {
         Collection<ISecurityDomain> domains = SecurityDomainRegistry.getInstance().getAll();
         model.addAttribute("baseUrl", RequestUtil.getBaseURL(request));
-        model.addAttribute("webjarInit", WebJarLocator.getInstance().getWebJarInit());
+        model.addAttribute("importMap", WebJarLocator.getInstance().getImportMap());
         model.addAttribute("timeout", request.getSession().getMaxInactiveInterval() * 1000);
         model.addAttribute("domainCount", domains.size());
         model.addAttribute("domains", domains);

@@ -29,7 +29,9 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.fujion.common.StrUtil;
 import org.fujion.event.ClickEvent;
 import org.fujion.event.EventUtil;
+import org.fujion.test.MockConfig;
 import org.fujion.test.MockTest;
+import org.fujion.webjar.WebJarLocator;
 import org.fujionclinical.shell.Shell;
 import org.fujionclinical.shell.elements.*;
 import org.fujionclinical.shell.elements.ElementPlugin.PluginContainer;
@@ -39,12 +41,17 @@ import org.fujionclinical.shell.plugins.PluginDefinition;
 import org.fujionclinical.shell.property.PropertyInfo;
 import org.fujionclinical.shell.triggers.TriggerConditionActivate;
 import org.fujionclinical.ui.controller.FrameworkController;
+import org.fujionclinical.ui.test.MockUIEnvironment;
 import org.fujionclinical.ui.test.MockUITest;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.util.ResourceUtils;
 
 import static org.junit.Assert.*;
 
-public class LayoutParserTest extends MockUITest {
+public class LayoutParserTest extends ShellTest {
     
     private Shell shell;
 
