@@ -13,14 +13,6 @@
 	<properties>
 		<webjar.name>fcf-login</webjar.name>
 		<webjar.version>${project.version}</webjar.version>
-        <requirejs>
-        {
-			'paths': {
-				'fcf-login': 'js/login',
-				'fcf-login-css': 'css/login'
-			}
-		}
-        </requirejs>
 	</properties>
 	
 	<dependencies>

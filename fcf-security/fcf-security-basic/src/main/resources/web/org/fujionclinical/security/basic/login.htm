@@ -15,7 +15,7 @@
 	
 	<script th:inline="javascript">
     	System.config(
-    		[(${webjarInit})]
+    		[(${importMap})]
         );
 	        
 		System.import('fcf-login').then(function(sec) {
