@@ -2,7 +2,7 @@
 	title="${@msg.fcf.shell.about.title}" 
 	controller="${@aboutDialogController}">
 	<div style="flex:1">
-		<grid style="border:none">
+		<grid style="border:none" class="table-striped">
 			<columns css="##{id} th {text-align:center;vertical-align:middle;width:50%}">
 				<column>
 					<image name="imgIcon" style="max-height:50px;max-width:100px"/>

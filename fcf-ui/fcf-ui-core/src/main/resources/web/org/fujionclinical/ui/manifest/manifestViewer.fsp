@@ -4,7 +4,7 @@
 	controller="org.fujionclinical.ui.manifest.ManifestViewer">
 	<div name="printRoot" flex="1">
 		<label name="caption" />
-		<grid name="grid">
+		<grid name="grid" class="table-striped">
 			<columns />
 			<rows />
 		</grid>
