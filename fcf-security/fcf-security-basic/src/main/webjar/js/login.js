@@ -1,6 +1,6 @@
 'use strict';
 
-define('fcf-login', ['jquery', 'lodash', 'fcf-login-css', 'bootstrap-css'], function($) {
+define('fcf-login', ['jquery', 'lodash', 'fcf-login-css', 'bootstrap-css'], () => {
 	return {
 	
 		init: function(timeout, logoutUrl, required, disabled) {
@@ -25,18 +25,16 @@ define('fcf-login', ['jquery', 'lodash', 'fcf-login-css', 'bootstrap-css'], func
 			}
 			
 			body$.show();
+			$('#fcf-username').get(0).focus();
 		},
 		
 		resetTimeout: function() {
-			var self = this;
-			
 			if (this._timer) {
 				clearTimeout(this._timer);
 			}
 			
-			this._timer = setTimeout(function() {
-				$(location).attr('href', self._logoutUrl);				
-			}, this._timeout);
+			this._timer = setTimeout(() =>
+				$(location).attr('href', this._logoutUrl), this._timeout);
 		},
 		
 		submitHandler: function(event) {

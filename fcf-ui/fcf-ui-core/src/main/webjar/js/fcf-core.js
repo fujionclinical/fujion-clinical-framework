@@ -1,7 +1,7 @@
 /*
  * Fujion Clinical Framework JavaScript Library
  */
-define('fcf-core', ['fujion-core', 'jquery', 'fcf-core-css'], function(fujion, $) { 
+define('fcf-core', ['fujion-core', 'jquery', 'fcf-core-css'], fujion => {
 
 var fcf = {
 

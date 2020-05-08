@@ -352,6 +352,7 @@ public class SessionMonitor extends FrameworkController {
                 setMode(nextMode());
                 
                 if (mode == Mode.LOGOUT) {
+                    timer.stop();
                     requestLogout();
                     return;
                 }
@@ -408,7 +409,7 @@ public class SessionMonitor extends FrameworkController {
      */
     @EventHandler(value = "click", target = "btnKeepOpen")
     private void onClick$btnKeepOpen() {
-        setMode(Mode.BASELINE);
+        resetActivity();
     }
     
     @EventHandler(value = "click", target = "btnLogout")
