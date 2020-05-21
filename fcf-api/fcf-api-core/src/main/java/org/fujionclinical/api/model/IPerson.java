@@ -64,6 +64,52 @@ public interface IPerson extends IDomainObject {
         return Objects.toString(getName(categories));
     }
 
+    /**
+     * Returns all addresses for the person.
+     *
+     * @return A list of all addresses (possibly null)
+     */
+    default List<Address> getAddresses() {
+        return null;
+    }
+
+    /**
+     * Returns the person's home address.
+     *
+     * @return The person's home address, or null if not found.
+     */
+    default Address getAddress() {
+        return getAddress(Address.AddressCategory.HOME);
+    }
+
+    /**
+     * Returns the person's address from one of the specified categories.  Categories are
+     * searched in order until a match is found.
+     *
+     * @param categories Only addresses belonging to one of these categories will be returned.
+     * @return The person's address, or null if not found.
+     */
+    default Address getAddress(Address.AddressCategory... categories) {
+        List<Address> addresses = getAddresses();
+
+        if (addresses != null && !addresses.isEmpty()) {
+            for (Address.AddressCategory category : categories) {
+                for (Address address : addresses) {
+                    if (address.getCategory() == category) {
+                        return address;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns all photos for the person.
+     *
+     * @return A list of all photos (possibly null)
+     */
     default List<PersonPhoto> getPhotos() {
         return null;
     }

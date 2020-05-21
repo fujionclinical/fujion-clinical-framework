@@ -1,7 +1,7 @@
 package org.fujionclinical.api.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import org.fujion.common.MiscUtil;
+
 import java.util.List;
 
 /**
@@ -9,37 +9,39 @@ import java.util.List;
  */
 public class PersonName {
 
-    public enum PersonNameCategory {
-        USUAL, OFFICIAL, TEMP, NICKNAME, ANONYMOUS, OLD, MAIDEN
-    }
-
     private String familyName;
-
     private List<String> givenNames;
-
     private List<String> prefixes;
-
     private List<String> suffixes;
-
     private PersonNameCategory category;
 
     public PersonName() {
 
     }
 
-    public PersonName(String familyName, String[] givenNames) {
+    public PersonName(
+            String familyName,
+            String[] givenNames) {
         this(familyName, givenNames, null, null, null);
     }
 
-    public PersonName(String familyName, String[] givenNames, PersonNameCategory category) {
+    public PersonName(
+            String familyName,
+            String[] givenNames,
+            PersonNameCategory category) {
         this(familyName, givenNames, null, null, category);
     }
 
-    public PersonName(String familyName, String[] givenNames, String[] prefixes, String[] suffixes, PersonNameCategory category) {
+    public PersonName(
+            String familyName,
+            String[] givenNames,
+            String[] prefixes,
+            String[] suffixes,
+            PersonNameCategory category) {
         this.familyName = familyName;
-        this.givenNames = toList(givenNames);
-        this.prefixes = toList(prefixes);
-        this.suffixes = toList(suffixes);
+        this.givenNames = MiscUtil.toList(givenNames);
+        this.prefixes = MiscUtil.toList(prefixes);
+        this.suffixes = MiscUtil.toList(suffixes);
         this.category = category;
     }
 
@@ -64,7 +66,7 @@ public class PersonName {
     }
 
     public void addGivenName(String givenName) {
-        givenNames = ensureList(givenNames);
+        givenNames = MiscUtil.ensureList(givenNames);
         givenNames.add(givenName);
     }
 
@@ -81,7 +83,7 @@ public class PersonName {
     }
 
     public void addPrefix(String prefix) {
-        prefixes = ensureList(prefixes);
+        prefixes = MiscUtil.ensureList(prefixes);
         prefixes.add(prefix);
     }
 
@@ -98,7 +100,7 @@ public class PersonName {
     }
 
     public void addSuffix(String suffix) {
-        suffixes = ensureList(suffixes);
+        suffixes = MiscUtil.ensureList(suffixes);
         suffixes.add(suffix);
     }
 
@@ -118,16 +120,12 @@ public class PersonName {
         return this.category != null;
     }
 
-    private List<String> ensureList(List<String> list) {
-        return list == null ? new ArrayList<>() : list;
-    }
-
-    private List<String> toList(String[] array) {
-        return array == null ? null : Arrays.asList(array);
-    }
-
     @Override
     public String toString() {
         return PersonNameParser.instance.toString(this);
+    }
+
+    public enum PersonNameCategory {
+        USUAL, OFFICIAL, TEMP, NICKNAME, ANONYMOUS, OLD, MAIDEN
     }
 }

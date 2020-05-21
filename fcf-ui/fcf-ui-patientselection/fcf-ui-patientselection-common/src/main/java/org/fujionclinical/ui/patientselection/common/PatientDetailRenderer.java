@@ -26,12 +26,15 @@
 package org.fujionclinical.ui.patientselection.common;
 
 import org.apache.commons.lang.StringUtils;
+import org.fujion.ancillary.MimeContent;
 import org.fujion.common.DateUtil;
 import org.fujion.common.StrUtil;
 import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Div;
 import org.fujion.component.Image;
 import org.fujion.component.Label;
+import org.fujionclinical.api.model.Address;
+import org.fujionclinical.api.model.PersonPhoto;
 import org.fujionclinical.api.patient.IPatient;
 
 import java.util.Date;
@@ -66,7 +69,14 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
         root.addChild(new Div());
         Image photo = new Image();
         photo.setStyles("max-height:300px;max-width:300px;padding-bottom:10px");
-        //photo.setSrc(FhirUtil.getImage(patient.getPhoto(), Constants.SILHOUETTE_IMAGE).getSrc());
+        PersonPhoto pix = patient.getPhoto();
+
+        if (pix == null || pix.getImage() == null) {
+            photo.setSrc(Constants.SILHOUETTE_IMAGE);
+        } else {
+            photo.setContent(pix.getImage());
+        }
+
         root.addChild(photo);
         addDemographic(root, null, patient.getFullName(), "font-weight: bold");
         addDemographic(root, "mrn", patient.getMRN());
@@ -83,14 +93,16 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
         //addContact(root, patient.getTelecom(), "work:phone", null);
         //addContact(root, patient.getTelecom(), "work:email", null);
         //addContact(root, patient.getTelecom(), "work:fax", "work fax");
-        /*
-        AddressDt address = FhirUtil.getAddress(patient.getAddress(), AddressUseEnum.HOME);
+
+        Address address = patient.getAddress();
         
         if (address != null) {
             root.addChild(new Div());
-            
-            for (StringDt line : address.getLine()) {
-                addDemographic(root, null, line.getValue());
+
+            if (address.hasLines()) {
+                for (String line : address.getLines()) {
+                    addDemographic(root, null, line);
+                }
             }
             
             String city = StringUtils.defaultString(address.getCity());
@@ -99,7 +111,7 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
             String sep = city.isEmpty() || state.isEmpty() ? "" : ", ";
             addDemographic(root, null, city + sep + state + "  " + zip);
         }
-        */
+
     }
 
     /**
