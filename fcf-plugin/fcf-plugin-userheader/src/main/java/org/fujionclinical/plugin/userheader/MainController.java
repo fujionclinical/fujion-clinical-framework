@@ -31,9 +31,9 @@ import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.component.Hyperlink;
 import org.fujion.component.Label;
-import org.fujionclinical.api.context.UserContext;
-import org.fujionclinical.api.domain.IUser;
-import org.fujionclinical.api.event.IGenericEvent;
+import org.fujionclinical.api.event.IEventSubscriber;
+import org.fujionclinical.api.model.user.IUser;
+import org.fujionclinical.api.model.user.UserContext;
 import org.fujionclinical.api.security.SecurityUtil;
 import org.fujionclinical.shell.ShellUtil;
 import org.fujionclinical.shell.elements.ElementPlugin;
@@ -54,7 +54,7 @@ public class MainController extends PluginController {
 
     private IUser currentUser;
 
-    private final IGenericEvent<IUser> userChangeListener = (event, user) -> {
+    private final IEventSubscriber<IUser> userChangeListener = (event, user) -> {
         setUser(user);
     };
 

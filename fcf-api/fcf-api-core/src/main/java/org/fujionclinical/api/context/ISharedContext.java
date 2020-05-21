@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.context;
 
-import org.fujionclinical.api.event.IGenericEvent;
+import org.fujionclinical.api.event.IEventSubscriber;
 
 /**
  * Every managed context must implement this interface to permit access to the wrapped domain
@@ -59,7 +59,7 @@ public interface ISharedContext<DomainClass> {
      * @param subscriber Object that is to subscribe to context changes.
      * @return True if the subscription request was successful.
      */
-    boolean addSubscriber(IContextEvent subscriber);
+    boolean addSubscriber(IContextSubscriber subscriber);
     
     /**
      * Adds multiple context change subscribers.
@@ -67,34 +67,34 @@ public interface ISharedContext<DomainClass> {
      * @param subscribers List of subscribers to add.
      * @return True if at least one subscription request succeeded.
      */
-    boolean addSubscribers(Iterable<IContextEvent> subscribers);
+    boolean addSubscribers(Iterable<IContextSubscriber> subscribers);
     
     /**
      * Removes a subscriber from the subscription list.
      *
      * @param subscriber Object to be removed.
      */
-    void removeSubscriber(IContextEvent subscriber);
+    void removeSubscriber(IContextSubscriber subscriber);
     
     /**
      * Removes multiple context change subscribers.
      *
      * @param subscribers List of subscribers to remove.
      */
-    void removeSubscribers(Iterable<IContextEvent> subscribers);
+    void removeSubscribers(Iterable<IContextSubscriber> subscribers);
     
     /**
      * Adds a listener for context change events.
      *
      * @param listener The listener.
      */
-    void addListener(IGenericEvent<DomainClass> listener);
+    void addListener(IEventSubscriber<DomainClass> listener);
     
     /**
      * Removes a listener for context change events.
      *
      * @param listener The listener.
      */
-    void removeListener(IGenericEvent<DomainClass> listener);
+    void removeListener(IEventSubscriber<DomainClass> listener);
 
 }

@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.hibernate.property;
 
-import org.fujionclinical.api.domain.IUser;
+import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.hibernate.core.AbstractDAO;
 import org.fujionclinical.hibernate.property.Property.PropertyId;
 import org.hibernate.Session;
@@ -46,7 +46,7 @@ public class PropertyDAO extends AbstractDAO<Property> {
     }
 
     public Property get(String propertyName, String instanceName, IUser user) {
-        PropertyId id = new PropertyId(propertyName, instanceName, user == null ? null : user.getLogicalId());
+        PropertyId id = new PropertyId(propertyName, instanceName, user == null ? null : user.getId());
         return get(Property.class, id);
     }
 
@@ -57,7 +57,7 @@ public class PropertyDAO extends AbstractDAO<Property> {
         try {
             @SuppressWarnings("unchecked")
             NativeQuery<String> query = session.createNativeQuery(GET_INSTANCES);
-            query.setParameter("name", propertyName).setParameter("user", user == null ? "" : user.getLogicalId());
+            query.setParameter("name", propertyName).setParameter("user", user == null ? "" : user.getId());
             List<String> result = query.list();
             Collections.sort(result, String.CASE_INSENSITIVE_ORDER);
             tx.commit();

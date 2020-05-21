@@ -7,15 +7,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * This Source Code Form is also subject to the terms of the Health-Related
  * Additional Disclaimer of Warranty and Limitation of Liability available at
  *
@@ -25,9 +25,14 @@
  */
 package org.fujionclinical.api.security.mock;
 
-import org.fujionclinical.api.domain.IUser;
+import org.fujionclinical.api.model.PersonName;
+import org.fujionclinical.api.model.PersonNameParser;
+import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.security.ISecurityDomain;
 import org.fujionclinical.api.security.SecurityDomainRegistry;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Mock user for testing.
@@ -40,6 +45,8 @@ public class MockUser implements IUser {
 
     private final String fullName;
 
+    private final List<PersonName> names;
+
     private final String loginName;
 
     private final String password;
@@ -50,16 +57,27 @@ public class MockUser implements IUser {
         this("mockId", "User, Mock", "username", "password", new MockSecurityDomain());
     }
 
-    public MockUser(String logicalId, String fullName, String loginName, String password, String securityDomain) {
+    public MockUser(
+            String logicalId,
+            String fullName,
+            String loginName,
+            String password,
+            String securityDomain) {
         this(logicalId, fullName, loginName, password, SecurityDomainRegistry.getSecurityDomain(securityDomain));
     }
 
-    public MockUser(String logicalId, String fullName, String loginName, String password, ISecurityDomain securityDomain) {
+    public MockUser(
+            String logicalId,
+            String fullName,
+            String loginName,
+            String password,
+            ISecurityDomain securityDomain) {
         this.logicalId = logicalId;
         this.fullName = fullName;
         this.loginName = loginName;
         this.password = password;
         this.securityDomain = securityDomain;
+        this.names = fullName == null ? null : Collections.singletonList(PersonNameParser.instance.fromString(fullName));
     }
 
     @Override
@@ -70,6 +88,10 @@ public class MockUser implements IUser {
     @Override
     public String getFullName() {
         return fullName;
+    }
+
+    public List<PersonName> getNames() {
+        return names;
     }
 
     @Override
@@ -88,12 +110,12 @@ public class MockUser implements IUser {
     }
 
     @Override
-    public String getLogicalId() {
+    public String getId() {
         return logicalId;
     }
 
     @Override
-    public MockUser getNativeUser() {
+    public MockUser getNative() {
         return this;
     }
 

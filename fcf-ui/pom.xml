@@ -18,5 +18,6 @@
 		<module>fcf-ui-popupsupport</module>
 		<module>fcf-ui-sharedforms</module>
 		<module>fcf-ui-reports</module>
-	</modules>
+        <module>fcf-ui-patientselection</module>
+    </modules>
 </project>

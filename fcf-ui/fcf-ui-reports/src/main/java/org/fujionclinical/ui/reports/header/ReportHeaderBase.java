@@ -30,7 +30,7 @@ import org.fujion.annotation.WiredComponent;
 import org.fujion.common.DateUtil;
 import org.fujion.component.BaseComponent;
 import org.fujion.component.Label;
-import org.fujionclinical.api.event.IGenericEvent;
+import org.fujionclinical.api.event.IEventSubscriber;
 import org.fujionclinical.ui.controller.FrameworkController;
 
 import java.util.Date;
@@ -48,7 +48,7 @@ public abstract class ReportHeaderBase extends FrameworkController {
 
     private final String contextEvent;
 
-    private final IGenericEvent<?> eventListener = (x, y) -> {
+    private final IEventSubscriber<?> eventListener = (x, y) -> {
         refresh();
     };
 

@@ -17,6 +17,10 @@
               class="org.fujionclinical.ui.reports.header.ReportHeaderUser"
               scope="prototype"/>
 
+        <bean id="reportHeaderPatient"
+              class="org.fujionclinical.ui.reports.header.ReportHeaderPatient"
+              scope="prototype"/>
+
     </beans>
 
 </beans>

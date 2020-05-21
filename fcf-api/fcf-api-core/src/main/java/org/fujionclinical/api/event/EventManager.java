@@ -104,24 +104,24 @@ public class EventManager implements ILocalEventDispatcher, IEventManager {
     
     /**
      * @see org.fujionclinical.api.event.IEventManager#subscribe(java.lang.String,
-     *      org.fujionclinical.api.event.IGenericEvent)
+     *      IEventSubscriber)
      */
     @SuppressWarnings("unchecked")
     @Override
-    public void subscribe(String eventName, IGenericEvent<?> subscriber) {
-        if (subscriptions.addSubscriber(eventName, (IGenericEvent<Object>) subscriber) == 1) {
+    public void subscribe(String eventName, IEventSubscriber<?> subscriber) {
+        if (subscriptions.addSubscriber(eventName, (IEventSubscriber<Object>) subscriber) == 1) {
             hostSubscribe(eventName, true);
         }
     }
     
     /**
      * @see org.fujionclinical.api.event.IEventManager#unsubscribe(java.lang.String,
-     *      org.fujionclinical.api.event.IGenericEvent)
+     *      IEventSubscriber)
      */
     @SuppressWarnings("unchecked")
     @Override
-    public void unsubscribe(String eventName, IGenericEvent<?> subscriber) {
-        if (subscriptions.removeSubscriber(eventName, (IGenericEvent<Object>) subscriber) == 0) {
+    public void unsubscribe(String eventName, IEventSubscriber<?> subscriber) {
+        if (subscriptions.removeSubscriber(eventName, (IEventSubscriber<Object>) subscriber) == 0) {
             hostSubscribe(eventName, false);
         }
     }

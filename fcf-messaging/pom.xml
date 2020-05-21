@@ -20,9 +20,9 @@
 	</description>
 	
 	<properties>
-		<org.springframework.amqp.version>2.1.4.RELEASE</org.springframework.amqp.version>
-		<org.apache.activemq.version>5.15.8</org.apache.activemq.version>
-		<com.rabbitmq.version>5.6.0</com.rabbitmq.version>
+		<org.springframework.amqp.version>2.2.6.RELEASE</org.springframework.amqp.version>
+		<org.apache.activemq.version>5.15.12</org.apache.activemq.version>
+		<com.rabbitmq.version>5.9.0</com.rabbitmq.version>
 	</properties>
 	
 	<modules>

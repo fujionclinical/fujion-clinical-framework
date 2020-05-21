@@ -36,7 +36,7 @@ import org.fujion.event.ChangeEvent;
 import org.fujionclinical.api.event.EventManager;
 import org.fujionclinical.api.event.EventUtil;
 import org.fujionclinical.api.event.IEventManager;
-import org.fujionclinical.api.event.IGenericEvent;
+import org.fujionclinical.api.event.IEventSubscriber;
 import org.fujionclinical.api.messaging.Recipient;
 import org.fujionclinical.api.messaging.Recipient.RecipientType;
 import org.fujionclinical.shell.plugins.PluginController;
@@ -47,7 +47,7 @@ import java.util.List;
 /**
  * Plug-in to test remote events.
  */
-public class MainController extends PluginController implements IGenericEvent<Object> {
+public class MainController extends PluginController implements IEventSubscriber<Object> {
 
     @WiredComponent
     private Textbox tboxEventName;

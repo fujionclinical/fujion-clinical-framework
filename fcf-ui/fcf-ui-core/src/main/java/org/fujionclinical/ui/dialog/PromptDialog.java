@@ -131,7 +131,7 @@ public class PromptDialog implements IAutoWired {
         root.setTitle(control.getTitle());
         icon.addClass(control.getIconClass());
         message.addClass(control.getTextClass());
-        message.setLabel(control.getMessage());
+        message.setLabel(StrUtil.formatMessage(control.getMessage()));
         root.addClass(control.getPanelClass());
         chkRemember.setVisible(root.hasAttribute("remember"));
         root.setOnCanClose(() -> {

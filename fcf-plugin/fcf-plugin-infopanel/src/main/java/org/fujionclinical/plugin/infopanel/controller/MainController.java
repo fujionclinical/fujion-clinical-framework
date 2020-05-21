@@ -31,7 +31,7 @@ import org.fujion.annotation.WiredComponent;
 import org.fujion.component.*;
 import org.fujion.event.DropEvent;
 import org.fujion.event.Event;
-import org.fujionclinical.api.event.IGenericEvent;
+import org.fujionclinical.api.event.IEventSubscriber;
 import org.fujionclinical.plugin.infopanel.model.IInfoPanel;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.shell.plugins.PluginController;
@@ -85,7 +85,7 @@ public class MainController extends PluginController implements IInfoPanel {
     /**
      * Listener for event-based drop and alert requests.
      */
-    private final IGenericEvent<BaseComponent> dropListener = (eventName, comp) -> {
+    private final IEventSubscriber<BaseComponent> dropListener = (eventName, comp) -> {
         if (isActive()) {
             if (eventName.equals(DROP_EVENT_NAME)) {
                 drop(comp);

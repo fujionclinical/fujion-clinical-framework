@@ -27,7 +27,7 @@ package org.fujionclinical.plugin.chat;
 
 import org.fujionclinical.api.event.EventUtil;
 import org.fujionclinical.api.event.IEventManager;
-import org.fujionclinical.api.event.IGenericEvent;
+import org.fujionclinical.api.event.IEventSubscriber;
 import org.fujionclinical.api.event.PingFilter;
 import org.fujionclinical.api.event.PingFilter.PingFilterType;
 import org.fujionclinical.api.messaging.IPublisherInfo;
@@ -71,7 +71,7 @@ public class ParticipantListener {
     /**
      * Listener for a specific event subtype.
      */
-    private class SubTypeListener implements IGenericEvent<IPublisherInfo> {
+    private class SubTypeListener implements IEventSubscriber<IPublisherInfo> {
         
         private final EventSubType subtype;
         

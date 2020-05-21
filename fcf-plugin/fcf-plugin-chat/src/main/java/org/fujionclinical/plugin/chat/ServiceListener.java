@@ -26,14 +26,14 @@
 package org.fujionclinical.plugin.chat;
 
 import org.fujionclinical.api.event.IEventManager;
-import org.fujionclinical.api.event.IGenericEvent;
+import org.fujionclinical.api.event.IEventSubscriber;
 
 /**
  * Simple listener implementation that tracks its own subscription.
  * 
  * @param <T> Class of event object.
  */
-public abstract class ServiceListener<T> implements IGenericEvent<T> {
+public abstract class ServiceListener<T> implements IEventSubscriber<T> {
     
     private final String eventName;
     

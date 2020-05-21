@@ -35,7 +35,7 @@ import org.fujion.event.IEventListener;
 import org.fujion.page.PageDefinition;
 import org.fujion.page.PageParser;
 import org.fujionclinical.api.event.EventManager;
-import org.fujionclinical.api.event.IGenericEvent;
+import org.fujionclinical.api.event.IEventSubscriber;
 import org.fujionclinical.ui.util.FCFUtil;
 
 import java.util.ArrayList;
@@ -45,7 +45,7 @@ import java.util.List;
 /**
  * Displays a popup message when a POPUP generic event is received.
  */
-public class PopupSupport implements IGenericEvent<Object>, IEventListener {
+public class PopupSupport implements IEventSubscriber<Object>, IEventListener {
     
     private static final String RESOURCE_PREFIX = FCFUtil.getResourcePath(PopupSupport.class);
     

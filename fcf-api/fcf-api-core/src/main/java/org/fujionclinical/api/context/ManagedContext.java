@@ -35,7 +35,7 @@ import org.fujionclinical.api.StopWatchFactory.IStopWatch;
 import org.fujionclinical.api.context.ISurveyResponse.ISurveyCallback;
 import org.fujionclinical.api.context.SurveyResponse.ResponseState;
 import org.fujionclinical.api.event.IEventManager;
-import org.fujionclinical.api.event.IGenericEvent;
+import org.fujionclinical.api.event.IEventSubscriber;
 
 import java.util.*;
 
@@ -58,15 +58,15 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
     
     private final Object[] domainObject = new Object[2];
     
-    private final Class<? extends IContextEvent> eventInterface;
+    private final Class<? extends IContextSubscriber> subscriberType;
     
     private final String contextName;
     
     private boolean isPending;
     
-    private final List<IContextEvent> subscribers = new ArrayList<>();
+    private final List<IContextSubscriber> subscribers = new ArrayList<>();
     
-    private final List<IContextEvent> surveyed = new ArrayList<>();
+    private final List<IContextSubscriber> surveyed = new ArrayList<>();
     
     protected IContextManager contextManager;
     
@@ -81,10 +81,10 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
      * interface it supports.
      *
      * @param contextName Unique name for this context.
-     * @param eventInterface The context change interface supported by this managed context.
+     * @param subscriberType The context change interface supported by this managed context.
      */
-    protected ManagedContext(String contextName, Class<? extends IContextEvent> eventInterface) {
-        this(contextName, eventInterface, null);
+    protected ManagedContext(String contextName, Class<? extends IContextSubscriber> subscriberType) {
+        this(contextName, subscriberType, null);
     }
     
     /**
@@ -92,12 +92,12 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
      * interface it supports.
      *
      * @param contextName Unique name for this context.
-     * @param eventInterface The context change interface supported by this managed context.
+     * @param subscriberType The type of context subscriber supported by this managed context.
      * @param initialContext The initial context state. May be null.
      */
-    protected ManagedContext(String contextName, Class<? extends IContextEvent> eventInterface, DomainClass initialContext) {
+    protected ManagedContext(String contextName, Class<? extends IContextSubscriber> subscriberType, DomainClass initialContext) {
         this.contextName = contextName;
-        this.eventInterface = eventInterface;
+        this.subscriberType = subscriberType;
         setPending(initialContext);
         commit(true);
     }
@@ -258,11 +258,11 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
     }
     
     /**
-     * @see org.fujionclinical.api.context.IManagedContext#addSubscriber(IContextEvent)
+     * @see org.fujionclinical.api.context.IManagedContext#addSubscriber(IContextSubscriber)
      */
     @Override
-    public boolean addSubscriber(IContextEvent subscriber) {
-        if (!eventInterface.isInstance(subscriber)) {
+    public boolean addSubscriber(IContextSubscriber subscriber) {
+        if (!this.subscriberType.isInstance(subscriber)) {
             return false;
         }
         
@@ -278,10 +278,10 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
      * @see org.fujionclinical.api.context.IManagedContext#addSubscribers(java.lang.Iterable)
      */
     @Override
-    public boolean addSubscribers(Iterable<IContextEvent> subscribers) {
+    public boolean addSubscribers(Iterable<IContextSubscriber> subscribers) {
         boolean result = false;
         
-        for (IContextEvent subscriber : subscribers) {
+        for (IContextSubscriber subscriber : subscribers) {
             result |= addSubscriber(subscriber);
         }
         
@@ -289,11 +289,11 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
     }
     
     /**
-     * @see org.fujionclinical.api.context.IManagedContext#removeSubscriber(IContextEvent)
+     * @see org.fujionclinical.api.context.IManagedContext#removeSubscriber(IContextSubscriber)
      */
     @Override
-    public void removeSubscriber(IContextEvent subscriber) {
-        if (eventInterface.isInstance(subscriber)) {
+    public void removeSubscriber(IContextSubscriber subscriber) {
+        if (this.subscriberType.isInstance(subscriber)) {
             subscribers.remove(subscriber);
             surveyed.remove(subscriber);
         }
@@ -303,8 +303,8 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
      * @see org.fujionclinical.api.context.IManagedContext#removeSubscribers(java.lang.Iterable)
      */
     @Override
-    public void removeSubscribers(Iterable<IContextEvent> subscribers) {
-        for (IContextEvent subscriber : subscribers) {
+    public void removeSubscribers(Iterable<IContextSubscriber> subscribers) {
+        for (IContextSubscriber subscriber : subscribers) {
             removeSubscriber(subscriber);
         }
     }
@@ -322,7 +322,7 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
             map.put("context", getContextName());
         }
         
-        for (IContextEvent event : getIterable(all)) {
+        for (IContextSubscriber event : getIterable(all)) {
             IStopWatch sw = null;
             
             try {
@@ -369,7 +369,7 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
      *            subscribers are returned.
      * @return Callback list.
      */
-    private Iterable<IContextEvent> getIterable(boolean all) {
+    private Iterable<IContextSubscriber> getIterable(boolean all) {
         return new ArrayList<>(all ? subscribers : surveyed);
     }
     
@@ -379,13 +379,13 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
     @Override
     public void surveySubscribers(boolean silent, ISurveyCallback callback) {
         SurveyResponse response = new SurveyResponse(silent);
-        Iterator<IContextEvent> iter = getIterable(true).iterator();
+        Iterator<IContextSubscriber> iter = getIterable(true).iterator();
         surveySubscribers(iter, response, callback);
     }
     
-    private void surveySubscribers(Iterator<IContextEvent> iter, SurveyResponse response, ISurveyCallback callback) {
+    private void surveySubscribers(Iterator<IContextSubscriber> iter, SurveyResponse response, ISurveyCallback callback) {
         if ((response.isSilent() || !response.rejected()) && iter.hasNext()) {
-            IContextEvent subscriber = iter.next();
+            IContextSubscriber subscriber = iter.next();
             
             response.reset(__ -> {
                 surveySubscribers(iter, response, callback);
@@ -418,12 +418,12 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
     }
 
     @Override
-    public void addListener(IGenericEvent<DomainClass> listener) {
+    public void addListener(IEventSubscriber<DomainClass> listener) {
         eventManager.subscribe(getEventName(), listener);
     }
     
     @Override
-    public void removeListener(IGenericEvent<DomainClass> listener) {
+    public void removeListener(IEventSubscriber<DomainClass> listener) {
         eventManager.unsubscribe(getEventName(), listener);
     }
     
@@ -485,8 +485,8 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
      */
     @Override
     public void registerObject(Object object) {
-        if (object instanceof IContextEvent) {
-            addSubscriber((IContextEvent) object);
+        if (object instanceof IContextSubscriber) {
+            addSubscriber((IContextSubscriber) object);
         }
     }
     
@@ -498,8 +498,8 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
      */
     @Override
     public void unregisterObject(Object object) {
-        if (object instanceof IContextEvent) {
-            removeSubscriber((IContextEvent) object);
+        if (object instanceof IContextSubscriber) {
+            removeSubscriber((IContextSubscriber) object);
         }
     }
     

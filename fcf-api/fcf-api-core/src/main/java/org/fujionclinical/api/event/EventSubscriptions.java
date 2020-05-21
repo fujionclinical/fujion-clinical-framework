@@ -40,7 +40,7 @@ import java.util.*;
     
     private static final Log log = LogFactory.getLog(EventSubscriptions.class);
     
-    private final Map<String, List<IGenericEvent<T>>> subscriptions = new HashMap<>();
+    private final Map<String, List<IEventSubscriber<T>>> subscriptions = new HashMap<>();
     
     /**
      * Adds a subscriber to the specified event.
@@ -49,8 +49,8 @@ import java.util.*;
      * @param subscriber Subscriber to add.
      * @return Count of subscribers after the operation.
      */
-    public synchronized int addSubscriber(String eventName, IGenericEvent<T> subscriber) {
-        List<IGenericEvent<T>> subscribers = getSubscribers(eventName, true);
+    public synchronized int addSubscriber(String eventName, IEventSubscriber<T> subscriber) {
+        List<IEventSubscriber<T>> subscribers = getSubscribers(eventName, true);
         subscribers.add(subscriber);
         return subscribers.size();
     }
@@ -62,8 +62,8 @@ import java.util.*;
      * @param subscriber Subscriber to remove.
      * @return Count of subscribers after the operation, or -1 no subscriber list existed.
      */
-    public synchronized int removeSubscriber(String eventName, IGenericEvent<T> subscriber) {
-        List<IGenericEvent<T>> subscribers = getSubscribers(eventName, false);
+    public synchronized int removeSubscriber(String eventName, IEventSubscriber<T> subscriber) {
+        List<IEventSubscriber<T>> subscribers = getSubscribers(eventName, false);
         
         if (subscribers != null) {
             subscribers.remove(subscriber);
@@ -116,8 +116,8 @@ import java.util.*;
      * @param eventName Name of the event.
      * @return Iterable for the subscriber list, or null if no list exists.
      */
-    public synchronized Iterable<IGenericEvent<T>> getSubscribers(String eventName) {
-        List<IGenericEvent<T>> subscribers = getSubscribers(eventName, false);
+    public synchronized Iterable<IEventSubscriber<T>> getSubscribers(String eventName) {
+        List<IEventSubscriber<T>> subscribers = getSubscribers(eventName, false);
         return subscribers == null ? null : new ArrayList<>(subscribers);
     }
     
@@ -147,10 +147,10 @@ import java.util.*;
         String name = eventName;
         
         while (!StringUtils.isEmpty(name)) {
-            Iterable<IGenericEvent<T>> subscribers = getSubscribers(name);
+            Iterable<IEventSubscriber<T>> subscribers = getSubscribers(name);
             
             if (subscribers != null) {
-                for (IGenericEvent<T> subscriber : subscribers) {
+                for (IEventSubscriber<T> subscriber : subscribers) {
                     try {
                         if (log.isDebugEnabled()) {
                             log.debug(String.format("Firing local Event[name=%s,data=%s]", eventName, eventData));
@@ -173,8 +173,8 @@ import java.util.*;
      * @param canCreate If true and the list does not exist, create it.
      * @return The requested list; may be null.
      */
-    private List<IGenericEvent<T>> getSubscribers(String eventName, boolean canCreate) {
-        List<IGenericEvent<T>> subscribers = subscriptions.get(eventName);
+    private List<IEventSubscriber<T>> getSubscribers(String eventName, boolean canCreate) {
+        List<IEventSubscriber<T>> subscribers = subscriptions.get(eventName);
         
         if (subscribers == null && canCreate) {
             subscribers = new LinkedList<>();

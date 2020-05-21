@@ -41,9 +41,9 @@ import org.fujion.event.KeycaptureEvent;
 import org.fujionclinical.api.AppFramework;
 import org.fujionclinical.api.FrameworkUtil;
 import org.fujionclinical.api.context.ISurveyResponse;
-import org.fujionclinical.api.context.UserContext.IUserContextEvent;
 import org.fujionclinical.api.event.EventManager;
 import org.fujionclinical.api.event.IEventManager;
+import org.fujionclinical.api.model.user.UserContext.IUserContextSubscriber;
 import org.fujionclinical.api.property.PropertyUtil;
 import org.fujionclinical.api.security.SecurityUtil;
 import org.fujionclinical.api.spring.SpringUtil;
@@ -112,17 +112,17 @@ public class Shell extends Div implements INamespace {
 
     private boolean logoutConfirm = true;
     
-    private final IUserContextEvent userContextListener = new IUserContextEvent() {
+    private final IUserContextSubscriber userContextListener = new IUserContextSubscriber() {
         
         /**
-         * @see IUserContextEvent#canceled()
+         * @see IUserContextSubscriber#canceled()
          */
         @Override
         public void canceled() {
         }
         
         /**
-         * @see IUserContextEvent#committed()
+         * @see IUserContextSubscriber#committed()
          */
         @Override
         public void committed() {
@@ -132,7 +132,7 @@ public class Shell extends Div implements INamespace {
         /**
          * Prompt user for logout confirmation (unless suppressed).
          *
-         * @see IUserContextEvent#pending
+         * @see IUserContextSubscriber#pending
          */
         @Override
         public void pending(ISurveyResponse response) {

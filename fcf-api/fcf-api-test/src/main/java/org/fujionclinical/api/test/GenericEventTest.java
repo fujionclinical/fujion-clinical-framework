@@ -28,7 +28,7 @@ package org.fujionclinical.api.test;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujionclinical.api.event.EventUtil;
-import org.fujionclinical.api.event.IGenericEvent;
+import org.fujionclinical.api.event.IEventSubscriber;
 import org.fujionclinical.api.messaging.IPublisherInfo;
 import org.fujionclinical.api.messaging.Recipient;
 import org.fujionclinical.api.messaging.Recipient.RecipientType;
@@ -68,7 +68,7 @@ public class GenericEventTest extends CommonTest {
     
     private Recipient currentRecipient;
     
-    private final IGenericEvent<TestPacket> subscriber = new IGenericEvent<TestPacket>() {
+    private final IEventSubscriber<TestPacket> subscriber = new IEventSubscriber<TestPacket>() {
         
         @Override
         public void eventCallback(String eventName, TestPacket testPacket) {
@@ -85,7 +85,7 @@ public class GenericEventTest extends CommonTest {
         }
     };
     
-    private final IGenericEvent<IPublisherInfo> pingSubscriber = new IGenericEvent<IPublisherInfo>() {
+    private final IEventSubscriber<IPublisherInfo> pingSubscriber = new IEventSubscriber<IPublisherInfo>() {
         
         @Override
         public void eventCallback(String eventName, IPublisherInfo publisherInfo) {

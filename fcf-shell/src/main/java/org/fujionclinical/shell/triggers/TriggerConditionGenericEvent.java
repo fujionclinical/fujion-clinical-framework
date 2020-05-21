@@ -26,7 +26,7 @@
 package org.fujionclinical.shell.triggers;
 
 import org.fujionclinical.api.event.EventManager;
-import org.fujionclinical.api.event.IGenericEvent;
+import org.fujionclinical.api.event.IEventSubscriber;
 import org.fujionclinical.shell.elements.ElementTriggerCondition;
 
 /**
@@ -38,7 +38,7 @@ public class TriggerConditionGenericEvent extends ElementTriggerCondition {
     
     private boolean subscribed;
 
-    private final IGenericEvent<Object> eventListener = (eventName, eventObject) -> {
+    private final IEventSubscriber<Object> eventListener = (eventName, eventObject) -> {
         if (!excludeEvent(eventObject)) {
             invokeCallbacks();
         }

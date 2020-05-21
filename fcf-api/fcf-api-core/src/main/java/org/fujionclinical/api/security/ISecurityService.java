@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.security;
 
-import org.fujionclinical.api.domain.IUser;
+import org.fujionclinical.api.model.user.IUser;
 
 /**
  * Interface implemented by the security service.

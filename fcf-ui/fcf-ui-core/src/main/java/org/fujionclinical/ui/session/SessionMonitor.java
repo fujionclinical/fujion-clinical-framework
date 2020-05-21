@@ -43,8 +43,8 @@ import org.fujion.event.EventUtil;
 import org.fujion.event.TimerEvent;
 import org.fujion.websocket.ISessionListener;
 import org.fujion.websocket.Session;
-import org.fujionclinical.api.domain.IUser;
-import org.fujionclinical.api.event.IGenericEvent;
+import org.fujionclinical.api.event.IEventSubscriber;
+import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.security.ISecurityService;
 import org.fujionclinical.ui.controller.FrameworkController;
 import org.fujionclinical.ui.dialog.DialogUtil;
@@ -176,7 +176,7 @@ public class SessionMonitor extends FrameworkController {
 
     };
     
-    private final IGenericEvent<Object> applicationControlListener = (eventName, eventData) -> {
+    private final IEventSubscriber<Object> applicationControlListener = (eventName, eventData) -> {
         SessionControl applicationControl = SessionControl.fromEvent(eventName);
         
         if (applicationControl != null) {

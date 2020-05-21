@@ -27,7 +27,7 @@ package org.fujionclinical.plugin.infopanel.controller;
 
 import org.fujionclinical.api.event.EventManager;
 import org.fujionclinical.api.event.IEventManager;
-import org.fujionclinical.api.event.IGenericEvent;
+import org.fujionclinical.api.event.IEventSubscriber;
 import org.fujionclinical.plugin.infopanel.model.IActionTarget;
 import org.fujionclinical.plugin.infopanel.model.IInfoPanel.Action;
 
@@ -38,7 +38,7 @@ import java.util.List;
  * Listens for a generic event and executes the associated action on the target when the event is
  * detected.
  */
-public class ActionListener implements IGenericEvent<Object> {
+public class ActionListener implements IEventSubscriber<Object> {
     
     private final String eventName;
     

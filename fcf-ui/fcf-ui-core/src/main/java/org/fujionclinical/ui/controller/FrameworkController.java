@@ -37,7 +37,7 @@ import org.fujionclinical.api.AppFramework;
 import org.fujionclinical.api.FrameworkUtil;
 import org.fujionclinical.api.event.EventManager;
 import org.fujionclinical.api.event.IEventManager;
-import org.fujionclinical.api.event.IGenericEvent;
+import org.fujionclinical.api.event.IEventSubscriber;
 import org.fujionclinical.api.spring.SpringUtil;
 import org.fujionclinical.ui.Constants;
 import org.springframework.context.ApplicationContext;
@@ -90,7 +90,7 @@ public class FrameworkController implements IAutoWired {
         
     };
     
-    private final IGenericEvent<Object> refreshListener = (eventName, eventData) -> {
+    private final IEventSubscriber<Object> refreshListener = (eventName, eventData) -> {
         refresh();
     };
     

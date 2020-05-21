@@ -30,13 +30,13 @@ import org.fujion.component.BaseComponent;
 import org.fujion.component.Label;
 import org.fujion.component.Pane;
 import org.fujionclinical.api.event.EventUtil;
-import org.fujionclinical.api.event.IGenericEvent;
+import org.fujionclinical.api.event.IEventSubscriber;
 import org.fujionclinical.shell.plugins.PluginController;
 
 /**
  * Controller for status panel plugin.
  */
-public class StatusPanel extends PluginController implements IGenericEvent<Object> {
+public class StatusPanel extends PluginController implements IEventSubscriber<Object> {
 
     /**
      * Creates the default pane.

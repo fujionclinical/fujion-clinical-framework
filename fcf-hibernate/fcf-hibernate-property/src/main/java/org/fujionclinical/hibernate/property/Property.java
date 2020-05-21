@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.hibernate.property;
 
-import org.fujionclinical.api.domain.IUser;
+import org.fujionclinical.api.model.user.IUser;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -91,7 +91,7 @@ public class Property implements Serializable {
         setName(name);
         setValue(value);
         setInstance(instance);
-        setUser(user == null ? null : user.getLogicalId());
+        setUser(user == null ? null : user.getId());
     }
     
     public String getName() {

@@ -38,7 +38,7 @@ import org.fujionclinical.api.alias.AliasType;
 import org.fujionclinical.api.alias.AliasTypeRegistry;
 import org.fujionclinical.api.context.ContextManager;
 import org.fujionclinical.api.context.IContextManager;
-import org.fujionclinical.api.domain.IUser;
+import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.security.ISecurityService;
 import org.fujionclinical.api.security.SecurityUtil;
 import org.fujionclinical.security.controller.PasswordChangeController;

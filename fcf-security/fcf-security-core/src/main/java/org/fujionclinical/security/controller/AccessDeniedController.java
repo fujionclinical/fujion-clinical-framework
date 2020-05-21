@@ -26,7 +26,7 @@
 package org.fujionclinical.security.controller;
 
 import org.fujion.common.StrUtil;
-import org.fujionclinical.api.domain.IUser;
+import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.security.SecurityUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

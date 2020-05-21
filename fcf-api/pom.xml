@@ -13,7 +13,11 @@
 	
 	<modules>
 		<module>fcf-api-core</module>
+		<module>fcf-api-encounter</module>
+		<module>fcf-api-location</module>
+		<module>fcf-api-patient</module>
+		<module>fcf-api-practitioner</module>
 		<module>fcf-api-mock</module>
 		<module>fcf-api-test</module>
-	</modules>
+    </modules>
 </project>

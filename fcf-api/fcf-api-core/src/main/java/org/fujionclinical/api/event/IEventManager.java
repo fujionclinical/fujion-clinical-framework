@@ -72,7 +72,7 @@ public interface IEventManager {
      * @param eventName Name of event.
      * @param subscriber Subscriber to event.
      */
-    void subscribe(String eventName, IGenericEvent<?> subscriber);
+    void subscribe(String eventName, IEventSubscriber<?> subscriber);
     
     /**
      * Unregister an event subscription. If the subscriber has no existing subscription then this
@@ -81,6 +81,6 @@ public interface IEventManager {
      * @param eventName Name of event.
      * @param subscriber Subscriber to event.
      */
-    void unsubscribe(String eventName, IGenericEvent<?> subscriber);
+    void unsubscribe(String eventName, IEventSubscriber<?> subscriber);
     
 }

@@ -26,22 +26,24 @@
 package org.fujionclinical.hibernate.security;
 
 import org.fujion.common.StrUtil;
-import org.fujionclinical.api.domain.IUser;
+import org.fujionclinical.api.model.PersonName;
+import org.fujionclinical.api.model.PersonNameParser;
+import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.security.ISecurityDomain;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
 @Table(name = "FCF_USER")
 public class User implements IUser {
-    
-    
+
     private static final long serialVersionUID = 1L;
     
     @Id
     @Column(name = "id")
-    private String logicalId;
+    private String id;
     
     @JoinColumn(name = "domain", nullable = true)
     @ManyToOne
@@ -63,25 +65,34 @@ public class User implements IUser {
     
     @Transient
     private SecurityDomain loginDomain;
-    
+
+    @Transient
+    private PersonName name;
+
     protected User() {
     }
     
-    public User(String logicalId, String fullName, String loginName, String password, SecurityDomain securityDomain,
+    public User(String id, String fullName, String loginName, String password, SecurityDomain securityDomain,
         String authorities) {
-        this.logicalId = logicalId;
+        this.id = id;
         this.fullName = fullName;
         this.loginName = loginName;
         this.password = password;
         this.assignedDomain = securityDomain;
         this.authorities = authorities;
+        this.name = fullName == null ? null : PersonNameParser.instance.fromString(fullName);
     }
     
     @Override
     public String toString() {
         return fullName;
     }
-    
+
+    @Override
+    public List<PersonName> getNames() {
+        return name == null ? null : Collections.singletonList(name);
+    }
+
     @Override
     public String getFullName() {
         return fullName;
@@ -103,13 +114,8 @@ public class User implements IUser {
     }
     
     @Override
-    public String getLogicalId() {
-        return logicalId;
-    }
-    
-    @Override
-    public User getNativeUser() {
-        return this;
+    public String getId() {
+        return id;
     }
     
     protected void setPassword(String password) {

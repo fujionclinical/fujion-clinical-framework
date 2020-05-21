@@ -33,7 +33,7 @@ import java.util.List;
 /**
  * Handles ping requests.
  */
-public class PingEventHandler implements IGenericEvent<PingRequest> {
+public class PingEventHandler implements IEventSubscriber<PingRequest> {
     
     public static final String EVENT_PING_REQUEST = "PING.REQUEST";
     

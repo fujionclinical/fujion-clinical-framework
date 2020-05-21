@@ -42,7 +42,7 @@ import java.util.*;
  * special services that maintain information about different shared context states (user, patient,
  * etc.) Each context object must implement the IManagedContext interface which is used by the
  * context manager to interact with the context object. Furthermore, each context object must
- * declare an extension of the IContextEvent interface which will be implemented by subscribers to
+ * declare an extension of the IContextSubscriber interface which will be implemented by subscribers to
  * process context change events.
  */
 public class ContextManager implements IContextManager, CCOWContextManager.ICCOWContextEvent, IRegisterEvent {
@@ -424,9 +424,9 @@ public class ContextManager implements IContextManager, CCOWContextManager.ICCOW
      */
     @Override
     public void unregisterObject(Object object) {
-        if (object instanceof IContextEvent) {
+        if (object instanceof IContextSubscriber) {
             for (IManagedContext<?> managedContext : managedContexts) {
-                managedContext.removeSubscriber((IContextEvent) object);
+                managedContext.removeSubscriber((IContextSubscriber) object);
             }
         }
 

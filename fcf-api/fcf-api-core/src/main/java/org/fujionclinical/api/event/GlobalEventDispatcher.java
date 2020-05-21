@@ -27,9 +27,9 @@ package org.fujionclinical.api.event;
 
 import org.apache.commons.lang.StringUtils;
 import org.fujionclinical.api.FrameworkUtil;
-import org.fujionclinical.api.domain.IUser;
 import org.fujionclinical.api.messaging.*;
 import org.fujionclinical.api.messaging.Recipient.RecipientType;
+import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.security.SecurityUtil;
 
 import java.io.Serializable;
@@ -75,7 +75,7 @@ public class GlobalEventDispatcher implements IGlobalEventDispatcher, IMessageCo
      */
     public void init() {
         IUser user = SecurityUtil.getAuthenticatedUser();
-        publisherInfo.setUserId(user == null ? null : user.getLogicalId());
+        publisherInfo.setUserId(user == null ? null : user.getId());
         publisherInfo.setUserName(user == null ? "" : user.getFullName());
         publisherInfo.setAppName(getAppName());
         publisherInfo.setConsumerId(consumer.getNodeId());

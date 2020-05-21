@@ -28,8 +28,8 @@ package org.fujionclinical.ui.reports.header;
 import org.fujion.annotation.OnFailure;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.component.Label;
-import org.fujionclinical.api.context.UserContext;
-import org.fujionclinical.api.domain.IUser;
+import org.fujionclinical.api.model.user.IUser;
+import org.fujionclinical.api.model.user.UserContext;
 import org.fujionclinical.ui.util.FCFUtil;
 
 /**

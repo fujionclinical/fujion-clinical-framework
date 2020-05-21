@@ -28,7 +28,7 @@ package org.fujionclinical.shell.plugins;
 import org.fujion.common.StrUtil;
 import org.fujionclinical.api.event.EventManager;
 import org.fujionclinical.api.event.IEventManager;
-import org.fujionclinical.api.event.IGenericEvent;
+import org.fujionclinical.api.event.IEventSubscriber;
 import org.fujionclinical.shell.elements.ElementPlugin;
 
 import java.util.List;
@@ -38,7 +38,7 @@ import java.util.List;
  * generic event is received. To configure properly, declare it as a prototype bean and reference
  * its bean id as a bean resource in the plugin definition.
  */
-public class PluginWakeOnMessage implements IPluginEventListener, IGenericEvent<Object> {
+public class PluginWakeOnMessage implements IPluginEventListener, IEventSubscriber<Object> {
     
     final private List<String> eventNames;
     
@@ -97,7 +97,7 @@ public class PluginWakeOnMessage implements IPluginEventListener, IGenericEvent<
     /**
      * When one of the subscribed events is published, force the container to load.
      * 
-     * @see org.fujionclinical.api.event.IGenericEvent#eventCallback(java.lang.String,
+     * @see IEventSubscriber#eventCallback(java.lang.String,
      *      java.lang.Object)
      */
     @Override
