@@ -1,17 +1,17 @@
 package org.fujionclinical.api.patient;
 
+import org.fujionclinical.api.model.IIdentifier;
 import org.fujionclinical.api.model.IPerson;
-import org.fujionclinical.api.model.Identifier;
-
-import java.util.Date;
 
 public interface IPatient extends IPerson {
 
-    Identifier getMRN();
+    IIdentifier getMRN();
 
-    String getGender();
+    default IPatient setMRN(IIdentifier mrn) {
+        throw new UnsupportedOperationException();
+    }
 
-    Date getDOB();
-
-    Date getDeceased();
+    default boolean hasMRN() {
+        return getMRN() != null;
+    }
 }

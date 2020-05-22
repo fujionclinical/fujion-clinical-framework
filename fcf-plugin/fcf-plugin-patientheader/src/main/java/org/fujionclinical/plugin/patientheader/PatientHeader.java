@@ -33,8 +33,9 @@ import org.fujion.annotation.WiredComponent;
 import org.fujion.common.DateUtil;
 import org.fujion.component.*;
 import org.fujionclinical.api.event.IEventSubscriber;
+import org.fujionclinical.api.model.IIdentifier;
+import org.fujionclinical.api.model.IPersonName;
 import org.fujionclinical.api.model.Identifier;
-import org.fujionclinical.api.model.PersonName;
 import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.patient.IPatient;
 import org.fujionclinical.api.patient.PatientContext;
@@ -152,11 +153,11 @@ public class PatientHeader extends PluginController {
 
         btnDetail.setDisabled(false);
         patientName = patient.getFullName();
-        Identifier mrn = patient.getMRN();
+        IIdentifier mrn = patient.getMRN();
         lblName.setLabel(patientName + (mrn == null ? "" : "  (" + mrn.getValue() + ")"));
-        setLabel(lblDOB, formatDateAndAge(patient.getDOB()), lblDOBLabel);
-        setLabel(lblDOD, DateUtil.formatDate(patient.getDeceased()), lblDODLabel);
-        setLabel(lblGender, patient.getGender(), null);
+        setLabel(lblDOB, formatDateAndAge(patient.getBirthDate()), lblDOBLabel);
+        setLabel(lblDOD, DateUtil.formatDate(patient.getDeceasedDate()), lblDODLabel);
+        setLabel(lblGender, patient.hasGender() ? patient.getGender().toString() : null, null);
     }
 
     private String formatDateAndAge(Date date) {
@@ -194,7 +195,7 @@ public class PatientHeader extends PluginController {
 
         // Names
 
-        for (PersonName name : patient.getNames()) {
+        for (IPersonName name : patient.getNames()) {
 
             String nm = name.toString();
 
@@ -214,7 +215,7 @@ public class PatientHeader extends PluginController {
         header = null;
 
         if (patient.getIdentifiers() != null) {
-            for (Identifier id : patient.getIdentifiers()) {
+            for (IIdentifier id : patient.getIdentifiers()) {
                 if (header == null) {
                     header = addHeader("Identifiers");
                 }

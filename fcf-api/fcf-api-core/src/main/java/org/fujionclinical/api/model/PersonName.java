@@ -1,131 +1,59 @@
 package org.fujionclinical.api.model;
 
-import org.fujion.common.MiscUtil;
-
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Represents a person's name as individual components.
- */
-public class PersonName {
+public class PersonName implements IPersonName {
 
     private String familyName;
-    private List<String> givenNames;
-    private List<String> prefixes;
-    private List<String> suffixes;
-    private PersonNameCategory category;
 
-    public PersonName() {
+    private PersonNameUse category;
 
-    }
+    private final List<String> givenNames = new ArrayList<>();
 
-    public PersonName(
-            String familyName,
-            String[] givenNames) {
-        this(familyName, givenNames, null, null, null);
-    }
+    private final List<String> prefixes = new ArrayList<>();
 
-    public PersonName(
-            String familyName,
-            String[] givenNames,
-            PersonNameCategory category) {
-        this(familyName, givenNames, null, null, category);
-    }
+    private final List<String> suffixes = new ArrayList<>();
 
-    public PersonName(
-            String familyName,
-            String[] givenNames,
-            String[] prefixes,
-            String[] suffixes,
-            PersonNameCategory category) {
-        this.familyName = familyName;
-        this.givenNames = MiscUtil.toList(givenNames);
-        this.prefixes = MiscUtil.toList(prefixes);
-        this.suffixes = MiscUtil.toList(suffixes);
-        this.category = category;
-    }
-
+    @Override
     public String getFamilyName() {
         return familyName;
     }
 
-    public void setFamilyName(String familyName) {
+    @Override
+    public IPersonName setFamilyName(String familyName) {
         this.familyName = familyName;
+        return this;
     }
 
-    public boolean hasFamilyName() {
-        return this.familyName != null && !this.familyName.isEmpty();
-    }
-
+    @Override
     public List<String> getGivenNames() {
         return givenNames;
     }
 
-    public void setGivenNames(List<String> givenNames) {
-        this.givenNames = givenNames;
-    }
-
-    public void addGivenName(String givenName) {
-        givenNames = MiscUtil.ensureList(givenNames);
-        givenNames.add(givenName);
-    }
-
-    public boolean hasGivenName() {
-        return givenNames != null && !givenNames.isEmpty();
-    }
-
+    @Override
     public List<String> getPrefixes() {
         return prefixes;
     }
 
-    public void setPrefixes(List<String> prefixes) {
-        this.prefixes = prefixes;
-    }
-
-    public void addPrefix(String prefix) {
-        prefixes = MiscUtil.ensureList(prefixes);
-        prefixes.add(prefix);
-    }
-
-    public boolean hasPrefix() {
-        return prefixes != null && !prefixes.isEmpty();
-    }
-
+    @Override
     public List<String> getSuffixes() {
         return suffixes;
     }
 
-    public void setSuffixes(List<String> suffixes) {
-        this.suffixes = suffixes;
-    }
-
-    public void addSuffix(String suffix) {
-        suffixes = MiscUtil.ensureList(suffixes);
-        suffixes.add(suffix);
-    }
-
-    public boolean hasSuffix() {
-        return suffixes != null && !suffixes.isEmpty();
-    }
-
-    public PersonNameCategory getCategory() {
+    @Override
+    public PersonNameUse getUse() {
         return category;
     }
 
-    public void setCategory(PersonNameCategory category) {
+    @Override
+    public IPersonName setUse(PersonNameUse category) {
         this.category = category;
-    }
-
-    public boolean hasCategory() {
-        return this.category != null;
+        return this;
     }
 
     @Override
     public String toString() {
-        return PersonNameParser.instance.toString(this);
-    }
-
-    public enum PersonNameCategory {
-        USUAL, OFFICIAL, TEMP, NICKNAME, ANONYMOUS, OLD, MAIDEN
+        return asString();
     }
 }

@@ -25,11 +25,12 @@
  */
 package org.fujionclinical.api.model.user;
 
-import org.fujionclinical.api.model.PersonName;
+import org.fujionclinical.api.model.IPersonName;
 import org.fujionclinical.api.model.PersonNameParser;
 import org.fujionclinical.api.security.ISecurityDomain;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,7 +42,7 @@ public class User implements IUser {
     
     private String id;
     
-    private List<PersonName> names;
+    private final List<IPersonName> names = new ArrayList<>();
     
     private String loginName;
     
@@ -55,7 +56,7 @@ public class User implements IUser {
     
     public User(String id, String fullName, String loginName, String password, ISecurityDomain securityDomain) {
         this.id = id;
-        addName(PersonNameParser.instance.fromString(fullName));
+        addNames(PersonNameParser.instance.fromString(fullName));
         this.loginName = loginName;
         this.password = password;
         this.securityDomain = securityDomain;
@@ -76,39 +77,19 @@ public class User implements IUser {
      * 
      * @param id User logical identifier.
      */
-    public void setId(String id) {
+    public IUser setId(String id) {
         this.id = id;
+        return this;
     }
-    
+
     /**
-     * Returns the user's full name.
+     * Returns the users' known names.
      * 
-     * @return User's full name.
+     * @return Users' known names.
      */
     @Override
-    public List<PersonName> getNames() {
+    public List<IPersonName> getNames() {
         return names;
-    }
-
-    /**
-     * Sets the user's full name.
-     *
-     * @param name User's full name.
-     */
-    public void setNames(List<PersonName> name) {
-        this.names = name;
-    }
-
-    /**
-     * Sets the user's full name.
-     *
-     * @param name User's full name.
-     */
-    public void addName(PersonName name) {
-        if (name != null) {
-            this.names = this.names == null ? new ArrayList<>() : this.names;
-            this.names.add(name);
-        }
     }
 
     /**

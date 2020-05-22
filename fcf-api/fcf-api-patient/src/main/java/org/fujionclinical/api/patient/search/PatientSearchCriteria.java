@@ -27,6 +27,7 @@ package org.fujionclinical.api.patient.search;
 
 import org.apache.commons.lang.StringUtils;
 import org.fujion.common.DateUtil;
+import org.fujionclinical.api.model.IPersonName;
 import org.fujionclinical.api.model.PersonName;
 import org.fujionclinical.api.model.PersonNameParser;
 import org.fujionclinical.api.query.SearchCriteria;
@@ -40,7 +41,7 @@ public class PatientSearchCriteria extends SearchCriteria {
 
     private static final String ERROR_MISSING_REQUIRED = "@patientsearch.error.missing.required";
 
-    private PersonName name;
+    private IPersonName name;
 
     private String mrn;
 
@@ -127,7 +128,7 @@ public class PatientSearchCriteria extends SearchCriteria {
      *
      * @return Patient name criterion.
      */
-    public PersonName getName() {
+    public IPersonName getName() {
         return name;
     }
 

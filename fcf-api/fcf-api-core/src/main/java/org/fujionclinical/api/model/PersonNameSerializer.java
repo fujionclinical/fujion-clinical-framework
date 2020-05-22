@@ -31,44 +31,45 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Serializer / deserializer for PersonName class.
+ * Serializer / deserializer for IPersonName class.
  */
-public class PersonNameSerializer implements ISerializer<PersonName> {
+public class PersonNameSerializer implements ISerializer<IPersonName> {
 
     private static final String COMPONENT_DELIM = "^";
 
     private static final String REPEAT_DELIM = "|";
 
     @Override
-    public String serialize(PersonName value) {
+    public String serialize(IPersonName value) {
         return (value.hasFamilyName() ? value.getFamilyName() : "") + COMPONENT_DELIM
                 + getComponent(value.getGivenNames()) + COMPONENT_DELIM
                 + getComponent(value.getPrefixes()) + COMPONENT_DELIM
                 + getComponent(value.getSuffixes()) + COMPONENT_DELIM
-                + (value.hasCategory() ? value.getCategory() : "");
+                + (value.hasUse() ? value.getUse() : "");
     }
 
     @Override
-    public PersonName deserialize(String value) {
+    public IPersonName deserialize(
+            String value,
+            IPersonName name) {
         String[] components = value.split("\\" + COMPONENT_DELIM);
-        PersonName result = new PersonName();
         int i = 0;
-        result.setFamilyName(getComponent(components, i++));
-        result.setGivenNames(getRepeats(components, i++));
-        result.setPrefixes(getRepeats(components, i++));
-        result.setSuffixes(getRepeats(components, i++));
-        result.setCategory(getUse(getComponent(components, i++)));
-        return result;
+        name.setFamilyName(getComponent(components, i++));
+        name.setGivenNames(getRepeats(components, i++));
+        name.setPrefixes(getRepeats(components, i++));
+        name.setSuffixes(getRepeats(components, i++));
+        name.setUse(getUse(getComponent(components, i++)));
+        return name;
     }
 
     @Override
-    public Class<PersonName> getType() {
-        return PersonName.class;
+    public Class<IPersonName> getType() {
+        return IPersonName.class;
     }
 
-    private PersonName.PersonNameCategory getUse(String use) {
+    private IPersonName.PersonNameUse getUse(String use) {
         try {
-            return PersonName.PersonNameCategory.valueOf(use);
+            return IPersonName.PersonNameUse.valueOf(use);
         } catch (Exception e) {
             return null;
         }

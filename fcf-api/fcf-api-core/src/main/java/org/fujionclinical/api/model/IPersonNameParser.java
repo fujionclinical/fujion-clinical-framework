@@ -33,7 +33,7 @@ public interface IPersonNameParser {
      * @param name Person name.
      * @return Displayable text.
      */
-    String toString(PersonName name);
+    String toString(IPersonName name);
 
     /**
      * Converts text to a person name equivalent.
@@ -42,9 +42,9 @@ public interface IPersonNameParser {
      * @param name  Person name instance to receive parsed result (if null, one will be created).
      * @return The person name parsed from the input value.
      */
-    PersonName fromString(
+    IPersonName fromString(
             String value,
-            PersonName name);
+            IPersonName name);
 
     /**
      * Converts text to a person name equivalent.
@@ -52,7 +52,7 @@ public interface IPersonNameParser {
      * @param value Value to convert.
      * @return The person name parsed from the input value.
      */
-    default PersonName fromString(String value) {
+    default IPersonName fromString(String value) {
         return fromString(value, null);
     }
 

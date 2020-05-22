@@ -25,7 +25,9 @@
  */
 package org.fujionclinical.api.model;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Default person name parser. Assumes family name(s) are first and separated from given name(s) by a
@@ -37,7 +39,7 @@ public class PersonNameParser implements IPersonNameParser {
     public static final IPersonNameParser instance = new PersonNameParser();
 
     @Override
-    public String toString(PersonName name) {
+    public String toString(IPersonName name) {
         StringBuilder sb = new StringBuilder();
         append(sb, name.getPrefixes());
         append(sb, name.getFamilyName());
@@ -48,33 +50,21 @@ public class PersonNameParser implements IPersonNameParser {
     }
 
     @Override
-    public PersonName fromString(
+    public IPersonName fromString(
             String value,
-            PersonName name) {
+            IPersonName name) {
         String[] pcs = value.split(",", 2);
-        String[] pcs1 = pcs[0].split(" ");
-        String[] pcs2 = pcs.length == 1 ? null : pcs[1].split(" ");
+        String familyName = pcs[0].trim();
+        String[] givenNames = pcs.length == 1 ? null : pcs[1].split(" ");
 
         if (name == null) {
             name = new PersonName();
         }
 
-        for (String pc : pcs1) {
-            pc = pc.trim();
+        name.setFamilyName(familyName);
 
-            if (!pc.isEmpty()) {
-                name.setFamilyName(pc);
-            }
-        }
-
-        if (pcs2 != null) {
-            for (String pc : pcs2) {
-                pc = pc.trim();
-
-                if (!pc.isEmpty()) {
-                    name.addGivenName(pc);
-                }
-            }
+        if (givenNames != null) {
+            name.setGivenNames(Arrays.stream(givenNames).map(nm -> nm.trim()).filter(nm -> !nm.isEmpty()).collect(Collectors.toList()));
         }
 
         return name;

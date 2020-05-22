@@ -34,7 +34,7 @@ import org.fujion.component.Grid;
 import org.fujion.component.Row;
 import org.fujion.event.ChangeEvent;
 import org.fujion.model.IComponentRenderer;
-import org.fujionclinical.api.model.Identifier;
+import org.fujionclinical.api.model.IIdentifier;
 import org.fujionclinical.api.patient.IPatient;
 import org.fujionclinical.api.patient.list.PatientListItem;
 
@@ -90,13 +90,13 @@ public class PatientListItemRenderer implements IComponentRenderer<Row, Object> 
             }
 
             String[] names = name.split(",", 2);
-            Identifier mrn = patient.getMRN();
+            IIdentifier mrn = patient.getMRN();
             addCell(row, names[0].trim(), max);
             addCell(row, names.length == 1 ? "" : names[1].trim(), max);
             addCell(row, mrn == null ? "" : mrn.getValue(), max);
 
             if (StringUtils.isEmpty(info)) {
-                Date dob = patient.getDOB();
+                Date dob = patient.getBirthDate();
                 info = dob == null ? "" : DateUtil.formatDate(dob);
             }
         }

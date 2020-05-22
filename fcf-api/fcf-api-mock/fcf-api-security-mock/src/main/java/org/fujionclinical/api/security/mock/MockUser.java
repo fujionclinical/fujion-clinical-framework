@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.security.mock;
 
-import org.fujionclinical.api.model.PersonName;
+import org.fujionclinical.api.model.IPersonName;
 import org.fujionclinical.api.model.PersonNameParser;
 import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.security.ISecurityDomain;
@@ -45,7 +45,7 @@ public class MockUser implements IUser {
 
     private final String fullName;
 
-    private final List<PersonName> names;
+    private final List<IPersonName> names;
 
     private final String loginName;
 
@@ -90,7 +90,7 @@ public class MockUser implements IUser {
         return fullName;
     }
 
-    public List<PersonName> getNames() {
+    public List<IPersonName> getNames() {
         return names;
     }
 

@@ -69,7 +69,7 @@ public class PatientMatchesController extends FrameworkController {
             }
             IPatient pat1 = o1.getData(IPatient.class);
             IPatient pat2 = o2.getData(IPatient.class);
-            int result = DateUtil.compare(pat1.getDOB(), pat2.getDOB());
+            int result = DateUtil.compare(pat1.getBirthDate(), pat2.getBirthDate());
             return ascending ? result : -result;
         }
         

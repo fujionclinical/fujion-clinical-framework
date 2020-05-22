@@ -36,7 +36,6 @@ import java.util.List;
 @SuppressWarnings("rawtypes")
 public class DomainFactoryRegistry extends BeanRegistry<Class<?>, IDomainFactory> {
 
-
     private static final DomainFactoryRegistry instance = new DomainFactoryRegistry();
 
     private DomainFactoryRegistry() {

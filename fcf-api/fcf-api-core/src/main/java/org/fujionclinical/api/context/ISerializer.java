@@ -39,15 +39,26 @@ public interface ISerializer<T> {
      * @return Serialized form of object.
      */
     String serialize(T object);
-    
+
     /**
      * Deserialize an object from its string form.
-     * 
+     *
      * @param value Serialized form of object.
      * @return Deserialized object instance.
      */
-    T deserialize(String value);
-    
+    default T deserialize(String value) {
+        return deserialize(value, null);
+    }
+
+    /**
+     * Deserialize an object from its string form.
+     *
+     * @param value Serialized form of object.
+     * @param object The object instance to be populated (may be null).
+     * @return Deserialized object instance.
+     */
+    T deserialize(String value, T object);
+
     /**
      * Get class type of target object.
      * 

@@ -25,14 +25,16 @@
  */
 package org.fujionclinical.api.patient;
 
+import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujionclinical.api.context.ContextItems;
 import org.fujionclinical.api.context.ContextManager;
 import org.fujionclinical.api.context.IContextSubscriber;
 import org.fujionclinical.api.context.ManagedContext;
+import org.fujionclinical.api.model.IIdentifier;
+import org.fujionclinical.api.model.IPersonName;
 import org.fujionclinical.api.model.Identifier;
-import org.fujionclinical.api.model.PersonName;
 import org.fujionclinical.api.model.PersonNameParser;
 
 import java.util.Collections;
@@ -53,7 +55,7 @@ public class PatientContext extends ManagedContext<IPatient> {
 
     protected static final String CCOW_MRN = CCOW_ID + ".MRN";
 
-    protected static final String CCOW_MPI = CCOW_ID + ".MPI";
+    // protected static final String CCOW_MPI = CCOW_ID + ".MPI";
 
     protected static final String CCOW_CO = SUBJECT_NAME + ".Co";
 
@@ -120,7 +122,7 @@ public class PatientContext extends ManagedContext<IPatient> {
         contextItems.setItem(CCOW_MRN, patient.getMRN() == null ? null : patient.getMRN().getValue(), "MRN");
         contextItems.setItem(CCOW_NAM, patient.getName().toString());
         contextItems.setItem(CCOW_GENDER, patient.getGender());
-        contextItems.setItem(CCOW_DOB, patient.getDOB());
+        contextItems.setItem(CCOW_DOB, patient.getBirthDate());
         return contextItems;
     }
 
@@ -130,40 +132,32 @@ public class PatientContext extends ManagedContext<IPatient> {
     @Override
     public IPatient fromCCOWContext(ContextItems contextItems) {
         return new IPatient() {
-            Identifier mrn = new Identifier(null, contextItems.getItem(CCOW_MRN));
-            String gender = contextItems.getItem(CCOW_GENDER);
-            Date dob = contextItems.getDate(CCOW_DOB);
-            PersonName name = PersonNameParser.instance.fromString(contextItems.getItem(CCOW_NAM));
-            String id = contextItems.getItem((CCOW_ID));
+            final IIdentifier mrn = new Identifier(null, contextItems.getItem(CCOW_MRN, "MRN"));
+            final IPersonName name = PersonNameParser.instance.fromString(contextItems.getItem(CCOW_NAM));
 
             @Override
-            public Identifier getMRN() {
+            public IIdentifier getMRN() {
                 return mrn;
             }
 
             @Override
-            public String getGender() {
-                return gender;
+            public Gender getGender() {
+                return EnumUtils.getEnum(Gender.class, contextItems.getItem(CCOW_GENDER));
             }
 
             @Override
-            public Date getDOB() {
-                return dob;
+            public Date getBirthDate() {
+                return contextItems.getDate(CCOW_DOB);
             }
 
             @Override
-            public Date getDeceased() {
-                return null;
-            }
-
-            @Override
-            public List<PersonName> getNames() {
+            public List<IPersonName> getNames() {
                 return name == null ? null : Collections.singletonList(name);
             }
 
             @Override
             public String getId() {
-                return id;
+                return contextItems.getItem((CCOW_ID));
             }
         };
     }

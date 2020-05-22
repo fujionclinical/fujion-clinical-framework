@@ -26,15 +26,14 @@
 package org.fujionclinical.ui.patientselection.common;
 
 import org.apache.commons.lang.StringUtils;
-import org.fujion.ancillary.MimeContent;
 import org.fujion.common.DateUtil;
 import org.fujion.common.StrUtil;
 import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Div;
 import org.fujion.component.Image;
 import org.fujion.component.Label;
-import org.fujionclinical.api.model.Address;
-import org.fujionclinical.api.model.PersonPhoto;
+import org.fujionclinical.api.model.IPersonPhoto;
+import org.fujionclinical.api.model.IPostalAddress;
 import org.fujionclinical.api.patient.IPatient;
 
 import java.util.Date;
@@ -69,7 +68,7 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
         root.addChild(new Div());
         Image photo = new Image();
         photo.setStyles("max-height:300px;max-width:300px;padding-bottom:10px");
-        PersonPhoto pix = patient.getPhoto();
+        IPersonPhoto pix = patient.getPhoto();
 
         if (pix == null || pix.getImage() == null) {
             photo.setSrc(Constants.SILHOUETTE_IMAGE);
@@ -82,9 +81,9 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
         addDemographic(root, "mrn", patient.getMRN());
         addDemographic(root, "gender", patient.getGender());
         //addDemographic(root, "race", org.springframework.util.StringUtils.collectionToCommaDelimitedString(patient.getRace()));
-        addDemographic(root, "age", DateUtil.formatAge(patient.getDOB()));
-        addDemographic(root, "dob", patient.getDOB());
-        addDemographic(root, "dod", patient.getDeceased());
+        addDemographic(root, "age", DateUtil.formatAge(patient.getBirthDate()));
+        addDemographic(root, "dob", patient.getBirthDate());
+        addDemographic(root, "dod", patient.getDeceasedDate());
         //addDemographic(root, "mother", patient.getMothersFirstName());
         // addDemographic(root, "language", patient.getLanguage());
         //addContact(root, patient.getTelecom(), "home:phone", null);
@@ -94,8 +93,8 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
         //addContact(root, patient.getTelecom(), "work:email", null);
         //addContact(root, patient.getTelecom(), "work:fax", "work fax");
 
-        Address address = patient.getAddress();
-        
+        IPostalAddress address = patient.getAddress();
+
         if (address != null) {
             root.addChild(new Div());
 
@@ -104,7 +103,7 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
                     addDemographic(root, null, line);
                 }
             }
-            
+
             String city = StringUtils.defaultString(address.getCity());
             String state = StringUtils.defaultString(address.getState());
             String zip = StringUtils.defaultString(address.getPostalCode());

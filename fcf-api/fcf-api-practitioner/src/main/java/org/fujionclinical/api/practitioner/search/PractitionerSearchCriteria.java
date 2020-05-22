@@ -26,10 +26,7 @@
 package org.fujionclinical.api.practitioner.search;
 
 import org.apache.commons.lang.StringUtils;
-import org.fujionclinical.api.model.ConceptCode;
-import org.fujionclinical.api.model.Identifier;
-import org.fujionclinical.api.model.PersonName;
-import org.fujionclinical.api.model.PersonNameParser;
+import org.fujionclinical.api.model.*;
 import org.fujionclinical.api.query.SearchCriteria;
 
 /**
@@ -37,13 +34,15 @@ import org.fujionclinical.api.query.SearchCriteria;
  */
 public class PractitionerSearchCriteria extends SearchCriteria {
 
+    public static final IConceptCode DEA_CONCEPT_CODE = new ConceptCode(null, "DEA", null);
+
     //private static final String ERROR_MISSING_REQUIRED = "@practitionersearch.error.missing.required";
 
-    private PersonName name;
+    private IPersonName name;
 
-    private Identifier dea;
+    private IIdentifier dea;
 
-    private Identifier ssn;
+    private IIdentifier ssn;
 
     private String gender;
 
@@ -100,7 +99,7 @@ public class PractitionerSearchCriteria extends SearchCriteria {
      *
      * @return Patient name criterion.
      */
-    public PersonName getName() {
+    public IPersonName getName() {
         return name;
     }
 
@@ -118,7 +117,7 @@ public class PractitionerSearchCriteria extends SearchCriteria {
      *
      * @param name Patient name.
      */
-    public void setName(PersonName name) {
+    public void setName(IPersonName name) {
         this.name = name;
     }
 
@@ -127,7 +126,7 @@ public class PractitionerSearchCriteria extends SearchCriteria {
      *
      * @return DEA criterion.
      */
-    public Identifier getDEA() {
+    public IIdentifier getDEA() {
         return dea;
     }
 
@@ -145,7 +144,7 @@ public class PractitionerSearchCriteria extends SearchCriteria {
      *
      * @return SSN criterion.
      */
-    public Identifier getSSN() {
+    public IIdentifier getSSN() {
         return ssn;
     }
 
