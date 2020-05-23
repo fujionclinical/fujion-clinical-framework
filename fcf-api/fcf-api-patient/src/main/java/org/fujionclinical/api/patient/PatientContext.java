@@ -33,9 +33,9 @@ import org.fujionclinical.api.context.ContextManager;
 import org.fujionclinical.api.context.IContextSubscriber;
 import org.fujionclinical.api.context.ManagedContext;
 import org.fujionclinical.api.model.IIdentifier;
-import org.fujionclinical.api.model.IPersonName;
+import org.fujionclinical.api.model.person.IPersonName;
 import org.fujionclinical.api.model.Identifier;
-import org.fujionclinical.api.model.PersonNameParser;
+import org.fujionclinical.api.model.person.PersonNameParser;
 
 import java.util.Collections;
 import java.util.Date;

@@ -27,9 +27,9 @@ package org.fujionclinical.api.patient.search;
 
 import org.apache.commons.lang.StringUtils;
 import org.fujion.common.DateUtil;
-import org.fujionclinical.api.model.IPersonName;
-import org.fujionclinical.api.model.PersonName;
-import org.fujionclinical.api.model.PersonNameParser;
+import org.fujionclinical.api.model.person.IPersonName;
+import org.fujionclinical.api.model.person.PersonName;
+import org.fujionclinical.api.model.person.PersonNameParser;
 import org.fujionclinical.api.query.SearchCriteria;
 
 import java.util.Date;

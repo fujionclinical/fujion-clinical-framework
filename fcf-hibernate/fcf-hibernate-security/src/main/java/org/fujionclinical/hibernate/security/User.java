@@ -26,8 +26,8 @@
 package org.fujionclinical.hibernate.security;
 
 import org.fujion.common.StrUtil;
-import org.fujionclinical.api.model.IPersonName;
-import org.fujionclinical.api.model.PersonNameParser;
+import org.fujionclinical.api.model.person.IPersonName;
+import org.fujionclinical.api.model.person.PersonNameParser;
 import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.security.ISecurityDomain;
 

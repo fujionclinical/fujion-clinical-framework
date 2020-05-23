@@ -5,7 +5,7 @@ import org.fujion.common.MiscUtil;
 import org.fujionclinical.api.location.ILocation;
 import org.fujionclinical.api.model.IPeriod;
 import org.fujionclinical.api.model.IDomainObject;
-import org.fujionclinical.api.model.IPerson;
+import org.fujionclinical.api.model.person.IPerson;
 
 import java.util.Collections;
 import java.util.List;

@@ -1,4 +1,4 @@
-package org.fujionclinical.api.model;
+package org.fujionclinical.api.model.person;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;

@@ -25,12 +25,11 @@
  */
 package org.fujionclinical.api.model.user;
 
-import org.fujionclinical.api.model.IPersonName;
-import org.fujionclinical.api.model.PersonNameParser;
+import org.fujionclinical.api.model.person.IPersonName;
+import org.fujionclinical.api.model.person.PersonNameParser;
 import org.fujionclinical.api.security.ISecurityDomain;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**

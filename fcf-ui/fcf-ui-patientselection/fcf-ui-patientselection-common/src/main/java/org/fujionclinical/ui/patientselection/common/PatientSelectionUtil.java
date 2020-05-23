@@ -29,7 +29,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.ancillary.IResponseCallback;
 import org.fujion.common.StrUtil;
-import org.fujionclinical.api.model.IPersonName;
+import org.fujionclinical.api.model.person.IPersonName;
 import org.fujionclinical.api.patient.IPatient;
 import org.fujionclinical.api.patient.search.PatientSearchCriteria;
 import org.fujionclinical.api.patient.search.PatientSearchUtil;

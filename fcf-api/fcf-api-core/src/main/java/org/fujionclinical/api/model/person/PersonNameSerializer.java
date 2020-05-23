@@ -23,9 +23,10 @@
  *
  * #L%
  */
-package org.fujionclinical.api.model;
+package org.fujionclinical.api.model.person;
 
 import org.fujionclinical.api.context.ISerializer;
+import org.fujionclinical.api.model.person.IPersonName;
 
 import java.util.Arrays;
 import java.util.List;

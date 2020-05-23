@@ -1,7 +1,10 @@
-package org.fujionclinical.api.model;
+package org.fujionclinical.api.model.person;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.fujion.common.MiscUtil;
+import org.fujionclinical.api.model.IAttachment;
+import org.fujionclinical.api.model.IDomainObject;
+import org.fujionclinical.api.model.IPostalAddress;
 
 import java.util.Collections;
 import java.util.Date;
@@ -10,24 +13,24 @@ import java.util.Objects;
 
 public interface IPerson extends IDomainObject {
 
-    enum Gender {MALE, FEMALE, OTHER, UNKNOWN};
-
     default Gender getGender() {
         return null;
     }
 
+    ;
+
     default IPerson setGender(Gender gender) {
         throw new UnsupportedOperationException();
     }
-    
+
     default boolean hasGender() {
         return getGender() != null;
     }
-    
+
     default Date getBirthDate() {
         return null;
     }
-    
+
     default IPerson setBirthDate(Date date) {
         throw new UnsupportedOperationException();
     }
@@ -35,25 +38,30 @@ public interface IPerson extends IDomainObject {
     default boolean hasBirthDate() {
         return getBirthDate() != null;
     }
-    
+
     default Date getDeceasedDate() {
         return null;
     }
-    
+
     default IPerson setDeceasedDate(Date date) {
         throw new UnsupportedOperationException();
     }
-    
+
     default boolean hasDeceasedDate() {
         return getDeceasedDate() != null;
     }
-    
+
     /**
      * Returns all known names for this person.
      *
      * @return List of all known names (never null).
      */
     List<IPersonName> getNames();
+
+    default IPerson setNames(List<IPersonName> names) {
+        MiscUtil.replaceList(getNames(), names);
+        return this;
+    }
 
     /**
      * Returns the person's usual name in parsed form.
@@ -92,11 +100,6 @@ public interface IPerson extends IDomainObject {
         return this;
     }
 
-    default IPerson setNames(List<IPersonName> names) {
-        MiscUtil.replaceList(getNames(), names);
-        return this;
-    }
-
     default boolean hasName() {
         return !CollectionUtils.isEmpty(getNames());
     }
@@ -128,6 +131,11 @@ public interface IPerson extends IDomainObject {
      */
     default List<IPostalAddress> getAddresses() {
         return Collections.emptyList();
+    }
+
+    default IPerson setAddresses(List<IPostalAddress> addresses) {
+        MiscUtil.replaceList(getAddresses(), addresses);
+        return this;
     }
 
     /**
@@ -167,11 +175,6 @@ public interface IPerson extends IDomainObject {
         return this;
     }
 
-    default IPerson setAddresses(List<IPostalAddress> addresses) {
-        MiscUtil.replaceList(getAddresses(), addresses);
-        return this;
-    }
-
     default boolean hasAddress() {
         return !CollectionUtils.isEmpty(getAddresses());
     }
@@ -181,8 +184,13 @@ public interface IPerson extends IDomainObject {
      *
      * @return A list of all photos (never null)
      */
-    default List<IPersonPhoto> getPhotos() {
+    default List<IAttachment> getPhotos() {
         return Collections.emptyList();
+    }
+
+    default IPerson setPhotos(List<IAttachment> photos) {
+        MiscUtil.replaceList(getPhotos(), photos);
+        return this;
     }
 
     /**
@@ -190,40 +198,29 @@ public interface IPerson extends IDomainObject {
      *
      * @return The person's default photo, or null if not found.
      */
-    default IPersonPhoto getPhoto() {
-        return getPhoto(IPersonPhoto.PersonPhotoCategory.USUAL);
+    default IAttachment getPhoto() {
+        return hasPhoto() ? getPhotos().get(0) : null;
     }
 
     /**
-     * Returns the person's photo from one of the specified categories.  Categories are
+     * Returns the person's photo from one of the specified titles.  Titles are
      * searched in order until a match is found.
      *
-     * @param categories Only photos belonging to one of these categories will be returned.
+     * @param titles Only photos belonging to one of these titles will be returned.
      * @return The person's photo, or null if not found.
      */
-    default IPersonPhoto getPhoto(IPersonPhoto.PersonPhotoCategory... categories) {
-        List<IPersonPhoto> photos = getPhotos();
-
-        if (photos != null && !photos.isEmpty()) {
-            for (IPersonPhoto.PersonPhotoCategory category : categories) {
-                for (IPersonPhoto photo : photos) {
-                    if (photo.getCategory() == category) {
-                        return photo;
-                    }
-                }
-            }
-        }
-
-        return null;
+    default IAttachment getPhoto(String... titles) {
+        return IAttachment.findByTitle(getPhotos(), titles);
     }
 
-    default IPerson addPhotos(IPersonPhoto... photos) {
+    default IPerson addPhotos(IAttachment... photos) {
         Collections.addAll(getPhotos(), photos);
         return this;
     }
 
-    default IPerson setPhotos(List<IPersonPhoto> photos) {
-        MiscUtil.replaceList(getPhotos(), photos);
-        return this;
+    default boolean hasPhoto() {
+        return !CollectionUtils.isEmpty(getPhotos());
     }
+
+    enum Gender {MALE, FEMALE, OTHER, UNKNOWN}
 }

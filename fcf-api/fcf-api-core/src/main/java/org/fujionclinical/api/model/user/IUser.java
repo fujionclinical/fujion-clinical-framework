@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.model.user;
 
-import org.fujionclinical.api.model.IPerson;
+import org.fujionclinical.api.model.person.IPerson;
 import org.fujionclinical.api.security.ISecurityDomain;
 
 /**

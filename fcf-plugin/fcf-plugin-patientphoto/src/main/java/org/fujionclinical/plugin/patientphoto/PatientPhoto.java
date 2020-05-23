@@ -32,7 +32,7 @@ import org.fujion.component.Image;
 import org.fujion.component.Label;
 import org.fujion.component.Popup;
 import org.fujionclinical.api.context.ISurveyResponse;
-import org.fujionclinical.api.model.IPersonPhoto;
+import org.fujionclinical.api.model.IAttachment;
 import org.fujionclinical.api.patient.IPatient;
 import org.fujionclinical.api.patient.PatientContext;
 import org.fujionclinical.ui.controller.FrameworkController;
@@ -68,8 +68,8 @@ public class PatientPhoto extends FrameworkController implements PatientContext.
     @Override
     public void committed() {
         IPatient patient = PatientContext.getActivePatient();
-        IPersonPhoto photo = patient == null || patient.getPhoto() == null ? null : patient.getPhoto();
-        Image image = photo == null ? null : new Image(photo.getImage());
+        IAttachment photo = patient == null || patient.getPhoto() == null ? null : patient.getPhoto();
+        Image image = photo == null || !photo.hasData() ? null : new Image(photo.getContent());
 
         if (patient == null) {
             imgPhoto.setSrc(Constants.NOPATIENT_IMAGE);

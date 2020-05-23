@@ -1,7 +1,7 @@
 package org.fujionclinical.api.patient;
 
 import org.fujionclinical.api.model.IIdentifier;
-import org.fujionclinical.api.model.IPerson;
+import org.fujionclinical.api.model.person.IPerson;
 
 public interface IPatient extends IPerson {
 

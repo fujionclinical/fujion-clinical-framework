@@ -32,7 +32,7 @@ import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Div;
 import org.fujion.component.Image;
 import org.fujion.component.Label;
-import org.fujionclinical.api.model.IPersonPhoto;
+import org.fujionclinical.api.model.IAttachment;
 import org.fujionclinical.api.model.IPostalAddress;
 import org.fujionclinical.api.patient.IPatient;
 
@@ -68,12 +68,12 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
         root.addChild(new Div());
         Image photo = new Image();
         photo.setStyles("max-height:300px;max-width:300px;padding-bottom:10px");
-        IPersonPhoto pix = patient.getPhoto();
+        IAttachment pix = patient.getPhoto();
 
-        if (pix == null || pix.getImage() == null) {
+        if (pix == null || !pix.hasData()) {
             photo.setSrc(Constants.SILHOUETTE_IMAGE);
         } else {
-            photo.setContent(pix.getImage());
+            photo.setContent(pix.getContent());
         }
 
         root.addChild(photo);

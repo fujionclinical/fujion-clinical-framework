@@ -1,4 +1,6 @@
-package org.fujionclinical.api.model;
+package org.fujionclinical.api.model.person;
+
+import org.fujionclinical.api.model.person.IPersonName;
 
 import java.util.ArrayList;
 import java.util.List;

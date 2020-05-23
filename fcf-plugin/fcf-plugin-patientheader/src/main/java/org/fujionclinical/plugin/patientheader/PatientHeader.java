@@ -34,7 +34,7 @@ import org.fujion.common.DateUtil;
 import org.fujion.component.*;
 import org.fujionclinical.api.event.IEventSubscriber;
 import org.fujionclinical.api.model.IIdentifier;
-import org.fujionclinical.api.model.IPersonName;
+import org.fujionclinical.api.model.person.IPersonName;
 import org.fujionclinical.api.model.Identifier;
 import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.patient.IPatient;
