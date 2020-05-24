@@ -2,12 +2,31 @@ package org.fujionclinical.api.model;
 
 import org.apache.commons.collections.CollectionUtils;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 public interface IPostalAddress {
 
-    enum PostalAddressUse {HOME, WORK, TEMP, OLD, BILLING}
+    enum PostalAddressUse {
+        HOME, WORK, TEMP, OLD, BILLING
+    }
+
+    static IPostalAddress getPostalAddress(
+            Collection<? extends IPostalAddress> addresses,
+            PostalAddressUse... uses) {
+        if (addresses != null && !addresses.isEmpty()) {
+            for (PostalAddressUse use : uses) {
+                for (IPostalAddress address : addresses) {
+                    if (address.getUse() == use) {
+                        return address;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
 
     PostalAddressUse getUse();
 

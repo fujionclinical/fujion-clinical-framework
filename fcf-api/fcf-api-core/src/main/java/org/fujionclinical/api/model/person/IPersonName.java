@@ -88,6 +88,8 @@ public interface IPersonName {
 
     default String asString() {
         return PersonNameParser.instance.toString(this);
-    };
+    }
+
+    ;
 
 }

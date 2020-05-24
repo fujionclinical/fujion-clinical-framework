@@ -6,7 +6,7 @@ import java.util.Collection;
 
 public interface IAttachment {
 
-    static IAttachment findByTitle(
+    static IAttachment getAttachment(
             Collection<? extends IAttachment> attachments,
             String... titles) {
         if (attachments != null && !attachments.isEmpty()) {

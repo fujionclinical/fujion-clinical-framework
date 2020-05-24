@@ -26,6 +26,8 @@
 package org.fujionclinical.ui.patientselection.common;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.EnumUtils;
+import org.fujion.ancillary.MimeContent;
 import org.fujion.common.DateUtil;
 import org.fujion.common.StrUtil;
 import org.fujion.component.BaseUIComponent;
@@ -33,10 +35,12 @@ import org.fujion.component.Div;
 import org.fujion.component.Image;
 import org.fujion.component.Label;
 import org.fujionclinical.api.model.IAttachment;
+import org.fujionclinical.api.model.IContactPoint;
 import org.fujionclinical.api.model.IPostalAddress;
 import org.fujionclinical.api.patient.IPatient;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Default class for rendering detail view of patient in patient selection dialog. This class may be
@@ -69,29 +73,30 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
         Image photo = new Image();
         photo.setStyles("max-height:300px;max-width:300px;padding-bottom:10px");
         IAttachment pix = patient.getPhoto();
+        MimeContent content = pix == null ? null : pix.getContent();
 
-        if (pix == null || !pix.hasData()) {
+        if (content == null) {
             photo.setSrc(Constants.SILHOUETTE_IMAGE);
         } else {
-            photo.setContent(pix.getContent());
+            photo.setContent(content);
         }
 
         root.addChild(photo);
         addDemographic(root, null, patient.getFullName(), "font-weight: bold");
         addDemographic(root, "mrn", patient.getMRN());
         addDemographic(root, "gender", patient.getGender());
-        //addDemographic(root, "race", org.springframework.util.StringUtils.collectionToCommaDelimitedString(patient.getRace()));
+        addDemographic(root, "race", patient.getRace());
         addDemographic(root, "age", DateUtil.formatAge(patient.getBirthDate()));
         addDemographic(root, "dob", patient.getBirthDate());
         addDemographic(root, "dod", patient.getDeceasedDate());
-        //addDemographic(root, "mother", patient.getMothersFirstName());
-        // addDemographic(root, "language", patient.getLanguage());
-        //addContact(root, patient.getTelecom(), "home:phone", null);
-        //addContact(root, patient.getTelecom(), "home:email", null);
-        //addContact(root, patient.getTelecom(), "home:fax", "home fax");
-        //addContact(root, patient.getTelecom(), "work:phone", null);
-        //addContact(root, patient.getTelecom(), "work:email", null);
-        //addContact(root, patient.getTelecom(), "work:fax", "work fax");
+        addDemographic(root, "marital status", patient.getMaritalStatus());
+        addDemographic(root, "language", patient.hasLanguage() ? patient.getLanguages().get(0) : null);
+        addContactPoint(root, patient.getContactPoints(), "home phone");
+        addContactPoint(root, patient.getContactPoints(), "home email");
+        addContactPoint(root, patient.getContactPoints(), "home fax");
+        addContactPoint(root, patient.getContactPoints(), "work phone");
+        addContactPoint(root, patient.getContactPoints(), "work email");
+        addContactPoint(root, patient.getContactPoints(), "work fax");
 
         IPostalAddress address = patient.getAddress();
 
@@ -139,26 +144,29 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
      * @return True if access confirmed.
      */
     protected boolean confirmAccess(IPatient patient) {
-        return true; //!patient.isRestricted();
+        return patient != null; //!patient.isRestricted();
     }
 
     /**
-     * Adds a contact element to the demographic panel. Uses default styling.
+     * Adds a contact point to the demographic panel. Uses default styling.
      *
-     * @param root Root component.
-     * @param contacts List of contacts from which to select.
-     * @param type Type of contact desired (e.g., "home:phone").
-     * @param labelId The id of the label to use.
+     * @param root          Root component.
+     * @param contactPoints List of contact points from which to select.
+     * @param type          Type of contact point desired (e.g., "home:phone").
      */
-    /*
-    protected void addContact(BaseUIComponent root, List<ContactPointDt> contacts, String type, String labelId) {
-        ContactPointDt contact = FhirUtil.getContact(contacts, type);
-        
-        if (contact != null) {
-            addDemographic(root, labelId == null ? contact.getUse() : labelId, contact.getValue(), null);
+    protected void addContactPoint(
+            BaseUIComponent root,
+            List<? extends IContactPoint> contactPoints,
+            String type) {
+        String[] types = type.split(" ", 2);
+        IContactPoint.ContactPointUse use = EnumUtils.getEnumIgnoreCase(IContactPoint.ContactPointUse.class, types[0]);
+        IContactPoint.ContactPointSystem system = EnumUtils.getEnumIgnoreCase(IContactPoint.ContactPointSystem.class, types[1]);
+        IContactPoint contactPoint = IContactPoint.getContactPoint(contactPoints, use, system);
+
+        if (contactPoint != null) {
+            addDemographic(root, type, contactPoint.getValue());
         }
     }
-    */
 
     /**
      * Adds a demographic element to the demographic panel. Uses default styling.

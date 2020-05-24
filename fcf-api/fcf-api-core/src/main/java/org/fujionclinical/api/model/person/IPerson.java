@@ -2,9 +2,8 @@ package org.fujionclinical.api.model.person;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.fujion.common.MiscUtil;
-import org.fujionclinical.api.model.IAttachment;
-import org.fujionclinical.api.model.IDomainObject;
-import org.fujionclinical.api.model.IPostalAddress;
+import org.fujion.common.StrUtil;
+import org.fujionclinical.api.model.*;
 
 import java.util.Collections;
 import java.util.Date;
@@ -13,11 +12,43 @@ import java.util.Objects;
 
 public interface IPerson extends IDomainObject {
 
+    enum Gender {
+        MALE, FEMALE, OTHER, UNKNOWN
+    }
+
+    enum MaritalStatus {
+        ANNULLED("A"), DIVORCED("D"), INTERLOCUTORY("I"), LEGALLY_SEPARATED("L"), MARRIED("M"),
+        POLYGAMOUS("P"), NEVER_MARRIED("S"), DOMESTIC_PARTNER("T"), UNMARRIED("U"), WIDOWED("W"), UNKNOWN("UNK");
+
+        private final String code;
+
+        MaritalStatus(String code) {
+            this.code = code;
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        @Override
+        public String toString() {
+            return StrUtil.toCamelCaseUpper(name());
+        }
+
+        public static MaritalStatus forCode(String code) {
+            for (MaritalStatus maritalStatus : MaritalStatus.values()) {
+                if (maritalStatus.getCode().equals(code)) {
+                    return maritalStatus;
+                }
+            }
+
+            return null;
+        }
+    }
+
     default Gender getGender() {
         return null;
     }
-
-    ;
 
     default IPerson setGender(Gender gender) {
         throw new UnsupportedOperationException();
@@ -25,6 +56,54 @@ public interface IPerson extends IDomainObject {
 
     default boolean hasGender() {
         return getGender() != null;
+    }
+
+    default ConceptCode getBirthSex() {
+        return null;
+    }
+
+    default IPerson setBirthSex(ConceptCode birthSex) {
+        throw new UnsupportedOperationException();
+    }
+
+    default boolean hasBirthSex() {
+        return getBirthSex() != null;
+    }
+
+    default ConceptCode getEthnicity() {
+        return null;
+    }
+
+    default IPerson setEthnicity(ConceptCode ethnicity) {
+        throw new UnsupportedOperationException();
+    }
+
+    default boolean hasEthnicity() {
+        return getEthnicity() != null;
+    }
+
+    default MaritalStatus getMaritalStatus() {
+        return null;
+    }
+
+    default IPerson setMaritalStatus(MaritalStatus maritalStatus) {
+        throw new UnsupportedOperationException();
+    }
+
+    default boolean hasMaritalStatus() {
+        return getMaritalStatus() != null;
+    }
+
+    default ConceptCode getRace() {
+        return null;
+    }
+
+    default IPerson setRace(ConceptCode race) {
+        throw new UnsupportedOperationException();
+    }
+
+    default boolean hasRace() {
+        return getRace() != null;
     }
 
     default Date getBirthDate() {
@@ -148,26 +227,15 @@ public interface IPerson extends IDomainObject {
     }
 
     /**
-     * Returns the person's address from one of the specified categories.  Categories are
+     * Returns the person's address from one of the specified uses.  Uses are
      * searched in order until a match is found.
      *
-     * @param categories Only addresses belonging to one of these categories will be returned.
+     * @param uses Only addresses belonging to one of these uses will be returned.
      * @return The person's address, or null if not found.
      */
-    default IPostalAddress getAddress(IPostalAddress.PostalAddressUse... categories) {
-        List<IPostalAddress> addresses = getAddresses();
+    default IPostalAddress getAddress(IPostalAddress.PostalAddressUse... uses) {
+        return IPostalAddress.getPostalAddress(getAddresses(), uses);
 
-        if (addresses != null && !addresses.isEmpty()) {
-            for (IPostalAddress.PostalAddressUse category : categories) {
-                for (IPostalAddress address : addresses) {
-                    if (address.getUse() == category) {
-                        return address;
-                    }
-                }
-            }
-        }
-
-        return null;
     }
 
     default IPerson addAddresses(IPostalAddress... addresses) {
@@ -177,6 +245,93 @@ public interface IPerson extends IDomainObject {
 
     default boolean hasAddress() {
         return !CollectionUtils.isEmpty(getAddresses());
+    }
+
+    /**
+     * Returns all contact points for the person.
+     *
+     * @return A list of all contact points (never null)
+     */
+    default List<IContactPoint> getContactPoints() {
+        return Collections.emptyList();
+    }
+
+    default IPerson setContactPoints(List<IContactPoint> contactPoints) {
+        MiscUtil.replaceList(getContactPoints(), contactPoints);
+        return this;
+    }
+
+    /**
+     * Returns the person's contact points from one of the specified uses.  Uses are
+     * searched in order until a match is found.
+     *
+     * @param uses Only contact points belonging to one of these uses will be returned.
+     * @return The person's contact, or null if not found.
+     */
+    default IContactPoint getContactPoint(IContactPoint.ContactPointUse... uses) {
+        return IContactPoint.getContactPoint(getContactPoints(), uses);
+
+    }
+
+    /**
+     * Returns the person's contact points from one of the specified systems.  Systems are
+     * searched in order until a match is found.
+     *
+     * @param systems Only contact points belonging to one of these systems will be returned.
+     * @return The person's contact, or null if not found.
+     */
+    default IContactPoint getContactPoint(IContactPoint.ContactPointSystem... systems) {
+        return IContactPoint.getContactPoint(getContactPoints(), systems);
+
+    }
+
+    /**
+     * Returns the person's home phone.
+     *
+     * @return The person's home phone, or null if not found.
+     */
+    default IContactPoint getHomePhone() {
+        return getContactPoint(IContactPoint.ContactPointUse.HOME, IContactPoint.ContactPointSystem.PHONE);
+    }
+
+    /**
+     * Returns the person's contact point matching the specified use and system.
+     *
+     * @param use    The contact point use being sought.
+     * @param system The contact point system being sought.
+     * @return The person's contact point, or null if not found.
+     */
+    default IContactPoint getContactPoint(
+            IContactPoint.ContactPointUse use,
+            IContactPoint.ContactPointSystem system) {
+        return IContactPoint.getContactPoint(getContactPoints(), use, system);
+    }
+
+    default IPerson addContactPoints(IContactPoint... contactPoints) {
+        Collections.addAll(getContactPoints(), contactPoints);
+        return this;
+    }
+
+    default boolean hasContactPoint() {
+        return !CollectionUtils.isEmpty(getContactPoints());
+    }
+
+    default List<IConceptCode> getLanguages() {
+        return Collections.emptyList();
+    }
+
+    default IPerson setLanguages(List<IConceptCode> languages) {
+        MiscUtil.replaceList(getLanguages(), languages);
+        return this;
+    }
+
+    default IPerson addLanguages(IConceptCode... languages) {
+        CollectionUtils.addAll(getLanguages(), languages);
+        return this;
+    }
+
+    default boolean hasLanguage() {
+        return !CollectionUtils.isEmpty(getLanguages());
     }
 
     /**
@@ -210,7 +365,7 @@ public interface IPerson extends IDomainObject {
      * @return The person's photo, or null if not found.
      */
     default IAttachment getPhoto(String... titles) {
-        return IAttachment.findByTitle(getPhotos(), titles);
+        return IAttachment.getAttachment(getPhotos(), titles);
     }
 
     default IPerson addPhotos(IAttachment... photos) {
@@ -221,6 +376,4 @@ public interface IPerson extends IDomainObject {
     default boolean hasPhoto() {
         return !CollectionUtils.isEmpty(getPhotos());
     }
-
-    enum Gender {MALE, FEMALE, OTHER, UNKNOWN}
 }
