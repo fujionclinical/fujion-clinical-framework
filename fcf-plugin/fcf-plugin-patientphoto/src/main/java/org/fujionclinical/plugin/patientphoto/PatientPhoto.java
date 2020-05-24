@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.plugin.patientphoto;
 
+import org.fujion.ancillary.MimeContent;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.common.StrUtil;
 import org.fujion.component.BaseComponent;
@@ -69,21 +70,21 @@ public class PatientPhoto extends FrameworkController implements PatientContext.
     public void committed() {
         IPatient patient = PatientContext.getActivePatient();
         IAttachment photo = patient == null || patient.getPhoto() == null ? null : patient.getPhoto();
-        Image image = photo == null || !photo.hasData() ? null : new Image(photo.getContent());
+        MimeContent content = photo == null ? null : photo.getContent();
 
         if (patient == null) {
             imgPhoto.setSrc(Constants.NOPATIENT_IMAGE);
             imgPhoto.setPopup(null);
             imgPhoto.setHint(StrUtil.getLabel("patientphoto.no.patient"));
-        } else if (image == null) {
+        } else if (content == null) {
             imgPhoto.setSrc(Constants.SILHOUETTE_IMAGE);
             imgPhoto.setPopup(null);
             imgPhoto.setHint(StrUtil.getLabel("patientphoto.no.photo"));
         } else {
-            imgPhoto.setSrc(image.getSrc());
+            imgPhoto.setContent(content);
             imgPhoto.setHint(null);
             imgPhoto.setPopup(popup);
-            imgFullPhoto.setSrc(image.getSrc());
+            imgFullPhoto.setContent(content);
             lblCaption.setLabel(patient.getFullName());
         }
 
