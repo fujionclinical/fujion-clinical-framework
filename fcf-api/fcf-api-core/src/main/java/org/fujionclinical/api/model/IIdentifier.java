@@ -31,22 +31,14 @@ public interface IIdentifier {
         return !StringUtils.isEmpty(getValue());
     }
 
-    default List<IConceptCode> getTypes() {
-        return Collections.emptyList();
-    }
+    IConcept getType();
 
-    default IIdentifier addTypes(IConceptCode... types) {
-        Collections.addAll(getTypes(), types);
-        return this;
-    }
-
-    default IIdentifier setTypes(List<IConceptCode> types) {
-        MiscUtil.replaceList(getTypes(), types);
-        return this;
+    default IIdentifier setType(IConcept type) {
+        throw new UnsupportedOperationException();
     }
 
     default boolean hasType() {
-        return !CollectionUtils.isEmpty(getTypes());
+        return getType() != null;
     }
 
     IdentifierCategory getCategory();

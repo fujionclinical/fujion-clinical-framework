@@ -22,6 +22,16 @@ public interface IPerson extends IDomainObject {
 
         private final String code;
 
+        public static MaritalStatus forCode(String code) {
+            for (MaritalStatus maritalStatus : MaritalStatus.values()) {
+                if (maritalStatus.getCode().equals(code)) {
+                    return maritalStatus;
+                }
+            }
+
+            return null;
+        }
+
         MaritalStatus(String code) {
             this.code = code;
         }
@@ -33,16 +43,6 @@ public interface IPerson extends IDomainObject {
         @Override
         public String toString() {
             return StrUtil.toCamelCaseUpper(name());
-        }
-
-        public static MaritalStatus forCode(String code) {
-            for (MaritalStatus maritalStatus : MaritalStatus.values()) {
-                if (maritalStatus.getCode().equals(code)) {
-                    return maritalStatus;
-                }
-            }
-
-            return null;
         }
     }
 
@@ -316,22 +316,26 @@ public interface IPerson extends IDomainObject {
         return !CollectionUtils.isEmpty(getContactPoints());
     }
 
-    default List<IConceptCode> getLanguages() {
+    default List<IConcept> getLanguages() {
         return Collections.emptyList();
     }
 
-    default IPerson setLanguages(List<IConceptCode> languages) {
+    default IPerson setLanguages(List<IConcept> languages) {
         MiscUtil.replaceList(getLanguages(), languages);
         return this;
     }
 
-    default IPerson addLanguages(IConceptCode... languages) {
+    default IPerson addLanguages(IConcept... languages) {
         CollectionUtils.addAll(getLanguages(), languages);
         return this;
     }
 
     default boolean hasLanguage() {
         return !CollectionUtils.isEmpty(getLanguages());
+    }
+
+    default IConcept getPreferredLanguage() {
+        return hasLanguage() ? getLanguages().get(0) : null;
     }
 
     /**
@@ -376,4 +380,5 @@ public interface IPerson extends IDomainObject {
     default boolean hasPhoto() {
         return !CollectionUtils.isEmpty(getPhotos());
     }
+
 }

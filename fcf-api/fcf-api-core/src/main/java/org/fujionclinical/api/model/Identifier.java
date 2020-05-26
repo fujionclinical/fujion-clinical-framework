@@ -1,8 +1,6 @@
 package org.fujionclinical.api.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import org.apache.commons.collections.CollectionUtils;
 
 public class Identifier implements IIdentifier {
 
@@ -10,7 +8,7 @@ public class Identifier implements IIdentifier {
 
     private final String value;
 
-    private final List<IConceptCode> types = new ArrayList<>();
+    private final IConcept type = new Concept(null);
 
     private final IdentifierCategory category;
 
@@ -28,7 +26,7 @@ public class Identifier implements IIdentifier {
         this.system = system;
         this.value = value;
         this.category = category;
-        Collections.addAll(this.types, types);
+        CollectionUtils.addAll(type.getCodes(), types);
     }
 
     @Override
@@ -41,11 +39,12 @@ public class Identifier implements IIdentifier {
         return value;
     }
 
-    public List<IConceptCode> getTypes() {
-        return Collections.unmodifiableList(types);
+    public IConcept getType() {
+        return type;
     }
 
     public IdentifierCategory getCategory() {
         return category;
     }
+
 }

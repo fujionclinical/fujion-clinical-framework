@@ -3,6 +3,8 @@ package org.fujionclinical.api.encounter;
 import org.apache.commons.collections.CollectionUtils;
 import org.fujion.common.MiscUtil;
 import org.fujionclinical.api.location.ILocation;
+import org.fujionclinical.api.model.ConceptCode;
+import org.fujionclinical.api.model.IConcept;
 import org.fujionclinical.api.model.IPeriod;
 import org.fujionclinical.api.model.IDomainObject;
 import org.fujionclinical.api.model.person.IPerson;
@@ -97,5 +99,21 @@ public interface IEncounter extends IDomainObject {
 
     default boolean hasLocation() {
         return getLocation() != null;
+    }
+
+    List<IConcept> getTypes();
+
+    default IEncounter addTypes(IConcept... types) {
+        CollectionUtils.addAll(getTypes(), types);
+        return this;
+    }
+
+    default IEncounter setType(List<IConcept> types) {
+        MiscUtil.replaceList(getTypes(), types);
+        return this;
+    }
+
+    default boolean hasType() {
+        return !CollectionUtils.isEmpty(getTypes());
     }
 }
