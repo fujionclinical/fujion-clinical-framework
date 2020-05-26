@@ -7,15 +7,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * This Source Code Form is also subject to the terms of the Health-Related
  * Additional Disclaimer of Warranty and Limitation of Liability available at
  *
@@ -29,7 +29,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
-import org.fujion.common.StrUtil;
+import org.fujion.common.LocalizedMessage;
 import org.fujion.component.Checkbox;
 import org.fujion.component.Grid;
 import org.fujion.component.Row;
@@ -50,32 +50,36 @@ public class MainController extends PluginController {
 
     private static final Log log = LogFactory.getLog(MainController.class);
 
-    private boolean needsRefresh = true;
+    private static final LocalizedMessage MSG_SESSIONS_TOTAL = new LocalizedMessage("fcf.sessiontracker.msg.sessions.total");
 
     private final Sessions sessions = Sessions.getInstance();
 
-    private IComponentRenderer<Row, Session> sessionRenderer;
-    
     private final ListModel<Session> model = new ListModel<>();
 
     private final ISessionLifecycle sessionTracker = new ISessionLifecycle() {
-        
+
         @Override
         public void onSessionCreate(Session session) {
             fireEvent("sessionCreate", session);
         }
-        
+
         @Override
         public void onSessionDestroy(Session session) {
             fireEvent("sessionDestroy", session);
         }
 
-        private void fireEvent(String type, Session session) {
+        private void fireEvent(
+                String type,
+                Session session) {
             Event event = new Event(type, root, session);
             EventUtil.post(event);
         }
 
     };
+
+    private boolean needsRefresh = true;
+
+    private IComponentRenderer<Row, Session> sessionRenderer;
 
     @WiredComponent
     private Grid grid;
@@ -95,9 +99,9 @@ public class MainController extends PluginController {
     }
 
     private void updateCount() {
-        grid.setTitle(StrUtil.formatMessage("@fcf.sessiontracker.msg.sessions.total", model.size()));
+        grid.setTitle(MSG_SESSIONS_TOTAL.toString(model.size()));
     }
-    
+
     @EventHandler(value = "sessionCreate")
     @EventHandler(value = "sessionDestroy")
     private void onSessionUpdate(Event event) {
@@ -108,7 +112,7 @@ public class MainController extends PluginController {
         } else {
             model.remove(session);
         }
-        
+
         updateCount();
     }
 
@@ -142,7 +146,7 @@ public class MainController extends PluginController {
             sessions.removeLifecycleListener(sessionTracker);
         }
     }
-    
+
     @Override
     public void onActivate() {
         super.onActivate();

@@ -7,15 +7,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * This Source Code Form is also subject to the terms of the Health-Related
  * Additional Disclaimer of Warranty and Limitation of Liability available at
  *
@@ -32,7 +32,6 @@ import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.OnFailure;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.common.DateUtil;
-import org.fujion.common.StrUtil;
 import org.fujion.component.*;
 import org.fujion.event.Event;
 import org.fujionclinical.ui.util.DateTimeUtil;
@@ -44,28 +43,24 @@ import java.util.Date;
  * Presents a date/time input element.
  */
 public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
-    
+
     @WiredComponent
     private Popup popup;
 
     @WiredComponent("popup.datebox")
     private Datebox datebox;
-    
+
     @WiredComponent("popup.timebox")
     private Timebox timebox;
-    
+
     private boolean requireTime;
-    
+
     private boolean ok;
-    
+
     private String dateFormat;
-    
+
     private String timeFormat;
-    
-    private final String requireTimeError = StrUtil.getLabel("fcf.datetime.error.no.time");
-    
-    private final String requireDateError = StrUtil.getLabel("fcf.datetime.error.no.date");
-    
+
     /**
      * Sets default property values.
      */
@@ -73,7 +68,7 @@ public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
         super();
         setReadonly(true);
     }
-    
+
     /**
      * Creates and wires all child components.
      */
@@ -82,7 +77,7 @@ public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
         datebox.setPattern(dateFormat);
         timebox.setPattern(timeFormat);
     }
-    
+
     /**
      * Returns true if a time component is required.
      *
@@ -91,7 +86,7 @@ public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
     public boolean getRequireTime() {
         return requireTime;
     }
-    
+
     /**
      * Set to true to indicate a time component is required.
      *
@@ -100,7 +95,7 @@ public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
     public void setRequireTime(boolean requireTime) {
         this.requireTime = requireTime;
     }
-    
+
     /**
      * Returns the constraint for the date component.
      *
@@ -109,7 +104,7 @@ public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
     public String getDateConstraint() {
         return datebox.getPattern();
     }
-    
+
     /**
      * Sets the constraint for the date component.
      *
@@ -118,7 +113,7 @@ public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
     public void setDateConstraint(String constraint) {
         datebox.setPattern(constraint);
     }
-    
+
     /**
      * Returns the constraint for the time component.
      *
@@ -127,7 +122,7 @@ public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
     public String getTimeConstraint() {
         return timebox.getPattern();
     }
-    
+
     /**
      * Sets the constraint for the time component.
      *
@@ -136,7 +131,7 @@ public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
     public void setTimeConstraint(String constraint) {
         timebox.setPattern(constraint);
     }
-    
+
     /**
      * Returns the current date value.
      *
@@ -145,7 +140,7 @@ public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
     public Date getDate() {
         return DateTimeUtil.getTime(datebox, timebox);
     }
-    
+
     /**
      * Sets the current date value.
      *
@@ -155,32 +150,34 @@ public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
         validateDate(date);
         setValue(DateUtil.formatDate(date));
     }
-    
+
     /**
      * Validates that a time component exists if one is required.
      *
      * @param value The date value.
      */
     public void validateDate(Date value) {
-        Assert.isTrue(!requireTime || DateUtil.hasTime(value), requireTimeError);
+        Assert.isTrue(!requireTime || DateUtil.hasTime(value), DialogConstants.MSG_REQUIRE_TIME.toString());
     }
-    
+
     /**
      * Displays (or clears) a validation error.
      *
-     * @param message The error text. If null, any existing validation errors will be cleared.
+     * @param message      The error text. If null, any existing validation errors will be cleared.
      * @param inputElement The input element that caused the validation error.
      */
-    private void showError(String message, BaseUIComponent inputElement) {
+    private void showError(
+            String message,
+            BaseUIComponent inputElement) {
         ok = message == null;
         datebox.setBalloon(inputElement == datebox ? message : null);
         timebox.setBalloon(inputElement == timebox ? message : null);
-        
+
         if (!ok) {
             inputElement.setFocus(true);
         }
     }
-    
+
     /**
      * Clears all validation errors.
      */
@@ -188,20 +185,20 @@ public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
         showError(null, datebox);
         showError(null, timebox);
     }
-    
+
     private boolean validateInput() {
         ok = true;
         boolean hasTime = timebox.getValue() != null;
-        
+
         if (datebox.getValue() == null && hasTime) {
-            showError(requireDateError, datebox);
+            showError(DialogConstants.MSG_REQUIRE_DATE.toString(), datebox);
         } else if (requireTime && !hasTime) {
-            showError(requireTimeError, timebox);
+            showError(DialogConstants.MSG_REQUIRE_TIME.toString(), timebox);
         }
-        
+
         return ok;
     }
-    
+
     /**
      * Transfers input state between the input box and the drop down dialog. If drop down is true,
      * the date value from the input box is copied to the drop down. If false, the reverse is done.
@@ -222,17 +219,17 @@ public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
             setDate(date);
         }
     }
-    
+
     /**
      * Update input elements when drop down dialog opens or closes.
      *
      * @param event The open or close event.
      */
-    @EventHandler(value = { "open", "close" }, target = "popup", onFailure = OnFailure.IGNORE)
+    @EventHandler(value = {"open", "close"}, target = "popup", onFailure = OnFailure.IGNORE)
     private void onOpenOrClose(Event event) {
         update(isOpen());
     }
-    
+
     /**
      * Automatic drop down when input box receives focus.
      */
@@ -243,15 +240,15 @@ public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
             update(true);
         }
     }
-    
+
     /**
      * Clear any validation error upon changing inputs.
      */
-    @EventHandler(value = "change", target = { "@datebox", "@timebox" }, onFailure = OnFailure.IGNORE)
+    @EventHandler(value = "change", target = {"@datebox", "@timebox"}, onFailure = OnFailure.IGNORE)
     private void onChange() {
         clearError();
     }
-    
+
     /**
      * Close drop down and update input box if validation successful
      */
@@ -261,7 +258,7 @@ public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
             setOpen(false);
         }
     }
-    
+
     /**
      * Close drop down, ignoring all changes.
      */
@@ -270,7 +267,7 @@ public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
         ok = false;
         setOpen(false);
     }
-    
+
     /**
      * Populate datebox with today's date while clearing timebox.
      */
@@ -281,7 +278,7 @@ public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
         validateInput();
         close();
     }
-    
+
     /**
      * Populate datebox and timebox with current date and time.
      */
@@ -293,7 +290,7 @@ public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
         validateInput();
         close();
     }
-    
+
     /**
      * Clear the time box.
      */
@@ -301,7 +298,7 @@ public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
     private void onClick$btnTimeClear() {
         updateTimebox(null);
     }
-    
+
     /**
      * Close the input box.
      */
@@ -310,7 +307,7 @@ public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
         super.close();
         update(false);
     }
-    
+
     /**
      * Update the datebox with the new value.
      *
@@ -319,7 +316,7 @@ public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
     private void updateDatebox(Date date) {
         datebox.setValue(DateUtil.stripTime(date));
     }
-    
+
     /**
      * Update the timebox with the new time.
      *
@@ -328,5 +325,5 @@ public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
     private void updateTimebox(Date time) {
         timebox.setValue(time);
     }
-    
+
 }

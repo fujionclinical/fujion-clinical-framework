@@ -41,6 +41,7 @@ import org.fujion.model.IComponentRenderer;
 import org.fujion.model.IModelAndView;
 import org.fujion.model.ListModel;
 import org.fujionclinical.api.FrameworkUtil;
+import org.fujionclinical.shell.Constants;
 import org.fujionclinical.shell.layout.Layout;
 import org.fujionclinical.shell.layout.LayoutIdentifier;
 import org.fujionclinical.shell.layout.LayoutParser;
@@ -51,8 +52,6 @@ import org.fujionclinical.ui.dialog.PopupDialog;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.fujionclinical.shell.designer.DesignConstants.*;
 
 /**
  * Supports selection and management of existing layouts.
@@ -152,7 +151,7 @@ public class LayoutManager implements IAutoWired {
         Map<String, Object> args = new HashMap<>();
         args.put("manage", manage);
         args.put("deflt", deflt);
-        PopupDialog.show(RESOURCE_PREFIX + "layoutManager.fsp", args, true, true, true, closeListener);
+        PopupDialog.show(Constants.RESOURCE_PREFIX_DESIGNER + "layoutManager.fsp", args, true, true, true, closeListener);
     }
     
     /**
@@ -165,7 +164,7 @@ public class LayoutManager implements IAutoWired {
      */
     public static void saveLayout(Layout layout, LayoutIdentifier layoutId, boolean hideScope,
                                   IResponseCallback<LayoutIdentifier> callback) {
-        LayoutPrompt.show(layoutId, hideScope, true, CAP_LAYOUT_SAVE, MSG_LAYOUT_SAVE, (event) -> {
+        LayoutPrompt.show(layoutId, hideScope, true, Constants.MSG_LAYOUT_SAVE_CAP.toString(), Constants.MSG_LAYOUT_SAVE.toString(), (event) -> {
             LayoutIdentifier id = event.getTarget().getAttribute("layoutId", LayoutIdentifier.class);
             
             if (id != null) {
@@ -191,8 +190,8 @@ public class LayoutManager implements IAutoWired {
         window = (Window) root;
         shared = defaultIsShared();
         boolean manage = root.getAttribute("manage", false);
-        window.setTitle(StrUtil.formatMessage(manage ? CAP_LAYOUT_MANAGE : CAP_LAYOUT_LOAD));
-        lblPrompt.setLabel(StrUtil.formatMessage(manage ? MSG_LAYOUT_MANAGE : MSG_LAYOUT_LOAD));
+        window.setTitle(StrUtil.formatMessage(manage ? Constants.MSG_LAYOUT_MANAGE_CAP.toString() : Constants.MSG_LAYOUT_LOAD_CAP.toString()));
+        lblPrompt.setLabel(StrUtil.formatMessage(manage ? Constants.MSG_LAYOUT_MANAGE.toString() : Constants.MSG_LAYOUT_LOAD.toString()));
         modelAndView = lstLayouts.getModelAndView(String.class);
         modelAndView.setRenderer(renderer);
         pnlSelect.setVisible(!manage);
@@ -242,8 +241,8 @@ public class LayoutManager implements IAutoWired {
      * @param clone If true, perform a clone operation; if false, a rename operation.
      */
     private void cloneOrRename(boolean clone) {
-        String title = clone ? CAP_LAYOUT_CLONE : CAP_LAYOUT_RENAME;
-        String prompt = clone ? MSG_LAYOUT_CLONE : MSG_LAYOUT_RENAME;
+        String title = clone ? Constants.MSG_LAYOUT_CLONE_CAP.toString() : Constants.MSG_LAYOUT_RENAME_CAP.toString();
+        String prompt = clone ? Constants.MSG_LAYOUT_CLONE.toString() : Constants.MSG_LAYOUT_RENAME.toString();
         LayoutIdentifier layoutId1 = getSelectedLayout();
         LayoutPrompt.show(layoutId1, !clone, false, title, prompt, (event) -> {
             LayoutIdentifier layoutId2 = event.getTarget().getAttribute("layoutId", LayoutIdentifier.class);
@@ -269,9 +268,7 @@ public class LayoutManager implements IAutoWired {
     public void importLayout(boolean shared, InputStream strm) {
         Layout layout = LayoutParser.parseStream(strm);
         LayoutIdentifier layoutId = new LayoutIdentifier(layout.getName(), shared);
-        saveLayout(layout, layoutId, false, (response) -> {
-            refresh(response.name);
-        });
+        saveLayout(layout, layoutId, false, response -> refresh(response.name));
     }
     
     @EventHandler(value = "upload", target = "@btnImport")
@@ -304,7 +301,7 @@ public class LayoutManager implements IAutoWired {
      */
     @EventHandler(value = "click", target = "@btnDelete")
     private void onClick$btnDelete() {
-        DialogUtil.confirm(MSG_LAYOUT_DELETE, (confirm) -> {
+        DialogUtil.confirm(Constants.MSG_LAYOUT_DELETE.toString(), (confirm) -> {
             if (confirm) {
                 LayoutUtil.deleteLayout(getSelectedLayout());
                 refresh(null);

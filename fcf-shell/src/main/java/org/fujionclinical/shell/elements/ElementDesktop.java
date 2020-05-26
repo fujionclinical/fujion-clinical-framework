@@ -32,8 +32,8 @@ import org.fujion.component.*;
 import org.fujionclinical.api.security.SecurityUtil;
 import org.fujionclinical.help.viewer.HelpUtil;
 import org.fujionclinical.help.viewer.HelpViewer.HelpViewerMode;
+import org.fujionclinical.shell.Constants;
 import org.fujionclinical.shell.Shell;
-import org.fujionclinical.shell.designer.DesignConstants;
 import org.fujionclinical.shell.designer.DesignMenu;
 import org.fujionclinical.shell.plugins.PluginResourceHelp;
 import org.fujionclinical.ui.action.ActionUtil;
@@ -121,7 +121,7 @@ public class ElementDesktop extends ElementUI {
             }
         });
 
-        if (SecurityUtil.isGrantedAny(DesignConstants.DESIGN_MODE_PRIVS)) {
+        if (SecurityUtil.isGrantedAny(Constants.DESIGNER_PRIVS)) {
             DesignMenu.create(this, menubar0);
         }
 

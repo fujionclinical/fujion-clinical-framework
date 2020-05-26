@@ -30,6 +30,7 @@ import org.fujion.annotation.WiredComponent;
 import org.fujion.component.Popupbox;
 import org.fujion.component.Textbox;
 import org.fujion.event.ChangeEvent;
+import org.fujionclinical.shell.Constants;
 import org.fujionclinical.shell.property.PropertyInfo;
 
 /**
@@ -41,7 +42,7 @@ public class PropertyEditorText extends PropertyEditorBase<Popupbox> {
     private Textbox textbox;
 
     public PropertyEditorText() {
-        super(DesignConstants.RESOURCE_PREFIX + "propertyEditorText.fsp");
+        super(Constants.RESOURCE_PREFIX_DESIGNER + "propertyEditorText.fsp");
     }
 
     @Override

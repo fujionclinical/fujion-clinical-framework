@@ -47,36 +47,6 @@ import static org.fujionclinical.ui.patientselection.common.Constants.*;
  */
 public class PatientSelectionUtil {
 
-    private static final Log log = LogFactory.getLog(PatientSelectionUtil.class);
-
-    private static final Comparator<IPatient> patientComparator = new Comparator<IPatient>() {
-
-        /**
-         * Sort by patient full name, ignoring case.
-         *
-         * @param patient1 First patient to compare.
-         * @param patient2 Second patient to compare.
-         * @return Result of comparison.
-         */
-        @Override
-        public int compare(
-                IPatient patient1,
-                IPatient patient2) {
-            IPersonName name1 = patient1.getName();
-            IPersonName name2 = patient2.getName();
-            String cmp1 = name1 == null ? "" : name1.toString();
-            String cmp2 = name2 == null ? "" : name2.toString();
-            return cmp1.compareToIgnoreCase(cmp2);
-        }
-
-    };
-
-    /**
-     * Enforce static class.
-     */
-    protected PatientSelectionUtil() {
-    }
-
     /**
      * Perform search, using the specified search text.
      *
@@ -122,12 +92,12 @@ public class PatientSelectionUtil {
             List<IPatient> matches = PatientSearchUtil.search(criteria);
 
             if (matches == null || matches.size() == 0) {
-                throw new SearchException(ERROR_PATIENT_NOT_FOUND);
+                throw new SearchException(MSG_ERROR_PATIENT_NOT_FOUND.toString());
             }
 
             if (maxMatches > 0 && matches.size() > maxMatches) {
-                String msg = StrUtil.formatMessage(TEXT_TOO_MANY_MATCHES, matches.size());
-                DialogUtil.prompt(msg, TITLE_TOO_MANY_MATCHES, REFINE_BUTTONS, (response) -> {
+                String msg = StrUtil.formatMessage(MSG_TOO_MANY_MATCHES_TEXT.toString(), matches.size());
+                DialogUtil.prompt(msg, MSG_TOO_MANY_MATCHES_TITLE.toString(), REFINE_BUTTONS, (response) -> {
                     if (response.hasResponse(BTN_REFINE_LABEL)) {
                         matches.clear();
                     }
@@ -144,7 +114,7 @@ public class PatientSelectionUtil {
             throw e;
         } catch (Exception e) {
             log.error("Error during patient search.", e);
-            throw new SearchException(StrUtil.formatMessage(UNEXPECTED_ERROR, FCFUtil.formatExceptionForDisplay(e)), e);
+            throw new SearchException(StrUtil.formatMessage(MSG_ERROR_NOT_FOUND.toString(), FCFUtil.formatExceptionForDisplay(e)), e);
         }
     }
 
@@ -158,5 +128,35 @@ public class PatientSelectionUtil {
 
             callback.onComplete(matches);
         }
+    }
+
+    private static final Log log = LogFactory.getLog(PatientSelectionUtil.class);
+
+    private static final Comparator<IPatient> patientComparator = new Comparator<IPatient>() {
+
+        /**
+         * Sort by patient full name, ignoring case.
+         *
+         * @param patient1 First patient to compare.
+         * @param patient2 Second patient to compare.
+         * @return Result of comparison.
+         */
+        @Override
+        public int compare(
+                IPatient patient1,
+                IPatient patient2) {
+            IPersonName name1 = patient1.getName();
+            IPersonName name2 = patient2.getName();
+            String cmp1 = name1 == null ? "" : name1.toString();
+            String cmp2 = name2 == null ? "" : name2.toString();
+            return cmp1.compareToIgnoreCase(cmp2);
+        }
+
+    };
+
+    /**
+     * Enforce static class.
+     */
+    protected PatientSelectionUtil() {
     }
 }

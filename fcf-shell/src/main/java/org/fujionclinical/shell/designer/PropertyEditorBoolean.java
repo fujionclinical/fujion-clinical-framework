@@ -29,6 +29,7 @@ import org.fujion.annotation.WiredComponent;
 import org.fujion.component.Radiobutton;
 import org.fujion.component.Radiogroup;
 import org.fujion.event.ChangeEvent;
+import org.fujionclinical.shell.Constants;
 import org.fujionclinical.shell.property.PropertyInfo;
 
 /**
@@ -46,7 +47,7 @@ public class PropertyEditorBoolean extends PropertyEditorBase<Radiogroup> {
      * Create property editor.
      */
     public PropertyEditorBoolean() {
-        super(DesignConstants.RESOURCE_PREFIX + "propertyEditorBoolean.fsp");
+        super(Constants.RESOURCE_PREFIX_DESIGNER + "propertyEditorBoolean.fsp");
     }
 
     @Override

@@ -30,14 +30,16 @@ import org.fujion.ancillary.IDisable;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.client.ExecutionContext;
-import org.fujion.common.StrUtil;
 import org.fujion.component.*;
 import org.fujion.event.Event;
 import org.fujion.page.PageUtil;
+import org.fujionclinical.shell.Constants;
 import org.fujionclinical.shell.elements.ElementBase;
 import org.fujionclinical.shell.elements.ElementUI;
 import org.fujionclinical.shell.layout.Layout;
 import org.fujionclinical.shell.layout.LayoutParser;
+
+import static org.fujionclinical.shell.Constants.MSG_DESIGNER_MENU_TITLE;
 
 /**
  * Context menu for designer.
@@ -84,11 +86,11 @@ public class DesignContextMenu implements IAutoWired {
      */
     public static DesignContextMenu getInstance() {
         Page page = ExecutionContext.getPage();
-        DesignContextMenu contextMenu = page.getAttribute(DesignConstants.ATTR_DESIGN_MENU, DesignContextMenu.class);
+        DesignContextMenu contextMenu = page.getAttribute(Constants.ATTR_DESIGNER_MENU, DesignContextMenu.class);
 
         if (contextMenu == null) {
             contextMenu = create();
-            page.setAttribute(DesignConstants.ATTR_DESIGN_MENU, contextMenu);
+            page.setAttribute(Constants.ATTR_DESIGNER_MENU, contextMenu);
         }
 
         return contextMenu;
@@ -100,7 +102,7 @@ public class DesignContextMenu implements IAutoWired {
      * @return New design context menu.
      */
     public static DesignContextMenu create() {
-        return PageUtil.createPage(DesignConstants.RESOURCE_PREFIX + "designContextMenu.fsp", ExecutionContext.getPage())
+        return PageUtil.createPage(Constants.RESOURCE_PREFIX_DESIGNER + "designContextMenu.fsp", ExecutionContext.getPage())
                 .get(0).getAttribute("controller", DesignContextMenu.class);
     }
 
@@ -157,7 +159,7 @@ public class DesignContextMenu implements IAutoWired {
     public void afterInitialized(BaseComponent root) {
         menuPopup = (Menupopup) root;
         root.setAttribute("controller", this);
-        mnuHeader.setImage(DesignConstants.DESIGN_ICON_ACTIVE);
+        mnuHeader.setImage(Constants.DESIGN_ICON_ACTIVE);
         clipboard.addListener(mnuHeader);
         menuPopup.addEventListener("open", this::onOpen);
     }
@@ -183,7 +185,7 @@ public class DesignContextMenu implements IAutoWired {
         if (this.owner != owner) {
             this.owner = owner;
             mnuHeader.setLabel(
-                owner == null ? "" : StrUtil.formatMessage("@fcf.shell.designer.menu.title", owner.getDisplayName()));
+                owner == null ? "" : MSG_DESIGNER_MENU_TITLE.toString(owner.getDisplayName()));
             updateControls();
         }
     }

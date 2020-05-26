@@ -29,7 +29,7 @@ import org.fujion.ancillary.IResponseCallback;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.common.DateUtil;
-import org.fujion.common.StrUtil;
+import org.fujion.common.LocalizedMessage;
 import org.fujion.component.*;
 import org.fujion.event.ChangeEvent;
 import org.fujion.model.ListModel;
@@ -50,7 +50,13 @@ import java.util.Set;
 public class SessionController extends FrameworkController implements ISessionUpdate {
     
     private static final String DIALOG = FCFUtil.getResourcePath(SessionController.class) + "session.fsp";
-    
+
+    private static final LocalizedMessage MSG_SESSION_TITLE = new LocalizedMessage("fcf.chat.session.title");
+
+    private static final LocalizedMessage MSG_SESSION_JOIN = new LocalizedMessage("fcf.chat.session.event.join");
+
+    private static final LocalizedMessage MSG_SESSION_LEAVE = new LocalizedMessage("fcf.chat.session.event.leave");
+
     private String sessionId;
     
     private ChatService chatService;
@@ -85,7 +91,7 @@ public class SessionController extends FrameworkController implements ISessionUp
     protected static SessionController create(String sessionId, boolean originator) {
         Map<String, Object> args = new HashMap<>();
         args.put("id", sessionId);
-        args.put("title", StrUtil.formatMessage("@fcf.chat.session.title"));
+        args.put("title", MSG_SESSION_TITLE.toString());
         args.put("originator", originator ? true : null);
         Window dlg = PopupDialog.show(DIALOG, args, true, true, false, null);
         return (SessionController) FrameworkController.getController(dlg);
@@ -267,7 +273,7 @@ public class SessionController extends FrameworkController implements ISessionUp
     @Override
     public void onParticipantAdded(IPublisherInfo participant, boolean fromRefresh) {
         if (model.add(participant) && !fromRefresh && !participant.equals(chatService.getSelf())) {
-            addDialog(StrUtil.formatMessage("@fcf.chat.session.event.join", participant.getUserName()), null, false);
+            addDialog(MSG_SESSION_JOIN.toString(participant.getUserName()), null, false);
         }
         
         outstandingInvitations.remove(participant);
@@ -281,7 +287,7 @@ public class SessionController extends FrameworkController implements ISessionUp
     @Override
     public void onParticipantRemoved(IPublisherInfo participant) {
         if (model.remove(participant)) {
-            addDialog(StrUtil.formatMessage("@fcf.chat.session.event.leave", participant.getUserName()), null, false);
+            addDialog(MSG_SESSION_LEAVE.toString(participant.getUserName()), null, false);
         }
     }
     

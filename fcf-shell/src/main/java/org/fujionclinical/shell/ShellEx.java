@@ -41,6 +41,8 @@ import org.fujionclinical.shell.plugins.PluginDefinition;
 import org.fujionclinical.shell.plugins.PluginException;
 import org.fujionclinical.shell.plugins.PluginRegistry;
 
+import static org.fujionclinical.shell.Constants.MSG_PLUGIN_UNKNOWN;
+
 /**
  * This class is provided primarily for backward compatibility with the old fixed layout of tab
  * views containing tree views. It can only be used with a layout that contains a tab view
@@ -54,8 +56,6 @@ public class ShellEx extends Shell {
     private static final String delim = "\\\\";
     
     private static final Log log = LogFactory.getLog(ShellEx.class);
-    
-    private static final String EXC_UNKNOWN_PLUGIN = "@fcf.shell.error.plugin.unknown";
     
     /**
      * Locates the plugin's parent UI element given a tab pane and a path.
@@ -166,7 +166,7 @@ public class ShellEx extends Shell {
         PluginDefinition def = pluginRegistry.get(id);
         
         if (def == null) {
-            throw new PluginException(EXC_UNKNOWN_PLUGIN, null, null, id);
+            throw new PluginException(MSG_PLUGIN_UNKNOWN.toString(), null, null, id);
         }
         
         return def;

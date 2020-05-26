@@ -196,7 +196,7 @@ public class AboutDialog extends FrameworkController {
     private static void showDialog(AboutParams params) {
         try {
             Map<String, Object> args = Collections.singletonMap("params", params);
-            Window dlg = (Window) PageUtil.createPage(Constants.RESOURCE_PREFIX + "aboutDialog.fsp", null, args).get(0);
+            Window dlg = (Window) PageUtil.createPage(Constants.RESOURCE_PREFIX_SHELL + "aboutDialog.fsp", null, args).get(0);
             dlg.modal(null);
         } catch (Exception e) {
             DialogUtil.showError(FCFUtil.formatExceptionForDisplay(e));

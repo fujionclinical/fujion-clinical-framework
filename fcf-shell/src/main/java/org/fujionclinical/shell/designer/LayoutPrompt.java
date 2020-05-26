@@ -32,6 +32,7 @@ import org.fujion.common.StrUtil;
 import org.fujion.component.*;
 import org.fujion.event.IEventListener;
 import org.fujion.page.PageUtil;
+import org.fujionclinical.shell.Constants;
 import org.fujionclinical.shell.layout.LayoutIdentifier;
 import org.fujionclinical.shell.layout.LayoutUtil;
 import org.fujionclinical.ui.dialog.DialogUtil;
@@ -39,14 +40,12 @@ import org.fujionclinical.ui.dialog.DialogUtil;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.fujionclinical.shell.designer.DesignConstants.*;
-
 /**
  * Supports selection and management of existing layouts.
  */
 public class LayoutPrompt implements IAutoWired {
     
-    private static final String DIALOG = DesignConstants.RESOURCE_PREFIX + "layoutPrompt.fsp";
+    private static final String DIALOG = Constants.RESOURCE_PREFIX_DESIGNER + "layoutPrompt.fsp";
     
     @WiredComponent
     private Radiogroup radioGroup;
@@ -112,7 +111,7 @@ public class LayoutPrompt implements IAutoWired {
         String name = txtLayout.getValue().trim();
         
         if (!LayoutUtil.validateName(name)) {
-            showError(MSG_LAYOUT_BADNAME);
+            showError(Constants.MSG_LAYOUT_BADNAME.toString());
             return;
         }
         
@@ -120,9 +119,9 @@ public class LayoutPrompt implements IAutoWired {
         
         if (LayoutUtil.layoutExists(id)) {
             if (!allowDups) {
-                showError(MSG_LAYOUT_DUP);
+                showError(Constants.MSG_LAYOUT_DUP.toString());
             } else {
-                DialogUtil.confirm(MSG_LAYOUT_OVERWRITE, CAP_LAYOUT_OVERWRITE, (confirm) -> {
+                DialogUtil.confirm(Constants.MSG_LAYOUT_OVERWRITE.toString(), Constants.MSG_LAYOUT_OVERWRITE_CAP.toString(), (confirm) -> {
                     if (confirm) {
                         close(id);
                     }

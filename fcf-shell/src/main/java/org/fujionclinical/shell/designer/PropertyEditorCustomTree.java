@@ -31,6 +31,7 @@ import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.component.*;
 import org.fujion.event.*;
+import org.fujionclinical.shell.Constants;
 import org.fujionclinical.shell.elements.ElementBase;
 import org.fujionclinical.shell.elements.ElementProxy;
 import org.fujionclinical.shell.plugins.PluginDefinition;
@@ -202,7 +203,7 @@ public class PropertyEditorCustomTree<T extends ElementBase> extends PropertyEdi
      *            elements.
      */
     public PropertyEditorCustomTree(Class<T> childClass, String labelProperty, boolean hierarchical) {
-        super(DesignConstants.RESOURCE_PREFIX + "propertyEditorCustomTree.fsp");
+        super(Constants.RESOURCE_PREFIX_DESIGNER + "propertyEditorCustomTree.fsp");
         this.childClass = childClass;
         this.labelProperty = labelProperty;
         this.hierarchical = hierarchical;

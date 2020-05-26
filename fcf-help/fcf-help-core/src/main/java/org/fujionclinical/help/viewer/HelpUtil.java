@@ -27,6 +27,7 @@ package org.fujionclinical.help.viewer;
 
 import org.fujion.client.ClientUtil;
 import org.fujion.client.ExecutionContext;
+import org.fujion.common.LocalizedMessage;
 import org.fujion.component.BaseComponent;
 import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Image;
@@ -60,6 +61,8 @@ public class HelpUtil {
     protected static final String VIEWER_ATTRIB = VIEWER_URL;
 
     protected static final String EMBEDDED_ATTRIB = RESOURCE_PREFIX + "embedded";
+
+    protected static final LocalizedMessage MSG_SEARCH_SCORE = new LocalizedMessage("fcf.help.tab.search.score");
 
     private static final String CSH_PREFIX = HelpUtil.class.getPackage().getName() + ".";
 

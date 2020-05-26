@@ -45,15 +45,14 @@ import org.fujionclinical.ui.dialog.DateRangePicker;
 import org.fujionclinical.ui.dialog.DialogUtil;
 import org.fujionclinical.ui.patientselection.common.*;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 import static org.fujionclinical.api.patient.list.IPatientListFilterManager.FilterCapability;
-import static org.fujionclinical.ui.patientselection.common.Constants.FILTER_DROP_ID;
-import static org.fujionclinical.ui.patientselection.common.Constants.PATIENT_LIST_ATTRIB;
+import static org.fujionclinical.ui.patientselection.common.Constants.*;
+
 /**
  * Controller for patient selection dialog.
  */
@@ -170,17 +169,6 @@ public class PatientSelectionController extends FrameworkController {
     private IPatientListItemManager itemManager;
 
     private IPatientListFilterManager filterManager;
-
-    private IPatientListFilter activeFilter;
-
-    private IPatient activePatient;
-
-    private boolean manageListMode;
-
-    private DateRange defaultDateRange;
-
-    private IPatientDetailRenderer patientDetailRenderer = new PatientDetailRenderer();
-
     /**
      * Handles drag/drop events for filters in filter management mode.
      */
@@ -191,6 +179,16 @@ public class PatientSelectionController extends FrameworkController {
         filterManager.moveFilter((IPatientListFilter) dragged.getData(), target.getIndex());
         dragged.getListbox().addChild(dragged, target);
     };
+
+    private IPatientListFilter activeFilter;
+
+    private IPatient activePatient;
+
+    private boolean manageListMode;
+
+    private DateRange defaultDateRange;
+
+    private IPatientDetailRenderer patientDetailRenderer = new PatientDetailRenderer();
 
     public PatientSelectionController(
             PatientListRegistry registry,
@@ -216,7 +214,7 @@ public class PatientSelectionController extends FrameworkController {
      * Initialize the date ranges to be used for filtering lists.
      */
     private void initDateRanges() {
-        drpDateRange.loadChoices(Labels.dateRanges());
+        drpDateRange.loadChoices(MSG_DATE_RANGE_VALUES.toString().split("\n"));
         defaultDateRange = drpDateRange.getSelectedRange();
     }
 
@@ -238,7 +236,7 @@ public class PatientSelectionController extends FrameworkController {
         }
 
         rgrpLists.getFirstChild(Radiobutton.class).setChecked(true);
-        pendingListItem.add(new PatientListItem(null, Labels.txtWaitMessage()));
+        pendingListItem.add(new PatientListItem(null, MSG_LIST_WAIT_MESSAGE.toString()));
     }
 
     /**
@@ -302,7 +300,7 @@ public class PatientSelectionController extends FrameworkController {
             Comboitem item = drpDateRange.findMatchingItem(range);
             item = item == null ? drpDateRange.addChoice(range, true) : item;
             drpDateRange.setSelectedItem(item);
-            lblDateRange.setLabel(MessageFormat.format(Labels.txtDateRange(), list.getEntityName()));
+            lblDateRange.setLabel(MSG_DATE_RANGE_LABEL.toString(list.getEntityName()));
         }
 
         refreshFilterList();
@@ -320,7 +318,7 @@ public class PatientSelectionController extends FrameworkController {
 
             if (filters == null || filters.isEmpty()) {
                 lstFilter.getModelAndView().setModel(null);
-                lstFilter.addChild(new Listitem(Labels.txtNoFilters()));
+                lstFilter.addChild(new Listitem(MSG_WARN_NO_FILTERS.toString()));
             } else {
                 lstFilter.getModelAndView(IPatientListFilter.class).setModel(new ListModel<>(filters));
 
@@ -375,7 +373,7 @@ public class PatientSelectionController extends FrameworkController {
             ListModel<IPatientListItem> model = items == null ? new ListModel<>() : new ListModel<>(items);
 
             if (model.isEmpty()) {
-                model.add(new PatientListItem(null, Labels.txtNoPatients()));
+                model.add(new PatientListItem(null, MSG_WARN_NO_PATIENTS.toString()));
                 grdPatientList.getRows().setSelectable(Selectable.NO);
             } else {
                 grdPatientList.getRows().setSelectable(Selectable.SINGLE);
@@ -385,7 +383,7 @@ public class PatientSelectionController extends FrameworkController {
             lblPatientList.setLabel(activeList.getDisplayName());
         } else {
             grdPatientList.getRows().setModel(null);
-            lblPatientList.setLabel(Labels.txtNoList());
+            lblPatientList.setLabel(MSG_WARN_NO_LIST_SELECTED.toString());
         }
 
         setActivePatient((IPatient) null);
@@ -489,7 +487,7 @@ public class PatientSelectionController extends FrameworkController {
         manageListMode = value;
         pnlManagedList.setVisible(value);
         pnlDemographics.setVisible(!value);
-        paneDemographics.setTitle(MessageFormat.format(value ? Labels.txtManageTitle() : Labels.txtDemoTitle(), activeList.getName()));
+        paneDemographics.setTitle((value ? MSG_MANAGE_TITLE : MSG_DEMOGRAPHIC_TITLE).toString(activeList.getName()));
 
         if (originalList != null) {
             originalList.refresh();
@@ -687,7 +685,7 @@ public class PatientSelectionController extends FrameworkController {
             String message) {
         String oldName = filter == null ? null : filter.getName();
 
-        DialogUtil.input(message + Labels.txtFilterNamePrompt(), filter == null ? Labels.txtNewFilterTitle() : Labels.txtRenameFilterTitle(), oldName,
+        DialogUtil.input(message + MSG_FILTER_NAME_PROMPT, filter == null ? MSG_FILTER_NEW_TITLE.toString() : MSG_FILTER_RENAME_TITLE.toString(), oldName,
                 (name) -> {
                     try {
                         if (!StringUtils.isEmpty(name)) {
@@ -889,8 +887,8 @@ public class PatientSelectionController extends FrameworkController {
     @EventHandler(value = "click", target = "btnSearch")
     @EventHandler(value = "enter", target = "edtSearch")
     private void onClick$btnSearch() {
-        root.addMask(Labels.txtSearchMessage());
-        displaySearchMessage(Labels.txtSearchMessage());
+        root.addMask(MSG_SEARCH_MESSAGE.toString());
+        displaySearchMessage(MSG_SEARCH_MESSAGE.toString());
         doSearch();
         root.removeMask();
         edtSearch.focus();
@@ -929,7 +927,7 @@ public class PatientSelectionController extends FrameworkController {
         IPatientListFilter filter = managedList.getActiveFilter();
 
         if (filter != null) {
-            DialogUtil.confirm(Labels.txtDeleteFilterPrompt(), MessageFormat.format(Labels.txtDeleteFilterTitle(), filter.getName()),
+            DialogUtil.confirm(MSG_FILTER_DELETE_PROMPT.toString(), MSG_FILTER_DELETE_TITLE.toString(filter.getName()),
                     (confirm) -> {
                         if (confirm) {
                             filterManager.removeFilter(filter);

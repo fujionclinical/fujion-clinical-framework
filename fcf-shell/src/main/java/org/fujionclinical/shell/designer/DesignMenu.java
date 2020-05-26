@@ -36,6 +36,7 @@ import org.fujion.component.Menuitem;
 import org.fujion.core.WebUtil;
 import org.fujion.page.PageUtil;
 import org.fujionclinical.api.security.SecurityUtil;
+import org.fujionclinical.shell.Constants;
 import org.fujionclinical.shell.Shell;
 import org.fujionclinical.shell.elements.ElementDesktop;
 import org.fujionclinical.shell.layout.Layout;
@@ -73,7 +74,7 @@ public class DesignMenu implements IAutoWired {
      */
     public static void create(ElementDesktop owner, BaseUIComponent parent) {
         Map<String, Object> args = Collections.singletonMap("owner", owner);
-        PageUtil.createPage(DesignConstants.RESOURCE_PREFIX + "designMenu.fsp", parent, args).get(0);
+        PageUtil.createPage(Constants.RESOURCE_PREFIX_DESIGNER + "designMenu.fsp", parent, args).get(0);
     }
     
     /**
@@ -112,7 +113,7 @@ public class DesignMenu implements IAutoWired {
      */
     @EventHandler(value = "click", target = "mnuClearDesktop")
     private void onClick$mnuClearDesktop() {
-        DialogUtil.confirm(DesignConstants.MSG_DESKTOP_CLEAR, DesignConstants.CAP_DESKTOP_CLEAR, (confirm) -> {
+        DialogUtil.confirm(Constants.MSG_DESIGNER_DESKTOP_CLEAR_TEXT.toString(), Constants.MSG_DESIGNER_DESKTOP_CLEAR_CAP.toString(), (confirm) -> {
             if (confirm) {
                 shell.reset();
             }
@@ -189,10 +190,10 @@ public class DesignMenu implements IAutoWired {
      * @param enabled The enabled status.
      */
     private void updateMenus(boolean enabled) {
-        menu.setImage(enabled ? DesignConstants.DESIGN_ICON_ACTIVE : DesignConstants.DESIGN_ICON_INACTIVE);
+        menu.setImage(enabled ? Constants.DESIGN_ICON_ACTIVE : Constants.DESIGN_ICON_INACTIVE);
         mnuDesignMode.addStyle("border-bottom", enabled ? "2px solid lightgray" : null);
         menu.setHint(
-            StrUtil.formatMessage(enabled ? DesignConstants.DESIGN_HINT_ACTIVE : DesignConstants.DESIGN_HINT_INACTIVE));
+            StrUtil.formatMessage(enabled ? Constants.MSG_DESIGNER_HINT_ACTIVE.toString() : Constants.MSG_DESIGNER_HINT_INACTIVE.toString()));
         BaseUIComponent child = (BaseUIComponent) menu.getFirstChild();
         
         while (child != null) {

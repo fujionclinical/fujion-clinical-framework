@@ -53,7 +53,7 @@ public class DialogUtil {
      * @param callback Callback to receive dialog response.
      */
     public static void confirm(String message, IConfirmCallback callback) {
-        confirm(message, "@fcf.prompt.confirm.title", callback);
+        confirm(message, MSG_CONFIRM_TITLE.toString(), callback);
     }
     
     /**
@@ -121,7 +121,7 @@ public class DialogUtil {
      * @param message Text message
      */
     public static void showInfo(String message) {
-        showInfo(message, "@fcf.prompt.info.title");
+        showInfo(message, MSG_INFO_TITLE.toString());
     }
     
     /**
@@ -140,7 +140,7 @@ public class DialogUtil {
      * @param message Text message
      */
     public static void showWarning(String message) {
-        showWarning(message, "@fcf.prompt.warning.title");
+        showWarning(message, MSG_WARNING_TITLE.toString());
     }
     
     /**
@@ -159,7 +159,7 @@ public class DialogUtil {
      * @param message Text message
      */
     public static void showError(String message) {
-        showError(message, "@fcf.prompt.error.title");
+        showError(message, MSG_ERROR_TITLE.toString());
     }
     
     /**

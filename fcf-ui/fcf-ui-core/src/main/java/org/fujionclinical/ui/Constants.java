@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.ui;
 
+import org.fujion.common.LocalizedMessage;
 import org.fujionclinical.ui.util.FCFUtil;
 
 /**
@@ -46,6 +47,12 @@ public class Constants {
      * Event for requesting a view update.
      */
     public static final String REFRESH_EVENT = "VIEW.REFRESH";
+
+    public static final LocalizedMessage MSG_ERROR_DLG_EXPANDED = new LocalizedMessage("fcf.error.dialog.expanded");
+
+    public static final LocalizedMessage MSG_ERROR_DLG_DETAIL_OPEN = new LocalizedMessage("fcf.error.dialog.detail.open.label");
+
+    public static final LocalizedMessage MSG_ERROR_DLG_DETAIL_CLOSED = new LocalizedMessage("fcf.error.dialog.detail.closed.label");
 
     /**
      * Enforce static class.

@@ -76,7 +76,7 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
         MimeContent content = pix == null ? null : pix.getContent();
 
         if (content == null) {
-            photo.setSrc(Constants.SILHOUETTE_IMAGE);
+            photo.setSrc(Constants.IMAGE_SILHOUETTE);
         } else {
             photo.setContent(content);
         }

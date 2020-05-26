@@ -7,15 +7,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * This Source Code Form is also subject to the terms of the Health-Related
  * Additional Disclaimer of Warranty and Limitation of Liability available at
  *
@@ -28,12 +28,12 @@ package org.fujionclinical.shell.designer;
 import org.fujion.ancillary.IAutoWired;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
-import org.fujion.common.StrUtil;
 import org.fujion.component.BaseComponent;
 import org.fujion.component.Button;
 import org.fujion.component.Memobox;
 import org.fujion.component.Window;
 import org.fujion.page.PageUtil;
+import org.fujionclinical.shell.Constants;
 import org.fujionclinical.ui.util.FCFUtil;
 
 import java.util.Collections;
@@ -43,38 +43,36 @@ import java.util.Map;
  * Allows viewing and editing of clipboard contents.
  */
 public class ClipboardViewer implements IAutoWired {
-    
-    private final String MSG_EMPTY = StrUtil.getLabel("fcf.shell.clipboard.viewer.message.empty");
-    
-    private boolean modified;
-    
-    private Window window;
-    
-    private Clipboard clipboard;
-    
-    private Object data;
-    
-    @WiredComponent
-    private Memobox txtData;
-    
-    @WiredComponent
-    private Button btnSave;
-    
-    @WiredComponent
-    private Button btnRestore;
-    
+
     /**
      * Show viewer.
-     * 
+     *
      * @param clipboard Clipboard whose contents is to be accessed.
      */
     public static void show(Clipboard clipboard) {
         Map<String, Object> args = Collections.singletonMap("clipboard", clipboard);
-        Window dlg = (Window) PageUtil.createPage(DesignConstants.RESOURCE_PREFIX + "clipboardViewer.fsp", null, args)
+        Window dlg = (Window) PageUtil.createPage(Constants.RESOURCE_PREFIX_DESIGNER + "clipboardViewer.fsp", null, args)
                 .get(0);
         dlg.modal(null);
     }
-    
+
+    private boolean modified;
+
+    private Window window;
+
+    private Clipboard clipboard;
+
+    private Object data;
+
+    @WiredComponent
+    private Memobox txtData;
+
+    @WiredComponent
+    private Button btnSave;
+
+    @WiredComponent
+    private Button btnRestore;
+
     @Override
     public void afterInitialized(BaseComponent root) {
         window = (Window) root;
@@ -82,10 +80,10 @@ public class ClipboardViewer implements IAutoWired {
         data = clipboard.getData();
         restore();
     }
-    
+
     /**
      * Commit changes in viewer to clipboard.
-     * 
+     *
      * @return True if successful.
      */
     private boolean commit() {
@@ -102,22 +100,22 @@ public class ClipboardViewer implements IAutoWired {
             modified = false;
             updateControls();
         }
-        
+
         return true;
     }
-    
+
     /**
      * Restore changes from clipboard.
      */
     private void restore() {
-        String text = data == null ? MSG_EMPTY
+        String text = data == null ? Constants.MSG_CLIPBOARD_EMPTY.toString()
                 : data instanceof IClipboardAware ? ((IClipboardAware<?>) data).toClipboard() : data.toString();
         txtData.setValue(text);
         txtData.setReadonly(!(data instanceof String || data instanceof IClipboardAware));
         modified = false;
         updateControls();
     }
-    
+
     /**
      * Update control states.
      */
@@ -126,7 +124,7 @@ public class ClipboardViewer implements IAutoWired {
         btnRestore.setDisabled(!modified);
         txtData.setBalloon(null);
     }
-    
+
     /**
      * Detected data edits.
      */
@@ -135,7 +133,7 @@ public class ClipboardViewer implements IAutoWired {
         modified = true;
         updateControls();
     }
-    
+
     /**
      * Clicking OK button commits changes and closes viewer.
      */
@@ -145,7 +143,7 @@ public class ClipboardViewer implements IAutoWired {
             window.close();
         }
     }
-    
+
     /**
      * Clicking cancel button discards changes and closes viewer.
      */
@@ -153,7 +151,7 @@ public class ClipboardViewer implements IAutoWired {
     private void onClick$btnCancel() {
         window.close();
     }
-    
+
     /**
      * Clicking save button commits changes.
      */
@@ -161,7 +159,7 @@ public class ClipboardViewer implements IAutoWired {
     private void onClick$btnSave() {
         commit();
     }
-    
+
     /**
      * Clicking restore button restores original data.
      */

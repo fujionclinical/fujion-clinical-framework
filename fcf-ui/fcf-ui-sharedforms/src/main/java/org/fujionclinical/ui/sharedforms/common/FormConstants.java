@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.ui.sharedforms.common;
 
+import org.fujion.common.LocalizedMessage;
 import org.fujionclinical.ui.util.FCFUtil;
 
 /**
@@ -59,6 +60,10 @@ public class FormConstants {
     public static final String LABEL_ID_FILTERING = "%.plugin.status.filtering";
 
     public static final String LABEL_ID_WAITING = "%.plugin.status.waiting";
+
+    public static final LocalizedMessage MSG_STATUS_ABORTED = new LocalizedMessage("reporting.plugin.status.aborted");
+
+    public static final LocalizedMessage MSG_ERROR_UNEXPECTED = new LocalizedMessage("reporting.plugin.error.unexpected");
 
     public static final String SCLASS_DOCUMENT_TITLE = "fcf-sharedforms-title";
 

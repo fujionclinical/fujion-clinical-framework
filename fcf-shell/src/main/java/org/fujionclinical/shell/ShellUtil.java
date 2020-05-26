@@ -32,6 +32,9 @@ import org.fujionclinical.help.HelpContext;
 import org.fujionclinical.help.viewer.HelpUtil;
 import org.fujionclinical.ui.action.ActionRegistry;
 
+import static org.fujionclinical.shell.Constants.MSG_ACTION_LOCK;
+import static org.fujionclinical.shell.Constants.MSG_ACTION_LOGOUT;
+
 /**
  * Static utility methods.
  */
@@ -40,8 +43,8 @@ public class ShellUtil {
     private static final String ACTION_BASE = "groovy:" + ShellUtil.class.getName() + ".getShell().";
 
     static {
-        ActionRegistry.register(true, "fcf.shell.lock", "@fcf.shell.action.lock.label", ACTION_BASE + "lock();");
-        ActionRegistry.register(true, "fcf.shell.logout", "@fcf.shell.action.logout.label", ACTION_BASE + "logout();");
+        ActionRegistry.register(true, "fcf.shell.lock", MSG_ACTION_LOCK.toString(), ACTION_BASE + "lock();");
+        ActionRegistry.register(true, "fcf.shell.logout", MSG_ACTION_LOGOUT.toString(), ACTION_BASE + "logout();");
     }
 
     /**

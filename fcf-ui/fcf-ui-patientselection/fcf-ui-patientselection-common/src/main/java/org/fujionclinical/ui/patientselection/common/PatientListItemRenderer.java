@@ -40,6 +40,8 @@ import org.fujionclinical.api.patient.list.PatientListItem;
 
 import java.util.Date;
 
+import static org.fujionclinical.ui.patientselection.common.Constants.MSG_UNKNOWN_PATIENT;
+
 /**
  * Renderer for patient list items.
  */
@@ -86,7 +88,7 @@ public class PatientListItemRenderer implements IComponentRenderer<Row, Object> 
             String name = patient.getFullName();
 
             if (name == null) {
-                name = StrUtil.getLabel("patientselection.warn.unknown.patient");
+                name = MSG_UNKNOWN_PATIENT.toString();
             }
 
             String[] names = name.split(",", 2);

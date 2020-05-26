@@ -45,6 +45,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static org.fujionclinical.help.viewer.HelpUtil.MSG_SEARCH_SCORE;
+
 /**
  * Tab supporting the help system search function. Consists of a text box into which the user may
  * enter a search expression (including boolean operators) and a list box to display the results of
@@ -201,7 +203,7 @@ public class HelpViewSearch extends HelpViewBase implements IComponentRenderer<L
         item.setData(qr.getTopic());
         Cell lc = new Cell();
         lc.addChild(toImage(score));
-        String tt = StrUtil.formatMessage("@fcf.help.tab.search.score", score);
+        String tt = MSG_SEARCH_SCORE.toString(score);
         lc.setHint(tt);
         item.addChild(lc);
         lc = new Cell(qr.getTopic().getLabel());

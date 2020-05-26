@@ -26,6 +26,7 @@
 package org.fujionclinical.ui.patientselection.common;
 
 
+import org.fujion.common.LocalizedMessage;
 import org.fujionclinical.ui.util.FCFUtil;
 
 /**
@@ -35,9 +36,11 @@ public class Constants {
 
     public static final String RESOURCE_PATH = FCFUtil.getResourcePath(Constants.class, 1);
 
-    public static final String SILHOUETTE_IMAGE = RESOURCE_PATH + "silhouette1.png";
+    public static final String FILTER_DROP_ID = "patientselection.filter.drop.id";
 
-    public static final String NOPATIENT_IMAGE = RESOURCE_PATH + "silhouette2.png";
+    public static final String IMAGE_SILHOUETTE = RESOURCE_PATH + "silhouette1.png";
+
+    public static final String IMAGE_NOPATIENT = RESOURCE_PATH + "silhouette2.png";
 
     public static final String PROP_PREFIX = Constants.class.getName() + ".";
 
@@ -49,51 +52,61 @@ public class Constants {
 
     public static final String PATIENT_LIST_ATTRIB = PROP_PREFIX + "list";
 
-    public static final String FILTER_DROP_ID = "patientselection.filter.drop.id";
+    public static final LocalizedMessage MSG_NO_PATIENT = new LocalizedMessage("patientphoto.no.patient");
 
-    public static final String LBL_CANNOT_SELECT_TITLE = "patientselection.error.noselect.title";
+    public static final LocalizedMessage MSG_NO_PHOTO = new LocalizedMessage("patientphoto.no.photo");
 
-    public static final String LBL_CANNOT_SELECT_MESSAGE = "patientselection.error.noselect.message";
+    public static final LocalizedMessage MSG_CANNOT_SELECT_TITLE = new LocalizedMessage("patientselection.error.noselect.title");
 
-    public static final String LBL_LIST_WAIT_MESSAGE = "patientselection.list.wait.message";
+    public static final LocalizedMessage MSG_CANNOT_SELECT_MESSAGE = new LocalizedMessage("patientselection.error.noselect.message");
 
-    public static final String LBL_DATE_RANGE_LABEL = "patientselection.daterange.label";
+    public static final LocalizedMessage MSG_LIST_WAIT_MESSAGE = new LocalizedMessage("patientselection.list.wait.message");
 
-    public static final String LBL_DATE_RANGE_VALUES = "patientselection.daterange.values";
+    public static final LocalizedMessage MSG_DATE_RANGE_LABEL = new LocalizedMessage("patientselection.daterange.label");
 
-    public static final String LBL_WARN_NO_FILTERS = "patientselection.warn.no.filters";
+    public static final LocalizedMessage MSG_DATE_RANGE_VALUES = new LocalizedMessage("patientselection.daterange.values");
 
-    public static final String LBL_WARN_NO_PATIENTS = "patientselection.warn.no.patients";
+    public static final LocalizedMessage MSG_WARN_NO_FILTERS = new LocalizedMessage("patientselection.warn.no.filters");
 
-    public static final String LBL_WARN_NO_LIST_SELECTED = "patientselection.warn.no.list.selected";
+    public static final LocalizedMessage MSG_WARN_NO_PATIENTS = new LocalizedMessage("patientselection.warn.no.patients");
 
-    public static final String LBL_DEMOGRAPHIC_TITLE = "patientselection.right.pane.title.demo";
+    public static final LocalizedMessage MSG_WARN_NO_LIST_SELECTED = new LocalizedMessage("patientselection.warn.no.list.selected");
 
-    public static final String LBL_MANAGE_TITLE = "patientselection.right.pane.title.manage";
+    public static final LocalizedMessage MSG_DEMOGRAPHIC_TITLE = new LocalizedMessage("patientselection.right.pane.title.demo");
 
-    public static final String LBL_FILTER_RENAME_TITLE = "patientselection.filter.rename.title";
+    public static final LocalizedMessage MSG_MANAGE_TITLE = new LocalizedMessage("patientselection.right.pane.title.manage");
 
-    public static final String LBL_FILTER_NEW_TITLE = "patientselection.filter.new.title";
+    public static final LocalizedMessage MSG_FILTER_RENAME_TITLE = new LocalizedMessage("patientselection.filter.rename.title");
 
-    public static final String LBL_FILTER_NAME_PROMPT = "patientselection.filter.name.prompt";
+    public static final LocalizedMessage MSG_FILTER_NEW_TITLE = new LocalizedMessage("patientselection.filter.new.title");
 
-    public static final String LBL_FILTER_DELETE_TITLE = "patientselection.filter.deletion.confirm.title";
+    public static final LocalizedMessage MSG_FILTER_NAME_PROMPT = new LocalizedMessage("patientselection.filter.name.prompt");
 
-    public static final String LBL_FILTER_DELETE_PROMPT = "patientselection.filter.deletion.confirm.prompt";
+    public static final LocalizedMessage MSG_FILTER_DELETE_TITLE = new LocalizedMessage("patientselection.filter.deletion.confirm.title");
 
-    public static final String LBL_SEARCH_MESSAGE = "patientselection.search.message";
+    public static final LocalizedMessage MSG_FILTER_DELETE_PROMPT = new LocalizedMessage("patientselection.filter.deletion.confirm.prompt");
 
-    public static final String ERROR_PATIENT_NOT_FOUND = "@patientsearch.error.patient.not.found";
+    public static final LocalizedMessage MSG_ACTION_SELECT = new LocalizedMessage("patientselection.action.select.label");
 
-    public static final String UNEXPECTED_ERROR = "@patientsearch.error.unknown";
+    public static final LocalizedMessage MSG_SEARCH_MESSAGE = new LocalizedMessage("patientselection.search.message");
 
-    public static final String TEXT_TOO_MANY_MATCHES = "@patientsearch.warn.too.many.matches.text";
+    public static final LocalizedMessage MSG_ERROR_NO_SELECTORS = new LocalizedMessage("patientselection.error.no.selectors");
 
-    public static final String TITLE_TOO_MANY_MATCHES = "@patientsearch.warn.too.many.matches.title";
+    public static final LocalizedMessage MSG_ERROR_PATIENT_NOT_FOUND = new LocalizedMessage("patientsearch.error.patient.not.found");
 
-    public static final String BTN_REFINE_LABEL = "@patientsearch.btn.refine.label";
+    public static final LocalizedMessage MSG_ERROR_NOT_FOUND = new LocalizedMessage("patientsearch.error.unknown");
 
-    public static final String BTN_CONTINUE_LABEL = "@patientsearch.btn.continue_.label";
+    public static final LocalizedMessage MSG_ERROR_MISSING_REQUIRED = new LocalizedMessage("patientsearch.error.missing.required");
+
+    public static final LocalizedMessage MSG_UNKNOWN_PATIENT = new LocalizedMessage("patientselection.warn.unknown.patient");
+
+    public static final LocalizedMessage MSG_TOO_MANY_MATCHES_TEXT = new LocalizedMessage("patientsearch.warn.too.many.matches.text");
+
+    public static final LocalizedMessage MSG_TOO_MANY_MATCHES_TITLE = new LocalizedMessage("patientsearch.warn.too.many.matches.title");
+
+    public static final String BTN_REFINE_LABEL = "patientsearch.btn.refine.label";
+
+    public static final String BTN_CONTINUE_LABEL = "patientsearch.btn.continue_.label";
 
     public static final String REFINE_BUTTONS = BTN_REFINE_LABEL + "|" + BTN_CONTINUE_LABEL;
 

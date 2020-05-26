@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.plugin.chat;
 
+import org.fujion.common.LocalizedMessage;
 import org.fujion.common.StrUtil;
 import org.fujionclinical.api.event.IEventManager;
 import org.fujionclinical.api.event.ILocalEventDispatcher;
@@ -59,7 +60,13 @@ public class ChatService implements IParticipantUpdate {
     protected static final String EVENT_PING = EVENT_SERVICE + "PING";
     
     private static final AtomicInteger lastId = new AtomicInteger();
-    
+
+    private static final LocalizedMessage MSG_CREATE_SESSION_ACTION = new LocalizedMessage("fcf.chat.action.create.session");
+
+    private static final LocalizedMessage MSG_INVITATION_MESSAGE = new LocalizedMessage("fcf.chat.invitation.message");
+
+    private static final LocalizedMessage MSG_INVITATION_CAPTION = new LocalizedMessage("fcf.chat.invitation.caption");
+
     private final IEventManager eventManager;
     
     private final Map<String, SessionController> sessions = new HashMap<>();
@@ -93,7 +100,7 @@ public class ChatService implements IParticipantUpdate {
     public ChatService(IEventManager eventManager) {
         this.eventManager = eventManager;
         self = ((ILocalEventDispatcher) eventManager).getGlobalEventDispatcher().getPublisherInfo();
-        ActionRegistry.register(false, "chat.create.session", "@fcf.chat.action.create.session",
+        ActionRegistry.register(false, "chat.create.session", MSG_CREATE_SESSION_ACTION.toString(),
             "groovy:" + ChatService.class.getName() + ".getInstance().createSession();");
     }
     
@@ -116,8 +123,8 @@ public class ChatService implements IParticipantUpdate {
                 Shell shell = ShellUtil.getShell();
                 
                 if (pcs.length == 2) {
-                    String message = StrUtil.formatMessage("@fcf.chat.invitation.message", pcs[1]);
-                    String caption = StrUtil.formatMessage("@fcf.chat.invitation.caption");
+                    String message = MSG_INVITATION_MESSAGE.toString(pcs[1]);
+                    String caption = MSG_INVITATION_CAPTION.toString();
                     shell.getMessageWindow().showMessage(message, caption, null, 999999, tag, (event) -> {
                         eventManager.fireLocalEvent(EVENT_ACCEPT, pcs[0]);
                     });

@@ -308,7 +308,7 @@ public abstract class AbstractSecurityService implements ISecurityService {
         if (canChangePassword()) {
             PasswordChangeController.show();
         } else {
-            DialogUtil.showWarning(StrUtil.getLabel(Constants.LBL_PASSWORD_CHANGE_UNAVAILABLE));
+            DialogUtil.showWarning(Constants.MSG_PASSWORD_CHANGE_UNAVAILABLE.toString());
         }
     }
 
@@ -322,8 +322,8 @@ public abstract class AbstractSecurityService implements ISecurityService {
 
     /**
      * Generates a new random password Length of password dictated by
-     * {@link Constants#LBL_PASSWORD_RANDOM_LENGTH} and
-     * {@link Constants#LBL_PASSWORD_RANDOM_CONSTRAINTS}
+     * {@link Constants#MSG_PASSWORD_RANDOM_LENGTH} and
+     * {@link Constants#MSG_PASSWORD_RANDOM_CONSTRAINTS}
      *
      * @return String The generated password
      */
@@ -331,7 +331,7 @@ public abstract class AbstractSecurityService implements ISecurityService {
     public String generateRandomPassword() {
         int len = getRandomPasswordLength();
         return SecurityUtil.generateRandomPassword(len, len,
-            StrUtil.getLabel(Constants.LBL_PASSWORD_RANDOM_CONSTRAINTS).split("\n"));
+            Constants.MSG_PASSWORD_RANDOM_CONSTRAINTS.toString().split("\n"));
     }
 
     /**
@@ -340,7 +340,7 @@ public abstract class AbstractSecurityService implements ISecurityService {
      * @return Minimum length for random password.
      */
     protected int getRandomPasswordLength() {
-        return NumberUtils.toInt(StrUtil.getLabel(Constants.LBL_PASSWORD_RANDOM_LENGTH), 12);
+        return NumberUtils.toInt(Constants.MSG_PASSWORD_RANDOM_LENGTH.toString(), 12);
     }
 
 }

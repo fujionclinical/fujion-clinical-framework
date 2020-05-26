@@ -52,6 +52,8 @@ import org.fujionclinical.ui.dialog.DialogUtil;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.fujionclinical.ui.session.SessionConstants.*;
+
 /**
  * Session inactivity timeout controller. Used to notify user regarding impending inactivity timeout
  * and take appropriate action.
@@ -259,7 +261,7 @@ public class SessionMonitor extends FrameworkController {
             
             if (mw != null) {
                 MessagePane mp = new MessagePane();
-                mp.setTitle(StrUtil.getLabel("fcf.sessionmonitor.shutdown.abort.title"));
+                mp.setTitle(MSG_SHUTDOWN_ABORT_TITLE.toString());
                 mp.addClass("flavor:alert-success");
                 mp.addChild(new Label(message));
                 mw.addChild(mp);
@@ -414,7 +416,7 @@ public class SessionMonitor extends FrameworkController {
     
     @EventHandler(value = "click", target = "btnLogout")
     private void onClick$btnLogout() {
-        logout(StrUtil.getLabel("fcf.sessionmonitor.logout.reason.message"));
+        logout(MSG_LOGOUT_REASON.toString());
     }
     
     @EventHandler(value = "click", target = "btnUnlock")
@@ -428,7 +430,7 @@ public class SessionMonitor extends FrameworkController {
             if (securityService.validatePassword(s)) {
                 setMode(Mode.BASELINE);
             } else {
-                lblInfo.setLabel(StrUtil.getLabel("fcf.sessionmonitor.lock.badpassword.message"));
+                lblInfo.setLabel(MSG_BAD_PASSWORD.toString());
             }
         }
     }

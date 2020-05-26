@@ -49,6 +49,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
+import static org.fujionclinical.ui.sharedforms.common.FormConstants.MSG_ERROR_UNEXPECTED;
+import static org.fujionclinical.ui.sharedforms.common.FormConstants.MSG_STATUS_ABORTED;
+
 /**
  * This is a stateful controller that supports plugins that perform background data retrieval using
  * an IQueryService-compliant service.
@@ -501,13 +504,13 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
                 break;
                 
             case ABORTED:
-                showMessage("@reporting.plugin.status.aborted");
+                showMessage(MSG_STATUS_ABORTED.toString());
                 break;
                 
             case ERROR:
                 Throwable t = (Throwable) result.getMetadata("exception");
                 log.error("Background thread threw an exception.", t);
-                showMessage("@reporting.plugin.error.unexpected", true);
+                showMessage(MSG_ERROR_UNEXPECTED.toString(), true);
                 break;
         }
     }

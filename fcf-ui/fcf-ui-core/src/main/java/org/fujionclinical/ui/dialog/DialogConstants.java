@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.ui.dialog;
 
+import org.fujion.common.LocalizedMessage;
 import org.fujionclinical.ui.util.FCFUtil;
 
 public class DialogConstants {
@@ -36,7 +37,19 @@ public class DialogConstants {
     static final String LABEL_ID_CANCEL = "@fcf.btn.cancel.label";
     
     static final String LABEL_IDS_OK_CANCEL = LABEL_ID_OK + "|" + LABEL_ID_CANCEL;
-    
+
+    static final LocalizedMessage MSG_REQUIRE_TIME = new LocalizedMessage("fcf.datetime.error.no.time");
+
+    static final LocalizedMessage MSG_REQUIRE_DATE = new LocalizedMessage("fcf.datetime.error.no.date");
+
+    static final LocalizedMessage MSG_CONFIRM_TITLE = new LocalizedMessage("fcf.prompt.confirm.title");
+
+    static final LocalizedMessage MSG_INFO_TITLE = new LocalizedMessage("fcf.prompt.info.title");
+
+    static final LocalizedMessage MSG_WARNING_TITLE = new LocalizedMessage("fcf.prompt.warning.title");
+
+    static final LocalizedMessage MSG_ERROR_TITLE = new LocalizedMessage("fcf.prompt.error.title");
+
     static final String STYLES_INFO = "fa-info-circle alert-info";
     
     static final String STYLES_WARNING = "fa-exclamation-triangle alert-warning";

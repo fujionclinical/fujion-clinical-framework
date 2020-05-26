@@ -6,31 +6,31 @@
 	<toolbar width="100%" alignment="end">
 		<div name="pnlSelect" flex="1" >
 			<button name="btnOK" class="flavor:btn-success" style="margin-right:5px"
-				label="${@msg.fcf.shell.designer.layout.manager.btn.ok.label}" />
+				label="${@msg.fcf.shell.layout.manager.btn.ok.label}" />
 			<button name="btnCancel" class="flavor:btn-danger"
-				label="${@msg.fcf.shell.designer.layout.manager.btn.cancel.label}" />
+				label="${@msg.fcf.shell.layout.manager.btn.cancel.label}" />
 		</div>
 		<div name="pnlScope">
 			<radiogroup name="radioGroup">
 				<radiobutton name="rbShared" checked="true"
-					label="${@msg.fcf.shell.designer.layout.manager.radio.shared.label}" />
+					label="${@msg.fcf.shell.layout.manager.radio.shared.label}" />
 				<radiobutton name="rbPrivate"
-					label="${@msg.fcf.shell.designer.layout.manager.radio.private.label}" />
+					label="${@msg.fcf.shell.layout.manager.radio.private.label}" />
 			</radiogroup>
 		</div>
 	</toolbar>
 	<toolbar name="tbManage" width="100%" alignment="end">
 		<button name="btnImport"
-			label="${@msg.fcf.shell.designer.layout.manager.btn.import.label}" />
+			label="${@msg.fcf.shell.layout.manager.btn.import.label}" />
 		<button name="btnExport"
-			label="${@msg.fcf.shell.designer.layout.manager.btn.export.label}" />
+			label="${@msg.fcf.shell.layout.manager.btn.export.label}" />
 		<span class="fa fa-option-vertical" style="opacity:.5"/>
 		<button name="btnClone"
-			label="${@msg.fcf.shell.designer.layout.manager.btn.clone.label}" />
+			label="${@msg.fcf.shell.layout.manager.btn.clone.label}" />
 		<button name="btnRename"
-			label="${@msg.fcf.shell.designer.layout.manager.btn.rename.label}" />
+			label="${@msg.fcf.shell.layout.manager.btn.rename.label}" />
 		<button name="btnDelete"
-			label="${@msg.fcf.shell.designer.layout.manager.btn.delete.label}" />
+			label="${@msg.fcf.shell.layout.manager.btn.delete.label}" />
 	</toolbar>
 	<upload name="upload" visible="false" accept=".xml" />
 </window>

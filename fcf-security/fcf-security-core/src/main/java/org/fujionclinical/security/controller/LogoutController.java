@@ -52,7 +52,7 @@ public class LogoutController {
     public String logoutSuccess(ModelMap model, @RequestParam(name = "message", required = false) String message,
                                 @RequestParam(name = "target", required = false) String target, HttpSession session) {
         model.addAttribute("message",
-            StringUtils.isEmpty(message) ? StrUtil.getLabel(Constants.LBL_LOGOUT_MESSAGE_DEFAULT) : message);
+            StringUtils.isEmpty(message) ? Constants.MSG_LOGOUT_MESSAGE_DEFAULT.toString() : message);
         model.addAttribute("target", StringUtils.isEmpty(target) ? "/" : target);
         return "classpath:/web/org/fujionclinical/security/logoutSuccess.htm";
     }

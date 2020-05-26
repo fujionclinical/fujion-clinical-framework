@@ -41,6 +41,7 @@ import org.fujion.model.IListModel;
 import org.fujion.model.IModelAndView;
 import org.fujion.model.ListModel;
 import org.fujion.page.PageUtil;
+import org.fujionclinical.shell.Constants;
 import org.fujionclinical.shell.ancillary.FCFException;
 import org.fujionclinical.shell.elements.ElementBase;
 import org.fujionclinical.shell.plugins.PluginDefinition;
@@ -154,7 +155,7 @@ public class PropertyGrid implements IAutoWired {
         Map<String, Object> args = new HashMap<>();
         args.put("target", target);
         args.put("embedded", embedded);
-        Window window = (Window) PageUtil.createPage(DesignConstants.RESOURCE_PREFIX + "propertyGrid.fsp", parent, args)
+        Window window = (Window) PageUtil.createPage(Constants.RESOURCE_PREFIX_DESIGNER + "propertyGrid.fsp", parent, args)
                 .get(0);
         
         if (parent == null) {
@@ -228,13 +229,13 @@ public class PropertyGrid implements IAutoWired {
         
         if (target == null) {
             ((BaseUIComponent) window.getFirstChild()).setVisible(false);
-            window.setTitle(StrUtil.formatMessage("@fcf.shell.designer.property.grid.noselection"));
+            window.setTitle(Constants.MSG_DESIGNER_GRID_NO_SELECTION.toString());
             disableButtons(true);
             return;
         }
         
         ((BaseUIComponent) window.getFirstChild()).setVisible(true);
-        window.setTitle(StrUtil.formatMessage("@fcf.shell.designer.property.grid.title", title));
+        window.setTitle(Constants.MSG_DESIGNER_GRID_TITLE.toString(title));
         
         if (props != null && !props.isEmpty()) {
             for (PropertyInfo prop : props) {
@@ -242,12 +243,12 @@ public class PropertyGrid implements IAutoWired {
             }
             
             gridProperties.setVisible(true);
-            setPropertyDescription("@fcf.shell.designer.property.grid.propdx.some.caption",
-                "@fcf.shell.designer.property.grid.propdx.some.message");
+            setPropertyDescription(Constants.MSG_DESIGNER_GRID_PROPDX_SOME_CAP.toString(),
+                    Constants.MSG_DESIGNER_GRID_PROPDX_SOME_TEXT.toString());
         } else {
             gridProperties.setVisible(false);
-            setPropertyDescription("@fcf.shell.designer.property.grid.propdx.none.caption",
-                "@fcf.shell.designer.property.grid.propdx.none.message");
+            setPropertyDescription(Constants.MSG_DESIGNER_GRID_PROPDX_NONE_CAP.toString(),
+                    Constants.MSG_DESIGNER_GRID_PROPDX_NONE_TEXT.toString());
         }
         
         disableButtons(true);
@@ -455,7 +456,7 @@ public class PropertyGrid implements IAutoWired {
                 : (PropertyEditorBase<?>) (selectedRow.getAttribute(EDITOR_ATTR));
         PropertyInfo propInfo = editor == null ? null : editor.getPropInfo();
         setPropertyDescription(
-            propInfo == null ? "@fcf.shell.designer.property.grid.propdx.some.caption" : propInfo.getName(),
+            propInfo == null ? Constants.MSG_DESIGNER_GRID_PROPDX_SOME_CAP.toString() : propInfo.getName(),
             propInfo == null ? " " : propInfo.getDescription());
 
         if (editor != null) {

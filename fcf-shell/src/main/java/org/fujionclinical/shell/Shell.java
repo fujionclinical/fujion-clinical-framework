@@ -7,15 +7,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * This Source Code Form is also subject to the terms of the Health-Related
  * Additional Disclaimer of Warranty and Limitation of Liability available at
  *
@@ -35,7 +35,6 @@ import org.fujion.annotation.Component.ChildTag;
 import org.fujion.annotation.Component.PropertyGetter;
 import org.fujion.annotation.Component.PropertySetter;
 import org.fujion.common.MiscUtil;
-import org.fujion.common.StrUtil;
 import org.fujion.component.*;
 import org.fujion.event.KeycaptureEvent;
 import org.fujionclinical.api.AppFramework;
@@ -66,61 +65,54 @@ import org.fujionclinical.ui.session.SessionControl;
 
 import java.util.*;
 
+import static org.fujionclinical.shell.Constants.*;
+
 /**
  * Implements a generic UI shell that can be dynamically extended with plug-ins.
  */
 @Component(tag = "fcfShell", widgetModule = "fcf-shell", widgetClass = "Shell", parentTag = "*", childTag = @ChildTag("*"))
 public class Shell extends Div implements INamespace {
-    
-    protected static final Log log = LogFactory.getLog(Shell.class);
-    
-    public final String LBL_NO_LAYOUT = StrUtil.getLabel("fcf.shell.nolayout.message");
-    
-    public final String LBL_LOGOUT_CONFIRMATION = StrUtil.getLabel("fcf.shell.logout.confirmation.message");
-    
-    public final String LBL_LOGOUT_CONFIRMATION_CAPTION = StrUtil.getLabel("fcf.shell.logout.confirmation.caption");
-    
-    public final String LBL_LOGOUT_CANCEL = StrUtil.getLabel("fcf.shell.logout.cancel.message");
-    
-    private final AppFramework appFramework = FrameworkUtil.getAppFramework();
-    
-    private final IEventManager eventManager = EventManager.getInstance();
-    
-    private final CommandRegistry commandRegistry = SpringUtil.getBean("commandRegistry", CommandRegistry.class);
-    
-    private final List<ElementPlugin> plugins = new ArrayList<>();
-    
-    private final Set<HelpModule> helpModules = new HashSet<>();
-    
-    private final Set<IHelpSet> helpSets = new HashSet<>();
-    
-    private final List<String> propertyGroups = new ArrayList<>();
-    
-    private Layout layout = new Layout();
-    
-    private ElementDesktop desktop;
-    
-    private final BaseComponent registeredStyles = new Span();
-    
-    private ShellStartup startupRoutines;
-    
-    private MessageWindow messageWindow;
-    
-    private String defaultLayoutName;
-    
-    private boolean autoStart;
 
-    private boolean logoutConfirm = true;
-    
+    /**
+     * Returns the application name for this instance of the shell.
+     *
+     * @return Application name, or null if not set.
+     */
+    public static String getApplicationName() {
+        return FrameworkUtil.getAppName();
+    }
+
+    protected static final Log log = LogFactory.getLog(Shell.class);
+
+    private final AppFramework appFramework = FrameworkUtil.getAppFramework();
+
+    private final IEventManager eventManager = EventManager.getInstance();
+
+    private final CommandRegistry commandRegistry = SpringUtil.getBean("commandRegistry", CommandRegistry.class);
+
+    private final List<ElementPlugin> plugins = new ArrayList<>();
+
+    private final Set<HelpModule> helpModules = new HashSet<>();
+
+    private final Set<IHelpSet> helpSets = new HashSet<>();
+
+    private final List<String> propertyGroups = new ArrayList<>();
+
+    private final BaseComponent registeredStyles = new Span();
+
+    private Layout layout = new Layout();
+
+    private ElementDesktop desktop;
+
     private final IUserContextSubscriber userContextListener = new IUserContextSubscriber() {
-        
+
         /**
          * @see IUserContextSubscriber#canceled()
          */
         @Override
         public void canceled() {
         }
-        
+
         /**
          * @see IUserContextSubscriber#committed()
          */
@@ -128,7 +120,7 @@ public class Shell extends Div implements INamespace {
         public void committed() {
             reset();
         }
-        
+
         /**
          * Prompt user for logout confirmation (unless suppressed).
          *
@@ -140,29 +132,30 @@ public class Shell extends Div implements INamespace {
                 response.accept();
             } else {
                 response.defer();
-                
-                DialogUtil.confirm(LBL_LOGOUT_CONFIRMATION, LBL_LOGOUT_CONFIRMATION_CAPTION, "LOGOUT.CONFIRM", (confirm) -> {
+
+                DialogUtil.confirm(MSG_LOGOUT_CONFIRMATION_TEXT.toString(), MSG_LOGOUT_CONFIRMATION_CAP.toString(), "LOGOUT.CONFIRM", (confirm) -> {
                     if (confirm) {
                         response.accept();
                     } else {
-                        response.reject(LBL_LOGOUT_CANCEL);
+                        response.reject(MSG_LOGOUT_CANCEL.toString());
                     }
-                    
+
                 });
             }
         }
-        
+
     };
-    
-    /**
-     * Returns the application name for this instance of the shell.
-     *
-     * @return Application name, or null if not set.
-     */
-    public static String getApplicationName() {
-        return FrameworkUtil.getAppName();
-    }
-    
+
+    private ShellStartup startupRoutines;
+
+    private MessageWindow messageWindow;
+
+    private String defaultLayoutName;
+
+    private boolean autoStart;
+
+    private boolean logoutConfirm = true;
+
     /**
      * Create the shell instance.
      */
@@ -170,7 +163,7 @@ public class Shell extends Div implements INamespace {
         super();
         ShellUtil.setShell(this);
     }
-    
+
     @Override
     protected void onAttach(Page page) {
         try {
@@ -180,24 +173,24 @@ public class Shell extends Div implements INamespace {
             desktop = new ElementDesktop(this);
             setLogoutConfirm(logoutConfirm);
             String confirmClose = getAppProperty("confirmClose", "FCF.CONFIRM.CLOSE");
-            
+
             if (StringUtils.isEmpty(confirmClose) || BooleanUtils.toBoolean(confirmClose)) {
                 page.setClosable(false);
             }
-            
+
             String layout = defaultLayoutName != null ? defaultLayoutName
                     : getAppProperty("layout", "FCF.LAYOUT.DEFAULT");
-            
+
             if (!StringUtils.isEmpty(layout)) {
                 loadLayout(layout);
             }
-            
+
         } catch (Exception e) {
             log.error("Error initializing the shell.", e);
             throw MiscUtil.toUnchecked(e);
         }
     }
-    
+
     /**
      * Handle help requests.
      *
@@ -209,7 +202,7 @@ public class Shell extends Div implements INamespace {
             HelpUtil.showCSH(ref == null ? event.getTarget() : ref);
         }
     }
-    
+
     /**
      * Capture unhandled shortcut key press events.
      *
@@ -217,12 +210,12 @@ public class Shell extends Div implements INamespace {
      */
     public void onKeycapture(KeycaptureEvent event) {
         String shortcut = event.getKeycapture();
-        
+
         for (ElementPlugin plugin : getActivatedPlugins(null)) {
             commandRegistry.fireCommands(shortcut, event, plugin.getOuterComponent());
         }
     }
-    
+
     /**
      * Returns a reference to the current UI desktop.
      *
@@ -231,7 +224,7 @@ public class Shell extends Div implements INamespace {
     public ElementDesktop getDesktop() {
         return desktop;
     }
-    
+
     /**
      * Returns a reference to the current UI layout.
      *
@@ -240,14 +233,14 @@ public class Shell extends Div implements INamespace {
     public Layout getUILayout() {
         return layout;
     }
-    
+
     /**
      * Executed once all plugins are loaded.
      */
     public void start() {
         desktop.activate(true);
         String initialPlugin = PropertyUtil.getValue("FCF.INITIAL.SECTION", getApplicationName());
-        
+
         if (!StringUtils.isEmpty(initialPlugin)) {
             for (ElementPlugin plugin : plugins) {
                 if (initialPlugin.equals(plugin.getDefinition().getId())) {
@@ -256,14 +249,14 @@ public class Shell extends Div implements INamespace {
                 }
             }
         }
-        
+
         if (startupRoutines == null) {
             startupRoutines = SpringUtil.getBean("fcfStartup", ShellStartup.class);
         }
-        
+
         startupRoutines.execute();
     }
-    
+
     /**
      * Loads a layout from the specified resource.
      *
@@ -272,14 +265,14 @@ public class Shell extends Div implements INamespace {
     public void loadLayout(String resource) {
         layout = LayoutParser.parseResource(resource);
         FrameworkUtil.setAppName(layout.getName());
-        
+
         if (layout.isEmpty()) {
-            DialogUtil.showError(LBL_NO_LAYOUT);
+            DialogUtil.showError(MSG_LAYOUT_MISSING.toString());
         } else {
             buildUI(layout);
         }
     }
-    
+
     /**
      * Returns the name of the layout to be loaded.
      *
@@ -289,7 +282,7 @@ public class Shell extends Div implements INamespace {
     public String getLayout() {
         return defaultLayoutName;
     }
-    
+
     /**
      * Sets the layout to be loaded. If null, the layout specified by the configuration will be
      * loaded.
@@ -300,12 +293,12 @@ public class Shell extends Div implements INamespace {
     @PropertySetter("layout")
     public void setLayout(String defaultLayoutName) throws Exception {
         this.defaultLayoutName = defaultLayoutName;
-        
+
         if (desktop != null && !StringUtils.isEmpty(defaultLayoutName)) {
             loadLayout(defaultLayoutName);
         }
     }
-    
+
     /**
      * Returns the auto-start setting.
      *
@@ -315,17 +308,17 @@ public class Shell extends Div implements INamespace {
     public boolean isAutoStart() {
         return autoStart;
     }
-    
+
     /**
      * Sets the auto-start setting.
      *
      * @param autoStart True if the start method is to be called automatically after loading a
-     *            layout. False if the start method must be called manually.
+     *                  layout. False if the start method must be called manually.
      */
     public void setAutoStart(boolean autoStart) {
         this.autoStart = autoStart;
     }
-    
+
     /**
      * Returns true if confirmation is required upon user-initiated logout.
      *
@@ -334,7 +327,7 @@ public class Shell extends Div implements INamespace {
     public boolean isLogoutConfirm() {
         return logoutConfirm;
     }
-    
+
     /**
      * Set to true if confirmation is required upon user-initiated logout.
      *
@@ -349,7 +342,7 @@ public class Shell extends Div implements INamespace {
             appFramework.unregisterObject(userContextListener);
         }
     }
-    
+
     /**
      * Build the UI based on the specified layout.
      *
@@ -361,19 +354,19 @@ public class Shell extends Div implements INamespace {
         layout.materialize(desktop);
         desktop.setAppId(FrameworkUtil.getAppName());
         desktop.activate(true);
-        
+
         if (autoStart) {
             start();
         }
     }
-    
+
     /**
      * Resets the desktop to its baseline state and clears registered help modules and property
      * groups.
      */
     public void reset() {
         FrameworkUtil.setAppName(null);
-        
+
         try {
             desktop.activate(false);
             desktop.clear();
@@ -385,9 +378,10 @@ public class Shell extends Div implements INamespace {
             registerPropertyGroup("FCF.CONTROLS");
             registeredStyles.destroyChildren();
             plugins.clear();
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
-    
+
     /**
      * Registers a plugin and its resources. Called internally when a plugin is instantiated.
      *
@@ -396,7 +390,7 @@ public class Shell extends Div implements INamespace {
     public void registerPlugin(ElementPlugin plugin) {
         plugins.add(plugin);
     }
-    
+
     /**
      * Unregisters a plugin and its resources. Called internally when a plugin is destroyed.
      *
@@ -405,7 +399,7 @@ public class Shell extends Div implements INamespace {
     public void unregisterPlugin(ElementPlugin plugin) {
         plugins.remove(plugin);
     }
-    
+
     /**
      * Adds a component to the common tool bar.
      *
@@ -414,7 +408,7 @@ public class Shell extends Div implements INamespace {
     public void addToolbarComponent(BaseComponent component) {
         desktop.getToolbar().addToolbarComponent(component, null);
     }
-    
+
     /**
      * Registers a help resource.
      *
@@ -422,23 +416,23 @@ public class Shell extends Div implements INamespace {
      */
     public void registerHelpResource(PluginResourceHelp resource) {
         HelpModule def = HelpModule.getModule(resource.getModule());
-        
+
         if (def != null && helpModules.add(def)) {
             IHelpSet hs = HelpSetCache.getInstance().get(def);
-            
+
             if (hs != null) {
                 helpSets.add(hs);
                 IHelpViewer viewer = HelpUtil.getViewer(false);
-                
+
                 if (viewer != null) {
                     viewer.mergeHelpSet(hs);
                 }
             }
         }
-        
+
         desktop.addHelpMenu(resource);
     }
-    
+
     /**
      * Registers an external style sheet. If the style sheet has not already been registered,
      * creates a style component and adds it to the current page.
@@ -452,7 +446,7 @@ public class Shell extends Div implements INamespace {
             registeredStyles.addChild(ss);
         }
     }
-    
+
     /**
      * Returns the style sheet associated with the specified URL.
      *
@@ -465,10 +459,10 @@ public class Shell extends Div implements INamespace {
                 return ss;
             }
         }
-        
+
         return null;
     }
-    
+
     /**
      * Registers a property group.
      *
@@ -480,18 +474,20 @@ public class Shell extends Div implements INamespace {
             eventManager.fireLocalEvent(Constants.EVENT_RESOURCE_PROPGROUP_ADD, propertyGroup);
         }
     }
-    
+
     /**
      * Adds a menu.
      *
-     * @param path Path for the menu.
+     * @param path   Path for the menu.
      * @param action Associated action for the menu.
      * @return Created menu item.
      */
-    public BaseMenuComponent addMenu(String path, String action) {
+    public BaseMenuComponent addMenu(
+            String path,
+            String action) {
         return desktop.addMenu(path, action, false);
     }
-    
+
     /**
      * Returns a list of all plugins currently loaded into the UI.
      *
@@ -500,7 +496,7 @@ public class Shell extends Div implements INamespace {
     public Iterable<ElementPlugin> getLoadedPlugins() {
         return plugins;
     }
-    
+
     /**
      * Locates a loaded plugin with the specified id.
      *
@@ -513,27 +509,29 @@ public class Shell extends Div implements INamespace {
                 return plugin;
             }
         }
-        
+
         return null;
     }
-    
+
     /**
      * Locates a loaded plugin with the specified id.
      *
-     * @param id Id of plugin to locate.
+     * @param id        Id of plugin to locate.
      * @param forceInit If true the plugin will be initialized if not already so.
      * @return A reference to the loaded and fully initialized plugin, or null if not found.
      */
-    public ElementPlugin getLoadedPlugin(String id, boolean forceInit) {
+    public ElementPlugin getLoadedPlugin(
+            String id,
+            boolean forceInit) {
         ElementPlugin plugin = getLoadedPlugin(id);
-        
+
         if (plugin != null && forceInit) {
             plugin.load();
         }
-        
+
         return plugin;
     }
-    
+
     /**
      * Locates an activated plugin with the specified id.
      *
@@ -546,10 +544,10 @@ public class Shell extends Div implements INamespace {
                 return plugin;
             }
         }
-        
+
         return null;
     }
-    
+
     /**
      * Returns a list of all active plugins.
      *
@@ -558,7 +556,7 @@ public class Shell extends Div implements INamespace {
     public Iterable<ElementPlugin> getActivatedPlugins() {
         return getActivatedPlugins(null);
     }
-    
+
     /**
      * Populates a list of all activated plugins.
      *
@@ -571,16 +569,16 @@ public class Shell extends Div implements INamespace {
         } else {
             list.clear();
         }
-        
+
         for (ElementPlugin plugin : plugins) {
             if (plugin.isActivated()) {
                 list.add(plugin);
             }
         }
-        
+
         return list;
     }
-    
+
     /**
      * Returns a list of all plugin definitions that are currently in use (i.e., have associated
      * plugins loaded) in the environment.
@@ -590,18 +588,18 @@ public class Shell extends Div implements INamespace {
      */
     public Iterable<PluginDefinition> getLoadedPluginDefinitions() {
         List<PluginDefinition> result = new ArrayList<>();
-        
+
         for (ElementPlugin plugin : plugins) {
             PluginDefinition def = plugin.getDefinition();
-            
+
             if (!result.contains(def)) {
                 result.add(def);
             }
         }
-        
+
         return result;
     }
-    
+
     /**
      * Returns a list of property groups bound to loaded plugins. Guarantees each group name will
      * appear at most once in the list.
@@ -611,12 +609,14 @@ public class Shell extends Div implements INamespace {
     public List<String> getPropertyGroups() {
         return propertyGroups;
     }
-    
-    public String getAppProperty(String queryParam, String propName) {
+
+    public String getAppProperty(
+            String queryParam,
+            String propName) {
         String result = getPage().getQueryParam(queryParam);
         return result == null ? PropertyUtil.getValue(propName) : result;
     }
-    
+
     /**
      * Logout user after confirmation prompt.
      */
@@ -631,14 +631,14 @@ public class Shell extends Div implements INamespace {
 
         SecurityUtil.getSecurityService().logout(false, null, null);
     }
-    
+
     /**
      * Lock the desktop.
      */
     public void lock() {
         eventManager.fireLocalEvent(SessionControl.LOCK.getEventName(), true);
     }
-    
+
     /**
      * Returns the message window instance for managing slide-down messages.
      *
@@ -647,7 +647,7 @@ public class Shell extends Div implements INamespace {
     public MessageWindow getMessageWindow() {
         return messageWindow;
     }
-    
+
     /**
      * Returns reference to the help viewer. If not already created, one will be created and
      * initialized with the registered help sets.
@@ -656,14 +656,14 @@ public class Shell extends Div implements INamespace {
      */
     protected IHelpViewer getHelpViewer() {
         IHelpViewer viewer = HelpUtil.getViewer(false);
-        
+
         if (viewer != null) {
             return viewer;
         }
-        
+
         viewer = HelpUtil.getViewer(true);
         viewer.load(helpSets);
         return viewer;
     }
-    
+
 }

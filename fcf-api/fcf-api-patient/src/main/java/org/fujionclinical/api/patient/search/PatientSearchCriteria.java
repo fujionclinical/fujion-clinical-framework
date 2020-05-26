@@ -27,6 +27,7 @@ package org.fujionclinical.api.patient.search;
 
 import org.apache.commons.lang.StringUtils;
 import org.fujion.common.DateUtil;
+import org.fujion.common.LocalizedMessage;
 import org.fujionclinical.api.model.person.IPersonName;
 import org.fujionclinical.api.model.person.PersonName;
 import org.fujionclinical.api.model.person.PersonNameParser;
@@ -39,7 +40,7 @@ import java.util.Date;
  */
 public class PatientSearchCriteria extends SearchCriteria {
 
-    private static final String ERROR_MISSING_REQUIRED = "@patientsearch.error.missing.required";
+    public static final LocalizedMessage MSG_ERROR_MISSING_REQUIRED = new LocalizedMessage("patientsearch.error.missing.required");
 
     private IPersonName name;
 
@@ -52,7 +53,7 @@ public class PatientSearchCriteria extends SearchCriteria {
     private Date birth;
 
     public PatientSearchCriteria() {
-        super(ERROR_MISSING_REQUIRED);
+        super(MSG_ERROR_MISSING_REQUIRED.toString());
     }
 
     /**

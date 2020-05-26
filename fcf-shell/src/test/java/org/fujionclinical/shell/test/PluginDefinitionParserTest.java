@@ -26,13 +26,8 @@
 package org.fujionclinical.shell.test;
 
 import org.fujion.test.MockTest;
-import org.fujion.webjar.WebJarLocator;
 import org.fujionclinical.shell.plugins.*;
-import org.fujionclinical.ui.test.MockUITest;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

@@ -40,6 +40,7 @@ import org.fujionclinical.api.security.SecurityUtil;
 import org.springframework.core.NestedCheckedException;
 import org.springframework.core.NestedRuntimeException;
 import org.springframework.web.util.WebUtils;
+import org.fujionclinical.ui.Constants;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -128,7 +129,7 @@ public class ExceptionController implements IAutoWired {
         this.lblMessage.setLabel(errMsg);
         this.lblStatusCode.setLabel(String.valueOf(errStatusCode));
 
-        if (SecurityUtil.isGrantedAny(StrUtil.getLabel("fcf.error.dialog.expanded"))) {
+        if (SecurityUtil.isGrantedAny(Constants.MSG_ERROR_DLG_EXPANDED.toString())) {
             setDetail(true);
         }
     }
@@ -162,7 +163,7 @@ public class ExceptionController implements IAutoWired {
     private void setDetail(boolean doOpen) {
         detail.setOpen(doOpen);
         detail.setLabel(
-            StrUtil.getLabel(doOpen ? "fcf.error.dialog.detail.open.label" : "fcf.error.dialog.detail.closed.label"));
+            StrUtil.getLabel(doOpen ? Constants.MSG_ERROR_DLG_DETAIL_OPEN.toString() : Constants.MSG_ERROR_DLG_DETAIL_CLOSED.toString()));
     }
 
     /**

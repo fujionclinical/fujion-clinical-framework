@@ -26,12 +26,9 @@
 package org.fujionclinical.shell.test;
 
 import org.apache.commons.beanutils.PropertyUtils;
-import org.fujion.common.StrUtil;
 import org.fujion.event.ClickEvent;
 import org.fujion.event.EventUtil;
-import org.fujion.test.MockConfig;
 import org.fujion.test.MockTest;
-import org.fujion.webjar.WebJarLocator;
 import org.fujionclinical.shell.Shell;
 import org.fujionclinical.shell.elements.*;
 import org.fujionclinical.shell.elements.ElementPlugin.PluginContainer;
@@ -41,14 +38,9 @@ import org.fujionclinical.shell.plugins.PluginDefinition;
 import org.fujionclinical.shell.property.PropertyInfo;
 import org.fujionclinical.shell.triggers.TriggerConditionActivate;
 import org.fujionclinical.ui.controller.FrameworkController;
-import org.fujionclinical.ui.test.MockUIEnvironment;
-import org.fujionclinical.ui.test.MockUITest;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
-import org.springframework.util.ResourceUtils;
 
+import static org.fujionclinical.shell.Constants.MSG_PLUGIN_TREEVIEW_DX;
 import static org.junit.Assert.*;
 
 public class LayoutParserTest extends ShellTest {
@@ -81,7 +73,7 @@ public class LayoutParserTest extends ShellTest {
         assertEquals(layout.getName(), "test");
         PluginDefinition def = PluginDefinition.getDefinition("treeview");
         assertNotNull(def);
-        assertEquals(def.getDescription(), StrUtil.getLabel("fcf.shell.plugin.treeview.description"));
+        assertEquals(def.getDescription(), MSG_PLUGIN_TREEVIEW_DX.toString());
         ElementBase ele = def.createElement(null, null, false);
         assertTrue(ele instanceof ElementTreeView);
         ElementDesktop root = shell.getDesktop();
