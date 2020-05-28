@@ -10,7 +10,7 @@ import java.util.List;
 public interface IPersonName {
 
     enum PersonNameUse {
-        USUAL, OFFICIAL, TEMP, NICKNAME, ANONYMOUS, OLD, MAIDEN
+        USUAL, OFFICIAL, TEMP, NICKNAME, ANONYMOUS, OLD, MAIDEN, ANY
     }
 
     String getFamilyName();

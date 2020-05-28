@@ -10,6 +10,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import static org.fujionclinical.api.model.person.IPersonName.PersonNameUse;
+
 public interface IPerson extends IDomainObject {
 
     enum Gender {
@@ -158,13 +160,13 @@ public interface IPerson extends IDomainObject {
      * @param categories Only names belonging to one of these categories will be returned.
      * @return The parsed name, or null if not found.
      */
-    default IPersonName getName(IPersonName.PersonNameUse... categories) {
+    default IPersonName getName(PersonNameUse... categories) {
         List<IPersonName> names = getNames();
 
         if (names != null && !names.isEmpty()) {
-            for (IPersonName.PersonNameUse category : categories) {
+            for (PersonNameUse category : categories) {
                 for (IPersonName name : names) {
-                    if (name.getUse() == category) {
+                    if (category == PersonNameUse.ANY || name.getUse() == category) {
                         return name;
                     }
                 }
@@ -189,7 +191,7 @@ public interface IPerson extends IDomainObject {
      * @return Person's full name, or null if not found.
      */
     default String getFullName() {
-        return getFullName(IPersonName.PersonNameUse.USUAL);
+        return getFullName(PersonNameUse.USUAL, PersonNameUse.ANY);
     }
 
     /**
@@ -199,7 +201,7 @@ public interface IPerson extends IDomainObject {
      * @param categories Only names belonging to one of these categories will be returned.
      * @return Person's full name or null if none found.
      */
-    default String getFullName(IPersonName.PersonNameUse... categories) {
+    default String getFullName(PersonNameUse... categories) {
         return Objects.toString(getName(categories));
     }
 

@@ -36,6 +36,7 @@ import org.fujion.component.Image;
 import org.fujion.component.Label;
 import org.fujionclinical.api.model.IAttachment;
 import org.fujionclinical.api.model.IContactPoint;
+import org.fujionclinical.api.model.IIdentifier;
 import org.fujionclinical.api.model.IPostalAddress;
 import org.fujionclinical.api.patient.IPatient;
 
@@ -196,7 +197,9 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
             Object object,
             String style) {
         String value = object == null ? null
-                : object instanceof Date ? DateUtil.formatDate((Date) object) : object.toString().trim();
+                : object instanceof Date ? DateUtil.formatDate((Date) object)
+                : object instanceof IIdentifier ? ((IIdentifier) object).getValue()
+                : object.toString().trim();
 
         if (!StringUtils.isEmpty(value)) {
             Label lbl = new Label((labelId == null ? "" : getDemographicLabel(labelId) + ": ") + value);
