@@ -86,10 +86,10 @@ public abstract class AbstractPatientList implements IPatientList {
      * @return A patient object, or null if not found or access is forbidden or an error occurred.
      */
     protected IPatient getPatient(String patientId) {
-        return getPatientFactory().create(patientId);
+        return getPatientDAO().read(patientId);
     }
 
-    protected IDomainDAO<IPatient> getPatientFactory() {
+    protected IDomainDAO<IPatient> getPatientDAO() {
         return DomainDAORegistry.getDAO(IPatient.class);
     }
 
@@ -115,7 +115,7 @@ public abstract class AbstractPatientList implements IPatientList {
         }
 
         String[] ary = new String[ids.size()];
-        List<IPatient> results = getPatientFactory().createMultiple(ids.keySet().toArray(ary));
+        List<IPatient> results = getPatientDAO().read(ids.keySet().toArray(ary));
 
         for (IPatient patient : results) {
             String info = ids.get(patient.getId());

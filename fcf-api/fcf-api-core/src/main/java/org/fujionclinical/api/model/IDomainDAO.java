@@ -25,8 +25,6 @@
  */
 package org.fujionclinical.api.model;
 
-import org.apache.commons.lang.NotImplementedException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,25 +38,22 @@ public interface IDomainDAO<T extends IDomainObject> {
     /**
      * Creates a new instance of an object of this domain.
      *
+     * @param template The domain object to use as a template.
      * @return The new domain object instance.
      */
-    default T create() {
-        return create(null);
-    }
+    T create(T template);
 
     /**
-     * Creates a new instance of an object of this domain.
+     * Creates multiple domain object instances from a list of templates..
      *
-     * @param id The id of the domain object.
-     * @return The new domain object instance.
+     * @param templates The domain objects to use as templates.
+     * @return A list of domain object instances.
      */
-    T create(String id);
-
-    default List<T> createMultiple(String... ids) {
+    default List<T> create(T... templates) {
         List<T> result = new ArrayList<>();
 
-        for (String id: ids) {
-            result.add(create(id));
+        for (T template : templates) {
+            result.add(create(template));
         }
 
         return result;
@@ -70,24 +65,32 @@ public interface IDomainDAO<T extends IDomainObject> {
      * @param id Unique id of the object.
      * @return The requested object.
      */
-    default T fetchObject(String id) {
-        throw new NotImplementedException();
-    }
+    abstract T read(String id);
 
     /**
-     * Fetches multiple domain objects as specified by an array of identifier values.
+     * Fetches multiple domain objects given a list of ids.
      *
-     * @param ids An array of unique identifiers.
+     * @param ids A list of unique identifiers.
      * @return A list of domain objects in the same order as requested in the ids parameter.
      */
-    default List<T> fetchObjects(String[] ids) {
+    default List<T> read(String... ids) {
         List<T> objects = new ArrayList<>();
 
-        for (String id: ids) {
-            objects.add(fetchObject(id));
+        for (String id : ids) {
+            objects.add(read(id));
         }
 
         return objects;
+    }
+
+    /**
+     * Performs a query, returning a list of matching domain objects.
+     *
+     * @param queryString The query string.
+     * @return A list of matching domain objects.
+     */
+    default List<T> search(String queryString) {
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -96,4 +99,5 @@ public interface IDomainDAO<T extends IDomainObject> {
      * @return The type of domain object created by this factory.
      */
     Class<T> getDomainClass();
+
 }

@@ -180,7 +180,7 @@ public abstract class PropertyBasedPatientList extends AbstractPatientList {
                             try {
                                 addPatient(getPatient(patientId), false);
                             } catch (Exception e) {
-                                // NOP
+                                log.error("Error fetching patient for list", e);
                             }
                         }
                     }

@@ -28,8 +28,6 @@ package org.fujionclinical.api.model;
 import org.fujionclinical.api.spring.BeanRegistry;
 import org.springframework.util.Assert;
 
-import java.util.List;
-
 /**
  * Tracks all domain DAO implementations.
  */
@@ -39,45 +37,6 @@ public class DomainDAORegistry<T extends IDomainObject> extends BeanRegistry<Cla
 
     public static <T extends IDomainObject> DomainDAORegistry<T> getInstance() {
         return (DomainDAORegistry<T>) instance;
-    }
-
-    /**
-     * Creates a new instance of an object of this domain.
-     *
-     * @param <T>   Class of domain object.
-     * @param clazz Class of object to create.
-     * @return The new domain object instance.
-     */
-    public static <T extends IDomainObject> T newObject(Class<T> clazz) {
-        return getDAO(clazz).create();
-    }
-
-    /**
-     * Fetches an object, identified by its unique id, from the underlying data store.
-     *
-     * @param <T>   Class of domain object.
-     * @param clazz Class of object to create.
-     * @param id    Unique id of the object.
-     * @return The requested object.
-     */
-    public static <T extends IDomainObject> T fetchObject(
-            Class<T> clazz,
-            String id) {
-        return getDAO(clazz).fetchObject(id);
-    }
-
-    /**
-     * Fetches multiple domain objects as specified by an array of identifier values.
-     *
-     * @param <T>   Class of domain object.
-     * @param clazz Class of object to create.
-     * @param ids   An array of unique identifiers.
-     * @return A list of domain objects in the same order as requested in the ids parameter.
-     */
-    public static <T extends IDomainObject> List<T> fetchObjects(
-            Class<T> clazz,
-            String[] ids) {
-        return getDAO(clazz).fetchObjects(ids);
     }
 
     /**
