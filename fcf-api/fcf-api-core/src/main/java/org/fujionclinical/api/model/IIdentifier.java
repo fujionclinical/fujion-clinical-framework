@@ -1,11 +1,6 @@
 package org.fujionclinical.api.model;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
-import org.fujion.common.MiscUtil;
-
-import java.util.Collections;
-import java.util.List;
 
 public interface IIdentifier {
 
@@ -50,4 +45,5 @@ public interface IIdentifier {
     default boolean hasCategory() {
         return getCategory() != null;
     }
+
 }

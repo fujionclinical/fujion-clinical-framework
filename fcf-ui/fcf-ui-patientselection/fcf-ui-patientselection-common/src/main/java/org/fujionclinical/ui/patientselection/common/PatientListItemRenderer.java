@@ -27,7 +27,6 @@ package org.fujionclinical.ui.patientselection.common;
 
 import org.apache.commons.lang.StringUtils;
 import org.fujion.common.DateUtil;
-import org.fujion.common.StrUtil;
 import org.fujion.component.Cell;
 import org.fujion.component.Columns;
 import org.fujion.component.Grid;
@@ -86,12 +85,14 @@ public class PatientListItemRenderer implements IComponentRenderer<Row, Object> 
 
         if (patient != null) {
             String name = patient.getFullName();
+            String[] names;
 
             if (name == null) {
-                name = MSG_UNKNOWN_PATIENT.toString();
+                names = new String[]{MSG_UNKNOWN_PATIENT.toString()};
+            } else {
+                names = name.split(",", 2);
             }
 
-            String[] names = name.split(",", 2);
             IIdentifier mrn = patient.getMRN();
             addCell(row, names[0].trim(), max);
             addCell(row, names.length == 1 ? "" : names[1].trim(), max);
@@ -113,17 +114,14 @@ public class PatientListItemRenderer implements IComponentRenderer<Row, Object> 
      * @param row   Grid row to receive new cell;
      * @param label Text label for the cell.
      * @param max   Maximum # of allowable cells.
-     * @return True if a cell was added.
      */
-    private boolean addCell(
+    private void addCell(
             Row row,
             String label,
             int max) {
         if (max == 0 || row.getChildCount() < max) {
             row.addChild(new Cell(label));
-            return true;
         }
-
-        return false;
     }
+
 }
