@@ -50,7 +50,7 @@
 		</bean>
 		
 		<!-- Maintains a registry of all domain factories. -->
-		<bean id="domainFactoryRegistry" class="org.fujionclinical.api.model.DomainFactoryRegistry"
+		<bean id="domainFactoryRegistry" class="org.fujionclinical.api.model.DomainDAORegistry"
 			factory-method="getInstance">
 		</bean>
 

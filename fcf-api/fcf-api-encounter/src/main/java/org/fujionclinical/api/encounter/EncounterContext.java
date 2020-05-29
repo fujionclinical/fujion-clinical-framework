@@ -39,6 +39,7 @@ public class EncounterContext extends ManagedContext<IEncounter> {
 
     public interface IEncounterContextSubscriber extends IContextSubscriber {
     }
+
     private static final String SUBJECT_NAME = "Encounter";
 
     private static final Log log = LogFactory.getLog(EncounterContext.class);

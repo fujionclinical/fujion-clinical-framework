@@ -31,8 +31,8 @@ import org.apache.commons.lang.reflect.ConstructorUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.common.DateRange;
-import org.fujionclinical.api.model.DomainFactoryRegistry;
-import org.fujionclinical.api.model.IDomainFactory;
+import org.fujionclinical.api.model.DomainDAORegistry;
+import org.fujionclinical.api.model.IDomainDAO;
 import org.fujionclinical.api.patient.IPatient;
 
 import java.util.*;
@@ -89,8 +89,8 @@ public abstract class AbstractPatientList implements IPatientList {
         return getPatientFactory().create(patientId);
     }
 
-    protected IDomainFactory<IPatient> getPatientFactory() {
-        return DomainFactoryRegistry.getFactory(IPatient.class);
+    protected IDomainDAO<IPatient> getPatientFactory() {
+        return DomainDAORegistry.getDAO(IPatient.class);
     }
 
     /**

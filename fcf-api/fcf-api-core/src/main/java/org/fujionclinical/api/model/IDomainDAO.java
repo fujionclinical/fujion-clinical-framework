@@ -31,11 +31,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Interface for a domain object factory.
+ * Interface for a domain object DAO.
  *
- * @param <T> Class created by factory.
+ * @param <T> Class created by DAO.
  */
-public interface IDomainFactory<T> {
+public interface IDomainDAO<T extends IDomainObject> {
 
     /**
      * Creates a new instance of an object of this domain.

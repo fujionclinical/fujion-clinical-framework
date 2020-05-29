@@ -31,19 +31,14 @@ import org.springframework.util.Assert;
 import java.util.List;
 
 /**
- * Tracks all domain factory implementations.
+ * Tracks all domain DAO implementations.
  */
-@SuppressWarnings("rawtypes")
-public class DomainFactoryRegistry extends BeanRegistry<Class<?>, IDomainFactory> {
+public class DomainDAORegistry<T extends IDomainObject> extends BeanRegistry<Class<T>, IDomainDAO<T>> {
 
-    private static final DomainFactoryRegistry instance = new DomainFactoryRegistry();
+    private static final DomainDAORegistry<?> instance = new DomainDAORegistry<>();
 
-    private DomainFactoryRegistry() {
-        super(IDomainFactory.class);
-    }
-
-    public static DomainFactoryRegistry getInstance() {
-        return instance;
+    public static <T extends IDomainObject> DomainDAORegistry<T> getInstance() {
+        return (DomainDAORegistry<T>) instance;
     }
 
     /**
@@ -54,7 +49,7 @@ public class DomainFactoryRegistry extends BeanRegistry<Class<?>, IDomainFactory
      * @return The new domain object instance.
      */
     public static <T extends IDomainObject> T newObject(Class<T> clazz) {
-        return getFactory(clazz).create();
+        return getDAO(clazz).create();
     }
 
     /**
@@ -68,7 +63,7 @@ public class DomainFactoryRegistry extends BeanRegistry<Class<?>, IDomainFactory
     public static <T extends IDomainObject> T fetchObject(
             Class<T> clazz,
             String id) {
-        return getFactory(clazz).fetchObject(id);
+        return getDAO(clazz).fetchObject(id);
     }
 
     /**
@@ -82,24 +77,29 @@ public class DomainFactoryRegistry extends BeanRegistry<Class<?>, IDomainFactory
     public static <T extends IDomainObject> List<T> fetchObjects(
             Class<T> clazz,
             String[] ids) {
-        return getFactory(clazz).fetchObjects(ids);
+        return getDAO(clazz).fetchObjects(ids);
     }
 
     /**
-     * Returns a domain factory for the specified class.
+     * Returns a domain DAO for the specified class.
      *
      * @param <T>   Class of domain object.
-     * @param clazz Class of object created by factory.
-     * @return A domain object factory.
+     * @param clazz Class of object managed by DAO.
+     * @return A domain object DAO.
+     * @throws IllegalArgumentException If no DAO found.
      */
-    public static <T extends IDomainObject> IDomainFactory<T> getFactory(Class<T> clazz) {
-        IDomainFactory factory = instance.get(clazz);
-        Assert.notNull(factory, "Domain class has no registered factory: " + clazz.getName());
-        return factory;
+    public static <T extends IDomainObject> IDomainDAO<T> getDAO(Class<T> clazz) {
+        IDomainDAO<T> dao = instance.get((Class) clazz);
+        Assert.notNull(dao, () -> "Class has no registered DAO: " + clazz.getName());
+        return dao;
+    }
+
+    private DomainDAORegistry() {
+        super((Class) IDomainDAO.class);
     }
 
     @Override
-    protected Class<?> getKey(IDomainFactory item) {
+    protected Class<T> getKey(IDomainDAO item) {
         return item.getDomainClass();
     }
 
