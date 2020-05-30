@@ -31,6 +31,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import java.io.IOException;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /**
  * Static utility class for the access to Spring Framework services.
@@ -125,7 +127,34 @@ public class SpringUtil {
             return null;
         }
     }
-    
+
+    /**
+     * Used to retrieve and cache a reference to a singleton bean in a thread-safe manner.
+     *
+     * @param bean      The bean name (can be null).
+     * @param beanClass The class of the bean.
+     * @param getter    The function to retrieve the cached reference.
+     * @param setter    The function to set the cached reference.
+     * @param <T>       The class of the bean.
+     * @return The bean instance (never null).
+     */
+    public static <T> T getBean(String bean, Class<T> beanClass, Supplier<T> getter, Consumer<T> setter) {
+        T value = getter.get();
+
+        if (value == null) {
+            synchronized (beanClass) {
+                value = getter.get();
+
+                if (value == null) {
+                    value = getBean(bean, beanClass);
+                    setter.accept(value);
+                }
+            }
+        }
+
+        return value;
+    }
+
     /**
      * Returns a property value from the application context.
      *

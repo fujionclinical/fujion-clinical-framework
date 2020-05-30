@@ -8,7 +8,7 @@
 
         <!-- Shared clinical contexts. -->
 
-        <bean id="encounterContext" parent="managedContext"
+        <bean id="encounterContext" parent="managedContext" depends-on="patientContext"
               class="org.fujionclinical.api.encounter.EncounterContext">
         </bean>
 

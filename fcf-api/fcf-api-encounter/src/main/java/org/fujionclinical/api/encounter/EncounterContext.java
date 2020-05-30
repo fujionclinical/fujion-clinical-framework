@@ -27,10 +27,9 @@ package org.fujionclinical.api.encounter;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.fujionclinical.api.context.ContextItems;
-import org.fujionclinical.api.context.ContextManager;
-import org.fujionclinical.api.context.IContextSubscriber;
-import org.fujionclinical.api.context.ManagedContext;
+import org.fujionclinical.api.context.*;
+import org.fujionclinical.api.patient.IPatient;
+import org.fujionclinical.api.patient.PatientContext;
 
 /**
  * Wrapper for shared encounter context.
@@ -38,27 +37,50 @@ import org.fujionclinical.api.context.ManagedContext;
 public class EncounterContext extends ManagedContext<IEncounter> {
 
     public interface IEncounterContextSubscriber extends IContextSubscriber {
+
     }
 
     private static final String SUBJECT_NAME = "Encounter";
 
     private static final Log log = LogFactory.getLog(EncounterContext.class);
 
-    /**
-     * Create a shared encounter context with an initial null state.
-     */
-    public EncounterContext() {
-        this(null);
-    }
+    private IEncounterContextSubscriber encounterContextSubscriber = new IEncounterContextSubscriber() {
+        @Override
+        public void pending(ISurveyResponse response) {
+            IEncounter encounter = getContextObject(true);
+            IPatient patient = encounter == null ? null : encounter.getPatient();
 
-    /**
-     * Create a shared encounter context with a specified initial state.
-     *
-     * @param encounter Encounter that will be the initial state.
-     */
-    public EncounterContext(IEncounter encounter) {
-        super(SUBJECT_NAME, IEncounterContextSubscriber.class, encounter);
-    }
+            if (patient != null) {
+                PatientContext.changePatient(patient);
+            }
+        }
+
+        @Override
+        public void committed() {
+        }
+
+        @Override
+        public void canceled() {
+        }
+    };
+
+    private PatientContext.IPatientContextSubscriber patientContextSubscriber = new PatientContext.IPatientContextSubscriber() {
+
+        @Override
+        public void pending(ISurveyResponse response) {
+        }
+
+        @Override
+        public void committed() {
+            if (!isPending()) {
+                changeEncounter(null);
+            }
+        }
+
+        @Override
+        public void canceled() {
+        }
+    };
 
     /**
      * Returns the managed encounter context.
@@ -89,6 +111,23 @@ public class EncounterContext extends ManagedContext<IEncounter> {
      */
     public static IEncounter getActiveEncounter() {
         return getEncounterContext().getContextObject(false);
+    }
+
+    /**
+     * Create a shared encounter context with an initial null state.
+     */
+    public EncounterContext() {
+        this(null);
+    }
+
+    /**
+     * Create a shared encounter context with a specified initial state.
+     *
+     * @param encounter Encounter that will be the initial state.
+     */
+    public EncounterContext(IEncounter encounter) {
+        super(SUBJECT_NAME, IEncounterContextSubscriber.class, encounter);
+        PatientContext.getPatientContext().addSubscriber(patientContextSubscriber);
     }
 
     /**

@@ -36,6 +36,7 @@ import org.fujionclinical.api.context.ISurveyResponse.ISurveyCallback;
 import org.fujionclinical.api.context.SurveyResponse.ResponseState;
 import org.fujionclinical.api.event.IEventManager;
 import org.fujionclinical.api.event.IEventSubscriber;
+import org.fujionclinical.api.model.IDomainObject;
 
 import java.util.*;
 
@@ -56,7 +57,7 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
     
     private static final int CONTEXT_PENDING = 1;
     
-    private final Object[] domainObject = new Object[2];
+    private final DomainClass[] domainObject = (DomainClass[]) new Object[2];
     
     private final Class<? extends IContextSubscriber> subscriberType;
     
@@ -145,6 +146,10 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
      * @return True if the two objects represent the same context.
      */
     protected boolean isSameContext(DomainClass domainObject1, DomainClass domainObject2) {
+        if (domainObject1 instanceof IDomainObject && domainObject2 instanceof IDomainObject) {
+            return ((IDomainObject) domainObject1).getId().equals(((IDomainObject) domainObject2).getId());
+        }
+
         return ObjectUtils.equals(domainObject1, domainObject2);
     }
     
@@ -330,10 +335,7 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
                     map.remove("exception");
                     map.put("subscriber", event.getClass().getName());
                     sw = StopWatchFactory.create("org.fujionclinical.context.notifySubscribers", map);
-                    
-                    if (sw != null) {
-                        sw.start();
-                    }
+                    sw.start();
                 }
                 
                 if (accept) {
@@ -387,9 +389,7 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
         if ((response.isSilent() || !response.rejected()) && iter.hasNext()) {
             IContextSubscriber subscriber = iter.next();
             
-            response.reset(__ -> {
-                surveySubscribers(iter, response, callback);
-            });
+            response.reset(__ -> surveySubscribers(iter, response, callback));
             
             try {
                 subscriber.pending(response);
@@ -454,9 +454,8 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
      * @see org.fujionclinical.api.context.ISharedContext#getContextObject(boolean)
      */
     @Override
-    @SuppressWarnings("unchecked")
     public DomainClass getContextObject(boolean pending) {
-        return (DomainClass) domainObject[pending ? CONTEXT_PENDING : CONTEXT_CURRENT];
+        return domainObject[pending ? CONTEXT_PENDING : CONTEXT_CURRENT];
     }
     
     // ************************************************************************************************

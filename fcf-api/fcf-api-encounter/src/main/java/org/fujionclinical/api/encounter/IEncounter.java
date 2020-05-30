@@ -8,6 +8,7 @@ import org.fujionclinical.api.model.IConcept;
 import org.fujionclinical.api.model.IPeriod;
 import org.fujionclinical.api.model.IDomainObject;
 import org.fujionclinical.api.model.person.IPerson;
+import org.fujionclinical.api.patient.IPatient;
 
 import java.util.Collections;
 import java.util.List;
@@ -51,6 +52,16 @@ public interface IEncounter extends IDomainObject {
          * The encounter status is unknown. Note that "unknown" is a value of last resort and every attempt should be made to provide a meaningful value other than "unknown".
          */
         UNKNOWN
+    }
+
+    IPatient getPatient();
+
+    default IEncounter setPatient(IPatient patient) {
+        throw new UnsupportedOperationException();
+    }
+
+    default boolean hasPatient() {
+        return getPatient() != null;
     }
 
     IPeriod getPeriod();
