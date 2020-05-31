@@ -26,6 +26,7 @@
 		<module>fcf-plugin-patientphoto</module>
 		<module>fcf-plugin-patientheader</module>
 		<module>fcf-plugin-userheader</module>
+		<module>fcf-plugin-encounters</module>
 	</modules>
 	
 	<dependencies>

@@ -7,7 +7,7 @@ public interface IPatient extends IPerson {
 
     IIdentifier getMRN();
 
-    default IPatient setMRN(IIdentifier mrn) {
+    default void setMRN(IIdentifier mrn) {
         throw new UnsupportedOperationException();
     }
 

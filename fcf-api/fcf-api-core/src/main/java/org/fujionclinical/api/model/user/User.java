@@ -76,9 +76,8 @@ public class User implements IUser {
      * 
      * @param id User logical identifier.
      */
-    public IUser setId(String id) {
+    public void setId(String id) {
         this.id = id;
-        return this;
     }
 
     /**

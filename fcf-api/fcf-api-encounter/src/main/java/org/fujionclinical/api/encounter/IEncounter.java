@@ -1,12 +1,11 @@
 package org.fujionclinical.api.encounter;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.fujion.common.MiscUtil;
+import org.fujion.common.CollectionUtil;
 import org.fujionclinical.api.location.ILocation;
-import org.fujionclinical.api.model.ConceptCode;
 import org.fujionclinical.api.model.IConcept;
-import org.fujionclinical.api.model.IPeriod;
 import org.fujionclinical.api.model.IDomainObject;
+import org.fujionclinical.api.model.IPeriod;
 import org.fujionclinical.api.model.person.IPerson;
 import org.fujionclinical.api.patient.IPatient;
 
@@ -56,7 +55,7 @@ public interface IEncounter extends IDomainObject {
 
     IPatient getPatient();
 
-    default IEncounter setPatient(IPatient patient) {
+    default void setPatient(IPatient patient) {
         throw new UnsupportedOperationException();
     }
 
@@ -66,7 +65,7 @@ public interface IEncounter extends IDomainObject {
 
     IPeriod getPeriod();
 
-    default IEncounter setPeriod(IPeriod period) {
+    default void setPeriod(IPeriod period) {
         throw new UnsupportedOperationException();
     }
 
@@ -76,7 +75,7 @@ public interface IEncounter extends IDomainObject {
 
     EncounterStatus getStatus();
 
-    default IEncounter setStatus(EncounterStatus status) {
+    default void setStatus(EncounterStatus status) {
         throw new UnsupportedOperationException();
     }
 
@@ -88,28 +87,32 @@ public interface IEncounter extends IDomainObject {
         return Collections.emptyList();
     }
 
-    default IEncounter setParticipants(List<IPerson> participants) {
-        MiscUtil.replaceList(getParticipants(), participants);
-        return this;
+    default void setParticipants(List<IPerson> participants) {
+        CollectionUtil.replaceList(getParticipants(), participants);
     }
 
-    default IEncounter addParticipants(IPerson... participants) {
+    default void addParticipants(IPerson... participants) {
         Collections.addAll(getParticipants(), participants);
-        return this;
     }
 
     default boolean hasParticipant() {
-        return !CollectionUtils.isEmpty(getParticipants());
+        return CollectionUtil.notEmpty(getParticipants());
     }
 
-    ILocation getLocation();
+    default List<ILocation> getLocations() {
+        return Collections.emptyList();
+    }
 
-    default IEncounter setLocation(ILocation location) {
-        throw new UnsupportedOperationException();
+    default void setLocations(List<ILocation> locations) {
+        CollectionUtil.replaceList(getLocations(), locations);
+    }
+
+    default void addLocations(ILocation... locations) {
+        CollectionUtils.addAll(getLocations(), locations);
     }
 
     default boolean hasLocation() {
-        return getLocation() != null;
+        return CollectionUtil.notEmpty(getLocations());
     }
 
     List<IConcept> getTypes();
@@ -120,11 +123,12 @@ public interface IEncounter extends IDomainObject {
     }
 
     default IEncounter setType(List<IConcept> types) {
-        MiscUtil.replaceList(getTypes(), types);
+        CollectionUtil.replaceList(getTypes(), types);
         return this;
     }
 
     default boolean hasType() {
-        return !CollectionUtils.isEmpty(getTypes());
+        return CollectionUtil.notEmpty(getTypes());
     }
+
 }

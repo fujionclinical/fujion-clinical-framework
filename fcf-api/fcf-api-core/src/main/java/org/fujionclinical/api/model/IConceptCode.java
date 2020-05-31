@@ -6,7 +6,7 @@ public interface IConceptCode {
 
     String getSystem();
 
-    default IConceptCode setSystem(String system) {
+    default void setSystem(String system) {
         throw new UnsupportedOperationException();
     }
 
@@ -16,7 +16,7 @@ public interface IConceptCode {
 
     String getCode();
 
-    default IConceptCode setCode(String code) {
+    default void setCode(String code) {
         throw new UnsupportedOperationException();
     }
 
@@ -26,7 +26,7 @@ public interface IConceptCode {
 
     String getText();
 
-    default IConceptCode setText(String text) {
+    default void setText(String text) {
         throw new UnsupportedOperationException();
     }
 

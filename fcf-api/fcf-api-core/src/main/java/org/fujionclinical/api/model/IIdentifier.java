@@ -8,7 +8,7 @@ public interface IIdentifier {
 
     String getSystem();
 
-    default IIdentifier setSystem(String system) {
+    default void setSystem(String system) {
         throw new UnsupportedOperationException();
     }
 
@@ -18,7 +18,7 @@ public interface IIdentifier {
 
     String getValue();
 
-    default IIdentifier setValue(String value) {
+    default void setValue(String value) {
         throw new UnsupportedOperationException();
     }
 
@@ -28,7 +28,7 @@ public interface IIdentifier {
 
     IConcept getType();
 
-    default IIdentifier setType(IConcept type) {
+    default void setType(IConcept type) {
         throw new UnsupportedOperationException();
     }
 
@@ -38,7 +38,7 @@ public interface IIdentifier {
 
     IdentifierCategory getCategory();
 
-    default IIdentifier setCategory(IdentifierCategory category) {
+    default void setCategory(IdentifierCategory category) {
         throw new UnsupportedOperationException();
     }
 

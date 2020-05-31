@@ -1,6 +1,7 @@
 package org.fujionclinical.api.model;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.fujion.common.CollectionUtil;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -12,25 +13,9 @@ public interface IPostalAddress {
         HOME, WORK, TEMP, OLD, BILLING
     }
 
-    static IPostalAddress getPostalAddress(
-            Collection<? extends IPostalAddress> addresses,
-            PostalAddressUse... uses) {
-        if (addresses != null && !addresses.isEmpty()) {
-            for (PostalAddressUse use : uses) {
-                for (IPostalAddress address : addresses) {
-                    if (address.getUse() == use) {
-                        return address;
-                    }
-                }
-            }
-        }
-
-        return null;
-    }
-
     PostalAddressUse getUse();
 
-    default IPostalAddress setUse(PostalAddressUse use) {
+    default void setUse(PostalAddressUse use) {
         throw new UnsupportedOperationException();
     }
 
@@ -42,22 +27,21 @@ public interface IPostalAddress {
         return Collections.emptyList();
     }
 
-    default IPostalAddress setLines(List<String> lines) {
+    default void setLines(List<String> lines) {
         throw new UnsupportedOperationException();
     }
 
-    default IPostalAddress addLines(String... lines) {
+    default void addLines(String... lines) {
         CollectionUtils.addAll(getLines(), lines);
-        return this;
     }
 
     default boolean hasLines() {
-        return !CollectionUtils.isEmpty(getLines());
+        return CollectionUtil.notEmpty(getLines());
     }
 
     String getCity();
 
-    default IPostalAddress setCity(String city) {
+    default void setCity(String city) {
         throw new UnsupportedOperationException();
     }
 
@@ -67,7 +51,7 @@ public interface IPostalAddress {
 
     String getDistrict();
 
-    default IPostalAddress setDistrict(String district) {
+    default void setDistrict(String district) {
         throw new UnsupportedOperationException();
     }
 
@@ -77,7 +61,7 @@ public interface IPostalAddress {
 
     String getState();
 
-    default IPostalAddress setState(String state) {
+    default void setState(String state) {
         throw new UnsupportedOperationException();
     }
 
@@ -87,7 +71,7 @@ public interface IPostalAddress {
 
     String getPostalCode();
 
-    default IPostalAddress setPostalCode(String postalCode) {
+    default void setPostalCode(String postalCode) {
         throw new UnsupportedOperationException();
     }
 
@@ -97,7 +81,7 @@ public interface IPostalAddress {
 
     String getCountry();
 
-    default IPostalAddress setCountry(String country) {
+    default void setCountry(String country) {
         throw new UnsupportedOperationException();
     }
 
@@ -107,7 +91,7 @@ public interface IPostalAddress {
 
     IPeriod getPeriod();
 
-    default IPostalAddress setPeriod(IPeriod period) {
+    default void setPeriod(IPeriod period) {
         throw new UnsupportedOperationException();
     }
 
@@ -118,4 +102,5 @@ public interface IPostalAddress {
     default String asString() {
         return toString();
     }
+
 }

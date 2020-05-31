@@ -147,7 +147,7 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
      */
     protected boolean isSameContext(DomainClass domainObject1, DomainClass domainObject2) {
         if (domainObject1 instanceof IDomainObject && domainObject2 instanceof IDomainObject) {
-            return ((IDomainObject) domainObject1).getId().equals(((IDomainObject) domainObject2).getId());
+            return ((IDomainObject) domainObject1).isSame(((IDomainObject) domainObject2));
         }
 
         return ObjectUtils.equals(domainObject1, domainObject2);

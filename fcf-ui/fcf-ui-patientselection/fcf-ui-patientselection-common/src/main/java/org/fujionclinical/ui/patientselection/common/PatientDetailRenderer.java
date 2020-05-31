@@ -34,14 +34,10 @@ import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Div;
 import org.fujion.component.Image;
 import org.fujion.component.Label;
-import org.fujionclinical.api.model.IAttachment;
-import org.fujionclinical.api.model.IContactPoint;
-import org.fujionclinical.api.model.IIdentifier;
-import org.fujionclinical.api.model.IPostalAddress;
+import org.fujionclinical.api.model.*;
 import org.fujionclinical.api.patient.IPatient;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * Default class for rendering detail view of patient in patient selection dialog. This class may be
@@ -92,12 +88,12 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
         addDemographic(root, "dod", patient.getDeceasedDate());
         addDemographic(root, "marital status", patient.getMaritalStatus());
         addDemographic(root, "language", patient.hasLanguage() ? patient.getLanguages().get(0) : null);
-        addContactPoint(root, patient.getContactPoints(), "home phone");
-        addContactPoint(root, patient.getContactPoints(), "home email");
-        addContactPoint(root, patient.getContactPoints(), "home fax");
-        addContactPoint(root, patient.getContactPoints(), "work phone");
-        addContactPoint(root, patient.getContactPoints(), "work email");
-        addContactPoint(root, patient.getContactPoints(), "work fax");
+        addContactPoint(root, "home phone", patient);
+        addContactPoint(root, "home email", patient);
+        addContactPoint(root, "home fax", patient);
+        addContactPoint(root, "work phone", patient);
+        addContactPoint(root, "work email", patient);
+        addContactPoint(root, "work fax", patient);
 
         IPostalAddress address = patient.getAddress();
 
@@ -150,19 +146,18 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
 
     /**
      * Adds a contact point to the demographic panel. Uses default styling.
-     *
-     * @param root          Root component.
-     * @param contactPoints List of contact points from which to select.
+     *  @param root          Root component.
      * @param type          Type of contact point desired (e.g., "home:phone").
+     * @param contactPoints List of contact points from which to select.
      */
     protected void addContactPoint(
             BaseUIComponent root,
-            List<? extends IContactPoint> contactPoints,
-            String type) {
+            String type,
+            IContactPointType contactPoints) {
         String[] types = type.split(" ", 2);
         IContactPoint.ContactPointUse use = EnumUtils.getEnumIgnoreCase(IContactPoint.ContactPointUse.class, types[0]);
         IContactPoint.ContactPointSystem system = EnumUtils.getEnumIgnoreCase(IContactPoint.ContactPointSystem.class, types[1]);
-        IContactPoint contactPoint = IContactPoint.getContactPoint(contactPoints, use, system);
+        IContactPoint contactPoint = contactPoints.getContactPoint(use, system);
 
         if (contactPoint != null) {
             addDemographic(root, type, contactPoint.getValue());

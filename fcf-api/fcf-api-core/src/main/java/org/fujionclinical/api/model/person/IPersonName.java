@@ -1,8 +1,7 @@
 package org.fujionclinical.api.model.person;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
-import org.fujion.common.MiscUtil;
+import org.fujion.common.CollectionUtil;
 
 import java.util.Collections;
 import java.util.List;
@@ -15,7 +14,7 @@ public interface IPersonName {
 
     String getFamilyName();
 
-    default IPersonName setFamilyName(String familyName) {
+    default void setFamilyName(String familyName) {
         throw new UnsupportedOperationException();
     }
 
@@ -25,55 +24,49 @@ public interface IPersonName {
 
     List<String> getGivenNames();
 
-    default IPersonName setGivenNames(List<String> givenNames) {
-        MiscUtil.replaceList(getGivenNames(), givenNames);
-        return this;
+    default void setGivenNames(List<String> givenNames) {
+        CollectionUtil.replaceList(getGivenNames(), givenNames);
     }
 
-    default IPersonName addGivenNames(String... givenNames) {
+    default void addGivenNames(String... givenNames) {
         Collections.addAll(getGivenNames(), givenNames);
-        return this;
     }
 
     default boolean hasGivenName() {
-        return !CollectionUtils.isEmpty(getGivenNames());
+        return CollectionUtil.notEmpty(getGivenNames());
     }
 
     List<String> getPrefixes();
 
-    default IPersonName setPrefixes(List<String> prefixes) {
-        MiscUtil.replaceList(getPrefixes(), prefixes);
-        return this;
+    default void setPrefixes(List<String> prefixes) {
+        CollectionUtil.replaceList(getPrefixes(), prefixes);
     }
 
-    default IPersonName addPrefixes(String... prefixes) {
+    default void addPrefixes(String... prefixes) {
         Collections.addAll(getPrefixes(), prefixes);
-        return this;
     }
 
     default boolean hasPrefix() {
-        return !CollectionUtils.isEmpty(getPrefixes());
+        return CollectionUtil.notEmpty(getPrefixes());
     }
 
     List<String> getSuffixes();
 
-    default IPersonName setSuffixes(List<String> suffixes) {
-        MiscUtil.replaceList(getSuffixes(), suffixes);
-        return this;
+    default void setSuffixes(List<String> suffixes) {
+        CollectionUtil.replaceList(getSuffixes(), suffixes);
     }
 
-    default IPersonName addSuffixes(String... suffixes) {
+    default void addSuffixes(String... suffixes) {
         Collections.addAll(getSuffixes(), suffixes);
-        return this;
     }
 
     default boolean hasSuffix() {
-        return CollectionUtils.isEmpty(getSuffixes());
+        return CollectionUtil.isEmpty(getSuffixes());
     }
 
     PersonNameUse getUse();
 
-    default IPersonName setUse(PersonNameUse use) {
+    default void setUse(PersonNameUse use) {
         throw new UnsupportedOperationException();
     }
 
@@ -81,15 +74,12 @@ public interface IPersonName {
         return getUse() != null;
     }
 
-    default IPersonName fromString(String value) {
+    default void fromString(String value) {
         PersonNameParser.instance.fromString(value, this);
-        return this;
     }
 
     default String asString() {
         return PersonNameParser.instance.toString(this);
     }
-
-    ;
 
 }

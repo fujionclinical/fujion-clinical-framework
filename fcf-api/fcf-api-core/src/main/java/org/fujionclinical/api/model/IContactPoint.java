@@ -1,5 +1,7 @@
 package org.fujionclinical.api.model;
 
+import org.fujion.common.CollectionUtil;
+
 import java.util.Collection;
 
 public interface IContactPoint {
@@ -12,56 +14,9 @@ public interface IContactPoint {
         HOME, WORK, TEMP, OLD, MOBILE
     }
 
-    static IContactPoint getContactPoint(
-            Collection<? extends IContactPoint> contactPoints,
-            ContactPointUse use,
-            ContactPointSystem system) {
-        if (contactPoints != null && !contactPoints.isEmpty()) {
-            for (IContactPoint contactPoint : contactPoints) {
-                if (contactPoint.getUse() == use && contactPoint.getSystem() == system) {
-                    return contactPoint;
-                }
-            }
-        }
-
-        return null;
-    }
-
-    static IContactPoint getContactPoint(
-            Collection<? extends IContactPoint> contactPoints,
-            ContactPointUse... uses) {
-        if (contactPoints != null && !contactPoints.isEmpty()) {
-            for (ContactPointUse use : uses) {
-                for (IContactPoint contactPoint : contactPoints) {
-                    if (contactPoint.getUse() == use) {
-                        return contactPoint;
-                    }
-                }
-            }
-        }
-
-        return null;
-    }
-
-    static IContactPoint getContactPoint(
-            Collection<? extends IContactPoint> contactPoints,
-            ContactPointSystem... systems) {
-        if (contactPoints != null && !contactPoints.isEmpty()) {
-            for (ContactPointSystem system : systems) {
-                for (IContactPoint contactPoint : contactPoints) {
-                    if (contactPoint.getSystem() == system) {
-                        return contactPoint;
-                    }
-                }
-            }
-        }
-
-        return null;
-    }
-
     ContactPointSystem getSystem();
 
-    default IContactPoint setSystem(ContactPointSystem system) {
+    default void setSystem(ContactPointSystem system) {
         throw new UnsupportedOperationException();
     }
 
@@ -71,7 +26,7 @@ public interface IContactPoint {
 
     String getValue();
 
-    default IContactPoint setValue(String value) {
+    default void setValue(String value) {
         throw new UnsupportedOperationException();
     }
 
@@ -83,7 +38,7 @@ public interface IContactPoint {
         return null;
     }
 
-    default IContactPoint setUse(ContactPointUse use) {
+    default void setUse(ContactPointUse use) {
         throw new UnsupportedOperationException();
     }
 
@@ -95,7 +50,7 @@ public interface IContactPoint {
         return 0;
     }
 
-    default IContactPoint setRank(Integer rank) {
+    default void setRank(Integer rank) {
         throw new UnsupportedOperationException();
     }
 
@@ -107,7 +62,7 @@ public interface IContactPoint {
         return null;
     }
 
-    default IContactPoint setPeriod(IPeriod period) {
+    default void setPeriod(IPeriod period) {
         throw new UnsupportedOperationException();
     }
 

@@ -23,9 +23,8 @@ public class PersonName implements IPersonName {
     }
 
     @Override
-    public IPersonName setFamilyName(String familyName) {
+    public void setFamilyName(String familyName) {
         this.familyName = familyName;
-        return this;
     }
 
     @Override
@@ -49,9 +48,8 @@ public class PersonName implements IPersonName {
     }
 
     @Override
-    public IPersonName setUse(PersonNameUse category) {
+    public void setUse(PersonNameUse category) {
         this.category = category;
-        return this;
     }
 
     @Override

@@ -41,7 +41,7 @@ public class EncounterSearchCriteria extends SearchCriteria {
     private DateRange period;
 
     public EncounterSearchCriteria() {
-        super("Insufficent search parameters.");
+        super("Insufficient search parameters.");
     }
 
     /**

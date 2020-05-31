@@ -7,15 +7,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * This Source Code Form is also subject to the terms of the Health-Related
  * Additional Disclaimer of Warranty and Limitation of Liability available at
  *
@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.shell.layout;
 
-import org.fujion.common.MiscUtil;
+import org.fujion.common.CollectionUtil;
 import org.fujionclinical.api.property.IPropertyProvider;
 import org.fujionclinical.shell.plugins.PluginDefinition;
 import org.w3c.dom.Element;
@@ -38,27 +38,30 @@ import java.util.*;
 public abstract class LayoutNode implements IPropertyProvider {
 
     protected static final String NULL_VALUE = "\\null\\";
-    
+
     private final Map<String, String> attributes = new HashMap<>();
 
     private final String tagName;
-    
+
     private final LayoutNode parent;
-    
+
     private final List<LayoutNode> children = new ArrayList<>();
 
     private final PluginDefinition pluginDefinition;
 
-    protected LayoutNode(String tagName, LayoutNode parent, PluginDefinition pluginDefinition) {
+    protected LayoutNode(
+            String tagName,
+            LayoutNode parent,
+            PluginDefinition pluginDefinition) {
         this.tagName = tagName;
         this.parent = parent;
         this.pluginDefinition = pluginDefinition;
-        
+
         if (parent != null) {
             parent.getChildren().add(this);
         }
     }
-    
+
     /**
      * Returns the tag name used when serializing this node.
      *
@@ -67,17 +70,17 @@ public abstract class LayoutNode implements IPropertyProvider {
     protected String getTagName() {
         return tagName;
     }
-    
+
     protected PluginDefinition getDefinition() {
         return pluginDefinition;
     }
-    
+
     protected List<LayoutNode> getChildren() {
         return children;
     }
 
     protected <T extends LayoutNode> T getChild(Class<T> clazz) {
-        Iterator<T> iter = MiscUtil.iteratorForType(children, clazz);
+        Iterator<T> iter = CollectionUtil.iteratorForType(children, clazz);
         return iter.hasNext() ? iter.next() : null;
     }
 
@@ -115,7 +118,7 @@ public abstract class LayoutNode implements IPropertyProvider {
     public boolean hasProperty(String key) {
         return attributes.containsKey(key);
     }
-    
+
     /**
      * Creates a DOM node from this layout node.
      *

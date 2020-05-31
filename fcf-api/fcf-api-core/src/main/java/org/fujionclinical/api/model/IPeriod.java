@@ -6,7 +6,7 @@ public interface IPeriod {
 
     Date getStartDate();
 
-    default IPeriod setStartDate(Date startDate) {
+    default void setStartDate(Date startDate) {
         throw new UnsupportedOperationException();
     }
 
@@ -16,7 +16,7 @@ public interface IPeriod {
 
     Date getEndDate();
 
-    default IPeriod setEndDate(Date endDate) {
+    default void setEndDate(Date endDate) {
         throw new UnsupportedOperationException();
     }
 

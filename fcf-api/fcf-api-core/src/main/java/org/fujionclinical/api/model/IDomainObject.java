@@ -25,11 +25,12 @@
  */
 package org.fujionclinical.api.model;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.fujion.common.CollectionUtil;
 
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Interface for a domain object.
@@ -43,10 +44,21 @@ public interface IDomainObject extends Serializable {
      */
     String getId();
 
-    default IDomainObject setId(String id) {
+    /**
+     * Sets the logical identifier for the domain object.  The default
+     * implementation throws an unsupported operation exception.
+     *
+     * @param id The new logical identifier.
+     */
+    default void setId(String id) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Returns true if a logical identifier is present.
+     *
+     * @return True if a logical identifier is present.
+     */
     default boolean hasId() {
         return getId() != null;
     }
@@ -67,17 +79,37 @@ public interface IDomainObject extends Serializable {
      * @return A matching identifier (possibly null)
      */
     default IIdentifier getIdentifier(String system) {
-        for (IIdentifier identifier : getIdentifiers()) {
-            if (system.equals(identifier.getSystem())) {
-                return identifier;
-            }
-        }
-
-        return null;
+        return getIdentifier(identifier -> system.equals(identifier.getSystem()));
     }
 
+    /**
+     * Returns the first identifier that matches the specified criteria.
+     *
+     * @param criteria A function that returns true when a match is found.
+     * @return A matching identifier (possibly null).
+     */
+    default IIdentifier getIdentifier(Predicate<IIdentifier> criteria) {
+        return CollectionUtil.findMatch(getIdentifiers(), criteria);
+    }
+
+    /**
+     * Returns true if at least one identifier is present.
+     *
+     * @return True if at least one identifier is present.
+     */
     default boolean hasIdentifier() {
-        return !CollectionUtils.isEmpty(getIdentifiers());
+        return CollectionUtil.notEmpty(getIdentifiers());
+    }
+
+    /**
+     * Returns true if two domain objects represent the same entity (i.e.,
+     * have the same logical identifier and type).
+     *
+     * @param object The domain object to compare to this one.
+     * @return True if both objects represent the same entity.
+     */
+    default boolean isSame(IDomainObject object) {
+        return object != null && object.getClass() == getClass() && object.getId().equals(getId());
     }
 
     /**
@@ -89,4 +121,5 @@ public interface IDomainObject extends Serializable {
     default Object getNative() {
         return this;
     }
+
 }

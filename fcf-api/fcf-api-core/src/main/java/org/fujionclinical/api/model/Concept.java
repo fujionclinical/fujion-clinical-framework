@@ -22,9 +22,8 @@ public class Concept implements IConcept {
     }
 
     @Override
-    public IConcept setText(String text) {
+    public void setText(String text) {
         this.text = text;
-        return this;
     }
 
     @Override

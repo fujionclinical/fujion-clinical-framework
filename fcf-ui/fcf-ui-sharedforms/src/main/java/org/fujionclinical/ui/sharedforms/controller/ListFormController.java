@@ -47,9 +47,9 @@ import java.util.List;
 /**
  * Controller for list view based forms.
  *
- * @param <DAO> Data access object type.
+ * @param <T> The type of data object being rendered.
  */
-public abstract class ListFormController<DAO> extends CaptionedFormController {
+public abstract class ListFormController<T> extends CaptionedFormController {
     
     private static final String SORT_TYPE_ATTR = "@sort_type";
     
@@ -92,12 +92,12 @@ public abstract class ListFormController<DAO> extends CaptionedFormController {
     
     private boolean sortAscending;
     
-    protected final ListModel<DAO> model = new ListModel<>();
+    protected final ListModel<T> model = new ListModel<>();
     
-    private final IComponentRenderer<Row, DAO> renderer = new IComponentRenderer<Row, DAO>() {
+    private final IComponentRenderer<Row, T> renderer = new IComponentRenderer<Row, T>() {
         
         @Override
-        public Row render(DAO object) {
+        public Row render(T object) {
             Row row = new Row();
             row.setData(object);
             row.addEventForward(ClickEvent.TYPE, grid, ChangeEvent.TYPE);
@@ -286,11 +286,11 @@ public abstract class ListFormController<DAO> extends CaptionedFormController {
     }
     
     @SuppressWarnings("unchecked")
-    protected DAO getSelectedValue() {
+    protected T getSelectedValue() {
         Row item = getSelectedRow();
         
         if (item != null) {
-            return (DAO) item.getData();
+            return (T) item.getData();
         }
         
         return null;
@@ -313,25 +313,25 @@ public abstract class ListFormController<DAO> extends CaptionedFormController {
     }
     
     /**
-     * Converts a DAO object for rendering.
+     * Converts a data object for rendering.
      *
-     * @param dao DAO object to be rendered.
+     * @param object T data object to be rendered.
      * @param columns Returns a list of objects to render, one per column.
      */
-    protected abstract void render(DAO dao, List<Object> columns);
+    protected abstract void render(T object, List<Object> columns);
     
     /**
      * Render a single row.
      *
      * @param row Row being rendered.
-     * @param dao DAO object
+     * @param object Data object
      */
-    protected void renderRow(Row row, DAO dao) {
+    protected void renderRow(Row row, T object) {
         List<Object> columns = new ArrayList<>();
         boolean error = false;
         
         try {
-            render(dao, columns);
+            render(object, columns);
         } catch (Exception e) {
             columns.clear();
             columns.add(FCFUtil.formatExceptionForDisplay(e));

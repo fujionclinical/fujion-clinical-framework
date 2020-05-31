@@ -1,15 +1,15 @@
 package org.fujionclinical.api.model;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.fujion.common.MiscUtil;
+import org.fujion.common.CollectionUtil;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 public interface IConcept {
 
     String getText();
 
-    default IConcept setText(String text) {
+    default void setText(String text) {
         throw new UnsupportedOperationException();
     }
 
@@ -19,18 +19,24 @@ public interface IConcept {
 
     List<IConceptCode> getCodes();
 
-    default IConcept setCodes(List<IConceptCode> codes) {
-        MiscUtil.replaceList(getCodes(), codes);
-        return this;
+    default void setCodes(List<IConceptCode> codes) {
+        CollectionUtil.replaceList(getCodes(), codes);
+    }
+
+    default IConceptCode getCode(String system) {
+        return getCode(code -> system.equals(code.getSystem()));
+    }
+
+    default IConceptCode getCode(Predicate<IConceptCode> criteria) {
+        return CollectionUtil.findMatch(getCodes(), criteria);
     }
 
     default boolean hasCode() {
-        return !CollectionUtils.isEmpty(getCodes());
+        return CollectionUtil.notEmpty(getCodes());
     }
 
-    default IConcept addCode(ConceptCode code) {
+    default void addCode(ConceptCode code) {
         getCodes().add(code);
-        return this;
     }
 
 }

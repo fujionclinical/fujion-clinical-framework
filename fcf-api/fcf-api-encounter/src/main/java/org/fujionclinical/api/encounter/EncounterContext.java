@@ -44,6 +44,8 @@ public class EncounterContext extends ManagedContext<IEncounter> {
 
     private static final Log log = LogFactory.getLog(EncounterContext.class);
 
+    private boolean fromEncounter;
+
     private IEncounterContextSubscriber encounterContextSubscriber = new IEncounterContextSubscriber() {
         @Override
         public void pending(ISurveyResponse response) {
@@ -51,6 +53,7 @@ public class EncounterContext extends ManagedContext<IEncounter> {
             IPatient patient = encounter == null ? null : encounter.getPatient();
 
             if (patient != null) {
+                fromEncounter = true;
                 PatientContext.changePatient(patient);
             }
         }
@@ -72,13 +75,16 @@ public class EncounterContext extends ManagedContext<IEncounter> {
 
         @Override
         public void committed() {
-            if (!isPending()) {
+            if (!fromEncounter) {
                 changeEncounter(null);
+            } else {
+                fromEncounter = false;
             }
         }
 
         @Override
         public void canceled() {
+            fromEncounter = false;
         }
     };
 
@@ -128,6 +134,7 @@ public class EncounterContext extends ManagedContext<IEncounter> {
     public EncounterContext(IEncounter encounter) {
         super(SUBJECT_NAME, IEncounterContextSubscriber.class, encounter);
         PatientContext.getPatientContext().addSubscriber(patientContextSubscriber);
+        addSubscriber(encounterContextSubscriber);
     }
 
     /**

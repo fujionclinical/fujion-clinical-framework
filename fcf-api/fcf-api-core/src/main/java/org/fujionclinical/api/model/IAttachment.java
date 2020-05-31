@@ -24,7 +24,7 @@ public interface IAttachment {
 
     String getContentType();
 
-    default IAttachment setContentType(String contentType) {
+    default void setContentType(String contentType) {
         throw new UnsupportedOperationException();
     }
 
@@ -34,7 +34,7 @@ public interface IAttachment {
 
     String getTitle();
 
-    default IAttachment setTitle(String title) {
+    default void setTitle(String title) {
         throw new UnsupportedOperationException();
     }
 
@@ -44,13 +44,13 @@ public interface IAttachment {
 
     String getEncodedData();
 
-    default IAttachment setEncodedData(String encodedData) {
+    default void setEncodedData(String encodedData) {
         throw new UnsupportedOperationException();
     }
 
     byte[] getRawData();
 
-    default IAttachment setRawData(byte[] rawData) {
+    default void setRawData(byte[] rawData) {
         throw new UnsupportedOperationException();
     }
 
@@ -58,7 +58,7 @@ public interface IAttachment {
 
     String getURL();
 
-    default IAttachment setURL(String url) {
+    default void setURL(String url) {
         throw new UnsupportedOperationException();
     }
 
@@ -78,10 +78,9 @@ public interface IAttachment {
         return null;
     }
 
-    default IAttachment setContent(MimeContent content) {
+    default void setContent(MimeContent content) {
         setURL(content.getSrc());
         setContentType(content.getMimeType());
         setRawData(content.getData());
-        return this;
     }
 }
