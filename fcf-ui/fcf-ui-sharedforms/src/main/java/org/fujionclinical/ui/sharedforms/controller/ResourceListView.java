@@ -29,7 +29,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.annotation.WiredComponent;
-import org.fujion.common.DateUtil;
 import org.fujion.component.BaseComponent;
 import org.fujion.component.Html;
 import org.fujion.component.Row;
@@ -38,18 +37,23 @@ import org.fujion.page.PageUtil;
 import org.fujion.thread.ICancellable;
 import org.fujion.thread.ThreadedTask;
 import org.fujionclinical.api.event.IEventSubscriber;
-import org.fujionclinical.api.model.*;
+import org.fujionclinical.api.model.DomainDAORegistry;
+import org.fujionclinical.api.model.IDomainDAO;
+import org.fujionclinical.api.model.IDomainObject;
 import org.fujionclinical.api.patient.IPatient;
 import org.fujionclinical.api.patient.PatientContext;
 import org.fujionclinical.api.query.IQueryContext;
 import org.fujionclinical.api.query.QueryContext;
+import org.fujionclinical.api.query.QueryExpression;
 import org.fujionclinical.api.query.QueryExpressionParser;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.ui.dialog.DialogUtil;
 import org.fujionclinical.ui.util.FCFUtil;
 import org.springframework.util.Assert;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Controller for displaying FHIR resources in a columnar format.
@@ -76,17 +80,17 @@ public abstract class ResourceListView<R extends IDomainObject, M> extends ListF
 
     private String detailTitle;
 
-    private String resourceQuery;
+    private QueryExpression queryExpression;
 
     protected void setup(
             Class<R> resourceClass,
             String title,
             String detailTitle,
-            String resourceQuery,
+            String queryString,
             int sortBy,
             String... headers) {
         this.detailTitle = detailTitle;
-        this.resourceQuery = resourceQuery;
+        this.queryExpression = QueryExpressionParser.getInstance().parse(resourceClass, queryString);
         this.resourceClass = resourceClass;
         super.setup(title, sortBy, headers);
     }
@@ -112,7 +116,7 @@ public abstract class ResourceListView<R extends IDomainObject, M> extends ListF
         startBackgroundThread(map -> {
             IDomainDAO<R> dao = DomainDAORegistry.getDAO(resourceClass);
             Assert.notNull(dao, () -> "Cannot find DAO for " + resourceClass);
-            map.put("results", dao.search(QueryExpressionParser.getInstance().parse(resourceClass, resourceQuery, queryContext)));
+            map.put("results", dao.search(queryExpression, queryContext));
         });
     }
 

@@ -7,15 +7,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * This Source Code Form is also subject to the terms of the Health-Related
  * Additional Disclaimer of Warranty and Limitation of Liability available at
  *
@@ -31,47 +31,43 @@ import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.Assert;
 
 import java.beans.PropertyDescriptor;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
-public abstract class QueryExpressionNormalizer<PROP, OPD> {
+/**
+ * Represents a fragment of a query expression (i.e., property name, operator, operands).
+ */
+public class QueryExpressionFragment<PROP, OPD> {
 
-    private final Class<PROP> propertyType;
+    public final String propertyName;
 
-    private final int maxOperands;
+    public final Class<PROP> propertyType;
 
-    private final Set<QueryOperator> validOperators = new HashSet<>();
+    public final QueryOperator operator;
 
-    public QueryExpressionNormalizer(
-            Class<PROP> propertyType,
-            int maxOperands,
-            QueryOperator... validOperators) {
-        this.propertyType = propertyType;
-        this.maxOperands = maxOperands;
-        this.validOperators.addAll(Arrays.asList(validOperators));
-    }
+    public final String[] operands;
 
-    protected abstract OPD normalize(
-            Object operand,
-            OPD previousOperand);
+    public final QueryExpressionResolver<PROP, OPD> resolver;
 
-    public QueryExpressionTuple createTuple(
-            PropertyDescriptor propDx,
-            IQueryContext queryContext,
+    public QueryExpressionFragment(
+            PropertyDescriptor propertyDescriptor,
+            QueryExpressionResolver<PROP, OPD> resolver,
             QueryOperator operator,
             String... operands) {
-        QueryParameter annot = AnnotationUtils.findAnnotation(propDx.getReadMethod(), QueryParameter.class);
-        Assert.notNull(annot, () -> "The property '" + propDx.getName() + "' is not a valid query parameter.");
-        String propertyName = StringUtils.defaultIfBlank(annot.value(), propDx.getName());
-        Assert.isTrue(validOperators.contains(operator), () -> "Not a valid operator: '" + operator + "'.");
-        Assert.isTrue(operands.length <= maxOperands, () -> "Operand maximum of " + maxOperands + " exceeded.");
+        QueryParameter annot = AnnotationUtils.findAnnotation(propertyDescriptor.getReadMethod(), QueryParameter.class);
+        Assert.notNull(annot, () -> "The property '" + propertyDescriptor.getName() + "' is not a valid query parameter.");
+        this.propertyName = StringUtils.defaultIfBlank(annot.value(), propertyDescriptor.getName());
+        this.propertyType = (Class<PROP>) propertyDescriptor.getPropertyType();
+        this.operator = operator;
+        this.resolver = resolver;
+        this.operands = operands;
+        resolver.validate(this);
+    }
+
+    public QueryExpressionTuple createTuple(IQueryContext queryContext) {
         OPD[] resolvedOperands = (OPD[]) new Object[operands.length];
-        int index = -1;
+        int index = 0;
+        OPD resolvedOperand = null;
 
         for (String opd : operands) {
-            OPD previousOperand = index == -1 ? null : resolvedOperands[index];
-            index++;
             String operandStr = opd.trim();
             Object operand;
 
@@ -83,9 +79,9 @@ public abstract class QueryExpressionNormalizer<PROP, OPD> {
                 operand = operandStr;
             }
 
-            OPD resolvedOperand = normalize(operand, previousOperand);
+            resolvedOperand = resolver.resolve(operand, resolvedOperand);
             Assert.notNull(resolvedOperand, () -> "Operand '" + operandStr + "' cannot be converted to " + propertyType + ".");
-            resolvedOperands[index] = resolvedOperand;
+            resolvedOperands[index++] = resolvedOperand;
         }
 
         return new QueryExpressionTuple(propertyName, propertyType, operator, resolvedOperands);
@@ -111,10 +107,6 @@ public abstract class QueryExpressionNormalizer<PROP, OPD> {
         } catch (Exception e) {
             return null;
         }
-    }
-
-    public Class<PROP> getPropertyType() {
-        return propertyType;
     }
 
 }

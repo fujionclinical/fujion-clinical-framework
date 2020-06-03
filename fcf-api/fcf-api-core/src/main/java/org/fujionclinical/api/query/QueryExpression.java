@@ -29,24 +29,31 @@ import org.fujionclinical.api.model.IDomainObject;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class QueryExpression<T extends IDomainObject> {
 
     private final Class<T> domainClass;
 
-    private final List<QueryExpressionTuple> tuples;
+    private final List<QueryExpressionFragment> fragments;
 
-    public QueryExpression(Class<T> domainClass, List<QueryExpressionTuple> tuples) {
+    public QueryExpression(Class<T> domainClass, List<QueryExpressionFragment> fragments) {
         this.domainClass = domainClass;
-        this.tuples = Collections.unmodifiableList(tuples);
+        this.fragments = fragments;
     }
 
     public Class<T> getDomainClass() {
         return domainClass;
     }
 
-    public List<QueryExpressionTuple> getTuples() {
-        return tuples;
+    public List<QueryExpressionTuple> resolve() {
+        return resolve(null);
+    }
+
+    public List<QueryExpressionTuple> resolve(IQueryContext queryContext) {
+        return fragments.stream()
+                .map(fragment -> fragment.createTuple(queryContext))
+                .collect(Collectors.toList());
     }
 
 }

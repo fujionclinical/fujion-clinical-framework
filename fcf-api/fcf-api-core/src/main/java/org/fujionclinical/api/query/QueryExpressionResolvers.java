@@ -27,23 +27,28 @@ package org.fujionclinical.api.query;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.fujion.common.DateUtil;
+import org.fujion.common.MiscUtil;
 import org.fujionclinical.api.model.ConceptCode;
 import org.fujionclinical.api.model.IConceptCode;
 import org.fujionclinical.api.model.IDomainObject;
 import org.fujionclinical.api.model.person.IPersonName;
+import org.springframework.util.Assert;
 
+import java.beans.PropertyDescriptor;
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
-class QueryExpressionNormalizers {
+class QueryExpressionResolvers {
 
-    static class StringNormalizer extends QueryExpressionNormalizer<String, String> {
+    static class StringNormalizer extends QueryExpressionResolver<String, String> {
 
         public StringNormalizer() {
             super(String.class, Integer.MAX_VALUE, QueryOperator.values());
         }
 
         @Override
-        protected String normalize(
+        protected String resolve(
                 Object operand,
                 String previousOperand) {
             return operand instanceof String ? (String) operand : null;
@@ -51,14 +56,14 @@ class QueryExpressionNormalizers {
 
     }
 
-    static class BooleanNormalizer extends QueryExpressionNormalizer<Boolean, Boolean> {
+    static class BooleanNormalizer extends QueryExpressionResolver<Boolean, Boolean> {
 
         public BooleanNormalizer() {
             super(Boolean.class, 1, QueryOperator.EQ);
         }
 
         @Override
-        protected Boolean normalize(
+        protected Boolean resolve(
                 Object operand,
                 Boolean previousOperand) {
             return operand instanceof Boolean ? (Boolean) operand
@@ -68,14 +73,14 @@ class QueryExpressionNormalizers {
 
     }
 
-    static class DateNormalizer extends QueryExpressionNormalizer<Date, Date> {
+    static class DateNormalizer extends QueryExpressionResolver<Date, Date> {
 
         public DateNormalizer() {
             super(Date.class, 1, QueryOperator.EQ, QueryOperator.GE, QueryOperator.GT, QueryOperator.LE, QueryOperator.LT);
         }
 
         @Override
-        protected Date normalize(
+        protected Date resolve(
                 Object operand,
                 Date previousOperand) {
             return operand instanceof Date ? (Date) operand
@@ -85,14 +90,14 @@ class QueryExpressionNormalizers {
 
     }
 
-    static class DomainObjectNormalizer extends QueryExpressionNormalizer<IDomainObject, String> {
+    static class DomainObjectNormalizer extends QueryExpressionResolver<IDomainObject, String> {
 
         public DomainObjectNormalizer() {
             super(IDomainObject.class, 1, QueryOperator.EQ);
         }
 
         @Override
-        protected String normalize(
+        protected String resolve(
                 Object operand,
                 String previousOperand) {
             return operand instanceof IDomainObject ? ((IDomainObject) operand).getId()
@@ -102,7 +107,7 @@ class QueryExpressionNormalizers {
 
     }
 
-    static class ConceptCodeNormalizer extends QueryExpressionNormalizer<IConceptCode, IConceptCode> {
+    static class ConceptCodeNormalizer extends QueryExpressionResolver<IConceptCode, IConceptCode> {
 
         public ConceptCodeNormalizer() {
             super(IConceptCode.class, Integer.MAX_VALUE, QueryOperator.EQ);
@@ -119,7 +124,7 @@ class QueryExpressionNormalizers {
         }
 
         @Override
-        protected IConceptCode normalize(
+        protected IConceptCode resolve(
                 Object operand,
                 IConceptCode previousOperand) {
             return operand instanceof IConceptCode ? (IConceptCode) operand
@@ -129,14 +134,14 @@ class QueryExpressionNormalizers {
 
     }
 
-    static class PersonNameNormalizer extends QueryExpressionNormalizer<IPersonName, String> {
+    static class PersonNameNormalizer extends QueryExpressionResolver<IPersonName, String> {
 
         public PersonNameNormalizer() {
             super(IPersonName.class, 1, QueryOperator.EQ, QueryOperator.SW);
         }
 
         @Override
-        protected String normalize(
+        protected String resolve(
                 Object operand,
                 String previousOperand) {
             return operand instanceof String ? (String) operand
@@ -146,16 +151,32 @@ class QueryExpressionNormalizers {
 
     }
 
-    static void registerNormalizers(QueryExpressionParser parser) {
-        parser.registerNormalizer(new StringNormalizer());
-        parser.registerNormalizer(new BooleanNormalizer());
-        parser.registerNormalizer(new DateNormalizer());
-        parser.registerNormalizer(new DomainObjectNormalizer());
-        parser.registerNormalizer(new ConceptCodeNormalizer());
-        parser.registerNormalizer(new PersonNameNormalizer());
+    private static final Map<Class<?>, QueryExpressionResolver> resolvers = new LinkedHashMap<>();
+
+    static {
+        registerResolver(new StringNormalizer());
+        registerResolver(new BooleanNormalizer());
+        registerResolver(new DateNormalizer());
+        registerResolver(new DomainObjectNormalizer());
+        registerResolver(new ConceptCodeNormalizer());
+        registerResolver(new PersonNameNormalizer());
     }
 
-    private QueryExpressionNormalizers() {
+    public static void registerResolver(QueryExpressionResolver resolver) {
+        resolvers.put(resolver.getPropertyType(), resolver);
+    }
+
+    public static QueryExpressionResolver getResolver(
+            PropertyDescriptor dx,
+            String propName) {
+        Class<?> propertyType = dx.getPropertyType();
+        Class<?> key = propertyType == null ? null : MiscUtil.firstAssignable(propertyType, resolvers.keySet());
+        QueryExpressionResolver resolver = key == null ? null : resolvers.get(key);
+        Assert.notNull(resolver, () -> "No resolver found for property '" + propName + "'.");
+        return resolver;
+    }
+
+    private QueryExpressionResolvers() {
 
     }
 

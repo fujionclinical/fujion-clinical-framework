@@ -25,7 +25,9 @@
  */
 package org.fujionclinical.api.model;
 
+import org.fujionclinical.api.query.IQueryContext;
 import org.fujionclinical.api.query.QueryExpression;
+import org.fujionclinical.api.query.QueryExpressionTuple;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +93,28 @@ public interface IDomainDAO<T extends IDomainObject> {
      * @param query The query expression.
      * @return A list of matching domain objects.
      */
-    List<T> search(QueryExpression query);
+    default List<T> search(QueryExpression query) {
+        return search(query, null);
+    }
+
+    /**
+     * Performs a query, returning a list of matching domain objects.
+     *
+     * @param query The query expression.
+     * @param queryContext The query context (may be null).
+     * @return A list of matching domain objects.
+     */
+    default List<T> search(QueryExpression query, IQueryContext queryContext) {
+        return search(query.resolve(queryContext));
+    }
+
+    /**
+     * Performs a query, returning a list of matching domain objects.
+     *
+     * @param tuples A list of query tuples.
+     * @return A list of matching domain objects.
+     */
+    List<T> search(List<QueryExpressionTuple> tuples);
 
     /**
      * Returns the type of domain object created by this factory.
