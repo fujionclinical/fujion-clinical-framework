@@ -33,13 +33,13 @@ import org.fujion.event.IEventListener;
 import org.fujion.thread.ICancellable;
 import org.fujion.thread.ThreadUtil;
 import org.fujion.thread.ThreadedTask;
-import org.fujionclinical.api.AppFramework;
-import org.fujionclinical.api.FrameworkUtil;
+import org.fujionclinical.api.core.AppFramework;
+import org.fujionclinical.api.core.FrameworkUtil;
 import org.fujionclinical.api.event.EventManager;
 import org.fujionclinical.api.event.IEventManager;
 import org.fujionclinical.api.event.IEventSubscriber;
 import org.fujionclinical.api.spring.SpringUtil;
-import org.fujionclinical.ui.Constants;
+import org.fujionclinical.ui.core.Constants;
 import org.springframework.context.ApplicationContext;
 
 import java.util.ArrayList;

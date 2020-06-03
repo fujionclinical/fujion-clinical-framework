@@ -35,12 +35,12 @@ import org.fujion.client.ExecutionContext;
 import org.fujion.common.StrUtil;
 import org.fujion.component.*;
 import org.fujion.core.RequestUtil;
-import org.fujionclinical.api.IThrowableContext;
+import org.fujionclinical.api.core.IThrowableContext;
 import org.fujionclinical.api.security.SecurityUtil;
 import org.springframework.core.NestedCheckedException;
 import org.springframework.core.NestedRuntimeException;
 import org.springframework.web.util.WebUtils;
-import org.fujionclinical.ui.Constants;
+import org.fujionclinical.ui.core.Constants;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;

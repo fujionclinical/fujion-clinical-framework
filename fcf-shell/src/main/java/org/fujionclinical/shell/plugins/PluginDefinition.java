@@ -28,7 +28,7 @@ package org.fujionclinical.shell.plugins;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.common.MiscUtil;
-import org.fujionclinical.api.ManifestIterator;
+import org.fujionclinical.api.core.ManifestIterator;
 import org.fujionclinical.api.property.IPropertyProvider;
 import org.fujionclinical.api.security.SecurityUtil;
 import org.fujionclinical.shell.ancillary.FCFException;

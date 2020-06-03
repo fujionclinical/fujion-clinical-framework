@@ -27,7 +27,7 @@ package org.fujionclinical.shell;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.fujionclinical.api.IRegisterEvent;
+import org.fujionclinical.api.core.IRegisterEvent;
 
 import java.util.ArrayList;
 import java.util.List;

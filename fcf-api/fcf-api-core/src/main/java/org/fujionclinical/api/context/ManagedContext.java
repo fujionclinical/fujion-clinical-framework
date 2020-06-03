@@ -28,10 +28,10 @@ package org.fujionclinical.api.context;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.fujionclinical.api.AppFramework;
-import org.fujionclinical.api.IRegisterEvent;
-import org.fujionclinical.api.StopWatchFactory;
-import org.fujionclinical.api.StopWatchFactory.IStopWatch;
+import org.fujionclinical.api.core.AppFramework;
+import org.fujionclinical.api.core.IRegisterEvent;
+import org.fujionclinical.api.core.StopWatchFactory;
+import org.fujionclinical.api.core.StopWatchFactory.IStopWatch;
 import org.fujionclinical.api.context.ISurveyResponse.ISurveyCallback;
 import org.fujionclinical.api.context.SurveyResponse.ResponseState;
 import org.fujionclinical.api.event.IEventManager;
@@ -479,7 +479,7 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
     /**
      * Register an object as a subscriber if it implements the callback interface.
      *
-     * @see org.fujionclinical.api.IRegisterEvent#registerObject(Object)
+     * @see IRegisterEvent#registerObject(Object)
      * @param object Object to register.
      */
     @Override
@@ -492,7 +492,7 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
     /**
      * Remove an object as a subscriber if it implements the callback interface.
      *
-     * @see org.fujionclinical.api.IRegisterEvent#unregisterObject(Object)
+     * @see IRegisterEvent#unregisterObject(Object)
      * @param object Object to unregister.
      */
     @Override

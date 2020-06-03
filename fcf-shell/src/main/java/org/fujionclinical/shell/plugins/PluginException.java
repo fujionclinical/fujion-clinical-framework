@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.shell.plugins;
 
-import org.fujionclinical.api.FrameworkRuntimeException;
+import org.fujionclinical.api.core.FrameworkRuntimeException;
 
 /**
  * Superclass for all exceptions thrown due to a plugin-related error.

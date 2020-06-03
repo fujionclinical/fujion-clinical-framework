@@ -27,7 +27,7 @@ package org.fujionclinical.shell;
 
 import org.fujion.client.ExecutionContext;
 import org.fujion.component.BaseUIComponent;
-import org.fujionclinical.api.ManifestIterator;
+import org.fujionclinical.api.core.ManifestIterator;
 import org.fujionclinical.help.HelpContext;
 import org.fujionclinical.help.viewer.HelpUtil;
 import org.fujionclinical.ui.action.ActionRegistry;

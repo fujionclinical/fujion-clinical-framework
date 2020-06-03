@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.shell.plugins;
 
-import org.fujionclinical.api.FrameworkUtil;
+import org.fujionclinical.api.core.FrameworkUtil;
 import org.fujionclinical.shell.elements.ElementPlugin;
 
 import java.util.ArrayList;

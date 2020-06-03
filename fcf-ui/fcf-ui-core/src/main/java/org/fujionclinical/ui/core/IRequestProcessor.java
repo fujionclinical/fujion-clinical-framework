@@ -23,15 +23,20 @@
  *
  * #L%
  */
-package org.fujionclinical.api;
+package org.fujionclinical.ui.core;
 
-public interface IThrowableContext {
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * <b>Implementations of RequestProcessor are assumed to be stateless and thread-safe.</b> Servlets
+ * typically run on multithreaded servers, so be aware that a servlet must handle concurrent
+ * requests and be careful to synchronize access to shared resources. Shared resources include
+ * in-memory data such as instance or class variables and external objects such as files, database
+ * connections, and network connections.
+ */
+public interface IRequestProcessor {
     
-    /**
-     * Provide additional contextual information regarding the exception
-     * 
-     * @return String additional contextual information
-     */
-    String getThrowableContext();
+    void process(HttpServletRequest req, HttpServletResponse res);
     
 }

@@ -29,7 +29,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.common.DateUtil;
 import org.fujion.component.Listitem;
-import org.fujionclinical.api.FrameworkUtil;
+import org.fujionclinical.api.core.FrameworkUtil;
 import org.fujionclinical.api.patient.IPatient;
 import org.fujionclinical.ui.controller.FrameworkController;
 

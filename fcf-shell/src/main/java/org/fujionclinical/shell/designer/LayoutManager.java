@@ -40,7 +40,7 @@ import org.fujion.event.UploadEvent.UploadState;
 import org.fujion.model.IComponentRenderer;
 import org.fujion.model.IModelAndView;
 import org.fujion.model.ListModel;
-import org.fujionclinical.api.FrameworkUtil;
+import org.fujionclinical.api.core.FrameworkUtil;
 import org.fujionclinical.shell.Constants;
 import org.fujionclinical.shell.layout.Layout;
 import org.fujionclinical.shell.layout.LayoutIdentifier;

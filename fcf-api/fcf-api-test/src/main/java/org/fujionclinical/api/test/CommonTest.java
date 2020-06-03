@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.test;
 
-import org.fujionclinical.api.AppFramework;
+import org.fujionclinical.api.core.AppFramework;
 import org.fujionclinical.api.context.ContextManager;
 import org.fujionclinical.api.event.EventManager;
 import org.fujionclinical.api.spring.AppContextInitializer;

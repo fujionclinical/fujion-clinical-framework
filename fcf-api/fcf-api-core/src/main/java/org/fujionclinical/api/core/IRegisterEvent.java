@@ -23,7 +23,7 @@
  *
  * #L%
  */
-package org.fujionclinical.api;
+package org.fujionclinical.api.core;
 
 /**
  * Classes that implement this will be notified when an object is registered to or unregistered from

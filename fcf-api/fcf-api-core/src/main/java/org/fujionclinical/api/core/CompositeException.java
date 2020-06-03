@@ -23,7 +23,7 @@
  *
  * #L%
  */
-package org.fujionclinical.api;
+package org.fujionclinical.api.core;
 
 import java.util.ArrayList;
 import java.util.Arrays;

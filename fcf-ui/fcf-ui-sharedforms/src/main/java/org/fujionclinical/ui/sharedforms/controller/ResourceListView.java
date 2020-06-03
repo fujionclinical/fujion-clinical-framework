@@ -112,7 +112,7 @@ public abstract class ResourceListView<R extends IDomainObject, M> extends ListF
         startBackgroundThread(map -> {
             IDomainDAO<R> dao = DomainDAORegistry.getDAO(resourceClass);
             Assert.notNull(dao, () -> "Cannot find DAO for " + resourceClass);
-            map.put("results", dao.search(QueryExpressionParser.parse(resourceClass, resourceQuery, queryContext)));
+            map.put("results", dao.search(QueryExpressionParser.getInstance().parse(resourceClass, resourceQuery, queryContext)));
         });
     }
 

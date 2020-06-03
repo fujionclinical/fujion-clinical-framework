@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.spring;
 
-import org.fujionclinical.api.AppFramework;
+import org.fujionclinical.api.core.AppFramework;
 import org.springframework.context.ApplicationContext;
 
 /**

@@ -27,7 +27,7 @@ package org.fujionclinical.api.patient.list;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.fujionclinical.api.IRegisterEvent;
+import org.fujionclinical.api.core.IRegisterEvent;
 import org.fujionclinical.api.spring.SpringUtil;
 
 import java.util.*;

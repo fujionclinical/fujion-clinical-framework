@@ -23,7 +23,7 @@
  *
  * #L%
  */
-package org.fujionclinical.ui;
+package org.fujionclinical.ui.core;
 
 import org.fujion.common.LocalizedMessage;
 import org.fujionclinical.ui.util.FCFUtil;

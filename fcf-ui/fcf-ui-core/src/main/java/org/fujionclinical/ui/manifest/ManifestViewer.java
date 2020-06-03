@@ -35,7 +35,7 @@ import org.fujion.event.Event;
 import org.fujion.model.IListModel;
 import org.fujion.model.IModelAndView;
 import org.fujion.model.ListModel;
-import org.fujionclinical.api.ManifestIterator;
+import org.fujionclinical.api.core.ManifestIterator;
 import org.fujionclinical.ui.dialog.PopupDialog;
 import org.fujionclinical.ui.util.FCFUtil;
 

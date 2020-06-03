@@ -35,7 +35,7 @@
 		</bean>
 		
 		<!-- Maintains an iterable list of all manifests in the class path. -->
-		<bean id="manifestIterator" class="org.fujionclinical.api.ManifestIterator"
+		<bean id="manifestIterator" class="org.fujionclinical.api.core.ManifestIterator"
 			factory-method="getInstance" init-method="init" />
 
 		<!-- Maintains a registry of all context serializers. -->
@@ -138,7 +138,7 @@
 		<context:annotation-config />
 
 		<!-- Framework support -->
-		<bean id="appFramework" class="org.fujionclinical.api.AppFramework">
+		<bean id="appFramework" class="org.fujionclinical.api.core.AppFramework">
 		</bean>
 
 		<!-- Manages subscription and publication of generic events. -->

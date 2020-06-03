@@ -37,7 +37,7 @@ import org.fujion.event.ChangeEvent;
 import org.fujion.icon.IIconLibrary;
 import org.fujion.icon.IconLibraryRegistry;
 import org.fujion.page.PageUtil;
-import org.fujionclinical.ui.Constants;
+import org.fujionclinical.ui.core.Constants;
 
 import java.util.List;
 

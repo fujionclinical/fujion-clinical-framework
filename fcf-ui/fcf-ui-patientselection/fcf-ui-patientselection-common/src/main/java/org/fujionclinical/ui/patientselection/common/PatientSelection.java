@@ -29,7 +29,7 @@ import org.fujion.ancillary.IResponseCallback;
 import org.fujion.common.StrUtil;
 import org.fujion.component.Window;
 import org.fujion.page.PageUtil;
-import org.fujionclinical.api.FrameworkUtil;
+import org.fujionclinical.api.core.FrameworkUtil;
 import org.fujionclinical.api.patient.IPatient;
 import org.fujionclinical.api.patient.PatientContext;
 import org.fujionclinical.api.property.PropertyUtil;
