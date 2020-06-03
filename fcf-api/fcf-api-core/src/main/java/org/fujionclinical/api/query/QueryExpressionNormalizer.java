@@ -1,6 +1,7 @@
 package org.fujionclinical.api.query;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.Assert;
 
@@ -43,25 +44,48 @@ public abstract class QueryExpressionNormalizer<PROP, OPD> {
         OPD[] resolvedOperands = (OPD[]) new Object[operands.length];
         int index = -1;
 
-        for (String operandStr : operands) {
+        for (String opd : operands) {
             OPD previousOperand = index == -1 ? null : resolvedOperands[index];
             index++;
-            operandStr = operandStr.trim();
+            String operandStr = opd.trim();
             Object operand;
 
             if (operandStr.startsWith("{{") && operandStr.endsWith("}}")) {
                 String placeholder = operandStr.substring(2, operandStr.length() - 2).trim();
-                operand = queryContext == null ? null : queryContext.getParam(placeholder);
+                operand = queryContext == null ? null : resolvePlaceholder(queryContext, placeholder);
                 Assert.notNull(operand, () -> "Unresolvable context placeholder: '" + placeholder + "'.");
             } else {
                 operand = operandStr;
             }
 
-            operand = normalize(operand, previousOperand);
-            Assert.notNull(operand, () -> "Context value cannot be converted to " + propertyType + ".");
+            OPD resolvedOperand = normalize(operand, previousOperand);
+            Assert.notNull(resolvedOperand, () -> "Operand '" + operandStr + "' cannot be converted to " + propertyType + ".");
+            resolvedOperands[index] = resolvedOperand;
         }
 
         return new QueryExpressionTuple(propertyName, propertyType, operator, resolvedOperands);
+    }
+
+    private Object resolvePlaceholder(
+            IQueryContext queryContext,
+            String placeholder) {
+        try {
+            String[] pcs = placeholder.split("\\.");
+            Object result = queryContext.getParam(pcs[0]);
+
+            for (int i = 1; i < pcs.length; i++) {
+                if (result == null) {
+                    break;
+                }
+
+                PropertyDescriptor dx = BeanUtils.getPropertyDescriptor(result.getClass(), pcs[i]);
+                result = dx.getReadMethod().invoke(result);
+            }
+
+            return result;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public Class<PROP> getPropertyType() {

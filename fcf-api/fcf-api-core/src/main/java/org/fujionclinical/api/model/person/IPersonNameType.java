@@ -1,6 +1,7 @@
 package org.fujionclinical.api.model.person;
 
 import org.fujion.common.CollectionUtil;
+import org.fujionclinical.api.query.QueryParameter;
 
 import java.util.Collections;
 import java.util.List;
@@ -24,8 +25,9 @@ public interface IPersonNameType {
      *
      * @return The parsed name, or null if not found.
      */
+    @QueryParameter
     default IPersonName getName() {
-        return getName(IPersonName.PersonNameUse.USUAL);
+        return getName(IPersonName.PersonNameUse.USUAL, IPersonName.PersonNameUse.ANY);
     }
 
     /**

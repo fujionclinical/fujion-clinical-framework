@@ -5,6 +5,7 @@ import org.fujion.common.DateUtil;
 import org.fujionclinical.api.model.ConceptCode;
 import org.fujionclinical.api.model.IConceptCode;
 import org.fujionclinical.api.model.IDomainObject;
+import org.fujionclinical.api.model.person.IPersonName;
 
 import java.util.Date;
 
@@ -102,14 +103,31 @@ class QueryExpressionNormalizers {
         }
 
     }
-    
+
+    static class PersonNameNormalizer extends QueryExpressionNormalizer<IPersonName, String> {
+
+        public PersonNameNormalizer() {
+            super(IPersonName.class, 1, QueryOperator.EQ, QueryOperator.SW);
+        }
+
+        @Override
+        protected String normalize(
+                Object operand,
+                String previousOperand) {
+            return operand instanceof String ? (String) operand
+                    : operand instanceof IPersonName ? ((IPersonName) operand).asString()
+                    : null;
+        }
+
+    }
+
     static void registerNormalizers(QueryExpressionParser parser) {
         parser.registerNormalizer(new StringNormalizer());
         parser.registerNormalizer(new BooleanNormalizer());
         parser.registerNormalizer(new DateNormalizer());
         parser.registerNormalizer(new DomainObjectNormalizer());
         parser.registerNormalizer(new ConceptCodeNormalizer());
-
+        parser.registerNormalizer(new PersonNameNormalizer());
     }
 
     private QueryExpressionNormalizers() {

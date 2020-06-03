@@ -24,29 +24,33 @@ public class QueryExpressionParser {
 
     private final Map<Class<?>, QueryExpressionNormalizer> normalizers = new LinkedHashMap<>();
 
-    public static <T extends IDomainObject> QueryExpression<T> parse(
+    public static QueryExpressionParser getInstance() {
+        return instance;
+    }
+
+    private QueryExpressionParser() {
+        QueryExpressionNormalizers.registerNormalizers(this);
+    }
+
+    public <T extends IDomainObject> QueryExpression<T> parse(
             Class<T> domainClass,
             String queryString) {
         return parse(domainClass, queryString, null);
     }
 
-    public static <T extends IDomainObject> QueryExpression<T> parse(
+    public <T extends IDomainObject> QueryExpression<T> parse(
             Class<T> domainClass,
             String queryString,
             IQueryContext queryContext) {
         List<QueryExpressionTuple> tuples = Arrays.stream(TUPLE_DELIMITER.split(queryString))
-                .map(tuple -> instance.parseFragment(domainClass, tuple, queryContext))
+                .map(tuple -> parseFragment(domainClass, tuple, queryContext))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
         return new QueryExpression<T>(domainClass, tuples);
     }
 
-    public static void registerNormalizer(QueryExpressionNormalizer normalizer) {
-        instance.normalizers.put(normalizer.getPropertyType(), normalizer);
-    }
-
-    private QueryExpressionParser() {
-        QueryExpressionNormalizers.registerNormalizers(this);
+    public void registerNormalizer(QueryExpressionNormalizer normalizer) {
+        normalizers.put(normalizer.getPropertyType(), normalizer);
     }
 
     private <T extends IDomainObject> QueryExpressionTuple parseFragment(
@@ -68,8 +72,8 @@ public class QueryExpressionParser {
 
             if (result != null) {
                 String propName = result[0].trim();
-                PropertyDescriptor dx = BeanUtils.getPropertyDescriptor(domainClass, propName);
-                QueryExpressionNormalizer normalizer = getNormalizer(dx);
+                PropertyDescriptor dx = getPropertyDescriptor(domainClass, propName);
+                QueryExpressionNormalizer normalizer = getNormalizer(dx, propName);
                 String[] operands = Arrays.stream(OPERAND_DELIMITER.split(result[1]))
                         .map(StringUtils::trimToNull)
                         .filter(Objects::nonNull)
@@ -83,6 +87,14 @@ public class QueryExpressionParser {
         throw new IllegalArgumentException("Invalid query syntax for '" + tuple + "'.");
     }
 
+    private PropertyDescriptor getPropertyDescriptor(
+            Class<?> clazz,
+            String propName) {
+        PropertyDescriptor dx = BeanUtils.getPropertyDescriptor(clazz, propName);
+        Assert.notNull(dx, () -> "Cannot resolve property '" + propName + "'.");
+        return dx;
+    }
+
     private String[] split(
             String value,
             String separator,
@@ -91,11 +103,13 @@ public class QueryExpressionParser {
         return result.length == 2 ? result : caseInsensitive ? split(value, separator.toLowerCase(), false) : null;
     }
 
-    private QueryExpressionNormalizer getNormalizer(PropertyDescriptor dx) {
+    private QueryExpressionNormalizer getNormalizer(
+            PropertyDescriptor dx,
+            String propName) {
         Class<?> propertyType = dx.getPropertyType();
-        Class<?> key = MiscUtil.firstAssignable(propertyType, normalizers.keySet());
+        Class<?> key = propertyType == null ? null : MiscUtil.firstAssignable(propertyType, normalizers.keySet());
         QueryExpressionNormalizer normalizer = key == null ? null : normalizers.get(key);
-        Assert.notNull(normalizer, () -> "No normalizer found for type '" + propertyType + "'.");
+        Assert.notNull(normalizer, () -> "No normalizer found for property '" + propName + "'.");
         return normalizer;
     }
 
