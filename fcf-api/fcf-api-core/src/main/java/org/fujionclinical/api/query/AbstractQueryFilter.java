@@ -34,13 +34,19 @@ import java.util.Set;
  * @param <T> Class of query result.
  */
 public abstract class AbstractQueryFilter<T> implements IQueryFilter<T> {
-    
-    
+
     private final Set<IQueryFilterChanged<T>> listeners = new HashSet<>();
-    
-    public AbstractQueryFilter() {
+
+    private String contextPrefix;
+
+    protected AbstractQueryFilter() {
+        this((String) null);
     }
-    
+
+    protected AbstractQueryFilter(String contextPrefix) {
+        this.contextPrefix = contextPrefix == null ? "" : contextPrefix + ".";
+    }
+
     /**
      * Create an instance with its listener.
      * 
@@ -87,5 +93,8 @@ public abstract class AbstractQueryFilter<T> implements IQueryFilter<T> {
             listener.onFilterChanged(filter);
         }
     }
-    
+
+    protected String getParameterName(String paramName) {
+        return contextPrefix + paramName;
+    }
 }

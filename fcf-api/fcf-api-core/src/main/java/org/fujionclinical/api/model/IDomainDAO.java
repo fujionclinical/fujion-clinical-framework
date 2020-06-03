@@ -25,6 +25,8 @@
  */
 package org.fujionclinical.api.model;
 
+import org.fujionclinical.api.query.QueryExpression;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,12 +88,10 @@ public interface IDomainDAO<T extends IDomainObject> {
     /**
      * Performs a query, returning a list of matching domain objects.
      *
-     * @param queryString The query string.
+     * @param query The query expression.
      * @return A list of matching domain objects.
      */
-    default List<T> search(String queryString) {
-        throw new UnsupportedOperationException();
-    }
+    List<T> search(QueryExpression query);
 
     /**
      * Returns the type of domain object created by this factory.

@@ -26,6 +26,7 @@
 package org.fujionclinical.api.model;
 
 import org.fujion.common.CollectionUtil;
+import org.fujionclinical.api.query.QueryParameter;
 
 import java.io.Serializable;
 import java.util.Collections;
@@ -42,6 +43,7 @@ public interface IDomainObject extends Serializable {
      *
      * @return The logical identifier.
      */
+    @QueryParameter
     String getId();
 
     /**

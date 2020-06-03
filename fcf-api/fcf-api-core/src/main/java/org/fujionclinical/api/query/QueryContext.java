@@ -36,7 +36,14 @@ public class QueryContext implements IQueryContext {
     private boolean changed = true;
     
     private final Map<String, Object> params = new HashMap<>();
-    
+
+    public QueryContext() {
+    }
+
+    public QueryContext(Map<String, ?> initialContext) {
+        params.putAll(initialContext);
+    }
+
     protected void dirty() {
         changed = true;
     }

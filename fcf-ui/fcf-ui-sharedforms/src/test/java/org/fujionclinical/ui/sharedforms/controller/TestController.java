@@ -74,7 +74,7 @@ public class TestController extends ListFormController<TestItem> {
     }
     
     @Override
-    protected void render(TestItem dao, List<Object> columns) {
+    protected void populate(TestItem dao, List<Object> columns) {
         columns.add(dao.item1);
         columns.add(dao.item2);
         columns.add(dao.item3);

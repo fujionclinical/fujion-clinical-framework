@@ -25,7 +25,6 @@
  */
 package org.fujionclinical.plugin.encounters;
 
-import org.fujion.annotation.WiredComponent;
 import org.fujion.component.*;
 import org.fujion.event.DblclickEvent;
 import org.fujionclinical.api.encounter.EncounterContext;
@@ -48,22 +47,16 @@ public class MainController extends ResourceListView<IEncounter, IEncounter> {
 
     private IEncounter lastEncounter;
 
-    @WiredComponent
-    private Rows rows;
-
     private final IEventSubscriber<IEncounter> encounterChangeListener = (eventName, encounter) -> setEncounter(encounter);
-
-    @WiredComponent
-    private Columns columns;
 
     @Override
     protected void setup() {
-        setup(IEncounter.class, "Encounters", "Encounter Detail", "query logic here", 1, "", "Date", "EncounterStatus", "Location", "Providers");
+        setup(IEncounter.class, "Encounters", "Encounter Detail", "patient={{patient}}", 1, "", "Date", "EncounterStatus", "Location", "Providers");
         columns.getFirstChild(Column.class).setStyles("width: 1%; min-width: 40px");
     }
 
     @Override
-    protected void render(
+    protected void populate(
             IEncounter encounter,
             List<Object> columns) {
         columns.add(" ");
@@ -97,11 +90,6 @@ public class MainController extends ResourceListView<IEncounter, IEncounter> {
 
         row.addEventListener(DblclickEvent.class, event ->
                 EncounterContext.changeEncounter(encounter));
-    }
-
-    @Override
-    protected void requestData() {
-
     }
 
     @Override

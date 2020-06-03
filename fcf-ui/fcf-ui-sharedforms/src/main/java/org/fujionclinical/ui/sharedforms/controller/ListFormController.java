@@ -39,6 +39,7 @@ import org.fujion.model.IComponentRenderer;
 import org.fujion.model.ListModel;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.ui.command.CommandUtil;
+import org.fujionclinical.ui.util.Formatters;
 import org.fujionclinical.ui.util.FCFUtil;
 
 import java.util.ArrayList;
@@ -68,10 +69,10 @@ public abstract class ListFormController<T> extends CaptionedFormController {
     private Pane listPane;
     
     @WiredComponent
-    private Columns columns;
+    protected Columns columns;
     
     @WiredComponent
-    private Rows rows;
+    protected Rows rows;
     
     @WiredComponent
     private Label status;
@@ -318,7 +319,7 @@ public abstract class ListFormController<T> extends CaptionedFormController {
      * @param object T data object to be rendered.
      * @param columns Returns a list of objects to render, one per column.
      */
-    protected abstract void render(T object, List<Object> columns);
+    protected abstract void populate(T object, List<Object> columns);
     
     /**
      * Render a single row.
@@ -331,7 +332,7 @@ public abstract class ListFormController<T> extends CaptionedFormController {
         boolean error = false;
         
         try {
-            render(object, columns);
+            populate(object, columns);
         } catch (Exception e) {
             columns.clear();
             columns.add(FCFUtil.formatExceptionForDisplay(e));
@@ -369,8 +370,8 @@ public abstract class ListFormController<T> extends CaptionedFormController {
      * @param data Data to transform.
      * @return Transformed data.
      */
-    protected Object transformData(Object data) {
-        return data;
+    protected String transformData(Object data) {
+        return Formatters.format(data, "");
     }
     
     /**

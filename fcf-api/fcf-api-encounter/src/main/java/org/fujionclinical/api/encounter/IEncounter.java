@@ -8,6 +8,7 @@ import org.fujionclinical.api.model.IDomainObject;
 import org.fujionclinical.api.model.IPeriod;
 import org.fujionclinical.api.model.person.IPerson;
 import org.fujionclinical.api.patient.IPatient;
+import org.fujionclinical.api.query.QueryParameter;
 
 import java.util.Collections;
 import java.util.List;
@@ -53,6 +54,7 @@ public interface IEncounter extends IDomainObject {
         UNKNOWN
     }
 
+    @QueryParameter
     IPatient getPatient();
 
     default void setPatient(IPatient patient) {
@@ -73,6 +75,7 @@ public interface IEncounter extends IDomainObject {
         return getPeriod() != null;
     }
 
+    @QueryParameter
     EncounterStatus getStatus();
 
     default void setStatus(EncounterStatus status) {

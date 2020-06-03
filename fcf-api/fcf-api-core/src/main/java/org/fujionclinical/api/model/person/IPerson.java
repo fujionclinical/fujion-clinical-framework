@@ -4,6 +4,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.fujion.common.CollectionUtil;
 import org.fujion.common.StrUtil;
 import org.fujionclinical.api.model.*;
+import org.fujionclinical.api.query.QueryParameter;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -43,6 +44,7 @@ public interface IPerson extends IDomainObject, IPostalAddressType, IContactPoin
         }
     }
 
+    @QueryParameter
     default Gender getGender() {
         return null;
     }
@@ -55,6 +57,7 @@ public interface IPerson extends IDomainObject, IPostalAddressType, IContactPoin
         return getGender() != null;
     }
 
+    @QueryParameter
     default ConceptCode getBirthSex() {
         return null;
     }
@@ -67,6 +70,7 @@ public interface IPerson extends IDomainObject, IPostalAddressType, IContactPoin
         return getBirthSex() != null;
     }
 
+    @QueryParameter
     default ConceptCode getEthnicity() {
         return null;
     }
@@ -79,6 +83,7 @@ public interface IPerson extends IDomainObject, IPostalAddressType, IContactPoin
         return getEthnicity() != null;
     }
 
+    @QueryParameter
     default MaritalStatus getMaritalStatus() {
         return null;
     }
@@ -91,6 +96,7 @@ public interface IPerson extends IDomainObject, IPostalAddressType, IContactPoin
         return getMaritalStatus() != null;
     }
 
+    @QueryParameter
     default ConceptCode getRace() {
         return null;
     }
@@ -103,6 +109,7 @@ public interface IPerson extends IDomainObject, IPostalAddressType, IContactPoin
         return getRace() != null;
     }
 
+    @QueryParameter
     default Date getBirthDate() {
         return null;
     }
@@ -115,6 +122,7 @@ public interface IPerson extends IDomainObject, IPostalAddressType, IContactPoin
         return getBirthDate() != null;
     }
 
+    @QueryParameter
     default Date getDeceasedDate() {
         return null;
     }
@@ -143,6 +151,7 @@ public interface IPerson extends IDomainObject, IPostalAddressType, IContactPoin
         return CollectionUtil.notEmpty(getLanguages());
     }
 
+    @QueryParameter
     default IConcept getPreferredLanguage() {
         return CollectionUtil.getFirst(getLanguages());
     }
