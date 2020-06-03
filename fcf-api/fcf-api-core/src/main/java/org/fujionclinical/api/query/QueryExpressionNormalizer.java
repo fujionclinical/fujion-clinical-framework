@@ -6,34 +6,29 @@ import org.springframework.util.Assert;
 
 import java.beans.PropertyDescriptor;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class QueryExpressionNormalizer<PROP, OPD> {
 
     private final Class<PROP> propertyType;
 
-    private final Class<OPD> operandType;
-
     private final int maxOperands;
 
-    private final List<QueryOperator> validOperators;
+    private final Set<QueryOperator> validOperators = new HashSet<>();
 
     public QueryExpressionNormalizer(
             Class<PROP> propertyType,
-            Class<OPD> operandType,
             int maxOperands,
             QueryOperator... validOperators) {
         this.propertyType = propertyType;
-        this.operandType = operandType;
         this.maxOperands = maxOperands;
-        this.validOperators = Arrays.asList(validOperators);
+        this.validOperators.addAll(Arrays.asList(validOperators));
     }
 
-    protected abstract OPD fromString(
-            String value,
-            OPD previousValue);
-
-    protected abstract OPD fromPlaceholder(PROP value);
+    protected abstract OPD normalize(
+            Object operand,
+            OPD previousOperand);
 
     public QueryExpressionTuple createTuple(
             PropertyDescriptor propDx,
@@ -48,27 +43,22 @@ public abstract class QueryExpressionNormalizer<PROP, OPD> {
         OPD[] resolvedOperands = (OPD[]) new Object[operands.length];
         int index = -1;
 
-        for (String operand : operands) {
-            OPD previousValue = index == -1 ? null : resolvedOperands[index];
+        for (String operandStr : operands) {
+            OPD previousOperand = index == -1 ? null : resolvedOperands[index];
             index++;
-            operand = operand.trim();
-            Object resolvedOperand;
+            operandStr = operandStr.trim();
+            Object operand;
 
-            if (operand.startsWith("{{") && operand.endsWith("}}")) {
-                String placeholder = operand.substring(2, operand.length() - 2).trim();
-                resolvedOperand = queryContext == null ? null : queryContext.getParam(placeholder);
-                Assert.notNull(resolvedOperand, () -> "Unrecognized context placeholder: '" + placeholder + "'.");
+            if (operandStr.startsWith("{{") && operandStr.endsWith("}}")) {
+                String placeholder = operandStr.substring(2, operandStr.length() - 2).trim();
+                operand = queryContext == null ? null : queryContext.getParam(placeholder);
+                Assert.notNull(operand, () -> "Unresolvable context placeholder: '" + placeholder + "'.");
             } else {
-                resolvedOperand = operand;
+                operand = operandStr;
             }
 
-            if (resolvedOperand instanceof String) {
-                resolvedOperands[index] = fromString((String) resolvedOperand, previousValue);
-            } else if (propertyType.isInstance(resolvedOperand)) {
-                resolvedOperands[index] = fromPlaceholder((PROP) resolvedOperand);
-            } else {
-                throw new IllegalArgumentException("Context value must be of type " + propertyType + ".");
-            }
+            operand = normalize(operand, previousOperand);
+            Assert.notNull(operand, () -> "Context value cannot be converted to " + propertyType + ".");
         }
 
         return new QueryExpressionTuple(propertyName, propertyType, operator, resolvedOperands);

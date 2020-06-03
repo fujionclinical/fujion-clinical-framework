@@ -42,19 +42,11 @@ public class QueryExpressionParser {
     }
 
     public static void registerNormalizer(QueryExpressionNormalizer normalizer) {
-        instance._registerNormalizer(normalizer);
+        instance.normalizers.put(normalizer.getPropertyType(), normalizer);
     }
 
     private QueryExpressionParser() {
-        _registerNormalizer(new QueryExpressionNormalizers.StringNormalizer());
-        _registerNormalizer(new QueryExpressionNormalizers.BooleanNormalizer());
-        _registerNormalizer(new QueryExpressionNormalizers.DateNormalizer());
-        _registerNormalizer(new QueryExpressionNormalizers.DomainObjectNormalizer());
-        _registerNormalizer(new QueryExpressionNormalizers.ConceptCodeNormalizer());
-    }
-
-    private void _registerNormalizer(QueryExpressionNormalizer normalizer) {
-        normalizers.put(normalizer.getPropertyType(), normalizer);
+        QueryExpressionNormalizers.registerNormalizers(this);
     }
 
     private <T extends IDomainObject> QueryExpressionTuple parseFragment(
