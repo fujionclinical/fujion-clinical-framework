@@ -82,6 +82,8 @@ public abstract class ResourceListView<R extends IDomainObject, M> extends ListF
 
     private QueryExpression queryExpression;
 
+    private IDomainDAO<R> dao;
+
     protected void setup(
             Class<R> resourceClass,
             String title,
@@ -92,6 +94,8 @@ public abstract class ResourceListView<R extends IDomainObject, M> extends ListF
         this.detailTitle = detailTitle;
         this.queryExpression = QueryExpressionParser.getInstance().parse(resourceClass, queryString);
         this.resourceClass = resourceClass;
+        this.dao = DomainDAORegistry.getDAO(resourceClass);
+        Assert.notNull(dao, () -> "Cannot find DAO for " + resourceClass);
         super.setup(title, sortBy, headers);
     }
 
@@ -114,8 +118,6 @@ public abstract class ResourceListView<R extends IDomainObject, M> extends ListF
     @Override
     protected void requestData() {
         startBackgroundThread(map -> {
-            IDomainDAO<R> dao = DomainDAORegistry.getDAO(resourceClass);
-            Assert.notNull(dao, () -> "Cannot find DAO for " + resourceClass);
             map.put("results", dao.search(queryExpression, queryContext));
         });
     }
