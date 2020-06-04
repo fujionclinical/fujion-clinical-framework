@@ -25,10 +25,6 @@
  */
 package org.fujionclinical.api.model;
 
-import org.fujion.common.CollectionUtil;
-
-import java.util.Collection;
-
 public interface IContactPoint {
 
     enum ContactPointSystem {

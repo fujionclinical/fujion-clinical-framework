@@ -29,7 +29,6 @@ import org.fujion.common.CollectionUtil;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Predicate;
 
 public interface IPostalAddressType {
 

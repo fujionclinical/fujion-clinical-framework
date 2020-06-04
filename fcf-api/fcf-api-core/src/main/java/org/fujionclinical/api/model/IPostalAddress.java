@@ -28,7 +28,6 @@ package org.fujionclinical.api.model;
 import org.apache.commons.collections.CollectionUtils;
 import org.fujion.common.CollectionUtil;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 

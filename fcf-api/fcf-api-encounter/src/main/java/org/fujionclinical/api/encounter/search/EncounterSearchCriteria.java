@@ -28,7 +28,6 @@ package org.fujionclinical.api.encounter.search;
 import org.fujion.common.DateRange;
 import org.fujionclinical.api.encounter.IEncounter;
 import org.fujionclinical.api.patient.IPatient;
-import org.fujionclinical.api.query.QueryExpression;
 import org.fujionclinical.api.query.SearchCriteria;
 
 /**

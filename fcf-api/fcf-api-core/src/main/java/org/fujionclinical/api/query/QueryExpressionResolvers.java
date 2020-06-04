@@ -34,9 +34,6 @@ import org.fujionclinical.api.model.person.IPersonName;
 import org.springframework.util.Assert;
 
 import java.beans.PropertyDescriptor;
-import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
