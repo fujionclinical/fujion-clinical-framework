@@ -43,8 +43,8 @@ import org.fujionclinical.api.query.DateQueryFilter.DateType;
 import org.fujionclinical.api.query.DateQueryFilter.IDateTypeExtractor;
 import org.fujionclinical.api.query.IQueryService;
 import org.fujionclinical.ui.dialog.DateRangePicker;
-import org.fujionclinical.ui.sharedforms.common.FormConstants;
 import org.fujionclinical.ui.reports.common.ReportUtil;
+import org.fujionclinical.ui.sharedforms.common.FormConstants;
 import org.fujionclinical.ui.util.FCFUtil;
 import org.springframework.beans.BeanUtils;
 

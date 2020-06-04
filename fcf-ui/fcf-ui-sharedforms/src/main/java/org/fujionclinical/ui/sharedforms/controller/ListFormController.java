@@ -39,8 +39,8 @@ import org.fujion.model.IComponentRenderer;
 import org.fujion.model.ListModel;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.ui.command.CommandUtil;
-import org.fujionclinical.ui.util.Formatters;
 import org.fujionclinical.ui.util.FCFUtil;
+import org.fujionclinical.ui.util.Formatters;
 
 import java.util.ArrayList;
 import java.util.List;
