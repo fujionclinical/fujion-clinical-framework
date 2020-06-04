@@ -35,7 +35,6 @@ import org.fujion.component.*;
 import org.fujionclinical.api.event.IEventSubscriber;
 import org.fujionclinical.api.model.IIdentifier;
 import org.fujionclinical.api.model.person.IPersonName;
-import org.fujionclinical.api.model.Identifier;
 import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.patient.IPatient;
 import org.fujionclinical.api.patient.PatientContext;
@@ -220,7 +219,7 @@ public class PatientHeader extends PluginController {
                     header = addHeader("Identifiers");
                 }
 
-                Identifier.IdentifierCategory categoryId = id.getCategory();
+                IIdentifier.IdentifierUse categoryId = id.getUse();
                 String category = categoryId == null ? null : categoryId.name().toLowerCase();
                 String system = StringUtils.defaultString(id.getSystem());
                 String value = StringUtils.defaultString(id.getValue());

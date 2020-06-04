@@ -32,7 +32,6 @@ import org.fujion.common.StrUtil;
 import org.fujionclinical.api.model.person.IPersonName;
 import org.fujionclinical.api.patient.IPatient;
 import org.fujionclinical.api.patient.search.PatientSearchCriteria;
-import org.fujionclinical.api.patient.search.PatientSearchUtil;
 import org.fujionclinical.api.query.SearchException;
 import org.fujionclinical.ui.dialog.DialogUtil;
 import org.fujionclinical.ui.util.FCFUtil;
@@ -88,8 +87,7 @@ public class PatientSelectionUtil {
         }
 
         try {
-            criteria.validate();
-            List<IPatient> matches = PatientSearchUtil.search(criteria);
+            List<IPatient> matches = criteria.search();
 
             if (matches == null || matches.size() == 0) {
                 throw new SearchException(MSG_ERROR_PATIENT_NOT_FOUND.toString());

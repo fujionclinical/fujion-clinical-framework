@@ -31,6 +31,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The representation of a compiled query expression, consisting of a list of query fragments and the domain class
+ * to which they apply.
+ *
+ * @param <T> The domain class.
+ */
 public class QueryExpression<T extends IDomainObject> {
 
     private final Class<T> domainClass;

@@ -62,7 +62,12 @@ public class QueryContext implements IQueryContext {
     public void reset() {
         changed = false;
     }
-    
+
+    @Override
+    public boolean isEmpty() {
+        return params.isEmpty();
+    }
+
     @Override
     public boolean setParam(String name, Object newValue) {
         Object oldValue = params.get(name);
@@ -75,7 +80,11 @@ public class QueryContext implements IQueryContext {
         }
         
         if (change) {
-            params.put(name, newValue);
+            if (newValue == null) {
+                params.remove(name);
+            } else {
+                params.put(name, newValue);
+            }
         }
         
         return change;
@@ -85,5 +94,10 @@ public class QueryContext implements IQueryContext {
     public Object getParam(String name) {
         return params.get(name);
     }
-    
+
+    @Override
+    public boolean hasParam(String name) {
+        return params.containsKey(name);
+    }
+
 }

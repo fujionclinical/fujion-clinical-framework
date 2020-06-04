@@ -27,7 +27,9 @@ package org.fujionclinical.ui.util;
 
 import org.fujion.common.DateUtil;
 import org.fujion.common.MiscUtil;
+import org.fujionclinical.api.model.IConcept;
 import org.fujionclinical.api.model.IConceptCode;
+import org.fujionclinical.api.model.IIdentifier;
 import org.fujionclinical.api.model.IPeriod;
 import org.fujionclinical.api.model.person.IPerson;
 
@@ -47,7 +49,9 @@ public class Formatters {
     static {
         register(Date.class, DateUtil::formatDate);
         register(IPeriod.class, FormatUtil::formatPeriod);
+        register(IConcept.class, FormatUtil::formatConcept);
         register(IConceptCode.class, FormatUtil::formatConceptCode);
+        register(IIdentifier.class, FormatUtil::formatIdentifier);
         register(IPerson.class, person -> person.getFullName());
     }
 

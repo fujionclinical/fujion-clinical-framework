@@ -25,7 +25,6 @@
  */
 package org.fujionclinical.api.query;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.Assert;
@@ -33,11 +32,15 @@ import org.springframework.util.Assert;
 import java.beans.PropertyDescriptor;
 
 /**
- * Represents a fragment of a query expression (i.e., property name, operator, operands).
+ * Represents a fragment of a query expression (i.e., property name, operator, operands).  Because a query fragment
+ * stores operands in their original, unresolved form, it is independent of any query context and may be used repeatedly
+ * with different contexts.  When a query context is applied to a fragment (via the createTuple method), a query
+ * expression tuple is produced, which is essentially a fragment with all operands fully resolved.  In this way,
+ * a query expression may be compiled once, and used repeatedly with different query contexts.
  */
 public class QueryExpressionFragment<PROP, OPD> {
 
-    public final String propertyName;
+    private final PropertyDescriptor propertyDescriptor;
 
     public final Class<PROP> propertyType;
 
@@ -54,7 +57,7 @@ public class QueryExpressionFragment<PROP, OPD> {
             String... operands) {
         QueryParameter annot = AnnotationUtils.findAnnotation(propertyDescriptor.getReadMethod(), QueryParameter.class);
         Assert.notNull(annot, () -> "The property '" + propertyDescriptor.getName() + "' is not a valid query parameter.");
-        this.propertyName = StringUtils.defaultIfBlank(annot.value(), propertyDescriptor.getName());
+        this.propertyDescriptor = propertyDescriptor;
         this.propertyType = (Class<PROP>) propertyDescriptor.getPropertyType();
         this.operator = operator;
         this.resolver = resolver;
@@ -62,6 +65,12 @@ public class QueryExpressionFragment<PROP, OPD> {
         resolver.validate(this);
     }
 
+    /**
+     * Creates an expression tuple (i.e., an expression fragment with all operands fully resolved).
+     *
+     * @param queryContext The query context.
+     * @return An expression tuple.
+     */
     public QueryExpressionTuple createTuple(IQueryContext queryContext) {
         OPD[] resolvedOperands = (OPD[]) new Object[operands.length];
         int index = 0;
@@ -84,9 +93,17 @@ public class QueryExpressionFragment<PROP, OPD> {
             resolvedOperands[index++] = resolvedOperand;
         }
 
-        return new QueryExpressionTuple(propertyName, propertyType, operator, resolvedOperands);
+        return new QueryExpressionTuple(propertyDescriptor, operator, resolvedOperands);
     }
 
+    /**
+     * Resolves a placeholder using the query context.  Can specify a property path (dot-notation) to access
+     * a property (possibly nested) of the resolved placeholder value.
+     *
+     * @param queryContext The query context.
+     * @param placeholder The placeholder (with optional property path).
+     * @return The resolved value, or null if could not be resolved.
+     */
     private Object resolvePlaceholder(
             IQueryContext queryContext,
             String placeholder) {

@@ -29,12 +29,14 @@ import org.apache.commons.lang.StringUtils;
 import org.fujionclinical.api.model.*;
 import org.fujionclinical.api.model.person.IPersonName;
 import org.fujionclinical.api.model.person.PersonNameParser;
+import org.fujionclinical.api.practitioner.IPractitioner;
+import org.fujionclinical.api.query.QueryExpression;
 import org.fujionclinical.api.query.SearchCriteria;
 
 /**
  * Criteria for practitioner searches.
  */
-public class PractitionerSearchCriteria extends SearchCriteria {
+public class PractitionerSearchCriteria extends SearchCriteria<IPractitioner> {
 
     public static final IConceptCode DEA_CONCEPT_CODE = new ConceptCode(null, "DEA", null);
 
@@ -49,7 +51,11 @@ public class PractitionerSearchCriteria extends SearchCriteria {
     private String gender;
 
     public PractitionerSearchCriteria() {
-        super("Insufficient search parameters.");
+        super(IPractitioner.class, "Insufficient search parameters.");
+    }
+
+    @Override
+    protected void buildQueryString(StringBuilder sb) {
     }
 
     /**

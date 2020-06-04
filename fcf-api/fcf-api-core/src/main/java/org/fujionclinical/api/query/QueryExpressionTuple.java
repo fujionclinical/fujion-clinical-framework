@@ -25,23 +25,24 @@
  */
 package org.fujionclinical.api.query;
 
+import java.beans.PropertyDescriptor;
+
+/**
+ * This is a query expression fragment with all operands fully resolved.
+ */
 public class QueryExpressionTuple {
 
-    public final String propertyName;
-
-    public final Class<?> propertyType;
+    public final PropertyDescriptor propertyDescriptor;
 
     public final QueryOperator operator;
 
     public final Object[] operands;
 
     public QueryExpressionTuple(
-            String propertyName,
-            Class<?> propertyType,
+            PropertyDescriptor propertyDescriptor,
             QueryOperator operator,
             Object... operands) {
-        this.propertyName = propertyName;
-        this.propertyType = propertyType;
+        this.propertyDescriptor = propertyDescriptor;
         this.operator = operator;
         this.operands = operands;
     }

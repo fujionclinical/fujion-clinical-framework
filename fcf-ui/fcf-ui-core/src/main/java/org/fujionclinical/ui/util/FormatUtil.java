@@ -25,7 +25,9 @@
  */
 package org.fujionclinical.ui.util;
 
+import org.fujionclinical.api.model.IConcept;
 import org.fujionclinical.api.model.IConceptCode;
+import org.fujionclinical.api.model.IIdentifier;
 import org.fujionclinical.api.model.IPeriod;
 
 import java.util.Date;
@@ -49,8 +51,16 @@ public class FormatUtil {
         return startDateStr + dlm + endDateStr;
     }
 
+    public static String formatIdentifier(IIdentifier identifier) {
+        return identifier.getValue();
+    }
+
     public static String formatConceptCode(IConceptCode code) {
         return code.hasText() ? code.getText() : code.getCode();
+    }
+
+    public static String formatConcept(IConcept code) {
+        return code.hasText() ? code.getText() : code.hasCode() ? formatConceptCode(code.getCodes().get(0)) : "";
     }
 
     private FormatUtil() {

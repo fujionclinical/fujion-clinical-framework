@@ -26,13 +26,15 @@
 package org.fujionclinical.api.encounter.search;
 
 import org.fujion.common.DateRange;
+import org.fujionclinical.api.encounter.IEncounter;
 import org.fujionclinical.api.patient.IPatient;
+import org.fujionclinical.api.query.QueryExpression;
 import org.fujionclinical.api.query.SearchCriteria;
 
 /**
  * Search criteria for encounter lookup.
  */
-public class EncounterSearchCriteria extends SearchCriteria {
+public class EncounterSearchCriteria extends SearchCriteria<IEncounter> {
 
     private IPatient patient;
 
@@ -41,7 +43,7 @@ public class EncounterSearchCriteria extends SearchCriteria {
     private DateRange period;
 
     public EncounterSearchCriteria() {
-        super("Insufficient search parameters.");
+        super(IEncounter.class, "Insufficient search parameters.");
     }
 
     /**
@@ -69,6 +71,11 @@ public class EncounterSearchCriteria extends SearchCriteria {
     public void setType(String type) {
         this.type = type;
     }
+
+    @Override
+    protected void buildQueryString(StringBuilder sb) {
+    }
+
 
     /**
      * Returns true if the current criteria settings meet the minimum requirements for a search.

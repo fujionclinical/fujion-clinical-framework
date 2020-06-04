@@ -28,9 +28,13 @@ package org.fujionclinical.api.patient.search;
 import org.apache.commons.lang.StringUtils;
 import org.fujion.common.DateUtil;
 import org.fujion.common.LocalizedMessage;
+import org.fujionclinical.api.model.ConceptCode;
+import org.fujionclinical.api.model.IConceptCode;
+import org.fujionclinical.api.model.IIdentifier;
+import org.fujionclinical.api.model.Identifier;
 import org.fujionclinical.api.model.person.IPersonName;
-import org.fujionclinical.api.model.person.PersonName;
 import org.fujionclinical.api.model.person.PersonNameParser;
+import org.fujionclinical.api.patient.IPatient;
 import org.fujionclinical.api.query.SearchCriteria;
 
 import java.util.Date;
@@ -38,22 +42,16 @@ import java.util.Date;
 /**
  * Search criteria for patient lookup.
  */
-public class PatientSearchCriteria extends SearchCriteria {
+public class PatientSearchCriteria extends SearchCriteria<IPatient> {
 
     public static final LocalizedMessage MSG_ERROR_MISSING_REQUIRED = new LocalizedMessage("patientsearch.error.missing.required");
 
-    private IPersonName name;
+    private static final IConceptCode SSN_TYPE = new ConceptCode("http://hl7.org/fhir/identifier-type", "SB");
 
-    private String mrn;
-
-    private String ssn;
-
-    private String gender;
-
-    private Date birth;
+    private static final IConceptCode MRN_TYPE = new ConceptCode("http://hl7.org/fhir/v2/0203", "MR");
 
     public PatientSearchCriteria() {
-        super(MSG_ERROR_MISSING_REQUIRED.toString());
+        super(IPatient.class, MSG_ERROR_MISSING_REQUIRED.toString());
     }
 
     /**
@@ -95,6 +93,14 @@ public class PatientSearchCriteria extends SearchCriteria {
         }
     }
 
+    @Override
+    protected void buildQueryString(StringBuilder sb) {
+        addFragment(sb, "name", "~");
+        addFragment(sb, "identifier", "=");
+        addFragment(sb, "gender", "=");
+        addFragment(sb, "birthDate", "=");
+    }
+
     /**
      * Returns a date value if the input is a valid date. Otherwise, returns null. Explicitly
      * excludes some patterns that may successfully parse as a date.
@@ -121,16 +127,7 @@ public class PatientSearchCriteria extends SearchCriteria {
      */
     @Override
     public boolean isValid() {
-        return super.isValid() || ssn != null || mrn != null || name != null;
-    }
-
-    /**
-     * Returns the patient name criterion.
-     *
-     * @return Patient name criterion.
-     */
-    public IPersonName getName() {
-        return name;
+        return super.isValid() || queryContext.hasParam("identifier") || queryContext.hasParam("name");
     }
 
     /**
@@ -139,7 +136,7 @@ public class PatientSearchCriteria extends SearchCriteria {
      * @param name Patient name.
      */
     public void setName(String name) {
-        this.name = PersonNameParser.instance.fromString(name);
+        setName(name == null ? null : PersonNameParser.instance.fromString(name));
     }
 
     /**
@@ -147,17 +144,8 @@ public class PatientSearchCriteria extends SearchCriteria {
      *
      * @param name Patient name.
      */
-    public void setName(PersonName name) {
-        this.name = name;
-    }
-
-    /**
-     * Returns the MRN criterion.
-     *
-     * @return MRN criterion.
-     */
-    public String getMRN() {
-        return mrn;
+    public void setName(IPersonName name) {
+        queryContext.setParam("name", name == null ? null : name.getFamilyName());
     }
 
     /**
@@ -166,16 +154,7 @@ public class PatientSearchCriteria extends SearchCriteria {
      * @param mrn MRN.
      */
     public void setMRN(String mrn) {
-        this.mrn = mrn;
-    }
-
-    /**
-     * Returns the SSN criterion.
-     *
-     * @return SSN criterion.
-     */
-    public String getSSN() {
-        return ssn;
+        queryContext.setParam("identifier", mrn == null ? null : new Identifier(null, mrn, IIdentifier.IdentifierUse.OFFICIAL, MRN_TYPE));
     }
 
     /**
@@ -184,16 +163,7 @@ public class PatientSearchCriteria extends SearchCriteria {
      * @param ssn SSN.
      */
     public void setSSN(String ssn) {
-        this.ssn = ssn;
-    }
-
-    /**
-     * Returns the gender criterion.
-     *
-     * @return Gender criterion.
-     */
-    public String getGender() {
-        return gender;
+        queryContext.setParam("identifier", ssn == null ? null : new Identifier("http://hl7.org/fhir/sid/us-ssn", ssn, IIdentifier.IdentifierUse.OFFICIAL, SSN_TYPE));
     }
 
     /**
@@ -202,16 +172,7 @@ public class PatientSearchCriteria extends SearchCriteria {
      * @param gender Gender.
      */
     public void setGender(String gender) {
-        this.gender = StringUtils.trimToNull(gender);
-    }
-
-    /**
-     * Returns the date of birth criterion.
-     *
-     * @return DOB criterion.
-     */
-    public Date getBirth() {
-        return birth;
+        queryContext.setParam("gender", StringUtils.trimToNull(gender));
     }
 
     /**
@@ -220,16 +181,7 @@ public class PatientSearchCriteria extends SearchCriteria {
      * @param birth Date of birth.
      */
     public void setBirth(Date birth) {
-        this.birth = birth;
+        queryContext.setParam("birthDate", birth);
     }
 
-    /**
-     * Returns true if no criteria have been set.
-     *
-     * @return True if no criteria have been set.
-     */
-    @Override
-    public boolean isEmpty() {
-        return super.isEmpty() && name == null && mrn == null && ssn == null && gender == null && birth == null;
-    }
 }

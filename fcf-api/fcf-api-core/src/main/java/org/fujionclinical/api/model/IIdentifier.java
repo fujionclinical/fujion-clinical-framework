@@ -29,7 +29,7 @@ import org.apache.commons.lang.StringUtils;
 
 public interface IIdentifier {
 
-    enum IdentifierCategory {USUAL, OFFICIAL, TEMPORARY, SECONDARY, OLD}
+    enum IdentifierUse {USUAL, OFFICIAL, TEMPORARY, SECONDARY, OLD}
 
     String getSystem();
 
@@ -61,14 +61,14 @@ public interface IIdentifier {
         return getType() != null;
     }
 
-    IdentifierCategory getCategory();
+    IdentifierUse getUse();
 
-    default void setCategory(IdentifierCategory category) {
+    default void setUse(IdentifierUse use) {
         throw new UnsupportedOperationException();
     }
 
-    default boolean hasCategory() {
-        return getCategory() != null;
+    default boolean hasUse() {
+        return getUse() != null;
     }
 
 }

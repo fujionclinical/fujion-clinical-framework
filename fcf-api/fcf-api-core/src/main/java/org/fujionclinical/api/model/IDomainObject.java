@@ -70,6 +70,7 @@ public interface IDomainObject extends Serializable {
      *
      * @return Identifiers associated with the domain object (never null)
      */
+    @QueryParameter
     default List<IIdentifier> getIdentifiers() {
         return Collections.emptyList();
     }

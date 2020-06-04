@@ -35,7 +35,7 @@ public class Identifier implements IIdentifier {
 
     private final IConcept type = new Concept(null);
 
-    private final IdentifierCategory category;
+    private final IdentifierUse use;
 
     public Identifier(
             String system,
@@ -46,11 +46,11 @@ public class Identifier implements IIdentifier {
     public Identifier(
             String system,
             String value,
-            IdentifierCategory category,
+            IdentifierUse use,
             IConceptCode... types) {
         this.system = system;
         this.value = value;
-        this.category = category;
+        this.use = use;
         CollectionUtils.addAll(type.getCodes(), types);
     }
 
@@ -68,8 +68,8 @@ public class Identifier implements IIdentifier {
         return type;
     }
 
-    public IdentifierCategory getCategory() {
-        return category;
+    public IdentifierUse getUse() {
+        return use;
     }
 
 }

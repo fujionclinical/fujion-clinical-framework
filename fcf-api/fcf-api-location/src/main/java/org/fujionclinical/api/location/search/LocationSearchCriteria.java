@@ -31,41 +31,15 @@ import org.fujionclinical.api.query.SearchCriteria;
 /**
  * Represents location search criteria.
  */
-public class LocationSearchCriteria extends SearchCriteria {
-
-
-    private ILocation.LocationType type;
-
-    private ILocation.LocationStatus status;
-
-    private String name;
+public class LocationSearchCriteria extends SearchCriteria<ILocation> {
 
     public LocationSearchCriteria() {
-        super("Insufficent search parameters.");
+        super(ILocation.class, "Insufficent search parameters.");
     }
 
-    public ILocation.LocationType getType() {
-        return type;
-    }
+    @Override
+    protected void buildQueryString(StringBuilder sb) {
 
-    public void setType(ILocation.LocationType type) {
-        this.type = type;
-    }
-
-    public ILocation.LocationStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(ILocation.LocationStatus status) {
-        this.status = status;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     /**
@@ -76,16 +50,6 @@ public class LocationSearchCriteria extends SearchCriteria {
     @Override
     public boolean isValid() {
         return true;
-    }
-
-    /**
-     * Returns true if no criteria have been set.
-     *
-     * @return True if no criteria have been set.
-     */
-    @Override
-    public boolean isEmpty() {
-        return super.isEmpty() && status == null && type == null;
     }
 
 }

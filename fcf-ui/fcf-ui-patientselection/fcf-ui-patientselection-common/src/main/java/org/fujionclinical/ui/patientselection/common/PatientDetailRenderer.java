@@ -34,10 +34,12 @@ import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Div;
 import org.fujion.component.Image;
 import org.fujion.component.Label;
-import org.fujionclinical.api.model.*;
+import org.fujionclinical.api.model.IAttachment;
+import org.fujionclinical.api.model.IContactPoint;
+import org.fujionclinical.api.model.IContactPointType;
+import org.fujionclinical.api.model.IPostalAddress;
 import org.fujionclinical.api.patient.IPatient;
-
-import java.util.Date;
+import org.fujionclinical.ui.util.Formatters;
 
 /**
  * Default class for rendering detail view of patient in patient selection dialog. This class may be
@@ -86,14 +88,14 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
         addDemographic(root, "age", DateUtil.formatAge(patient.getBirthDate()));
         addDemographic(root, "dob", patient.getBirthDate());
         addDemographic(root, "dod", patient.getDeceasedDate());
-        addDemographic(root, "marital status", patient.getMaritalStatus());
-        addDemographic(root, "language", patient.hasLanguage() ? patient.getLanguages().get(0) : null);
-        addContactPoint(root, "home phone", patient);
-        addContactPoint(root, "home email", patient);
-        addContactPoint(root, "home fax", patient);
-        addContactPoint(root, "work phone", patient);
-        addContactPoint(root, "work email", patient);
-        addContactPoint(root, "work fax", patient);
+        addDemographic(root, "marital_status", patient.getMaritalStatus());
+        addDemographic(root, "language", patient.hasLanguage() ? patient.getLanguages() : null);
+        addContactPoint(root, "home_phone", patient);
+        addContactPoint(root, "home_email", patient);
+        addContactPoint(root, "home_fax", patient);
+        addContactPoint(root, "work_phone", patient);
+        addContactPoint(root, "work_email", patient);
+        addContactPoint(root, "work_fax", patient);
 
         IPostalAddress address = patient.getAddress();
 
@@ -146,15 +148,16 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
 
     /**
      * Adds a contact point to the demographic panel. Uses default styling.
-     *  @param root          Root component.
-     * @param type          Type of contact point desired (e.g., "home:phone").
+     *
+     * @param root          Root component.
+     * @param type          Type of contact point desired (e.g., "home_phone").
      * @param contactPoints List of contact points from which to select.
      */
     protected void addContactPoint(
             BaseUIComponent root,
             String type,
             IContactPointType contactPoints) {
-        String[] types = type.split(" ", 2);
+        String[] types = type.split("_", 2);
         IContactPoint.ContactPointUse use = EnumUtils.getEnumIgnoreCase(IContactPoint.ContactPointUse.class, types[0]);
         IContactPoint.ContactPointSystem system = EnumUtils.getEnumIgnoreCase(IContactPoint.ContactPointSystem.class, types[1]);
         IContactPoint contactPoint = contactPoints.getContactPoint(use, system);
@@ -191,13 +194,11 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
             String labelId,
             Object object,
             String style) {
-        String value = object == null ? null
-                : object instanceof Date ? DateUtil.formatDate((Date) object)
-                : object instanceof IIdentifier ? ((IIdentifier) object).getValue()
-                : object.toString().trim();
+        String value = Formatters.format(object);
 
         if (!StringUtils.isEmpty(value)) {
-            Label lbl = new Label((labelId == null ? "" : getDemographicLabel(labelId) + ": ") + value);
+            String label = getDemographicLabel(labelId);
+            Label lbl = new Label((label == null ? "" : label + ": ") + value);
             root.addChild(lbl);
 
             if (style != null) {
@@ -215,7 +216,7 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
      * @return Label text.
      */
     protected String getDemographicLabel(String labelId) {
-        return StrUtil.getLabel(labelId.contains(".") ? labelId : "patientselection.demographic.label." + labelId);
+        return labelId == null ? null : StrUtil.getLabel(labelId.contains(".") ? labelId : "patientselection.demographic.label." + labelId);
     }
 
 }

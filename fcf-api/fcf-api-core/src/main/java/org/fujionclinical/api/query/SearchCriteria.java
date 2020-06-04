@@ -26,20 +26,44 @@
 package org.fujionclinical.api.query;
 
 import org.apache.commons.lang.StringUtils;
+import org.fujionclinical.api.model.DomainDAORegistry;
+import org.fujionclinical.api.model.IDomainObject;
+
+import java.util.List;
 
 /**
  * Base class for search criteria.
  */
-public abstract class SearchCriteria {
+public abstract class SearchCriteria<T extends IDomainObject> {
+
+    private final Class<T> domainClass;
 
     private final String validationFailureMessage;
 
-    private String id;
+    protected final IQueryContext queryContext = new QueryContext();
 
-    private int maximum;
-
-    protected SearchCriteria(String validationFailureMessage) {
+    protected SearchCriteria(Class<T> domainClass, String validationFailureMessage) {
+        this.domainClass = domainClass;
         this.validationFailureMessage = validationFailureMessage;
+    }
+
+    abstract protected void buildQueryString(StringBuilder sb);
+
+    public List<QueryExpressionTuple> compile() {
+        validate();
+        StringBuilder sb = new StringBuilder();
+        addFragment(sb, "id", "=");
+        buildQueryString(sb);
+        return QueryExpressionParser.getInstance().parse(domainClass, sb.toString()).resolve(queryContext);
+    }
+
+    /**
+     * Perform a search based on given criteria.
+     *
+     * @return Resources matching the search criteria.
+     */
+    public List<T> search() {
+        return DomainDAORegistry.getDAO(domainClass).search(compile());
     }
 
     /**
@@ -48,7 +72,7 @@ public abstract class SearchCriteria {
      * @return True if minimum search requirements have been met.
      */
     protected boolean isValid() {
-        return id != null;
+        return queryContext.hasParam("id");
     }
 
     /**
@@ -62,30 +86,12 @@ public abstract class SearchCriteria {
     }
 
     /**
-     * Returns the maximum hits criterion.
-     *
-     * @return Maximum hits criterion.
-     */
-    public int getMaximum() {
-        return maximum;
-    }
-
-    /**
      * Sets the maximum hits criterion.
      *
      * @param maximum Maximum.
      */
-    public void setMaximum(int maximum) {
-        this.maximum = maximum;
-    }
-
-    /**
-     * Returns the domain identifier.
-     *
-     * @return Domain identifier.
-     */
-    public String getId() {
-        return id;
+    public void setMaximum(Integer maximum) {
+        queryContext.setParam("maximum", maximum);
     }
 
     /**
@@ -94,7 +100,7 @@ public abstract class SearchCriteria {
      * @param id Domain identifier.
      */
     public void setId(String id) {
-        this.id = StringUtils.trimToNull(id);
+        queryContext.setParam("id", StringUtils.trimToNull(id));
     }
 
     /**
@@ -103,7 +109,18 @@ public abstract class SearchCriteria {
      * @return True if no criteria have been set.
      */
     public boolean isEmpty() {
-        return id == null;
+        return queryContext.isEmpty();
+    }
+
+    public void clear() {
+        queryContext.reset();
+    }
+
+    protected void addFragment(StringBuilder sb, String parameter, String operator) {
+        if (queryContext.hasParam(parameter)) {
+            sb.append(sb.length() == 0 ? "" : "&");
+            sb.append(parameter).append(" ").append(operator).append(" {{").append(parameter).append("}}");
+        }
     }
 
 }

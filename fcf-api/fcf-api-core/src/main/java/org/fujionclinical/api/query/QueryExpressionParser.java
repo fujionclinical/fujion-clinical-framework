@@ -80,15 +80,14 @@ public class QueryExpressionParser {
 
             if (result != null) {
                 String propertyName = result[0].trim();
-                PropertyDescriptor dx = getPropertyDescriptor(domainClass, propertyName);
-                QueryExpressionResolver resolver = QueryExpressionResolvers.getResolver(dx, propertyName);
+                PropertyDescriptor propertyDescriptor = getPropertyDescriptor(domainClass, propertyName);
+                QueryExpressionResolver resolver = QueryExpressionResolvers.getResolver(propertyDescriptor);
                 String[] operands = Arrays.stream(OPERAND_DELIMITER.split(result[1]))
                         .map(StringUtils::trimToNull)
                         .filter(Objects::nonNull)
                         .map(StrUtil::stripQuotes)
-                        .map(StringUtils::trimToNull)
                         .toArray(String[]::new);
-                return new QueryExpressionFragment(dx, resolver, operator, operands);
+                return new QueryExpressionFragment(propertyDescriptor, resolver, operator, operands);
             }
         }
 
@@ -97,9 +96,9 @@ public class QueryExpressionParser {
 
     private PropertyDescriptor getPropertyDescriptor(
             Class<?> clazz,
-            String propName) {
-        PropertyDescriptor dx = BeanUtils.getPropertyDescriptor(clazz, propName);
-        Assert.notNull(dx, () -> "Cannot resolve property '" + propName + "'.");
+            String propertyName) {
+        PropertyDescriptor dx = BeanUtils.getPropertyDescriptor(clazz, propertyName);
+        Assert.notNull(dx, () -> "Cannot resolve property '" + propertyName + "'.");
         return dx;
     }
 

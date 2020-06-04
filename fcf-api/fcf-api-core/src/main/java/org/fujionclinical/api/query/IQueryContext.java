@@ -46,7 +46,15 @@ public interface IQueryContext {
      * @return Parameter value
      */
     Object getParam(String name);
-    
+
+    /**
+     * Returns true if the parameter exists within the context.
+     *
+     * @param name Parameter name
+     * @return True if the parameter exists within the context.
+     */
+    boolean hasParam(String name);
+
     /**
      * Returns true if the current context state has changed from the previous snapshot.
      * 
@@ -58,5 +66,11 @@ public interface IQueryContext {
      * Clears the change status.
      */
     void reset();
-    
+
+    /**
+     * Returns true if the context has no entries.
+     *
+     * @return True if the context has no entries.
+     */
+    boolean isEmpty();
 }

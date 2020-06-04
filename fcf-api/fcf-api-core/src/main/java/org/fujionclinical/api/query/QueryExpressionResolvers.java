@@ -28,23 +28,29 @@ package org.fujionclinical.api.query;
 import org.apache.commons.lang3.BooleanUtils;
 import org.fujion.common.DateUtil;
 import org.fujion.common.MiscUtil;
-import org.fujionclinical.api.model.ConceptCode;
-import org.fujionclinical.api.model.IConceptCode;
-import org.fujionclinical.api.model.IDomainObject;
+import org.fujionclinical.api.core.CoreUtil;
+import org.fujionclinical.api.model.*;
 import org.fujionclinical.api.model.person.IPersonName;
 import org.springframework.util.Assert;
 
 import java.beans.PropertyDescriptor;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * A registry of query expression resolvers, indexed by the property type resolved.  Includes several predefined
+ * resolvers, but additional ones may be registered.
+ */
 class QueryExpressionResolvers {
 
-    static class StringNormalizer extends QueryExpressionResolver<String, String> {
+    static class StringResolver extends QueryExpressionResolver<String, String> {
 
-        public StringNormalizer() {
-            super(String.class, Integer.MAX_VALUE, QueryOperator.values());
+        public StringResolver() {
+            super(String.class, Integer.MAX_VALUE, QueryOperator.EQ, QueryOperator.SW);
         }
 
         @Override
@@ -56,9 +62,9 @@ class QueryExpressionResolvers {
 
     }
 
-    static class BooleanNormalizer extends QueryExpressionResolver<Boolean, Boolean> {
+    static class BooleanResolver extends QueryExpressionResolver<Boolean, Boolean> {
 
-        public BooleanNormalizer() {
+        public BooleanResolver() {
             super(Boolean.class, 1, QueryOperator.EQ);
         }
 
@@ -73,9 +79,9 @@ class QueryExpressionResolvers {
 
     }
 
-    static class DateNormalizer extends QueryExpressionResolver<Date, Date> {
+    static class DateResolver extends QueryExpressionResolver<Date, Date> {
 
-        public DateNormalizer() {
+        public DateResolver() {
             super(Date.class, 1, QueryOperator.EQ, QueryOperator.GE, QueryOperator.GT, QueryOperator.LE, QueryOperator.LT);
         }
 
@@ -90,9 +96,9 @@ class QueryExpressionResolvers {
 
     }
 
-    static class DomainObjectNormalizer extends QueryExpressionResolver<IDomainObject, String> {
+    static class DomainObjectResolver extends QueryExpressionResolver<IDomainObject, String> {
 
-        public DomainObjectNormalizer() {
+        public DomainObjectResolver() {
             super(IDomainObject.class, 1, QueryOperator.EQ);
         }
 
@@ -107,9 +113,9 @@ class QueryExpressionResolvers {
 
     }
 
-    static class ConceptCodeNormalizer extends QueryExpressionResolver<IConceptCode, IConceptCode> {
+    static class ConceptCodeResolver extends QueryExpressionResolver<IConceptCode, IConceptCode> {
 
-        public ConceptCodeNormalizer() {
+        public ConceptCodeResolver() {
             super(IConceptCode.class, Integer.MAX_VALUE, QueryOperator.EQ);
         }
 
@@ -134,9 +140,36 @@ class QueryExpressionResolvers {
 
     }
 
-    static class PersonNameNormalizer extends QueryExpressionResolver<IPersonName, String> {
+    static class IdentifierResolver extends QueryExpressionResolver<IIdentifier, IIdentifier> {
 
-        public PersonNameNormalizer() {
+        public IdentifierResolver() {
+            super(IIdentifier.class, Integer.MAX_VALUE, QueryOperator.EQ);
+        }
+
+        private IIdentifier fromString(
+                String value,
+                IIdentifier previousValue) {
+            String previousSystem = previousValue == null ? null : previousValue.getSystem();
+            String[] pcs = value.split("\\|", 3);
+            String system = pcs.length > 1 ? pcs[0] : null;
+            String code = pcs.length == 1 ? pcs[0] : pcs[1];
+            return new Identifier(system == null ? previousSystem : system, code);
+        }
+
+        @Override
+        protected IIdentifier resolve(
+                Object operand,
+                IIdentifier previousOperand) {
+            return operand instanceof IIdentifier ? (IIdentifier) operand
+                    : operand instanceof String ? fromString((String) operand, previousOperand)
+                    : null;
+        }
+
+    }
+
+    static class PersonNameResolver extends QueryExpressionResolver<IPersonName, String> {
+
+        public PersonNameResolver() {
             super(IPersonName.class, 1, QueryOperator.EQ, QueryOperator.SW);
         }
 
@@ -154,25 +187,37 @@ class QueryExpressionResolvers {
     private static final Map<Class<?>, QueryExpressionResolver> resolvers = new LinkedHashMap<>();
 
     static {
-        registerResolver(new StringNormalizer());
-        registerResolver(new BooleanNormalizer());
-        registerResolver(new DateNormalizer());
-        registerResolver(new DomainObjectNormalizer());
-        registerResolver(new ConceptCodeNormalizer());
-        registerResolver(new PersonNameNormalizer());
+        registerResolver(new StringResolver());
+        registerResolver(new BooleanResolver());
+        registerResolver(new DateResolver());
+        registerResolver(new DomainObjectResolver());
+        registerResolver(new ConceptCodeResolver());
+        registerResolver(new IdentifierResolver());
+        registerResolver(new PersonNameResolver());
     }
 
+    /**
+     * Register a query expression resolver.
+     *
+     * @param resolver The query expression resolver.
+     */
     public static void registerResolver(QueryExpressionResolver resolver) {
         resolvers.put(resolver.getPropertyType(), resolver);
     }
 
+    /**
+     * Retrieve the query expression resolver for the property type specified by the property descriptor.
+     *
+     * @param propertyDescriptor The property descriptor.
+     * @return The associated query expression resolver (never null).
+     * @exception IllegalArgumentException If no query expression resolved was found.
+     */
     public static QueryExpressionResolver getResolver(
-            PropertyDescriptor dx,
-            String propName) {
-        Class<?> propertyType = dx.getPropertyType();
+            PropertyDescriptor propertyDescriptor) {
+        Class<?> propertyType = CoreUtil.getPropertyType(propertyDescriptor);
         Class<?> key = propertyType == null ? null : MiscUtil.firstAssignable(propertyType, resolvers.keySet());
         QueryExpressionResolver resolver = key == null ? null : resolvers.get(key);
-        Assert.notNull(resolver, () -> "No resolver found for property '" + propName + "'.");
+        Assert.notNull(resolver, () -> "No resolver found for property '" + propertyDescriptor.getName() + "'.");
         return resolver;
     }
 
