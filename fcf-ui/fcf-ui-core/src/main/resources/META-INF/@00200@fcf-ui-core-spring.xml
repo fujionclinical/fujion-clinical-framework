@@ -116,7 +116,12 @@
 				value="${org.fujionclinical.ui.session.countdown.duration.lock}" />
 			<property name="securityService" ref="securityService" />
 		</bean>
-		
+
+		<bean id="popupSupport" class="org.fujionclinical.ui.popup.PopupSupport"
+			  init-method="init" destroy-method="destroy">
+			<property name="eventManager" ref="eventManager" />
+		</bean>
+
 	</beans>
 </beans>
 

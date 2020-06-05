@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		 http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <beans profile="root">
+
+        <bean class="org.fujionclinical.reports.header.ReportHeaderRegistry"
+              factory-method="getInstance"/>
+
+    </beans>
+
+    <beans profile="child">
+
+        <bean id="reportHeaderUser"
+              class="org.fujionclinical.reports.header.ReportHeaderUser"
+              scope="prototype"/>
+
+        <bean id="reportHeaderPatient"
+              class="org.fujionclinical.reports.header.ReportHeaderPatient"
+              scope="prototype"/>
+
+    </beans>
+
+</beans>

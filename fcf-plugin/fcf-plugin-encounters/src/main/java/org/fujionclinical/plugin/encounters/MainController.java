@@ -34,7 +34,7 @@ import org.fujionclinical.api.model.location.ILocation;
 import org.fujionclinical.api.model.person.IPersonName;
 import org.fujionclinical.api.model.person.IPersonNameType;
 import org.fujionclinical.shell.elements.ElementPlugin;
-import org.fujionclinical.ui.sharedforms.controller.ResourceListView;
+import org.fujionclinical.sharedforms.controller.ResourceListView;
 
 import java.util.List;
 import java.util.Objects;

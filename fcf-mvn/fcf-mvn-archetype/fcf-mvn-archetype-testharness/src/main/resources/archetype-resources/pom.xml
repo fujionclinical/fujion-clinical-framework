@@ -32,11 +32,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.fujionclinical</groupId>
-			<artifactId>fcf-ui-popupsupport</artifactId>
-			<version>${fcfVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.fujionclinical</groupId>
 			<artifactId>fcf-security-mock</artifactId>
 			<version>${fcfVersion}</version>
 		</dependency>
