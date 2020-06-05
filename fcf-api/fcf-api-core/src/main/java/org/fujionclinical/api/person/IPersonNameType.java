@@ -80,6 +80,7 @@ public interface IPersonNameType {
      *
      * @return Person's full name, or null if not found.
      */
+    @QueryParameter
     default String getFullName() {
         return getFullName(IPersonName.PersonNameUse.USUAL, IPersonName.PersonNameUse.ANY);
     }
