@@ -27,6 +27,7 @@ package org.fujionclinical.api.model;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.fujion.common.CollectionUtil;
+import org.fujionclinical.api.query.QueryParameter;
 
 import java.util.Collections;
 import java.util.List;
@@ -37,6 +38,7 @@ public interface IPostalAddress {
         HOME, WORK, TEMP, OLD, BILLING
     }
 
+    @QueryParameter
     PostalAddressUse getUse();
 
     default void setUse(PostalAddressUse use) {
@@ -63,6 +65,7 @@ public interface IPostalAddress {
         return CollectionUtil.notEmpty(getLines());
     }
 
+    @QueryParameter
     String getCity();
 
     default void setCity(String city) {
@@ -83,6 +86,7 @@ public interface IPostalAddress {
         return getDistrict() != null;
     }
 
+    @QueryParameter
     String getState();
 
     default void setState(String state) {
@@ -93,6 +97,7 @@ public interface IPostalAddress {
         return getState() != null;
     }
 
+    @QueryParameter
     String getPostalCode();
 
     default void setPostalCode(String postalCode) {
@@ -103,6 +108,7 @@ public interface IPostalAddress {
         return getPostalCode() != null;
     }
 
+    @QueryParameter
     String getCountry();
 
     default void setCountry(String country) {

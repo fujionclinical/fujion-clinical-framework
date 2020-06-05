@@ -25,30 +25,13 @@
  */
 package org.fujionclinical.api.query;
 
-import java.beans.PropertyDescriptor;
-
 /**
- * This is a query expression fragment with all operands fully resolved.
+ * This class exists only to provide property descriptors for query expression modifiers.  It is not meant to be
+ * implemented.
  */
-public class QueryExpressionTuple {
+abstract class QueryExpressionModifier {
 
-    public final PropertyDescriptor propertyDescriptor;
-
-    public final String propertyPath;
-
-    public final QueryOperator operator;
-
-    public final Object[] operands;
-
-    public QueryExpressionTuple(
-            PropertyDescriptor propertyDescriptor,
-            String propertyPath,
-            QueryOperator operator,
-            Object... operands) {
-        this.propertyDescriptor = propertyDescriptor;
-        this.propertyPath = propertyPath;
-        this.operator = operator;
-        this.operands = operands;
-    }
+    @QueryParameter
+    public abstract int get_count();
 
 }

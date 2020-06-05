@@ -79,15 +79,16 @@ public class QueryExpressionParser {
             result = result == null ? split(fragment, " " + operator.name() + " ", true) : result;
 
             if (result != null) {
-                String propertyName = result[0].trim();
-                PropertyDescriptor propertyDescriptor = getPropertyDescriptor(domainClass, propertyName);
+                String propertyPath = result[0].trim();
+                Class<?> propClass = propertyPath.startsWith("_") ? QueryExpressionModifier.class : domainClass;
+                PropertyDescriptor propertyDescriptor = getPropertyDescriptor(propClass, propertyPath);
                 AbstractQueryExpressionResolver resolver = QueryExpressionResolvers.getResolver(propertyDescriptor);
                 String[] operands = Arrays.stream(OPERAND_DELIMITER.split(result[1]))
                         .map(StringUtils::trimToNull)
                         .filter(Objects::nonNull)
                         .map(StrUtil::stripQuotes)
                         .toArray(String[]::new);
-                return new QueryExpressionFragment(propertyDescriptor, resolver, operator, operands);
+                return new QueryExpressionFragment(propertyDescriptor, propertyPath, resolver, operator, operands);
             }
         }
 
@@ -96,11 +97,15 @@ public class QueryExpressionParser {
 
     private PropertyDescriptor getPropertyDescriptor(
             Class<?> clazz,
-            String propertyName) {
-        PropertyDescriptor propertyDescriptor = propertyName.startsWith("_")
-                ? QueryExpressionModifiers.getPropertyDescriptor(propertyName)
-                : BeanUtils.getPropertyDescriptor(clazz, propertyName);
-        Assert.notNull(propertyDescriptor, () -> "Cannot resolve property '" + propertyName + "'.");
+            String propertyPath) {
+        PropertyDescriptor propertyDescriptor = null;
+
+        for (String propertyName : propertyPath.split("\\.")) {
+            propertyDescriptor = BeanUtils.getPropertyDescriptor(clazz, propertyName);
+            Assert.notNull(propertyDescriptor, () -> "Cannot resolve property '" + propertyPath + "'.");
+            clazz = propertyDescriptor.getPropertyType();
+        }
+
         return propertyDescriptor;
     }
 

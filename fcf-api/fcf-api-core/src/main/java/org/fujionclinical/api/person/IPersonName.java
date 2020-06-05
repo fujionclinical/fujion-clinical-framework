@@ -27,6 +27,7 @@ package org.fujionclinical.api.person;
 
 import org.apache.commons.lang.StringUtils;
 import org.fujion.common.CollectionUtil;
+import org.fujionclinical.api.query.QueryParameter;
 
 import java.util.Collections;
 import java.util.List;
@@ -37,6 +38,7 @@ public interface IPersonName {
         USUAL, OFFICIAL, TEMP, NICKNAME, ANONYMOUS, OLD, MAIDEN, ANY
     }
 
+    @QueryParameter
     String getFamilyName();
 
     default void setFamilyName(String familyName) {
@@ -47,6 +49,7 @@ public interface IPersonName {
         return !StringUtils.isEmpty(getFamilyName());
     }
 
+    @QueryParameter
     List<String> getGivenNames();
 
     default void setGivenNames(List<String> givenNames) {

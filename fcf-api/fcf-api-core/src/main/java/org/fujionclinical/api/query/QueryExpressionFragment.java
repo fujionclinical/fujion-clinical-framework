@@ -43,20 +43,24 @@ public class QueryExpressionFragment<PROP, OPD> {
 
     private final PropertyDescriptor propertyDescriptor;
 
-    public final QueryOperator operator;
+    private final String propertyPath;
 
-    public final String[] operands;
+    protected final QueryOperator operator;
 
-    public final AbstractQueryExpressionResolver<PROP, OPD> resolver;
+    protected final String[] operands;
+
+    private final AbstractQueryExpressionResolver<PROP, OPD> resolver;
 
     public QueryExpressionFragment(
             PropertyDescriptor propertyDescriptor,
+            String propertyPath,
             AbstractQueryExpressionResolver<PROP, OPD> resolver,
             QueryOperator operator,
             String... operands) {
         QueryParameter annot = AnnotationUtils.findAnnotation(propertyDescriptor.getReadMethod(), QueryParameter.class);
         Assert.notNull(annot, () -> "The property '" + propertyDescriptor.getName() + "' is not a valid query parameter.");
         this.propertyDescriptor = propertyDescriptor;
+        this.propertyPath = propertyPath;
         this.operator = operator;
         this.resolver = resolver;
         this.operands = operands;
@@ -92,7 +96,7 @@ public class QueryExpressionFragment<PROP, OPD> {
             resolvedOperands[index++] = resolvedOperand;
         }
 
-        return new QueryExpressionTuple(propertyDescriptor, operator, resolvedOperands);
+        return new QueryExpressionTuple(propertyDescriptor, propertyPath, operator, resolvedOperands);
     }
 
     /**
@@ -100,7 +104,7 @@ public class QueryExpressionFragment<PROP, OPD> {
      * a property (possibly nested) of the resolved placeholder value.
      *
      * @param queryContext The query context.
-     * @param placeholder The placeholder (with optional property path).
+     * @param placeholder  The placeholder (with optional property path).
      * @return The resolved value, or null if could not be resolved.
      */
     private Object resolvePlaceholder(
