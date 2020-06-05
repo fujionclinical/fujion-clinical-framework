@@ -23,7 +23,7 @@
  *
  * #L%
  */
-package org.fujionclinical.api.model.person;
+package org.fujionclinical.api.person;
 
 import java.util.ArrayList;
 import java.util.List;

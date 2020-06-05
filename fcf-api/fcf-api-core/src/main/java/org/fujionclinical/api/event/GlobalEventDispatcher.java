@@ -29,7 +29,7 @@ import org.apache.commons.lang.StringUtils;
 import org.fujionclinical.api.core.FrameworkUtil;
 import org.fujionclinical.api.messaging.*;
 import org.fujionclinical.api.messaging.Recipient.RecipientType;
-import org.fujionclinical.api.model.user.IUser;
+import org.fujionclinical.api.user.IUser;
 import org.fujionclinical.api.security.SecurityUtil;
 
 import java.io.Serializable;

@@ -23,35 +23,19 @@
  *
  * #L%
  */
-package org.fujionclinical.api.encounter.search;
+package org.fujionclinical.api.encounter;
 
 import org.fujion.common.DateRange;
-import org.fujionclinical.api.encounter.IEncounter;
 import org.fujionclinical.api.patient.IPatient;
-import org.fujionclinical.api.query.SearchCriteria;
+import org.fujionclinical.api.query.AbstractQueryCriteria;
 
 /**
  * Search criteria for encounter lookup.
  */
-public class EncounterSearchCriteria extends SearchCriteria<IEncounter> {
+public class EncounterQueryCriteria extends AbstractQueryCriteria<IEncounter> {
 
-    private IPatient patient;
-
-    private String type;
-
-    private DateRange period;
-
-    public EncounterSearchCriteria() {
-        super(IEncounter.class, "Insufficient search parameters.");
-    }
-
-    /**
-     * Returns the patient criterion.
-     *
-     * @return Patient criterion.
-     */
-    public IPatient getPatient() {
-        return patient;
+    public EncounterQueryCriteria() {
+        super(IEncounter.class, ';', null);
     }
 
     /**
@@ -60,19 +44,23 @@ public class EncounterSearchCriteria extends SearchCriteria<IEncounter> {
      * @param patient Patient.
      */
     public void setPatient(IPatient patient) {
-        this.patient = patient;
-    }
-
-    public String getType() {
-        return type;
+        queryContext.setParam("patient", patient);
     }
 
     public void setType(String type) {
-        this.type = type;
+        queryContext.setParam("type", type);
     }
 
     @Override
     protected void buildQueryString(StringBuilder sb) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    protected boolean parseCriterion(
+            String criterion,
+            int position) {
+        return false;
     }
 
 
@@ -83,26 +71,7 @@ public class EncounterSearchCriteria extends SearchCriteria<IEncounter> {
      */
     @Override
     public boolean isValid() {
-        return super.isValid() || patient != null;
-    }
-
-    /**
-     * Returns true if no criteria have been set.
-     *
-     * @return True if no criteria have been set.
-     */
-    @Override
-    public boolean isEmpty() {
-        return super.isEmpty() && patient == null && type == null;
-    }
-
-    /**
-     * Returns the time window within which to search.
-     *
-     * @return Search time window.
-     */
-    public DateRange getPeriod() {
-        return period;
+        return super.isValid() || queryContext.hasParam("patient");
     }
 
     /**
@@ -111,7 +80,7 @@ public class EncounterSearchCriteria extends SearchCriteria<IEncounter> {
      * @param period Search time window.
      */
     public void setPeriod(DateRange period) {
-        this.period = period;
+        queryContext.setParam("period", period);
     }
 
 }

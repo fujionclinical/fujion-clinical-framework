@@ -168,7 +168,7 @@
 
 		<!-- Shared user context. -->
 		<bean id="userContext" parent="managedContext"
-			class="org.fujionclinical.api.model.user.UserContext">
+			class="org.fujionclinical.api.user.UserContext">
 			<constructor-arg value="#{securityService.authenticatedUser}" />
 		</bean>
 

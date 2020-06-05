@@ -23,7 +23,7 @@
  *
  * #L%
  */
-package org.fujionclinical.api.model.person;
+package org.fujionclinical.api.person;
 
 import org.fujion.common.CollectionUtil;
 import org.fujionclinical.api.query.QueryParameter;

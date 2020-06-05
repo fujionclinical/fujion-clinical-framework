@@ -23,25 +23,37 @@
  *
  * #L%
  */
-package org.fujionclinical.api.query;
+package org.fujionclinical.api.person;
 
-import org.fujion.common.StrUtil;
+public interface IPersonNameParser {
 
-/**
- * Exception class for search related exceptions.
- */
-public class SearchException extends RuntimeException {
+    /**
+     * Converts person name to displayable text.
+     *
+     * @param name Person name.
+     * @return Displayable text.
+     */
+    String toString(IPersonName name);
 
-    private static final long serialVersionUID = 1L;
+    /**
+     * Converts text to a person name equivalent.
+     *
+     * @param value Value to convert.
+     * @param name  Person name instance to receive parsed result (if null, one will be created).
+     * @return The person name parsed from the input value.
+     */
+    IPersonName fromString(
+            String value,
+            IPersonName name);
 
-    public SearchException(String label) {
-        this(label, null);
-    }
-
-    public SearchException(
-            String label,
-            Throwable cause) {
-        super(StrUtil.formatMessage(label), cause);
+    /**
+     * Converts text to a person name equivalent.
+     *
+     * @param value Value to convert.
+     * @return The person name parsed from the input value.
+     */
+    default IPersonName fromString(String value) {
+        return fromString(value, null);
     }
 
 }

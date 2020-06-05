@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.api.query;
 
+import org.apache.commons.lang.ClassUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.Assert;
@@ -42,23 +43,20 @@ public class QueryExpressionFragment<PROP, OPD> {
 
     private final PropertyDescriptor propertyDescriptor;
 
-    public final Class<PROP> propertyType;
-
     public final QueryOperator operator;
 
     public final String[] operands;
 
-    public final QueryExpressionResolver<PROP, OPD> resolver;
+    public final AbstractQueryExpressionResolver<PROP, OPD> resolver;
 
     public QueryExpressionFragment(
             PropertyDescriptor propertyDescriptor,
-            QueryExpressionResolver<PROP, OPD> resolver,
+            AbstractQueryExpressionResolver<PROP, OPD> resolver,
             QueryOperator operator,
             String... operands) {
         QueryParameter annot = AnnotationUtils.findAnnotation(propertyDescriptor.getReadMethod(), QueryParameter.class);
         Assert.notNull(annot, () -> "The property '" + propertyDescriptor.getName() + "' is not a valid query parameter.");
         this.propertyDescriptor = propertyDescriptor;
-        this.propertyType = (Class<PROP>) propertyDescriptor.getPropertyType();
         this.operator = operator;
         this.resolver = resolver;
         this.operands = operands;
@@ -72,6 +70,7 @@ public class QueryExpressionFragment<PROP, OPD> {
      * @return An expression tuple.
      */
     public QueryExpressionTuple createTuple(IQueryContext queryContext) {
+        Class<PROP> propertyType = ClassUtils.primitiveToWrapper(propertyDescriptor.getPropertyType());
         OPD[] resolvedOperands = (OPD[]) new Object[operands.length];
         int index = 0;
         OPD resolvedOperand = null;
@@ -88,7 +87,7 @@ public class QueryExpressionFragment<PROP, OPD> {
                 operand = operandStr;
             }
 
-            resolvedOperand = resolver.resolve(operand, resolvedOperand);
+            resolvedOperand = resolver.resolve(propertyType, operand, resolvedOperand);
             Assert.notNull(resolvedOperand, () -> "Operand '" + operandStr + "' cannot be converted to " + propertyType + ".");
             resolvedOperands[index++] = resolvedOperand;
         }

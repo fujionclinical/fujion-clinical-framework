@@ -31,24 +31,25 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public abstract class QueryExpressionResolver<PROP, OPD> {
+public abstract class AbstractQueryExpressionResolver<TGT, OPD> {
 
-    private final Class<PROP> propertyType;
+    private final Class<TGT> targetClass;
 
     private final int maxOperands;
 
     private final Set<QueryOperator> validOperators = new HashSet<>();
 
-    public QueryExpressionResolver(
-            Class<PROP> propertyType,
+    public AbstractQueryExpressionResolver(
+            Class<TGT> targetClass,
             int maxOperands,
             QueryOperator... validOperators) {
-        this.propertyType = propertyType;
+        this.targetClass = targetClass;
         this.maxOperands = maxOperands;
         this.validOperators.addAll(Arrays.asList(validOperators));
     }
 
     protected abstract OPD resolve(
+            Class<TGT> propertyType,
             Object operand,
             OPD previousOperand);
 
@@ -57,8 +58,8 @@ public abstract class QueryExpressionResolver<PROP, OPD> {
         Assert.isTrue(fragment.operands.length <= maxOperands, () -> "Operand maximum of " + maxOperands + " exceeded.");
     }
 
-    public Class<PROP> getPropertyType() {
-        return propertyType;
+    public Class<TGT> getTargetClass() {
+        return targetClass;
     }
 
 }

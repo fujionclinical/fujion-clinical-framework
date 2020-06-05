@@ -26,6 +26,7 @@
 package org.fujionclinical.api.query;
 
 import org.apache.commons.lang.StringUtils;
+import org.fujion.common.LocalizedMessage;
 import org.fujionclinical.api.model.DomainDAORegistry;
 import org.fujionclinical.api.model.IDomainObject;
 
@@ -34,21 +35,50 @@ import java.util.List;
 /**
  * Base class for search criteria.
  */
-public abstract class SearchCriteria<T extends IDomainObject> {
+public abstract class AbstractQueryCriteria<T extends IDomainObject> {
+
+    private static final LocalizedMessage MSG_ERROR_MISSING_REQUIRED = new LocalizedMessage("patientsearch.error.missing.required");
+
+    protected final IQueryContext queryContext = new QueryContext();
 
     private final Class<T> domainClass;
 
     private final String validationFailureMessage;
 
-    protected final IQueryContext queryContext = new QueryContext();
+    private final Character criterionSeparator;
 
-    protected SearchCriteria(Class<T> domainClass, String validationFailureMessage) {
+    protected AbstractQueryCriteria(
+            Class<T> domainClass,
+            Character criterionSeparator,
+            String validationFailureMessage) {
         this.domainClass = domainClass;
-        this.validationFailureMessage = validationFailureMessage;
+        this.criterionSeparator = criterionSeparator;
+        this.validationFailureMessage = validationFailureMessage == null ? MSG_ERROR_MISSING_REQUIRED.toString() : validationFailureMessage;
     }
 
+    /**
+     * Implement to build a query string from the current search criteria.
+     *
+     * @param sb A string builder to use to build the query string.
+     */
     abstract protected void buildQueryString(StringBuilder sb);
 
+    /**
+     * Parses the search string criterion.
+     *
+     * @param criterion The search criterion.
+     * @param position  The position of the criterion in the search string.
+     * @return True if the criterion was parsed.
+     */
+    abstract protected boolean parseCriterion(
+            String criterion,
+            int position);
+
+    /**
+     * Compile the current search criteria.
+     *
+     * @return The compiled search criteria (as a list of query expression tuples).
+     */
     public List<QueryExpressionTuple> compile() {
         validate();
         StringBuilder sb = new StringBuilder();
@@ -81,7 +111,7 @@ public abstract class SearchCriteria<T extends IDomainObject> {
      */
     public void validate() {
         if (!isValid()) {
-            throw new SearchException(validationFailureMessage);
+            throw new QueryException(validationFailureMessage);
         }
     }
 
@@ -91,7 +121,7 @@ public abstract class SearchCriteria<T extends IDomainObject> {
      * @param maximum Maximum.
      */
     public void setMaximum(Integer maximum) {
-        queryContext.setParam("maximum", maximum);
+        queryContext.setParam("_count", maximum);
     }
 
     /**
@@ -112,11 +142,32 @@ public abstract class SearchCriteria<T extends IDomainObject> {
         return queryContext.isEmpty();
     }
 
-    public void clear() {
+    public void reset() {
         queryContext.reset();
     }
 
-    protected void addFragment(StringBuilder sb, String parameter, String operator) {
+    public void reset(String searchString) {
+        reset();
+        String[] criteria = criterionSeparator == null ? new String[]{searchString} : StringUtils.split(searchString, criterionSeparator);
+        int position = 0;
+
+        for (String criterion : criteria) {
+            criterion = StringUtils.trimToNull(criterion);
+
+            if (criterion != null) {
+                boolean processed = parseCriterion(criterion.trim(), position++);
+
+                if (!processed) {
+                    throw new QueryException("Unrecognized search criterion '" + criterion + "'.");
+                }
+            }
+        }
+    }
+
+    protected void addFragment(
+            StringBuilder sb,
+            String parameter,
+            String operator) {
         if (queryContext.hasParam(parameter)) {
             sb.append(sb.length() == 0 ? "" : "&");
             sb.append(parameter).append(" ").append(operator).append(" {{").append(parameter).append("}}");

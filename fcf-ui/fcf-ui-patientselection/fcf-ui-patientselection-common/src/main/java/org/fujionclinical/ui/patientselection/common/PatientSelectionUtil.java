@@ -29,10 +29,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.ancillary.IResponseCallback;
 import org.fujion.common.StrUtil;
-import org.fujionclinical.api.model.person.IPersonName;
+import org.fujionclinical.api.person.IPersonName;
 import org.fujionclinical.api.patient.IPatient;
-import org.fujionclinical.api.patient.search.PatientSearchCriteria;
-import org.fujionclinical.api.query.SearchException;
+import org.fujionclinical.api.patient.PatientQueryCriteria;
+import org.fujionclinical.api.query.QueryException;
 import org.fujionclinical.ui.dialog.DialogUtil;
 import org.fujionclinical.ui.util.FCFUtil;
 
@@ -62,7 +62,9 @@ public class PatientSelectionUtil {
             String searchText,
             int maxMatches,
             IResponseCallback<List<IPatient>> callback) {
-        execute(new PatientSearchCriteria(searchText), maxMatches, callback);
+        PatientQueryCriteria criteria = new PatientQueryCriteria();
+        criteria.reset(searchText);
+        execute(criteria, maxMatches, callback);
     }
 
     /**
@@ -78,7 +80,7 @@ public class PatientSelectionUtil {
      *                   search.
      */
     public static void execute(
-            PatientSearchCriteria criteria,
+            PatientQueryCriteria criteria,
             int maxMatches,
             IResponseCallback<List<IPatient>> callback) {
         if (criteria == null || criteria.isEmpty()) {
@@ -90,7 +92,7 @@ public class PatientSelectionUtil {
             List<IPatient> matches = criteria.search();
 
             if (matches == null || matches.size() == 0) {
-                throw new SearchException(MSG_ERROR_PATIENT_NOT_FOUND.toString());
+                throw new QueryException(MSG_ERROR_PATIENT_NOT_FOUND.toString());
             }
 
             if (maxMatches > 0 && matches.size() > maxMatches) {
@@ -108,11 +110,11 @@ public class PatientSelectionUtil {
 
             //PatientContext.checkRequired(matches);
             doCallback(matches, callback);
-        } catch (SearchException e) {
+        } catch (QueryException e) {
             throw e;
         } catch (Exception e) {
             log.error("Error during patient search.", e);
-            throw new SearchException(StrUtil.formatMessage(MSG_ERROR_NOT_FOUND.toString(), FCFUtil.formatExceptionForDisplay(e)), e);
+            throw new QueryException(MSG_ERROR_NOT_FOUND.toString(FCFUtil.formatExceptionForDisplay(e)), e);
         }
     }
 

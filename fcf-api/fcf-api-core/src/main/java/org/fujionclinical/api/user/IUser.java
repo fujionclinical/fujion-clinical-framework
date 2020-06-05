@@ -23,37 +23,35 @@
  *
  * #L%
  */
-package org.fujionclinical.api.model.person;
+package org.fujionclinical.api.user;
 
-public interface IPersonNameParser {
+import org.fujionclinical.api.person.IPerson;
+import org.fujionclinical.api.security.ISecurityDomain;
 
-    /**
-     * Converts person name to displayable text.
-     *
-     * @param name Person name.
-     * @return Displayable text.
-     */
-    String toString(IPersonName name);
+/**
+ * Interface for a user.
+ */
+public interface IUser extends IPerson {
 
     /**
-     * Converts text to a person name equivalent.
+     * Return the user's login name.
      *
-     * @param value Value to convert.
-     * @param name  Person name instance to receive parsed result (if null, one will be created).
-     * @return The person name parsed from the input value.
+     * @return User's login name.
      */
-    IPersonName fromString(
-            String value,
-            IPersonName name);
+    String getLoginName();
 
     /**
-     * Converts text to a person name equivalent.
+     * Return the user's password.
      *
-     * @param value Value to convert.
-     * @return The person name parsed from the input value.
+     * @return User's password.
      */
-    default IPersonName fromString(String value) {
-        return fromString(value, null);
-    }
+    String getPassword();
+
+    /**
+     * Returns the user's security domain.
+     *
+     * @return User's security domain.
+     */
+    ISecurityDomain getSecurityDomain();
 
 }

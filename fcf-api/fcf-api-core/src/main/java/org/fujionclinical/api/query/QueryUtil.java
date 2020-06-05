@@ -25,21 +25,22 @@
  */
 package org.fujionclinical.api.query;
 
+import org.fujionclinical.api.person.IPerson;
 import org.fujionclinical.api.query.IQueryResult.CompletionStatus;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Static utility methods.
  */
 public class QueryUtil {
-    
-    
+
     private static class QueryResult<T> implements IQueryResult<T> {
-        
-        
+
         private final List<T> results;
         
         private final CompletionStatus status;
@@ -128,7 +129,26 @@ public class QueryUtil {
     public static <T> IQueryResult<T> packageResult(List<T> results, CompletionStatus status, Map<String, Object> metadata) {
         return new QueryResult<>(results, status, metadata);
     }
-    
+
+    /**
+     * Returns an enum member if the value matches the start of one and only one member's name.
+     * Matching is case-insensitive.
+     *
+     * @param value The value to test.
+     * @return The matching member, or null if no match.
+     */
+    public static <T extends Enum<T>> T findMatchingMember(Class<T> clazz, String value) {
+        if (value == null || value.isEmpty()) {
+            return null;
+        }
+
+        String uc = value.toUpperCase();
+        List<T> result = Arrays.stream(clazz.getEnumConstants())
+                .filter(element -> element.name().toUpperCase().startsWith(uc))
+                .collect(Collectors.toList());
+        return result.size() == 1 ? result.get(0) : null;
+    }
+
     /**
      * Force static class.
      */

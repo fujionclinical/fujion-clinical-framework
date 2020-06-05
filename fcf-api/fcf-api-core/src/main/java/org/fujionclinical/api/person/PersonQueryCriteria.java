@@ -23,74 +23,62 @@
  *
  * #L%
  */
-package org.fujionclinical.api.patient.search;
+package org.fujionclinical.api.person;
 
 import org.apache.commons.lang.StringUtils;
 import org.fujion.common.DateUtil;
-import org.fujion.common.LocalizedMessage;
 import org.fujionclinical.api.model.ConceptCode;
 import org.fujionclinical.api.model.IConceptCode;
 import org.fujionclinical.api.model.IIdentifier;
 import org.fujionclinical.api.model.Identifier;
-import org.fujionclinical.api.model.person.IPersonName;
-import org.fujionclinical.api.model.person.PersonNameParser;
-import org.fujionclinical.api.patient.IPatient;
-import org.fujionclinical.api.query.SearchCriteria;
+import org.fujionclinical.api.query.AbstractQueryCriteria;
+import org.fujionclinical.api.query.QueryUtil;
 
+import java.util.Arrays;
 import java.util.Date;
 
 /**
- * Search criteria for patient lookup.
+ * Base search criteria for person lookups.
  */
-public class PatientSearchCriteria extends SearchCriteria<IPatient> {
-
-    public static final LocalizedMessage MSG_ERROR_MISSING_REQUIRED = new LocalizedMessage("patientsearch.error.missing.required");
+public abstract class PersonQueryCriteria<T extends IPerson> extends AbstractQueryCriteria<T> {
 
     private static final IConceptCode SSN_TYPE = new ConceptCode("http://hl7.org/fhir/identifier-type", "SB");
 
-    private static final IConceptCode MRN_TYPE = new ConceptCode("http://hl7.org/fhir/v2/0203", "MR");
-
-    public PatientSearchCriteria() {
-        super(IPatient.class, MSG_ERROR_MISSING_REQUIRED.toString());
+    protected PersonQueryCriteria(
+            Class<T> domainClass,
+            String validationFailureMessage) {
+        super(domainClass, ';', validationFailureMessage);
     }
 
     /**
-     * Creates a criteria instance with settings parsed from search text.
+     * Parses a criterion and sets the result in the query context.
      *
-     * @param searchText Search text to parse. Uses pattern matching to determine which criterion is
-     *                   associated with a given input component. Separate multiple input components with
-     *                   semicolons.
+     * @param criterion The search criterion to parse.
+     * @param position  The position of the criterion in the search string.
+     * @return True if the criterion was successfully parsed.
      */
-    public PatientSearchCriteria(String searchText) {
-        this();
-        searchText = searchText == null ? null : searchText.trim();
+    @Override
+    protected boolean parseCriterion(
+            String criterion,
+            int position) {
+        Date tempDate;
+        IPerson.Gender tempGender;
 
-        if (!StringUtils.isEmpty(searchText)) {
-            String[] pcs = searchText.split(";");
-
-            for (String pc : pcs) {
-                pc = pc.trim();
-                Date tempDate;
-
-                if (pc.isEmpty()) {
-                    continue;
-                }
-
-                if (isValid() && (pc.equalsIgnoreCase("M") || pc.equalsIgnoreCase("F"))) {
-                    setGender(pc.toUpperCase());
-                } else if (!pc.matches(".*\\d.*")) {
-                    setName(pc);
-                } else if (pc.matches("^=.+$")) {
-                    setId(pc.substring(1));
-                } else if (pc.matches("^\\d{3}-\\d{2}-\\d{4}$")) {
-                    setSSN(pc);
-                } else if ((tempDate = parseDate(pc)) != null) {
-                    setBirth(tempDate);
-                } else {
-                    setMRN(pc);
-                }
-            }
+        if (position > 0 && (tempGender = asGender(criterion)) != null) {
+            setGender(tempGender);
+        } else if (!criterion.matches(".*\\d.*")) {
+            setName(criterion);
+        } else if (criterion.matches("^=.+$")) {
+            setId(criterion.substring(1));
+        } else if (criterion.matches("^\\d{3}-\\d{2}-\\d{4}$")) {
+            setSSN(criterion);
+        } else if ((tempDate = parseDate(criterion)) != null) {
+            setBirth(tempDate);
+        } else {
+            return false;
         }
+
+        return true;
     }
 
     @Override
@@ -131,30 +119,21 @@ public class PatientSearchCriteria extends SearchCriteria<IPatient> {
     }
 
     /**
-     * Sets the patient name criterion.
+     * Sets the person name criterion.
      *
-     * @param name Patient name.
+     * @param name Person name.
      */
     public void setName(String name) {
         setName(name == null ? null : PersonNameParser.instance.fromString(name));
     }
 
     /**
-     * Sets the patient name criterion.
+     * Sets the person name criterion.
      *
-     * @param name Patient name.
+     * @param name Person name.
      */
     public void setName(IPersonName name) {
         queryContext.setParam("name", name == null ? null : name.getFamilyName());
-    }
-
-    /**
-     * Sets the MRN criterion.
-     *
-     * @param mrn MRN.
-     */
-    public void setMRN(String mrn) {
-        queryContext.setParam("identifier", mrn == null ? null : new Identifier(null, mrn, IIdentifier.IdentifierUse.OFFICIAL, MRN_TYPE));
     }
 
     /**
@@ -171,8 +150,18 @@ public class PatientSearchCriteria extends SearchCriteria<IPatient> {
      *
      * @param gender Gender.
      */
-    public void setGender(String gender) {
-        queryContext.setParam("gender", StringUtils.trimToNull(gender));
+    public void setGender(IPerson.Gender gender) {
+        queryContext.setParam("gender", gender);
+    }
+
+    /**
+     * Returns a gender enum member if the value matches the start of a member's name.
+     *
+     * @param value The value to test.
+     * @return The matching gender, or null if no match.
+     */
+    private IPerson.Gender asGender(String value) {
+        return QueryUtil.findMatchingMember(IPerson.Gender.class, value);
     }
 
     /**

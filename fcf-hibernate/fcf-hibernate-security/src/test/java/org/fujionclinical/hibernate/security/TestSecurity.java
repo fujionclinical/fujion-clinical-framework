@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.hibernate.security;
 
-import org.fujionclinical.api.model.user.IUser;
+import org.fujionclinical.api.user.IUser;
 import org.fujionclinical.api.security.SecurityDomainRegistry;
 import org.fujionclinical.api.spring.SpringUtil;
 import org.fujionclinical.ui.test.MockUITest;

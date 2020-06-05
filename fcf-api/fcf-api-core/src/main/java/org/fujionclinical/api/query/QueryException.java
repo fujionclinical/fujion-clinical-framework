@@ -23,33 +23,25 @@
  *
  * #L%
  */
-package org.fujionclinical.api.location.search;
+package org.fujionclinical.api.query;
 
-import org.fujionclinical.api.location.ILocation;
-import org.fujionclinical.api.query.SearchCriteria;
+import org.fujion.common.StrUtil;
 
 /**
- * Represents location search criteria.
+ * Exception class for search related exceptions.
  */
-public class LocationSearchCriteria extends SearchCriteria<ILocation> {
+public class QueryException extends RuntimeException {
 
-    public LocationSearchCriteria() {
-        super(ILocation.class, "Insufficent search parameters.");
+    private static final long serialVersionUID = 1L;
+
+    public QueryException(String label) {
+        this(label, null);
     }
 
-    @Override
-    protected void buildQueryString(StringBuilder sb) {
-
-    }
-
-    /**
-     * Returns true if the current criteria settings meet the minimum requirements for a search.
-     *
-     * @return True if minimum search requirements have been met.
-     */
-    @Override
-    public boolean isValid() {
-        return true;
+    public QueryException(
+            String label,
+            Throwable cause) {
+        super(StrUtil.formatMessage(label), cause);
     }
 
 }

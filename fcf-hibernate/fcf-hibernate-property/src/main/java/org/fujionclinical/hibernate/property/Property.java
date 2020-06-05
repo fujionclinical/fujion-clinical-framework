@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.hibernate.property;
 
-import org.fujionclinical.api.model.user.IUser;
+import org.fujionclinical.api.user.IUser;
 
 import javax.persistence.*;
 import java.io.Serializable;

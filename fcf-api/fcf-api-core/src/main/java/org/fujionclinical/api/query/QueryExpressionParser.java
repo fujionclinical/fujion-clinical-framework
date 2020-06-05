@@ -81,7 +81,7 @@ public class QueryExpressionParser {
             if (result != null) {
                 String propertyName = result[0].trim();
                 PropertyDescriptor propertyDescriptor = getPropertyDescriptor(domainClass, propertyName);
-                QueryExpressionResolver resolver = QueryExpressionResolvers.getResolver(propertyDescriptor);
+                AbstractQueryExpressionResolver resolver = QueryExpressionResolvers.getResolver(propertyDescriptor);
                 String[] operands = Arrays.stream(OPERAND_DELIMITER.split(result[1]))
                         .map(StringUtils::trimToNull)
                         .filter(Objects::nonNull)
@@ -97,9 +97,11 @@ public class QueryExpressionParser {
     private PropertyDescriptor getPropertyDescriptor(
             Class<?> clazz,
             String propertyName) {
-        PropertyDescriptor dx = BeanUtils.getPropertyDescriptor(clazz, propertyName);
-        Assert.notNull(dx, () -> "Cannot resolve property '" + propertyName + "'.");
-        return dx;
+        PropertyDescriptor propertyDescriptor = propertyName.startsWith("_")
+                ? QueryExpressionModifiers.getPropertyDescriptor(propertyName)
+                : BeanUtils.getPropertyDescriptor(clazz, propertyName);
+        Assert.notNull(propertyDescriptor, () -> "Cannot resolve property '" + propertyName + "'.");
+        return propertyDescriptor;
     }
 
     private String[] split(

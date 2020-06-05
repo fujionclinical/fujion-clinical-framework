@@ -23,7 +23,7 @@
  *
  * #L%
  */
-package org.fujionclinical.api.model.user;
+package org.fujionclinical.api.user;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

@@ -23,35 +23,29 @@
  *
  * #L%
  */
-package org.fujionclinical.api.model.user;
+package org.fujionclinical.api.location;
 
-import org.fujionclinical.api.model.person.IPerson;
-import org.fujionclinical.api.security.ISecurityDomain;
+import org.fujionclinical.api.query.AbstractQueryCriteria;
 
 /**
- * Interface for a user.
+ * Represents location search criteria.
  */
-public interface IUser extends IPerson {
+public class LocationQueryCriteria extends AbstractQueryCriteria<ILocation> {
 
-    /**
-     * Return the user's login name.
-     *
-     * @return User's login name.
-     */
-    String getLoginName();
+    public LocationQueryCriteria() {
+        super(ILocation.class, ';', null);
+    }
 
-    /**
-     * Return the user's password.
-     *
-     * @return User's password.
-     */
-    String getPassword();
+    @Override
+    protected void buildQueryString(StringBuilder sb) {
+        throw new UnsupportedOperationException();
+    }
 
-    /**
-     * Returns the user's security domain.
-     *
-     * @return User's security domain.
-     */
-    ISecurityDomain getSecurityDomain();
+    @Override
+    protected boolean parseCriterion(
+            String criterion,
+            int position) {
+        return false;
+    }
 
 }

@@ -31,7 +31,7 @@ import org.fujionclinical.api.model.IConcept;
 import org.fujionclinical.api.model.IConceptCode;
 import org.fujionclinical.api.model.IIdentifier;
 import org.fujionclinical.api.model.IPeriod;
-import org.fujionclinical.api.model.person.IPerson;
+import org.fujionclinical.api.person.IPerson;
 
 import java.util.*;
 import java.util.function.Function;

@@ -106,7 +106,7 @@ public class Constants {
 
     public static final String BTN_REFINE_LABEL = "patientsearch.btn.refine.label";
 
-    public static final String BTN_CONTINUE_LABEL = "patientsearch.btn.continue_.label";
+    public static final String BTN_CONTINUE_LABEL = "patientsearch.btn.continue.label";
 
     public static final String REFINE_BUTTONS = BTN_REFINE_LABEL + "|" + BTN_CONTINUE_LABEL;
 

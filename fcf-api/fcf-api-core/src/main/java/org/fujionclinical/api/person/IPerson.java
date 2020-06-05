@@ -23,7 +23,7 @@
  *
  * #L%
  */
-package org.fujionclinical.api.model.person;
+package org.fujionclinical.api.person;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.fujion.common.CollectionUtil;
@@ -39,7 +39,7 @@ import java.util.List;
 public interface IPerson extends IDomainObject, IPostalAddressType, IContactPointType, IPersonNameType {
 
     enum Gender {
-        MALE, FEMALE, OTHER, UNKNOWN
+        MALE, FEMALE, OTHER, UNKNOWN;
     }
 
     enum MaritalStatus {

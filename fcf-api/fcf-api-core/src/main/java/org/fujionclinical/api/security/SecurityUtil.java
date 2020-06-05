@@ -26,7 +26,7 @@
 package org.fujionclinical.api.security;
 
 import org.apache.commons.lang.math.RandomUtils;
-import org.fujionclinical.api.model.user.IUser;
+import org.fujionclinical.api.user.IUser;
 import org.fujionclinical.api.spring.SpringUtil;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.Assert;

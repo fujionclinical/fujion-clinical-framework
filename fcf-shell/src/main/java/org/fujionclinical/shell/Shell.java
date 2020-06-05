@@ -42,7 +42,7 @@ import org.fujionclinical.api.core.FrameworkUtil;
 import org.fujionclinical.api.context.ISurveyResponse;
 import org.fujionclinical.api.event.EventManager;
 import org.fujionclinical.api.event.IEventManager;
-import org.fujionclinical.api.model.user.UserContext.IUserContextSubscriber;
+import org.fujionclinical.api.user.UserContext.IUserContextSubscriber;
 import org.fujionclinical.api.property.PropertyUtil;
 import org.fujionclinical.api.security.SecurityUtil;
 import org.fujionclinical.api.spring.SpringUtil;

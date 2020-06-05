@@ -31,8 +31,8 @@ import org.fujionclinical.api.encounter.EncounterContext;
 import org.fujionclinical.api.encounter.IEncounter;
 import org.fujionclinical.api.event.IEventSubscriber;
 import org.fujionclinical.api.location.ILocation;
-import org.fujionclinical.api.model.person.IPersonName;
-import org.fujionclinical.api.model.person.IPersonNameType;
+import org.fujionclinical.api.person.IPersonName;
+import org.fujionclinical.api.person.IPersonNameType;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.ui.sharedforms.controller.ResourceListView;
 

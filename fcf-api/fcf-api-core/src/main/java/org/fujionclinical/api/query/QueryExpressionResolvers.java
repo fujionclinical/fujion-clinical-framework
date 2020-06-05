@@ -7,15 +7,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * This Source Code Form is also subject to the terms of the Health-Related
  * Additional Disclaimer of Warranty and Limitation of Liability available at
  *
@@ -26,12 +26,14 @@
 package org.fujionclinical.api.query;
 
 import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ClassUtils;
 import org.fujion.common.DateUtil;
 import org.fujion.common.MiscUtil;
 import org.fujionclinical.api.core.CoreUtil;
 import org.fujionclinical.api.model.*;
-import org.fujionclinical.api.model.person.IPersonName;
+import org.fujionclinical.api.person.IPersonName;
 import org.springframework.util.Assert;
+import org.springframework.util.NumberUtils;
 
 import java.beans.PropertyDescriptor;
 import java.util.Date;
@@ -44,7 +46,25 @@ import java.util.Map;
  */
 class QueryExpressionResolvers {
 
-    static class StringResolver extends QueryExpressionResolver<String, String> {
+    static class EnumResolver extends AbstractQueryExpressionResolver<Enum, Enum> {
+
+        public EnumResolver() {
+            super(Enum.class, Integer.MAX_VALUE, QueryOperator.EQ, QueryOperator.SW);
+        }
+
+        @Override
+        protected Enum resolve(
+                Class<Enum> propertyType,
+                Object operand,
+                Enum previousOperand) {
+            return operand instanceof String ? QueryUtil.findMatchingMember(propertyType, (String) operand)
+                    : propertyType.isInstance(operand) ? propertyType.cast(operand)
+                    : null;
+        }
+
+    }
+
+    static class StringResolver extends AbstractQueryExpressionResolver<String, String> {
 
         public StringResolver() {
             super(String.class, Integer.MAX_VALUE, QueryOperator.EQ, QueryOperator.SW);
@@ -52,6 +72,7 @@ class QueryExpressionResolvers {
 
         @Override
         protected String resolve(
+                Class<String> propertyType,
                 Object operand,
                 String previousOperand) {
             return operand instanceof String ? (String) operand : null;
@@ -59,7 +80,7 @@ class QueryExpressionResolvers {
 
     }
 
-    static class BooleanResolver extends QueryExpressionResolver<Boolean, Boolean> {
+    static class BooleanResolver extends AbstractQueryExpressionResolver<Boolean, Boolean> {
 
         public BooleanResolver() {
             super(Boolean.class, 1, QueryOperator.EQ);
@@ -67,6 +88,7 @@ class QueryExpressionResolvers {
 
         @Override
         protected Boolean resolve(
+                Class<Boolean> propertyType,
                 Object operand,
                 Boolean previousOperand) {
             return operand instanceof Boolean ? (Boolean) operand
@@ -76,7 +98,25 @@ class QueryExpressionResolvers {
 
     }
 
-    static class DateResolver extends QueryExpressionResolver<Date, Date> {
+    static class NumberResolver extends AbstractQueryExpressionResolver<Number, Number> {
+
+        public NumberResolver() {
+            super(Number.class, 1, QueryOperator.EQ);
+        }
+
+        @Override
+        protected Number resolve(
+                Class<Number> propertyType,
+                Object operand,
+                Number previousOperand) {
+            return propertyType.isInstance(operand) ? NumberUtils.convertNumberToTargetClass((Number) operand, propertyType)
+                    : operand instanceof String ? NumberUtils.parseNumber((String) operand, propertyType)
+                    : null;
+        }
+
+    }
+
+    static class DateResolver extends AbstractQueryExpressionResolver<Date, Date> {
 
         public DateResolver() {
             super(Date.class, 1, QueryOperator.EQ, QueryOperator.GE, QueryOperator.GT, QueryOperator.LE, QueryOperator.LT);
@@ -84,6 +124,7 @@ class QueryExpressionResolvers {
 
         @Override
         protected Date resolve(
+                Class<Date> propertyType,
                 Object operand,
                 Date previousOperand) {
             return operand instanceof Date ? (Date) operand
@@ -93,7 +134,7 @@ class QueryExpressionResolvers {
 
     }
 
-    static class DomainObjectResolver extends QueryExpressionResolver<IDomainObject, String> {
+    static class DomainObjectResolver extends AbstractQueryExpressionResolver<IDomainObject, String> {
 
         public DomainObjectResolver() {
             super(IDomainObject.class, 1, QueryOperator.EQ);
@@ -101,16 +142,17 @@ class QueryExpressionResolvers {
 
         @Override
         protected String resolve(
+                Class<IDomainObject> propertyType,
                 Object operand,
                 String previousOperand) {
-            return operand instanceof IDomainObject ? ((IDomainObject) operand).getId()
+            return propertyType.isInstance(operand) ? propertyType.cast(operand).getId()
                     : operand instanceof String ? (String) operand
                     : null;
         }
 
     }
 
-    static class ConceptCodeResolver extends QueryExpressionResolver<IConceptCode, IConceptCode> {
+    static class ConceptCodeResolver extends AbstractQueryExpressionResolver<IConceptCode, IConceptCode> {
 
         public ConceptCodeResolver() {
             super(IConceptCode.class, Integer.MAX_VALUE, QueryOperator.EQ);
@@ -128,6 +170,7 @@ class QueryExpressionResolvers {
 
         @Override
         protected IConceptCode resolve(
+                Class<IConceptCode> propertyType,
                 Object operand,
                 IConceptCode previousOperand) {
             return operand instanceof IConceptCode ? (IConceptCode) operand
@@ -137,7 +180,7 @@ class QueryExpressionResolvers {
 
     }
 
-    static class IdentifierResolver extends QueryExpressionResolver<IIdentifier, IIdentifier> {
+    static class IdentifierResolver extends AbstractQueryExpressionResolver<IIdentifier, IIdentifier> {
 
         public IdentifierResolver() {
             super(IIdentifier.class, Integer.MAX_VALUE, QueryOperator.EQ);
@@ -155,6 +198,7 @@ class QueryExpressionResolvers {
 
         @Override
         protected IIdentifier resolve(
+                Class<IIdentifier> propertyType,
                 Object operand,
                 IIdentifier previousOperand) {
             return operand instanceof IIdentifier ? (IIdentifier) operand
@@ -164,7 +208,7 @@ class QueryExpressionResolvers {
 
     }
 
-    static class PersonNameResolver extends QueryExpressionResolver<IPersonName, String> {
+    static class PersonNameResolver extends AbstractQueryExpressionResolver<IPersonName, String> {
 
         public PersonNameResolver() {
             super(IPersonName.class, 1, QueryOperator.EQ, QueryOperator.SW);
@@ -172,6 +216,7 @@ class QueryExpressionResolvers {
 
         @Override
         protected String resolve(
+                Class<IPersonName> propertyType,
                 Object operand,
                 String previousOperand) {
             return operand instanceof String ? (String) operand
@@ -181,12 +226,14 @@ class QueryExpressionResolvers {
 
     }
 
-    private static final Map<Class<?>, QueryExpressionResolver> resolvers = new LinkedHashMap<>();
+    private static final Map<Class<?>, AbstractQueryExpressionResolver> resolvers = new LinkedHashMap<>();
 
     static {
         registerResolver(new StringResolver());
         registerResolver(new BooleanResolver());
+        registerResolver(new NumberResolver());
         registerResolver(new DateResolver());
+        registerResolver(new EnumResolver());
         registerResolver(new DomainObjectResolver());
         registerResolver(new ConceptCodeResolver());
         registerResolver(new IdentifierResolver());
@@ -198,8 +245,8 @@ class QueryExpressionResolvers {
      *
      * @param resolver The query expression resolver.
      */
-    public static void registerResolver(QueryExpressionResolver resolver) {
-        resolvers.put(resolver.getPropertyType(), resolver);
+    public static void registerResolver(AbstractQueryExpressionResolver resolver) {
+        resolvers.put(resolver.getTargetClass(), resolver);
     }
 
     /**
@@ -207,13 +254,14 @@ class QueryExpressionResolvers {
      *
      * @param propertyDescriptor The property descriptor.
      * @return The associated query expression resolver (never null).
-     * @exception IllegalArgumentException If no query expression resolved was found.
+     * @throws IllegalArgumentException If no query expression resolved was found.
      */
-    public static QueryExpressionResolver getResolver(
+    public static AbstractQueryExpressionResolver getResolver(
             PropertyDescriptor propertyDescriptor) {
         Class<?> propertyType = CoreUtil.getPropertyType(propertyDescriptor);
+        propertyType = ClassUtils.primitiveToWrapper(propertyType);
         Class<?> key = propertyType == null ? null : MiscUtil.firstAssignable(propertyType, resolvers.keySet());
-        QueryExpressionResolver resolver = key == null ? null : resolvers.get(key);
+        AbstractQueryExpressionResolver resolver = key == null ? null : resolvers.get(key);
         Assert.notNull(resolver, () -> "No resolver found for property '" + propertyDescriptor.getName() + "'.");
         return resolver;
     }

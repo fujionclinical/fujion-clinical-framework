@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.security.mock.controller;
 
-import org.fujionclinical.api.model.user.IUser;
+import org.fujionclinical.api.user.IUser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

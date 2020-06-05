@@ -31,7 +31,7 @@ import org.fujionclinical.api.location.ILocation;
 import org.fujionclinical.api.model.IConcept;
 import org.fujionclinical.api.model.IDomainObject;
 import org.fujionclinical.api.model.IPeriod;
-import org.fujionclinical.api.model.person.IPerson;
+import org.fujionclinical.api.person.IPerson;
 import org.fujionclinical.api.patient.IPatient;
 import org.fujionclinical.api.query.QueryParameter;
 

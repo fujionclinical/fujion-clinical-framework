@@ -23,10 +23,10 @@
  *
  * #L%
  */
-package org.fujionclinical.api.model.user;
+package org.fujionclinical.api.user;
 
-import org.fujionclinical.api.model.person.IPersonName;
-import org.fujionclinical.api.model.person.PersonNameParser;
+import org.fujionclinical.api.person.IPersonName;
+import org.fujionclinical.api.person.PersonNameParser;
 import org.fujionclinical.api.security.ISecurityDomain;
 
 import java.util.ArrayList;
