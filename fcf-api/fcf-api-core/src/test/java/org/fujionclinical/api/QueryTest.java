@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.api;
 
-import org.fujionclinical.api.user.IUser;
-import org.fujionclinical.api.user.User;
+import org.fujionclinical.api.model.user.IUser;
+import org.fujionclinical.api.model.user.User;
 import org.fujionclinical.api.query.QueryContext;
 import org.fujionclinical.api.query.QueryExpression;
 import org.fujionclinical.api.query.QueryExpressionParser;

@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.security;
 
-import org.fujionclinical.api.user.IUser;
+import org.fujionclinical.api.model.user.IUser;
 
 import java.io.Serializable;
 import java.util.List;

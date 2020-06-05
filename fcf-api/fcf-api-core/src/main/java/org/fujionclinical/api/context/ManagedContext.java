@@ -36,7 +36,7 @@ import org.fujionclinical.api.core.StopWatchFactory;
 import org.fujionclinical.api.core.StopWatchFactory.IStopWatch;
 import org.fujionclinical.api.event.IEventManager;
 import org.fujionclinical.api.event.IEventSubscriber;
-import org.fujionclinical.api.model.IDomainObject;
+import org.fujionclinical.api.model.core.IDomainObject;
 
 import java.util.*;
 

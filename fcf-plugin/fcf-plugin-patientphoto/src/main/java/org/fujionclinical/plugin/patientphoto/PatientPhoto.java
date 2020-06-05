@@ -32,11 +32,11 @@ import org.fujion.component.Image;
 import org.fujion.component.Label;
 import org.fujion.component.Popup;
 import org.fujionclinical.api.context.ISurveyResponse;
-import org.fujionclinical.api.model.IAttachment;
-import org.fujionclinical.api.patient.IPatient;
-import org.fujionclinical.api.patient.PatientContext;
+import org.fujionclinical.api.model.core.IAttachment;
+import org.fujionclinical.api.model.patient.IPatient;
+import org.fujionclinical.api.model.patient.PatientContext;
 import org.fujionclinical.ui.controller.FrameworkController;
-import org.fujionclinical.ui.patientselection.common.Constants;
+import org.fujionclinical.patientselection.common.Constants;
 
 /**
  * Controller for patient photo plugin.

@@ -44,7 +44,7 @@ import org.fujion.event.TimerEvent;
 import org.fujion.websocket.ISessionListener;
 import org.fujion.websocket.Session;
 import org.fujionclinical.api.event.IEventSubscriber;
-import org.fujionclinical.api.user.IUser;
+import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.security.ISecurityService;
 import org.fujionclinical.ui.controller.FrameworkController;
 import org.fujionclinical.ui.dialog.DialogUtil;

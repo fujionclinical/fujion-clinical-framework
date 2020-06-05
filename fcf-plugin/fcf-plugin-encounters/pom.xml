@@ -16,7 +16,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.fujionclinical</groupId>
-			<artifactId>fcf-api-encounter</artifactId>
+			<artifactId>fcf-api-model</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>

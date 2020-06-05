@@ -27,11 +27,11 @@ package org.fujionclinical.ui.util;
 
 import org.fujion.common.DateUtil;
 import org.fujion.common.MiscUtil;
-import org.fujionclinical.api.model.IConcept;
-import org.fujionclinical.api.model.IConceptCode;
-import org.fujionclinical.api.model.IIdentifier;
-import org.fujionclinical.api.model.IPeriod;
-import org.fujionclinical.api.person.IPerson;
+import org.fujionclinical.api.model.core.IConcept;
+import org.fujionclinical.api.model.core.IConceptCode;
+import org.fujionclinical.api.model.core.IIdentifier;
+import org.fujionclinical.api.model.core.IPeriod;
+import org.fujionclinical.api.model.person.IPerson;
 
 import java.util.*;
 import java.util.function.Function;

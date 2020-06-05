@@ -26,7 +26,7 @@
 package org.fujionclinical.hibernate.property;
 
 import org.fujion.common.StrUtil;
-import org.fujionclinical.api.user.IUser;
+import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.property.IPropertyService;
 import org.fujionclinical.api.security.ISecurityService;
 import org.fujionclinical.api.security.SecurityUtil;

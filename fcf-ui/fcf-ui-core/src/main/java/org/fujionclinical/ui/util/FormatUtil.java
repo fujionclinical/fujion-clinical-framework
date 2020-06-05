@@ -25,10 +25,10 @@
  */
 package org.fujionclinical.ui.util;
 
-import org.fujionclinical.api.model.IConcept;
-import org.fujionclinical.api.model.IConceptCode;
-import org.fujionclinical.api.model.IIdentifier;
-import org.fujionclinical.api.model.IPeriod;
+import org.fujionclinical.api.model.core.IConcept;
+import org.fujionclinical.api.model.core.IConceptCode;
+import org.fujionclinical.api.model.core.IIdentifier;
+import org.fujionclinical.api.model.core.IPeriod;
 
 import java.util.Date;
 

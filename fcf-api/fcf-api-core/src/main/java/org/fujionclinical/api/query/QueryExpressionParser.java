@@ -27,7 +27,7 @@ package org.fujionclinical.api.query;
 
 import org.apache.commons.lang.StringUtils;
 import org.fujion.common.StrUtil;
-import org.fujionclinical.api.model.IDomainObject;
+import org.fujionclinical.api.model.core.IDomainObject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.Assert;
 

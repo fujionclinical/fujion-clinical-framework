@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.hibernate.property;
 
-import org.fujionclinical.api.user.IUser;
+import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.hibernate.core.AbstractDAO;
 import org.fujionclinical.hibernate.property.Property.PropertyId;
 import org.hibernate.Session;

@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.hibernate.security;
 
-import org.fujionclinical.api.user.IUser;
+import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.hibernate.core.AbstractDAO;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.security.mock;
 
-import org.fujionclinical.api.user.IUser;
+import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.security.ISecurityService;
 
 /**

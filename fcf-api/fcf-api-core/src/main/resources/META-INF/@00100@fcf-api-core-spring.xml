@@ -50,7 +50,7 @@
 		</bean>
 		
 		<!-- Maintains a registry of all domain factories. -->
-		<bean id="domainFactoryRegistry" class="org.fujionclinical.api.model.DomainDAORegistry"
+		<bean id="domainFactoryRegistry" class="org.fujionclinical.api.model.core.DomainDAORegistry"
 			factory-method="getInstance">
 		</bean>
 
@@ -168,7 +168,7 @@
 
 		<!-- Shared user context. -->
 		<bean id="userContext" parent="managedContext"
-			class="org.fujionclinical.api.user.UserContext">
+			class="org.fujionclinical.api.model.user.UserContext">
 			<constructor-arg value="#{securityService.authenticatedUser}" />
 		</bean>
 

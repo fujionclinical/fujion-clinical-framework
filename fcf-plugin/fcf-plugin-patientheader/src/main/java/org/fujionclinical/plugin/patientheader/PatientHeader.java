@@ -33,15 +33,15 @@ import org.fujion.annotation.WiredComponent;
 import org.fujion.common.DateUtil;
 import org.fujion.component.*;
 import org.fujionclinical.api.event.IEventSubscriber;
-import org.fujionclinical.api.model.IIdentifier;
-import org.fujionclinical.api.person.IPersonName;
-import org.fujionclinical.api.user.IUser;
-import org.fujionclinical.api.patient.IPatient;
-import org.fujionclinical.api.patient.PatientContext;
+import org.fujionclinical.api.model.core.IIdentifier;
+import org.fujionclinical.api.model.person.IPersonName;
+import org.fujionclinical.api.model.user.IUser;
+import org.fujionclinical.api.model.patient.IPatient;
+import org.fujionclinical.api.model.patient.PatientContext;
 import org.fujionclinical.api.security.SecurityUtil;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.shell.plugins.PluginController;
-import org.fujionclinical.ui.patientselection.common.PatientSelection;
+import org.fujionclinical.patientselection.common.PatientSelection;
 
 import java.util.Date;
 

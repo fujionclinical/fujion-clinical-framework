@@ -27,8 +27,8 @@ package org.fujionclinical.api.query;
 
 import org.apache.commons.lang.StringUtils;
 import org.fujion.common.LocalizedMessage;
-import org.fujionclinical.api.model.DomainDAORegistry;
-import org.fujionclinical.api.model.IDomainObject;
+import org.fujionclinical.api.model.core.DomainDAORegistry;
+import org.fujionclinical.api.model.core.IDomainObject;
 
 import java.util.List;
 

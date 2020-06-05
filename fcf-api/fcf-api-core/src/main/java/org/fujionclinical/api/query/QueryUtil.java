@@ -25,7 +25,6 @@
  */
 package org.fujionclinical.api.query;
 
-import org.fujionclinical.api.person.IPerson;
 import org.fujionclinical.api.query.IQueryResult.CompletionStatus;
 
 import java.util.Arrays;

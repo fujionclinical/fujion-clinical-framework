@@ -72,6 +72,8 @@
 		<module>fcf-hibernate</module>
 		<module>fcf-plugin</module>
 		<module>fcf-testharness</module>
+		<module>fcf-patientlist</module>
+		<module>fcf-patientselection</module>
 		<module>fcf-webapp</module>
 	</modules>
 

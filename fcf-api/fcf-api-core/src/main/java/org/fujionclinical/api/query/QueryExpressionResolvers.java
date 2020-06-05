@@ -30,8 +30,8 @@ import org.apache.commons.lang3.ClassUtils;
 import org.fujion.common.DateUtil;
 import org.fujion.common.MiscUtil;
 import org.fujionclinical.api.core.CoreUtil;
-import org.fujionclinical.api.model.*;
-import org.fujionclinical.api.person.IPersonName;
+import org.fujionclinical.api.model.core.*;
+import org.fujionclinical.api.model.person.IPersonName;
 import org.springframework.util.Assert;
 import org.springframework.util.NumberUtils;
 

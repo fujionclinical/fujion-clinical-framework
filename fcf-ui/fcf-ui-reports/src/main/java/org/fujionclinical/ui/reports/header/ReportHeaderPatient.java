@@ -30,9 +30,9 @@ import org.fujion.annotation.OnFailure;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.common.DateUtil;
 import org.fujion.component.Label;
-import org.fujionclinical.api.model.IIdentifier;
-import org.fujionclinical.api.patient.IPatient;
-import org.fujionclinical.api.patient.PatientContext;
+import org.fujionclinical.api.model.core.IIdentifier;
+import org.fujionclinical.api.model.patient.IPatient;
+import org.fujionclinical.api.model.patient.PatientContext;
 import org.fujionclinical.ui.util.FCFUtil;
 
 import java.util.Date;

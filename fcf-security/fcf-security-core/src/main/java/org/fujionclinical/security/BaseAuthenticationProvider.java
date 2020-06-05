@@ -27,7 +27,7 @@ package org.fujionclinical.security;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.fujionclinical.api.user.IUser;
+import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.security.ISecurityDomain;
 import org.fujionclinical.api.security.SecurityDomainRegistry;
 import org.springframework.security.authentication.AuthenticationProvider;

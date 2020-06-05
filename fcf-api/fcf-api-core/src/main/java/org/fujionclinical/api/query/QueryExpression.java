@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.query;
 
-import org.fujionclinical.api.model.IDomainObject;
+import org.fujionclinical.api.model.core.IDomainObject;
 
 import java.util.List;
 import java.util.stream.Collectors;
