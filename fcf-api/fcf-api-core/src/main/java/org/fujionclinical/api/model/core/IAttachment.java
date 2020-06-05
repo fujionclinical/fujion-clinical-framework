@@ -39,10 +39,10 @@ public interface IAttachment {
                 for (IAttachment attachment : attachments) {
                     if (title.equals(attachment.getTitle())) {
                         return attachment;
-                    }
-                }
-            }
         }
+        }
+    }
+    }
 
         return null;
     }

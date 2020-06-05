@@ -27,6 +27,7 @@
 		<module>fcf-plugin-patientheader</module>
 		<module>fcf-plugin-userheader</module>
 		<module>fcf-plugin-encounters</module>
+		<module>fcf-plugin-conditions</module>
 	</modules>
 	
 	<dependencies>

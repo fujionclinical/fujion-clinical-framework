@@ -16,6 +16,14 @@
               class="org.fujionclinical.api.model.encounter.EncounterContext">
         </bean>
 
+        <bean id="conditionContext" parent="managedContext" depends-on="patientContext"
+              class="org.fujionclinical.api.model.condition.ConditionContext">
+        </bean>
+
+        <bean id="locationContext" parent="managedContext"
+              class="org.fujionclinical.api.model.location.LocationContext">
+        </bean>
+
     </beans>
 
 </beans>
