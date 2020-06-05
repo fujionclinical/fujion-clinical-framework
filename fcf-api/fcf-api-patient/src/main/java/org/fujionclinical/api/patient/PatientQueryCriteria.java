@@ -73,7 +73,7 @@ public class PatientQueryCriteria extends PersonQueryCriteria<IPatient> {
      * @param mrn MRN.
      */
     public void setMRN(String mrn) {
-        queryContext.setParam("identifier", mrn == null ? null : new Identifier(null, mrn, IIdentifier.IdentifierUse.OFFICIAL, MRN_TYPE));
+        queryContext.setParam("identifiers", mrn == null ? null : new Identifier(null, mrn, IIdentifier.IdentifierUse.OFFICIAL, MRN_TYPE));
     }
 
 }

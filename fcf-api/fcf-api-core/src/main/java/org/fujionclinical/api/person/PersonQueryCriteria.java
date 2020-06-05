@@ -142,7 +142,7 @@ public abstract class PersonQueryCriteria<T extends IPerson> extends AbstractQue
      * @param ssn SSN.
      */
     public void setSSN(String ssn) {
-        queryContext.setParam("identifier", ssn == null ? null : new Identifier("http://hl7.org/fhir/sid/us-ssn", ssn, IIdentifier.IdentifierUse.OFFICIAL, SSN_TYPE));
+        queryContext.setParam("identifiers", ssn == null ? null : new Identifier("http://hl7.org/fhir/sid/us-ssn", ssn, IIdentifier.IdentifierUse.OFFICIAL, SSN_TYPE));
     }
 
     /**
