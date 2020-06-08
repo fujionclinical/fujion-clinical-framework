@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.api.model.core;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.fujion.common.CollectionUtil;
 import org.fujionclinical.api.query.QueryParameter;
 
@@ -102,6 +103,62 @@ public interface IDomainObject extends Serializable {
      */
     default boolean hasIdentifier() {
         return CollectionUtil.notEmpty(getIdentifiers());
+    }
+
+    /**
+     * Returns any tags associated with the domain object.
+     *
+     * @return Tags associated with the domain object.
+     */
+    default List<IConceptCode> getTags() {
+        return Collections.emptyList();
+    }
+
+    /**
+     * Sets tags to be associated with the domain object.
+     *
+     * @param tags The tags.
+     */
+    default void setTags(List<IConceptCode> tags) {
+        CollectionUtil.replaceList(getTags(), tags);
+    }
+
+    /**
+     * Add tags to be associated with the domain object.
+     *
+     * @param tags Tags to add.
+     */
+    default void addTags(IConceptCode... tags) {
+        CollectionUtils.addAll(getTags(), tags);
+    }
+
+    /**
+     * Returns a tag belonging to the specified system, or null if one is not found.
+     *
+     * @param system The code system.
+     * @return A matching tag (possibly null)
+     */
+    default IConceptCode getTag(String system) {
+        return getTag(tag -> system.equals(tag.getSystem()));
+    }
+
+    /**
+     * Returns the first tag that matches the specified criteria.
+     *
+     * @param criteria A function that returns true when a match is found.
+     * @return A matching tag (possibly null).
+     */
+    default IConceptCode getTag(Predicate<IConceptCode> criteria) {
+        return CollectionUtil.findMatch(getTags(), criteria);
+    }
+
+    /**
+     * Returns true if any tags are present.
+     *
+     * @return True if any tags are present.
+     */
+    default boolean hasTag() {
+        return CollectionUtil.notEmpty(getTags());
     }
 
     /**
