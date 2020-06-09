@@ -38,31 +38,7 @@ public class WrappedList<T, W> implements List<T> {
 
     @Override
     public Iterator<T> iterator() {
-        validateLists();
-        return new Iterator<T>() {
-
-            private Iterator<T> outerIterator = outerList.iterator();
-
-            private Iterator<W> innerIterator = innerList.iterator();
-
-            @Override
-            public boolean hasNext() {
-                Assert.isTrue(outerIterator.hasNext() == innerIterator.hasNext(), "Inner and outer lists no longer in sync.");
-                return outerIterator.hasNext();
-            }
-
-            @Override
-            public T next() {
-                innerIterator.next();
-                return outerIterator.next();
-            }
-
-            @Override
-            public void remove() {
-                innerIterator.remove();
-                outerIterator.remove();
-            }
-        };
+        return listIterator();
     }
 
     @Override
@@ -165,7 +141,70 @@ public class WrappedList<T, W> implements List<T> {
 
     @Override
     public ListIterator<T> listIterator(int index) {
-        return outerList.listIterator(index);
+        validateLists();
+        return new ListIterator<T>() {
+
+            private ListIterator<T> outerIterator = outerList.listIterator(index);
+
+            private ListIterator<W> innerIterator = innerList.listIterator(index);
+
+            @Override
+            public boolean hasNext() {
+                return validate(outerIterator.hasNext(), innerIterator.hasNext());
+            }
+
+            @Override
+            public T next() {
+                innerIterator.next();
+                return outerIterator.next();
+            }
+
+            @Override
+            public boolean hasPrevious() {
+                return validate(outerIterator.hasPrevious(), innerIterator.hasPrevious());
+            }
+
+            @Override
+            public T previous() {
+                innerIterator.previous();
+                return outerIterator.previous();
+            }
+
+            @Override
+            public int nextIndex() {
+                return validate(outerIterator.nextIndex(), innerIterator.nextIndex());
+            }
+
+            @Override
+            public int previousIndex() {
+                return validate(outerIterator.previousIndex(), innerIterator.previousIndex());
+            }
+
+            @Override
+            public void remove() {
+                innerIterator.remove();
+                outerIterator.remove();
+            }
+
+            @Override
+            public void set(T element) {
+                innerIterator.set(transform.unwrap(element));
+                outerIterator.set(element);
+            }
+
+            @Override
+            public void add(T element) {
+                innerIterator.add(transform.unwrap(element));
+                outerIterator.add(element);
+            }
+
+            private <T> T validate(
+                    T value1,
+                    T value2) {
+                Assert.isTrue(value1 == value2, "Inner and outer lists no longer in sync.");
+                return value1;
+            }
+        };
     }
 
     @Override
