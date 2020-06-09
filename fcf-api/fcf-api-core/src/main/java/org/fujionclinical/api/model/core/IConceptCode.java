@@ -58,4 +58,8 @@ public interface IConceptCode {
     default boolean hasText() {
         return !StringUtils.isEmpty(getText());
     }
+
+    default boolean isSame(IConceptCode code) {
+        return (hasSystem() && hasCode() && getSystem().equals(code.getSystem()) && getCode().equals(code.getCode()));
+    }
 }
