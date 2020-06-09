@@ -77,14 +77,14 @@ public interface ICondition extends IDomainObject, IAnnotationType {
     }
 
     @QueryParameter
-    Date getRecorded();
+    Date getRecordedDate();
 
-    default void setRecorded(Date recorded) {
+    default void setRecordedDate(Date recorded) {
         throw new UnsupportedOperationException();
     }
 
     default boolean hasRecorded() {
-        return getRecorded() != null;
+        return getRecordedDate() != null;
     }
 
     @QueryParameter
