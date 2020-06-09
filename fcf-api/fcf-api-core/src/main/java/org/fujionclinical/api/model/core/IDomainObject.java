@@ -129,7 +129,7 @@ public interface IDomainObject extends Serializable {
      * @param tags Tags to add.
      */
     default void addTags(IConceptCode... tags) {
-        CollectionUtils.addAll(getTags(), tags);
+        Collections.addAll(getTags(), tags);
     }
 
     /**

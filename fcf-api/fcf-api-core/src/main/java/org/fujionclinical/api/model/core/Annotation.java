@@ -29,6 +29,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.fujionclinical.api.model.person.IPerson;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class Annotation implements IAnnotation {
             IPerson... authors) {
         this.text = text;
         this.recorded = recorded;
-        CollectionUtils.addAll(this.authors, authors);
+        Collections.addAll(this.authors, authors);
     }
 
     @Override

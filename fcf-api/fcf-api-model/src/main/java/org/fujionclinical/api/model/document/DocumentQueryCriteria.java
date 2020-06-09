@@ -1,3 +1,9 @@
+package org.fujionclinical.api.model.document;
+
+import org.fujionclinical.api.model.encounter.IEncounter;
+import org.fujionclinical.api.model.patient.IPatient;
+import org.fujionclinical.api.query.AbstractQueryCriteria;
+
 /*
  * #%L
  * Fujion Clinical Framework
@@ -23,21 +29,10 @@
  *
  * #L%
  */
-package org.fujionclinical.api.model.condition;
+public class DocumentQueryCriteria extends AbstractQueryCriteria<IDocument> {
 
-import org.fujionclinical.api.model.encounter.IEncounter;
-import org.fujionclinical.api.model.patient.IPatient;
-import org.fujionclinical.api.query.AbstractQueryCriteria;
-
-import java.util.Date;
-
-/**
- * Search criteria for encounter lookup.
- */
-public class ConditionQueryCriteria extends AbstractQueryCriteria<ICondition> {
-
-    public ConditionQueryCriteria() {
-        super(ICondition.class, ';', null);
+    protected DocumentQueryCriteria() {
+        super(IDocument.class, ';', null);
     }
 
     /**
@@ -53,23 +48,20 @@ public class ConditionQueryCriteria extends AbstractQueryCriteria<ICondition> {
         queryContext.setParam("encounter", encounter);
     }
 
-    public void setStatus(ICondition.VerificationStatus status) {
-        queryContext.setParam("verificationStatus", status);
+    public void setStatus(IDocument.DocumentStatus status) {
+        queryContext.setParam("documentStatus", status);
     }
 
-    public void setStatus(ICondition.ClinicalStatus status) {
-        queryContext.setParam("clinicalStatus", status);
-    }
-
-    public void setCreationDate(Date creationDate) {
-        queryContext.setParam("creationDate", creationDate);
+    public void setStatus(IDocument.CompositionStatus status) {
+        queryContext.setParam("compositionStatus", status);
     }
 
     @Override
     protected void buildQueryString(StringBuilder sb) {
-        addFragment(sb, "patient.id", "=");
-        addFragment(sb, "clinicalStatus", "=");
-        addFragment(sb, "verificationStatus", "=");
+        addFragment(sb, "patient.id");
+        addFragment(sb, "encounter.id");
+        addFragment(sb, "documentStatus");
+        addFragment(sb, "compositionStatus");
     }
 
     @Override
@@ -77,16 +69,6 @@ public class ConditionQueryCriteria extends AbstractQueryCriteria<ICondition> {
             String criterion,
             int position) {
         return false;
-    }
-
-    /**
-     * Returns true if the current criteria settings meet the minimum requirements for a search.
-     *
-     * @return True if minimum search requirements have been met.
-     */
-    @Override
-    public boolean isValid() {
-        return super.isValid() || queryContext.hasParam("patient");
     }
 
 }

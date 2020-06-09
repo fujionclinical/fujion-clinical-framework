@@ -58,7 +58,7 @@ public interface IPostalAddress {
     }
 
     default void addLines(String... lines) {
-        CollectionUtils.addAll(getLines(), lines);
+        Collections.addAll(getLines(), lines);
     }
 
     default boolean hasLines() {

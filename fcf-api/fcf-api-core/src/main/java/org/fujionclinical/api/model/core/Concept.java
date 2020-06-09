@@ -28,6 +28,7 @@ package org.fujionclinical.api.model.core;
 import org.apache.commons.collections.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Concept implements IConcept {
@@ -38,7 +39,7 @@ public class Concept implements IConcept {
 
     public Concept(String text, IConceptCode... codes) {
         this.text = text;
-        CollectionUtils.addAll(this.codes, codes);
+        Collections.addAll(this.codes, codes);
     }
 
     @Override

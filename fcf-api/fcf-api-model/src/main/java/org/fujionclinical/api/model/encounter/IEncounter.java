@@ -25,14 +25,13 @@
  */
 package org.fujionclinical.api.model.encounter;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.fujion.common.CollectionUtil;
-import org.fujionclinical.api.model.location.ILocation;
 import org.fujionclinical.api.model.core.IConcept;
 import org.fujionclinical.api.model.core.IDomainObject;
 import org.fujionclinical.api.model.core.IPeriod;
-import org.fujionclinical.api.model.person.IPerson;
+import org.fujionclinical.api.model.location.ILocation;
 import org.fujionclinical.api.model.patient.IPatient;
+import org.fujionclinical.api.model.person.IPerson;
 import org.fujionclinical.api.query.QueryParameter;
 
 import java.util.Collections;
@@ -136,7 +135,7 @@ public interface IEncounter extends IDomainObject {
     }
 
     default void addLocations(ILocation... locations) {
-        CollectionUtils.addAll(getLocations(), locations);
+        Collections.addAll(getLocations(), locations);
     }
 
     default boolean hasLocation() {
@@ -146,7 +145,7 @@ public interface IEncounter extends IDomainObject {
     List<IConcept> getTypes();
 
     default IEncounter addTypes(IConcept... types) {
-        CollectionUtils.addAll(getTypes(), types);
+        Collections.addAll(getTypes(), types);
         return this;
     }
 

@@ -169,7 +169,7 @@ public interface IPerson extends IDomainObject, IPostalAddressType, IContactPoin
     }
 
     default void addLanguages(IConcept... languages) {
-        CollectionUtils.addAll(getLanguages(), languages);
+        Collections.addAll(getLanguages(), languages);
     }
 
     default boolean hasLanguage() {

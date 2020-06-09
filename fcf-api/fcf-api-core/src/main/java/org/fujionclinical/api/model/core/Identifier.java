@@ -27,6 +27,8 @@ package org.fujionclinical.api.model.core;
 
 import org.apache.commons.collections.CollectionUtils;
 
+import java.util.Collections;
+
 public class Identifier implements IIdentifier {
 
     private final String system;
@@ -51,7 +53,7 @@ public class Identifier implements IIdentifier {
         this.system = system;
         this.value = value;
         this.use = use;
-        CollectionUtils.addAll(type.getCodes(), types);
+        Collections.addAll(type.getCodes(), types);
     }
 
     @Override

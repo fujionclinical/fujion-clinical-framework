@@ -25,7 +25,6 @@
  */
 package org.fujionclinical.api.model.location;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.fujion.common.CollectionUtil;
 import org.fujionclinical.api.model.core.IConcept;
 import org.fujionclinical.api.model.core.IContactPointType;
@@ -85,7 +84,7 @@ public interface ILocation extends IDomainObject, IPostalAddressType, IContactPo
     }
 
     default void addAliases(String... aliases) {
-        CollectionUtils.addAll(getAliases(), aliases);
+        Collections.addAll(getAliases(), aliases);
     }
 
     default boolean hasAlias() {
@@ -124,7 +123,7 @@ public interface ILocation extends IDomainObject, IPostalAddressType, IContactPo
     }
 
     default void addTypes(IConcept... types) {
-        CollectionUtils.addAll(getTypes(), types);
+        Collections.addAll(getTypes(), types);
     }
 
     default boolean hasType() {

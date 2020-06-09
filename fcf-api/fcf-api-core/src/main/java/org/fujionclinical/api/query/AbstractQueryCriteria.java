@@ -166,6 +166,12 @@ public abstract class AbstractQueryCriteria<T extends IDomainObject> {
 
     protected void addFragment(
             StringBuilder sb,
+            String parameter) {
+        addFragment(sb, parameter, "=");
+    }
+
+    protected void addFragment(
+            StringBuilder sb,
             String parameter,
             String operator) {
         if (queryContext.hasParam(parameter)) {
