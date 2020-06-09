@@ -136,7 +136,7 @@ public class WrappedList<T, W> implements List<T> {
 
     @Override
     public ListIterator<T> listIterator() {
-        return outerList.listIterator();
+        return listIterator(0);
     }
 
     @Override
