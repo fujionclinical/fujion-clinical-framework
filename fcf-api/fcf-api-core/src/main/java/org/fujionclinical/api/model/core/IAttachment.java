@@ -104,8 +104,8 @@ public interface IAttachment {
     }
 
     default void setContent(MimeContent content) {
-        setURL(content.getSrc());
-        setContentType(content.getMimeType());
-        setRawData(content.getData());
+        setURL(content == null ? null : content.getSrc());
+        setContentType(content == null ? null : content.getMimeType());
+        setRawData(content == null ? null : content.getData());
     }
 }

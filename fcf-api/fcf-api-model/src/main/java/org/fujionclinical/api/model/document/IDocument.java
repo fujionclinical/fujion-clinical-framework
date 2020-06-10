@@ -26,9 +26,7 @@
 package org.fujionclinical.api.model.document;
 
 import org.fujion.common.CollectionUtil;
-import org.fujionclinical.api.model.core.IAttachmentType;
-import org.fujionclinical.api.model.core.IConcept;
-import org.fujionclinical.api.model.core.IDomainObject;
+import org.fujionclinical.api.model.core.*;
 import org.fujionclinical.api.model.encounter.IEncounter;
 import org.fujionclinical.api.model.person.IPerson;
 
@@ -102,6 +100,14 @@ public interface IDocument extends IDomainObject, IAttachmentType {
 
     default boolean hasType() {
         return getType() != null;
+    }
+
+    default boolean hasType(IConceptCode code) {
+        return hasType() && getType().getCodes().stream().filter(cde -> code.isSame(cde)).findFirst().isPresent();
+    }
+
+    default boolean hasType(String type) {
+        return hasType() && getType().getCodes().stream().filter(code -> type.equals(code.getCode())).findFirst().isPresent();
     }
 
     default List<IConcept> getCategories() {
