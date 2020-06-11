@@ -59,6 +59,11 @@
 			factory-method="getInstance">
 		</bean>
 
+		<!-- Maintains a registry of all wrapper transforms. -->
+		<bean id="wrapperTransformRegistry" class="org.fujionclinical.api.model.core.WrapperTransformRegistry"
+			  factory-method="getInstance">
+		</bean>
+
 		<task:annotation-driven executor="taskExecutor"
 			scheduler="taskScheduler" />
 

@@ -28,6 +28,8 @@ package org.fujionclinical.api.core;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.Arrays;
 import java.util.Collection;
 
 public class CoreUtil {
@@ -48,7 +50,29 @@ public class CoreUtil {
         return propertyType;
     }
 
+    public static Class<?>[] getGenericParameters(Class<?> clazz, Class<?> source) {
+        Type[] paramTypes = null;
+
+        while (paramTypes == null && clazz != null && clazz != Object.class) {
+            Type[] types = clazz.getGenericInterfaces();
+
+            paramTypes = Arrays.stream(types)
+                    .filter(type -> type instanceof ParameterizedType)
+                    .filter(type -> ((ParameterizedType) type).getRawType() == source)
+                    .map(type -> ((ParameterizedType) type).getActualTypeArguments())
+                    .findFirst()
+                    .orElse(null);
+
+            clazz = clazz.getSuperclass();
+        }
+
+        return paramTypes == null ? null : Arrays.stream(paramTypes)
+                .map(type -> (Class<?>) type)
+                .toArray(size -> new Class[size]);
+    }
+
     private CoreUtil() {
 
     }
+
 }

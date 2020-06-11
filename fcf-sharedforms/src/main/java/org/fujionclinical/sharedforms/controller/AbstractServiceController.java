@@ -39,9 +39,9 @@ import org.fujion.event.Event;
 import org.fujion.event.EventUtil;
 import org.fujion.thread.ICancellable;
 import org.fujionclinical.api.query.*;
+import org.fujionclinical.sharedforms.common.FormConstants;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.shell.plugins.PluginController;
-import org.fujionclinical.sharedforms.common.FormConstants;
 import org.fujionclinical.ui.util.FCFUtil;
 
 import java.util.ArrayList;
@@ -289,7 +289,16 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
         style.setSrc(FCFUtil.getResourcePath(AbstractServiceController.class, 1) + "common.css");
         root.getPage().addChild(style);
     }
-    
+
+    /**
+     * Returns a reference to the query service.
+     *
+     * @return The query service.
+     */
+    protected IQueryService<T> getService() {
+        return service;
+    }
+
     /**
      * Override to respond to a model change.
      *

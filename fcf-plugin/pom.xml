@@ -28,6 +28,7 @@
 		<module>fcf-plugin-userheader</module>
 		<module>fcf-plugin-encounters</module>
 		<module>fcf-plugin-conditions</module>
+		<module>fcf-plugin-documents</module>
 	</modules>
 	
 	<dependencies>
