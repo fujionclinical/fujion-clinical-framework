@@ -26,17 +26,20 @@
 package org.fujionclinical.api.query;
 
 import org.fujion.common.DateRange;
-import org.fujion.common.DateUtil;
-
-import java.util.Date;
+import org.fujionclinical.api.model.core.DateTimeWrapper;
+import org.fujionclinical.api.model.core.IRange;
+import org.fujionclinical.api.model.core.Range;
 
 public class DateQueryFilter<T> extends AbstractQueryFilter<T> {
-    
+
     public interface IDateTypeExtractor<T> {
-        
-        Date getDateByType(T result, DateType dateType);
+
+        DateTimeWrapper getDateByType(
+                T result,
+                DateType dateType);
+
     }
-    
+
     /**
      * Type of date to be considered in a query.
      */
@@ -45,29 +48,30 @@ public class DateQueryFilter<T> extends AbstractQueryFilter<T> {
         UPDATED, // When the entity was last updated
         CREATED // When the entity was first created
     }
-    
+
     private DateType dateType = DateType.MEASURED;
-    
-    private DateRange dateRange;
-    
+
+    private IRange<DateTimeWrapper> dateRange;
+
     private final IDateTypeExtractor<T> dateTypeExtractor;
-    
+
     public DateQueryFilter(IDateTypeExtractor<T> dateTypeExtractor) {
         this.dateTypeExtractor = dateTypeExtractor;
     }
-    
+
     /**
      * Filter result based on selected date range.
      */
     @Override
     public boolean include(T result) {
-        return getDateRange().inRange(DateUtil.stripTime(dateTypeExtractor.getDateByType(result, dateType)), true, true);
+        DateTimeWrapper dateTime = dateTypeExtractor.getDateByType(result, dateType);
+        return dateTime == null || getDateRange().inRange(dateTime);
     }
     
     @Override
     public boolean updateContext(IQueryContext context) {
         context.setParam("dateType", dateType);
-        DateRange oldDateRange = (DateRange) context.getParam("dateRange");
+        IRange<DateTimeWrapper> oldDateRange = (IRange<DateTimeWrapper>) context.getParam("dateRange");
         
         if (dateRange == null || oldDateRange == null || !oldDateRange.inRange(dateRange)) {
             context.setParam("dateRange", dateRange);
@@ -75,27 +79,33 @@ public class DateQueryFilter<T> extends AbstractQueryFilter<T> {
         
         return context.hasChanged();
     }
-    
+
     public DateType getDateType() {
         return dateType;
     }
-    
+
     public void setDateType(DateType dateType) {
         if (this.dateType != dateType) {
             this.dateType = dateType;
             notifyListeners();
         }
     }
-    
-    public DateRange getDateRange() {
+
+    public IRange<DateTimeWrapper> getDateRange() {
         return dateRange;
     }
-    
+
     public void setDateRange(DateRange dateRange) {
+        DateTimeWrapper low = new DateTimeWrapper(dateRange.getStartDate());
+        DateTimeWrapper high = new DateTimeWrapper(dateRange.getEndDate());
+        setDateRange(new Range<>(low, high));
+    }
+
+    public void setDateRange(IRange<DateTimeWrapper> dateRange) {
         if (this.dateRange != dateRange) {
-            this.dateRange = dateRange == null ? null : new DateRange(dateRange);
+            this.dateRange = dateRange;
             notifyListeners();
         }
     }
-    
+
 }

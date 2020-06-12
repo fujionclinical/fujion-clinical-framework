@@ -25,7 +25,6 @@
  */
 package org.fujionclinical.api.model.person;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.fujion.common.CollectionUtil;
 import org.fujion.common.StrUtil;
 import org.fujionclinical.api.model.core.*;
@@ -33,7 +32,6 @@ import org.fujionclinical.api.query.QueryParameter;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 public interface IPerson extends IDomainObject, IPostalAddressType, IContactPointType, IPersonNameType {
@@ -75,7 +73,7 @@ public interface IPerson extends IDomainObject, IPostalAddressType, IContactPoin
     }
 
     default void setGender(Gender gender) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasGender() {
@@ -88,7 +86,7 @@ public interface IPerson extends IDomainObject, IPostalAddressType, IContactPoin
     }
 
     default void setBirthSex(ConceptCode birthSex) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasBirthSex() {
@@ -101,7 +99,7 @@ public interface IPerson extends IDomainObject, IPostalAddressType, IContactPoin
     }
 
     default void setEthnicity(ConceptCode ethnicity) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasEthnicity() {
@@ -114,7 +112,7 @@ public interface IPerson extends IDomainObject, IPostalAddressType, IContactPoin
     }
 
     default void setMaritalStatus(MaritalStatus maritalStatus) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasMaritalStatus() {
@@ -127,7 +125,7 @@ public interface IPerson extends IDomainObject, IPostalAddressType, IContactPoin
     }
 
     default void setRace(ConceptCode race) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasRace() {
@@ -135,12 +133,12 @@ public interface IPerson extends IDomainObject, IPostalAddressType, IContactPoin
     }
 
     @QueryParameter
-    default Date getBirthDate() {
+    default DateTimeWrapper getBirthDate() {
         return null;
     }
 
-    default void setBirthDate(Date date) {
-        throw new UnsupportedOperationException();
+    default void setBirthDate(DateTimeWrapper date) {
+        notSupported();
     }
 
     default boolean hasBirthDate() {
@@ -148,12 +146,12 @@ public interface IPerson extends IDomainObject, IPostalAddressType, IContactPoin
     }
 
     @QueryParameter
-    default Date getDeceasedDate() {
+    default DateTimeWrapper getDeceasedDate() {
         return null;
     }
 
-    default void setDeceasedDate(Date date) {
-        throw new UnsupportedOperationException();
+    default void setDeceasedDate(DateTimeWrapper date) {
+        notSupported();
     }
 
     default boolean hasDeceasedDate() {

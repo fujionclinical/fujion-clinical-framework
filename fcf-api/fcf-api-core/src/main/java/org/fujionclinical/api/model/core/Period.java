@@ -25,36 +25,36 @@
  */
 package org.fujionclinical.api.model.core;
 
-import java.util.Date;
-
 public class Period implements IPeriod {
 
-    private Date startDate;
+    private DateTimeWrapper startDate;
 
-    private Date endDate;
+    private DateTimeWrapper endDate;
 
-    public Period(Date startDate, Date endDate) {
+    public Period(
+            DateTimeWrapper startDate,
+            DateTimeWrapper endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
     @Override
-    public Date getStartDate() {
+    public DateTimeWrapper getStartDate() {
         return startDate;
     }
 
     @Override
-    public void setStartDate(Date startDate) {
+    public void setStartDate(DateTimeWrapper startDate) {
         this.startDate = startDate;
     }
 
     @Override
-    public Date getEndDate() {
+    public DateTimeWrapper getEndDate() {
         return endDate;
     }
 
     @Override
-    public void setEndDate(Date endDate) {
+    public void setEndDate(DateTimeWrapper endDate) {
         this.endDate = endDate;
     }
 

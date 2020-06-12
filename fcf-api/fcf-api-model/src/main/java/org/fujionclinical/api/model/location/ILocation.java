@@ -48,7 +48,7 @@ public interface ILocation extends IDomainObject, IPostalAddressType, IContactPo
     LocationStatus getStatus();
 
     default void setStatus(LocationStatus status) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasStatus() {
@@ -63,7 +63,7 @@ public interface ILocation extends IDomainObject, IPostalAddressType, IContactPo
     String getName();
 
     default void setName(String name) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasName() {
@@ -102,7 +102,7 @@ public interface ILocation extends IDomainObject, IPostalAddressType, IContactPo
     }
 
     default void setDescription(String description) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasDescription() {

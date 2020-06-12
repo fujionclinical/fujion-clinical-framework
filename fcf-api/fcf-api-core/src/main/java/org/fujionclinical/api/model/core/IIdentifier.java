@@ -27,14 +27,14 @@ package org.fujionclinical.api.model.core;
 
 import org.apache.commons.lang.StringUtils;
 
-public interface IIdentifier {
+public interface IIdentifier extends IBaseType {
 
     enum IdentifierUse {USUAL, OFFICIAL, TEMPORARY, SECONDARY, OLD}
 
     String getSystem();
 
     default void setSystem(String system) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasSystem() {
@@ -44,7 +44,7 @@ public interface IIdentifier {
     String getValue();
 
     default void setValue(String value) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasValue() {
@@ -54,7 +54,7 @@ public interface IIdentifier {
     IConcept getType();
 
     default void setType(IConcept type) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasType() {
@@ -64,7 +64,7 @@ public interface IIdentifier {
     IdentifierUse getUse();
 
     default void setUse(IdentifierUse use) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasUse() {

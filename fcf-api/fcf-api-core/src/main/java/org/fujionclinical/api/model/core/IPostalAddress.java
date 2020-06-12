@@ -32,7 +32,7 @@ import org.fujionclinical.api.query.QueryParameter;
 import java.util.Collections;
 import java.util.List;
 
-public interface IPostalAddress {
+public interface IPostalAddress extends IBaseType {
 
     enum PostalAddressUse {
         HOME, WORK, TEMP, OLD, BILLING
@@ -42,7 +42,7 @@ public interface IPostalAddress {
     PostalAddressUse getUse();
 
     default void setUse(PostalAddressUse use) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasUse() {
@@ -54,7 +54,7 @@ public interface IPostalAddress {
     }
 
     default void setLines(List<String> lines) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default void addLines(String... lines) {
@@ -69,7 +69,7 @@ public interface IPostalAddress {
     String getCity();
 
     default void setCity(String city) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasCity() {
@@ -79,7 +79,7 @@ public interface IPostalAddress {
     String getDistrict();
 
     default void setDistrict(String district) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasDistrict() {
@@ -90,7 +90,7 @@ public interface IPostalAddress {
     String getState();
 
     default void setState(String state) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasState() {
@@ -101,7 +101,7 @@ public interface IPostalAddress {
     String getPostalCode();
 
     default void setPostalCode(String postalCode) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasPostalCode() {
@@ -112,7 +112,7 @@ public interface IPostalAddress {
     String getCountry();
 
     default void setCountry(String country) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasCountry() {
@@ -122,7 +122,7 @@ public interface IPostalAddress {
     IPeriod getPeriod();
 
     default void setPeriod(IPeriod period) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasPeriod() {

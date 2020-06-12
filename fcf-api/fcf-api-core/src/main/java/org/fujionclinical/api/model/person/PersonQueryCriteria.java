@@ -26,15 +26,9 @@
 package org.fujionclinical.api.model.person;
 
 import org.apache.commons.lang.StringUtils;
-import org.fujion.common.DateUtil;
-import org.fujionclinical.api.model.core.ConceptCode;
-import org.fujionclinical.api.model.core.IConceptCode;
-import org.fujionclinical.api.model.core.IIdentifier;
-import org.fujionclinical.api.model.core.Identifier;
+import org.fujionclinical.api.model.core.*;
 import org.fujionclinical.api.query.AbstractQueryCriteria;
 import org.fujionclinical.api.query.QueryUtil;
-
-import java.util.Date;
 
 /**
  * Base search criteria for person lookups.
@@ -60,7 +54,7 @@ public abstract class PersonQueryCriteria<T extends IPerson> extends AbstractQue
     protected boolean parseCriterion(
             String criterion,
             int position) {
-        Date tempDate;
+        DateTimeWrapper tempDate;
         IPerson.Gender tempGender;
 
         if (position > 0 && (tempGender = asGender(criterion)) != null) {
@@ -95,7 +89,7 @@ public abstract class PersonQueryCriteria<T extends IPerson> extends AbstractQue
      * @param value Input to parse.
      * @return Result of parsed input, or null if parsing unsuccessful.
      */
-    private Date parseDate(String value) {
+    private DateTimeWrapper parseDate(String value) {
         if (StringUtils.isNumeric(value)) {
             return null;
         }
@@ -104,7 +98,7 @@ public abstract class PersonQueryCriteria<T extends IPerson> extends AbstractQue
             return null;
         }
 
-        return DateUtil.parseDate(value);
+        return DateTimeWrapper.parse(value);
     }
 
     /**
@@ -166,9 +160,9 @@ public abstract class PersonQueryCriteria<T extends IPerson> extends AbstractQue
     /**
      * Sets the date of birth criterion.
      *
-     * @param birth Date of birth.
+     * @param birth DateTimeWrapper of birth.
      */
-    public void setBirth(Date birth) {
+    public void setBirth(DateTimeWrapper birth) {
         queryContext.setParam("birthDate", birth);
     }
 

@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.model.core;
 
-public interface IContactPoint {
+public interface IContactPoint extends IBaseType {
 
     enum ContactPointSystem {
         PHONE, FAX, EMAIL, PAGER, URL, SMS, OTHER
@@ -38,7 +38,7 @@ public interface IContactPoint {
     ContactPointSystem getSystem();
 
     default void setSystem(ContactPointSystem system) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasSystem() {
@@ -48,7 +48,7 @@ public interface IContactPoint {
     String getValue();
 
     default void setValue(String value) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasValue() {
@@ -60,7 +60,7 @@ public interface IContactPoint {
     }
 
     default void setUse(ContactPointUse use) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasUse() {
@@ -72,7 +72,7 @@ public interface IContactPoint {
     }
 
     default void setRank(Integer rank) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasRank() {
@@ -84,7 +84,7 @@ public interface IContactPoint {
     }
 
     default void setPeriod(IPeriod period) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasPeriod() {

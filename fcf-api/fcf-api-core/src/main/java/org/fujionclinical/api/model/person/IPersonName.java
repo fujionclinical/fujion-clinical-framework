@@ -27,12 +27,13 @@ package org.fujionclinical.api.model.person;
 
 import org.apache.commons.lang.StringUtils;
 import org.fujion.common.CollectionUtil;
+import org.fujionclinical.api.model.core.IBaseType;
 import org.fujionclinical.api.query.QueryParameter;
 
 import java.util.Collections;
 import java.util.List;
 
-public interface IPersonName {
+public interface IPersonName extends IBaseType {
 
     enum PersonNameUse {
         USUAL, OFFICIAL, TEMP, NICKNAME, ANONYMOUS, OLD, MAIDEN, ANY
@@ -42,7 +43,7 @@ public interface IPersonName {
     String getFamilyName();
 
     default void setFamilyName(String familyName) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasFamilyName() {
@@ -95,7 +96,7 @@ public interface IPersonName {
     PersonNameUse getUse();
 
     default void setUse(PersonNameUse use) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasUse() {

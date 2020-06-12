@@ -30,12 +30,12 @@ import org.fujion.common.CollectionUtil;
 import java.util.List;
 import java.util.function.Predicate;
 
-public interface IConcept {
+public interface IConcept extends IBaseType {
 
     String getText();
 
     default void setText(String text) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasText() {

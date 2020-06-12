@@ -82,7 +82,7 @@ public interface IEncounter extends IDomainObject {
     IPatient getPatient();
 
     default void setPatient(IPatient patient) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasPatient() {
@@ -92,7 +92,7 @@ public interface IEncounter extends IDomainObject {
     IPeriod getPeriod();
 
     default void setPeriod(IPeriod period) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasPeriod() {
@@ -103,7 +103,7 @@ public interface IEncounter extends IDomainObject {
     EncounterStatus getStatus();
 
     default void setStatus(EncounterStatus status) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasStatus() {

@@ -33,17 +33,18 @@ import org.fujion.annotation.WiredComponent;
 import org.fujion.common.DateUtil;
 import org.fujion.component.*;
 import org.fujionclinical.api.event.IEventSubscriber;
+import org.fujionclinical.api.model.core.DateTimeWrapper;
 import org.fujionclinical.api.model.core.IIdentifier;
-import org.fujionclinical.api.model.person.IPersonName;
-import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.patient.PatientContext;
+import org.fujionclinical.api.model.person.IPersonName;
+import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.security.SecurityUtil;
+import org.fujionclinical.patientselection.common.PatientSelection;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.shell.plugins.PluginController;
-import org.fujionclinical.patientselection.common.PatientSelection;
 
-import java.util.Date;
+import java.util.Objects;
 
 /**
  * Controller for patient header plugin.
@@ -155,20 +156,20 @@ public class PatientHeader extends PluginController {
         IIdentifier mrn = patient.getMRN();
         lblName.setLabel(patientName + (mrn == null ? "" : "  (" + mrn.getValue() + ")"));
         setLabel(lblDOB, formatDateAndAge(patient.getBirthDate()), lblDOBLabel);
-        setLabel(lblDOD, DateUtil.formatDate(patient.getDeceasedDate()), lblDODLabel);
-        setLabel(lblGender, patient.hasGender() ? patient.getGender().toString() : null, null);
+        setLabel(lblDOD, patient.getDeceasedDate(), lblDODLabel);
+        setLabel(lblGender, patient.getGender(), null);
     }
 
-    private String formatDateAndAge(Date date) {
-        return date == null ? null : DateUtil.formatDate(date) + " (" + DateUtil.formatAge(date) + ")";
+    private String formatDateAndAge(DateTimeWrapper date) {
+        return date == null ? null : date + " (" + DateUtil.formatAge(date.getLegacyDate()) + ")";
     }
 
     private void setLabel(
             Label label,
-            String value,
+            Object value,
             BaseUIComponent associatedComponent) {
-        label.setLabel(value);
-        label.setVisible(value != null && !value.isEmpty());
+        label.setLabel(value == null ? null : value.toString());
+        label.setVisible(value != null);
 
         if (associatedComponent != null) {
             associatedComponent.setVisible(label.isVisible());

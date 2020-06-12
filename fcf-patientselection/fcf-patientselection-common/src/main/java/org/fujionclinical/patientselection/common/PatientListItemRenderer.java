@@ -26,18 +26,16 @@
 package org.fujionclinical.patientselection.common;
 
 import org.apache.commons.lang.StringUtils;
-import org.fujion.common.DateUtil;
 import org.fujion.component.Cell;
 import org.fujion.component.Columns;
 import org.fujion.component.Grid;
 import org.fujion.component.Row;
 import org.fujion.event.ChangeEvent;
 import org.fujion.model.IComponentRenderer;
+import org.fujionclinical.api.model.core.DateTimeWrapper;
 import org.fujionclinical.api.model.core.IIdentifier;
 import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.patientlist.PatientListItem;
-
-import java.util.Date;
 
 import static org.fujionclinical.patientselection.common.Constants.MSG_UNKNOWN_PATIENT;
 
@@ -99,8 +97,8 @@ public class PatientListItemRenderer implements IComponentRenderer<Row, Object> 
             addCell(row, mrn == null ? "" : mrn.getValue(), max);
 
             if (StringUtils.isEmpty(info)) {
-                Date dob = patient.getBirthDate();
-                info = dob == null ? "" : DateUtil.formatDate(dob);
+                DateTimeWrapper dob = patient.getBirthDate();
+                info = dob == null ? "" : dob.toString();
             }
         }
 

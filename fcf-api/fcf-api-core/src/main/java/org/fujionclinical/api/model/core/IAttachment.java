@@ -29,7 +29,7 @@ import org.fujion.ancillary.MimeContent;
 
 import java.util.Collection;
 
-public interface IAttachment {
+public interface IAttachment extends IBaseType {
 
     static IAttachment getAttachment(
             Collection<? extends IAttachment> attachments,
@@ -50,7 +50,7 @@ public interface IAttachment {
     String getContentType();
 
     default void setContentType(String contentType) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasContentType() {
@@ -60,7 +60,7 @@ public interface IAttachment {
     String getTitle();
 
     default void setTitle(String title) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasTitle() {
@@ -70,13 +70,13 @@ public interface IAttachment {
     String getEncodedData();
 
     default void setEncodedData(String encodedData) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     byte[] getRawData();
 
     default void setRawData(byte[] rawData) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     boolean hasData();
@@ -84,7 +84,7 @@ public interface IAttachment {
     String getURL();
 
     default void setURL(String url) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasURL() {

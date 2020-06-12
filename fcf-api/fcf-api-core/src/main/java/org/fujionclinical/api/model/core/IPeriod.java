@@ -25,41 +25,38 @@
  */
 package org.fujionclinical.api.model.core;
 
-import org.fujion.common.DateUtil;
+public interface IPeriod extends IBaseType {
 
-import java.util.Date;
+    DateTimeWrapper getStartDate();
 
-public interface IPeriod {
-
-    Date getStartDate();
-
-    default void setStartDate(Date startDate) {
-        throw new UnsupportedOperationException();
+    default void setStartDate(DateTimeWrapper startDate) {
+        notSupported();
     }
 
     default boolean hasStartDate() {
         return getStartDate() != null;
     }
 
-    Date getEndDate();
+    DateTimeWrapper getEndDate();
 
-    default void setEndDate(Date endDate) {
-        throw new UnsupportedOperationException();
+    default void setEndDate(DateTimeWrapper endDate) {
+        notSupported();
     }
 
     default boolean hasEndDate() {
         return getEndDate() != null;
     }
 
-    default boolean inRange(Date date) {
-        if (hasStartDate() && DateUtil.compare(date, getStartDate()) < 0) {
+    default boolean inRange(DateTimeWrapper date) {
+        if (hasStartDate() && date.compareTo(getStartDate()) < 0) {
             return false;
         }
 
-        if (hasEndDate() && DateUtil.compare(date, getEndDate()) >= 0) {
+        if (hasEndDate() && date.compareTo(getEndDate()) >= 0) {
             return false;
         }
 
         return true;
     }
+
 }

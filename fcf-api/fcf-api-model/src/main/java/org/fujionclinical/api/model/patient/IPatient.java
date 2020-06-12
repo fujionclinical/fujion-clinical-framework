@@ -33,7 +33,7 @@ public interface IPatient extends IPerson {
     IIdentifier getMRN();
 
     default void setMRN(IIdentifier mrn) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasMRN() {

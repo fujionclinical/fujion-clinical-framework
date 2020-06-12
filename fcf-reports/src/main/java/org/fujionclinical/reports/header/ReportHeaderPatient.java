@@ -30,12 +30,11 @@ import org.fujion.annotation.OnFailure;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.common.DateUtil;
 import org.fujion.component.Label;
+import org.fujionclinical.api.model.core.DateTimeWrapper;
 import org.fujionclinical.api.model.core.IIdentifier;
 import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.patient.PatientContext;
 import org.fujionclinical.ui.util.FCFUtil;
-
-import java.util.Date;
 
 /**
  * This is the generic controller for the stock report headers.
@@ -78,12 +77,13 @@ public class ReportHeaderPatient extends ReportHeaderBase {
                 text += "   (" + gender + ")";
             }
 
-            Date deceased = patient.getDeceasedDate();
-            String age = DateUtil.formatAge(patient.getBirthDate(), true, deceased);
+            DateTimeWrapper dob = patient.getBirthDate();
+            DateTimeWrapper deceased = patient.getDeceasedDate();
+            String age = DateUtil.formatAge(dob == null ? null : dob.getLegacyDate(), true, deceased == null ? null : deceased.getLegacyDate());
             text += "  Age: " + age;
 
             if (deceased != null) {
-                text += "  Died: " + DateUtil.formatDate(deceased);
+                text += "  Died: " + deceased;
             }
         }
 

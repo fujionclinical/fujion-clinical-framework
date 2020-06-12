@@ -33,6 +33,7 @@ import org.fujionclinical.api.model.core.IIdentifier;
 import org.fujionclinical.api.model.core.IPeriod;
 import org.fujionclinical.api.model.person.IPerson;
 
+import java.time.temporal.Temporal;
 import java.util.*;
 import java.util.function.Function;
 
@@ -48,6 +49,7 @@ public class Formatters {
 
     static {
         register(Date.class, DateUtil::formatDate);
+        register(Temporal.class, DateUtil::formatDate);
         register(IPeriod.class, FormatUtil::formatPeriod);
         register(IConcept.class, FormatUtil::formatConcept);
         register(IConceptCode.class, FormatUtil::formatConceptCode);

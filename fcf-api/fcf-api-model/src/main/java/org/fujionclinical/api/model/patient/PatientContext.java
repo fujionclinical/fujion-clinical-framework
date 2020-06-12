@@ -32,13 +32,13 @@ import org.fujionclinical.api.context.ContextItems;
 import org.fujionclinical.api.context.ContextManager;
 import org.fujionclinical.api.context.IContextSubscriber;
 import org.fujionclinical.api.context.ManagedContext;
+import org.fujionclinical.api.model.core.DateTimeWrapper;
 import org.fujionclinical.api.model.core.IIdentifier;
 import org.fujionclinical.api.model.core.Identifier;
 import org.fujionclinical.api.model.person.IPersonName;
 import org.fujionclinical.api.model.person.PersonNameParser;
 
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -146,7 +146,7 @@ public class PatientContext extends ManagedContext<IPatient> {
             }
 
             @Override
-            public Date getBirthDate() {
+            public DateTimeWrapper getBirthDate() {
                 return contextItems.getDate(CCOW_DOB);
             }
 

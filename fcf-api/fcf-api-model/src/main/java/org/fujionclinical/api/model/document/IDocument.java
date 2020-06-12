@@ -26,15 +26,11 @@
 package org.fujionclinical.api.model.document;
 
 import org.fujion.common.CollectionUtil;
-import org.fujionclinical.api.model.core.IAttachmentType;
-import org.fujionclinical.api.model.core.IConcept;
-import org.fujionclinical.api.model.core.IConceptCode;
-import org.fujionclinical.api.model.core.IDomainObject;
+import org.fujionclinical.api.model.core.*;
 import org.fujionclinical.api.model.encounter.IEncounter;
 import org.fujionclinical.api.model.person.IPerson;
 
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 public interface IDocument extends IDomainObject, IAttachmentType {
@@ -51,12 +47,12 @@ public interface IDocument extends IDomainObject, IAttachmentType {
         REPLACES, TRANSFORMS, SIGNS, APPENDS
     }
 
-    interface IRelatedDocument {
+    interface IRelatedDocument extends IBaseType {
 
         DocumentRelationship getRelationship();
 
         default void setRelationship(DocumentRelationship relationship) {
-            throw new UnsupportedOperationException();
+            notSupported();
         }
 
         default boolean hasRelationship() {
@@ -65,10 +61,10 @@ public interface IDocument extends IDomainObject, IAttachmentType {
 
     }
 
-    Date getCreationDate();
+    DateTimeWrapper getCreationDate();
 
-    default void setCreationDate(Date creationDate) {
-        throw new UnsupportedOperationException();
+    default void setCreationDate(DateTimeWrapper creationDate) {
+        notSupported();
     }
 
     default boolean hasCreationDate() {
@@ -78,7 +74,7 @@ public interface IDocument extends IDomainObject, IAttachmentType {
     DocumentStatus getDocumentStatus();
 
     default void setDocumentStatus(DocumentStatus status) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasDocumentStatus() {
@@ -88,7 +84,7 @@ public interface IDocument extends IDomainObject, IAttachmentType {
     CompositionStatus getCompositionStatus();
 
     default void setCompositionStatus(CompositionStatus status) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasCompositionStatus() {
@@ -98,7 +94,7 @@ public interface IDocument extends IDomainObject, IAttachmentType {
     IConcept getType();
 
     default void setType(IConcept type) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasType() {
@@ -148,7 +144,7 @@ public interface IDocument extends IDomainObject, IAttachmentType {
     String getDescription();
 
     default void setDescription(String description) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasDescription() {
@@ -158,7 +154,7 @@ public interface IDocument extends IDomainObject, IAttachmentType {
     IEncounter getEncounter();
 
     default void setEncounter(IEncounter encounter) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasEncounter() {

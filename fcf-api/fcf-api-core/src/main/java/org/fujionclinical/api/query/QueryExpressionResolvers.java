@@ -27,7 +27,6 @@ package org.fujionclinical.api.query;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ClassUtils;
-import org.fujion.common.DateUtil;
 import org.fujion.common.MiscUtil;
 import org.fujionclinical.api.core.CoreUtil;
 import org.fujionclinical.api.model.core.*;
@@ -36,7 +35,6 @@ import org.springframework.util.Assert;
 import org.springframework.util.NumberUtils;
 
 import java.beans.PropertyDescriptor;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -116,19 +114,19 @@ class QueryExpressionResolvers {
 
     }
 
-    static class DateResolver extends AbstractQueryExpressionResolver<Date, Date> {
+    static class DateResolver extends AbstractQueryExpressionResolver<DateTimeWrapper, DateTimeWrapper> {
 
         public DateResolver() {
-            super(Date.class, 1, QueryOperator.EQ, QueryOperator.GE, QueryOperator.GT, QueryOperator.LE, QueryOperator.LT);
+            super(DateTimeWrapper.class, 1, QueryOperator.EQ, QueryOperator.GE, QueryOperator.GT, QueryOperator.LE, QueryOperator.LT);
         }
 
         @Override
-        protected Date resolve(
-                Class<Date> propertyType,
+        protected DateTimeWrapper resolve(
+                Class<DateTimeWrapper> propertyType,
                 Object operand,
-                Date previousOperand) {
-            return operand instanceof Date ? (Date) operand
-                    : operand instanceof String ? DateUtil.parseDate((String) operand)
+                DateTimeWrapper previousOperand) {
+            return operand instanceof DateTimeWrapper ? (DateTimeWrapper) operand
+                    : operand instanceof String ? DateTimeWrapper.parse((String) operand)
                     : null;
         }
 

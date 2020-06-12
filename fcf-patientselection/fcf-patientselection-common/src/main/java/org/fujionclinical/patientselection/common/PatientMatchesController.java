@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.patientselection.common;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.common.DateUtil;
@@ -69,7 +70,7 @@ public class PatientMatchesController extends FrameworkController {
             }
             IPatient pat1 = o1.getData(IPatient.class);
             IPatient pat2 = o2.getData(IPatient.class);
-            int result = DateUtil.compare(pat1.getBirthDate(), pat2.getBirthDate());
+            int result = ObjectUtils.compare(pat1.getBirthDate(), pat2.getBirthDate());
             return ascending ? result : -result;
         }
         

@@ -37,19 +37,19 @@ import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Combobox;
 import org.fujion.component.Comboitem;
 import org.fujion.model.*;
+import org.fujionclinical.api.model.core.DateTimeWrapper;
 import org.fujionclinical.api.property.PropertyUtil;
 import org.fujionclinical.api.query.DateQueryFilter;
 import org.fujionclinical.api.query.DateQueryFilter.DateType;
 import org.fujionclinical.api.query.DateQueryFilter.IDateTypeExtractor;
 import org.fujionclinical.api.query.IQueryService;
-import org.fujionclinical.ui.dialog.DateRangePicker;
 import org.fujionclinical.reports.common.ReportUtil;
 import org.fujionclinical.sharedforms.common.FormConstants;
+import org.fujionclinical.ui.dialog.DateRangePicker;
 import org.fujionclinical.ui.util.FCFUtil;
 import org.springframework.beans.BeanUtils;
 
 import java.lang.reflect.Method;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -141,12 +141,14 @@ public abstract class AbstractBaseController<T, M> extends AbstractServiceContro
     /**
      * Returns the date for the given result for filtering purposes.
      *
-     * @param result Result from which to extract a date.
+     * @param result   Result from which to extract a date.
      * @param dateType The date type.
      * @return The extracted date.
      */
     @Override
-    public abstract Date getDateByType(M result, DateType dateType);
+    public abstract DateTimeWrapper getDateByType(
+            M result,
+            DateType dateType);
 
     /**
      * Sets the component that displays the selectable elements.

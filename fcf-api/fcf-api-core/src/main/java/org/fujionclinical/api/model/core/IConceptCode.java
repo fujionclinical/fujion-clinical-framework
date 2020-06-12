@@ -27,12 +27,12 @@ package org.fujionclinical.api.model.core;
 
 import org.apache.commons.lang.StringUtils;
 
-public interface IConceptCode {
+public interface IConceptCode extends IBaseType {
 
     String getSystem();
 
     default void setSystem(String system) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasSystem() {
@@ -42,7 +42,7 @@ public interface IConceptCode {
     String getCode();
 
     default void setCode(String code) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasCode() {
@@ -52,7 +52,7 @@ public interface IConceptCode {
     String getText();
 
     default void setText(String text) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasText() {

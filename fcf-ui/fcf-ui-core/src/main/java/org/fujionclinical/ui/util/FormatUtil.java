@@ -25,19 +25,14 @@
  */
 package org.fujionclinical.ui.util;
 
-import org.fujionclinical.api.model.core.IConcept;
-import org.fujionclinical.api.model.core.IConceptCode;
-import org.fujionclinical.api.model.core.IIdentifier;
-import org.fujionclinical.api.model.core.IPeriod;
-
-import java.util.Date;
+import org.fujionclinical.api.model.core.*;
 
 public class FormatUtil {
 
     public static String formatPeriod(IPeriod period) {
         int i = 0;
-        Date startDate = period.getStartDate();
-        Date endDate = period.getEndDate();
+        DateTimeWrapper startDate = period.getStartDate();
+        DateTimeWrapper endDate = period.getEndDate();
 
         if (startDate != null && endDate != null && startDate.equals(endDate)) {
             endDate = null;

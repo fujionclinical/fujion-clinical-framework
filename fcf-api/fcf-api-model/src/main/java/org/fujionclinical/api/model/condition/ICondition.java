@@ -58,7 +58,7 @@ public interface ICondition extends IDomainObject, IAnnotationType {
     IPatient getPatient();
 
     default void setPatient(IPatient patient) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasPatient() {
@@ -69,7 +69,7 @@ public interface ICondition extends IDomainObject, IAnnotationType {
     IPeriod getOnset();
 
     default void setOnset(IPeriod period) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasOnset() {
@@ -80,7 +80,7 @@ public interface ICondition extends IDomainObject, IAnnotationType {
     Date getRecordedDate();
 
     default void setRecordedDate(Date recorded) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasRecorded() {
@@ -91,7 +91,7 @@ public interface ICondition extends IDomainObject, IAnnotationType {
     IPerson getRecorder();
 
     default void setRecorder(IPerson recorder) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasRecorder() {
@@ -102,7 +102,7 @@ public interface ICondition extends IDomainObject, IAnnotationType {
     IPerson getAsserter();
 
     default void setAsserter(IPerson asserter) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasAsserter() {
@@ -113,7 +113,7 @@ public interface ICondition extends IDomainObject, IAnnotationType {
     IConcept getCondition();
 
     default void setCondition(IConcept condition) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasCondition() {
@@ -124,7 +124,7 @@ public interface ICondition extends IDomainObject, IAnnotationType {
     IEncounter getEncounter();
 
     default void setEncounter(IEncounter encounter) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasEncounter() {
@@ -135,7 +135,7 @@ public interface ICondition extends IDomainObject, IAnnotationType {
     ClinicalStatus getClinicalStatus();
 
     default void setClinicalStatus(ClinicalStatus clinicalStatus) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasClinicalStatus() {
@@ -146,7 +146,7 @@ public interface ICondition extends IDomainObject, IAnnotationType {
     VerificationStatus getVerificationStatus();
 
     default void setVerificationStatus(VerificationStatus verificationStatus) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasVerificationStatus() {
@@ -157,7 +157,7 @@ public interface ICondition extends IDomainObject, IAnnotationType {
     Severity getSeverity();
 
     default void setSeverity(Severity severity) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasSeverity() {

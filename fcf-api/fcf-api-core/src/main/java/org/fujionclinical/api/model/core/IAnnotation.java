@@ -28,10 +28,9 @@ package org.fujionclinical.api.model.core;
 import org.fujion.common.CollectionUtil;
 import org.fujionclinical.api.model.person.IPerson;
 
-import java.util.Date;
 import java.util.List;
 
-public interface IAnnotation {
+public interface IAnnotation extends IBaseType {
 
     List<IPerson> getAuthors();
 
@@ -47,10 +46,10 @@ public interface IAnnotation {
         getAuthors().add(author);
     }
 
-    Date getRecorded();
+    DateTimeWrapper getRecorded();
 
-    default void setRecorded(Date recorded) {
-        throw new UnsupportedOperationException();
+    default void setRecorded(DateTimeWrapper recorded) {
+        notSupported();
     }
 
     default boolean hasRecorded() {
@@ -60,7 +59,7 @@ public interface IAnnotation {
     String getText();
 
     default void setText(String text) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     default boolean hasText() {

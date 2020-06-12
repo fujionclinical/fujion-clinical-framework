@@ -26,6 +26,7 @@
 package org.fujionclinical.api.context;
 
 import org.fujion.common.DateUtil;
+import org.fujionclinical.api.model.core.DateTimeWrapper;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -295,9 +296,9 @@ public class ContextItems {
      * @param itemName Item name
      * @return Date value
      */
-    public Date getDate(String itemName) {
+    public DateTimeWrapper getDate(String itemName) {
         try {
-            return DateUtil.parseDate(getItem(itemName));
+            return DateTimeWrapper.parse(getItem(itemName));
         } catch (Exception e) {
             return null;
         }

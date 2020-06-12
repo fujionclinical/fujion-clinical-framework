@@ -37,7 +37,7 @@ import java.util.function.Predicate;
 /**
  * Interface for a domain object.
  */
-public interface IDomainObject extends Serializable {
+public interface IDomainObject extends IBaseType, Serializable {
 
     /**
      * Returns the logical identifier for the domain object.
@@ -54,7 +54,7 @@ public interface IDomainObject extends Serializable {
      * @param id The new logical identifier.
      */
     default void setId(String id) {
-        throw new UnsupportedOperationException();
+        notSupported();
     }
 
     /**
