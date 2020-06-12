@@ -25,7 +25,11 @@
  */
 package org.fujionclinical.ui.util;
 
-import org.fujionclinical.api.model.core.*;
+import org.fujion.common.DateTimeWrapper;
+import org.fujionclinical.api.model.core.IConcept;
+import org.fujionclinical.api.model.core.IConceptCode;
+import org.fujionclinical.api.model.core.IIdentifier;
+import org.fujionclinical.api.model.core.IPeriod;
 
 public class FormatUtil {
 

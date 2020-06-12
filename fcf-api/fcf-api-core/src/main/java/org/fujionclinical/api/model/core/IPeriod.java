@@ -25,6 +25,8 @@
  */
 package org.fujionclinical.api.model.core;
 
+import org.fujion.common.DateTimeWrapper;
+
 public interface IPeriod extends IBaseType {
 
     DateTimeWrapper getStartDate();

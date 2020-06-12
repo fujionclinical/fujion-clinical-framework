@@ -26,7 +26,11 @@
 package org.fujionclinical.api.model.person;
 
 import org.apache.commons.lang.StringUtils;
-import org.fujionclinical.api.model.core.*;
+import org.fujion.common.DateTimeWrapper;
+import org.fujionclinical.api.model.core.ConceptCode;
+import org.fujionclinical.api.model.core.IConceptCode;
+import org.fujionclinical.api.model.core.IIdentifier;
+import org.fujionclinical.api.model.core.Identifier;
 import org.fujionclinical.api.query.AbstractQueryCriteria;
 import org.fujionclinical.api.query.QueryUtil;
 
@@ -160,7 +164,7 @@ public abstract class PersonQueryCriteria<T extends IPerson> extends AbstractQue
     /**
      * Sets the date of birth criterion.
      *
-     * @param birth DateTimeWrapper of birth.
+     * @param birth Date of birth.
      */
     public void setBirth(DateTimeWrapper birth) {
         queryContext.setParam("birthDate", birth);

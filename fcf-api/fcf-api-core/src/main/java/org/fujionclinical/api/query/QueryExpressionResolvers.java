@@ -27,6 +27,7 @@ package org.fujionclinical.api.query;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ClassUtils;
+import org.fujion.common.DateTimeWrapper;
 import org.fujion.common.MiscUtil;
 import org.fujionclinical.api.core.CoreUtil;
 import org.fujionclinical.api.model.core.*;

@@ -26,7 +26,7 @@
 package org.fujionclinical.api.query;
 
 import org.fujion.common.DateRange;
-import org.fujionclinical.api.model.core.DateTimeWrapper;
+import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.model.core.IRange;
 import org.fujionclinical.api.model.core.Range;
 

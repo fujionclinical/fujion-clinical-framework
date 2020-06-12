@@ -26,13 +26,13 @@
 package org.fujionclinical.patientselection.common;
 
 import org.apache.commons.lang.StringUtils;
+import org.fujion.common.DateTimeWrapper;
 import org.fujion.component.Cell;
 import org.fujion.component.Columns;
 import org.fujion.component.Grid;
 import org.fujion.component.Row;
 import org.fujion.event.ChangeEvent;
 import org.fujion.model.IComponentRenderer;
-import org.fujionclinical.api.model.core.DateTimeWrapper;
 import org.fujionclinical.api.model.core.IIdentifier;
 import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.patientlist.PatientListItem;

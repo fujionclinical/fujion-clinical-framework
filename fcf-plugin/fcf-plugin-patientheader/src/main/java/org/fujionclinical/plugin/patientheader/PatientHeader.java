@@ -30,10 +30,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
+import org.fujion.common.DateTimeWrapper;
 import org.fujion.common.DateUtil;
 import org.fujion.component.*;
 import org.fujionclinical.api.event.IEventSubscriber;
-import org.fujionclinical.api.model.core.DateTimeWrapper;
 import org.fujionclinical.api.model.core.IIdentifier;
 import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.patient.PatientContext;
@@ -43,8 +43,6 @@ import org.fujionclinical.api.security.SecurityUtil;
 import org.fujionclinical.patientselection.common.PatientSelection;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.shell.plugins.PluginController;
-
-import java.util.Objects;
 
 /**
  * Controller for patient header plugin.

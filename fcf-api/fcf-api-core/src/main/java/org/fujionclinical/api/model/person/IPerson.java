@@ -26,6 +26,7 @@
 package org.fujionclinical.api.model.person;
 
 import org.fujion.common.CollectionUtil;
+import org.fujion.common.DateTimeWrapper;
 import org.fujion.common.StrUtil;
 import org.fujionclinical.api.model.core.*;
 import org.fujionclinical.api.query.QueryParameter;

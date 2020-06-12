@@ -27,12 +27,12 @@ package org.fujionclinical.plugin.documents;
 
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
+import org.fujion.common.DateTimeWrapper;
 import org.fujion.component.Combobox;
 import org.fujion.component.Label;
 import org.fujion.component.Row;
 import org.fujion.event.EventUtil;
 import org.fujion.model.IListModel;
-import org.fujionclinical.api.model.core.DateTimeWrapper;
 import org.fujionclinical.api.model.document.IDocument;
 import org.fujionclinical.api.query.DateQueryFilter;
 import org.fujionclinical.api.query.IQueryContext;

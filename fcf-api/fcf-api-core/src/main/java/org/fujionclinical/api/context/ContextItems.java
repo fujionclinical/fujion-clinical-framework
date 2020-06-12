@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.api.context;
 
+import org.fujion.common.DateTimeWrapper;
 import org.fujion.common.DateUtil;
-import org.fujionclinical.api.model.core.DateTimeWrapper;
 
 import java.util.Date;
 import java.util.HashMap;

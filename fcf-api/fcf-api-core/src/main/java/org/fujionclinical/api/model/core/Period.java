@@ -25,6 +25,8 @@
  */
 package org.fujionclinical.api.model.core;
 
+import org.fujion.common.DateTimeWrapper;
+
 public class Period implements IPeriod {
 
     private DateTimeWrapper startDate;
