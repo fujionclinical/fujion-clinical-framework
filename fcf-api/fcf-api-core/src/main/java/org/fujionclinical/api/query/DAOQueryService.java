@@ -27,7 +27,7 @@ package org.fujionclinical.api.query;
 
 import org.fujionclinical.api.model.core.DomainDAORegistry;
 import org.fujionclinical.api.model.core.IDomainDAO;
-import org.fujionclinical.api.model.core.IDomainObject;
+import org.fujionclinical.api.model.core.IDomainType;
 
 import java.util.List;
 
@@ -36,7 +36,7 @@ import java.util.List;
  *
  * @param <T> The type of domain object.
  */
-public class DAOQueryService<T extends IDomainObject> extends AbstractQueryServiceEx<IDomainDAO<T>, T> {
+public class DAOQueryService<T extends IDomainType> extends AbstractQueryServiceEx<IDomainDAO<T>, T> {
 
     private final QueryExpression<T> queryExpression;
 

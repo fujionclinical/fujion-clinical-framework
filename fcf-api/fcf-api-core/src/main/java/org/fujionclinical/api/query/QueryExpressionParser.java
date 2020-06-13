@@ -27,7 +27,7 @@ package org.fujionclinical.api.query;
 
 import org.apache.commons.lang.StringUtils;
 import org.fujion.common.StrUtil;
-import org.fujionclinical.api.model.core.IDomainObject;
+import org.fujionclinical.api.model.core.IDomainType;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.Assert;
 
@@ -52,7 +52,7 @@ public class QueryExpressionParser {
         return instance;
     }
 
-    public <T extends IDomainObject> QueryExpression<T> parse(
+    public <T extends IDomainType> QueryExpression<T> parse(
             Class<T> domainClass,
             String queryString) {
         List<QueryExpressionFragment> fragments = Arrays.stream(TUPLE_DELIMITER.split(queryString))
@@ -62,7 +62,7 @@ public class QueryExpressionParser {
         return new QueryExpression<T>(domainClass, fragments);
     }
 
-    private <T extends IDomainObject> QueryExpressionFragment parseFragment(
+    private <T extends IDomainType> QueryExpressionFragment parseFragment(
             Class<T> domainClass,
             String fragment) {
         for (QueryOperator operator : QueryOperator.values()) {

@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.query;
 
-import org.fujionclinical.api.model.core.IDomainObject;
+import org.fujionclinical.api.model.core.IDomainType;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
  *
  * @param <T> The domain class.
  */
-public class QueryExpression<T extends IDomainObject> {
+public class QueryExpression<T extends IDomainType> {
 
     private final Class<T> domainClass;
 

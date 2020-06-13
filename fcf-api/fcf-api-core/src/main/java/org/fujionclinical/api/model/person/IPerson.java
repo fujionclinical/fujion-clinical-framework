@@ -35,7 +35,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public interface IPerson extends IDomainObject, IPostalAddressType, IContactPointType, IPersonNameType {
+public interface IPerson extends IDomainType, IPostalAddressType, IContactPointType, IPersonNameType {
 
     enum Gender {
         MALE, FEMALE, OTHER, UNKNOWN;

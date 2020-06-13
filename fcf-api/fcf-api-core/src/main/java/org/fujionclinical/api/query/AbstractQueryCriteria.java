@@ -28,14 +28,14 @@ package org.fujionclinical.api.query;
 import org.apache.commons.lang.StringUtils;
 import org.fujion.common.LocalizedMessage;
 import org.fujionclinical.api.model.core.DomainDAORegistry;
-import org.fujionclinical.api.model.core.IDomainObject;
+import org.fujionclinical.api.model.core.IDomainType;
 
 import java.util.List;
 
 /**
  * Base class for search criteria.
  */
-public abstract class AbstractQueryCriteria<T extends IDomainObject> {
+public abstract class AbstractQueryCriteria<T extends IDomainType> {
 
     private static final LocalizedMessage MSG_ERROR_MISSING_REQUIRED = new LocalizedMessage("patientsearch.error.missing.required");
 

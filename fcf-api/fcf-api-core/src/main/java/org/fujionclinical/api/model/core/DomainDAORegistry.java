@@ -31,11 +31,11 @@ import org.springframework.util.Assert;
 /**
  * Tracks all domain DAO implementations.
  */
-public class DomainDAORegistry<T extends IDomainObject> extends BeanRegistry<Class<T>, IDomainDAO<T>> {
+public class DomainDAORegistry<T extends IDomainType> extends BeanRegistry<Class<T>, IDomainDAO<T>> {
 
     private static final DomainDAORegistry<?> instance = new DomainDAORegistry<>();
 
-    public static <T extends IDomainObject> DomainDAORegistry<T> getInstance() {
+    public static <T extends IDomainType> DomainDAORegistry<T> getInstance() {
         return (DomainDAORegistry<T>) instance;
     }
 
@@ -47,7 +47,7 @@ public class DomainDAORegistry<T extends IDomainObject> extends BeanRegistry<Cla
      * @return A domain object DAO.
      * @throws IllegalArgumentException If no DAO found.
      */
-    public static <T extends IDomainObject> IDomainDAO<T> getDAO(Class<T> clazz) {
+    public static <T extends IDomainType> IDomainDAO<T> getDAO(Class<T> clazz) {
         IDomainDAO<T> dao = instance.get((Class) clazz);
         Assert.notNull(dao, () -> "Class has no registered DAO: " + clazz.getName());
         return dao;

@@ -133,15 +133,15 @@ class QueryExpressionResolvers {
 
     }
 
-    static class DomainObjectResolver extends AbstractQueryExpressionResolver<IDomainObject, String> {
+    static class DomainObjectResolver extends AbstractQueryExpressionResolver<IDomainType, String> {
 
         public DomainObjectResolver() {
-            super(IDomainObject.class, 1, QueryOperator.EQ);
+            super(IDomainType.class, 1, QueryOperator.EQ);
         }
 
         @Override
         protected String resolve(
-                Class<IDomainObject> propertyType,
+                Class<IDomainType> propertyType,
                 Object operand,
                 String previousOperand) {
             return propertyType.isInstance(operand) ? propertyType.cast(operand).getId()

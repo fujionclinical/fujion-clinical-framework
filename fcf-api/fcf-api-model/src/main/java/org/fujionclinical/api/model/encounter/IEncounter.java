@@ -27,7 +27,7 @@ package org.fujionclinical.api.model.encounter;
 
 import org.fujion.common.CollectionUtil;
 import org.fujionclinical.api.model.core.IConcept;
-import org.fujionclinical.api.model.core.IDomainObject;
+import org.fujionclinical.api.model.core.IDomainType;
 import org.fujionclinical.api.model.core.IPeriod;
 import org.fujionclinical.api.model.location.ILocation;
 import org.fujionclinical.api.model.patient.IPatient;
@@ -37,7 +37,7 @@ import org.fujionclinical.api.query.QueryParameter;
 import java.util.Collections;
 import java.util.List;
 
-public interface IEncounter extends IDomainObject {
+public interface IEncounter extends IDomainType {
 
     enum EncounterStatus {
         /**

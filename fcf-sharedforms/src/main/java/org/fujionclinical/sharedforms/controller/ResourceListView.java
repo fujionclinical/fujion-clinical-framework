@@ -39,7 +39,7 @@ import org.fujion.thread.ThreadedTask;
 import org.fujionclinical.api.event.IEventSubscriber;
 import org.fujionclinical.api.model.core.DomainDAORegistry;
 import org.fujionclinical.api.model.core.IDomainDAO;
-import org.fujionclinical.api.model.core.IDomainObject;
+import org.fujionclinical.api.model.core.IDomainType;
 import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.patient.PatientContext;
 import org.fujionclinical.api.query.IQueryContext;
@@ -61,7 +61,7 @@ import java.util.Map;
  * @param <R> Type of resource object.
  * @param <M> Type of model object.
  */
-public abstract class ResourceListView<R extends IDomainObject, M> extends ListFormController<M> {
+public abstract class ResourceListView<R extends IDomainType, M> extends ListFormController<M> {
 
     private static final Log log = LogFactory.getLog(ResourceListView.class);
 

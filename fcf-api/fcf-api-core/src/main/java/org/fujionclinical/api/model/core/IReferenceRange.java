@@ -5,7 +5,27 @@ import org.fujion.common.CollectionUtil;
 import java.util.Collections;
 import java.util.List;
 
-public interface IReferenceRange extends IRange<Double> {
+public interface IReferenceRange<T extends Number> extends IBaseType {
+
+    IQuantity<T> getLow();
+
+    default void setLow(IQuantity<T> value) {
+        notSupported();
+    }
+
+    default boolean hasLow() {
+        return getLow() != null;
+    }
+
+    IQuantity<T> getHigh();
+
+    default void setHigh(IQuantity<T> value) {
+        notSupported();
+    }
+
+    default boolean hasHigh() {
+        return getHigh() != null;
+    }
 
     IConcept getType();
 

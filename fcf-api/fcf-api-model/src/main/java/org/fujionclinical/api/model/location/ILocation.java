@@ -28,13 +28,13 @@ package org.fujionclinical.api.model.location;
 import org.fujion.common.CollectionUtil;
 import org.fujionclinical.api.model.core.IConcept;
 import org.fujionclinical.api.model.core.IContactPointType;
-import org.fujionclinical.api.model.core.IDomainObject;
+import org.fujionclinical.api.model.core.IDomainType;
 import org.fujionclinical.api.model.core.IPostalAddressType;
 
 import java.util.Collections;
 import java.util.List;
 
-public interface ILocation extends IDomainObject, IPostalAddressType, IContactPointType {
+public interface ILocation extends IDomainType, IPostalAddressType, IContactPointType {
 
     enum LocationType {}
 

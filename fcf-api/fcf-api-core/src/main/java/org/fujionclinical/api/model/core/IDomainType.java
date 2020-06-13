@@ -25,7 +25,6 @@
  */
 package org.fujionclinical.api.model.core;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.fujion.common.CollectionUtil;
 import org.fujionclinical.api.query.QueryParameter;
 
@@ -37,7 +36,7 @@ import java.util.function.Predicate;
 /**
  * Interface for a domain object.
  */
-public interface IDomainObject extends IBaseType, Serializable {
+public interface IDomainType extends IBaseType, Serializable {
 
     /**
      * Returns the logical identifier for the domain object.
@@ -168,7 +167,7 @@ public interface IDomainObject extends IBaseType, Serializable {
      * @param object The domain object to compare to this one.
      * @return True if both objects represent the same entity.
      */
-    default boolean isSame(IDomainObject object) {
+    default boolean isSame(IDomainType object) {
         return object != null && object.getClass() == getClass() && object.getId().equals(getId());
     }
 

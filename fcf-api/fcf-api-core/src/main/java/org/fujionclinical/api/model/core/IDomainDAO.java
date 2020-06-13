@@ -37,7 +37,7 @@ import java.util.List;
  *
  * @param <T> Class created by DAO.
  */
-public interface IDomainDAO<T extends IDomainObject> {
+public interface IDomainDAO<T extends IDomainType> {
 
     /**
      * Creates a new instance of an object of this domain.

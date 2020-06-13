@@ -34,7 +34,7 @@ import org.fujionclinical.api.model.person.IPerson;
 import java.util.Collections;
 import java.util.List;
 
-public interface IDocument extends IDomainObject, IAttachmentType {
+public interface IDocument extends IDomainType, IAttachmentType, ICategoryType {
 
     enum DocumentStatus {
         CURRENT, SUPERSEDED, ENTERED_IN_ERROR
@@ -108,22 +108,6 @@ public interface IDocument extends IDomainObject, IAttachmentType {
 
     default boolean hasType(String type) {
         return hasType() && getType().getCodes().stream().filter(code -> type.equals(code.getCode())).findFirst().isPresent();
-    }
-
-    default List<IConcept> getCategories() {
-        return Collections.emptyList();
-    }
-
-    default void setCategories(List<IConcept> categories) {
-        CollectionUtil.replaceList(getCategories(), categories);
-    }
-
-    default void addCategories(IConcept... categories) {
-        Collections.addAll(getCategories(), categories);
-    }
-
-    default boolean hasCategory() {
-        return CollectionUtil.notEmpty(getCategories());
     }
 
     default List<IPerson> getAuthors() {

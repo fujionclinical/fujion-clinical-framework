@@ -1,13 +1,14 @@
 package org.fujionclinical.api.model.observation;
 
 import org.fujion.common.CollectionUtil;
+import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.model.core.*;
 
+import java.time.LocalTime;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
-public interface IObservationType extends IBaseType, IAnnotationType {
+public interface IObservationType extends IBaseType {
 
     public enum DataAbsentReason {
         UNKNOWN("Unknown"),                             // The value is expected to exist but is not known.
@@ -64,12 +65,20 @@ public interface IObservationType extends IBaseType, IAnnotationType {
         return CollectionUtil.notEmpty(getInterpretations());
     }
 
-    default IReferenceRange getReferenceRange() {
-        return null;
+    default List<IReferenceRange<Double>> getReferenceRanges() {
+        return Collections.emptyList();
     }
 
-    default void setReferenceRange(IReferenceRange value) {
-        notSupported();
+    default void setReferenceRanges(List<IReferenceRange<Double>> values) {
+        CollectionUtil.replaceList(getReferenceRanges(), values);
+    }
+
+    default void addReferenceRanges(IReferenceRange<Double>... values) {
+        Collections.addAll(getReferenceRanges(), values);
+    }
+
+    default boolean hasReferenceRange() {
+        return CollectionUtil.notEmpty(getReferenceRanges());
     }
 
     default DataAbsentReason getDataAbsentReason() {
@@ -114,7 +123,7 @@ public interface IObservationType extends IBaseType, IAnnotationType {
         return null;
     }
 
-    default void setValueAsBoolean() {
+    default void setValueAsBoolean(Boolean value) {
         notSupported();
     }
 
@@ -134,16 +143,28 @@ public interface IObservationType extends IBaseType, IAnnotationType {
         return getValueAsInteger() != null;
     }
 
-    default Date getValueAsDate() {
+    default DateTimeWrapper getValueAsDateTime() {
         return null;
     }
 
-    default void setValueAsDate(Date value) {
+    default void setValueAsDateTime(DateTimeWrapper value) {
         notSupported();
     }
 
-    default boolean hasValueAsDate() {
-        return getValueAsDate() != null;
+    default boolean hasValueAsDateTime() {
+        return getValueAsDateTime() != null;
+    }
+
+    default LocalTime getValueAsTime() {
+        return null;
+    }
+
+    default void setValueAsTime(LocalTime value) {
+        notSupported();
+    }
+
+    default boolean hasValueAsTime() {
+        return getValueAsTime() != null;
     }
 
     default IPeriod getValueAsPeriod() {
@@ -170,5 +191,28 @@ public interface IObservationType extends IBaseType, IAnnotationType {
         return getValueAsRange() != null;
     }
 
-    // TODO: quantity, ratio, sampleddata, time
+    default IQuantity<Double> getValueAsQuantity() {
+        return null;
+    }
+
+    default void setValueAsQuantity(IQuantity<Double> value) {
+        notSupported();
+    }
+
+    default boolean hasValueAsQuantity() {
+        return getValueAsQuantity() != null;
+    }
+
+    default IRatio<Double> getValueAsRatio() {
+        return null;
+    }
+
+    default void setValueAsRatio(IRatio<Double> value) {
+        notSupported();
+    }
+
+    default boolean hasValueAsRatio() {
+        return getValueAsRatio() != null;
+    }
+
 }

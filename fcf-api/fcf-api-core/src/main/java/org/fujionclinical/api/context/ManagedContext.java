@@ -36,7 +36,7 @@ import org.fujionclinical.api.core.StopWatchFactory;
 import org.fujionclinical.api.core.StopWatchFactory.IStopWatch;
 import org.fujionclinical.api.event.IEventManager;
 import org.fujionclinical.api.event.IEventSubscriber;
-import org.fujionclinical.api.model.core.IDomainObject;
+import org.fujionclinical.api.model.core.IDomainType;
 
 import java.util.*;
 
@@ -146,8 +146,8 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
      * @return True if the two objects represent the same context.
      */
     protected boolean isSameContext(DomainClass domainObject1, DomainClass domainObject2) {
-        if (domainObject1 instanceof IDomainObject && domainObject2 instanceof IDomainObject) {
-            return ((IDomainObject) domainObject1).isSame(((IDomainObject) domainObject2));
+        if (domainObject1 instanceof IDomainType && domainObject2 instanceof IDomainType) {
+            return ((IDomainType) domainObject1).isSame(((IDomainType) domainObject2));
         }
 
         return ObjectUtils.equals(domainObject1, domainObject2);
