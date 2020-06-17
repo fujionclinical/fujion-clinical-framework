@@ -27,8 +27,6 @@ package org.fujionclinical.api.query;
 
 import org.fujion.common.DateRange;
 import org.fujion.common.DateTimeWrapper;
-import org.fujionclinical.api.model.core.IRange;
-import org.fujionclinical.api.model.impl.Range;
 
 public class DateQueryFilter<T> extends AbstractQueryFilter<T> {
 
@@ -51,7 +49,7 @@ public class DateQueryFilter<T> extends AbstractQueryFilter<T> {
 
     private DateType dateType = DateType.MEASURED;
 
-    private IRange<DateTimeWrapper> dateRange;
+    private DateRange dateRange;
 
     private final IDateTypeExtractor<T> dateTypeExtractor;
 
@@ -65,13 +63,13 @@ public class DateQueryFilter<T> extends AbstractQueryFilter<T> {
     @Override
     public boolean include(T result) {
         DateTimeWrapper dateTime = dateTypeExtractor.getDateByType(result, dateType);
-        return dateTime == null || getDateRange().inRange(dateTime);
+        return dateTime == null || getDateRange().inRange(dateTime.getLegacyDate());
     }
     
     @Override
     public boolean updateContext(IQueryContext context) {
         context.setParam("dateType", dateType);
-        IRange<DateTimeWrapper> oldDateRange = (IRange<DateTimeWrapper>) context.getParam("dateRange");
+        DateRange oldDateRange = (DateRange) context.getParam("dateRange");
         
         if (dateRange == null || oldDateRange == null || !oldDateRange.inRange(dateRange)) {
             context.setParam("dateRange", dateRange);
@@ -91,17 +89,11 @@ public class DateQueryFilter<T> extends AbstractQueryFilter<T> {
         }
     }
 
-    public IRange<DateTimeWrapper> getDateRange() {
+    public DateRange getDateRange() {
         return dateRange;
     }
 
     public void setDateRange(DateRange dateRange) {
-        DateTimeWrapper low = new DateTimeWrapper(dateRange.getStartDate());
-        DateTimeWrapper high = new DateTimeWrapper(dateRange.getEndDate());
-        setDateRange(new Range<>(low, high));
-    }
-
-    public void setDateRange(IRange<DateTimeWrapper> dateRange) {
         if (this.dateRange != dateRange) {
             this.dateRange = dateRange;
             notifyListeners();

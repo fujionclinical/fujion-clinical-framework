@@ -11,18 +11,18 @@
 	<beans profile="root">
 
 		<fcp:plugin
-			url="web/org/fujionclinical/plugin/documents/documentMain.fsp"
-			id="fcfDocuments2" name="Clinical Documents Display">
+				url="web/org/fujionclinical/plugin/documents/documentMain.fsp"
+				id="fcfDocuments" name="Clinical Documents Display">
 			<fcp:resource>
-				<fcp:help-resource module="fcfDocumentsHelp" />
-				<fcp:property-resource group="DOCUMENT.CONTROLS" />
+				<fcp:help-resource module="fcfDocumentsHelp"/>
+				<fcp:property-resource group="DOCUMENT.CONTROLS"/>
 				<fcp:bean-resource bean="fcfDocumentsActionStatus"
-					required="true" />
+								   required="true"/>
 			</fcp:resource>
 
 			<fcp:serialization>
-				<fcp:property name="Fixed Category" id="fixedFilter" type="enum" 
-					description="To restrict documents to a specific category, set this to the category name." >
+				<fcp:property name="Fixed Category" id="fixedFilter" type="enum"
+							  description="To restrict documents to a specific category, set this to the category name.">
 					<fcp:config>
 						<fcp:entry key="bean">documentTypeEnumerator</fcp:entry>
 					</fcp:config>
