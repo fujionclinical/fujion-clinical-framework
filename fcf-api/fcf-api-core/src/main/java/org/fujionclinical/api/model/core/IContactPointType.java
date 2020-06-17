@@ -42,7 +42,7 @@ public interface IContactPointType {
     }
 
     default void setContactPoints(List<IContactPoint> contactPoints) {
-        CollectionUtil.replaceList(getContactPoints(), contactPoints);
+        CollectionUtil.replaceElements(getContactPoints(), contactPoints);
     }
 
     /**

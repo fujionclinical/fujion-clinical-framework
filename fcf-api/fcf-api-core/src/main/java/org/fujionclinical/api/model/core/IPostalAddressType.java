@@ -42,7 +42,7 @@ public interface IPostalAddressType {
     }
 
     default void setAddresses(List<IPostalAddress> addresses) {
-        CollectionUtil.replaceList(getAddresses(), addresses);
+        CollectionUtil.replaceElements(getAddresses(), addresses);
     }
 
     /**

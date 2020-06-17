@@ -23,43 +23,45 @@
  *
  * #L%
  */
-package org.fujionclinical.api.model.core;
+package org.fujionclinical.api.model.impl;
 
-public class ConceptCode implements IConceptCode {
+import org.fujion.common.DateTimeWrapper;
+import org.fujionclinical.api.model.core.IPeriod;
 
-    private final String system;
+public class Period implements IPeriod {
 
-    private final String code;
+    private DateTimeWrapper startDate;
 
-    private final String text;
+    private DateTimeWrapper endDate;
 
-    public ConceptCode(
-            String system,
-            String code) {
-        this(system, code, null);
+    public Period() {
     }
 
-    public ConceptCode(
-            String system,
-            String code,
-            String text) {
-        this.system = system;
-        this.code = code;
-        this.text = text;
+    public Period(
+            DateTimeWrapper startDate,
+            DateTimeWrapper endDate) {
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     @Override
-    public String getSystem() {
-        return system;
+    public DateTimeWrapper getStartDate() {
+        return startDate;
     }
 
     @Override
-    public String getCode() {
-        return code;
+    public void setStartDate(DateTimeWrapper startDate) {
+        this.startDate = startDate;
     }
 
     @Override
-    public String getText() {
-        return text;
+    public DateTimeWrapper getEndDate() {
+        return endDate;
     }
+
+    @Override
+    public void setEndDate(DateTimeWrapper endDate) {
+        this.endDate = endDate;
+    }
+
 }

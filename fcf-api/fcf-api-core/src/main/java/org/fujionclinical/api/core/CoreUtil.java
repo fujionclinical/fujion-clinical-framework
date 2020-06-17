@@ -25,11 +25,11 @@
  */
 package org.fujionclinical.api.core;
 
+import org.apache.commons.lang3.EnumUtils;
+
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.Arrays;
 import java.util.Collection;
 
 public class CoreUtil {
@@ -50,25 +50,35 @@ public class CoreUtil {
         return propertyType;
     }
 
-    public static Class<?>[] getGenericParameters(Class<?> clazz, Class<?> source) {
-        Type[] paramTypes = null;
+    public static <T> Class<T> cast(Class<?> clazz) {
+        return (Class<T>) clazz;
+    }
 
-        while (paramTypes == null && clazz != null && clazz != Object.class) {
-            Type[] types = clazz.getGenericInterfaces();
+    public static String enumToString(Enum<?> value) {
+        return value == null ? null : value.name().toLowerCase().replace("_", " ");
+    }
 
-            paramTypes = Arrays.stream(types)
-                    .filter(type -> type instanceof ParameterizedType)
-                    .filter(type -> ((ParameterizedType) type).getRawType() == source)
-                    .map(type -> ((ParameterizedType) type).getActualTypeArguments())
-                    .findFirst()
-                    .orElse(null);
+    public static <T extends Enum<T>> T stringToEnum(String value, Class<T> type) {
+        return stringToEnum(value, type, null);
+    }
 
-            clazz = clazz.getSuperclass();
+    public static <T extends Enum<T>> T stringToEnum(String value, Class<T> type, T deflt) {
+        if (value == null) {
+            return deflt;
         }
 
-        return paramTypes == null ? null : Arrays.stream(paramTypes)
-                .map(type -> (Class<?>) type)
-                .toArray(size -> new Class[size]);
+        T enumValue = EnumUtils.getEnumIgnoreCase(type, value);
+        enumValue = enumValue != null ? enumValue : EnumUtils.getEnumIgnoreCase(type, value.replace("-", "_"));
+        enumValue = enumValue != null ? enumValue : EnumUtils.getEnumIgnoreCase(type, value.replace("-", ""));
+        return enumValue != null ? enumValue : deflt;
+    }
+
+    public static <T extends Enum<T>> T enumToEnum(Enum<?> value, Class<T> type) {
+        return enumToEnum(value, type, null);
+    }
+
+    public static <T extends Enum<T>> T enumToEnum(Enum<?> value, Class<T> type, T deflt) {
+        return value == null ? null : stringToEnum(value.name(), type, deflt);
     }
 
     private CoreUtil() {

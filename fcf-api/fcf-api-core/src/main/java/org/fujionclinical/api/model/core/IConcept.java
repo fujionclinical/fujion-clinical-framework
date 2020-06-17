@@ -26,6 +26,7 @@
 package org.fujionclinical.api.model.core;
 
 import org.fujion.common.CollectionUtil;
+import org.fujionclinical.api.model.impl.ConceptCode;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -45,7 +46,7 @@ public interface IConcept extends IBaseType {
     List<IConceptCode> getCodes();
 
     default void setCodes(List<IConceptCode> codes) {
-        CollectionUtil.replaceList(getCodes(), codes);
+        CollectionUtil.replaceElements(getCodes(), codes);
     }
 
     default IConceptCode getCode(String system) {

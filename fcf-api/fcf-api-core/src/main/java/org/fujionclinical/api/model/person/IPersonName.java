@@ -27,6 +27,7 @@ package org.fujionclinical.api.model.person;
 
 import org.apache.commons.lang.StringUtils;
 import org.fujion.common.CollectionUtil;
+import org.fujionclinical.api.core.CoreUtil;
 import org.fujionclinical.api.model.core.IBaseType;
 import org.fujionclinical.api.query.QueryParameter;
 
@@ -36,7 +37,13 @@ import java.util.List;
 public interface IPersonName extends IBaseType {
 
     enum PersonNameUse {
-        USUAL, OFFICIAL, TEMP, NICKNAME, ANONYMOUS, OLD, MAIDEN, ANY
+        USUAL, OFFICIAL, TEMP, NICKNAME, ANONYMOUS, OLD, MAIDEN, ANY;
+
+        @Override
+        public String toString() {
+            return CoreUtil.enumToString(this);
+        }
+
     }
 
     @QueryParameter
@@ -54,7 +61,7 @@ public interface IPersonName extends IBaseType {
     List<String> getGivenNames();
 
     default void setGivenNames(List<String> givenNames) {
-        CollectionUtil.replaceList(getGivenNames(), givenNames);
+        CollectionUtil.replaceElements(getGivenNames(), givenNames);
     }
 
     default void addGivenNames(String... givenNames) {
@@ -68,7 +75,7 @@ public interface IPersonName extends IBaseType {
     List<String> getPrefixes();
 
     default void setPrefixes(List<String> prefixes) {
-        CollectionUtil.replaceList(getPrefixes(), prefixes);
+        CollectionUtil.replaceElements(getPrefixes(), prefixes);
     }
 
     default void addPrefixes(String... prefixes) {
@@ -82,7 +89,7 @@ public interface IPersonName extends IBaseType {
     List<String> getSuffixes();
 
     default void setSuffixes(List<String> suffixes) {
-        CollectionUtil.replaceList(getSuffixes(), suffixes);
+        CollectionUtil.replaceElements(getSuffixes(), suffixes);
     }
 
     default void addSuffixes(String... suffixes) {
@@ -90,7 +97,7 @@ public interface IPersonName extends IBaseType {
     }
 
     default boolean hasSuffix() {
-        return CollectionUtil.isEmpty(getSuffixes());
+        return CollectionUtil.notEmpty(getSuffixes());
     }
 
     PersonNameUse getUse();

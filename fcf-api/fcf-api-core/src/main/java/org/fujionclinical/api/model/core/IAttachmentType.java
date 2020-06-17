@@ -43,7 +43,7 @@ public interface IAttachmentType {
     }
 
     default void setAttachments(List<IAttachment> attachments) {
-        CollectionUtil.replaceList(getAttachments(), attachments);
+        CollectionUtil.replaceElements(getAttachments(), attachments);
     }
 
     default List<IAttachment> getAttachments(Predicate<IAttachment> criteria) {

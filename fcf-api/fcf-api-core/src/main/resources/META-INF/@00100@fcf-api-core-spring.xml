@@ -40,38 +40,38 @@
 
 		<!-- Maintains a registry of all context serializers. -->
 		<bean id="contextSerializerRegistry"
-			class="org.fujionclinical.api.context.ContextSerializerRegistry"
-			factory-method="getInstance" />
+              class="org.fujionclinical.api.context.ContextSerializerRegistry"
+              factory-method="getInstance"/>
 
-		<!-- Maintains a registry of all alias types. -->
-		<bean id="aliasTypeRegistry" class="org.fujionclinical.api.alias.AliasTypeRegistry"
-			factory-method="getInstance">
-			<property name="propertyFile" value="classpath*:/META-INF/alias.properties,${org.fujionclinical.location.aliases}" />
-		</bean>
-		
-		<!-- Maintains a registry of all domain factories. -->
-		<bean id="domainFactoryRegistry" class="org.fujionclinical.api.model.core.DomainDAORegistry"
-			factory-method="getInstance">
-		</bean>
+        <!-- Maintains a registry of all alias types. -->
+        <bean id="aliasTypeRegistry" class="org.fujionclinical.api.alias.AliasTypeRegistry"
+              factory-method="getInstance">
+            <property name="propertyFile" value="classpath*:/META-INF/alias.properties,${org.fujionclinical.location.aliases}"/>
+        </bean>
 
-		<!-- Maintains a registry of all security domains. -->
-		<bean id="securityDomainRegistry" class="org.fujionclinical.api.security.SecurityDomainRegistry"
-			factory-method="getInstance">
-		</bean>
+        <!-- Maintains a registry of all domain factories. -->
+        <bean id="domainFactoryRegistry" class="org.fujionclinical.api.model.dao.DomainDAORegistry"
+              factory-method="getInstance">
+        </bean>
 
-		<!-- Maintains a registry of all wrapper transforms. -->
-		<bean id="wrapperTransformRegistry" class="org.fujionclinical.api.model.core.WrapperTransformRegistry"
-			  factory-method="getInstance">
-		</bean>
+        <!-- Maintains a registry of all security domains. -->
+        <bean id="securityDomainRegistry" class="org.fujionclinical.api.security.SecurityDomainRegistry"
+              factory-method="getInstance">
+        </bean>
 
-		<task:annotation-driven executor="taskExecutor"
-			scheduler="taskScheduler" />
+        <!-- Maintains a registry of all wrapper transforms. -->
+        <bean id="wrapperTransformRegistry" class="org.fujionclinical.api.model.core.ModelTransformRegistry"
+              factory-method="getInstance">
+        </bean>
 
-		<!-- Unbound queues (default) can lead to memory exceptions. Shutdown is 
-			called upon bean destruction. taskExecutor and taskScheduler will be of types 
-			ExecutorService and ScheduledExecutorService respectively. When a task is 
-			rejected, a thread pool executor will throw a RejectedExecutionException 
-			(default policy). -->
+        <task:annotation-driven executor="taskExecutor"
+                                scheduler="taskScheduler"/>
+
+        <!-- Unbound queues (default) can lead to memory exceptions. Shutdown is
+            called upon bean destruction. taskExecutor and taskScheduler will be of types
+            ExecutorService and ScheduledExecutorService respectively. When a task is
+            rejected, a thread pool executor will throw a RejectedExecutionException
+            (default policy). -->
 		<bean id="taskExecutor"
 			class="org.springframework.scheduling.concurrent.ThreadPoolExecutorFactoryBean"
 			init-method="initialize" destroy-method="destroy">

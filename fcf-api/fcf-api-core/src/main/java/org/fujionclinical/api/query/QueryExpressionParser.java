@@ -102,7 +102,7 @@ public class QueryExpressionParser {
 
         for (String propertyName : propertyPath.split("\\.")) {
             propertyDescriptor = BeanUtils.getPropertyDescriptor(clazz, propertyName);
-            Assert.notNull(propertyDescriptor, () -> "Cannot resolve property '" + propertyPath + "'.");
+            Assert.notNull(propertyDescriptor, () -> "Cannot resolve property '" + propertyPath + "'");
             clazz = propertyDescriptor.getPropertyType();
         }
 

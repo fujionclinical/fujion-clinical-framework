@@ -50,7 +50,7 @@ public class EncounterContext extends ManagedContext<IEncounter> {
         @Override
         public void pending(ISurveyResponse response) {
             IEncounter encounter = getContextObject(true);
-            IPatient patient = encounter == null ? null : encounter.getPatient();
+            IPatient patient = encounter == null || !encounter.hasPatient() ? null : encounter.getPatient().getReferenced();
 
             if (patient != null) {
                 fromEncounter = true;

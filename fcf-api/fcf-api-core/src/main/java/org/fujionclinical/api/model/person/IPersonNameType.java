@@ -42,7 +42,7 @@ public interface IPersonNameType {
     List<IPersonName> getNames();
 
     default void setNames(List<IPersonName> names) {
-        CollectionUtil.replaceList(getNames(), names);
+        CollectionUtil.replaceElements(getNames(), names);
     }
 
     /**

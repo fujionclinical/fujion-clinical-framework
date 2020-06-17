@@ -23,8 +23,9 @@
  *
  * #L%
  */
-package org.fujionclinical.api.model.core;
+package org.fujionclinical.api.model.dao;
 
+import org.fujionclinical.api.model.core.IDomainType;
 import org.fujionclinical.api.query.IQueryContext;
 import org.fujionclinical.api.query.QueryExpression;
 import org.fujionclinical.api.query.QueryExpressionTuple;
@@ -121,6 +122,6 @@ public interface IDomainDAO<T extends IDomainType> {
      *
      * @return The type of domain object created by this factory.
      */
-    Class<T> getDomainClass();
+    Class<T> getDomainType();
 
 }

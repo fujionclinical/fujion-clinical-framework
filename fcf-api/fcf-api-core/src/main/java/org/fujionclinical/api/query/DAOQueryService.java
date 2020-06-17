@@ -25,9 +25,9 @@
  */
 package org.fujionclinical.api.query;
 
-import org.fujionclinical.api.model.core.DomainDAORegistry;
-import org.fujionclinical.api.model.core.IDomainDAO;
 import org.fujionclinical.api.model.core.IDomainType;
+import org.fujionclinical.api.model.dao.DomainDAORegistry;
+import org.fujionclinical.api.model.dao.IDomainDAO;
 
 import java.util.List;
 

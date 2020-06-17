@@ -30,7 +30,12 @@ import org.apache.commons.lang3.ClassUtils;
 import org.fujion.common.DateTimeWrapper;
 import org.fujion.common.MiscUtil;
 import org.fujionclinical.api.core.CoreUtil;
-import org.fujionclinical.api.model.core.*;
+import org.fujionclinical.api.model.core.IConceptCode;
+import org.fujionclinical.api.model.core.IDomainType;
+import org.fujionclinical.api.model.core.IIdentifier;
+import org.fujionclinical.api.model.core.IReference;
+import org.fujionclinical.api.model.impl.ConceptCode;
+import org.fujionclinical.api.model.impl.Identifier;
 import org.fujionclinical.api.model.person.IPersonName;
 import org.springframework.util.Assert;
 import org.springframework.util.NumberUtils;
@@ -133,9 +138,9 @@ class QueryExpressionResolvers {
 
     }
 
-    static class DomainObjectResolver extends AbstractQueryExpressionResolver<IDomainType, String> {
+    static class DomainTypeResolver extends AbstractQueryExpressionResolver<IDomainType, String> {
 
-        public DomainObjectResolver() {
+        public DomainTypeResolver() {
             super(IDomainType.class, 1, QueryOperator.EQ);
         }
 
@@ -225,6 +230,24 @@ class QueryExpressionResolvers {
 
     }
 
+    static class ReferenceResolver extends AbstractQueryExpressionResolver<IReference, String> {
+
+        public ReferenceResolver() {
+            super(IReference.class, 1, QueryOperator.EQ);
+        }
+
+        @Override
+        protected String resolve(
+                Class<IReference> propertyType,
+                Object operand,
+                String previousOperand) {
+            return propertyType.isInstance(operand) ? propertyType.cast(operand).getId()
+                    : operand instanceof String ? (String) operand
+                    : null;
+        }
+
+    }
+
     private static final Map<Class<?>, AbstractQueryExpressionResolver> resolvers = new LinkedHashMap<>();
 
     static {
@@ -233,10 +256,11 @@ class QueryExpressionResolvers {
         registerResolver(new NumberResolver());
         registerResolver(new DateResolver());
         registerResolver(new EnumResolver());
-        registerResolver(new DomainObjectResolver());
+        registerResolver(new DomainTypeResolver());
         registerResolver(new ConceptCodeResolver());
         registerResolver(new IdentifierResolver());
         registerResolver(new PersonNameResolver());
+        registerResolver(new ReferenceResolver());
     }
 
     /**
@@ -261,7 +285,7 @@ class QueryExpressionResolvers {
         propertyType = ClassUtils.primitiveToWrapper(propertyType);
         Class<?> key = propertyType == null ? null : MiscUtil.firstAssignable(propertyType, resolvers.keySet());
         AbstractQueryExpressionResolver resolver = key == null ? null : resolvers.get(key);
-        Assert.notNull(resolver, () -> "No resolver found for property '" + propertyDescriptor.getName() + "'.");
+        Assert.notNull(resolver, () -> "No resolver found for property '" + propertyDescriptor.getName() + "'");
         return resolver;
     }
 

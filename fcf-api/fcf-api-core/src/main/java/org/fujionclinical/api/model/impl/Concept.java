@@ -23,27 +23,48 @@
  *
  * #L%
  */
-package org.fujionclinical.api.model.core;
+package org.fujionclinical.api.model.impl;
 
-public class Range<T extends Comparable<? super T>> implements IRange<T> {
+import org.fujionclinical.api.model.core.IConcept;
+import org.fujionclinical.api.model.core.IConceptCode;
 
-    private final T low;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-    private final T high;
+public class Concept implements IConcept {
 
-    public Range(T low, T high) {
-        this.low = low;
-        this.high = high;
+    private final List<IConceptCode> codes = new ArrayList<>();
+
+    private String text;
+
+    public Concept() {
+    }
+
+    public Concept(IConceptCode... codes) {
+        this(null, codes);
+    }
+
+    public Concept(
+            String text,
+            IConceptCode... codes) {
+        this.text = text;
+        Collections.addAll(this.codes, codes);
     }
 
     @Override
-    public T getLow() {
-        return low;
+    public String getText() {
+        return text;
     }
 
     @Override
-    public T getHigh() {
-        return high;
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    @Override
+    public List<IConceptCode> getCodes() {
+        return codes;
     }
 
 }

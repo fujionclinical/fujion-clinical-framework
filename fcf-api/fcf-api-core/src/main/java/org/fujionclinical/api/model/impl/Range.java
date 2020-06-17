@@ -15,7 +15,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * This Source Code Form is also subject to the terms of the Health-Related
  * Additional Disclaimer of Warranty and Limitation of Liability available at
  *
@@ -23,41 +23,31 @@
  *
  * #L%
  */
-package org.fujionclinical.api.model.core;
+package org.fujionclinical.api.model.impl;
 
-import org.fujion.common.DateTimeWrapper;
+import org.fujionclinical.api.model.core.IRange;
 
-public class Period implements IPeriod {
+public class Range<T extends Comparable<? super T>> implements IRange<T> {
 
-    private DateTimeWrapper startDate;
+    private final T low;
 
-    private DateTimeWrapper endDate;
+    private final T high;
 
-    public Period(
-            DateTimeWrapper startDate,
-            DateTimeWrapper endDate) {
-        this.startDate = startDate;
-        this.endDate = endDate;
+    public Range(
+            T low,
+            T high) {
+        this.low = low;
+        this.high = high;
     }
 
     @Override
-    public DateTimeWrapper getStartDate() {
-        return startDate;
+    public T getLow() {
+        return low;
     }
 
     @Override
-    public void setStartDate(DateTimeWrapper startDate) {
-        this.startDate = startDate;
-    }
-
-    @Override
-    public DateTimeWrapper getEndDate() {
-        return endDate;
-    }
-
-    @Override
-    public void setEndDate(DateTimeWrapper endDate) {
-        this.endDate = endDate;
+    public T getHigh() {
+        return high;
     }
 
 }

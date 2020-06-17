@@ -26,9 +26,11 @@
 package org.fujionclinical.api.model.encounter;
 
 import org.fujion.common.CollectionUtil;
+import org.fujionclinical.api.core.CoreUtil;
 import org.fujionclinical.api.model.core.IConcept;
 import org.fujionclinical.api.model.core.IDomainType;
 import org.fujionclinical.api.model.core.IPeriod;
+import org.fujionclinical.api.model.core.IReference;
 import org.fujionclinical.api.model.location.ILocation;
 import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.person.IPerson;
@@ -55,11 +57,11 @@ public interface IEncounter extends IDomainType {
         /**
          * The Encounter has begun and the patient is present / the practitioner and the patient are meeting.
          */
-        INPROGRESS,
+        IN_PROGRESS,
         /**
          * The Encounter has begun, but the patient is temporarily on leave.
          */
-        ONLEAVE,
+        ON_LEAVE,
         /**
          * The Encounter has ended.
          */
@@ -71,17 +73,23 @@ public interface IEncounter extends IDomainType {
         /**
          * This instance should not have been part of this patient's medical record.
          */
-        ENTEREDINERROR,
+        ENTERED_IN_ERROR,
         /**
          * The encounter status is unknown. Note that "unknown" is a value of last resort and every attempt should be made to provide a meaningful value other than "unknown".
          */
-        UNKNOWN
+        UNKNOWN;
+
+        @Override
+        public String toString() {
+            return CoreUtil.enumToString(this);
+        }
+
     }
 
     @QueryParameter
-    IPatient getPatient();
+    IReference<IPatient> getPatient();
 
-    default void setPatient(IPatient patient) {
+    default void setPatient(IReference<IPatient> patient) {
         notSupported();
     }
 
@@ -110,15 +118,15 @@ public interface IEncounter extends IDomainType {
         return getStatus() != null;
     }
 
-    default List<IPerson> getParticipants() {
+    default List<IReference<IPerson>> getParticipants() {
         return Collections.emptyList();
     }
 
-    default void setParticipants(List<IPerson> participants) {
-        CollectionUtil.replaceList(getParticipants(), participants);
+    default void setParticipants(List<IReference<IPerson>> participants) {
+        CollectionUtil.replaceElements(getParticipants(), participants);
     }
 
-    default void addParticipants(IPerson... participants) {
+    default void addParticipants(IReference<IPerson>... participants) {
         Collections.addAll(getParticipants(), participants);
     }
 
@@ -126,15 +134,15 @@ public interface IEncounter extends IDomainType {
         return CollectionUtil.notEmpty(getParticipants());
     }
 
-    default List<ILocation> getLocations() {
+    default List<IReference<ILocation>> getLocations() {
         return Collections.emptyList();
     }
 
-    default void setLocations(List<ILocation> locations) {
-        CollectionUtil.replaceList(getLocations(), locations);
+    default void setLocations(List<IReference<ILocation>> locations) {
+        CollectionUtil.replaceElements(getLocations(), locations);
     }
 
-    default void addLocations(ILocation... locations) {
+    default void addLocations(IReference<ILocation>... locations) {
         Collections.addAll(getLocations(), locations);
     }
 
@@ -149,8 +157,8 @@ public interface IEncounter extends IDomainType {
         return this;
     }
 
-    default IEncounter setType(List<IConcept> types) {
-        CollectionUtil.replaceList(getTypes(), types);
+    default IEncounter setTypes(List<IConcept> types) {
+        CollectionUtil.replaceElements(getTypes(), types);
         return this;
     }
 

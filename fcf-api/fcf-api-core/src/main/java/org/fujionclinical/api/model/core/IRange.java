@@ -15,7 +15,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * This Source Code Form is also subject to the terms of the Health-Related
  * Additional Disclaimer of Warranty and Limitation of Liability available at
  *
@@ -25,13 +25,21 @@
  */
 package org.fujionclinical.api.model.core;
 
+import org.fujionclinical.api.core.CoreUtil;
+
 public interface IRange<T extends Comparable<? super T>> extends IBaseType {
 
     enum Bounds {
         EXCLUSIVE,
         INCLUSIVE,
         INCLUSIVE_LOW,
-        INCLUSIVE_HIGH
+        INCLUSIVE_HIGH;
+
+        @Override
+        public String toString() {
+            return CoreUtil.enumToString(this);
+        }
+
     }
 
     T getLow();

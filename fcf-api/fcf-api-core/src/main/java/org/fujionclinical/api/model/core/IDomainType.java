@@ -96,6 +96,24 @@ public interface IDomainType extends IBaseType, Serializable {
     }
 
     /**
+     * Sets identifiers to be associated with the domain object.
+     *
+     * @param identifiers The identifiers.
+     */
+    default void setIdentifiers(List<IIdentifier> identifiers) {
+        CollectionUtil.replaceElements(getIdentifiers(), identifiers);
+    }
+
+    /**
+     * Add identifiers to be associated with the domain object.
+     *
+     * @param identifiers Identifiers to add.
+     */
+    default void addIdentifiers(IIdentifier... identifiers) {
+        Collections.addAll(getIdentifiers(), identifiers);
+    }
+
+    /**
      * Returns true if at least one identifier is present.
      *
      * @return True if at least one identifier is present.
@@ -119,7 +137,7 @@ public interface IDomainType extends IBaseType, Serializable {
      * @param tags The tags.
      */
     default void setTags(List<IConceptCode> tags) {
-        CollectionUtil.replaceList(getTags(), tags);
+        CollectionUtil.replaceElements(getTags(), tags);
     }
 
     /**

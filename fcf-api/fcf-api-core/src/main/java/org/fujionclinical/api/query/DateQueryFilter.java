@@ -28,7 +28,7 @@ package org.fujionclinical.api.query;
 import org.fujion.common.DateRange;
 import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.model.core.IRange;
-import org.fujionclinical.api.model.core.Range;
+import org.fujionclinical.api.model.impl.Range;
 
 public class DateQueryFilter<T> extends AbstractQueryFilter<T> {
 

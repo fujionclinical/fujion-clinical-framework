@@ -15,7 +15,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * This Source Code Form is also subject to the terms of the Health-Related
  * Additional Disclaimer of Warranty and Limitation of Liability available at
  *
@@ -23,37 +23,31 @@
  *
  * #L%
  */
-package org.fujionclinical.api.model.core;
+package org.fujionclinical.api.model.impl;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.fujionclinical.api.model.core.IConceptCode;
 
-import java.util.Collections;
-
-public class Identifier implements IIdentifier {
+public class ConceptCode implements IConceptCode {
 
     private final String system;
 
-    private final String value;
+    private final String code;
 
-    private final IConcept type = new Concept(null);
+    private final String text;
 
-    private final IdentifierUse use;
-
-    public Identifier(
+    public ConceptCode(
             String system,
-            String value) {
-        this(system, value, null);
+            String code) {
+        this(system, code, null);
     }
 
-    public Identifier(
+    public ConceptCode(
             String system,
-            String value,
-            IdentifierUse use,
-            IConceptCode... types) {
+            String code,
+            String text) {
         this.system = system;
-        this.value = value;
-        this.use = use;
-        Collections.addAll(type.getCodes(), types);
+        this.code = code;
+        this.text = text;
     }
 
     @Override
@@ -62,16 +56,12 @@ public class Identifier implements IIdentifier {
     }
 
     @Override
-    public String getValue() {
-        return value;
+    public String getCode() {
+        return code;
     }
 
-    public IConcept getType() {
-        return type;
+    @Override
+    public String getText() {
+        return text;
     }
-
-    public IdentifierUse getUse() {
-        return use;
-    }
-
 }

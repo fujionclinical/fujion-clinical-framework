@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.api.model.core;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.fujion.common.CollectionUtil;
+import org.fujionclinical.api.core.CoreUtil;
 import org.fujionclinical.api.query.QueryParameter;
 
 import java.util.Collections;
@@ -35,7 +35,23 @@ import java.util.List;
 public interface IPostalAddress extends IBaseType {
 
     enum PostalAddressUse {
-        HOME, WORK, TEMP, OLD, BILLING
+        HOME, WORK, TEMP, OLD, BILLING;
+
+        @Override
+        public String toString() {
+            return CoreUtil.enumToString(this);
+        }
+
+    }
+
+    enum PostalAddressType {
+        POSTAL, PHYSICAL, BOTH;
+
+        @Override
+        public String toString() {
+            return CoreUtil.enumToString(this);
+        }
+
     }
 
     @QueryParameter
@@ -47,6 +63,17 @@ public interface IPostalAddress extends IBaseType {
 
     default boolean hasUse() {
         return getUse() != null;
+    }
+
+    @QueryParameter
+    PostalAddressType getType();
+
+    default void setType(PostalAddressType type) {
+        notSupported();
+    }
+
+    default boolean hasType() {
+        return getType() != null;
     }
 
     default List<String> getLines() {

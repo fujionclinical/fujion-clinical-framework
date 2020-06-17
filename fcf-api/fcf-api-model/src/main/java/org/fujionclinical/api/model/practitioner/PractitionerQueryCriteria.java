@@ -25,9 +25,9 @@
  */
 package org.fujionclinical.api.model.practitioner;
 
-import org.fujionclinical.api.model.core.ConceptCode;
 import org.fujionclinical.api.model.core.IConceptCode;
-import org.fujionclinical.api.model.core.Identifier;
+import org.fujionclinical.api.model.impl.ConceptCode;
+import org.fujionclinical.api.model.impl.Identifier;
 import org.fujionclinical.api.model.person.PersonQueryCriteria;
 
 /**

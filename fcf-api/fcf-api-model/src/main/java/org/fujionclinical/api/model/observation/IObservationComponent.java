@@ -27,32 +27,38 @@ package org.fujionclinical.api.model.observation;
 
 import org.fujion.common.CollectionUtil;
 import org.fujion.common.DateTimeWrapper;
+import org.fujion.common.MiscUtil;
+import org.fujionclinical.api.core.CoreUtil;
 import org.fujionclinical.api.model.core.*;
 
 import java.time.LocalTime;
 import java.util.Collections;
 import java.util.List;
 
-public interface IObservationType extends IBaseType {
+public interface IObservationComponent extends IBaseType {
 
-    public enum DataAbsentReason {
-        UNKNOWN("Unknown"),                             // The value is expected to exist but is not known.
-        ASKED_UNKNOWN("Asked But Unknown"),             // The source was asked but does not know the value.
-        TEMP_UNKNOWN("Temporarily Unknown"),            // There is reason to expect (from the workflow) that the value may become known.
-        NOT_ASKED("Not Asked"),                         // The workflow didn't lead to this value being known.
-        ASKED_DECLINED("Asked But Declined"),           // The source was asked but declined to answer.
-        MASKED("Masked"),                               // The information is not available due to security, privacy or related reasons.
-        NOT_APPLICABLE("Not Applicable"),               // There is no proper value for this element (e.g. last menstrual period for a male).
-        UNSUPPORTED("Unsupported"),                     // The source system wasn't capable of supporting this element.
-        AS_TEXT("As Text"),                             // The content of the data is represented in the resource narrative.
-        ERROR("Error"),                                 // Some system or workflow process error means that the information is not available.
-        NOT_A_NUMBER("Not a Number (NaN)"),             // The numeric value is undefined or unrepresentable due to a floating point processing error.
-        NEGATIVE_INFINITY("Negative Infinity (NINF)"),   // The numeric value is excessively low and unrepresentable due to a floating point processing error.
-        POSITIVE_INFINITY("Positive Infinity (PINF)"),   // The numeric value is excessively high and unrepresentable due to a floating point processing error.
-        NOT_PERFORMED("Not Performed"),                 // The value is not available because the observation procedure (test, etc.) was not performed.
-        NOT_PERMITTED("Not Permitted");                 // The value is not permitted in this context (e.g. due to profiles, or the base data types).
+    enum DataAbsentReason {
+        UNKNOWN,                              // The value is expected to exist but is not known.
+        ASKED_UNKNOWN("asked but unknown"),   // The source was asked but does not know the value.
+        TEMP_UNKNOWN("temporarily unknown"),  // There is reason to expect (from the workflow) that the value may become known.
+        NOT_ASKED,                            // The workflow didn't lead to this value being known.
+        ASKED_DECLINED("asked but declined"), // The source was asked but declined to answer.
+        MASKED,                               // The information is not available due to security, privacy or related reasons.
+        NOT_APPLICABLE,                       // There is no proper value for this element (e.g. last menstrual period for a male).
+        UNSUPPORTED,                          // The source system wasn't capable of supporting this element.
+        AS_TEXT,                              // The content of the data is represented in the resource narrative.
+        ERROR,                                // Some system or workflow process error means that the information is not available.
+        NOT_A_NUMBER,                         // The numeric value is undefined or unrepresentable due to a floating point processing error.
+        NEGATIVE_INFINITY,                    // The numeric value is excessively low and unrepresentable due to a floating point processing error.
+        POSITIVE_INFINITY,                    // The numeric value is excessively high and unrepresentable due to a floating point processing error.
+        NOT_PERFORMED,                        // The value is not available because the observation procedure (test, etc.) was not performed.
+        NOT_PERMITTED;                        // The value is not permitted in this context (e.g. due to profiles, or the base data types).
 
         private final String displayText;
+
+        DataAbsentReason() {
+            this.displayText = CoreUtil.enumToString(this);
+        }
 
         DataAbsentReason(String displayText) {
             this.displayText = displayText;
@@ -79,7 +85,7 @@ public interface IObservationType extends IBaseType {
     }
 
     default void setInterpretations(List<IConcept> value) {
-        CollectionUtil.replaceList(getInterpretations(), value);
+        CollectionUtil.replaceElements(getInterpretations(), value);
     }
 
     default void addInterpretations(IConcept... values) {
@@ -95,7 +101,7 @@ public interface IObservationType extends IBaseType {
     }
 
     default void setReferenceRanges(List<IReferenceRange<Double>> values) {
-        CollectionUtil.replaceList(getReferenceRanges(), values);
+        CollectionUtil.replaceElements(getReferenceRanges(), values);
     }
 
     default void addReferenceRanges(IReferenceRange<Double>... values) {
@@ -118,10 +124,18 @@ public interface IObservationType extends IBaseType {
         return getDataAbsentReason() != null;
     }
 
-    boolean hasValue();
+    Object getValue();
+
+    default void setValue(Object value) {
+        notSupported();
+    }
+
+    default boolean hasValue() {
+        return getValue() != null;
+    }
 
     default String getValueAsString() {
-        return null;
+        return MiscUtil.castTo(getValue(), String.class);
     }
 
     default void setValueAsString(String value) {
@@ -133,7 +147,7 @@ public interface IObservationType extends IBaseType {
     }
 
     default IConcept getValueAsConcept() {
-        return null;
+        return MiscUtil.castTo(getValue(), IConcept.class);
     }
 
     default void setValueAsConcept(IConcept value) {
@@ -145,7 +159,7 @@ public interface IObservationType extends IBaseType {
     }
 
     default Boolean getValueAsBoolean() {
-        return null;
+        return MiscUtil.castTo(getValue(), Boolean.class);
     }
 
     default void setValueAsBoolean(Boolean value) {
@@ -157,7 +171,7 @@ public interface IObservationType extends IBaseType {
     }
 
     default Integer getValueAsInteger() {
-        return null;
+        return MiscUtil.castTo(getValue(), Integer.class);
     }
 
     default void setValueAsInteger(Integer value) {
@@ -169,7 +183,7 @@ public interface IObservationType extends IBaseType {
     }
 
     default DateTimeWrapper getValueAsDateTime() {
-        return null;
+        return MiscUtil.castTo(getValue(), DateTimeWrapper.class);
     }
 
     default void setValueAsDateTime(DateTimeWrapper value) {
@@ -181,7 +195,7 @@ public interface IObservationType extends IBaseType {
     }
 
     default LocalTime getValueAsTime() {
-        return null;
+        return MiscUtil.castTo(getValue(), LocalTime.class);
     }
 
     default void setValueAsTime(LocalTime value) {
@@ -193,7 +207,7 @@ public interface IObservationType extends IBaseType {
     }
 
     default IPeriod getValueAsPeriod() {
-        return null;
+        return MiscUtil.castTo(getValue(), IPeriod.class);
     }
 
     default void setValueAsPeriod(IPeriod value) {
@@ -205,7 +219,7 @@ public interface IObservationType extends IBaseType {
     }
 
     default IRange getValueAsRange() {
-        return null;
+        return MiscUtil.castTo(getValue(), IRange.class);
     }
 
     default void setValueAsRange(IRange value) {
@@ -217,7 +231,7 @@ public interface IObservationType extends IBaseType {
     }
 
     default IQuantity<Double> getValueAsQuantity() {
-        return null;
+        return MiscUtil.castTo(getValue(), IQuantity.class);
     }
 
     default void setValueAsQuantity(IQuantity<Double> value) {
@@ -229,7 +243,7 @@ public interface IObservationType extends IBaseType {
     }
 
     default IRatio<Double> getValueAsRatio() {
-        return null;
+        return MiscUtil.castTo(getValue(), IRatio.class);
     }
 
     default void setValueAsRatio(IRatio<Double> value) {

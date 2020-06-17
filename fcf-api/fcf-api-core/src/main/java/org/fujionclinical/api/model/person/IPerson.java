@@ -27,8 +27,9 @@ package org.fujionclinical.api.model.person;
 
 import org.fujion.common.CollectionUtil;
 import org.fujion.common.DateTimeWrapper;
-import org.fujion.common.StrUtil;
+import org.fujionclinical.api.core.CoreUtil;
 import org.fujionclinical.api.model.core.*;
+import org.fujionclinical.api.model.impl.ConceptCode;
 import org.fujionclinical.api.query.QueryParameter;
 
 import java.util.Arrays;
@@ -39,6 +40,12 @@ public interface IPerson extends IDomainType, IPostalAddressType, IContactPointT
 
     enum Gender {
         MALE, FEMALE, OTHER, UNKNOWN;
+
+        @Override
+        public String toString() {
+            return CoreUtil.enumToString(this);
+        }
+
     }
 
     enum MaritalStatus {
@@ -64,8 +71,9 @@ public interface IPerson extends IDomainType, IPostalAddressType, IContactPointT
 
         @Override
         public String toString() {
-            return StrUtil.toCamelCaseUpper(name());
+            return CoreUtil.enumToString(this);
         }
+
     }
 
     @QueryParameter
@@ -164,7 +172,7 @@ public interface IPerson extends IDomainType, IPostalAddressType, IContactPointT
     }
 
     default void setLanguages(List<IConcept> languages) {
-        CollectionUtil.replaceList(getLanguages(), languages);
+        CollectionUtil.replaceElements(getLanguages(), languages);
     }
 
     default void addLanguages(IConcept... languages) {
@@ -190,7 +198,7 @@ public interface IPerson extends IDomainType, IPostalAddressType, IContactPointT
     }
 
     default void setPhotos(List<IAttachment> photos) {
-        CollectionUtil.replaceList(getPhotos(), photos);
+        CollectionUtil.replaceElements(getPhotos(), photos);
     }
 
     /**

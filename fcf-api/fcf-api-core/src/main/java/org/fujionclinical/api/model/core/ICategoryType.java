@@ -37,7 +37,7 @@ public interface ICategoryType {
     }
 
     default void setCategories(List<IConcept> values) {
-        CollectionUtil.replaceList(getCategories(), values);
+        CollectionUtil.replaceElements(getCategories(), values);
     }
 
     default void addCategories(IConcept... values) {

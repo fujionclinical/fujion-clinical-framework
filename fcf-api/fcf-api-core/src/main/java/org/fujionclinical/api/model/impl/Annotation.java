@@ -23,23 +23,55 @@
  *
  * #L%
  */
-package org.fujionclinical.api.model.core;
+package org.fujionclinical.api.model.impl;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.fujion.common.DateTimeWrapper;
+import org.fujionclinical.api.model.core.IAnnotation;
+import org.fujionclinical.api.model.person.IPerson;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Concept implements IConcept {
+public class Annotation implements IAnnotation {
 
-    private final List<IConceptCode> codes = new ArrayList<>();
+    private final List<IPerson> authors = new ArrayList<>();
+
+    private DateTimeWrapper recorded;
 
     private String text;
 
-    public Concept(String text, IConceptCode... codes) {
+    public Annotation() {
+    }
+
+    public Annotation(
+            String text,
+            IPerson... authors) {
+        this(text, DateTimeWrapper.now(), authors);
+    }
+
+    public Annotation(
+            String text,
+            DateTimeWrapper recorded,
+            IPerson... authors) {
         this.text = text;
-        Collections.addAll(this.codes, codes);
+        this.recorded = recorded;
+        Collections.addAll(this.authors, authors);
+    }
+
+    @Override
+    public List<IPerson> getAuthors() {
+        return authors;
+    }
+
+    @Override
+    public DateTimeWrapper getRecorded() {
+        return recorded;
+    }
+
+    @Override
+    public void setRecorded(DateTimeWrapper recorded) {
+        this.recorded = recorded;
     }
 
     @Override
@@ -50,11 +82,6 @@ public class Concept implements IConcept {
     @Override
     public void setText(String text) {
         this.text = text;
-    }
-
-    @Override
-    public List<IConceptCode> getCodes() {
-        return codes;
     }
 
 }

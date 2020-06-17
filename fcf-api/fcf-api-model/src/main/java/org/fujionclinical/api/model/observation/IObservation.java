@@ -27,6 +27,7 @@ package org.fujionclinical.api.model.observation;
 
 import org.fujion.common.CollectionUtil;
 import org.fujion.common.DateTimeWrapper;
+import org.fujionclinical.api.core.CoreUtil;
 import org.fujionclinical.api.model.core.ICategoryType;
 import org.fujionclinical.api.model.core.IDomainType;
 import org.fujionclinical.api.model.encounter.IEncounter;
@@ -35,9 +36,17 @@ import org.fujionclinical.api.model.patient.IPatient;
 import java.util.Collections;
 import java.util.List;
 
-public interface IObservation extends IDomainType, IObservationType, ICategoryType {
+public interface IObservation extends IDomainType, IObservationComponent, ICategoryType {
 
-    enum ObservationStatus {REGISTERED, PRELIMINARY, FINAL, AMENDED, CORRECTED, CANCELLED, ENTERED_IN_ERROR, UNKNOWN}
+    enum ObservationStatus {
+        REGISTERED, PRELIMINARY, FINAL, AMENDED, CORRECTED, CANCELLED, ENTERED_IN_ERROR, UNKNOWN;
+
+        @Override
+        public String toString() {
+            return CoreUtil.enumToString(this);
+        }
+
+    }
 
     DateTimeWrapper getEffectiveDate();
 
@@ -79,15 +88,15 @@ public interface IObservation extends IDomainType, IObservationType, ICategoryTy
         return getEncounter() != null;
     }
 
-    default List<IObservationType> getComponents() {
+    default List<IObservationComponent> getComponents() {
         return Collections.emptyList();
     }
 
-    default void setComponents(List<IObservationType> values) {
-        CollectionUtil.replaceList(getComponents(), values);
+    default void setComponents(List<IObservationComponent> values) {
+        CollectionUtil.replaceElements(getComponents(), values);
     }
 
-    default void addComponents(IObservationType... values) {
+    default void addComponents(IObservationComponent... values) {
         Collections.addAll(getComponents(), values);
     }
 

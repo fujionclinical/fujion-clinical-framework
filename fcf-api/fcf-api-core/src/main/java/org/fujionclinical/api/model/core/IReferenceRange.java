@@ -63,7 +63,7 @@ public interface IReferenceRange<T extends Number> extends IBaseType {
     }
 
     default void setAppliesTo(List<IConcept> value) {
-        CollectionUtil.replaceList(getAppliesTo(), value);
+        CollectionUtil.replaceElements(getAppliesTo(), value);
     }
 
     default void addAppliesTo(IConcept... values) {
@@ -72,6 +72,18 @@ public interface IReferenceRange<T extends Number> extends IBaseType {
 
     default boolean hasAppliesTo() {
         return CollectionUtil.notEmpty(getAppliesTo());
+    }
+
+    default IRange<Double> getAgeRange() {
+        return null;
+    }
+
+    default void setAgeRange(IRange<Double> value) {
+        notSupported();
+    }
+
+    default boolean hasAgeRange() {
+        return getAgeRange() != null;
     }
 
     default String getDescription() {

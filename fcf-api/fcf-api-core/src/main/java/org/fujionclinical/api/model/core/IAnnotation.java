@@ -36,7 +36,7 @@ public interface IAnnotation extends IBaseType {
     List<IPerson> getAuthors();
 
     default void setAuthors(List<IPerson> authors) {
-        CollectionUtil.replaceList(getAuthors(), authors);
+        CollectionUtil.replaceElements(getAuthors(), authors);
     }
 
     default boolean hasAuthor() {

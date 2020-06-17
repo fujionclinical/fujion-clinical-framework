@@ -27,10 +27,10 @@ package org.fujionclinical.api.model.person;
 
 import org.apache.commons.lang.StringUtils;
 import org.fujion.common.DateTimeWrapper;
-import org.fujionclinical.api.model.core.ConceptCode;
 import org.fujionclinical.api.model.core.IConceptCode;
 import org.fujionclinical.api.model.core.IIdentifier;
-import org.fujionclinical.api.model.core.Identifier;
+import org.fujionclinical.api.model.impl.ConceptCode;
+import org.fujionclinical.api.model.impl.Identifier;
 import org.fujionclinical.api.query.AbstractQueryCriteria;
 import org.fujionclinical.api.query.QueryUtil;
 

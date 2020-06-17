@@ -26,6 +26,7 @@
 package org.fujionclinical.api.model.location;
 
 import org.fujion.common.CollectionUtil;
+import org.fujionclinical.api.core.CoreUtil;
 import org.fujionclinical.api.model.core.IConcept;
 import org.fujionclinical.api.model.core.IContactPointType;
 import org.fujionclinical.api.model.core.IDomainType;
@@ -36,9 +37,15 @@ import java.util.List;
 
 public interface ILocation extends IDomainType, IPostalAddressType, IContactPointType {
 
-    enum LocationType {}
+    enum LocationStatus {
+        ACTIVE, SUSPENDED, INACTIVE;
 
-    enum LocationStatus {ACTIVE, SUSPENDED, INACTIVE}
+        @Override
+        public String toString() {
+            return CoreUtil.enumToString(this);
+        }
+
+    }
 
     /**
      * The activity status.
@@ -80,7 +87,7 @@ public interface ILocation extends IDomainType, IPostalAddressType, IContactPoin
     }
 
     default void setAliases(List<String> aliases) {
-        CollectionUtil.replaceList(getAliases(), aliases);
+        CollectionUtil.replaceElements(getAliases(), aliases);
     }
 
     default void addAliases(String... aliases) {
@@ -119,7 +126,7 @@ public interface ILocation extends IDomainType, IPostalAddressType, IContactPoin
     }
 
     default void setTypes(List<IConcept> types) {
-        CollectionUtil.replaceList(getTypes(), types);
+        CollectionUtil.replaceElements(getTypes(), types);
     }
 
     default void addTypes(IConcept... types) {

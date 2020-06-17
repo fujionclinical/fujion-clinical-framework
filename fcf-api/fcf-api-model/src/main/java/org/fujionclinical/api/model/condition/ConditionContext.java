@@ -50,7 +50,7 @@ public class ConditionContext extends ManagedContext<ICondition> {
         @Override
         public void pending(ISurveyResponse response) {
             ICondition condition = getContextObject(true);
-            IPatient patient = condition == null ? null : condition.getPatient();
+            IPatient patient = condition == null || !condition.hasPatient() ? null : condition.getPatient().getReferenced();
 
             if (patient != null) {
                 fromCondition = true;

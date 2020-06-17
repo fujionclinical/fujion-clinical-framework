@@ -31,8 +31,8 @@ import org.apache.commons.lang.reflect.ConstructorUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.common.DateRange;
-import org.fujionclinical.api.model.core.DomainDAORegistry;
-import org.fujionclinical.api.model.core.IDomainDAO;
+import org.fujionclinical.api.model.dao.DomainDAORegistry;
+import org.fujionclinical.api.model.dao.IDomainDAO;
 import org.fujionclinical.api.model.patient.IPatient;
 
 import java.util.*;

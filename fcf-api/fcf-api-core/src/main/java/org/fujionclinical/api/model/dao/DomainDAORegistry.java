@@ -23,8 +23,9 @@
  *
  * #L%
  */
-package org.fujionclinical.api.model.core;
+package org.fujionclinical.api.model.dao;
 
+import org.fujionclinical.api.model.core.IDomainType;
 import org.fujionclinical.api.spring.BeanRegistry;
 import org.springframework.util.Assert;
 
@@ -59,7 +60,7 @@ public class DomainDAORegistry<T extends IDomainType> extends BeanRegistry<Class
 
     @Override
     protected Class<T> getKey(IDomainDAO item) {
-        return item.getDomainClass();
+        return item.getDomainType();
     }
 
 }

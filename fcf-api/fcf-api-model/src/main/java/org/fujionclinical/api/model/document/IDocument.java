@@ -27,6 +27,7 @@ package org.fujionclinical.api.model.document;
 
 import org.fujion.common.CollectionUtil;
 import org.fujion.common.DateTimeWrapper;
+import org.fujionclinical.api.core.CoreUtil;
 import org.fujionclinical.api.model.core.*;
 import org.fujionclinical.api.model.encounter.IEncounter;
 import org.fujionclinical.api.model.person.IPerson;
@@ -37,15 +38,33 @@ import java.util.List;
 public interface IDocument extends IDomainType, IAttachmentType, ICategoryType {
 
     enum DocumentStatus {
-        CURRENT, SUPERSEDED, ENTERED_IN_ERROR
+        CURRENT, SUPERSEDED, ENTERED_IN_ERROR;
+
+        @Override
+        public String toString() {
+            return CoreUtil.enumToString(this);
+        }
+
     }
 
     enum CompositionStatus {
-        PRELIMINARY, FINAL, AMENDED, ENTERED_IN_ERROR
+        PRELIMINARY, FINAL, AMENDED, ENTERED_IN_ERROR;
+
+        @Override
+        public String toString() {
+            return CoreUtil.enumToString(this);
+        }
+
     }
 
     enum DocumentRelationship {
-        REPLACES, TRANSFORMS, SIGNS, APPENDS
+        REPLACES, TRANSFORMS, SIGNS, APPENDS;
+
+        @Override
+        public String toString() {
+            return CoreUtil.enumToString(this);
+        }
+
     }
 
     interface IRelatedDocument extends IBaseType {
@@ -58,6 +77,16 @@ public interface IDocument extends IDomainType, IAttachmentType, ICategoryType {
 
         default boolean hasRelationship() {
             return getRelationship() != null;
+        }
+
+        IReference<IDocument> getDocument();
+
+        default void setDocument(IReference<IDocument> value) {
+            notSupported();
+        }
+
+        default boolean hasDocument() {
+            return getDocument() != null;
         }
 
     }
@@ -110,15 +139,15 @@ public interface IDocument extends IDomainType, IAttachmentType, ICategoryType {
         return hasType() && getType().getCodes().stream().filter(code -> type.equals(code.getCode())).findFirst().isPresent();
     }
 
-    default List<IPerson> getAuthors() {
+    default List<IReference<IPerson>> getAuthors() {
         return Collections.emptyList();
     }
 
-    default void setAuthors(List<IPerson> authors) {
-        CollectionUtil.replaceList(getAuthors(), authors);
+    default void setAuthors(List<IReference<IPerson>> authors) {
+        CollectionUtil.replaceElements(getAuthors(), authors);
     }
 
-    default void addAuthors(IPerson... authors) {
+    default void addAuthors(IReference<IPerson>... authors) {
         Collections.addAll(getAuthors(), authors);
     }
 
@@ -136,9 +165,9 @@ public interface IDocument extends IDomainType, IAttachmentType, ICategoryType {
         return getDescription() != null;
     }
 
-    IEncounter getEncounter();
+    IReference<IEncounter> getEncounter();
 
-    default void setEncounter(IEncounter encounter) {
+    default void setEncounter(IReference<IEncounter> encounter) {
         notSupported();
     }
 
@@ -151,7 +180,7 @@ public interface IDocument extends IDomainType, IAttachmentType, ICategoryType {
     }
 
     default void setRelatedDocuments(List<IRelatedDocument> relatedDocuments) {
-        CollectionUtil.replaceList(getRelatedDocuments(), relatedDocuments);
+        CollectionUtil.replaceElements(getRelatedDocuments(), relatedDocuments);
     }
 
     default void addRelatedDocuments(IRelatedDocument... relatedDocuments) {

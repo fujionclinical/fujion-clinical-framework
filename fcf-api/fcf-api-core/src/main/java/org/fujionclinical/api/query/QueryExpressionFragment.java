@@ -86,13 +86,13 @@ public class QueryExpressionFragment<PROP, OPD> {
             if (operandStr.startsWith("{{") && operandStr.endsWith("}}")) {
                 String placeholder = operandStr.substring(2, operandStr.length() - 2).trim();
                 operand = queryContext == null ? null : resolvePlaceholder(queryContext, placeholder);
-                Assert.notNull(operand, () -> "Unresolvable context placeholder: '" + placeholder + "'.");
+                Assert.notNull(operand, () -> "Unresolvable context placeholder: '" + placeholder + "'");
             } else {
                 operand = operandStr;
             }
 
             resolvedOperand = resolver.resolve(propertyType, operand, resolvedOperand);
-            Assert.notNull(resolvedOperand, () -> "Operand '" + operandStr + "' cannot be converted to " + propertyType + ".");
+            Assert.notNull(resolvedOperand, () -> "Operand '" + operandStr + "' cannot be converted to '" + propertyType + "'");
             resolvedOperands[index++] = resolvedOperand;
         }
 

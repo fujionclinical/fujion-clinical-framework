@@ -25,39 +25,60 @@
  */
 package org.fujionclinical.api.model.condition;
 
-import org.fujionclinical.api.model.core.IAnnotationType;
-import org.fujionclinical.api.model.core.IConcept;
-import org.fujionclinical.api.model.core.IDomainType;
-import org.fujionclinical.api.model.core.IPeriod;
+import org.fujion.common.DateTimeWrapper;
+import org.fujionclinical.api.core.CoreUtil;
+import org.fujionclinical.api.model.core.*;
 import org.fujionclinical.api.model.encounter.IEncounter;
 import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.person.IPerson;
 import org.fujionclinical.api.query.QueryParameter;
 
-import java.util.Date;
-
 public interface ICondition extends IDomainType, IAnnotationType {
 
     enum ClinicalStatus {
-        ACTIVE, RECURRENCE, RELAPSE, INACTIVE, REMISSION, RESOLVED
+        ACTIVE, RECURRENCE, RELAPSE, INACTIVE, REMISSION, RESOLVED;
+
+        @Override
+        public String toString() {
+            return CoreUtil.enumToString(this);
+        }
+
     }
 
     enum VerificationStatus {
-        UNCONFIRMED, PROVISIONAL, DIFFERENTIAL, CONFIRMED, REFUTED, ENTERED_IN_ERROR
+        UNCONFIRMED, PROVISIONAL, DIFFERENTIAL, CONFIRMED, REFUTED, ENTERED_IN_ERROR;
+
+        @Override
+        public String toString() {
+            return CoreUtil.enumToString(this);
+        }
+
     }
 
     enum Source {
-        ENCOUNTER_DIAGNOSIS, PROBLEM_LIST, OTHER
+        ENCOUNTER_DIAGNOSIS, PROBLEM_LIST, OTHER;
+
+        @Override
+        public String toString() {
+            return CoreUtil.enumToString(this);
+        }
+
     }
 
     enum Severity {
-        MILD, MODERATE, SEVERE
+        MILD, MODERATE, SEVERE;
+
+        @Override
+        public String toString() {
+            return CoreUtil.enumToString(this);
+        }
+
     }
 
     @QueryParameter
-    IPatient getPatient();
+    IReference<IPatient> getPatient();
 
-    default void setPatient(IPatient patient) {
+    default void setPatient(IReference<IPatient> patient) {
         notSupported();
     }
 
@@ -77,9 +98,9 @@ public interface ICondition extends IDomainType, IAnnotationType {
     }
 
     @QueryParameter
-    Date getRecordedDate();
+    DateTimeWrapper getRecordedDate();
 
-    default void setRecordedDate(Date recorded) {
+    default void setRecordedDate(DateTimeWrapper recorded) {
         notSupported();
     }
 
@@ -88,9 +109,9 @@ public interface ICondition extends IDomainType, IAnnotationType {
     }
 
     @QueryParameter
-    IPerson getRecorder();
+    IReference<IPerson> getRecorder();
 
-    default void setRecorder(IPerson recorder) {
+    default void setRecorder(IReference<IPerson> recorder) {
         notSupported();
     }
 
@@ -99,9 +120,9 @@ public interface ICondition extends IDomainType, IAnnotationType {
     }
 
     @QueryParameter
-    IPerson getAsserter();
+    IReference<IPerson> getAsserter();
 
-    default void setAsserter(IPerson asserter) {
+    default void setAsserter(IReference<IPerson> asserter) {
         notSupported();
     }
 
@@ -121,9 +142,9 @@ public interface ICondition extends IDomainType, IAnnotationType {
     }
 
     @QueryParameter
-    IEncounter getEncounter();
+    IReference<IEncounter> getEncounter();
 
-    default void setEncounter(IEncounter encounter) {
+    default void setEncounter(IReference<IEncounter> encounter) {
         notSupported();
     }
 

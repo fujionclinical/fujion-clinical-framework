@@ -26,10 +26,19 @@
 package org.fujionclinical.api.model.core;
 
 import org.apache.commons.lang.StringUtils;
+import org.fujionclinical.api.core.CoreUtil;
 
 public interface IIdentifier extends IBaseType {
 
-    enum IdentifierUse {USUAL, OFFICIAL, TEMPORARY, SECONDARY, OLD}
+    enum IdentifierUse {
+        USUAL, OFFICIAL, TEMPORARY, SECONDARY, OLD;
+
+        @Override
+        public String toString() {
+            return CoreUtil.enumToString(this);
+        }
+
+    }
 
     String getSystem();
 

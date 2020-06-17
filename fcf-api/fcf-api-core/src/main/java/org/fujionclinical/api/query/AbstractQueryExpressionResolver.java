@@ -54,8 +54,8 @@ public abstract class AbstractQueryExpressionResolver<TGT, OPD> {
             OPD previousOperand);
 
     public void validate(QueryExpressionFragment fragment) {
-        Assert.isTrue(validOperators.contains(fragment.operator), () -> "Not a valid operator: '" + fragment.operator + "'.");
-        Assert.isTrue(fragment.operands.length <= maxOperands, () -> "Operand maximum of " + maxOperands + " exceeded.");
+        Assert.isTrue(validOperators.contains(fragment.operator), () -> "Not a valid operator: '" + fragment.operator + "'");
+        Assert.isTrue(fragment.operands.length <= maxOperands, () -> "Operand maximum of " + maxOperands + " exceeded");
     }
 
     public Class<TGT> getTargetClass() {

@@ -25,7 +25,6 @@
  */
 package org.fujionclinical.api.model.core;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.fujion.common.CollectionUtil;
 
 import java.util.Collections;
@@ -36,7 +35,7 @@ public interface IAnnotationType {
     List<IAnnotation> getAnnotations();
 
     default void setAnnotations(List<IAnnotation> annotations) {
-        CollectionUtil.replaceList(getAnnotations(), annotations);
+        CollectionUtil.replaceElements(getAnnotations(), annotations);
     }
 
     default void addAnnotations(IAnnotation... annotations) {
