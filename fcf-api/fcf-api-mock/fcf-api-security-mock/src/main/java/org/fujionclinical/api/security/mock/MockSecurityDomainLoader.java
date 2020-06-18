@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.security.mock;
 
-import org.fujionclinical.api.security.SecurityDomainRegistry;
+import org.fujionclinical.api.security.SecurityDomains;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -57,7 +57,7 @@ public class MockSecurityDomainLoader {
             
             MockSecurityDomain securityDomain = new MockSecurityDomain(pcs[0], pcs[1], attrs);
             securityDomain.setMockAuthorities(authorities);
-            SecurityDomainRegistry.registerSecurityDomain(securityDomain);
+            SecurityDomains.registerSecurityDomain(securityDomain);
         }
     }
 }

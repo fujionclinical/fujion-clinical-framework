@@ -27,10 +27,10 @@ package org.fujionclinical.api;
 
 import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.model.user.User;
-import org.fujionclinical.api.query.QueryContext;
-import org.fujionclinical.api.query.QueryExpression;
-import org.fujionclinical.api.query.QueryExpressionParser;
-import org.fujionclinical.api.query.QueryExpressionTuple;
+import org.fujionclinical.api.query.core.QueryContext;
+import org.fujionclinical.api.query.expression.Expression;
+import org.fujionclinical.api.query.expression.ExpressionParser;
+import org.fujionclinical.api.query.expression.ExpressionTuple;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -44,10 +44,10 @@ public class QueryTest {
         QueryContext queryContext = new QueryContext();
         queryContext.setParam("user", user);
         queryContext.setParam("count", 123);
-        QueryExpression expression = QueryExpressionParser.getInstance().parse(IUser.class,
+        Expression expression = ExpressionParser.getInstance().parse(IUser.class,
                 "id=={{user.id}} & name.familyName ~ {{user.name.familyName}} & birthDate >= 1/27/2000 & race=system1|code1,code2,system3|code3,|code4" +
                 "& identifiers=system1|value1 & _count={{count}}");
-        List<QueryExpressionTuple> tuples = expression.resolve(queryContext);
+        List<ExpressionTuple> tuples = expression.resolve(queryContext);
         Assert.assertEquals(6, tuples.size());
     }
 

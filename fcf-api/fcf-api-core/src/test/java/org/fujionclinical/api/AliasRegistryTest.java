@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api;
 
-import org.fujionclinical.api.alias.AliasTypeRegistry;
+import org.fujionclinical.api.alias.AliasTypes;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -35,17 +35,17 @@ public class AliasRegistryTest {
     
     @Test
     public void test() {
-        AliasTypeRegistry reg = AliasTypeRegistry.getInstance();
+        AliasTypes reg = AliasTypes.getInstance();
         reg.get("AUTHORITY").register("auth1", "auth.alias1");
         reg.get("AUTHORITY").register("auth2", "auth.alias2");
-        AliasTypeRegistry.register("AUTHORITY", "auth3", "auth.alias3");
+        AliasTypes.register("AUTHORITY", "auth3", "auth.alias3");
         reg.get("AUTHORITY").register("authx*", "auth.aliasx*");
         reg.get("AUTHORITY").register("authy.*.abc.*", "authz.*.xyz.*");
         reg.get("AUTHORITY").register("authy.?.def.*", "authz.?.xyz.*");
         
         reg.get("PROPERTY").register("prop1", "prop.alias1");
         reg.get("PROPERTY").register("prop2", "prop.alias2");
-        AliasTypeRegistry.register("PROPERTY", "prop3", "prop.alias3");
+        AliasTypes.register("PROPERTY", "prop3", "prop.alias3");
         reg.get("PROPERTY").register("propx*", "prop.aliasx*");
         reg.get("PROPERTY").register("propy.*.abc.*", "propz.*.xyz.*");
         reg.get("PROPERTY").register("propy.?.def.*", "propz.?.xyz.*");

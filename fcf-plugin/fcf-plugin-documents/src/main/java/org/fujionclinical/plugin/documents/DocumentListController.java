@@ -34,10 +34,10 @@ import org.fujion.event.Event;
 import org.fujion.event.EventUtil;
 import org.fujion.model.IListModel;
 import org.fujionclinical.api.model.document.IDocument;
-import org.fujionclinical.api.query.AbstractQueryFilter;
-import org.fujionclinical.api.query.DAOQueryService;
-import org.fujionclinical.api.query.DateQueryFilter.DateType;
-import org.fujionclinical.api.query.IQueryContext;
+import org.fujionclinical.api.query.core.IQueryContext;
+import org.fujionclinical.api.query.filter.AbstractQueryFilter;
+import org.fujionclinical.api.query.filter.DateQueryFilter.DateType;
+import org.fujionclinical.api.query.service.DAOQueryService;
 import org.fujionclinical.sharedforms.controller.AbstractGridController;
 
 import java.util.*;

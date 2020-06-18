@@ -34,9 +34,9 @@ import org.fujion.component.Row;
 import org.fujion.event.EventUtil;
 import org.fujion.model.IListModel;
 import org.fujionclinical.api.model.document.IDocument;
-import org.fujionclinical.api.query.DateQueryFilter;
-import org.fujionclinical.api.query.IQueryContext;
-import org.fujionclinical.api.query.InMemoryQueryService;
+import org.fujionclinical.api.query.core.IQueryContext;
+import org.fujionclinical.api.query.filter.DateQueryFilter;
+import org.fujionclinical.api.query.service.InMemoryQueryService;
 import org.fujionclinical.sharedforms.controller.AbstractGridController;
 
 import java.util.List;

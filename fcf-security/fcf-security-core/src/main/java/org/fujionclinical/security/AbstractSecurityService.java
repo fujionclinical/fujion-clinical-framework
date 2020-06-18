@@ -34,7 +34,7 @@ import org.fujion.client.ExecutionContext;
 import org.fujion.core.WebUtil;
 import org.fujion.websocket.Session;
 import org.fujionclinical.api.alias.AliasType;
-import org.fujionclinical.api.alias.AliasTypeRegistry;
+import org.fujionclinical.api.alias.AliasTypes;
 import org.fujionclinical.api.context.ContextManager;
 import org.fujionclinical.api.context.IContextManager;
 import org.fujionclinical.api.model.user.IUser;
@@ -61,7 +61,7 @@ public abstract class AbstractSecurityService implements ISecurityService {
 
     private String logoutTarget;
 
-    private final AliasType authorityAlias = AliasTypeRegistry.getType(ALIAS_TYPE_AUTHORITY);
+    private final AliasType authorityAlias = AliasTypes.getType(ALIAS_TYPE_AUTHORITY);
 
     /**
      * Returns the security context from the execution context.

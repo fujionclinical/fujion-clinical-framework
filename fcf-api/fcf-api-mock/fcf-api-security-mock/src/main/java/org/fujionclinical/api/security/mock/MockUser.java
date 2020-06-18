@@ -29,7 +29,7 @@ import org.fujionclinical.api.model.person.IPersonName;
 import org.fujionclinical.api.model.person.PersonNameParser;
 import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.security.ISecurityDomain;
-import org.fujionclinical.api.security.SecurityDomainRegistry;
+import org.fujionclinical.api.security.SecurityDomains;
 
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +63,7 @@ public class MockUser implements IUser {
             String loginName,
             String password,
             String securityDomain) {
-        this(logicalId, fullName, loginName, password, SecurityDomainRegistry.getSecurityDomain(securityDomain));
+        this(logicalId, fullName, loginName, password, SecurityDomains.getSecurityDomain(securityDomain));
     }
 
     public MockUser(

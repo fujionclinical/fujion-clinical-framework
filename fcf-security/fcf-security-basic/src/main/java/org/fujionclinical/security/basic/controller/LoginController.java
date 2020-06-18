@@ -30,7 +30,7 @@ import org.fujion.core.RequestUtil;
 import org.fujion.webjar.WebJarLocator;
 import org.fujionclinical.api.security.ISecurityDomain;
 import org.fujionclinical.api.security.ISecurityService;
-import org.fujionclinical.api.security.SecurityDomainRegistry;
+import org.fujionclinical.api.security.SecurityDomains;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -50,7 +50,7 @@ public class LoginController {
     
     @GetMapping(path = "security/login", produces = "text/html")
     public String login(ModelMap model, HttpServletRequest request) {
-        Collection<ISecurityDomain> domains = SecurityDomainRegistry.getInstance().getAll();
+        Collection<ISecurityDomain> domains = SecurityDomains.getInstance().getAll();
         model.addAttribute("baseUrl", RequestUtil.getBaseURL(request));
         model.addAttribute("importMap", WebJarLocator.getInstance().getImportMap());
         model.addAttribute("timeout", request.getSession().getMaxInactiveInterval() * 1000);

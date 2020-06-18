@@ -27,12 +27,12 @@ package org.fujionclinical.api.model.encounter;
 
 import org.fujion.common.DateRange;
 import org.fujionclinical.api.model.patient.IPatient;
-import org.fujionclinical.api.query.AbstractQueryCriteria;
+import org.fujionclinical.api.query.expression.AbstractCriteria;
 
 /**
  * Search criteria for encounter lookup.
  */
-public class EncounterQueryCriteria extends AbstractQueryCriteria<IEncounter> {
+public class EncounterQueryCriteria extends AbstractCriteria<IEncounter> {
 
     public EncounterQueryCriteria() {
         super(IEncounter.class, ';', null);

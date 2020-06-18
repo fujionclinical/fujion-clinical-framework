@@ -29,7 +29,7 @@ import org.apache.commons.lang.StringUtils;
 import org.fujion.common.CollectionUtil;
 import org.fujionclinical.api.core.CoreUtil;
 import org.fujionclinical.api.model.core.IBaseType;
-import org.fujionclinical.api.query.QueryParameter;
+import org.fujionclinical.api.query.expression.QueryParameter;
 
 import java.util.Collections;
 import java.util.List;

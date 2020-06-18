@@ -27,14 +27,14 @@ package org.fujionclinical.api.model.condition;
 
 import org.fujionclinical.api.model.encounter.IEncounter;
 import org.fujionclinical.api.model.patient.IPatient;
-import org.fujionclinical.api.query.AbstractQueryCriteria;
+import org.fujionclinical.api.query.expression.AbstractCriteria;
 
 import java.util.Date;
 
 /**
  * Search criteria for encounter lookup.
  */
-public class ConditionQueryCriteria extends AbstractQueryCriteria<ICondition> {
+public class ConditionQueryCriteria extends AbstractCriteria<ICondition> {
 
     public ConditionQueryCriteria() {
         super(ICondition.class, ';', null);

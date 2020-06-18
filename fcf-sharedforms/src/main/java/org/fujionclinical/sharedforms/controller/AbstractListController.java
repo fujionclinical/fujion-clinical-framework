@@ -30,7 +30,7 @@ import org.fujion.annotation.OnFailure;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.component.Listbox;
 import org.fujion.component.Listitem;
-import org.fujionclinical.api.query.IQueryService;
+import org.fujionclinical.api.query.service.IQueryService;
 
 import java.util.ArrayList;
 import java.util.List;

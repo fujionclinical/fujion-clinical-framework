@@ -27,7 +27,7 @@ package org.fujionclinical.api.model.document;
 
 import org.fujionclinical.api.model.encounter.IEncounter;
 import org.fujionclinical.api.model.patient.IPatient;
-import org.fujionclinical.api.query.AbstractQueryCriteria;
+import org.fujionclinical.api.query.expression.AbstractCriteria;
 
 /*
  * #%L
@@ -54,7 +54,7 @@ import org.fujionclinical.api.query.AbstractQueryCriteria;
  *
  * #L%
  */
-public class DocumentQueryCriteria extends AbstractQueryCriteria<IDocument> {
+public class DocumentQueryCriteria extends AbstractCriteria<IDocument> {
 
     protected DocumentQueryCriteria() {
         super(IDocument.class, ';', null);

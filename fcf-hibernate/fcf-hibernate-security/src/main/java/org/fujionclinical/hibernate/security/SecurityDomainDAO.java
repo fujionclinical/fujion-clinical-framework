@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.hibernate.security;
 
-import org.fujionclinical.api.security.SecurityDomainRegistry;
+import org.fujionclinical.api.security.SecurityDomains;
 import org.fujionclinical.hibernate.core.AbstractDAO;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -57,7 +57,7 @@ public class SecurityDomainDAO extends AbstractDAO<SecurityDomain> {
 
             for (SecurityDomain domain : domains) {
                 if (!"*".equals(domain.getLogicalId())) {
-                    SecurityDomainRegistry.registerSecurityDomain(domain);
+                    SecurityDomains.registerSecurityDomain(domain);
                 }
             }
 

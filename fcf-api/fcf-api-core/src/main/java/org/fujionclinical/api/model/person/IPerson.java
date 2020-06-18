@@ -30,7 +30,7 @@ import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.core.CoreUtil;
 import org.fujionclinical.api.model.core.*;
 import org.fujionclinical.api.model.impl.ConceptCode;
-import org.fujionclinical.api.query.QueryParameter;
+import org.fujionclinical.api.query.expression.QueryParameter;
 
 import java.util.Arrays;
 import java.util.Collections;

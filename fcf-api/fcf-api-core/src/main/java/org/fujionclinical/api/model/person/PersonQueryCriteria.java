@@ -31,13 +31,13 @@ import org.fujionclinical.api.model.core.IConceptCode;
 import org.fujionclinical.api.model.core.IIdentifier;
 import org.fujionclinical.api.model.impl.ConceptCode;
 import org.fujionclinical.api.model.impl.Identifier;
-import org.fujionclinical.api.query.AbstractQueryCriteria;
-import org.fujionclinical.api.query.QueryUtil;
+import org.fujionclinical.api.query.core.QueryUtil;
+import org.fujionclinical.api.query.expression.AbstractCriteria;
 
 /**
  * Base search criteria for person lookups.
  */
-public abstract class PersonQueryCriteria<T extends IPerson> extends AbstractQueryCriteria<T> {
+public abstract class PersonQueryCriteria<T extends IPerson> extends AbstractCriteria<T> {
 
     private static final IConceptCode SSN_TYPE = new ConceptCode("http://hl7.org/fhir/identifier-type", "SB");
 

@@ -215,7 +215,7 @@ public class ContextItems {
             return null;
         }
 
-        ISerializer<?> contextSerializer = ContextSerializerRegistry.getInstance().get(clazz);
+        ISerializer<?> contextSerializer = ContextSerializers.getInstance().get(clazz);
 
         if (contextSerializer == null) {
             throw new ContextException("No serializer found for type " + clazz.getName());
@@ -253,7 +253,7 @@ public class ContextItems {
             setItem(itemName, (String) null);
         } else {
             @SuppressWarnings("unchecked")
-            ISerializer<Object> contextSerializer = (ISerializer<Object>) ContextSerializerRegistry.getInstance()
+            ISerializer<Object> contextSerializer = (ISerializer<Object>) ContextSerializers.getInstance()
                     .get(value.getClass());
 
             if (contextSerializer == null) {

@@ -38,14 +38,14 @@ import org.fujion.thread.ICancellable;
 import org.fujion.thread.ThreadedTask;
 import org.fujionclinical.api.event.IEventSubscriber;
 import org.fujionclinical.api.model.core.IDomainType;
-import org.fujionclinical.api.model.dao.DomainDAORegistry;
+import org.fujionclinical.api.model.dao.DomainDAOs;
 import org.fujionclinical.api.model.dao.IDomainDAO;
 import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.patient.PatientContext;
-import org.fujionclinical.api.query.IQueryContext;
-import org.fujionclinical.api.query.QueryContext;
-import org.fujionclinical.api.query.QueryExpression;
-import org.fujionclinical.api.query.QueryExpressionParser;
+import org.fujionclinical.api.query.core.IQueryContext;
+import org.fujionclinical.api.query.core.QueryContext;
+import org.fujionclinical.api.query.expression.Expression;
+import org.fujionclinical.api.query.expression.ExpressionParser;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.ui.dialog.DialogUtil;
 import org.fujionclinical.ui.util.FCFUtil;
@@ -80,7 +80,7 @@ public abstract class ResourceListView<R extends IDomainType, M> extends ListFor
 
     private String detailTitle;
 
-    private QueryExpression queryExpression;
+    private Expression queryExpression;
 
     private IDomainDAO<R> dao;
 
@@ -92,9 +92,9 @@ public abstract class ResourceListView<R extends IDomainType, M> extends ListFor
             int sortBy,
             String... headers) {
         this.detailTitle = detailTitle;
-        this.queryExpression = QueryExpressionParser.getInstance().parse(resourceClass, queryString);
+        this.queryExpression = ExpressionParser.getInstance().parse(resourceClass, queryString);
         this.resourceClass = resourceClass;
-        this.dao = DomainDAORegistry.getDAO(resourceClass);
+        this.dao = DomainDAOs.getDAO(resourceClass);
         Assert.notNull(dao, () -> "Cannot find DAO for " + resourceClass);
         super.setup(title, sortBy, headers);
     }

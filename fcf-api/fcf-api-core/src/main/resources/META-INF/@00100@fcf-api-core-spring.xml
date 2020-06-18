@@ -34,35 +34,40 @@
 			<constructor-arg ref="appContextFinder" />
 		</bean>
 		
-		<!-- Maintains an iterable list of all manifests in the class path. -->
+		<!-- An iterable list of all manifests found in the class path. -->
 		<bean id="manifestIterator" class="org.fujionclinical.api.core.ManifestIterator"
 			factory-method="getInstance" init-method="init" />
 
-		<!-- Maintains a registry of all context serializers. -->
+		<!-- A registry of all context serializers. -->
 		<bean id="contextSerializerRegistry"
-              class="org.fujionclinical.api.context.ContextSerializerRegistry"
+              class="org.fujionclinical.api.context.ContextSerializers"
               factory-method="getInstance"/>
 
-        <!-- Maintains a registry of all alias types. -->
-        <bean id="aliasTypeRegistry" class="org.fujionclinical.api.alias.AliasTypeRegistry"
+        <!-- A registry of all alias types. -->
+        <bean id="aliasTypeRegistry" class="org.fujionclinical.api.alias.AliasTypes"
               factory-method="getInstance">
             <property name="propertyFile" value="classpath*:/META-INF/alias.properties,${org.fujionclinical.location.aliases}"/>
         </bean>
 
-        <!-- Maintains a registry of all domain factories. -->
-        <bean id="domainFactoryRegistry" class="org.fujionclinical.api.model.dao.DomainDAORegistry"
+        <!-- A registry of all domain factories. -->
+        <bean id="domainFactoryRegistry" class="org.fujionclinical.api.model.dao.DomainDAOs"
               factory-method="getInstance">
         </bean>
 
-        <!-- Maintains a registry of all security domains. -->
-        <bean id="securityDomainRegistry" class="org.fujionclinical.api.security.SecurityDomainRegistry"
+        <!-- A registry of all security domains. -->
+        <bean id="securityDomainRegistry" class="org.fujionclinical.api.security.SecurityDomains"
               factory-method="getInstance">
         </bean>
 
-        <!-- Maintains a registry of all wrapper transforms. -->
-        <bean id="wrapperTransformRegistry" class="org.fujionclinical.api.model.core.ModelTransformRegistry"
-              factory-method="getInstance">
+        <!-- A registry of all model transforms. -->
+        <bean id="modelTransformRegistry" class="org.fujionclinical.api.model.core.ModelTransforms"
+			  factory-method="getInstance">
         </bean>
+
+		<!-- A registry of all query parameter descriptors. -->
+		<bean id="parameterDescriptorRegistry" class="org.fujionclinical.api.query.expression.ParameterDescriptors"
+			  factory-method="getInstance">
+		</bean>
 
         <task:annotation-driven executor="taskExecutor"
                                 scheduler="taskScheduler"/>

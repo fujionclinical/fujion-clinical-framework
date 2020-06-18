@@ -25,12 +25,12 @@
  */
 package org.fujionclinical.api.model.location;
 
-import org.fujionclinical.api.query.AbstractQueryCriteria;
+import org.fujionclinical.api.query.expression.AbstractCriteria;
 
 /**
  * Represents location search criteria.
  */
-public class LocationQueryCriteria extends AbstractQueryCriteria<ILocation> {
+public class LocationQueryCriteria extends AbstractCriteria<ILocation> {
 
     public LocationQueryCriteria() {
         super(ILocation.class, ';', null);

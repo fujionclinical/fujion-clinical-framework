@@ -31,7 +31,7 @@ import org.apache.commons.lang.reflect.ConstructorUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.common.DateRange;
-import org.fujionclinical.api.model.dao.DomainDAORegistry;
+import org.fujionclinical.api.model.dao.DomainDAOs;
 import org.fujionclinical.api.model.dao.IDomainDAO;
 import org.fujionclinical.api.model.patient.IPatient;
 
@@ -90,7 +90,7 @@ public abstract class AbstractPatientList implements IPatientList {
     }
 
     protected IDomainDAO<IPatient> getPatientDAO() {
-        return DomainDAORegistry.getDAO(IPatient.class);
+        return DomainDAOs.getDAO(IPatient.class);
     }
 
     /**

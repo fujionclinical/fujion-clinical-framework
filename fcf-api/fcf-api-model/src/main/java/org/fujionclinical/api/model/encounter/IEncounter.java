@@ -34,7 +34,7 @@ import org.fujionclinical.api.model.core.IReference;
 import org.fujionclinical.api.model.location.ILocation;
 import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.person.IPerson;
-import org.fujionclinical.api.query.QueryParameter;
+import org.fujionclinical.api.query.expression.QueryParameter;
 
 import java.util.Collections;
 import java.util.List;

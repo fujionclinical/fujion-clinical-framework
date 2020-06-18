@@ -26,7 +26,7 @@
 package org.fujionclinical.hibernate.security;
 
 import org.fujionclinical.api.model.user.IUser;
-import org.fujionclinical.api.security.SecurityDomainRegistry;
+import org.fujionclinical.api.security.SecurityDomains;
 import org.fujionclinical.api.spring.SpringUtil;
 import org.fujionclinical.ui.test.MockUITest;
 import org.junit.Test;
@@ -43,7 +43,7 @@ public class TestSecurity extends MockUITest {
         SecurityDomainDAO sdao = SpringUtil.getAppContext().getBean(SecurityDomainDAO.class);
         setupDomains(sdao);
         sdao.init();
-        assertEquals(3, SecurityDomainRegistry.getInstance().getAll().size());
+        assertEquals(3, SecurityDomains.getInstance().getAll().size());
         UserDAO udao = SpringUtil.getAppContext().getBean(UserDAO.class);
         setupUsers(udao);
         SecurityDomain domain = getSecurityDomain("1");
@@ -82,6 +82,6 @@ public class TestSecurity extends MockUITest {
     }
     
     private SecurityDomain getSecurityDomain(String id) {
-        return (SecurityDomain) SecurityDomainRegistry.getInstance().get(id);
+        return (SecurityDomain) SecurityDomains.getInstance().get(id);
     }
 }

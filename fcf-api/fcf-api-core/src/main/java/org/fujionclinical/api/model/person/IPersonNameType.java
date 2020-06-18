@@ -26,7 +26,7 @@
 package org.fujionclinical.api.model.person;
 
 import org.fujion.common.CollectionUtil;
-import org.fujionclinical.api.query.QueryParameter;
+import org.fujionclinical.api.query.expression.QueryParameter;
 
 import java.util.Collections;
 import java.util.List;

@@ -29,7 +29,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.security.ISecurityDomain;
-import org.fujionclinical.api.security.SecurityDomainRegistry;
+import org.fujionclinical.api.security.SecurityDomains;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -102,7 +102,7 @@ public class BaseAuthenticationProvider implements AuthenticationProvider {
             username = pcs.length > 1 ? pcs[1] : null;
         }
         
-        ISecurityDomain securityDomain = SecurityDomainRegistry.getSecurityDomain(domain);
+        ISecurityDomain securityDomain = SecurityDomains.getSecurityDomain(domain);
         
         if (username == null || password == null || securityDomain == null) {
             throw new BadCredentialsException("Missing security credentials.");

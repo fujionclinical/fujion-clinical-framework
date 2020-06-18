@@ -29,10 +29,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.ancillary.IResponseCallback;
 import org.fujion.common.StrUtil;
-import org.fujionclinical.api.model.person.IPersonName;
 import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.patient.PatientQueryCriteria;
-import org.fujionclinical.api.query.QueryException;
+import org.fujionclinical.api.model.person.IPersonName;
+import org.fujionclinical.api.query.core.QueryException;
 import org.fujionclinical.ui.dialog.DialogUtil;
 import org.fujionclinical.ui.util.FCFUtil;
 

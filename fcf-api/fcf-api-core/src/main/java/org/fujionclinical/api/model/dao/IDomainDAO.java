@@ -26,9 +26,9 @@
 package org.fujionclinical.api.model.dao;
 
 import org.fujionclinical.api.model.core.IDomainType;
-import org.fujionclinical.api.query.IQueryContext;
-import org.fujionclinical.api.query.QueryExpression;
-import org.fujionclinical.api.query.QueryExpressionTuple;
+import org.fujionclinical.api.query.core.IQueryContext;
+import org.fujionclinical.api.query.expression.Expression;
+import org.fujionclinical.api.query.expression.ExpressionTuple;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,7 +94,7 @@ public interface IDomainDAO<T extends IDomainType> {
      * @param query The query expression.
      * @return A list of matching domain objects.
      */
-    default List<T> search(QueryExpression query) {
+    default List<T> search(Expression query) {
         return search(query, null);
     }
 
@@ -105,7 +105,7 @@ public interface IDomainDAO<T extends IDomainType> {
      * @param queryContext The query context (may be null).
      * @return A list of matching domain objects.
      */
-    default List<T> search(QueryExpression query, IQueryContext queryContext) {
+    default List<T> search(Expression query, IQueryContext queryContext) {
         return search(query.resolve(queryContext));
     }
 
@@ -115,7 +115,7 @@ public interface IDomainDAO<T extends IDomainType> {
      * @param tuples A list of query tuples.
      * @return A list of matching domain objects.
      */
-    List<T> search(List<QueryExpressionTuple> tuples);
+    List<T> search(List<ExpressionTuple> tuples);
 
     /**
      * Returns the type of domain object created by this factory.

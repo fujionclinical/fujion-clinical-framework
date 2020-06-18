@@ -34,7 +34,7 @@ import org.fujion.component.Checkbox;
 import org.fujion.component.Grid;
 import org.fujion.component.Row;
 import org.fujion.component.Rows;
-import org.fujionclinical.api.query.IQueryService;
+import org.fujionclinical.api.query.service.IQueryService;
 import org.fujionclinical.sharedforms.common.FormConstants;
 
 import java.util.ArrayList;
