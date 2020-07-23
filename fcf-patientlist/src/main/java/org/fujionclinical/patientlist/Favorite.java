@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.patientlist;
 
-import org.apache.commons.lang.ObjectUtils;
+import org.apache.commons.lang3.ObjectUtils;
 
 /**
  * Provides serialization support for a list.

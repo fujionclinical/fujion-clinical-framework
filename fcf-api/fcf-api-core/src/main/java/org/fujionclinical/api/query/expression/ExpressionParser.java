@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.query.expression;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.fujion.common.StrUtil;
 import org.fujionclinical.api.model.core.IDomainType;
 import org.springframework.beans.BeanUtils;

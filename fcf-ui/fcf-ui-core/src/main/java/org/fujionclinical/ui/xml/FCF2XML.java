@@ -26,7 +26,7 @@
 package org.fujionclinical.ui.xml;
 
 import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.fujion.annotation.ComponentDefinition;
 import org.fujion.common.XMLUtil;
 import org.fujion.component.BaseComponent;
@@ -129,7 +129,7 @@ public class FCF2XML {
             properties.put("impl", clazz.getName());
         }
 
-        Node child = doc.createElement(cmpname);
+        Node child = doc.createElement(cmpname.replace("#", "_"));
         parent.appendChild(child);
 
         for (PropertyDescriptor propDx : PropertyUtils.getPropertyDescriptors(root)) {

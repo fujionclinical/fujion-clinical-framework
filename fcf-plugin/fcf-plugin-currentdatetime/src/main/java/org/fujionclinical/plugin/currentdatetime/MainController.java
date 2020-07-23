@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.plugin.currentdatetime;
 
-import org.apache.commons.lang.time.FastDateFormat;
+import org.apache.commons.lang3.time.FastDateFormat;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.common.DateUtil;

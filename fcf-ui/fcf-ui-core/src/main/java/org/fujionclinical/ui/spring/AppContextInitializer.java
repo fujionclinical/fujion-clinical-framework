@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.ui.spring;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.fujion.client.ExecutionContext;
 import org.fujion.component.Page;
 import org.fujion.spring.ClasspathMessageSource;

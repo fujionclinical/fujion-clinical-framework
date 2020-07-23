@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.maven.plugin.help.chm;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.fujionclinical.maven.plugin.core.BaseMojo;
 
 import java.io.BufferedReader;

@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.api.spring;
 
-import org.apache.commons.lang.RandomStringUtils;
-import org.apache.commons.lang.math.RandomUtils;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.springframework.core.env.PropertySource;
 
 import java.util.UUID;

@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.ui.dialog;
 
-import org.apache.commons.lang.math.NumberUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.fujion.common.StrUtil;
 import org.fujionclinical.api.property.PropertyUtil;
 

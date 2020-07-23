@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.ui.dialog;
 
-import org.apache.commons.lang.time.DateUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.fujion.ancillary.IAutoWired;
 import org.fujion.ancillary.INamespace;
 import org.fujion.annotation.EventHandler;

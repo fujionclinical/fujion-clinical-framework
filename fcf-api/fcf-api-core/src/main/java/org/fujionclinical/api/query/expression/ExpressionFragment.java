@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.query.expression;
 
-import org.apache.commons.lang.ClassUtils;
+import org.apache.commons.lang3.ClassUtils;
 import org.fujionclinical.api.query.core.IQueryContext;
 import org.springframework.beans.BeanUtils;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -75,7 +75,7 @@ public class ExpressionFragment<PRM, OPD> {
      * @return An expression tuple.
      */
     public ExpressionTuple createTuple(IQueryContext queryContext) {
-        Class<PRM> propertyType = ClassUtils.primitiveToWrapper(propertyDescriptor.getPropertyType());
+        Class<PRM> propertyType = (Class<PRM>) ClassUtils.primitiveToWrapper(propertyDescriptor.getPropertyType());
         OPD[] normalizedOperands = (OPD[]) new Object[operands.length];
         int index = 0;
         OPD normalizedOperand = null;

@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.shell.elements;
 
-import org.apache.commons.lang.WordUtils;
+import org.apache.commons.text.WordUtils;
 import org.fujion.ancillary.IDisable;
 import org.fujion.annotation.EventHandler;
 import org.fujion.client.ClientUtil;
@@ -65,7 +65,7 @@ public class ElementPlugin extends ElementUI implements IDisable, IPropertyAcces
         registerAllowedParentClass(ElementPlugin.class, ElementUI.class);
     }
 
-    private class ToolbarContainer extends Namespace {
+    private static class ToolbarContainer extends Namespace {
 
         public ToolbarContainer() {
             super();
@@ -73,7 +73,7 @@ public class ElementPlugin extends ElementUI implements IDisable, IPropertyAcces
         }
     }
 
-    public class PluginContainer extends Namespace {}
+    public static class PluginContainer extends Namespace {}
 
     private final PluginContainer container = new PluginContainer();
 

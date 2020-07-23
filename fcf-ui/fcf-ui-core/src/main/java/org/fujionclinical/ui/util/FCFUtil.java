@@ -27,10 +27,10 @@ package org.fujionclinical.ui.util;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.exception.ExceptionUtils;
-import org.apache.commons.lang.math.NumberUtils;
-import org.apache.commons.lang.reflect.FieldUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.fujion.client.ExecutionContext;
 import org.fujion.common.MiscUtil;
 import org.fujion.component.*;

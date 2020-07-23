@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.plugin.mockup;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.component.Iframe;
 import org.fujionclinical.shell.elements.ElementPlugin;

@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.ui.action;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.fujion.component.BaseComponent;
 import org.fujion.event.ClickEvent;
 

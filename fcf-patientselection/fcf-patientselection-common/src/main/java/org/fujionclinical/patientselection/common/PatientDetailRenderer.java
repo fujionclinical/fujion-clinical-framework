@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.patientselection.common;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.EnumUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.fujion.ancillary.MimeContent;
 import org.fujion.common.DateUtil;
 import org.fujion.common.StrUtil;

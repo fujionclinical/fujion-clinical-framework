@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.shell.property;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.fujion.common.MiscUtil;
 
 import java.lang.reflect.Method;

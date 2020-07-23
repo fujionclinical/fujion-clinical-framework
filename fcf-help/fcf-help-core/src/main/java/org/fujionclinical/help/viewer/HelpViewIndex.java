@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.help.viewer;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.component.BaseComponent;

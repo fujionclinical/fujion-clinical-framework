@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.plugin.settings;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.fujion.component.BaseComponent;
 import org.fujionclinical.shell.designer.PropertyGrid;
 import org.fujionclinical.shell.plugins.PluginController;

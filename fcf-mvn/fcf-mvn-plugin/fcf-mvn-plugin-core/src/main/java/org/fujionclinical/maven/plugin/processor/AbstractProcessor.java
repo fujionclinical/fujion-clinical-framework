@@ -26,7 +26,7 @@
 package org.fujionclinical.maven.plugin.processor;
 
 import org.apache.commons.io.filefilter.WildcardFileFilter;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.fujionclinical.maven.plugin.core.BaseMojo;
 import org.fujionclinical.maven.plugin.iterator.IResourceIterator;
 import org.fujionclinical.maven.plugin.resource.IResource;

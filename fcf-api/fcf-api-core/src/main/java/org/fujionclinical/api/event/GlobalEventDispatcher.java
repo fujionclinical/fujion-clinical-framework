@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.event;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.fujionclinical.api.core.FrameworkUtil;
 import org.fujionclinical.api.messaging.*;
 import org.fujionclinical.api.messaging.Recipient.RecipientType;

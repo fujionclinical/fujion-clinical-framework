@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.shell.elements;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.fujionclinical.ui.action.ActionListener;
 import org.fujionclinical.ui.action.ActionUtil;
 

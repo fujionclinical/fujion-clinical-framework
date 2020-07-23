@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.model.person;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.model.core.IConceptCode;
 import org.fujionclinical.api.model.core.IIdentifier;

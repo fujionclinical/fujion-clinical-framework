@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.ui.manifest;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.fujion.common.StrUtil;
 
 import java.util.jar.Attributes;

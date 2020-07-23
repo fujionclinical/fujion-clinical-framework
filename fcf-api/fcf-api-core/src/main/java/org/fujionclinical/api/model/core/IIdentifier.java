@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.model.core;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.fujionclinical.api.core.CoreUtil;
 
 public interface IIdentifier extends IBaseType {

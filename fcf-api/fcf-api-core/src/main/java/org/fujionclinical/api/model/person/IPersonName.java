@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.model.person;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.fujion.common.CollectionUtil;
 import org.fujionclinical.api.core.CoreUtil;
 import org.fujionclinical.api.model.core.IBaseType;

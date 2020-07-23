@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.security;
 
-import org.apache.commons.lang.math.RandomUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.spring.SpringUtil;
 import org.springframework.util.AntPathMatcher;
@@ -179,14 +179,14 @@ public class SecurityUtil {
             throw new IllegalArgumentException();
         }
         
-        int pwdLength = RandomUtils.nextInt(maxLength - minLength + 1) + minLength;
+        int pwdLength = RandomUtils.nextInt(0, maxLength - minLength + 1) + minLength;
         int[] min = new int[constraints.length];
         String[] chars = new String[constraints.length];
         char[] pwd = new char[pwdLength];
         int totalRequired = 0;
         
         for (int i = 0; i < constraints.length; i++) {
-            String[] pcs = constraints[i].split("\\,", 2);
+            String[] pcs = constraints[i].split(",", 2);
             min[i] = Integer.parseInt(pcs[0]);
             chars[i] = pcs[1];
             totalRequired += min[i];
@@ -197,16 +197,16 @@ public class SecurityUtil {
         
         while (pwdLength-- > 0) {
             if (min[grp] <= 0) {
-                grp = totalRequired > 0 ? grp + 1 : RandomUtils.nextInt(constraints.length);
+                grp = totalRequired > 0 ? grp + 1 : RandomUtils.nextInt(0, constraints.length);
             }
             
-            int i = RandomUtils.nextInt(pwd.length);
+            int i = RandomUtils.nextInt(0, pwd.length);
             
             while (pwd[i] != 0) {
                 i = ++i % pwd.length;
             }
             
-            pwd[i] = chars[grp].charAt(RandomUtils.nextInt(chars[grp].length()));
+            pwd[i] = chars[grp].charAt(RandomUtils.nextInt(0, chars[grp].length()));
             min[grp]--;
             totalRequired--;
         }

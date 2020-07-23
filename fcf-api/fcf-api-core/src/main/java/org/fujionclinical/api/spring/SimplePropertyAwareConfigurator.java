@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.spring;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * This is a simple implementation of a property-aware configurator that includes a property

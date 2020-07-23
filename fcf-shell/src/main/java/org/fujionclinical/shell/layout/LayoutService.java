@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.shell.layout;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.fujionclinical.api.property.IPropertyService;
 
 import java.util.Collections;

@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.core;
 
-import org.apache.commons.lang.ObjectUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.fujion.common.StrUtil;
 import org.springframework.core.NestedCheckedException;
 

@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.ui.render;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.fujion.common.DateUtil;
 import org.fujion.common.StrUtil;
 import org.fujion.component.BaseComponent;

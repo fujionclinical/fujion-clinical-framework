@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.shell.layout;
 
-import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.ObjectUtils;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.fujion.client.ExecutionContext;
 import org.fujion.common.MiscUtil;
 import org.fujion.common.Version;

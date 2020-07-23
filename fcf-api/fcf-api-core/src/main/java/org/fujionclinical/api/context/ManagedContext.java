@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.context;
 
-import org.apache.commons.lang.ObjectUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujionclinical.api.context.ISurveyResponse.ISurveyCallback;

@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.shell;
 
-import org.apache.commons.lang.BooleanUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.ancillary.INamespace;
@@ -37,9 +37,9 @@ import org.fujion.annotation.Component.PropertySetter;
 import org.fujion.common.MiscUtil;
 import org.fujion.component.*;
 import org.fujion.event.KeycaptureEvent;
+import org.fujionclinical.api.context.ISurveyResponse;
 import org.fujionclinical.api.core.AppFramework;
 import org.fujionclinical.api.core.FrameworkUtil;
-import org.fujionclinical.api.context.ISurveyResponse;
 import org.fujionclinical.api.event.EventManager;
 import org.fujionclinical.api.event.IEventManager;
 import org.fujionclinical.api.model.user.UserContext.IUserContextSubscriber;

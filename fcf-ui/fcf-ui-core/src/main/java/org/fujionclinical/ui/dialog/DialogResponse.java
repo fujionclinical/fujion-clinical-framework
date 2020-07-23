@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.ui.dialog;
 
-import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.ObjectUtils;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.fujion.common.StrUtil;
 
 import java.util.ArrayList;
