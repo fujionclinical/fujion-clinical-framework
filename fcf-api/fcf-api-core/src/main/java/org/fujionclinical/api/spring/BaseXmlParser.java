@@ -143,7 +143,9 @@ public class BaseXmlParser extends AbstractSingleBeanDefinitionParser {
             try {
                 Resource resource = parserContext.getReaderContext().getResource();
                 return resource == null ? null : resource.getURL().getPath();
-            } catch (IOException e) {}
+            } catch (IOException e) {
+                // NOP
+            }
         }
         
         return null;

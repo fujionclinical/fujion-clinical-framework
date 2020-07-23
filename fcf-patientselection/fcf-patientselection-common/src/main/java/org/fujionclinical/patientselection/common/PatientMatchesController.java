@@ -28,7 +28,6 @@ package org.fujionclinical.patientselection.common;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.fujion.common.DateUtil;
 import org.fujion.component.Listitem;
 import org.fujionclinical.api.core.FrameworkUtil;
 import org.fujionclinical.api.model.patient.IPatient;
@@ -54,7 +53,7 @@ public class PatientMatchesController extends FrameworkController {
     /**
      * Comparator for sorting by date of birth.
      */
-    private class DOBComparator implements Comparator<Listitem> {
+    private static class DOBComparator implements Comparator<Listitem> {
         
         private final boolean ascending;
         

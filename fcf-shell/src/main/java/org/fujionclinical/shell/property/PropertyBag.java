@@ -46,7 +46,7 @@ public class PropertyBag extends Properties implements IPropertyProvider {
         super();
         
         for (String property : properties) {
-            String[] nv = property.split("\\=", 2);
+            String[] nv = property.split("=", 2);
             setProperty(nv[0], nv.length == 1 ? null : nv[1]);
         }
     }

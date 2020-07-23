@@ -30,6 +30,7 @@ import org.fujionclinical.help.HelpTopic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * This class manages the history of selected topics. There are methods for adding new topics,
@@ -114,7 +115,7 @@ public class HelpHistory {
      * @return True if topics are equal.
      */
     private boolean sameTopic(HelpTopic topic1, HelpTopic topic2) {
-        return topic1 == topic2 || (topic1 != null && topic1.equals(topic2));
+        return Objects.equals(topic1, topic2);
     }
 
     /**

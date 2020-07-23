@@ -28,6 +28,7 @@ package org.fujionclinical.plugin.encounters;
 import org.fujion.component.*;
 import org.fujion.event.DblclickEvent;
 import org.fujionclinical.api.event.IEventSubscriber;
+import org.fujionclinical.api.model.core.IReference;
 import org.fujionclinical.api.model.encounter.EncounterContext;
 import org.fujionclinical.api.model.encounter.IEncounter;
 import org.fujionclinical.api.model.location.ILocation;
@@ -68,13 +69,13 @@ public class MainController extends ResourceListView<IEncounter, IEncounter> {
 
     private List<ILocation> getLocations(IEncounter encounter) {
         return encounter.getLocations().stream()
-                .map(locationRef -> locationRef.getReferenced())
+                .map(IReference::getReferenced)
                 .collect(Collectors.toList());
     }
 
     private List<IPersonName> getParticipants(IEncounter encounter) {
         return encounter.getParticipants().stream()
-                .map(participantRef -> participantRef.getReferenced())
+                .map(IReference::getReferenced)
                 .map(IPersonNameType::getName)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());

@@ -345,7 +345,7 @@ public class TreeUtil {
      * @param nodes Treenode components
      */
     /*
-    /* TODO:
+    // TODO:
     public static void adjustVisibility(Iterable<Treenode> nodes) {
         if (nodes != null) {
             boolean visibleChildren = parent.getVisibleItemCount() > 0;

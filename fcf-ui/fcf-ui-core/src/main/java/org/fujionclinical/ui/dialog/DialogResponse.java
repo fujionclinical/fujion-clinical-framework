@@ -26,11 +26,11 @@
 package org.fujionclinical.ui.dialog;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.ObjectUtils;
 import org.fujion.common.StrUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static org.fujionclinical.ui.dialog.DialogConstants.LABEL_ID_CANCEL;
 import static org.fujionclinical.ui.dialog.DialogConstants.LABEL_ID_OK;
@@ -138,7 +138,7 @@ public class DialogResponse<T> {
      * @return True if this dialog response contains the specified response.
      */
     public boolean hasResponse(T response) {
-        return ObjectUtils.equals(this.response, response);
+        return Objects.equals(this.response, response);
     }
 
     /**

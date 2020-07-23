@@ -177,7 +177,7 @@ public class HelpViewer implements IAutoWired, IHelpViewer, ITopicListener {
             topicLabel = StringUtils.isEmpty(topicLabel) ? topicId : topicLabel;
             HelpTopic helpTopic = helpSet.getTopic(topicId);
             helpTopic = helpTopic == null ? null
-                    : new HelpTopic(helpTopic.getURL(), helpTopic.getLabel(), helpSet.getName());
+                    : new HelpTopic(helpTopic.getURL(), topicLabel, helpSet.getName());
             setTopic(helpTopic);
             show(HelpViewType.HISTORY);
         }
@@ -447,6 +447,7 @@ public class HelpViewer implements IAutoWired, IHelpViewer, ITopicListener {
                     return topic;
                 }
             } catch (Exception e) {
+                // NOP
             }
         }
 
@@ -488,7 +489,6 @@ public class HelpViewer implements IAutoWired, IHelpViewer, ITopicListener {
             InvocationRequestQueue proxyQueue = InvocationRequestQueueRegistry.getInstance().get("help" + proxyId);
 
             if (proxyQueue == null || !proxyQueue.isAlive()) {
-                proxyQueue = null;
                 close();
             } else {
                 requestQueue = new InvocationRequestQueue("help" + page.getId(), page, this, HelpUtil.closeRequest);

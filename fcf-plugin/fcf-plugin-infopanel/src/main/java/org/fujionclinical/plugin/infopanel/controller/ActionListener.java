@@ -91,7 +91,7 @@ public class ActionListener implements IEventSubscriber<Object> {
             try {
                 target.doAction(action);
             } catch (Throwable t) {
-                
+                // NOP
             }
         }
     }

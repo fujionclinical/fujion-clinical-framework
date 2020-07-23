@@ -82,7 +82,9 @@ public final class JMSUtil {
         
         try {
             clientId = connection == null ? null : connection.getClientID();
-        } catch (JMSException e) {}
+        } catch (JMSException e) {
+            // NOP
+        }
         
         return clientId;
     }

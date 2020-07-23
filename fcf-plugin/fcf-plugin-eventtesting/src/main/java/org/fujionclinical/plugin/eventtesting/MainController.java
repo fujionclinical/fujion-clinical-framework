@@ -130,8 +130,8 @@ public class MainController extends PluginController implements IEventSubscriber
 
         List<Recipient> recipients = new ArrayList<>();
 
-        for (String recip : text.split("\\,")) {
-            String[] pcs = recip.split("\\:", 2);
+        for (String recip : text.split(",")) {
+            String[] pcs = recip.split(":", 2);
 
             if (pcs.length == 2) {
                 RecipientType type = RecipientType.valueOf(pcs[0].trim().toUpperCase());
@@ -177,7 +177,9 @@ public class MainController extends PluginController implements IEventSubscriber
         if (!(eventData instanceof String)) {
             try {
                 eventData = JSONUtil.serialize(eventData, true);
-            } catch (Exception e) {}
+            } catch (Exception e) {
+                // NOP
+            }
         }
 
         s += "\n\n" + eventName + ":\n" + eventData;

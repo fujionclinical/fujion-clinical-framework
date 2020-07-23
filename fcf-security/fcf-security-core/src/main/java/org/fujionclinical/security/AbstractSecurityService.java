@@ -25,7 +25,6 @@
  */
 package org.fujionclinical.security;
 
-import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -51,6 +50,7 @@ import org.springframework.web.socket.WebSocketSession;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Base Spring Security implementation.
@@ -132,7 +132,7 @@ public abstract class AbstractSecurityService implements ISecurityService {
     private String replaceParam(String text, String param, String value) {
         if (text.contains(param)) {
             try {
-                value = value == null ? "" : URLEncoder.encode(value, CharEncoding.UTF_8);
+                value = value == null ? "" : URLEncoder.encode(value, StandardCharsets.UTF_8.name());
                 text = text.replace(param, value);
             } catch (UnsupportedEncodingException e) {
                 log.error("Error encoding parameter value.", e);

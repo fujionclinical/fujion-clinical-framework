@@ -57,7 +57,7 @@ public class DocumentDisplayController extends AbstractGridController<IDocument,
     private Combobox cboHeader;
 
     public DocumentDisplayController() {
-        super(new InMemoryQueryService<IDocument>(), "fcfdocuments", "DOCUMENT", "documentsPrint.css", "patient");
+        super(new InMemoryQueryService<>(), "fcfdocuments", "DOCUMENT", "documentsPrint.css", "patient");
         ((InMemoryQueryService) getService()).setQueryResult(() -> documents);
     }
 

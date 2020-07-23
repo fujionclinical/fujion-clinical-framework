@@ -346,7 +346,7 @@ public class PatientSelectionController extends FrameworkController {
             for (Listitem item : lb.getChildren(Listitem.class)) {
                 IPatientListFilter flt = (IPatientListFilter) item.getData();
 
-                if (flt != null && filter.equals(flt)) {
+                if (filter.equals(flt)) {
                     lb.setSelectedItem(item);
                     //item.scrollIntoView(true);
                     return true;

@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.patientlist;
 
-import org.apache.commons.lang3.ObjectUtils;
+import java.util.Objects;
 
 /**
  * Provides serialization support for a list.
@@ -73,7 +73,7 @@ public class Favorite {
         }
 
         Favorite favorite = (Favorite) object;
-        return ObjectUtils.equals(this.name, favorite.name) && ObjectUtils.equals(this.patientList, favorite.patientList);
+        return Objects.equals(this.name, favorite.name) && Objects.equals(this.patientList, favorite.patientList);
     }
 
 }

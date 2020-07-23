@@ -83,7 +83,7 @@ public interface IModelTransform<L, N> extends IBaseType {
      */
     default List<N> fromLogicalModel(Collection<L> values) {
         return values == null ? null : values.stream()
-                .map(value -> fromLogicalModel(value))
+                .map(this::fromLogicalModel)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
@@ -118,7 +118,7 @@ public interface IModelTransform<L, N> extends IBaseType {
      */
     default List<L> toLogicalModel(Collection<N> values) {
         return values == null ? null : values.stream()
-                .map(value -> toLogicalModel(value))
+                .map(this::toLogicalModel)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }

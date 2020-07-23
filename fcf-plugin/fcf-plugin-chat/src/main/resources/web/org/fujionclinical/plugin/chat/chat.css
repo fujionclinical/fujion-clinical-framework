@@ -30,16 +30,3 @@
 	display: block;
 }
 
-.chat-participant-self span.z-label {
-	font-style: italic;
-	color: green!important;
-}
-
-.chat-participant-active span.z-label {
-	font-style: italic;
-}
-
-.chat-invite .z-listheader-img {
-	display: none;
-}
-

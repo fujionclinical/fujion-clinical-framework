@@ -132,11 +132,11 @@ public interface IDocument extends IDomainType, IAttachmentType, ICategoryType {
     }
 
     default boolean hasType(IConceptCode code) {
-        return hasType() && getType().getCodes().stream().filter(cde -> code.isSame(cde)).findFirst().isPresent();
+        return hasType() && getType().getCodes().stream().anyMatch(code::isSame);
     }
 
     default boolean hasType(String type) {
-        return hasType() && getType().getCodes().stream().filter(code -> type.equals(code.getCode())).findFirst().isPresent();
+        return hasType() && getType().getCodes().stream().anyMatch(code -> type.equals(code.getCode()));
     }
 
     default List<IReference<IPerson>> getAuthors() {

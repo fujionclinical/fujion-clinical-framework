@@ -134,7 +134,9 @@ public class MessageConsumer implements IMessageConsumer {
         try {
             subscriber.setMessageListener(null);
             subscriber.close();
-        } catch (JMSException e) {}
+        } catch (JMSException e) {
+            // NOP
+        }
         
         return true;
     }

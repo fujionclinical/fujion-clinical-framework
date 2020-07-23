@@ -117,7 +117,7 @@ public class PropertyTypeRegistry extends AbstractRegistry<String, PropertyType>
             return propType;
         }
         
-        String[] pcs = key.split("\\:", 3);
+        String[] pcs = key.split(":", 3);
         PropertySerializer<?> serializer = null;
         
         if ("bean".equals(pcs[1])) {

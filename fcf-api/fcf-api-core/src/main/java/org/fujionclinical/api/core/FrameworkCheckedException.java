@@ -25,9 +25,10 @@
  */
 package org.fujionclinical.api.core;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.fujion.common.StrUtil;
 import org.springframework.core.NestedCheckedException;
+
+import java.util.Objects;
 
 /**
  * Superclass for all checked exceptions thrown in the framework
@@ -84,7 +85,7 @@ public class FrameworkCheckedException extends NestedCheckedException implements
         }
         
         FrameworkCheckedException otherBe = (FrameworkCheckedException) other;
-        return getMessage().equals(otherBe.getMessage()) && ObjectUtils.equals(getCause(), otherBe.getCause());
+        return getMessage().equals(otherBe.getMessage()) && Objects.equals(getCause(), otherBe.getCause());
     }
     
     @Override

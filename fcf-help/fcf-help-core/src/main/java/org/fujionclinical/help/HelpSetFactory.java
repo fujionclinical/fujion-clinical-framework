@@ -58,7 +58,7 @@ public class HelpSetFactory {
      * @return Returns the implementation class.
      */
     public static Class<? extends IHelpSet> register(Class<? extends IHelpSet> clazz, String formats) {
-        for (String type : formats.split("\\,")) {
+        for (String type : formats.split(",")) {
             instance.map.put(type, clazz);
         }
         

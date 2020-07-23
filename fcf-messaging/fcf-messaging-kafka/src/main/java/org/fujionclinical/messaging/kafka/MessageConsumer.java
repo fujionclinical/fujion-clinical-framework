@@ -75,7 +75,9 @@ public class MessageConsumer implements IMessageConsumer {
                     try {
                         poll();
                         monitor.wait(pollingInterval);
-                    } catch (InterruptedException e) {}
+                    } catch (InterruptedException e) {
+                        // NOP
+                    }
                 }
             }
             

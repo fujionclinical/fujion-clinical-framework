@@ -106,7 +106,9 @@ public class KafkaService {
                         params.put(key, value);
                     }
                     
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                    // NOP
+                }
             }
         }
         

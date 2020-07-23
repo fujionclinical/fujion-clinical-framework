@@ -62,7 +62,7 @@ public class ExpressionParser {
                 .map(fragment -> parseFragment(domainClass, fragment))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
-        return new Expression<T>(domainClass, fragments);
+        return new Expression<>(domainClass, fragments);
     }
 
     private <T extends IDomainType> ExpressionFragment parseFragment(

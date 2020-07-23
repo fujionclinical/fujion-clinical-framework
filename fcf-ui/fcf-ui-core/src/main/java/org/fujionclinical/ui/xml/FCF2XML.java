@@ -150,7 +150,9 @@ public class FCF2XML {
                     }
 
                     properties.put(name, value);
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                    // NOP
+                }
             }
         }
 

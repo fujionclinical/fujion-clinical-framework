@@ -25,10 +25,10 @@
  */
 package org.fujionclinical.help;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.net.URL;
+import java.util.Objects;
 
 /**
  * Represents a single help topic
@@ -106,7 +106,7 @@ public class HelpTopic implements Comparable<HelpTopic> {
      * @return True if a duplicate.
      */
     public boolean isDuplicate(HelpTopic topic) {
-        return ObjectUtils.equals(url, topic.url) && compareTo(topic) == 0;
+        return Objects.equals(url, topic.url) && compareTo(topic) == 0;
     }
     
     @Override
@@ -121,6 +121,6 @@ public class HelpTopic implements Comparable<HelpTopic> {
         }
         
         HelpTopic ht = (HelpTopic) object;
-        return ht == this || (StringUtils.equals(label, ht.label) && ObjectUtils.equals(url, ht.url));
+        return ht == this || (StringUtils.equals(label, ht.label) && Objects.equals(url, ht.url));
     }
 }

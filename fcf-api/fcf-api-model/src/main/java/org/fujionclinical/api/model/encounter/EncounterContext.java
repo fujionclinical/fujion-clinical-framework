@@ -46,7 +46,7 @@ public class EncounterContext extends ManagedContext<IEncounter> {
 
     private boolean fromEncounter;
 
-    private IEncounterContextSubscriber encounterContextSubscriber = new IEncounterContextSubscriber() {
+    private final IEncounterContextSubscriber encounterContextSubscriber = new IEncounterContextSubscriber() {
         @Override
         public void pending(ISurveyResponse response) {
             IEncounter encounter = getContextObject(true);
@@ -67,7 +67,7 @@ public class EncounterContext extends ManagedContext<IEncounter> {
         }
     };
 
-    private PatientContext.IPatientContextSubscriber patientContextSubscriber = new PatientContext.IPatientContextSubscriber() {
+    private final PatientContext.IPatientContextSubscriber patientContextSubscriber = new PatientContext.IPatientContextSubscriber() {
 
         @Override
         public void pending(ISurveyResponse response) {

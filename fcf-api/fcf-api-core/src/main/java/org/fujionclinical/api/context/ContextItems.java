@@ -250,7 +250,7 @@ public class ContextItems {
      */
     public void setItem(String itemName, Object value) {
         if (value == null) {
-            setItem(itemName, (String) null);
+            setItem(itemName, null);
         } else {
             @SuppressWarnings("unchecked")
             ISerializer<Object> contextSerializer = (ISerializer<Object>) ContextSerializers.getInstance()
@@ -311,7 +311,7 @@ public class ContextItems {
      */
     public void addItems(String values) {
         for (String line : values.split("[\\r\\n]")) {
-            String[] pcs = line.split("\\=", 2);
+            String[] pcs = line.split("=", 2);
 
             if (pcs.length == 2) {
                 setItem(pcs[0], pcs[1]);

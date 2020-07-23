@@ -25,9 +25,10 @@
  */
 package org.fujionclinical.api.core;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.fujion.common.StrUtil;
 import org.springframework.core.NestedRuntimeException;
+
+import java.util.Objects;
 
 /**
  * Superclass for all 'fatal' exceptions thrown in the framework
@@ -97,7 +98,7 @@ public class FrameworkRuntimeException extends NestedRuntimeException implements
         }
 
         FrameworkRuntimeException otherBe = (FrameworkRuntimeException) other;
-        return getMessage().equals(otherBe.getMessage()) && ObjectUtils.equals(getCause(), otherBe.getCause());
+        return getMessage().equals(otherBe.getMessage()) && Objects.equals(getCause(), otherBe.getCause());
     }
 
     /**

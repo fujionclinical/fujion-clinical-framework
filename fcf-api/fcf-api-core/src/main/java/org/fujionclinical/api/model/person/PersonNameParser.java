@@ -64,7 +64,7 @@ public class PersonNameParser implements IPersonNameParser {
         name.setFamilyName(familyName);
 
         if (givenNames != null) {
-            name.setGivenNames(Arrays.stream(givenNames).map(nm -> nm.trim()).filter(nm -> !nm.isEmpty()).collect(Collectors.toList()));
+            name.setGivenNames(Arrays.stream(givenNames).map(String::trim).filter(nm -> !nm.isEmpty()).collect(Collectors.toList()));
         }
 
         return name;

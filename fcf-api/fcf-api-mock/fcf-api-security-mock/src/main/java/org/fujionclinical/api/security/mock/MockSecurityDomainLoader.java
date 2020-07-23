@@ -43,12 +43,12 @@ public class MockSecurityDomainLoader {
      * @param authorities Comma-separated list of granted authorities.
      */
     public MockSecurityDomainLoader(String domains, String authorities) {
-        for (String domain : domains.split("\\,")) {
+        for (String domain : domains.split(",")) {
             String[] pcs = domain.split("\\^");
             Map<String, String> attrs = new HashMap<>();
             
             for (int i = 2; i < pcs.length; i++) {
-                String[] nv = pcs[i].split("\\=", 2);
+                String[] nv = pcs[i].split("=", 2);
                 
                 if (nv.length == 2) {
                     attrs.put(nv[0], nv[1]);

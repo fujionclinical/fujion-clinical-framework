@@ -46,9 +46,8 @@ public class ResourceProcessor extends AbstractProcessor<BaseMojo> {
      * @param mojo The mojo.
      * @param resourceBase The resource base path.
      * @param resources The resources to process.
-     * @throws Exception if error occurs initializing generator
      */
-    public ResourceProcessor(BaseMojo mojo, String resourceBase, List<String> resources) throws Exception {
+    public ResourceProcessor(BaseMojo mojo, String resourceBase, List<String> resources) {
         super(mojo);
         this.resourceBase = resourceBase;
         this.resources = resources;

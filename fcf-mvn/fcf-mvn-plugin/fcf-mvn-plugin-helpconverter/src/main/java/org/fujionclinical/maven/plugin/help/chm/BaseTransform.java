@@ -33,6 +33,7 @@ import org.fujionclinical.maven.plugin.transform.AbstractTransform;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Extracts the topic tree from a view, converting from window-1252 to UTF-8 encoding and
@@ -40,9 +41,7 @@ import java.nio.charset.Charset;
  */
 public abstract class BaseTransform extends AbstractTransform {
     
-    protected static final String UTF8 = "UTF-8";
-    
-    protected static final Charset CS_UTF8 = Charset.forName(UTF8);
+    protected static final Charset CS_UTF8 = StandardCharsets.UTF_8;
     
     protected static final String WIN1252 = "windows-1252";
     

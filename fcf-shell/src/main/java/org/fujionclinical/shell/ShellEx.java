@@ -315,9 +315,8 @@ public class ShellEx extends Shell {
      *
      * @param path Format is &lt;tab name&gt;\&lt;tree node path&gt;
      * @return The parent UI element.
-     * @throws Exception Unspecified exception.
      */
-    private ElementUI parentFromPath(String path) throws Exception {
+    private ElementUI parentFromPath(String path) {
         if (TOOLBAR_PATH.equalsIgnoreCase(path)) {
             return getDesktop().getToolbar();
         }

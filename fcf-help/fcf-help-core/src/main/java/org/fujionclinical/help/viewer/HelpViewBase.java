@@ -83,11 +83,9 @@ public abstract class HelpViewBase implements IAutoWired, ITopicListener {
                 return HelpViewContents.class;
             
             case KEYWORD:
-                return HelpViewIndex.class;
-            
             case INDEX:
                 return HelpViewIndex.class;
-            
+
             case SEARCH:
                 return HelpViewSearch.class;
             

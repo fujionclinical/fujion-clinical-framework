@@ -160,7 +160,7 @@ public class MessagingTest extends CommonTest {
             try {
                 Thread.sleep(pollingInterval);
             } catch (InterruptedException e) {
-                continue;
+                // NOP
             }
         }
         

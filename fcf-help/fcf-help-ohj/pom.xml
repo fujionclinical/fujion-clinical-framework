@@ -52,6 +52,7 @@
 	<profiles>
 		<!-- Prevents Maven from creating spurious project folder. -->
 		<profile>
+			<id>dummy</id>
 			<activation>
 				<property>
 					<name>!basedir</name>

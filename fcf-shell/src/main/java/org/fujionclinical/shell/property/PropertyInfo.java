@@ -148,7 +148,7 @@ public class PropertyInfo {
         
         if (config != null) {
             for (String param : config) {
-                String[] pcs = param.split("\\=", 2);
+                String[] pcs = param.split("=", 2);
                 
                 if (pcs.length == 2) {
                     this.config.put(pcs[0], pcs[1]);

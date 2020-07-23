@@ -146,7 +146,7 @@ public class FCFUtil {
      * @return String representing resource path
      */
     public static String getResourcePath(String name, int up) {
-        String path = StringUtils.chomp(name.replace('.', '/'), "/");
+        String path = StringUtils.removeEnd(name.replace('.', '/'), "/");
         
         while (up > 0) {
             int i = path.lastIndexOf("/");
@@ -188,7 +188,7 @@ public class FCFUtil {
             return new Html(text);
         }
         
-        if (frag.matches("^https?:\\/\\/.+$")) {
+        if (frag.matches("^https?://.+$")) {
             Hyperlink link = new Hyperlink();
             link.setHref(text);
             link.setTarget("_blank");
@@ -219,7 +219,9 @@ public class FCFUtil {
             } catch (Exception e) {
                 try {
                     FieldUtils.writeField(controller, key, value, true);
-                } catch (Exception e1) {}
+                } catch (Exception e1) {
+                    // NOP
+                }
             }
             
         }

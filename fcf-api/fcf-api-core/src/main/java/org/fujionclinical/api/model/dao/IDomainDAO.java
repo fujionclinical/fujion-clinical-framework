@@ -70,7 +70,7 @@ public interface IDomainDAO<T extends IDomainType> {
      * @param id Unique id of the object.
      * @return The requested object.
      */
-    abstract T read(String id);
+    T read(String id);
 
     /**
      * Fetches multiple domain objects given a list of ids.

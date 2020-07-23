@@ -91,7 +91,7 @@ public class AppContextInitializer implements ApplicationContextInitializer<XmlW
             env.getPropertySources().addLast(new ExternalPropertySource(ctx));
             env.getPropertySources().addLast(new RandomPropertySource());
             env.setDefaultProfiles(Constants.PROFILE_ROOT_DEFAULT);
-            ctx.setConfigLocations((String[]) ArrayUtils.addAll(Constants.DEFAULT_LOCATIONS, ctx.getConfigLocations()));
+            ctx.setConfigLocations(ArrayUtils.addAll(Constants.DEFAULT_LOCATIONS, ctx.getConfigLocations()));
             ClasspathMessageSource.getInstance().setResourceLoader(ctx);
             registerSessionListener();
         }

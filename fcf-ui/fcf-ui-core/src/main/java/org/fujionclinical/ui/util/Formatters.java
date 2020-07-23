@@ -32,6 +32,7 @@ import org.fujionclinical.api.model.core.IConceptCode;
 import org.fujionclinical.api.model.core.IIdentifier;
 import org.fujionclinical.api.model.core.IPeriod;
 import org.fujionclinical.api.model.person.IPerson;
+import org.fujionclinical.api.model.person.IPersonNameType;
 
 import java.time.temporal.Temporal;
 import java.util.*;
@@ -54,7 +55,7 @@ public class Formatters {
         register(IConcept.class, FormatUtil::formatConcept);
         register(IConceptCode.class, FormatUtil::formatConceptCode);
         register(IIdentifier.class, FormatUtil::formatIdentifier);
-        register(IPerson.class, person -> person.getFullName());
+        register(IPerson.class, IPersonNameType::getFullName);
     }
 
     public static <T> void register(

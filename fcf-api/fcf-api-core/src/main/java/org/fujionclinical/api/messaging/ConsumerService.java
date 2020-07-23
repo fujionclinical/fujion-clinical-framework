@@ -184,7 +184,7 @@ public class ConsumerService implements IMessageCallback, DestructionAwareBeanPo
             try {
                 callback.onMessage(channel, message);
             } catch (Exception e) {
-                
+                // NOP
             }
         }
     }

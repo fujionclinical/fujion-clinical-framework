@@ -150,7 +150,9 @@ public class PopupDialog extends Window {
     public void show(IEventListener closeListener) {
         try {
             modal(closeListener);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            // NOP
+        }
     }
     
     /**

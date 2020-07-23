@@ -41,7 +41,7 @@ public class AliasType {
     
     private static final Log log = LogFactory.getLog(AliasType.class);
     
-    private static final String WILDCARD_DELIM_REGEX = "((?<=[\\*,\\?])|(?=[\\*,\\?]))";
+    private static final String WILDCARD_DELIM_REGEX = "((?<=[*,?])|(?=[*,?]))";
     
     private static final SimpleRegexMatcher matcher = new SimpleRegexMatcher();
     

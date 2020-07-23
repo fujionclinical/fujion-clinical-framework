@@ -288,10 +288,9 @@ public class Shell extends Div implements INamespace {
      * loaded.
      *
      * @param defaultLayoutName The default layout name.
-     * @throws Exception Unspecified exception.
      */
     @PropertySetter("layout")
-    public void setLayout(String defaultLayoutName) throws Exception {
+    public void setLayout(String defaultLayoutName) {
         this.defaultLayoutName = defaultLayoutName;
 
         if (desktop != null && !StringUtils.isEmpty(defaultLayoutName)) {
@@ -379,6 +378,7 @@ public class Shell extends Div implements INamespace {
             registeredStyles.destroyChildren();
             plugins.clear();
         } catch (Exception e) {
+            // NOP
         }
     }
 

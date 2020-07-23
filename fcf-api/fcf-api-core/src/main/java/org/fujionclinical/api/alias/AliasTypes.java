@@ -135,7 +135,7 @@ public class AliasTypes extends AbstractRegistry<String, AliasType> implements A
             return;
         }
 
-        for (String pf : propertyFile.split("\\,")) {
+        for (String pf : propertyFile.split(",")) {
             loadAliases(applicationContext, pf);
         }
 

@@ -46,7 +46,7 @@ public class ConditionContext extends ManagedContext<ICondition> {
 
     private boolean fromCondition;
 
-    private IConditionContextSubscriber conditionContextSubscriber = new IConditionContextSubscriber() {
+    private final IConditionContextSubscriber conditionContextSubscriber = new IConditionContextSubscriber() {
         @Override
         public void pending(ISurveyResponse response) {
             ICondition condition = getContextObject(true);
@@ -67,7 +67,7 @@ public class ConditionContext extends ManagedContext<ICondition> {
         }
     };
 
-    private PatientContext.IPatientContextSubscriber patientContextSubscriber = new PatientContext.IPatientContextSubscriber() {
+    private final PatientContext.IPatientContextSubscriber patientContextSubscriber = new PatientContext.IPatientContextSubscriber() {
 
         @Override
         public void pending(ISurveyResponse response) {

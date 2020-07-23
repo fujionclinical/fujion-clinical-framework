@@ -25,7 +25,6 @@
  */
 package org.fujionclinical.api.context;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujionclinical.api.context.ISurveyResponse.ISurveyCallback;
@@ -150,7 +149,7 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
             return ((IDomainType) domainObject1).isSame(((IDomainType) domainObject2));
         }
 
-        return ObjectUtils.equals(domainObject1, domainObject2);
+        return Objects.equals(domainObject1, domainObject2);
     }
     
     /**

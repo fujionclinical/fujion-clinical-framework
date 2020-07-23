@@ -149,7 +149,9 @@ public abstract class AbstractRenderer<T extends BaseComponent, M> implements IC
                 createLabel(container, value, prefix, style);
             }
 
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            // NOP
+        }
 
         return container;
     }

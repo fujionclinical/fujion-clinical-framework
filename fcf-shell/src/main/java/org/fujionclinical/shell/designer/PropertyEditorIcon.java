@@ -57,7 +57,7 @@ public class PropertyEditorIcon extends PropertyEditorBase<IconPicker> {
                 if (choice.startsWith("web/")) {
                     editor.addIconByUrl(choice);
                 } else {
-                    String[] pcs = choice.split("\\:", 3);
+                    String[] pcs = choice.split(":", 3);
                     String library = pcs.length == 0 ? null : pcs[0];
                     String name = pcs.length < 2 ? "*" : pcs[1];
                     String dimension = pcs.length < 3 ? null : pcs[2];

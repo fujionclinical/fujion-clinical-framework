@@ -57,7 +57,7 @@ public class PropertyEditorColor extends PropertyEditorBase<ColorPicker> {
             editor.clear();
 
             for (String choice : values) {
-                String[] color = choice.split("\\:", 2);
+                String[] color = choice.split(":", 2);
 
                 for (String s : color) {
                     ColorPickeritem item = new ColorPickeritem(ColorUtil.toColor(s));

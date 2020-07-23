@@ -103,7 +103,7 @@ public abstract class AbstractProcessor<T extends BaseMojo> {
      * @param transform The transform.
      */
     public void registerTransform(String pattern, AbstractTransform transform) {
-        transforms.add(new Transform(new WildcardFileFilter(pattern.split("\\,")), transform));
+        transforms.add(new Transform(new WildcardFileFilter(pattern.split(",")), transform));
     }
     
     /**

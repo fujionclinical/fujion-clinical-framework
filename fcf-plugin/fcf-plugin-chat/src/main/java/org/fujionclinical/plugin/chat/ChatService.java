@@ -26,7 +26,6 @@
 package org.fujionclinical.plugin.chat;
 
 import org.fujion.common.LocalizedMessage;
-import org.fujion.common.StrUtil;
 import org.fujionclinical.api.event.IEventManager;
 import org.fujionclinical.api.event.ILocalEventDispatcher;
 import org.fujionclinical.api.messaging.IPublisherInfo;

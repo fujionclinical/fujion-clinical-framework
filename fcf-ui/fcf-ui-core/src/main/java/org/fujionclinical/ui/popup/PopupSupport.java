@@ -92,7 +92,7 @@ public class PopupSupport implements IEventSubscriber<Object>, IEventListener {
                 window.removeEventListener("close", this);
                 window.destroy();
             } catch (Throwable e) {
-                
+                // NOP
             }
         }
         
@@ -134,7 +134,9 @@ public class PopupSupport implements IEventSubscriber<Object>, IEventListener {
             Label label = window.findByName("messagetext", Label.class);
             label.setLabel(popupData.getMessage());
             window.setMode(Mode.POPUP);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            // NOP
+        }
     }
     
     /**

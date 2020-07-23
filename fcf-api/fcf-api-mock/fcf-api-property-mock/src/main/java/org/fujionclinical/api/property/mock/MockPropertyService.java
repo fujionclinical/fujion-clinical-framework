@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.property.mock;
 
-import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.fujion.common.StrUtil;
 import org.fujionclinical.api.property.IPropertyService;
 import org.springframework.core.io.Resource;

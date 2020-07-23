@@ -83,11 +83,9 @@ public class CaptionedFormController extends PluginController {
         
         switch (cs) {
             case FRAME:
-                break;
-            
             case TITLE:
                 break;
-            
+
             case LEFT:
                 background = getGradValue(color1, color2);
                 break;

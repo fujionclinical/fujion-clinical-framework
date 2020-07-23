@@ -49,7 +49,7 @@ public class RelatedDocument implements IDocument.IRelatedDocument {
     }
 
     @Override
-    public void setDocument(IReference<IDocument> value) {
+    public void setDocument(IReference<IDocument> document) {
         this.document = document;
     }
 

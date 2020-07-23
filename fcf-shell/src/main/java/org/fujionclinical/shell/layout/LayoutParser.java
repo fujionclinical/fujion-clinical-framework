@@ -26,7 +26,6 @@
 package org.fujionclinical.shell.layout;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.ObjectUtils;
 import org.fujion.client.ExecutionContext;
 import org.fujion.common.MiscUtil;
 import org.fujion.common.Version;
@@ -44,6 +43,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import java.io.InputStream;
+import java.util.Objects;
 
 /**
  * Parses an XML layout. A number of data sources are supported.
@@ -401,8 +401,8 @@ public class LayoutParser {
         for (PropertyInfo propInfo : src.getDefinition().getProperties()) {
             Object value = propInfo.isSerializable() ? propInfo.getPropertyValue(src) : null;
             String val = value == null ? null : propInfo.getPropertyType().getSerializer().serialize(value);
-            
-            if (!ObjectUtils.equals(value, propInfo.getDefault())) {
+
+            if (!Objects.equals(value, propInfo.getDefault())) {
                 dest.getAttributes().put(propInfo.getId(), val);
             }
         }

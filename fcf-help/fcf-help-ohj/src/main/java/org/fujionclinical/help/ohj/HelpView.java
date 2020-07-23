@@ -81,6 +81,7 @@ public class HelpView implements IHelpView {
             initTopicTree(baseNode, topicTree.getRoot());
             
         } catch (IOException e) {
+            // NOP
         }
         
     }
@@ -118,7 +119,9 @@ public class HelpView implements IHelpView {
                 
                 try {
                     url = target == null ? null : target.getURL();
-                } catch (MalformedURLException e) {}
+                } catch (MalformedURLException e) {
+                    // NOP
+                }
                 
                 HelpTopic ht = new HelpTopic(url, topic.getLabel(), source);
                 HelpTopicNode htnChild = new HelpTopicNode(ht);

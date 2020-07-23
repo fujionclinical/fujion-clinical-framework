@@ -25,7 +25,6 @@
  */
 package org.fujionclinical.patientlist;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.ConstructorUtils;
 import org.apache.commons.logging.Log;
@@ -323,7 +322,7 @@ public abstract class AbstractPatientList implements IPatientList {
     @Override
     public IPatientList copy() {
         try {
-            return (IPatientList) ConstructorUtils.invokeConstructor(getClass(), this);
+            return ConstructorUtils.invokeConstructor(getClass(), this);
         } catch (Exception e) {
             log.error("Error attempting to copy list.", e);
             return null;
@@ -375,8 +374,8 @@ public abstract class AbstractPatientList implements IPatientList {
         }
 
         AbstractPatientList list = (AbstractPatientList) object;
-        return ObjectUtils.equals(name, list.name) && ObjectUtils.equals(activeFilter, list.activeFilter)
-                && ObjectUtils.equals(dateRange, list.dateRange);
+        return Objects.equals(name, list.name) && Objects.equals(activeFilter, list.activeFilter)
+                && Objects.equals(dateRange, list.dateRange);
     }
 
 }
