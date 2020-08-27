@@ -109,6 +109,12 @@ public class MainController extends ResourceListView<IEncounter, IEncounter> {
         EncounterContext.getEncounterContext().removeListener(encounterChangeListener);
     }
 
+    @Override
+    protected void renderData() {
+        super.renderData();
+        updateRowStatus(lastEncounter, true);
+    }
+
     private void setEncounter(IEncounter encounter) {
         updateRowStatus(lastEncounter, false);
         updateRowStatus(encounter, true);

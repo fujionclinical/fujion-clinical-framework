@@ -173,8 +173,10 @@
 	border: none;
 }
 
-.fcf-designmode-active {
-	outline: 2px dotted lightgray;
+.fcf-designmode-active:hover,
+.fcf-designmode-active .fujion-mask:hover > span {
+	outline: 2px dotted orange;
+	outline-offset: -2px;
 	position: relative;
 }
 
