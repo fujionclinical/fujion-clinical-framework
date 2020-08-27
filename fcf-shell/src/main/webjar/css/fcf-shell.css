@@ -173,7 +173,7 @@
 	border: none;
 }
 
-*.fcf-designmode-active {
+.fcf-designmode-active {
 	outline: 2px dotted lightgray;
 	position: relative;
 }
