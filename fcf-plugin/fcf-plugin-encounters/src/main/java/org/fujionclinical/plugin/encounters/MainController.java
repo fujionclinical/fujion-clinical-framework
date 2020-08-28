@@ -52,7 +52,7 @@ public class MainController extends ResourceListView<IEncounter, IEncounter> {
 
     @Override
     protected void setup() {
-        setup(IEncounter.class, "Encounters", "Encounter Detail", "patient={{patient}}", 1, "", "Date", "EncounterStatus", "Location", "Providers");
+        setup(IEncounter.class, "Encounters", "Encounter Detail", "patient={{patient}}", 1, "", "Date", "Status", "Location", "Providers");
         columns.getFirstChild(Column.class).setStyles("width: 1%; min-width: 40px");
     }
 
