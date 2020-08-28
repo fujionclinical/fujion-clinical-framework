@@ -145,7 +145,7 @@ public class ThemeUtil {
 
         @Override
         public String getThemeClass() {
-            return "flavor:card-" + name().toLowerCase();
+            return "flavor:bg-" + name().toLowerCase();
         }
 
         @Override
