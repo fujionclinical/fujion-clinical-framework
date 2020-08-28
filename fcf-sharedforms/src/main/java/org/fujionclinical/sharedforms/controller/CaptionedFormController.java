@@ -101,7 +101,7 @@ public class CaptionedFormController extends PluginController {
         }
         
         panel.addClass("caption-style:fcf-sharedForms-captioned-caption-" + cs.name().toLowerCase());
-        String css = "##{id}-titlebar ";
+        String css = ".card-title ";
         
         if (cs == CaptionStyle.HIDDEN) {
             css += "{display:none}";
