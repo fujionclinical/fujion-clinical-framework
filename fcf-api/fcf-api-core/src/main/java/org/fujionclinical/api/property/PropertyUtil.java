@@ -38,11 +38,7 @@ public class PropertyUtil {
     private static IPropertyService propertyService;
     
     public static IPropertyService getPropertyService() {
-        if (propertyService == null) {
-            propertyService = SpringUtil.getBean("propertyService", IPropertyService.class);
-        }
-        
-        return propertyService;
+        return SpringUtil.getBean("propertyService", IPropertyService.class, () -> propertyService, value -> propertyService = value);
     }
     
     /**
