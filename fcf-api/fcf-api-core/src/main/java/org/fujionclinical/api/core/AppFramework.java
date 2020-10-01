@@ -207,19 +207,6 @@ public class AppFramework implements ApplicationContextAware, DestructionAwareBe
     }
 
     /**
-     * Does nothing but return the original bean instance.
-     *
-     * @param bean     Bean instance.
-     * @param beanName Name of the managed bean.
-     */
-    @Override
-    public Object postProcessBeforeInitialization(
-            Object bean,
-            String beanName) throws BeansException {
-        return bean;
-    }
-
-    /**
      * Unregister container-managed bean upon destruction.
      *
      * @param bean     Bean instance.
@@ -232,9 +219,4 @@ public class AppFramework implements ApplicationContextAware, DestructionAwareBe
         unregisterObject(bean);
     }
 
-    @Override
-    public boolean requiresDestruction(Object bean) {
-        return true;
-    }
-
-}
+ }

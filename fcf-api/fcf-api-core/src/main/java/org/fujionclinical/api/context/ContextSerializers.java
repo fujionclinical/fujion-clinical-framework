@@ -77,11 +77,6 @@ public class ContextSerializers extends AbstractRegistry<Class<?>, ISerializer<?
     }
 
     @Override
-    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        return bean;
-    }
-
-    @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         if (bean instanceof ISerializer) {
             register((ISerializer<?>) bean);

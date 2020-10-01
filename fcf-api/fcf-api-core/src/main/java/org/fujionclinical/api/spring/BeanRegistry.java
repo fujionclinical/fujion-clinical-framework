@@ -50,11 +50,6 @@ public abstract class BeanRegistry<K, V> extends AbstractRegistry<K, V> implemen
         this.clazz = clazz;
     }
     
-    @Override
-    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        return bean;
-    }
-    
     /**
      * If the managed bean is of the desired type, add it to the registry.
      */

@@ -62,9 +62,4 @@ public class PatientSelectorRegistry extends AbstractRegistry<String, IPatientSe
         return bean;
     }
     
-    @Override
-    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        return bean;
-    }
-    
 }
