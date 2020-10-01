@@ -29,6 +29,7 @@ import org.fujion.common.CollectionUtil;
 import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.model.person.IPerson;
 
+import java.util.Collections;
 import java.util.List;
 
 public interface IAnnotation extends IBaseType {
@@ -43,8 +44,8 @@ public interface IAnnotation extends IBaseType {
         return CollectionUtil.notEmpty(getAuthors());
     }
 
-    default void addAuthor(IPerson author) {
-        getAuthors().add(author);
+    default void addAuthors(IPerson... authors) {
+        Collections.addAll(getAuthors(), authors);
     }
 
     DateTimeWrapper getRecorded();
