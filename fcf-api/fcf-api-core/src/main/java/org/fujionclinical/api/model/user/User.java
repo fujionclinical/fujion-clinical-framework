@@ -147,13 +147,4 @@ public class User implements IUser {
         this.securityDomain = securityDomain;
     }
     
-    /**
-     * Returns the native user object if this is a proxy.
-     * 
-     * @return The native user object.
-     */
-    @Override
-    public User getNative() {
-        return this;
-    }
 }

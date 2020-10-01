@@ -189,14 +189,4 @@ public interface IDomainType extends IBaseType, Serializable {
         return object != null && object.getClass() == getClass() && object.getId().equals(getId());
     }
 
-    /**
-     * Returns the native object if this is a proxy.  The default implementation
-     * returns the object itself.
-     *
-     * @return The native object.
-     */
-    default Object getNative() {
-        return this;
-    }
-
 }

@@ -114,9 +114,4 @@ public class MockUser implements IUser {
         return logicalId;
     }
 
-    @Override
-    public MockUser getNative() {
-        return this;
-    }
-
 }
