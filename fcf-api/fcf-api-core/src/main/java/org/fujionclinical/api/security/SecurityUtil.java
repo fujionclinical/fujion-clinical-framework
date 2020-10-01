@@ -41,7 +41,7 @@ public class SecurityUtil {
     
     private static final AntPathMatcher urlMatcher = new AntPathMatcher();
     
-    private static ISecurityService securityService;
+    private static volatile ISecurityService securityService;
     
     /**
      * Returns a reference to the security service.
@@ -49,11 +49,7 @@ public class SecurityUtil {
      * @return The security service instance.
      */
     public static ISecurityService getSecurityService() {
-        if (securityService == null) {
-            securityService = SpringUtil.getBean("securityService", ISecurityService.class);
-        }
-        
-        return securityService;
+        return SpringUtil.getBean("securityService", ISecurityService.class, () -> securityService, value -> securityService = value);
     }
     
     /**
