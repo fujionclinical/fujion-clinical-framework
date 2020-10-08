@@ -30,17 +30,17 @@ import org.fujionclinical.api.model.core.IAttachment;
 
 import java.nio.charset.StandardCharsets;
 
-public class Attachment implements IAttachment {
+public class AttachmentImpl implements IAttachment {
 
     private String contentType;
 
     private String title;
 
-    private String encodedData;
+    private String encodedContent;
+
+    private byte[] rawContent;
 
     private String url;
-
-    private byte[] rawData;
 
     @Override
     public String getContentType() {
@@ -63,38 +63,38 @@ public class Attachment implements IAttachment {
     }
 
     @Override
-    public String getEncodedData() {
-        if (encodedData == null && rawData != null) {
-            encodedData = Base64.encodeBase64String(rawData);
+    public String getEncodedContent() {
+        if (encodedContent == null && rawContent != null) {
+            encodedContent = Base64.encodeBase64String(rawContent);
         }
 
-        return encodedData;
+        return encodedContent;
     }
 
     @Override
-    public void setEncodedData(String encodedData) {
-        this.encodedData = encodedData;
-        this.rawData = null;
+    public void setEncodedContent(String encodedData) {
+        this.encodedContent = encodedData;
+        this.rawContent = null;
     }
 
     @Override
-    public byte[] getRawData() {
-        if (rawData == null && encodedData != null) {
-            rawData = Base64.decodeBase64(encodedData.getBytes(StandardCharsets.UTF_8));
+    public byte[] getRawContent() {
+        if (rawContent == null && encodedContent != null) {
+            rawContent = Base64.decodeBase64(encodedContent.getBytes(StandardCharsets.UTF_8));
         }
 
-        return rawData;
+        return rawContent;
     }
 
     @Override
-    public void setRawData(byte[] rawData) {
-        this.rawData = rawData;
-        this.encodedData = null;
+    public void setRawContent(byte[] rawData) {
+        this.rawContent = rawData;
+        this.encodedContent = null;
     }
 
     @Override
-    public boolean hasData() {
-        return rawData != null || encodedData != null;
+    public boolean hasContent() {
+        return rawContent != null || encodedContent != null;
     }
 
     @Override

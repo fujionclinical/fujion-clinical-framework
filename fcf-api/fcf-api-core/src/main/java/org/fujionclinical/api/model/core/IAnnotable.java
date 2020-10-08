@@ -25,15 +25,14 @@
  */
 package org.fujionclinical.api.model.core;
 
+import edu.utah.kmm.model.cool.foundation.common.Annotatable;
 import edu.utah.kmm.model.cool.foundation.datatype.Annotation;
 import org.fujion.common.CollectionUtil;
 
 import java.util.Collections;
 import java.util.List;
 
-public interface IAnnotationType {
-
-    List<Annotation> getNotes();
+public interface IAnnotable extends Annotatable {
 
     default void setNotes(List<Annotation> annotations) {
         CollectionUtil.replaceElements(getNotes(), annotations);

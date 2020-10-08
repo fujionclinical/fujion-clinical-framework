@@ -67,19 +67,19 @@ public interface IAttachment extends IBaseType {
         return getTitle() != null;
     }
 
-    String getEncodedData();
+    String getEncodedContent();
 
-    default void setEncodedData(String encodedData) {
+    default void setEncodedContent(String encodedData) {
         notSupported();
     }
 
-    byte[] getRawData();
+    byte[] getRawContent();
 
-    default void setRawData(byte[] rawData) {
+    default void setRawContent(byte[] rawData) {
         notSupported();
     }
 
-    boolean hasData();
+    boolean hasContent();
 
     String getURL();
 
@@ -92,8 +92,8 @@ public interface IAttachment extends IBaseType {
     }
 
     default MimeContent getContent() {
-        if (hasData()) {
-            return new MimeContent(getContentType(), getEncodedData());
+        if (hasContent()) {
+            return new MimeContent(getContentType(), getEncodedContent());
         }
 
         if (hasURL()) {
@@ -106,6 +106,6 @@ public interface IAttachment extends IBaseType {
     default void setContent(MimeContent content) {
         setURL(content == null ? null : content.getSrc());
         setContentType(content == null ? null : content.getMimeType());
-        setRawData(content == null ? null : content.getData());
+        setRawContent(content == null ? null : content.getData());
     }
 }

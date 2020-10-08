@@ -27,7 +27,7 @@ package org.fujionclinical.api.model.condition;
 
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujionclinical.api.core.CoreUtil;
-import org.fujionclinical.api.model.core.IAnnotationType;
+import org.fujionclinical.api.model.core.IAnnotable;
 import org.fujionclinical.api.model.core.IDomainType;
 import org.fujionclinical.api.model.core.IPeriod;
 import org.fujionclinical.api.model.core.IReference;
@@ -38,7 +38,7 @@ import org.fujionclinical.api.query.expression.QueryParameter;
 
 import java.time.LocalDateTime;
 
-public interface ICondition extends IDomainType, IAnnotationType {
+public interface ICondition extends IDomainType, IAnnotable {
 
     enum ClinicalStatus {
         ACTIVE, RECURRENCE, RELAPSE, INACTIVE, REMISSION, RESOLVED;
