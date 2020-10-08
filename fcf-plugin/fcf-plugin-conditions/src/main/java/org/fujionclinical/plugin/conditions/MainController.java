@@ -46,7 +46,7 @@ public class MainController extends ResourceListView<ICondition, ICondition> {
         columns.add(condition.getCondition());
         columns.add(condition.getOnset());
         columns.add(condition.getClinicalStatus());
-        columns.add(condition.getAnnotations());
+        columns.add(condition.getNotes());
     }
     
     @Override

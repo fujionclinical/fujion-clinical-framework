@@ -32,17 +32,17 @@ import java.util.List;
 
 public interface IAnnotationType {
 
-    List<IAnnotation> getAnnotations();
+    List<IAnnotation> getNotes();
 
-    default void setAnnotations(List<IAnnotation> annotations) {
-        CollectionUtil.replaceElements(getAnnotations(), annotations);
+    default void setNotes(List<IAnnotation> annotations) {
+        CollectionUtil.replaceElements(getNotes(), annotations);
     }
 
-    default void addAnnotations(IAnnotation... annotations) {
-        Collections.addAll(getAnnotations(), annotations);
+    default void addNotes(IAnnotation... annotations) {
+        Collections.addAll(getNotes(), annotations);
     }
 
-    default boolean hasAnnotation() {
-        return CollectionUtil.notEmpty(getAnnotations());
+    default boolean hasNotes() {
+        return CollectionUtil.notEmpty(getNotes());
     }
 }

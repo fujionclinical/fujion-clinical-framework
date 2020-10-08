@@ -7,15 +7,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * This Source Code Form is also subject to the terms of the Health-Related
  * Additional Disclaimer of Warranty and Limitation of Liability available at
  *
@@ -29,59 +29,65 @@ import org.fujionclinical.api.model.core.IAnnotation;
 import org.fujionclinical.api.model.person.IPerson;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class Annotation implements IAnnotation {
 
-    private final List<IPerson> authors = new ArrayList<>();
+    private IPerson author;
 
-    private LocalDateTime recorded;
+    private LocalDateTime timestamp;
 
-    private String text;
+    private String content;
 
     public Annotation() {
     }
 
-    public Annotation(
-            String text,
-            IPerson... authors) {
-        this(text, LocalDateTime.now(), authors);
+    public Annotation(String content) {
+        this(content, LocalDateTime.now(), null);
     }
 
     public Annotation(
-            String text,
-            LocalDateTime recorded,
-            IPerson... authors) {
-        this.text = text;
-        this.recorded = recorded;
-        Collections.addAll(this.authors, authors);
+            String content,
+            IPerson author) {
+        this(content, LocalDateTime.now(), author);
+    }
+
+    public Annotation(
+            String content,
+            LocalDateTime timestamp,
+            IPerson author) {
+        this.content = content;
+        this.timestamp = timestamp;
+        this.author = author;
     }
 
     @Override
-    public List<IPerson> getAuthors() {
-        return authors;
+    public IPerson getAuthor() {
+        return author;
     }
 
     @Override
-    public LocalDateTime getRecorded() {
-        return recorded;
+    public void setAuthor(IPerson author) {
+        this.author = author;
     }
 
     @Override
-    public void setRecorded(LocalDateTime recorded) {
-        this.recorded = recorded;
+    public LocalDateTime getTimestamp() {
+        return timestamp;
     }
 
     @Override
-    public String getText() {
-        return text;
+    public void setTimestamp(LocalDateTime recorded) {
+        this.timestamp = recorded;
     }
 
     @Override
-    public void setText(String text) {
-        this.text = text;
+    public String getContent() {
+        return content;
+    }
+
+    @Override
+    public void setContent(String content) {
+        this.content = content;
     }
 
 }

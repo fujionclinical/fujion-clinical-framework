@@ -25,46 +25,37 @@
  */
 package org.fujionclinical.api.model.core;
 
-import org.fujion.common.CollectionUtil;
 import org.fujionclinical.api.model.person.IPerson;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.List;
 
 public interface IAnnotation extends IBaseType {
 
-    List<IPerson> getAuthors();
+    IPerson getAuthor();
 
-    default void setAuthors(List<IPerson> authors) {
-        CollectionUtil.replaceElements(getAuthors(), authors);
-    }
+    void setAuthor(IPerson author);
 
     default boolean hasAuthor() {
-        return CollectionUtil.notEmpty(getAuthors());
+        return getAuthor() != null;
     }
 
-    default void addAuthors(IPerson... authors) {
-        Collections.addAll(getAuthors(), authors);
-    }
+    LocalDateTime getTimestamp();
 
-    LocalDateTime getRecorded();
-
-    default void setRecorded(LocalDateTime recorded) {
+    default void setTimestamp(LocalDateTime recorded) {
         notSupported();
     }
 
-    default boolean hasRecorded() {
-        return getRecorded() != null;
+    default boolean hasTimestamp() {
+        return getTimestamp() != null;
     }
 
-    String getText();
+    String getContent();
 
-    default void setText(String text) {
+    default void setContent(String text) {
         notSupported();
     }
 
-    default boolean hasText() {
-        return getText() != null;
+    default boolean hasContent() {
+        return getContent() != null;
     }
 }

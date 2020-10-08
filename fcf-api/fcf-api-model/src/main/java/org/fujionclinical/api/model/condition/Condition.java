@@ -163,7 +163,7 @@ public class Condition extends BaseDomainType implements ICondition {
     }
 
     @Override
-    public List<IAnnotation> getAnnotations() {
+    public List<IAnnotation> getNotes() {
         return annotations;
     }
 

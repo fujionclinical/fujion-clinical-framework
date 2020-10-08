@@ -30,7 +30,7 @@ import edu.utah.kmm.model.cool.terminology.ConceptReference;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceImpl;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ClassUtils;
-import org.fujion.common.DateTimeWrapper;
+import org.fujion.common.DateUtil;
 import org.fujion.common.MiscUtil;
 import org.fujionclinical.api.core.CoreUtil;
 import org.fujionclinical.api.model.core.IDomainType;
@@ -44,6 +44,8 @@ import org.springframework.util.NumberUtils;
 
 import java.beans.PropertyDescriptor;
 import java.net.URI;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * A registry of parameter descriptors, indexed by the parameter type.  Includes several predefined
@@ -122,19 +124,37 @@ class ParameterDescriptors extends BeanRegistry<Class<?>, IParameterDescriptor> 
 
     }
 
-    static class DateParameter extends AbstractParameterDescriptor<DateTimeWrapper, DateTimeWrapper> {
+    static class DateParameter extends AbstractParameterDescriptor<LocalDate, LocalDate> {
 
         public DateParameter() {
-            super(DateTimeWrapper.class, 1, Operator.EQ, Operator.GE, Operator.GT, Operator.LE, Operator.LT);
+            super(LocalDate.class, 1, Operator.EQ, Operator.GE, Operator.GT, Operator.LE, Operator.LT);
         }
 
         @Override
-        public DateTimeWrapper normalizeOperand(
-                Class<DateTimeWrapper> parameterType,
+        public LocalDate normalizeOperand(
+                Class<LocalDate> parameterType,
                 Object operand,
-                DateTimeWrapper previousOperand) {
-            return operand instanceof DateTimeWrapper ? (DateTimeWrapper) operand
-                    : operand instanceof String ? DateTimeWrapper.parse((String) operand)
+                LocalDate previousOperand) {
+            return operand instanceof LocalDate ? (LocalDate) operand
+                    : operand instanceof String ? DateUtil.parseLocalDate((String) operand).toLocalDate()
+                    : null;
+        }
+
+    }
+
+    static class DateTimeParameter extends AbstractParameterDescriptor<LocalDateTime, LocalDateTime> {
+
+        public DateTimeParameter() {
+            super(LocalDateTime.class, 1, Operator.EQ, Operator.GE, Operator.GT, Operator.LE, Operator.LT);
+        }
+
+        @Override
+        public LocalDateTime normalizeOperand(
+                Class<LocalDateTime> parameterType,
+                Object operand,
+                LocalDateTime previousOperand) {
+            return operand instanceof LocalDateTime ? (LocalDateTime) operand
+                    : operand instanceof String ? DateUtil.parseLocalDate((String) operand)
                     : null;
         }
 
@@ -265,6 +285,7 @@ class ParameterDescriptors extends BeanRegistry<Class<?>, IParameterDescriptor> 
         register(new BooleanParameter());
         register(new NumberParameter());
         register(new DateParameter());
+        register(new DateTimeParameter());
         register(new EnumParameter());
         register(new DomainTypeParameter());
         register(new ConceptCodeParameter());
