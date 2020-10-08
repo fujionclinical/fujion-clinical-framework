@@ -25,17 +25,21 @@
  */
 package org.fujionclinical.api.model.practitioner;
 
-import org.fujionclinical.api.model.core.IConceptCode;
-import org.fujionclinical.api.model.impl.ConceptCode;
-import org.fujionclinical.api.model.impl.Identifier;
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceImpl;
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSetImpl;
+import org.fujionclinical.api.model.impl.IdentifierImpl;
 import org.fujionclinical.api.model.person.PersonQueryCriteria;
+
+import java.net.URI;
 
 /**
  * Criteria for practitioner searches.
  */
 public class PractitionerQueryCriteria extends PersonQueryCriteria<IPractitioner> {
 
-    public static final IConceptCode DEA_CONCEPT_CODE = new ConceptCode(null, "DEA", null);
+    public static final ConceptReferenceSet DEA_CONCEPT_CODE = new ConceptReferenceSetImpl(
+            new ConceptReferenceImpl((URI) null, "DEA", "DEA Number"));
 
     public PractitionerQueryCriteria() {
         super(IPractitioner.class, null);
@@ -71,7 +75,7 @@ public class PractitionerQueryCriteria extends PersonQueryCriteria<IPractitioner
      * @param dea DEA.
      */
     public void setDEA(String dea) {
-        queryContext.setParam("identifier", dea == null ? null : new Identifier(null, dea, null, DEA_CONCEPT_CODE));
+        queryContext.setParam("identifier", dea == null ? null : new IdentifierImpl((URI) null, dea, null, DEA_CONCEPT_CODE));
     }
 
 }

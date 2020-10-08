@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.api.model.core;
 
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.CollectionUtil;
 
 import java.util.Collections;
@@ -32,15 +33,15 @@ import java.util.List;
 
 public interface ICategoryType {
 
-    default List<IConcept> getCategories() {
+    default List<ConceptReferenceSet> getCategories() {
         return Collections.emptyList();
     }
 
-    default void setCategories(List<IConcept> values) {
+    default void setCategories(List<ConceptReferenceSet> values) {
         CollectionUtil.replaceElements(getCategories(), values);
     }
 
-    default void addCategories(IConcept... values) {
+    default void addCategories(ConceptReferenceSet... values) {
         Collections.addAll(getCategories(), values);
     }
 

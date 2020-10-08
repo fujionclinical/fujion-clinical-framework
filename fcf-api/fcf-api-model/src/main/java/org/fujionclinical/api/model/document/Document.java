@@ -25,9 +25,9 @@
  */
 package org.fujionclinical.api.model.document;
 
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.model.core.IAttachment;
-import org.fujionclinical.api.model.core.IConcept;
 import org.fujionclinical.api.model.core.IReference;
 import org.fujionclinical.api.model.encounter.IEncounter;
 import org.fujionclinical.api.model.impl.BaseDomainType;
@@ -44,7 +44,7 @@ public class Document extends BaseDomainType implements IDocument {
 
     private final List<IAttachment> attachments = new ArrayList<>();
 
-    private final List<IConcept> categories = new ArrayList<>();
+    private final List<ConceptReferenceSet> categories = new ArrayList<>();
 
     private DateTimeWrapper creationDate;
 
@@ -52,7 +52,7 @@ public class Document extends BaseDomainType implements IDocument {
 
     private CompositionStatus compositionStatus;
 
-    private IConcept type;
+    private ConceptReferenceSet type;
 
     private String description;
 
@@ -89,12 +89,12 @@ public class Document extends BaseDomainType implements IDocument {
     }
 
     @Override
-    public IConcept getType() {
+    public ConceptReferenceSet getType() {
         return type;
     }
 
     @Override
-    public void setType(IConcept type) {
+    public void setType(ConceptReferenceSet type) {
         this.type = type;
     }
 
@@ -134,7 +134,7 @@ public class Document extends BaseDomainType implements IDocument {
     }
 
     @Override
-    public List<IConcept> getCategories() {
+    public List<ConceptReferenceSet> getCategories() {
         return categories;
     }
 

@@ -26,6 +26,7 @@
 package org.fujionclinical.api.model.user;
 
 import org.fujionclinical.api.model.person.IPersonName;
+import org.fujionclinical.api.model.person.Person;
 import org.fujionclinical.api.model.person.PersonNameParser;
 import org.fujionclinical.api.security.ISecurityDomain;
 
@@ -35,9 +36,7 @@ import java.util.List;
 /**
  * Simple implementation of a user.
  */
-public class User implements IUser {
-    
-    private static final long serialVersionUID = 1L;
+public class User extends Person implements IUser {
     
     private String id;
     

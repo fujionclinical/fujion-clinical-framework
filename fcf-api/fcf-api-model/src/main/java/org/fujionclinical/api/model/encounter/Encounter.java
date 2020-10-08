@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.model.encounter;
 
-import org.fujionclinical.api.model.core.IConcept;
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujionclinical.api.model.core.IPeriod;
 import org.fujionclinical.api.model.core.IReference;
 import org.fujionclinical.api.model.impl.BaseDomainType;
@@ -42,7 +42,7 @@ public class Encounter extends BaseDomainType implements IEncounter {
 
     private final List<IReference<ILocation>> locations = new ArrayList<>();
 
-    private final List<IConcept> types = new ArrayList<>();
+    private final List<ConceptReferenceSet> types = new ArrayList<>();
 
     private IReference<IPatient> patient;
 
@@ -91,7 +91,7 @@ public class Encounter extends BaseDomainType implements IEncounter {
     }
 
     @Override
-    public List<IConcept> getTypes() {
+    public List<ConceptReferenceSet> getTypes() {
         return types;
     }
 

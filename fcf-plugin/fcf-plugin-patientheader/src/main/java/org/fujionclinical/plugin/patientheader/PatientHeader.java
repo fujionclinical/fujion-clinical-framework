@@ -25,6 +25,8 @@
  */
 package org.fujionclinical.plugin.patientheader;
 
+import edu.utah.kmm.model.cool.core.datatype.Identifier;
+import edu.utah.kmm.model.cool.core.datatype.IdentifierUse;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -34,7 +36,6 @@ import org.fujion.common.DateTimeWrapper;
 import org.fujion.common.DateUtil;
 import org.fujion.component.*;
 import org.fujionclinical.api.event.IEventSubscriber;
-import org.fujionclinical.api.model.core.IIdentifier;
 import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.patient.PatientContext;
 import org.fujionclinical.api.model.person.IPersonName;
@@ -91,7 +92,9 @@ public class PatientHeader extends PluginController {
     private String patientName;
 
     private boolean needsDetail = true;
+
     private final IEventSubscriber<IPatient> patientChangeListener = (event, patient) -> setPatient(patient);
+
     private boolean showUser = true;
 
     @Override
@@ -151,8 +154,8 @@ public class PatientHeader extends PluginController {
 
         btnDetail.setDisabled(false);
         patientName = patient.getFullName();
-        IIdentifier mrn = patient.getMRN();
-        lblName.setLabel(patientName + (mrn == null ? "" : "  (" + mrn.getValue() + ")"));
+        Identifier mrn = patient.getMRN();
+        lblName.setLabel(patientName + (mrn == null ? "" : "  (" + mrn.getId() + ")"));
         setLabel(lblDOB, formatDateAndAge(patient.getBirthDate()), lblDOBLabel);
         setLabel(lblDOD, patient.getDeceasedDate(), lblDODLabel);
         setLabel(lblGender, patient.getGender(), null);
@@ -213,15 +216,15 @@ public class PatientHeader extends PluginController {
         header = null;
 
         if (patient.getIdentifiers() != null) {
-            for (IIdentifier id : patient.getIdentifiers()) {
+            for (Identifier id : patient.getIdentifiers()) {
                 if (header == null) {
                     header = addHeader("Identifiers");
                 }
 
-                IIdentifier.IdentifierUse categoryId = id.getUse();
+                IdentifierUse categoryId = id.getUse();
                 String category = categoryId == null ? null : categoryId.name().toLowerCase();
-                String system = StringUtils.defaultString(id.getSystem());
-                String value = StringUtils.defaultString(id.getValue());
+                String system = StringUtils.defaultString(id.hasSystem() ? id.getSystem().toString() : null);
+                String value = StringUtils.defaultString(id.getId());
 
                 if (!StringUtils.isEmpty(system)) {
                     value += " (" + system + ")";

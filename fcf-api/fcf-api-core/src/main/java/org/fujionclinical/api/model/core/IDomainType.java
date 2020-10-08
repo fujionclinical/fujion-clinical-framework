@@ -25,10 +25,15 @@
  */
 package org.fujionclinical.api.model.core;
 
+import edu.utah.kmm.model.cool.core.datatype.Identifier;
+import edu.utah.kmm.model.cool.core.datatype.Metadata;
+import edu.utah.kmm.model.cool.foundation.entity.Entity;
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.CollectionUtil;
+import org.fujionclinical.api.model.impl.IdentifierImpl;
 import org.fujionclinical.api.query.expression.QueryParameter;
 
-import java.io.Serializable;
+import java.net.URI;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
@@ -36,7 +41,7 @@ import java.util.function.Predicate;
 /**
  * Interface for a domain object.
  */
-public interface IDomainType extends IBaseType, Serializable {
+public interface IDomainType extends Entity, IBaseType {
 
     /**
      * Returns the logical identifier for the domain object.
@@ -44,7 +49,9 @@ public interface IDomainType extends IBaseType, Serializable {
      * @return The logical identifier.
      */
     @QueryParameter
-    String getId();
+    default String getId() {
+        return getDefaultId().getId();
+    }
 
     /**
      * Sets the logical identifier for the domain object.  The default
@@ -71,8 +78,18 @@ public interface IDomainType extends IBaseType, Serializable {
      * @return Identifiers associated with the domain object (never null)
      */
     @QueryParameter
-    default List<IIdentifier> getIdentifiers() {
+    @Override
+    default List<Identifier> getIdentifiers() {
         return Collections.emptyList();
+    }
+
+    /**
+     * Sets identifiers to be associated with the domain object.
+     *
+     * @param identifiers The identifiers.
+     */
+    default void setIdentifiers(List<Identifier> identifiers) {
+        CollectionUtil.replaceElements(getIdentifiers(), identifiers);
     }
 
     /**
@@ -81,8 +98,8 @@ public interface IDomainType extends IBaseType, Serializable {
      * @param system The identifier system.
      * @return A matching identifier (possibly null)
      */
-    default IIdentifier getIdentifier(String system) {
-        return getIdentifier(identifier -> system.equals(identifier.getSystem()));
+    default Identifier getIdentifier(String system) {
+        return findFirst(system);
     }
 
     /**
@@ -91,17 +108,8 @@ public interface IDomainType extends IBaseType, Serializable {
      * @param criteria A function that returns true when a match is found.
      * @return A matching identifier (possibly null).
      */
-    default IIdentifier getIdentifier(Predicate<IIdentifier> criteria) {
+    default Identifier getIdentifier(Predicate<Identifier> criteria) {
         return CollectionUtil.findMatch(getIdentifiers(), criteria);
-    }
-
-    /**
-     * Sets identifiers to be associated with the domain object.
-     *
-     * @param identifiers The identifiers.
-     */
-    default void setIdentifiers(List<IIdentifier> identifiers) {
-        CollectionUtil.replaceElements(getIdentifiers(), identifiers);
     }
 
     /**
@@ -109,7 +117,7 @@ public interface IDomainType extends IBaseType, Serializable {
      *
      * @param identifiers Identifiers to add.
      */
-    default void addIdentifiers(IIdentifier... identifiers) {
+    default void addIdentifiers(Identifier... identifiers) {
         Collections.addAll(getIdentifiers(), identifiers);
     }
 
@@ -118,8 +126,14 @@ public interface IDomainType extends IBaseType, Serializable {
      *
      * @return True if at least one identifier is present.
      */
-    default boolean hasIdentifier() {
+    default boolean hasIdentifiers() {
         return CollectionUtil.notEmpty(getIdentifiers());
+    }
+
+    default Identifier createIdentifier(
+            URI system,
+            String id) {
+        return new IdentifierImpl(system, id);
     }
 
     /**
@@ -127,8 +141,8 @@ public interface IDomainType extends IBaseType, Serializable {
      *
      * @return Tags associated with the domain object.
      */
-    default List<IConceptCode> getTags() {
-        return Collections.emptyList();
+    default List<ConceptReferenceSet> getTags() {
+        return getMetadata().getGroup();
     }
 
     /**
@@ -136,8 +150,8 @@ public interface IDomainType extends IBaseType, Serializable {
      *
      * @param tags The tags.
      */
-    default void setTags(List<IConceptCode> tags) {
-        CollectionUtil.replaceElements(getTags(), tags);
+    default void setTags(List<ConceptReferenceSet> tags) {
+        getMetadata().setGroup(tags);
     }
 
     /**
@@ -145,8 +159,8 @@ public interface IDomainType extends IBaseType, Serializable {
      *
      * @param tags Tags to add.
      */
-    default void addTags(IConceptCode... tags) {
-        Collections.addAll(getTags(), tags);
+    default void addTags(ConceptReferenceSet... tags) {
+        getMetadata().addGroup(tags);
     }
 
     /**
@@ -155,8 +169,8 @@ public interface IDomainType extends IBaseType, Serializable {
      * @param system The code system.
      * @return A matching tag (possibly null)
      */
-    default IConceptCode getTag(String system) {
-        return getTag(tag -> system.equals(tag.getSystem()));
+    default ConceptReferenceSet getTag(String system) {
+        return getTag(tag -> tag.getBySystem(system) != null);
     }
 
     /**
@@ -165,7 +179,7 @@ public interface IDomainType extends IBaseType, Serializable {
      * @param criteria A function that returns true when a match is found.
      * @return A matching tag (possibly null).
      */
-    default IConceptCode getTag(Predicate<IConceptCode> criteria) {
+    default ConceptReferenceSet getTag(Predicate<ConceptReferenceSet> criteria) {
         return CollectionUtil.findMatch(getTags(), criteria);
     }
 
@@ -176,6 +190,33 @@ public interface IDomainType extends IBaseType, Serializable {
      */
     default boolean hasTag() {
         return CollectionUtil.notEmpty(getTags());
+    }
+
+    @Override
+    default String getText() {
+        return null;
+    }
+
+    @Override
+    default void setText(String text) {
+        notSupported();
+    }
+
+    @Override
+    default boolean hasText() {
+        return getText() != null;
+    }
+
+    default Metadata getMetadata() {
+        return notSupported();
+    }
+
+    default void setMetadata(Metadata metadata) {
+        notSupported();
+    }
+
+    default boolean hasMetadata() {
+        return getMetadata() != null;
     }
 
     /**

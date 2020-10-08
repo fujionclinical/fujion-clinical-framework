@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.api.model.core;
 
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.CollectionUtil;
 
 import java.util.Collections;
@@ -52,21 +53,21 @@ public interface IReferenceRange<T extends Number> extends IBaseType {
         return getHigh() != null;
     }
 
-    IConcept getType();
+    ConceptReferenceSet getType();
 
-    default void setType(IConcept value) {
+    default void setType(ConceptReferenceSet value) {
         notSupported();
     }
 
-    default List<IConcept> getAppliesTo() {
+    default List<ConceptReferenceSet> getAppliesTo() {
         return Collections.emptyList();
     }
 
-    default void setAppliesTo(List<IConcept> value) {
+    default void setAppliesTo(List<ConceptReferenceSet> value) {
         CollectionUtil.replaceElements(getAppliesTo(), value);
     }
 
-    default void addAppliesTo(IConcept... values) {
+    default void addAppliesTo(ConceptReferenceSet... values) {
         Collections.addAll(getAppliesTo(), values);
     }
 

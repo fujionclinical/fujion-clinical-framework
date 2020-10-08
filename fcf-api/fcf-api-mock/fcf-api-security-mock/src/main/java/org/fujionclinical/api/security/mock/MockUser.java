@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.api.security.mock;
 
+import edu.utah.kmm.model.cool.core.datatype.Metadata;
 import org.fujionclinical.api.model.person.IPersonName;
 import org.fujionclinical.api.model.person.PersonNameParser;
 import org.fujionclinical.api.model.user.IUser;
@@ -38,8 +39,6 @@ import java.util.List;
  * Mock user for testing.
  */
 public class MockUser implements IUser {
-
-    private static final long serialVersionUID = 1L;
 
     private final String logicalId;
 
@@ -112,6 +111,21 @@ public class MockUser implements IUser {
     @Override
     public String getId() {
         return logicalId;
+    }
+
+    @Override
+    public Metadata getMetadata() {
+        return null;
+    }
+
+    @Override
+    public void setMetadata(Metadata metadata) {
+        notSupported();
+    }
+
+    @Override
+    public boolean hasMetadata() {
+        return false;
     }
 
 }

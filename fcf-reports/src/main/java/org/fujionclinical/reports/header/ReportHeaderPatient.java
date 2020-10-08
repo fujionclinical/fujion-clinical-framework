@@ -25,13 +25,13 @@
  */
 package org.fujionclinical.reports.header;
 
+import edu.utah.kmm.model.cool.core.datatype.Identifier;
 import org.apache.commons.lang3.StringUtils;
 import org.fujion.annotation.OnFailure;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.common.DateTimeWrapper;
 import org.fujion.common.DateUtil;
 import org.fujion.component.Label;
-import org.fujionclinical.api.model.core.IIdentifier;
 import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.patient.PatientContext;
 import org.fujionclinical.ui.util.FCFUtil;
@@ -64,11 +64,11 @@ public class ReportHeaderPatient extends ReportHeaderBase {
         if (patient == null) {
             text = "No Patient Selected";
         } else {
-            IIdentifier mrn = patient.getMRN(); // May be null!
+            Identifier mrn = patient.getMRN(); // May be null!
             text = patient.getFullName();
 
             if (mrn != null) {
-                text += "  #" + mrn.getValue();
+                text += "  #" + mrn.getId();
             }
 
             String gender = patient.getGender() == null ? "" : patient.getGender().toString();

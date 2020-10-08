@@ -28,18 +28,13 @@ package org.fujionclinical.api.model.patient;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.context.ContextItems;
 import org.fujionclinical.api.context.ContextManager;
 import org.fujionclinical.api.context.IContextSubscriber;
 import org.fujionclinical.api.context.ManagedContext;
-import org.fujionclinical.api.model.core.IIdentifier;
-import org.fujionclinical.api.model.impl.Identifier;
-import org.fujionclinical.api.model.person.IPersonName;
+import org.fujionclinical.api.model.impl.IdentifierImpl;
+import org.fujionclinical.api.model.person.IPerson;
 import org.fujionclinical.api.model.person.PersonNameParser;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Wrapper for shared patient context.
@@ -47,6 +42,7 @@ import java.util.List;
 public class PatientContext extends ManagedContext<IPatient> {
 
     public interface IPatientContextSubscriber extends IContextSubscriber {
+
     }
 
     protected static final String SUBJECT_NAME = "Patient";
@@ -66,22 +62,6 @@ public class PatientContext extends ManagedContext<IPatient> {
     protected static final String CCOW_NAM = CCOW_CO + ".PatientName";
 
     private static final Log log = LogFactory.getLog(PatientContext.class);
-
-    /**
-     * Create a shared patient context with an initial null state.
-     */
-    public PatientContext() {
-        this(null);
-    }
-
-    /**
-     * Create a shared patient context with a specified initial state.
-     *
-     * @param patient Patient that will be the initial state.
-     */
-    public PatientContext(IPatient patient) {
-        super(SUBJECT_NAME, IPatientContextSubscriber.class, patient);
-    }
 
     /**
      * Returns the managed patient context.
@@ -115,11 +95,27 @@ public class PatientContext extends ManagedContext<IPatient> {
     }
 
     /**
+     * Create a shared patient context with an initial null state.
+     */
+    public PatientContext() {
+        this(null);
+    }
+
+    /**
+     * Create a shared patient context with a specified initial state.
+     *
+     * @param patient Patient that will be the initial state.
+     */
+    public PatientContext(IPatient patient) {
+        super(SUBJECT_NAME, IPatientContextSubscriber.class, patient);
+    }
+
+    /**
      * Creates a CCOW context from the specified patient object.
      */
     @Override
     public ContextItems toCCOWContext(IPatient patient) {
-        contextItems.setItem(CCOW_MRN, patient.getMRN() == null ? null : patient.getMRN().getValue(), "MRN");
+        contextItems.setItem(CCOW_MRN, patient.getMRN() == null ? null : patient.getMRN().getId(), "MRN");
         contextItems.setItem(CCOW_NAM, patient.getName().toString());
         contextItems.setItem(CCOW_GENDER, patient.getGender());
         contextItems.setItem(CCOW_DOB, patient.getBirthDate());
@@ -131,35 +127,13 @@ public class PatientContext extends ManagedContext<IPatient> {
      */
     @Override
     public IPatient fromCCOWContext(ContextItems contextItems) {
-        return new IPatient() {
-            final IIdentifier mrn = new Identifier(null, contextItems.getItem(CCOW_MRN, "MRN"));
-            final IPersonName name = PersonNameParser.instance.fromString(contextItems.getItem(CCOW_NAM));
-
-            @Override
-            public IIdentifier getMRN() {
-                return mrn;
-            }
-
-            @Override
-            public Gender getGender() {
-                return EnumUtils.getEnum(Gender.class, contextItems.getItem(CCOW_GENDER));
-            }
-
-            @Override
-            public DateTimeWrapper getBirthDate() {
-                return contextItems.getDate(CCOW_DOB);
-            }
-
-            @Override
-            public List<IPersonName> getNames() {
-                return name == null ? null : Collections.singletonList(name);
-            }
-
-            @Override
-            public String getId() {
-                return contextItems.getItem((CCOW_ID));
-            }
-        };
+        Patient patient = new Patient();
+        patient.setId(contextItems.getItem((CCOW_ID)));
+        patient.setMRN(new IdentifierImpl("http://edu.utah.uukmm/mrn", contextItems.getItem(CCOW_MRN, "MRN")));
+        patient.addNames(PersonNameParser.instance.fromString(contextItems.getItem(CCOW_NAM)));
+        patient.setGender(EnumUtils.getEnum(IPerson.Gender.class, contextItems.getItem(CCOW_GENDER)));
+        patient.setBirthDate(contextItems.getDate(CCOW_DOB));
+        return patient;
     }
 
     /**

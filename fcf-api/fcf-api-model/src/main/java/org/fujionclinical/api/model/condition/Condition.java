@@ -25,9 +25,9 @@
  */
 package org.fujionclinical.api.model.condition;
 
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.model.core.IAnnotation;
-import org.fujionclinical.api.model.core.IConcept;
 import org.fujionclinical.api.model.core.IPeriod;
 import org.fujionclinical.api.model.core.IReference;
 import org.fujionclinical.api.model.encounter.IEncounter;
@@ -52,7 +52,7 @@ public class Condition extends BaseDomainType implements ICondition {
 
     private IReference<IPerson> asserter;
 
-    private IConcept condition;
+    private ConceptReferenceSet condition;
 
     private IReference<IEncounter> encounter;
 
@@ -113,12 +113,12 @@ public class Condition extends BaseDomainType implements ICondition {
     }
 
     @Override
-    public IConcept getCondition() {
+    public ConceptReferenceSet getCondition() {
         return condition;
     }
 
     @Override
-    public void setCondition(IConcept condition) {
+    public void setCondition(ConceptReferenceSet condition) {
         this.condition = condition;
     }
 

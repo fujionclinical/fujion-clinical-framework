@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.model.impl;
 
-import org.fujionclinical.api.model.core.IConcept;
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujionclinical.api.model.core.IQuantity;
 import org.fujionclinical.api.model.core.IRange;
 import org.fujionclinical.api.model.core.IReferenceRange;
@@ -39,13 +39,13 @@ public class ReferenceRange<T extends Number> implements IReferenceRange<T> {
 
     private IQuantity<T> high;
 
-    private IConcept type;
+    private ConceptReferenceSet type;
 
     private String description;
 
     private IRange<Double> ageRange;
 
-    private final List<IConcept> appliesTo = new ArrayList<>();
+    private final List<ConceptReferenceSet> appliesTo = new ArrayList<>();
 
     @Override
     public IQuantity<T> getLow() {
@@ -68,17 +68,17 @@ public class ReferenceRange<T extends Number> implements IReferenceRange<T> {
     }
 
     @Override
-    public IConcept getType() {
+    public ConceptReferenceSet getType() {
         return type;
     }
 
     @Override
-    public void setType(IConcept value) {
+    public void setType(ConceptReferenceSet value) {
         this.type = value;
     }
 
     @Override
-    public List<IConcept> getAppliesTo() {
+    public List<ConceptReferenceSet> getAppliesTo() {
         return appliesTo;
     }
 

@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.model.location;
 
-import org.fujionclinical.api.model.core.IConcept;
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujionclinical.api.model.core.IContactPoint;
 import org.fujionclinical.api.model.core.IPostalAddress;
 import org.fujionclinical.api.model.impl.BaseDomainType;
@@ -37,7 +37,7 @@ public class Location extends BaseDomainType implements ILocation {
 
     private final List<String> aliases = new ArrayList<>();
 
-    private final List<IConcept> types = new ArrayList<>();
+    private final List<ConceptReferenceSet> types = new ArrayList<>();
 
     private final List<IContactPoint> contactPoints = new ArrayList<>();
 
@@ -85,7 +85,7 @@ public class Location extends BaseDomainType implements ILocation {
     }
 
     @Override
-    public List<IConcept> getTypes() {
+    public List<ConceptReferenceSet> getTypes() {
         return types;
     }
 

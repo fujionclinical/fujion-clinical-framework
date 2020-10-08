@@ -25,9 +25,9 @@
  */
 package org.fujionclinical.api.model.encounter;
 
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.CollectionUtil;
 import org.fujionclinical.api.core.CoreUtil;
-import org.fujionclinical.api.model.core.IConcept;
 import org.fujionclinical.api.model.core.IDomainType;
 import org.fujionclinical.api.model.core.IPeriod;
 import org.fujionclinical.api.model.core.IReference;
@@ -150,14 +150,14 @@ public interface IEncounter extends IDomainType {
         return CollectionUtil.notEmpty(getLocations());
     }
 
-    List<IConcept> getTypes();
+    List<ConceptReferenceSet> getTypes();
 
-    default IEncounter addTypes(IConcept... types) {
+    default IEncounter addTypes(ConceptReferenceSet... types) {
         Collections.addAll(getTypes(), types);
         return this;
     }
 
-    default IEncounter setTypes(List<IConcept> types) {
+    default IEncounter setTypes(List<ConceptReferenceSet> types) {
         CollectionUtil.replaceElements(getTypes(), types);
         return this;
     }

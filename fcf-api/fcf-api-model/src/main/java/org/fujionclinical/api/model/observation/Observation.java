@@ -7,15 +7,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * This Source Code Form is also subject to the terms of the Health-Related
  * Additional Disclaimer of Warranty and Limitation of Liability available at
  *
@@ -25,11 +25,12 @@
  */
 package org.fujionclinical.api.model.observation;
 
+import edu.utah.kmm.model.cool.core.datatype.Identifier;
+import edu.utah.kmm.model.cool.core.datatype.Metadata;
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.DateTimeWrapper;
-import org.fujionclinical.api.model.core.IConcept;
-import org.fujionclinical.api.model.core.IConceptCode;
-import org.fujionclinical.api.model.core.IIdentifier;
 import org.fujionclinical.api.model.encounter.IEncounter;
+import org.fujionclinical.api.model.impl.MetadataImpl;
 import org.fujionclinical.api.model.patient.IPatient;
 
 import java.util.ArrayList;
@@ -39,11 +40,11 @@ public class Observation extends ObservationComponent implements IObservation {
 
     private final List<IObservationComponent> components = new ArrayList<>();
 
-    private final List<IConceptCode> tags = new ArrayList<>();
+    private final List<ConceptReferenceSet> categories = new ArrayList<>();
 
-    private final List<IConcept> categories = new ArrayList<>();
+    private final List<Identifier> identifiers = new ArrayList<>();
 
-    private final List<IIdentifier> identifiers = new ArrayList<>();
+    private Metadata metadata;
 
     private DateTimeWrapper effectiveDate;
 
@@ -111,18 +112,28 @@ public class Observation extends ObservationComponent implements IObservation {
     }
 
     @Override
-    public List<IIdentifier> getIdentifiers() {
+    public List<Identifier> getIdentifiers() {
         return identifiers;
     }
 
     @Override
-    public List<IConceptCode> getTags() {
-        return tags;
+    public List<ConceptReferenceSet> getCategories() {
+        return categories;
     }
 
     @Override
-    public List<IConcept> getCategories() {
-        return categories;
+    public Metadata getMetadata() {
+        return metadata == null ? metadata = new MetadataImpl() : metadata;
+    }
+
+    @Override
+    public void setMetadata(Metadata metadata) {
+        this.metadata = metadata;
+    }
+
+    @Override
+    public boolean hasMetadata() {
+        return metadata != null;
     }
 
 }

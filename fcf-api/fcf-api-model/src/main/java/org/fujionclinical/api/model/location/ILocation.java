@@ -25,9 +25,9 @@
  */
 package org.fujionclinical.api.model.location;
 
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.CollectionUtil;
 import org.fujionclinical.api.core.CoreUtil;
-import org.fujionclinical.api.model.core.IConcept;
 import org.fujionclinical.api.model.core.IContactPointType;
 import org.fujionclinical.api.model.core.IDomainType;
 import org.fujionclinical.api.model.core.IPostalAddressType;
@@ -121,15 +121,15 @@ public interface ILocation extends IDomainType, IPostalAddressType, IContactPoin
      *
      * @return The types.
      */
-    default List<IConcept> getTypes() {
+    default List<ConceptReferenceSet> getTypes() {
         return Collections.emptyList();
     }
 
-    default void setTypes(List<IConcept> types) {
+    default void setTypes(List<ConceptReferenceSet> types) {
         CollectionUtil.replaceElements(getTypes(), types);
     }
 
-    default void addTypes(IConcept... types) {
+    default void addTypes(ConceptReferenceSet... types) {
         Collections.addAll(getTypes(), types);
     }
 

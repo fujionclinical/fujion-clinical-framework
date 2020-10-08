@@ -25,12 +25,12 @@
  */
 package org.fujionclinical.api.model.person;
 
+import edu.utah.kmm.model.cool.core.datatype.IdentifierUse;
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceImpl;
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSetImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.fujion.common.DateTimeWrapper;
-import org.fujionclinical.api.model.core.IConceptCode;
-import org.fujionclinical.api.model.core.IIdentifier;
-import org.fujionclinical.api.model.impl.ConceptCode;
-import org.fujionclinical.api.model.impl.Identifier;
+import org.fujionclinical.api.model.impl.IdentifierImpl;
 import org.fujionclinical.api.query.core.QueryUtil;
 import org.fujionclinical.api.query.expression.AbstractCriteria;
 
@@ -39,7 +39,8 @@ import org.fujionclinical.api.query.expression.AbstractCriteria;
  */
 public abstract class PersonQueryCriteria<T extends IPerson> extends AbstractCriteria<T> {
 
-    private static final IConceptCode SSN_TYPE = new ConceptCode("http://hl7.org/fhir/identifier-type", "SB");
+    private static final ConceptReferenceSetImpl SSN_TYPE = new ConceptReferenceSetImpl(
+            new ConceptReferenceImpl("http://hl7.org/fhir/identifier-type", "SB", "Social Security Number"));
 
     protected PersonQueryCriteria(
             Class<T> domainClass,
@@ -139,7 +140,7 @@ public abstract class PersonQueryCriteria<T extends IPerson> extends AbstractCri
      * @param ssn SSN.
      */
     public void setSSN(String ssn) {
-        queryContext.setParam("identifiers", ssn == null ? null : new Identifier("http://hl7.org/fhir/sid/us-ssn", ssn, IIdentifier.IdentifierUse.OFFICIAL, SSN_TYPE));
+        queryContext.setParam("identifiers", ssn == null ? null : new IdentifierImpl("http://hl7.org/fhir/sid/us-ssn", ssn, IdentifierUse.OFFICIAL, SSN_TYPE));
     }
 
     /**

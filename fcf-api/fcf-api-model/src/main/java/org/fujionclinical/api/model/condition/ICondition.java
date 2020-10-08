@@ -25,9 +25,13 @@
  */
 package org.fujionclinical.api.model.condition;
 
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.core.CoreUtil;
-import org.fujionclinical.api.model.core.*;
+import org.fujionclinical.api.model.core.IAnnotationType;
+import org.fujionclinical.api.model.core.IDomainType;
+import org.fujionclinical.api.model.core.IPeriod;
+import org.fujionclinical.api.model.core.IReference;
 import org.fujionclinical.api.model.encounter.IEncounter;
 import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.person.IPerson;
@@ -131,9 +135,9 @@ public interface ICondition extends IDomainType, IAnnotationType {
     }
 
     @QueryParameter
-    IConcept getCondition();
+    ConceptReferenceSet getCondition();
 
-    default void setCondition(IConcept condition) {
+    default void setCondition(ConceptReferenceSet condition) {
         notSupported();
     }
 

@@ -7,15 +7,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * This Source Code Form is also subject to the terms of the Health-Related
  * Additional Disclaimer of Warranty and Limitation of Liability available at
  *
@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.model.impl;
 
-import org.fujionclinical.api.model.core.IConceptCode;
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujionclinical.api.model.core.IQuantity;
 
 public class Quantity<T extends Number> implements IQuantity<T> {
@@ -34,7 +34,7 @@ public class Quantity<T extends Number> implements IQuantity<T> {
 
     private QuantityComparator comparator;
 
-    private IConceptCode unit;
+    private ConceptReferenceSet unit;
 
     @Override
     public T getValue() {
@@ -57,12 +57,12 @@ public class Quantity<T extends Number> implements IQuantity<T> {
     }
 
     @Override
-    public IConceptCode getUnit() {
+    public ConceptReferenceSet getUnit() {
         return unit;
     }
 
     @Override
-    public void setUnit(IConceptCode value) {
+    public void setUnit(ConceptReferenceSet value) {
         this.unit = value;
     }
 

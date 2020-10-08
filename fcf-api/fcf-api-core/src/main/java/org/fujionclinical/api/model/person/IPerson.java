@@ -25,11 +25,15 @@
  */
 package org.fujionclinical.api.model.person;
 
+import edu.utah.kmm.model.cool.terminology.ConceptReference;
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.CollectionUtil;
 import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.core.CoreUtil;
-import org.fujionclinical.api.model.core.*;
-import org.fujionclinical.api.model.impl.ConceptCode;
+import org.fujionclinical.api.model.core.IAttachment;
+import org.fujionclinical.api.model.core.IContactPointType;
+import org.fujionclinical.api.model.core.IDomainType;
+import org.fujionclinical.api.model.core.IPostalAddressType;
 import org.fujionclinical.api.query.expression.QueryParameter;
 
 import java.util.Arrays;
@@ -90,11 +94,11 @@ public interface IPerson extends IDomainType, IPostalAddressType, IContactPointT
     }
 
     @QueryParameter
-    default ConceptCode getBirthSex() {
+    default ConceptReference getBirthSex() {
         return null;
     }
 
-    default void setBirthSex(ConceptCode birthSex) {
+    default void setBirthSex(ConceptReference birthSex) {
         notSupported();
     }
 
@@ -103,11 +107,11 @@ public interface IPerson extends IDomainType, IPostalAddressType, IContactPointT
     }
 
     @QueryParameter
-    default ConceptCode getEthnicity() {
+    default ConceptReference getEthnicity() {
         return null;
     }
 
-    default void setEthnicity(ConceptCode ethnicity) {
+    default void setEthnicity(ConceptReference ethnicity) {
         notSupported();
     }
 
@@ -129,11 +133,11 @@ public interface IPerson extends IDomainType, IPostalAddressType, IContactPointT
     }
 
     @QueryParameter
-    default ConceptCode getRace() {
+    default ConceptReference getRace() {
         return null;
     }
 
-    default void setRace(ConceptCode race) {
+    default void setRace(ConceptReference race) {
         notSupported();
     }
 
@@ -167,15 +171,15 @@ public interface IPerson extends IDomainType, IPostalAddressType, IContactPointT
         return getDeceasedDate() != null;
     }
 
-    default List<IConcept> getLanguages() {
+    default List<ConceptReferenceSet> getLanguages() {
         return Collections.emptyList();
     }
 
-    default void setLanguages(List<IConcept> languages) {
+    default void setLanguages(List<ConceptReferenceSet> languages) {
         CollectionUtil.replaceElements(getLanguages(), languages);
     }
 
-    default void addLanguages(IConcept... languages) {
+    default void addLanguages(ConceptReferenceSet... languages) {
         Collections.addAll(getLanguages(), languages);
     }
 
@@ -184,7 +188,7 @@ public interface IPerson extends IDomainType, IPostalAddressType, IContactPointT
     }
 
     @QueryParameter
-    default IConcept getPreferredLanguage() {
+    default ConceptReferenceSet getPreferredLanguage() {
         return CollectionUtil.getFirst(getLanguages());
     }
 
@@ -229,4 +233,17 @@ public interface IPerson extends IDomainType, IPostalAddressType, IContactPointT
         return CollectionUtil.notEmpty(getPhotos());
     }
 
+    @Override
+    default String getText() {
+        return null;
+    }
+
+    @Override
+    default void setText(String text) {
+        notSupported();
+    }
+
+    default boolean hasText() {
+        return getText() != null;
+    }
 }

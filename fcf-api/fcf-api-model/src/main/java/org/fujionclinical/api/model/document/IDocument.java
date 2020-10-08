@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.api.model.document;
 
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.CollectionUtil;
 import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.core.CoreUtil;
@@ -121,9 +122,9 @@ public interface IDocument extends IDomainType, IAttachmentType, ICategoryType {
         return getCompositionStatus() != null;
     }
 
-    IConcept getType();
+    ConceptReferenceSet getType();
 
-    default void setType(IConcept type) {
+    default void setType(ConceptReferenceSet type) {
         notSupported();
     }
 
@@ -131,12 +132,12 @@ public interface IDocument extends IDomainType, IAttachmentType, ICategoryType {
         return getType() != null;
     }
 
-    default boolean hasType(IConceptCode code) {
-        return hasType() && getType().getCodes().stream().anyMatch(code::isSame);
+    default boolean hasType(ConceptReferenceSet code) {
+        return hasType() && getType().getConceptReferences().stream().anyMatch(code::equals);
     }
 
     default boolean hasType(String type) {
-        return hasType() && getType().getCodes().stream().anyMatch(code -> type.equals(code.getCode()));
+        return hasType() && getType().getConceptReferences().stream().anyMatch(code -> type.equals(code.getCode()));
     }
 
     default List<IReference<IPerson>> getAuthors() {

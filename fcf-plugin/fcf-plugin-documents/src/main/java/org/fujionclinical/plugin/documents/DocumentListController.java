@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.plugin.documents;
 
+import edu.utah.kmm.model.cool.terminology.ConceptReference;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.common.DateTimeWrapper;
@@ -33,7 +34,6 @@ import org.fujion.component.*;
 import org.fujion.event.Event;
 import org.fujion.event.EventUtil;
 import org.fujion.model.IListModel;
-import org.fujionclinical.api.model.core.IConceptCode;
 import org.fujionclinical.api.model.document.IDocument;
 import org.fujionclinical.api.query.core.IQueryContext;
 import org.fujionclinical.api.query.filter.AbstractQueryFilter;
@@ -154,7 +154,7 @@ public class DocumentListController extends AbstractGridController<IDocument, ID
 
         if (documents != null) {
             for (IDocument doc : documents) {
-                types.addAll(doc.getType().getCodes().stream().map(IConceptCode::getCode).collect(Collectors.toList()));
+                types.addAll(doc.getType().getConceptReferences().stream().map(ConceptReference::getCode).collect(Collectors.toList()));
             }
         }
 

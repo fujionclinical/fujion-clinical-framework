@@ -7,15 +7,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * This Source Code Form is also subject to the terms of the Health-Related
  * Additional Disclaimer of Warranty and Limitation of Liability available at
  *
@@ -24,6 +24,8 @@
  * #L%
  */
 package org.fujionclinical.api.model.core;
+
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 
 import java.util.Arrays;
 
@@ -34,6 +36,13 @@ public interface IQuantity<T extends Number> extends IBaseType {
 
         private final String symbol;
 
+        public static QuantityComparator fromSymbol(String symbol) {
+            return symbol == null ? null : Arrays.stream(values())
+                    .filter(value -> value.symbol.equals(symbol))
+                    .findFirst()
+                    .orElse(null);
+        }
+
         QuantityComparator(String symbol) {
             this.symbol = symbol;
         }
@@ -41,13 +50,6 @@ public interface IQuantity<T extends Number> extends IBaseType {
         @Override
         public String toString() {
             return symbol;
-        }
-
-        public static QuantityComparator fromSymbol(String symbol) {
-            return symbol == null ? null : Arrays.stream(values())
-                    .filter(value -> value.symbol.equals(symbol))
-                    .findFirst()
-                    .orElse(null);
         }
     }
 
@@ -71,9 +73,9 @@ public interface IQuantity<T extends Number> extends IBaseType {
         return getComparator() != null;
     }
 
-    IConceptCode getUnit();
+    ConceptReferenceSet getUnit();
 
-    default void setUnit(IConceptCode value) {
+    default void setUnit(ConceptReferenceSet value) {
         notSupported();
     }
 

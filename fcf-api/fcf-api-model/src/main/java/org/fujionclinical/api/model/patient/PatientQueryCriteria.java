@@ -25,18 +25,22 @@
  */
 package org.fujionclinical.api.model.patient;
 
-import org.fujionclinical.api.model.core.IConceptCode;
-import org.fujionclinical.api.model.core.IIdentifier;
-import org.fujionclinical.api.model.impl.ConceptCode;
-import org.fujionclinical.api.model.impl.Identifier;
+import edu.utah.kmm.model.cool.core.datatype.IdentifierUse;
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceImpl;
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSetImpl;
+import org.fujionclinical.api.model.impl.IdentifierImpl;
 import org.fujionclinical.api.model.person.PersonQueryCriteria;
+
+import java.net.URI;
 
 /**
  * Search criteria for patient lookup.
  */
 public class PatientQueryCriteria extends PersonQueryCriteria<IPatient> {
 
-    private static final IConceptCode MRN_TYPE = new ConceptCode("http://hl7.org/fhir/v2/0203", "MR");
+    private static final ConceptReferenceSet MRN_TYPE = new ConceptReferenceSetImpl(
+            new ConceptReferenceImpl("http://hl7.org/fhir/v2/0203", "MR", "Medical Record Number"));
 
     public PatientQueryCriteria() {
         super(IPatient.class, null);
@@ -67,7 +71,7 @@ public class PatientQueryCriteria extends PersonQueryCriteria<IPatient> {
      * @param mrn MRN.
      */
     public void setMRN(String mrn) {
-        queryContext.setParam("identifiers", mrn == null ? null : new Identifier(null, mrn, IIdentifier.IdentifierUse.OFFICIAL, MRN_TYPE));
+        queryContext.setParam("identifiers", mrn == null ? null : new IdentifierImpl((URI) null, mrn, IdentifierUse.OFFICIAL, MRN_TYPE));
     }
 
 }

@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.patientselection.common;
 
+import edu.utah.kmm.model.cool.core.datatype.Identifier;
 import org.apache.commons.lang3.StringUtils;
 import org.fujion.common.DateTimeWrapper;
 import org.fujion.component.Cell;
@@ -33,7 +34,6 @@ import org.fujion.component.Grid;
 import org.fujion.component.Row;
 import org.fujion.event.ChangeEvent;
 import org.fujion.model.IComponentRenderer;
-import org.fujionclinical.api.model.core.IIdentifier;
 import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.patientlist.PatientListItem;
 
@@ -91,10 +91,10 @@ public class PatientListItemRenderer implements IComponentRenderer<Row, Object> 
                 names = name.split(",", 2);
             }
 
-            IIdentifier mrn = patient.getMRN();
+            Identifier mrn = patient.getMRN();
             addCell(row, names[0].trim(), max);
             addCell(row, names.length == 1 ? "" : names[1].trim(), max);
-            addCell(row, mrn == null ? "" : mrn.getValue(), max);
+            addCell(row, mrn == null ? "" : mrn.getId(), max);
 
             if (StringUtils.isEmpty(info)) {
                 DateTimeWrapper dob = patient.getBirthDate();

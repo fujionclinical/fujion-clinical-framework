@@ -25,14 +25,16 @@
  */
 package org.fujionclinical.api.model.person;
 
+import edu.utah.kmm.model.cool.terminology.ConceptReference;
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.model.core.IAttachment;
-import org.fujionclinical.api.model.core.IConcept;
 import org.fujionclinical.api.model.core.IContactPoint;
 import org.fujionclinical.api.model.core.IPostalAddress;
 import org.fujionclinical.api.model.impl.BaseDomainType;
-import org.fujionclinical.api.model.impl.ConceptCode;
+import org.fujionclinical.api.model.impl.IdentifierImpl;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +44,7 @@ public abstract class Person extends BaseDomainType implements IPerson {
 
     private final List<IAttachment> photos = new ArrayList<>();
 
-    private final List<IConcept> languages = new ArrayList<>();
+    private final List<ConceptReferenceSet> languages = new ArrayList<>();
 
     private final List<IContactPoint> contactPoints = new ArrayList<>();
 
@@ -50,13 +52,13 @@ public abstract class Person extends BaseDomainType implements IPerson {
 
     private Gender gender;
 
-    private ConceptCode birthSex;
+    private ConceptReference birthSex;
 
-    private ConceptCode ethnicity;
+    private ConceptReference ethnicity;
 
     private MaritalStatus maritalStatus;
 
-    private ConceptCode race;
+    private ConceptReference race;
 
     private DateTimeWrapper birthDate;
 
@@ -78,22 +80,22 @@ public abstract class Person extends BaseDomainType implements IPerson {
     }
 
     @Override
-    public ConceptCode getBirthSex() {
+    public ConceptReference getBirthSex() {
         return birthSex;
     }
 
     @Override
-    public void setBirthSex(ConceptCode birthSex) {
+    public void setBirthSex(ConceptReference birthSex) {
         this.birthSex = birthSex;
     }
 
     @Override
-    public ConceptCode getEthnicity() {
+    public ConceptReference getEthnicity() {
         return ethnicity;
     }
 
     @Override
-    public void setEthnicity(ConceptCode ethnicity) {
+    public void setEthnicity(ConceptReference ethnicity) {
         this.ethnicity = ethnicity;
     }
 
@@ -108,12 +110,12 @@ public abstract class Person extends BaseDomainType implements IPerson {
     }
 
     @Override
-    public ConceptCode getRace() {
+    public ConceptReference getRace() {
         return race;
     }
 
     @Override
-    public void setRace(ConceptCode race) {
+    public void setRace(ConceptReference race) {
         this.race = race;
     }
 
@@ -143,7 +145,7 @@ public abstract class Person extends BaseDomainType implements IPerson {
     }
 
     @Override
-    public List<IConcept> getLanguages() {
+    public List<ConceptReferenceSet> getLanguages() {
         return languages;
     }
 
@@ -155,6 +157,13 @@ public abstract class Person extends BaseDomainType implements IPerson {
     @Override
     public List<IContactPoint> getContactPoints() {
         return contactPoints;
+    }
+
+    @Override
+    public edu.utah.kmm.model.cool.core.datatype.Identifier createIdentifier(
+            URI system,
+            String id) {
+        return new IdentifierImpl(system, id);
     }
 
 }

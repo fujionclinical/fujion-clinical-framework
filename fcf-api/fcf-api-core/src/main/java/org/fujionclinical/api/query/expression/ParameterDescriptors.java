@@ -25,17 +25,17 @@
  */
 package org.fujionclinical.api.query.expression;
 
+import edu.utah.kmm.model.cool.core.datatype.Identifier;
+import edu.utah.kmm.model.cool.terminology.ConceptReference;
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceImpl;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ClassUtils;
 import org.fujion.common.DateTimeWrapper;
 import org.fujion.common.MiscUtil;
 import org.fujionclinical.api.core.CoreUtil;
-import org.fujionclinical.api.model.core.IConceptCode;
 import org.fujionclinical.api.model.core.IDomainType;
-import org.fujionclinical.api.model.core.IIdentifier;
 import org.fujionclinical.api.model.core.IReference;
-import org.fujionclinical.api.model.impl.ConceptCode;
-import org.fujionclinical.api.model.impl.Identifier;
+import org.fujionclinical.api.model.impl.IdentifierImpl;
 import org.fujionclinical.api.model.person.IPersonName;
 import org.fujionclinical.api.query.core.QueryUtil;
 import org.fujionclinical.api.spring.BeanRegistry;
@@ -43,6 +43,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.NumberUtils;
 
 import java.beans.PropertyDescriptor;
+import java.net.URI;
 
 /**
  * A registry of parameter descriptors, indexed by the parameter type.  Includes several predefined
@@ -157,56 +158,56 @@ class ParameterDescriptors extends BeanRegistry<Class<?>, IParameterDescriptor> 
 
     }
 
-    static class ConceptCodeParameter extends AbstractParameterDescriptor<IConceptCode, IConceptCode> {
+    static class ConceptCodeParameter extends AbstractParameterDescriptor<ConceptReference, ConceptReference> {
 
         public ConceptCodeParameter() {
-            super(IConceptCode.class, Integer.MAX_VALUE, Operator.EQ);
+            super(ConceptReference.class, Integer.MAX_VALUE, Operator.EQ);
         }
 
-        private IConceptCode fromString(
+        private ConceptReference fromString(
                 String value,
-                IConceptCode previousValue) {
-            String previousSystem = previousValue == null ? null : previousValue.getSystem();
+                ConceptReference previousValue) {
+            URI previousSystem = previousValue == null ? null : previousValue.getSystem();
             String[] pcs = value.split("\\|", 3);
             String system = pcs.length > 1 ? pcs[0] : null;
             String code = pcs.length == 1 ? pcs[0] : pcs[1];
-            return new ConceptCode(system == null ? previousSystem : system, code);
+            return new ConceptReferenceImpl(system == null ? previousSystem : URI.create(system), code, null);
         }
 
         @Override
-        public IConceptCode normalizeOperand(
-                Class<IConceptCode> parameterType,
+        public ConceptReference normalizeOperand(
+                Class<ConceptReference> parameterType,
                 Object operand,
-                IConceptCode previousOperand) {
-            return operand instanceof IConceptCode ? (IConceptCode) operand
+                ConceptReference previousOperand) {
+            return operand instanceof ConceptReference ? (ConceptReference) operand
                     : operand instanceof String ? fromString((String) operand, previousOperand)
                     : null;
         }
 
     }
 
-    static class IdentifierParameter extends AbstractParameterDescriptor<IIdentifier, IIdentifier> {
+    static class IdentifierParameter extends AbstractParameterDescriptor<Identifier, Identifier> {
 
         public IdentifierParameter() {
-            super(IIdentifier.class, Integer.MAX_VALUE, Operator.EQ);
+            super(Identifier.class, Integer.MAX_VALUE, Operator.EQ);
         }
 
-        private IIdentifier fromString(
+        private Identifier fromString(
                 String value,
-                IIdentifier previousValue) {
-            String previousSystem = previousValue == null ? null : previousValue.getSystem();
+                Identifier previousValue) {
+            String previousSystem = previousValue == null ? null : previousValue.getSystem().toString();
             String[] pcs = value.split("\\|", 3);
             String system = pcs.length > 1 ? pcs[0] : null;
             String code = pcs.length == 1 ? pcs[0] : pcs[1];
-            return new Identifier(system == null ? previousSystem : system, code);
+            return new IdentifierImpl(system == null ? previousSystem : system, code);
         }
 
         @Override
-        public IIdentifier normalizeOperand(
-                Class<IIdentifier> parameterType,
+        public Identifier normalizeOperand(
+                Class<Identifier> parameterType,
                 Object operand,
-                IIdentifier previousOperand) {
-            return operand instanceof IIdentifier ? (IIdentifier) operand
+                Identifier previousOperand) {
+            return operand instanceof Identifier ? (Identifier) operand
                     : operand instanceof String ? fromString((String) operand, previousOperand)
                     : null;
         }

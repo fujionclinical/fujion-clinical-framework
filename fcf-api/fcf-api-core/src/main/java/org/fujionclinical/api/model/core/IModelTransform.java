@@ -28,6 +28,7 @@ package org.fujionclinical.api.model.core;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -74,18 +75,33 @@ public interface IModelTransform<L, N> extends IBaseType {
     }
 
     /**
-     * Converts a list of logical model instances to native form, handling nulls.
+     * Converts a collection of logical model instances to native form, handling nulls.
      * <p>
      * Do not override the default implementation.  Rather, override the {@link #_fromLogicalModel} method instead.
      *
      * @param values A list of logical model instances (possibly null).
      * @return The corresponding list of native model instances (null if the input is null).
      */
-    default List<N> fromLogicalModel(Collection<L> values) {
+    default List<N> fromLogicalModelAsList(Collection<L> values) {
         return values == null ? null : values.stream()
                 .map(this::fromLogicalModel)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Converts a collection of logical model instances to native form, handling nulls.
+     * <p>
+     * Do not override the default implementation.  Rather, override the {@link #_fromLogicalModel} method instead.
+     *
+     * @param values A list of logical model instances (possibly null).
+     * @return The corresponding set of native model instances (null if the input is null).
+     */
+    default Set<N> fromLogicalModelAsSet(Collection<L> values) {
+        return values == null ? null : values.stream()
+                .map(this::fromLogicalModel)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
     }
 
     /**
@@ -116,11 +132,26 @@ public interface IModelTransform<L, N> extends IBaseType {
      * @param values A list of native model instances (possibly null).
      * @return The corresponding list of logical model instances (null if the input is null).
      */
-    default List<L> toLogicalModel(Collection<N> values) {
+    default List<L> toLogicalModelAsList(Collection<N> values) {
         return values == null ? null : values.stream()
                 .map(this::toLogicalModel)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Converts a list of native model instances to logical model form, handling null input.
+     * <p>
+     * Do not override the default implementation.  Rather, override the {@link #_toLogicalModel} method instead.
+     *
+     * @param values A list of native model instances (possibly null).
+     * @return The corresponding set of logical model instances (null if the input is null).
+     */
+    default Set<L> toLogicalModelAsSet(Collection<N> values) {
+        return values == null ? null : values.stream()
+                .map(this::toLogicalModel)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
     }
 
 }

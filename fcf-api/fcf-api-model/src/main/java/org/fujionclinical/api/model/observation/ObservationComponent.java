@@ -7,15 +7,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * This Source Code Form is also subject to the terms of the Health-Related
  * Additional Disclaimer of Warranty and Limitation of Liability available at
  *
@@ -25,6 +25,8 @@
  */
 package org.fujionclinical.api.model.observation;
 
+import edu.utah.kmm.model.cool.terminology.ConceptReference;
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.model.core.*;
 import org.fujionclinical.api.model.impl.ValueWrapper;
@@ -35,30 +37,30 @@ import java.util.List;
 
 public class ObservationComponent implements IObservationComponent {
 
-    private final List<IConcept> interpretations = new ArrayList<>();
+    private final List<ConceptReferenceSet> interpretations = new ArrayList<>();
 
     private final List<IReferenceRange<Double>> referenceRanges = new ArrayList<>();
 
-    private final ValueWrapper value = new ValueWrapper(String.class, Boolean.class, IConcept.class,
+    private final ValueWrapper value = new ValueWrapper(String.class, Boolean.class, ConceptReference.class,
             DateTimeWrapper.class, Integer.class, IPeriod.class, IQuantity.class, IRange.class,
             IRatio.class, LocalTime.class);
 
-    private IConcept code;
+    private ConceptReferenceSet code;
 
     private DataAbsentReason dataAbsentReason;
 
     @Override
-    public IConcept getCode() {
+    public ConceptReferenceSet getCode() {
         return code;
     }
 
     @Override
-    public void setCode(IConcept code) {
+    public void setCode(ConceptReferenceSet code) {
         this.code = code;
     }
 
     @Override
-    public List<IConcept> getInterpretations() {
+    public List<ConceptReferenceSet> getInterpretations() {
         return interpretations;
     }
 
@@ -92,7 +94,7 @@ public class ObservationComponent implements IObservationComponent {
     }
 
     @Override
-    public void setValueAsConcept(IConcept value) {
+    public void setValueAsConcept(ConceptReferenceSet value) {
         setValue(value);
     }
 
