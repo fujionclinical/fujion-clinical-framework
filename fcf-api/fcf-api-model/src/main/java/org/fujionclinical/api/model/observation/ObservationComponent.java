@@ -27,10 +27,10 @@ package org.fujionclinical.api.model.observation;
 
 import edu.utah.kmm.model.cool.terminology.ConceptReference;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
-import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.model.core.*;
 import org.fujionclinical.api.model.impl.ValueWrapper;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +42,7 @@ public class ObservationComponent implements IObservationComponent {
     private final List<IReferenceRange<Double>> referenceRanges = new ArrayList<>();
 
     private final ValueWrapper value = new ValueWrapper(String.class, Boolean.class, ConceptReference.class,
-            DateTimeWrapper.class, Integer.class, IPeriod.class, IQuantity.class, IRange.class,
+            LocalDateTime.class, Integer.class, IPeriod.class, IQuantity.class, IRange.class,
             IRatio.class, LocalTime.class);
 
     private ConceptReferenceSet code;
@@ -109,7 +109,7 @@ public class ObservationComponent implements IObservationComponent {
     }
 
     @Override
-    public void setValueAsDateTime(DateTimeWrapper value) {
+    public void setValueAsDateTime(LocalDateTime value) {
         setValue(value);
     }
 

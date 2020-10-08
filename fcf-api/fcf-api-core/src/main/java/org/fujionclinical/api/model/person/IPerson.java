@@ -28,7 +28,6 @@ package org.fujionclinical.api.model.person;
 import edu.utah.kmm.model.cool.terminology.ConceptReference;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.CollectionUtil;
-import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.core.CoreUtil;
 import org.fujionclinical.api.model.core.IAttachment;
 import org.fujionclinical.api.model.core.IContactPointType;
@@ -36,6 +35,7 @@ import org.fujionclinical.api.model.core.IDomainType;
 import org.fujionclinical.api.model.core.IPostalAddressType;
 import org.fujionclinical.api.query.expression.QueryParameter;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -146,11 +146,11 @@ public interface IPerson extends IDomainType, IPostalAddressType, IContactPointT
     }
 
     @QueryParameter
-    default DateTimeWrapper getBirthDate() {
+    default LocalDateTime getBirthDate() {
         return null;
     }
 
-    default void setBirthDate(DateTimeWrapper date) {
+    default void setBirthDate(LocalDateTime date) {
         notSupported();
     }
 
@@ -159,11 +159,11 @@ public interface IPerson extends IDomainType, IPostalAddressType, IContactPointT
     }
 
     @QueryParameter
-    default DateTimeWrapper getDeceasedDate() {
+    default LocalDateTime getDeceasedDate() {
         return null;
     }
 
-    default void setDeceasedDate(DateTimeWrapper date) {
+    default void setDeceasedDate(LocalDateTime date) {
         notSupported();
     }
 

@@ -7,15 +7,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * This Source Code Form is also subject to the terms of the Health-Related
  * Additional Disclaimer of Warranty and Limitation of Liability available at
  *
@@ -25,9 +25,10 @@
  */
 package org.fujionclinical.api.context;
 
-import org.fujion.common.DateTimeWrapper;
 import org.fujion.common.DateUtil;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +39,7 @@ import java.util.Set;
  * index to allow case-insensitive lookup.
  */
 public class ContextItems {
-    
+
     private final Map<String, String> items = new HashMap<>();
 
     private final Map<String, String> index = new HashMap<>();
@@ -61,11 +62,13 @@ public class ContextItems {
      * Performs a case-insensitive lookup of the item name in the index.
      *
      * @param itemName Item name
-     * @param autoAdd If true and item name not in index, add it.
+     * @param autoAdd  If true and item name not in index, add it.
      * @return Item name as stored internally. If not already stored, returns the item name as it
      *         was specified in itemName.
      */
-    private String lookupItemName(String itemName, boolean autoAdd) {
+    private String lookupItemName(
+            String itemName,
+            boolean autoAdd) {
         String indexedName = index.get(itemName.toLowerCase());
 
         if (indexedName == null && autoAdd) {
@@ -79,11 +82,14 @@ public class ContextItems {
      * Performs a case-insensitive lookup of the item name + suffix in the index.
      *
      * @param itemName Item name
-     * @param suffix Item suffix
-     * @param autoAdd If true and item name not in index, add it.
+     * @param suffix   Item suffix
+     * @param autoAdd  If true and item name not in index, add it.
      * @return Item name with suffix as stored internally
      */
-    private String lookupItemName(String itemName, String suffix, boolean autoAdd) {
+    private String lookupItemName(
+            String itemName,
+            String suffix,
+            boolean autoAdd) {
         return lookupItemName(itemName + "." + suffix, autoAdd);
     }
 
@@ -131,13 +137,15 @@ public class ContextItems {
     /**
      * Returns a map consisting of suffixes of context items that match the specified prefix.
      *
-     * @param prefix Item name less any suffix.
+     * @param prefix    Item name less any suffix.
      * @param firstOnly If true, only the first match is returned. Otherwise, all matches are
-     *            returned.
+     *                  returned.
      * @return Map of suffixes whose prefix matches the specified value. The value of each map entry
      *         is the value of the original context item.
      */
-    private Map<String, String> getSuffixes(String prefix, Boolean firstOnly) {
+    private Map<String, String> getSuffixes(
+            String prefix,
+            Boolean firstOnly) {
         HashMap<String, String> matches = new HashMap<>();
         prefix = normalizePrefix(prefix);
         int i = prefix.length();
@@ -190,10 +198,12 @@ public class ContextItems {
      * Retrieves a context item qualified by a suffix.
      *
      * @param itemName Item name
-     * @param suffix Item suffix
+     * @param suffix   Item suffix
      * @return Item value
      */
-    public String getItem(String itemName, String suffix) {
+    public String getItem(
+            String itemName,
+            String suffix) {
         return items.get(lookupItemName(itemName, suffix, false));
     }
 
@@ -201,14 +211,16 @@ public class ContextItems {
      * Returns an object of the specified class. The class must have an associated context
      * serializer registered.
      *
-     * @param <T> The item's class.
+     * @param <T>      The item's class.
      * @param itemName Item name
-     * @param clazz Class of item to be returned.
+     * @param clazz    Class of item to be returned.
      * @return Deserialized item of specified class.
      * @throws ContextException If no context serializer found.
      */
     @SuppressWarnings("unchecked")
-    public <T> T getItem(String itemName, Class<T> clazz) throws ContextException {
+    public <T> T getItem(
+            String itemName,
+            Class<T> clazz) throws ContextException {
         String item = getItem(itemName);
 
         if (item == null || item.isEmpty()) {
@@ -228,9 +240,11 @@ public class ContextItems {
      * Sets a context item value.
      *
      * @param itemName Item name
-     * @param value Item value
+     * @param value    Item value
      */
-    public void setItem(String itemName, String value) {
+    public void setItem(
+            String itemName,
+            String value) {
         itemName = lookupItemName(itemName, value != null);
 
         if (value == null) {
@@ -245,10 +259,12 @@ public class ContextItems {
      * Sets a context item value.
      *
      * @param itemName Item name.
-     * @param value The value to set. The value's class must have an associated context serializer
-     *            registered for it.
+     * @param value    The value to set. The value's class must have an associated context serializer
+     *                 registered for it.
      */
-    public void setItem(String itemName, Object value) {
+    public void setItem(
+            String itemName,
+            Object value) {
         if (value == null) {
             setItem(itemName, null);
         } else {
@@ -268,10 +284,13 @@ public class ContextItems {
      * Sets a context item value, qualified with the specified suffix.
      *
      * @param itemName Item name
-     * @param value Item value
-     * @param suffix Item suffix
+     * @param value    Item value
+     * @param suffix   Item suffix
      */
-    public void setItem(String itemName, String value, String suffix) {
+    public void setItem(
+            String itemName,
+            String value,
+            String suffix) {
         itemName = lookupItemName(itemName, suffix, value != null);
         items.put(itemName, value);
     }
@@ -280,9 +299,11 @@ public class ContextItems {
      * Saves a date item object as a context item.
      *
      * @param itemName Item name
-     * @param date Date value
+     * @param date     Date value
      */
-    public void setDate(String itemName, Date date) {
+    public void setDate(
+            String itemName,
+            Date date) {
         if (date == null) {
             setItem(itemName, null);
         } else {
@@ -296,9 +317,23 @@ public class ContextItems {
      * @param itemName Item name
      * @return Date value
      */
-    public DateTimeWrapper getDate(String itemName) {
+    public LocalDate getDate(String itemName) {
         try {
-            return DateTimeWrapper.parse(getItem(itemName));
+            return DateUtil.parseLocalDate(getItem(itemName)).toLocalDate();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    /**
+     * Returns a date item associated with the specified item name.
+     *
+     * @param itemName Item name
+     * @return Date value
+     */
+    public LocalDateTime getDateTime(String itemName) {
+        try {
+            return DateUtil.parseLocalDate(getItem(itemName));
         } catch (Exception e) {
             return null;
         }
@@ -338,4 +373,5 @@ public class ContextItems {
             setItem(itemName, values.get(itemName));
         }
     }
+
 }

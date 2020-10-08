@@ -26,9 +26,9 @@
 package org.fujionclinical.api.model.core;
 
 import org.fujion.common.CollectionUtil;
-import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.model.person.IPerson;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -48,9 +48,9 @@ public interface IAnnotation extends IBaseType {
         Collections.addAll(getAuthors(), authors);
     }
 
-    DateTimeWrapper getRecorded();
+    LocalDateTime getRecorded();
 
-    default void setRecorded(DateTimeWrapper recorded) {
+    default void setRecorded(LocalDateTime recorded) {
         notSupported();
     }
 

@@ -27,12 +27,12 @@ package org.fujionclinical.api.model.document;
 
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.CollectionUtil;
-import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.core.CoreUtil;
 import org.fujionclinical.api.model.core.*;
 import org.fujionclinical.api.model.encounter.IEncounter;
 import org.fujionclinical.api.model.person.IPerson;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -92,9 +92,9 @@ public interface IDocument extends IDomainType, IAttachmentType, ICategoryType {
 
     }
 
-    DateTimeWrapper getCreationDate();
+    LocalDateTime getCreationDate();
 
-    default void setCreationDate(DateTimeWrapper creationDate) {
+    default void setCreationDate(LocalDateTime creationDate) {
         notSupported();
     }
 

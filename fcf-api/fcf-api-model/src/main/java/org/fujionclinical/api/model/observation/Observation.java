@@ -28,11 +28,11 @@ package org.fujionclinical.api.model.observation;
 import edu.utah.kmm.model.cool.core.datatype.Identifier;
 import edu.utah.kmm.model.cool.core.datatype.Metadata;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
-import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.model.encounter.IEncounter;
 import org.fujionclinical.api.model.impl.MetadataImpl;
 import org.fujionclinical.api.model.patient.IPatient;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +46,7 @@ public class Observation extends ObservationComponent implements IObservation {
 
     private Metadata metadata;
 
-    private DateTimeWrapper effectiveDate;
+    private LocalDateTime effectiveDate;
 
     private ObservationStatus status;
 
@@ -57,12 +57,12 @@ public class Observation extends ObservationComponent implements IObservation {
     private String id;
 
     @Override
-    public DateTimeWrapper getEffectiveDate() {
+    public LocalDateTime getEffectiveDate() {
         return effectiveDate;
     }
 
     @Override
-    public void setEffectiveDate(DateTimeWrapper effectiveDate) {
+    public void setEffectiveDate(LocalDateTime effectiveDate) {
         this.effectiveDate = effectiveDate;
     }
 

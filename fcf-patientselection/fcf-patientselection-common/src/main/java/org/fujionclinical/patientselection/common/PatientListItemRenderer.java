@@ -27,7 +27,6 @@ package org.fujionclinical.patientselection.common;
 
 import edu.utah.kmm.model.cool.core.datatype.Identifier;
 import org.apache.commons.lang3.StringUtils;
-import org.fujion.common.DateTimeWrapper;
 import org.fujion.component.Cell;
 import org.fujion.component.Columns;
 import org.fujion.component.Grid;
@@ -36,6 +35,8 @@ import org.fujion.event.ChangeEvent;
 import org.fujion.model.IComponentRenderer;
 import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.patientlist.PatientListItem;
+
+import java.time.LocalDateTime;
 
 import static org.fujionclinical.patientselection.common.Constants.MSG_UNKNOWN_PATIENT;
 
@@ -97,7 +98,7 @@ public class PatientListItemRenderer implements IComponentRenderer<Row, Object> 
             addCell(row, mrn == null ? "" : mrn.getId(), max);
 
             if (StringUtils.isEmpty(info)) {
-                DateTimeWrapper dob = patient.getBirthDate();
+                LocalDateTime dob = patient.getBirthDate();
                 info = dob == null ? "" : dob.toString();
             }
         }

@@ -26,13 +26,13 @@
 package org.fujionclinical.api.model.observation;
 
 import org.fujion.common.CollectionUtil;
-import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.core.CoreUtil;
 import org.fujionclinical.api.model.core.ICategoryType;
 import org.fujionclinical.api.model.core.IDomainType;
 import org.fujionclinical.api.model.encounter.IEncounter;
 import org.fujionclinical.api.model.patient.IPatient;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -48,9 +48,9 @@ public interface IObservation extends IDomainType, IObservationComponent, ICateg
 
     }
 
-    DateTimeWrapper getEffectiveDate();
+    LocalDateTime getEffectiveDate();
 
-    default void setEffectiveDate(DateTimeWrapper value) {
+    default void setEffectiveDate(LocalDateTime value) {
         notSupported();
     }
 

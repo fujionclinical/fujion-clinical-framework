@@ -32,7 +32,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
-import org.fujion.common.DateTimeWrapper;
 import org.fujion.common.DateUtil;
 import org.fujion.component.*;
 import org.fujionclinical.api.event.IEventSubscriber;
@@ -44,6 +43,8 @@ import org.fujionclinical.api.security.SecurityUtil;
 import org.fujionclinical.patientselection.common.PatientSelection;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.shell.plugins.PluginController;
+
+import java.time.LocalDateTime;
 
 /**
  * Controller for patient header plugin.
@@ -161,8 +162,8 @@ public class PatientHeader extends PluginController {
         setLabel(lblGender, patient.getGender(), null);
     }
 
-    private String formatDateAndAge(DateTimeWrapper date) {
-        return date == null ? null : date + " (" + DateUtil.formatAge(date.getLegacyDate()) + ")";
+    private String formatDateAndAge(LocalDateTime date) {
+        return date == null ? null : date + " (" + DateUtil.formatAge(date) + ")";
     }
 
     private void setLabel(

@@ -25,10 +25,10 @@
  */
 package org.fujionclinical.api.model.impl;
 
-import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.model.core.IAnnotation;
 import org.fujionclinical.api.model.person.IPerson;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -37,7 +37,7 @@ public class Annotation implements IAnnotation {
 
     private final List<IPerson> authors = new ArrayList<>();
 
-    private DateTimeWrapper recorded;
+    private LocalDateTime recorded;
 
     private String text;
 
@@ -47,12 +47,12 @@ public class Annotation implements IAnnotation {
     public Annotation(
             String text,
             IPerson... authors) {
-        this(text, DateTimeWrapper.now(), authors);
+        this(text, LocalDateTime.now(), authors);
     }
 
     public Annotation(
             String text,
-            DateTimeWrapper recorded,
+            LocalDateTime recorded,
             IPerson... authors) {
         this.text = text;
         this.recorded = recorded;
@@ -65,12 +65,12 @@ public class Annotation implements IAnnotation {
     }
 
     @Override
-    public DateTimeWrapper getRecorded() {
+    public LocalDateTime getRecorded() {
         return recorded;
     }
 
     @Override
-    public void setRecorded(DateTimeWrapper recorded) {
+    public void setRecorded(LocalDateTime recorded) {
         this.recorded = recorded;
     }
 

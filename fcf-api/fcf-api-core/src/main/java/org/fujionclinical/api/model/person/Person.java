@@ -27,7 +27,6 @@ package org.fujionclinical.api.model.person;
 
 import edu.utah.kmm.model.cool.terminology.ConceptReference;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
-import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.model.core.IAttachment;
 import org.fujionclinical.api.model.core.IContactPoint;
 import org.fujionclinical.api.model.core.IPostalAddress;
@@ -35,6 +34,7 @@ import org.fujionclinical.api.model.impl.BaseDomainType;
 import org.fujionclinical.api.model.impl.IdentifierImpl;
 
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,9 +60,9 @@ public abstract class Person extends BaseDomainType implements IPerson {
 
     private ConceptReference race;
 
-    private DateTimeWrapper birthDate;
+    private LocalDateTime birthDate;
 
-    private DateTimeWrapper deceasedDate;
+    private LocalDateTime deceasedDate;
 
     @Override
     public List<IPersonName> getNames() {
@@ -120,22 +120,22 @@ public abstract class Person extends BaseDomainType implements IPerson {
     }
 
     @Override
-    public DateTimeWrapper getBirthDate() {
+    public LocalDateTime getBirthDate() {
         return birthDate;
     }
 
     @Override
-    public void setBirthDate(DateTimeWrapper birthDate) {
+    public void setBirthDate(LocalDateTime birthDate) {
         this.birthDate = birthDate;
     }
 
     @Override
-    public DateTimeWrapper getDeceasedDate() {
+    public LocalDateTime getDeceasedDate() {
         return deceasedDate;
     }
 
     @Override
-    public void setDeceasedDate(DateTimeWrapper deceasedDate) {
+    public void setDeceasedDate(LocalDateTime deceasedDate) {
         this.deceasedDate = deceasedDate;
     }
 

@@ -25,8 +25,7 @@
  */
 package org.fujionclinical.api.model.condition;
 
-import org.fujion.common.DateTimeWrapper;
-
+import java.time.LocalDateTime;
 import java.util.Comparator;
 
 /**
@@ -35,8 +34,8 @@ import java.util.Comparator;
 public class ConditionComparators {
 
     public static final Comparator<ICondition> CONDITION_RECORDED_DATE = (o1, o2) -> {
-        DateTimeWrapper d1 = o1 == null ? null : o1.getRecordedDate();
-        DateTimeWrapper d2 = o2 == null ? null : o2.getRecordedDate();
+        LocalDateTime d1 = o1 == null ? null : o1.getRecordedDate();
+        LocalDateTime d2 = o2 == null ? null : o2.getRecordedDate();
         return d1 == d2 ? 0 : d1 == null ? -1 : d2 == null ? 1 : d1.compareTo(d2);
     };
 

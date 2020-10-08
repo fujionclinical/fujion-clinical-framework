@@ -26,7 +26,6 @@
 package org.fujionclinical.api.model.condition;
 
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
-import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.model.core.IAnnotation;
 import org.fujionclinical.api.model.core.IPeriod;
 import org.fujionclinical.api.model.core.IReference;
@@ -35,6 +34,7 @@ import org.fujionclinical.api.model.impl.BaseDomainType;
 import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.person.IPerson;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +48,7 @@ public class Condition extends BaseDomainType implements ICondition {
 
     private IReference<IPerson> recorder;
 
-    private DateTimeWrapper recordedDate;
+    private LocalDateTime recordedDate;
 
     private IReference<IPerson> asserter;
 
@@ -83,12 +83,12 @@ public class Condition extends BaseDomainType implements ICondition {
     }
 
     @Override
-    public DateTimeWrapper getRecordedDate() {
+    public LocalDateTime getRecordedDate() {
         return recordedDate;
     }
 
     @Override
-    public void setRecordedDate(DateTimeWrapper recordedDate) {
+    public void setRecordedDate(LocalDateTime recordedDate) {
         this.recordedDate = recordedDate;
     }
 

@@ -26,7 +26,6 @@
 package org.fujionclinical.api.model.condition;
 
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
-import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.core.CoreUtil;
 import org.fujionclinical.api.model.core.IAnnotationType;
 import org.fujionclinical.api.model.core.IDomainType;
@@ -36,6 +35,8 @@ import org.fujionclinical.api.model.encounter.IEncounter;
 import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.person.IPerson;
 import org.fujionclinical.api.query.expression.QueryParameter;
+
+import java.time.LocalDateTime;
 
 public interface ICondition extends IDomainType, IAnnotationType {
 
@@ -102,9 +103,9 @@ public interface ICondition extends IDomainType, IAnnotationType {
     }
 
     @QueryParameter
-    DateTimeWrapper getRecordedDate();
+    LocalDateTime getRecordedDate();
 
-    default void setRecordedDate(DateTimeWrapper recorded) {
+    default void setRecordedDate(LocalDateTime recorded) {
         notSupported();
     }
 

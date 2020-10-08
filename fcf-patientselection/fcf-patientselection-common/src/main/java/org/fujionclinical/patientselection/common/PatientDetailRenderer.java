@@ -85,7 +85,7 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
         addDemographic(root, "mrn", patient.getMRN());
         addDemographic(root, "gender", patient.getGender());
         addDemographic(root, "race", patient.getRace());
-        addDemographic(root, "age", DateUtil.formatAge(patient.hasBirthDate() ? patient.getBirthDate().getLegacyDate() : null));
+        addDemographic(root, "age", DateUtil.formatAge(patient.hasBirthDate() ? patient.getBirthDate() : null));
         addDemographic(root, "dob", patient.getBirthDate());
         addDemographic(root, "dod", patient.getDeceasedDate());
         addDemographic(root, "marital_status", patient.getMaritalStatus());

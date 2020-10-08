@@ -26,13 +26,13 @@
 package org.fujionclinical.api.model.document;
 
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
-import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.model.core.IAttachment;
 import org.fujionclinical.api.model.core.IReference;
 import org.fujionclinical.api.model.encounter.IEncounter;
 import org.fujionclinical.api.model.impl.BaseDomainType;
 import org.fujionclinical.api.model.person.IPerson;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +46,7 @@ public class Document extends BaseDomainType implements IDocument {
 
     private final List<ConceptReferenceSet> categories = new ArrayList<>();
 
-    private DateTimeWrapper creationDate;
+    private LocalDateTime creationDate;
 
     private DocumentStatus documentStatus;
 
@@ -59,12 +59,12 @@ public class Document extends BaseDomainType implements IDocument {
     private IReference<IEncounter> encounter;
 
     @Override
-    public DateTimeWrapper getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
     @Override
-    public void setCreationDate(DateTimeWrapper creationDate) {
+    public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
 

@@ -29,24 +29,25 @@ import edu.utah.kmm.model.cool.core.datatype.Identifier;
 import org.apache.commons.lang3.StringUtils;
 import org.fujion.annotation.OnFailure;
 import org.fujion.annotation.WiredComponent;
-import org.fujion.common.DateTimeWrapper;
 import org.fujion.common.DateUtil;
 import org.fujion.component.Label;
 import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.patient.PatientContext;
 import org.fujionclinical.ui.util.FCFUtil;
 
+import java.time.LocalDateTime;
+
 /**
  * This is the generic controller for the stock report headers.
  */
 public class ReportHeaderPatient extends ReportHeaderBase {
 
+    @WiredComponent(onFailure = OnFailure.IGNORE)
+    private Label lblPatientInfo;
+
     static {
         ReportHeaderRegistry.getInstance().register("patient", FCFUtil.getResourcePath(ReportHeaderPatient.class) + "patientReportHeader.fsp");
     }
-
-    @WiredComponent(onFailure = OnFailure.IGNORE)
-    private Label lblPatientInfo;
 
     public ReportHeaderPatient() {
         super("CONTEXT.CHANGED.Patient");
@@ -77,9 +78,9 @@ public class ReportHeaderPatient extends ReportHeaderBase {
                 text += "   (" + gender + ")";
             }
 
-            DateTimeWrapper dob = patient.getBirthDate();
-            DateTimeWrapper deceased = patient.getDeceasedDate();
-            String age = DateUtil.formatAge(dob == null ? null : dob.getLegacyDate(), true, deceased == null ? null : deceased.getLegacyDate());
+            LocalDateTime dob = patient.getBirthDate();
+            LocalDateTime deceased = patient.getDeceasedDate();
+            String age = DateUtil.formatAge(dob == null ? null : dob, true, deceased == null ? null : deceased);
             text += "  Age: " + age;
 
             if (deceased != null) {

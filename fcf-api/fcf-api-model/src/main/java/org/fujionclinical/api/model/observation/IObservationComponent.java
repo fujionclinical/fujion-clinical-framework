@@ -27,11 +27,11 @@ package org.fujionclinical.api.model.observation;
 
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.CollectionUtil;
-import org.fujion.common.DateTimeWrapper;
 import org.fujion.common.MiscUtil;
 import org.fujionclinical.api.core.CoreUtil;
 import org.fujionclinical.api.model.core.*;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Collections;
 import java.util.List;
@@ -183,11 +183,11 @@ public interface IObservationComponent extends IBaseType {
         return getValueAsInteger() != null;
     }
 
-    default DateTimeWrapper getValueAsDateTime() {
-        return MiscUtil.castTo(getValue(), DateTimeWrapper.class);
+    default LocalDateTime getValueAsDateTime() {
+        return MiscUtil.castTo(getValue(), LocalDateTime.class);
     }
 
-    default void setValueAsDateTime(DateTimeWrapper value) {
+    default void setValueAsDateTime(LocalDateTime value) {
         notSupported();
     }
 

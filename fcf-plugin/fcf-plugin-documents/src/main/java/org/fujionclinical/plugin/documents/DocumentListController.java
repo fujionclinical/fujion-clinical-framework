@@ -306,7 +306,7 @@ public class DocumentListController extends AbstractGridController<IDocument, ID
 
     @Override
     public DateTimeWrapper getDateByType(IDocument result, DateType dateMode) {
-        return result.getCreationDate();
+        return new DateTimeWrapper(result.getCreationDate());
     }
 
 }

@@ -28,15 +28,16 @@ package org.fujionclinical.ui.util;
 import edu.utah.kmm.model.cool.core.datatype.Identifier;
 import edu.utah.kmm.model.cool.terminology.ConceptReference;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
-import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.model.core.IPeriod;
+
+import java.time.LocalDateTime;
 
 public class FormatUtil {
 
     public static String formatPeriod(IPeriod period) {
         int i = 0;
-        DateTimeWrapper startDate = period.getStart();
-        DateTimeWrapper endDate = period.getEnd();
+        LocalDateTime startDate = period.getStart();
+        LocalDateTime endDate = period.getEnd();
 
         if (startDate != null && endDate != null && startDate.equals(endDate)) {
             endDate = null;

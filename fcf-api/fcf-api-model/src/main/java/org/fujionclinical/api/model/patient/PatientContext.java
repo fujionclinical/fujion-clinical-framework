@@ -132,7 +132,7 @@ public class PatientContext extends ManagedContext<IPatient> {
         patient.setMRN(new IdentifierImpl("http://edu.utah.uukmm/mrn", contextItems.getItem(CCOW_MRN, "MRN")));
         patient.addNames(PersonNameParser.instance.fromString(contextItems.getItem(CCOW_NAM)));
         patient.setGender(EnumUtils.getEnum(IPerson.Gender.class, contextItems.getItem(CCOW_GENDER)));
-        patient.setBirthDate(contextItems.getDate(CCOW_DOB));
+        patient.setBirthDate(contextItems.getDateTime(CCOW_DOB));
         return patient;
     }
 
