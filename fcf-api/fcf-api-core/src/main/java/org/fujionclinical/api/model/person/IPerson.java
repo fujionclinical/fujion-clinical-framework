@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.api.model.person;
 
+import edu.utah.kmm.model.cool.foundation.core.Party;
 import edu.utah.kmm.model.cool.terminology.ConceptReference;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.CollectionUtil;
@@ -40,7 +41,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public interface IPerson extends IDomainType, IPostalAddressType, IContactPointType, IPersonNameType {
+public interface IPerson extends Party, IDomainType, IPostalAddressType, IContactPointType, IPersonNameType {
 
     enum Gender {
         MALE, FEMALE, OTHER, UNKNOWN;

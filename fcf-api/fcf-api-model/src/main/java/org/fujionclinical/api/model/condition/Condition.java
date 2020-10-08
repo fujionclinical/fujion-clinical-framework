@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.api.model.condition;
 
+import edu.utah.kmm.model.cool.foundation.datatype.Annotation;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
-import org.fujionclinical.api.model.core.IAnnotation;
 import org.fujionclinical.api.model.core.IPeriod;
 import org.fujionclinical.api.model.core.IReference;
 import org.fujionclinical.api.model.encounter.IEncounter;
@@ -40,7 +40,7 @@ import java.util.List;
 
 public class Condition extends BaseDomainType implements ICondition {
 
-    private final List<IAnnotation> annotations = new ArrayList<>();
+    private final List<Annotation> annotations = new ArrayList<>();
 
     private IReference<IPatient> patient;
 
@@ -163,7 +163,7 @@ public class Condition extends BaseDomainType implements ICondition {
     }
 
     @Override
-    public List<IAnnotation> getNotes() {
+    public List<Annotation> getNotes() {
         return annotations;
     }
 

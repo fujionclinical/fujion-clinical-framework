@@ -25,49 +25,54 @@
  */
 package org.fujionclinical.api.model.impl;
 
-import org.fujionclinical.api.model.core.IAnnotation;
-import org.fujionclinical.api.model.person.IPerson;
+import edu.utah.kmm.model.cool.foundation.core.Party;
+import edu.utah.kmm.model.cool.foundation.datatype.Annotation;
 
 import java.time.LocalDateTime;
 
-public class Annotation implements IAnnotation {
+public class AnnotationImpl implements Annotation {
 
-    private IPerson author;
+    private Party author;
 
     private LocalDateTime timestamp;
 
     private String content;
 
-    public Annotation() {
+    public AnnotationImpl() {
     }
 
-    public Annotation(String content) {
+    public AnnotationImpl(String content) {
         this(content, LocalDateTime.now(), null);
     }
 
-    public Annotation(
+    public AnnotationImpl(
             String content,
-            IPerson author) {
+            Party author) {
         this(content, LocalDateTime.now(), author);
     }
 
-    public Annotation(
+    public AnnotationImpl(
             String content,
             LocalDateTime timestamp,
-            IPerson author) {
+            Party author) {
         this.content = content;
         this.timestamp = timestamp;
         this.author = author;
     }
 
     @Override
-    public IPerson getAuthor() {
+    public Party getAuthor() {
         return author;
     }
 
     @Override
-    public void setAuthor(IPerson author) {
+    public void setAuthor(Party author) {
         this.author = author;
+    }
+
+    @Override
+    public boolean hasAuthor() {
+        return author != null;
     }
 
     @Override
@@ -81,6 +86,11 @@ public class Annotation implements IAnnotation {
     }
 
     @Override
+    public boolean hasTimestamp() {
+        return timestamp != null;
+    }
+
+    @Override
     public String getContent() {
         return content;
     }
@@ -88,6 +98,11 @@ public class Annotation implements IAnnotation {
     @Override
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public boolean hasContent() {
+        return content != null;
     }
 
 }
