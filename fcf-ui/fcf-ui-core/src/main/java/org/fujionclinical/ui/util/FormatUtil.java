@@ -35,8 +35,8 @@ public class FormatUtil {
 
     public static String formatPeriod(IPeriod period) {
         int i = 0;
-        DateTimeWrapper startDate = period.getStartDate();
-        DateTimeWrapper endDate = period.getEndDate();
+        DateTimeWrapper startDate = period.getStart();
+        DateTimeWrapper endDate = period.getEnd();
 
         if (startDate != null && endDate != null && startDate.equals(endDate)) {
             endDate = null;

@@ -29,32 +29,32 @@ import org.fujion.common.DateTimeWrapper;
 
 public interface IPeriod extends IBaseType {
 
-    DateTimeWrapper getStartDate();
+    DateTimeWrapper getStart();
 
-    default void setStartDate(DateTimeWrapper startDate) {
+    default void setStart(DateTimeWrapper startDate) {
         notSupported();
     }
 
-    default boolean hasStartDate() {
-        return getStartDate() != null;
+    default boolean hasStart() {
+        return getStart() != null;
     }
 
-    DateTimeWrapper getEndDate();
+    DateTimeWrapper getEnd();
 
-    default void setEndDate(DateTimeWrapper endDate) {
+    default void setEnd(DateTimeWrapper endDate) {
         notSupported();
     }
 
-    default boolean hasEndDate() {
-        return getEndDate() != null;
+    default boolean hasEnd() {
+        return getEnd() != null;
     }
 
     default boolean inRange(DateTimeWrapper date) {
-        if (hasStartDate() && date.compareTo(getStartDate()) < 0) {
+        if (hasStart() && date.compareTo(getStart()) < 0) {
             return false;
         }
 
-        if (hasEndDate() && date.compareTo(getEndDate()) >= 0) {
+        if (hasEnd() && date.compareTo(getEnd()) >= 0) {
             return false;
         }
 

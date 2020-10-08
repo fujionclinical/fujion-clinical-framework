@@ -45,22 +45,22 @@ public class Period implements IPeriod {
     }
 
     @Override
-    public DateTimeWrapper getStartDate() {
+    public DateTimeWrapper getStart() {
         return startDate;
     }
 
     @Override
-    public void setStartDate(DateTimeWrapper startDate) {
+    public void setStart(DateTimeWrapper startDate) {
         this.startDate = startDate;
     }
 
     @Override
-    public DateTimeWrapper getEndDate() {
+    public DateTimeWrapper getEnd() {
         return endDate;
     }
 
     @Override
-    public void setEndDate(DateTimeWrapper endDate) {
+    public void setEnd(DateTimeWrapper endDate) {
         this.endDate = endDate;
     }
 
