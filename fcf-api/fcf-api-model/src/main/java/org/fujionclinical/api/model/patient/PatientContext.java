@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.api.model.patient;
 
+import edu.utah.kmm.model.cool.core.datatype.IdentifierExImpl;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -32,7 +33,6 @@ import org.fujionclinical.api.context.ContextItems;
 import org.fujionclinical.api.context.ContextManager;
 import org.fujionclinical.api.context.IContextSubscriber;
 import org.fujionclinical.api.context.ManagedContext;
-import org.fujionclinical.api.model.impl.IdentifierImpl;
 import org.fujionclinical.api.model.person.IPerson;
 import org.fujionclinical.api.model.person.PersonNameParser;
 
@@ -129,7 +129,7 @@ public class PatientContext extends ManagedContext<IPatient> {
     public IPatient fromCCOWContext(ContextItems contextItems) {
         Patient patient = new Patient();
         patient.setId(contextItems.getItem((CCOW_ID)));
-        patient.setMRN(new IdentifierImpl("http://edu.utah.uukmm/mrn", contextItems.getItem(CCOW_MRN, "MRN")));
+        patient.setMRN(new IdentifierExImpl("http://edu.utah.uukmm/mrn", contextItems.getItem(CCOW_MRN, "MRN")));
         patient.addNames(PersonNameParser.instance.fromString(contextItems.getItem(CCOW_NAM)));
         patient.setGender(EnumUtils.getEnum(IPerson.Gender.class, contextItems.getItem(CCOW_GENDER)));
         patient.setBirthDate(contextItems.getDateTime(CCOW_DOB));

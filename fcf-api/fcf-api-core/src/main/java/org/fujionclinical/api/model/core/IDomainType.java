@@ -26,11 +26,11 @@
 package org.fujionclinical.api.model.core;
 
 import edu.utah.kmm.model.cool.core.datatype.Identifier;
+import edu.utah.kmm.model.cool.core.datatype.IdentifierExImpl;
 import edu.utah.kmm.model.cool.core.datatype.Metadata;
 import edu.utah.kmm.model.cool.foundation.entity.Entity;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.CollectionUtil;
-import org.fujionclinical.api.model.impl.IdentifierImpl;
 import org.fujionclinical.api.query.expression.QueryParameter;
 
 import java.net.URI;
@@ -133,7 +133,7 @@ public interface IDomainType extends Entity, IBaseType {
     default Identifier createIdentifier(
             URI system,
             String id) {
-        return new IdentifierImpl(system, id);
+        return new IdentifierExImpl(system, id);
     }
 
     /**

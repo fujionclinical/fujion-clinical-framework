@@ -27,9 +27,9 @@ package org.fujionclinical.api.model.observation;
 
 import edu.utah.kmm.model.cool.core.datatype.Identifier;
 import edu.utah.kmm.model.cool.core.datatype.Metadata;
+import edu.utah.kmm.model.cool.core.datatype.MetadataImpl;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujionclinical.api.model.encounter.IEncounter;
-import org.fujionclinical.api.model.impl.MetadataImpl;
 import org.fujionclinical.api.model.patient.IPatient;
 
 import java.time.LocalDateTime;

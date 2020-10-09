@@ -26,15 +26,15 @@
 package org.fujionclinical.ui.util;
 
 import edu.utah.kmm.model.cool.core.datatype.Identifier;
+import edu.utah.kmm.model.cool.core.datatype.Period;
 import edu.utah.kmm.model.cool.terminology.ConceptReference;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
-import org.fujionclinical.api.model.core.IPeriod;
 
 import java.time.LocalDateTime;
 
 public class FormatUtil {
 
-    public static String formatPeriod(IPeriod period) {
+    public static String formatPeriod(Period period) {
         int i = 0;
         LocalDateTime startDate = period.getStart();
         LocalDateTime endDate = period.getEnd();

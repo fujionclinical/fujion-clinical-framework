@@ -25,11 +25,11 @@
  */
 package org.fujionclinical.api.model.condition;
 
+import edu.utah.kmm.model.cool.core.datatype.Period;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujionclinical.api.core.CoreUtil;
 import org.fujionclinical.api.model.core.IAnnotable;
 import org.fujionclinical.api.model.core.IDomainType;
-import org.fujionclinical.api.model.core.IPeriod;
 import org.fujionclinical.api.model.core.IReference;
 import org.fujionclinical.api.model.encounter.IEncounter;
 import org.fujionclinical.api.model.patient.IPatient;
@@ -92,9 +92,9 @@ public interface ICondition extends IDomainType, IAnnotable {
     }
 
     @QueryParameter
-    IPeriod getOnset();
+    Period getOnset();
 
-    default void setOnset(IPeriod period) {
+    default void setOnset(Period period) {
         notSupported();
     }
 

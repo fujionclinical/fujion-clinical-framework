@@ -25,13 +25,13 @@
  */
 package org.fujionclinical.api.model.person;
 
+import edu.utah.kmm.model.cool.core.datatype.IdentifierExImpl;
 import edu.utah.kmm.model.cool.terminology.ConceptReference;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujionclinical.api.model.core.IAttachment;
 import org.fujionclinical.api.model.core.IContactPoint;
 import org.fujionclinical.api.model.core.IPostalAddress;
 import org.fujionclinical.api.model.impl.BaseDomainType;
-import org.fujionclinical.api.model.impl.IdentifierImpl;
 
 import java.net.URI;
 import java.time.LocalDateTime;
@@ -163,7 +163,7 @@ public abstract class Person extends BaseDomainType implements IPerson {
     public edu.utah.kmm.model.cool.core.datatype.Identifier createIdentifier(
             URI system,
             String id) {
-        return new IdentifierImpl(system, id);
+        return new IdentifierExImpl(system, id);
     }
 
 }

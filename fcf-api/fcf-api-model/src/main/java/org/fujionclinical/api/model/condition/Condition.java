@@ -25,9 +25,9 @@
  */
 package org.fujionclinical.api.model.condition;
 
+import edu.utah.kmm.model.cool.core.datatype.Period;
 import edu.utah.kmm.model.cool.foundation.datatype.Annotation;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
-import org.fujionclinical.api.model.core.IPeriod;
 import org.fujionclinical.api.model.core.IReference;
 import org.fujionclinical.api.model.encounter.IEncounter;
 import org.fujionclinical.api.model.impl.BaseDomainType;
@@ -44,7 +44,7 @@ public class Condition extends BaseDomainType implements ICondition {
 
     private IReference<IPatient> patient;
 
-    private IPeriod onset;
+    private Period onset;
 
     private IReference<IPerson> recorder;
 
@@ -73,12 +73,12 @@ public class Condition extends BaseDomainType implements ICondition {
     }
 
     @Override
-    public IPeriod getOnset() {
+    public Period getOnset() {
         return onset;
     }
 
     @Override
-    public void setOnset(IPeriod onset) {
+    public void setOnset(Period onset) {
         this.onset = onset;
     }
 

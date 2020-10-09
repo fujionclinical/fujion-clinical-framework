@@ -25,12 +25,12 @@
  */
 package org.fujionclinical.api.model.person;
 
+import edu.utah.kmm.model.cool.core.datatype.IdentifierExImpl;
 import edu.utah.kmm.model.cool.core.datatype.IdentifierUse;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceImpl;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSetImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.fujion.common.DateTimeWrapper;
-import org.fujionclinical.api.model.impl.IdentifierImpl;
 import org.fujionclinical.api.query.core.QueryUtil;
 import org.fujionclinical.api.query.expression.AbstractCriteria;
 
@@ -131,7 +131,7 @@ public abstract class PersonQueryCriteria<T extends IPerson> extends AbstractCri
      * @param name Person name.
      */
     public void setName(IPersonName name) {
-        queryContext.setParam("name", name == null ? null : name.getFamilyName());
+        queryContext.setParam("name", name == null ? null : name.getFamily());
     }
 
     /**
@@ -140,7 +140,7 @@ public abstract class PersonQueryCriteria<T extends IPerson> extends AbstractCri
      * @param ssn SSN.
      */
     public void setSSN(String ssn) {
-        queryContext.setParam("identifiers", ssn == null ? null : new IdentifierImpl("http://hl7.org/fhir/sid/us-ssn", ssn, IdentifierUse.OFFICIAL, SSN_TYPE));
+        queryContext.setParam("identifiers", ssn == null ? null : new IdentifierExImpl("http://hl7.org/fhir/sid/us-ssn", ssn, IdentifierUse.OFFICIAL, SSN_TYPE));
     }
 
     /**

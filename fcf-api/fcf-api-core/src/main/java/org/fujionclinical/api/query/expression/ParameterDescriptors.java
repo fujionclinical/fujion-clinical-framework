@@ -26,6 +26,7 @@
 package org.fujionclinical.api.query.expression;
 
 import edu.utah.kmm.model.cool.core.datatype.Identifier;
+import edu.utah.kmm.model.cool.core.datatype.IdentifierExImpl;
 import edu.utah.kmm.model.cool.terminology.ConceptReference;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceImpl;
 import org.apache.commons.lang3.BooleanUtils;
@@ -35,7 +36,6 @@ import org.fujion.common.MiscUtil;
 import org.fujionclinical.api.core.CoreUtil;
 import org.fujionclinical.api.model.core.IDomainType;
 import org.fujionclinical.api.model.core.IReference;
-import org.fujionclinical.api.model.impl.IdentifierImpl;
 import org.fujionclinical.api.model.person.IPersonName;
 import org.fujionclinical.api.query.core.QueryUtil;
 import org.fujionclinical.api.spring.BeanRegistry;
@@ -219,7 +219,7 @@ class ParameterDescriptors extends BeanRegistry<Class<?>, IParameterDescriptor> 
             String[] pcs = value.split("\\|", 3);
             String system = pcs.length > 1 ? pcs[0] : null;
             String code = pcs.length == 1 ? pcs[0] : pcs[1];
-            return new IdentifierImpl(system == null ? previousSystem : system, code);
+            return new IdentifierExImpl(system == null ? previousSystem : system, code);
         }
 
         @Override

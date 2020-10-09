@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.api.model.observation;
 
+import edu.utah.kmm.model.cool.core.datatype.Period;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.CollectionUtil;
 import org.fujion.common.MiscUtil;
@@ -207,11 +208,11 @@ public interface IObservationComponent extends IBaseType {
         return getValueAsTime() != null;
     }
 
-    default IPeriod getValueAsPeriod() {
-        return MiscUtil.castTo(getValue(), IPeriod.class);
+    default Period getValueAsPeriod() {
+        return MiscUtil.castTo(getValue(), Period.class);
     }
 
-    default void setValueAsPeriod(IPeriod value) {
+    default void setValueAsPeriod(Period value) {
         notSupported();
     }
 

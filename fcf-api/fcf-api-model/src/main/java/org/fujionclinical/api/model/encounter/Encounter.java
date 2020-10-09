@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.api.model.encounter;
 
+import edu.utah.kmm.model.cool.core.datatype.Period;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
-import org.fujionclinical.api.model.core.IPeriod;
 import org.fujionclinical.api.model.core.IReference;
 import org.fujionclinical.api.model.impl.BaseDomainType;
 import org.fujionclinical.api.model.location.ILocation;
@@ -46,7 +46,7 @@ public class Encounter extends BaseDomainType implements IEncounter {
 
     private IReference<IPatient> patient;
 
-    private IPeriod period;
+    private Period period;
 
     private EncounterStatus status;
 
@@ -61,12 +61,12 @@ public class Encounter extends BaseDomainType implements IEncounter {
     }
 
     @Override
-    public IPeriod getPeriod() {
+    public Period getPeriod() {
         return period;
     }
 
     @Override
-    public void setPeriod(IPeriod period) {
+    public void setPeriod(Period period) {
         this.period = period;
     }
 

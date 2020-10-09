@@ -42,9 +42,9 @@ public class PersonNameParser implements IPersonNameParser {
     public String toString(IPersonName name) {
         StringBuilder sb = new StringBuilder();
         append(sb, name.getPrefixes());
-        append(sb, name.getFamilyName());
+        append(sb, name.getFamily());
         sb.append(",");
-        append(sb, name.getGivenNames());
+        append(sb, name.getGiven());
         append(sb, name.getSuffixes());
         return sb.toString();
     }
@@ -58,13 +58,13 @@ public class PersonNameParser implements IPersonNameParser {
         String[] givenNames = pcs.length == 1 ? null : pcs[1].split(" ");
 
         if (name == null) {
-            name = new PersonName();
+            name = new PersonNameImpl();
         }
 
-        name.setFamilyName(familyName);
+        name.setFamily(familyName);
 
         if (givenNames != null) {
-            name.setGivenNames(Arrays.stream(givenNames).map(String::trim).filter(nm -> !nm.isEmpty()).collect(Collectors.toList()));
+            name.setGiven(Arrays.stream(givenNames).map(String::trim).filter(nm -> !nm.isEmpty()).collect(Collectors.toList()));
         }
 
         return name;

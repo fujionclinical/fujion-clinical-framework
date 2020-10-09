@@ -25,11 +25,11 @@
  */
 package org.fujionclinical.api.model.encounter;
 
+import edu.utah.kmm.model.cool.core.datatype.Period;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.CollectionUtil;
 import org.fujionclinical.api.core.CoreUtil;
 import org.fujionclinical.api.model.core.IDomainType;
-import org.fujionclinical.api.model.core.IPeriod;
 import org.fujionclinical.api.model.core.IReference;
 import org.fujionclinical.api.model.location.ILocation;
 import org.fujionclinical.api.model.patient.IPatient;
@@ -97,9 +97,9 @@ public interface IEncounter extends IDomainType {
         return getPatient() != null;
     }
 
-    IPeriod getPeriod();
+    Period getPeriod();
 
-    default void setPeriod(IPeriod period) {
+    default void setPeriod(Period period) {
         notSupported();
     }
 

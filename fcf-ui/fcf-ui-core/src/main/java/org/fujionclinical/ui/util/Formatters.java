@@ -26,11 +26,11 @@
 package org.fujionclinical.ui.util;
 
 import edu.utah.kmm.model.cool.core.datatype.Identifier;
+import edu.utah.kmm.model.cool.core.datatype.Period;
 import edu.utah.kmm.model.cool.terminology.ConceptReference;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.DateUtil;
 import org.fujion.common.MiscUtil;
-import org.fujionclinical.api.model.core.IPeriod;
 import org.fujionclinical.api.model.person.IPerson;
 import org.fujionclinical.api.model.person.IPersonNameType;
 
@@ -51,7 +51,7 @@ public class Formatters {
     static {
         register(Date.class, DateUtil::formatDate);
         register(Temporal.class, DateUtil::formatDate);
-        register(IPeriod.class, FormatUtil::formatPeriod);
+        register(Period.class, FormatUtil::formatPeriod);
         register(ConceptReferenceSet.class, FormatUtil::formatConcept);
         register(ConceptReference.class, FormatUtil::formatConceptCode);
         register(Identifier.class, FormatUtil::formatIdentifier);

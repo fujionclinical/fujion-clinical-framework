@@ -25,14 +25,21 @@
  */
 package org.fujionclinical.api.model.person;
 
+import edu.utah.kmm.model.cool.core.datatype.Period;
+import edu.utah.kmm.model.cool.foundation.datatype.PersonNameUse;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersonName implements IPersonName {
+public class PersonNameImpl implements IPersonName {
+
+    private String text;
 
     private String familyName;
 
     private PersonNameUse category;
+
+    private Period periodOfUse;
 
     private final List<String> givenNames = new ArrayList<>();
 
@@ -41,17 +48,17 @@ public class PersonName implements IPersonName {
     private final List<String> suffixes = new ArrayList<>();
 
     @Override
-    public String getFamilyName() {
+    public String getFamily() {
         return familyName;
     }
 
     @Override
-    public void setFamilyName(String familyName) {
+    public void setFamily(String familyName) {
         this.familyName = familyName;
     }
 
     @Override
-    public List<String> getGivenNames() {
+    public List<String> getGiven() {
         return givenNames;
     }
 
@@ -66,6 +73,16 @@ public class PersonName implements IPersonName {
     }
 
     @Override
+    public Period getPeriodOfUse() {
+        return periodOfUse;
+    }
+
+    @Override
+    public void setPeriodOfUse(Period periodOfUse) {
+        this.periodOfUse = periodOfUse;
+    }
+
+    @Override
     public PersonNameUse getUse() {
         return category;
     }
@@ -73,6 +90,17 @@ public class PersonName implements IPersonName {
     @Override
     public void setUse(PersonNameUse category) {
         this.category = category;
+    }
+
+    @Override
+    public String getText() {
+        return text == null ? asString() : text;
+    }
+
+    @Override
+    public void setText(String text) {
+        this.text = text;
+        PersonNameParser.instance.fromString(text, this);
     }
 
     @Override

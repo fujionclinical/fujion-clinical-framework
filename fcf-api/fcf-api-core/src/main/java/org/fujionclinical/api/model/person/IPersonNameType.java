@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.api.model.person;
 
+import edu.utah.kmm.model.cool.foundation.datatype.PersonNameUse;
 import org.fujion.common.CollectionUtil;
 import org.fujionclinical.api.query.expression.QueryParameter;
 
@@ -52,7 +53,7 @@ public interface IPersonNameType {
      */
     @QueryParameter
     default IPersonName getName() {
-        return getName(IPersonName.PersonNameUse.USUAL, IPersonName.PersonNameUse.ANY);
+        return getName(PersonNameUse.USUAL, null);
     }
 
     /**
@@ -62,9 +63,9 @@ public interface IPersonNameType {
      * @param categories Only names belonging to one of these categories will be returned.
      * @return The parsed name, or null if not found.
      */
-    default IPersonName getName(IPersonName.PersonNameUse... categories) {
+    default IPersonName getName(PersonNameUse... categories) {
         return CollectionUtil.findMatch(getNames(), (name, category) ->
-                category == IPersonName.PersonNameUse.ANY || name.getUse() == category, categories);
+                category == null || name.getUse() == category, categories);
     }
 
     default void addNames(IPersonName... names) {
@@ -82,7 +83,7 @@ public interface IPersonNameType {
      */
     @QueryParameter
     default String getFullName() {
-        return getFullName(IPersonName.PersonNameUse.USUAL, IPersonName.PersonNameUse.ANY);
+        return getFullName(PersonNameUse.USUAL, null);
     }
 
     /**
@@ -92,7 +93,7 @@ public interface IPersonNameType {
      * @param categories Only names belonging to one of these categories will be returned.
      * @return Person's full name or null if none found.
      */
-    default String getFullName(IPersonName.PersonNameUse... categories) {
+    default String getFullName(PersonNameUse... categories) {
         return Objects.toString(getName(categories));
     }
 

@@ -25,89 +25,125 @@
  */
 package org.fujionclinical.api.model.person;
 
+import edu.utah.kmm.model.cool.core.datatype.Period;
+import edu.utah.kmm.model.cool.foundation.datatype.PersonName;
+import edu.utah.kmm.model.cool.foundation.datatype.PersonNameUse;
 import org.apache.commons.lang3.StringUtils;
 import org.fujion.common.CollectionUtil;
-import org.fujionclinical.api.core.CoreUtil;
 import org.fujionclinical.api.model.core.IBaseType;
 import org.fujionclinical.api.query.expression.QueryParameter;
 
 import java.util.Collections;
 import java.util.List;
 
-public interface IPersonName extends IBaseType {
-
-    enum PersonNameUse {
-        USUAL, OFFICIAL, TEMP, NICKNAME, ANONYMOUS, OLD, MAIDEN, ANY;
-
-        @Override
-        public String toString() {
-            return CoreUtil.enumToString(this);
-        }
-
-    }
+public interface IPersonName extends PersonName, IBaseType {
 
     @QueryParameter
-    String getFamilyName();
+    @Override
+    String getFamily();
 
-    default void setFamilyName(String familyName) {
+    @Override
+    default void setFamily(String familyName) {
         notSupported();
     }
 
-    default boolean hasFamilyName() {
-        return !StringUtils.isEmpty(getFamilyName());
+    @Override
+    default boolean hasFamily() {
+        return !StringUtils.isEmpty(getFamily());
     }
 
     @QueryParameter
-    List<String> getGivenNames();
+    @Override
+    List<String> getGiven();
 
-    default void setGivenNames(List<String> givenNames) {
-        CollectionUtil.replaceElements(getGivenNames(), givenNames);
+    @Override
+    default void setGiven(List<String> givenNames) {
+        CollectionUtil.replaceElements(getGiven(), givenNames);
     }
 
-    default void addGivenNames(String... givenNames) {
-        Collections.addAll(getGivenNames(), givenNames);
+    @Override
+    default void addGiven(String... givenNames) {
+        Collections.addAll(getGiven(), givenNames);
     }
 
-    default boolean hasGivenName() {
-        return CollectionUtil.notEmpty(getGivenNames());
+    @Override
+    default boolean hasGiven() {
+        return CollectionUtil.notEmpty(getGiven());
     }
 
+    @Override
     List<String> getPrefixes();
 
+    @Override
     default void setPrefixes(List<String> prefixes) {
         CollectionUtil.replaceElements(getPrefixes(), prefixes);
     }
 
+    @Override
     default void addPrefixes(String... prefixes) {
         Collections.addAll(getPrefixes(), prefixes);
     }
 
-    default boolean hasPrefix() {
+    @Override
+    default boolean hasPrefixes() {
         return CollectionUtil.notEmpty(getPrefixes());
     }
 
+    @Override
     List<String> getSuffixes();
 
+    @Override
     default void setSuffixes(List<String> suffixes) {
         CollectionUtil.replaceElements(getSuffixes(), suffixes);
     }
 
+    @Override
     default void addSuffixes(String... suffixes) {
         Collections.addAll(getSuffixes(), suffixes);
     }
 
-    default boolean hasSuffix() {
+    @Override
+    default boolean hasSuffixes() {
         return CollectionUtil.notEmpty(getSuffixes());
     }
 
+    @Override
     PersonNameUse getUse();
 
+    @Override
     default void setUse(PersonNameUse use) {
         notSupported();
     }
 
+    @Override
     default boolean hasUse() {
         return getUse() != null;
+    }
+
+    @Override
+    Period getPeriodOfUse();
+
+    @Override
+    default void setPeriodOfUse(Period periodOfUse) {
+        notSupported();
+    }
+
+    @Override
+    default boolean hasPeriodOfUse() {
+        return getPeriodOfUse() != null;
+    }
+
+    @Override
+    String getText();
+
+    @Override
+    default void setText(String text) {
+        notSupported();
+    }
+
+    @Override
+    default boolean hasText() {
+        return getText() != null;
     }
 
     default void fromString(String value) {

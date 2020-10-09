@@ -25,9 +25,13 @@
  */
 package org.fujionclinical.api.model.observation;
 
+import edu.utah.kmm.model.cool.core.datatype.Period;
 import edu.utah.kmm.model.cool.terminology.ConceptReference;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
-import org.fujionclinical.api.model.core.*;
+import org.fujionclinical.api.model.core.IQuantity;
+import org.fujionclinical.api.model.core.IRange;
+import org.fujionclinical.api.model.core.IRatio;
+import org.fujionclinical.api.model.core.IReferenceRange;
 import org.fujionclinical.api.model.impl.ValueWrapper;
 
 import java.time.LocalDateTime;
@@ -42,7 +46,7 @@ public class ObservationComponent implements IObservationComponent {
     private final List<IReferenceRange<Double>> referenceRanges = new ArrayList<>();
 
     private final ValueWrapper value = new ValueWrapper(String.class, Boolean.class, ConceptReference.class,
-            LocalDateTime.class, Integer.class, IPeriod.class, IQuantity.class, IRange.class,
+            LocalDateTime.class, Integer.class, Period.class, IQuantity.class, IRange.class,
             IRatio.class, LocalTime.class);
 
     private ConceptReferenceSet code;
@@ -119,7 +123,7 @@ public class ObservationComponent implements IObservationComponent {
     }
 
     @Override
-    public void setValueAsPeriod(IPeriod value) {
+    public void setValueAsPeriod(Period value) {
         setValue(value);
     }
 

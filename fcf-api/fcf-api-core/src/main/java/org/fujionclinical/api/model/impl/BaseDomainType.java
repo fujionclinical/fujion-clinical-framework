@@ -27,6 +27,7 @@ package org.fujionclinical.api.model.impl;
 
 import edu.utah.kmm.model.cool.core.datatype.Identifier;
 import edu.utah.kmm.model.cool.core.datatype.Metadata;
+import edu.utah.kmm.model.cool.core.datatype.MetadataImpl;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujionclinical.api.model.core.IDomainType;
 

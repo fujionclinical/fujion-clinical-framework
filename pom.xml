@@ -168,7 +168,22 @@
 			</dependency>
 			<dependency>
 				<groupId>edu.utah.kmm</groupId>
+				<artifactId>cool-api-extensions</artifactId>
+				<version>${cool-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>edu.utah.kmm</groupId>
 				<artifactId>cool-impl-generated</artifactId>
+				<version>${cool-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>edu.utah.kmm</groupId>
+				<artifactId>cool-impl-extensions</artifactId>
+				<version>${cool-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>edu.utah.kmm</groupId>
+				<artifactId>cool-core</artifactId>
 				<version>${cool-version}</version>
 			</dependency>
 			<dependency>

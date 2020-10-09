@@ -25,10 +25,10 @@
  */
 package org.fujionclinical.api.model.practitioner;
 
+import edu.utah.kmm.model.cool.core.datatype.IdentifierExImpl;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceImpl;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSetImpl;
-import org.fujionclinical.api.model.impl.IdentifierImpl;
 import org.fujionclinical.api.model.person.PersonQueryCriteria;
 
 import java.net.URI;
@@ -75,7 +75,7 @@ public class PractitionerQueryCriteria extends PersonQueryCriteria<IPractitioner
      * @param dea DEA.
      */
     public void setDEA(String dea) {
-        queryContext.setParam("identifier", dea == null ? null : new IdentifierImpl((URI) null, dea, null, DEA_CONCEPT_CODE));
+        queryContext.setParam("identifier", dea == null ? null : new IdentifierExImpl((URI) null, dea, null, DEA_CONCEPT_CODE));
     }
 
 }

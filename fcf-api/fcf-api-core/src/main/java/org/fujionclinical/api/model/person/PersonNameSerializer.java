@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.api.model.person;
 
+import edu.utah.kmm.model.cool.foundation.datatype.PersonNameUse;
 import org.fujionclinical.api.context.ISerializer;
 
 import java.util.Arrays;
@@ -41,8 +42,8 @@ public class PersonNameSerializer implements ISerializer<IPersonName> {
 
     @Override
     public String serialize(IPersonName value) {
-        return (value.hasFamilyName() ? value.getFamilyName() : "") + COMPONENT_DELIM
-                + getComponent(value.getGivenNames()) + COMPONENT_DELIM
+        return (value.hasFamily() ? value.getFamily() : "") + COMPONENT_DELIM
+                + getComponent(value.getGiven()) + COMPONENT_DELIM
                 + getComponent(value.getPrefixes()) + COMPONENT_DELIM
                 + getComponent(value.getSuffixes()) + COMPONENT_DELIM
                 + (value.hasUse() ? value.getUse() : "");
@@ -54,11 +55,11 @@ public class PersonNameSerializer implements ISerializer<IPersonName> {
             IPersonName name) {
         String[] components = value.split("\\" + COMPONENT_DELIM);
         int i = 0;
-        name.setFamilyName(getComponent(components, i++));
-        name.setGivenNames(getRepeats(components, i++));
+        name.setFamily(getComponent(components, i++));
+        name.setGiven(getRepeats(components, i++));
         name.setPrefixes(getRepeats(components, i++));
         name.setSuffixes(getRepeats(components, i++));
-        name.setUse(getUse(getComponent(components, i++)));
+        name.setUse(getUse(getComponent(components, i)));
         return name;
     }
 
@@ -67,9 +68,9 @@ public class PersonNameSerializer implements ISerializer<IPersonName> {
         return IPersonName.class;
     }
 
-    private IPersonName.PersonNameUse getUse(String use) {
+    private PersonNameUse getUse(String use) {
         try {
-            return IPersonName.PersonNameUse.valueOf(use);
+            return PersonNameUse.valueOf(use);
         } catch (Exception e) {
             return null;
         }
