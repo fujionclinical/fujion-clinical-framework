@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.api.model.impl;
 
+import edu.utah.kmm.model.cool.core.datatype.QuantityEx;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
-import org.fujionclinical.api.model.core.IQuantity;
 import org.fujionclinical.api.model.core.IRange;
 import org.fujionclinical.api.model.core.IReferenceRange;
 
@@ -35,9 +35,9 @@ import java.util.List;
 
 public class ReferenceRange<T extends Number> implements IReferenceRange<T> {
 
-    private IQuantity<T> low;
+    private QuantityEx<T> low;
 
-    private IQuantity<T> high;
+    private QuantityEx<T> high;
 
     private ConceptReferenceSet type;
 
@@ -48,22 +48,22 @@ public class ReferenceRange<T extends Number> implements IReferenceRange<T> {
     private final List<ConceptReferenceSet> appliesTo = new ArrayList<>();
 
     @Override
-    public IQuantity<T> getLow() {
+    public QuantityEx<T> getLow() {
         return low;
     }
 
     @Override
-    public void setLow(IQuantity<T> value) {
+    public void setLow(QuantityEx<T> value) {
         this.low = value;
     }
 
     @Override
-    public IQuantity<T> getHigh() {
+    public QuantityEx<T> getHigh() {
         return high;
     }
 
     @Override
-    public void setHigh(IQuantity<T> value) {
+    public void setHigh(QuantityEx<T> value) {
         this.high = value;
     }
 

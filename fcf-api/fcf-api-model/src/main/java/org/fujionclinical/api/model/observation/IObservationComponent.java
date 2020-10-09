@@ -26,13 +26,13 @@
 package org.fujionclinical.api.model.observation;
 
 import edu.utah.kmm.model.cool.core.datatype.Period;
+import edu.utah.kmm.model.cool.core.datatype.QuantityEx;
 import edu.utah.kmm.model.cool.core.datatype.Ratio;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.CollectionUtil;
 import org.fujion.common.MiscUtil;
 import org.fujionclinical.api.core.CoreUtil;
 import org.fujionclinical.api.model.core.IBaseType;
-import org.fujionclinical.api.model.core.IQuantity;
 import org.fujionclinical.api.model.core.IRange;
 import org.fujionclinical.api.model.core.IReferenceRange;
 
@@ -236,11 +236,11 @@ public interface IObservationComponent extends IBaseType {
         return getValueAsRange() != null;
     }
 
-    default IQuantity<Double> getValueAsQuantity() {
-        return MiscUtil.castTo(getValue(), IQuantity.class);
+    default QuantityEx<Double> getValueAsQuantity() {
+        return MiscUtil.castTo(getValue(), QuantityEx.class);
     }
 
-    default void setValueAsQuantity(IQuantity<Double> value) {
+    default void setValueAsQuantity(QuantityEx<Double> value) {
         notSupported();
     }
 

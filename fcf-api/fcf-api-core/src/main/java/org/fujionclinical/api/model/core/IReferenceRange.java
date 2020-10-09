@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.api.model.core;
 
+import edu.utah.kmm.model.cool.core.datatype.QuantityEx;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.CollectionUtil;
 
@@ -33,9 +34,9 @@ import java.util.List;
 
 public interface IReferenceRange<T extends Number> extends IBaseType {
 
-    IQuantity<T> getLow();
+    QuantityEx<T> getLow();
 
-    default void setLow(IQuantity<T> value) {
+    default void setLow(QuantityEx<T> value) {
         notSupported();
     }
 
@@ -43,9 +44,9 @@ public interface IReferenceRange<T extends Number> extends IBaseType {
         return getLow() != null;
     }
 
-    IQuantity<T> getHigh();
+    QuantityEx<T> getHigh();
 
-    default void setHigh(IQuantity<T> value) {
+    default void setHigh(QuantityEx<T> value) {
         notSupported();
     }
 

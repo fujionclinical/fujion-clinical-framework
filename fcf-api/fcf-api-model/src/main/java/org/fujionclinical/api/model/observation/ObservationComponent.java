@@ -26,10 +26,10 @@
 package org.fujionclinical.api.model.observation;
 
 import edu.utah.kmm.model.cool.core.datatype.Period;
+import edu.utah.kmm.model.cool.core.datatype.QuantityEx;
 import edu.utah.kmm.model.cool.core.datatype.Ratio;
 import edu.utah.kmm.model.cool.terminology.ConceptReference;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
-import org.fujionclinical.api.model.core.IQuantity;
 import org.fujionclinical.api.model.core.IRange;
 import org.fujionclinical.api.model.core.IReferenceRange;
 import org.fujionclinical.api.model.impl.ValueWrapper;
@@ -46,7 +46,7 @@ public class ObservationComponent implements IObservationComponent {
     private final List<IReferenceRange<Double>> referenceRanges = new ArrayList<>();
 
     private final ValueWrapper value = new ValueWrapper(String.class, Boolean.class, ConceptReference.class,
-            LocalDateTime.class, Integer.class, Period.class, IQuantity.class, IRange.class,
+            LocalDateTime.class, Integer.class, Period.class, QuantityEx.class, IRange.class,
             Ratio.class, LocalTime.class);
 
     private ConceptReferenceSet code;
@@ -133,7 +133,7 @@ public class ObservationComponent implements IObservationComponent {
     }
 
     @Override
-    public void setValueAsQuantity(IQuantity<Double> value) {
+    public void setValueAsQuantity(QuantityEx<Double> value) {
         setValue(value);
     }
 

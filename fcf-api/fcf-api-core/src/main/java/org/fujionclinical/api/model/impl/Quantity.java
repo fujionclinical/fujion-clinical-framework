@@ -25,10 +25,10 @@
  */
 package org.fujionclinical.api.model.impl;
 
+import edu.utah.kmm.model.cool.core.datatype.QuantityEx;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
-import org.fujionclinical.api.model.core.IQuantity;
 
-public class Quantity<T extends Number> implements IQuantity<T> {
+public class Quantity<T extends Number> implements QuantityEx<T> {
 
     private T value;
 
