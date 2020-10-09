@@ -25,9 +25,10 @@
  */
 package org.fujionclinical.api.model.core;
 
+import edu.utah.kmm.model.cool.core.BaseType;
 import org.fujionclinical.api.core.CoreUtil;
 
-public interface IRange<T extends Comparable<? super T>> extends IBaseType {
+public interface IRange<T extends Comparable<? super T>> extends BaseType {
 
     enum Bounds {
         EXCLUSIVE,

@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.api.model.observation;
 
+import edu.utah.kmm.model.cool.core.BaseType;
 import edu.utah.kmm.model.cool.core.datatype.Period;
 import edu.utah.kmm.model.cool.core.datatype.QuantityEx;
 import edu.utah.kmm.model.cool.core.datatype.Ratio;
@@ -32,7 +33,6 @@ import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.CollectionUtil;
 import org.fujion.common.MiscUtil;
 import org.fujionclinical.api.core.CoreUtil;
-import org.fujionclinical.api.model.core.IBaseType;
 import org.fujionclinical.api.model.core.IRange;
 import org.fujionclinical.api.model.core.IReferenceRange;
 
@@ -41,7 +41,7 @@ import java.time.LocalTime;
 import java.util.Collections;
 import java.util.List;
 
-public interface IObservationComponent extends IBaseType {
+public interface IObservationComponent extends BaseType {
 
     enum DataAbsentReason {
         UNKNOWN,                              // The value is expected to exist but is not known.

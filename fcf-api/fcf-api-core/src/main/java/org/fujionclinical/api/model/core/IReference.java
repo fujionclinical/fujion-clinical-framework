@@ -25,7 +25,9 @@
  */
 package org.fujionclinical.api.model.core;
 
-public interface IReference<T extends IDomainType> extends IBaseType {
+import edu.utah.kmm.model.cool.core.BaseType;
+
+public interface IReference<T extends IDomainType> extends BaseType {
 
     T getReferenced();
 

@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.api.model.core;
 
+import edu.utah.kmm.model.cool.core.BaseType;
 import edu.utah.kmm.model.cool.core.datatype.Identifier;
 import edu.utah.kmm.model.cool.core.datatype.IdentifierExImpl;
 import edu.utah.kmm.model.cool.core.datatype.Metadata;
@@ -41,7 +42,7 @@ import java.util.function.Predicate;
 /**
  * Interface for a domain object.
  */
-public interface IDomainType extends Entity, IBaseType {
+public interface IDomainType extends Entity, BaseType {
 
     /**
      * Returns the logical identifier for the domain object.

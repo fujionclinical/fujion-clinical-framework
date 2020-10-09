@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.api.model.core;
 
+import edu.utah.kmm.model.cool.core.BaseType;
 import edu.utah.kmm.model.cool.core.datatype.QuantityEx;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.CollectionUtil;
@@ -32,7 +33,7 @@ import org.fujion.common.CollectionUtil;
 import java.util.Collections;
 import java.util.List;
 
-public interface IReferenceRange<T extends Number> extends IBaseType {
+public interface IReferenceRange<T extends Number> extends BaseType {
 
     QuantityEx<T> getLow();
 

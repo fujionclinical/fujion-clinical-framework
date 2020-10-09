@@ -25,6 +25,8 @@
  */
 package org.fujionclinical.api.model.core;
 
+import edu.utah.kmm.model.cool.core.BaseType;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -37,7 +39,7 @@ import java.util.stream.Collectors;
  * @param <L> The logical model type.
  * @param <N> The native  model type.
  */
-public interface IModelTransform<L, N> extends IBaseType {
+public interface IModelTransform<L, N> extends BaseType {
 
     /**
      * Returns the logical model type.

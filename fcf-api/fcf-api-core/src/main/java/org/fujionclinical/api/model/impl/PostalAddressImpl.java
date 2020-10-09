@@ -31,7 +31,7 @@ import org.fujionclinical.api.model.core.IPostalAddress;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostalAddress implements IPostalAddress {
+public class PostalAddressImpl implements IPostalAddress {
 
     private final List<String> lines = new ArrayList<>();
 

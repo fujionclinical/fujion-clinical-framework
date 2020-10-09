@@ -25,18 +25,18 @@
  */
 package org.fujionclinical.api.model.person;
 
+import edu.utah.kmm.model.cool.core.BaseType;
 import edu.utah.kmm.model.cool.core.datatype.Period;
 import edu.utah.kmm.model.cool.foundation.datatype.PersonName;
 import edu.utah.kmm.model.cool.foundation.datatype.PersonNameUse;
 import org.apache.commons.lang3.StringUtils;
 import org.fujion.common.CollectionUtil;
-import org.fujionclinical.api.model.core.IBaseType;
 import org.fujionclinical.api.query.expression.QueryParameter;
 
 import java.util.Collections;
 import java.util.List;
 
-public interface IPersonName extends PersonName, IBaseType {
+public interface IPersonName extends PersonName, BaseType {
 
     @QueryParameter
     @Override

@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.api.model.core;
 
+import edu.utah.kmm.model.cool.core.BaseType;
 import edu.utah.kmm.model.cool.core.datatype.Period;
 import org.fujion.common.CollectionUtil;
 import org.fujionclinical.api.core.CoreUtil;
@@ -33,7 +34,7 @@ import org.fujionclinical.api.query.expression.QueryParameter;
 import java.util.Collections;
 import java.util.List;
 
-public interface IPostalAddress extends IBaseType {
+public interface IPostalAddress extends BaseType {
 
     enum PostalAddressUse {
         HOME, WORK, TEMP, OLD, BILLING;

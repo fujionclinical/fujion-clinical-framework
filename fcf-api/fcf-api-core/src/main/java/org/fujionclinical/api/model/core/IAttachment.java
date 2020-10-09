@@ -25,11 +25,12 @@
  */
 package org.fujionclinical.api.model.core;
 
+import edu.utah.kmm.model.cool.core.BaseType;
 import org.fujion.ancillary.MimeContent;
 
 import java.util.Collection;
 
-public interface IAttachment extends IBaseType {
+public interface IAttachment extends BaseType {
 
     static IAttachment getAttachment(
             Collection<? extends IAttachment> attachments,

@@ -28,7 +28,10 @@ package org.fujionclinical.api.model.document;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.CollectionUtil;
 import org.fujionclinical.api.core.CoreUtil;
-import org.fujionclinical.api.model.core.*;
+import org.fujionclinical.api.model.core.IAttachmentType;
+import org.fujionclinical.api.model.core.ICategoryType;
+import org.fujionclinical.api.model.core.IDomainType;
+import org.fujionclinical.api.model.core.IReference;
 import org.fujionclinical.api.model.encounter.IEncounter;
 import org.fujionclinical.api.model.person.IPerson;
 
@@ -68,7 +71,7 @@ public interface IDocument extends IDomainType, IAttachmentType, ICategoryType {
 
     }
 
-    interface IRelatedDocument extends IBaseType {
+    interface IRelatedDocument extends BaseType {
 
         DocumentRelationship getRelationship();
 
