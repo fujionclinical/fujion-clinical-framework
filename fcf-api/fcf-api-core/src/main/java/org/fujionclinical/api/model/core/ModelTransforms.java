@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.api.model.core;
 
+import edu.utah.kmm.cool.transform.ModelTransform;
 import org.fujion.common.Logger;
 import org.fujionclinical.api.spring.BeanRegistry;
 import org.springframework.util.Assert;
@@ -35,7 +36,7 @@ import java.util.List;
 /**
  * Indexes all wrapper transforms by their native and model types.
  */
-public class ModelTransforms extends BeanRegistry<Class<? extends IModelTransform>, IModelTransform> {
+public class ModelTransforms extends BeanRegistry<Class<? extends ModelTransform>, ModelTransform> {
 
     private static final Logger log = Logger.create(ModelTransforms.class);
 
@@ -46,20 +47,20 @@ public class ModelTransforms extends BeanRegistry<Class<? extends IModelTransfor
     }
 
     private ModelTransforms() {
-        super(IModelTransform.class);
+        super(ModelTransform.class);
     }
 
     @Override
-    protected Class<? extends IModelTransform> getKey(IModelTransform item) {
+    protected Class<? extends ModelTransform> getKey(ModelTransform item) {
         return item.getClass();
     }
 
-    public <L, N> IModelTransform<L, N> get(
+    public <L, N> ModelTransform<L, N> get(
             Class<L> logicalType,
             Class<N> nativeType) {
-        List<IModelTransform> candidates = new ArrayList<>();
+        List<ModelTransform> candidates = new ArrayList<>();
 
-        for (IModelTransform transform : this) {
+        for (ModelTransform transform : this) {
             if (logicalType.isAssignableFrom(transform.getLogicalType()) && nativeType.isAssignableFrom(transform.getNativeType())) {
                 candidates.add(transform);
             }
