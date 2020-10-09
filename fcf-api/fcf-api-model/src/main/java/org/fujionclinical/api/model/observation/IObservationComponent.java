@@ -26,11 +26,15 @@
 package org.fujionclinical.api.model.observation;
 
 import edu.utah.kmm.model.cool.core.datatype.Period;
+import edu.utah.kmm.model.cool.core.datatype.Ratio;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.CollectionUtil;
 import org.fujion.common.MiscUtil;
 import org.fujionclinical.api.core.CoreUtil;
-import org.fujionclinical.api.model.core.*;
+import org.fujionclinical.api.model.core.IBaseType;
+import org.fujionclinical.api.model.core.IQuantity;
+import org.fujionclinical.api.model.core.IRange;
+import org.fujionclinical.api.model.core.IReferenceRange;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -244,11 +248,11 @@ public interface IObservationComponent extends IBaseType {
         return getValueAsQuantity() != null;
     }
 
-    default IRatio<Double> getValueAsRatio() {
-        return MiscUtil.castTo(getValue(), IRatio.class);
+    default Ratio<Double> getValueAsRatio() {
+        return MiscUtil.castTo(getValue(), Ratio.class);
     }
 
-    default void setValueAsRatio(IRatio<Double> value) {
+    default void setValueAsRatio(Ratio<Double> value) {
         notSupported();
     }
 

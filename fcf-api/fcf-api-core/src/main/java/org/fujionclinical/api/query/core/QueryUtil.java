@@ -135,6 +135,7 @@ public class QueryUtil {
      * Matching is case-insensitive.
      *
      * @param value The value to test.
+     * @param <T> The enum type.
      * @return The matching member, or null if no match.
      */
     public static <T extends Enum<T>> T findMatchingMember(Class<T> clazz, String value) {

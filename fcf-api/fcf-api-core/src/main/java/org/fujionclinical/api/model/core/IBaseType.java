@@ -31,7 +31,11 @@ package org.fujionclinical.api.model.core;
 public interface IBaseType {
 
     /**
-     * Called by methods that are not supported to throw the appropriate exception.
+     * Called by methods that are not supported to throw the appropriate exception.  It is defined as a function
+     * to allow function methods to use it without requiring a separate return statement.
+     *
+     * @param <T> Type of null value returned.
+     * @returns Null value to allow using as a function.
      *
      * @throws UnsupportedOperationException Always thrown.
      */
