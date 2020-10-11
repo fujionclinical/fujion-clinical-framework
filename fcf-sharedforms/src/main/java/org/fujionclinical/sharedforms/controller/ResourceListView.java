@@ -25,6 +25,12 @@
  */
 package org.fujionclinical.sharedforms.controller;
 
+import edu.utah.kmm.model.cool.dao.core.EntityDAO;
+import edu.utah.kmm.model.cool.dao.core.EntityDAORegistry;
+import edu.utah.kmm.model.cool.dao.query.Expression;
+import edu.utah.kmm.model.cool.dao.query.ExpressionParser;
+import edu.utah.kmm.model.cool.dao.query.QueryContext;
+import edu.utah.kmm.model.cool.dao.query.QueryContextImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -38,14 +44,8 @@ import org.fujion.thread.ICancellable;
 import org.fujion.thread.ThreadedTask;
 import org.fujionclinical.api.event.IEventSubscriber;
 import org.fujionclinical.api.model.core.IDomainType;
-import org.fujionclinical.api.model.dao.DomainDAOs;
-import org.fujionclinical.api.model.dao.IDomainDAO;
 import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.patient.PatientContext;
-import org.fujionclinical.api.query.core.IQueryContext;
-import org.fujionclinical.api.query.core.QueryContext;
-import org.fujionclinical.api.query.expression.Expression;
-import org.fujionclinical.api.query.expression.ExpressionParser;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.ui.dialog.DialogUtil;
 import org.fujionclinical.ui.util.FCFUtil;
@@ -67,7 +67,7 @@ public abstract class ResourceListView<R extends IDomainType, M> extends ListFor
 
     private static final String DETAIL_POPUP = FCFUtil.getResourcePath(ResourceListView.class) + "resourceListDetailPopup.fsp";
 
-    private final IQueryContext queryContext = new QueryContext();
+    private final QueryContext queryContext = new QueryContextImpl();
 
     @WiredComponent
     protected Html detailView;
@@ -82,7 +82,7 @@ public abstract class ResourceListView<R extends IDomainType, M> extends ListFor
 
     private Expression queryExpression;
 
-    private IDomainDAO<R> dao;
+    private EntityDAO<R> dao;
 
     protected void setup(
             Class<R> resourceClass,
@@ -94,7 +94,7 @@ public abstract class ResourceListView<R extends IDomainType, M> extends ListFor
         this.detailTitle = detailTitle;
         this.queryExpression = ExpressionParser.getInstance().parse(resourceClass, queryString);
         this.resourceClass = resourceClass;
-        this.dao = DomainDAOs.getDAO(resourceClass);
+        this.dao = EntityDAORegistry.get(resourceClass);
         Assert.notNull(dao, () -> "Cannot find DAO for " + resourceClass);
         super.setup(title, sortBy, headers);
     }

@@ -49,10 +49,8 @@
             <property name="propertyFile" value="classpath*:/META-INF/alias.properties,${org.fujionclinical.location.aliases}"/>
         </bean>
 
-        <!-- A registry of all domain factories. -->
-        <bean id="domainFactoryRegistry" class="org.fujionclinical.api.model.dao.DomainDAOs"
-              factory-method="getInstance">
-        </bean>
+        <!-- Initializer for CoolBeans. -->
+        <bean class="org.fujionclinical.api.model.core.CoolInitializer" />
 
         <!-- A registry of all security domains. -->
         <bean id="securityDomainRegistry" class="org.fujionclinical.api.security.SecurityDomains"
@@ -63,11 +61,6 @@
         <bean id="modelTransformRegistry" class="org.fujionclinical.api.model.core.ModelTransforms"
 			  factory-method="getInstance">
         </bean>
-
-		<!-- A registry of all query parameter descriptors. -->
-		<bean id="parameterDescriptorRegistry" class="org.fujionclinical.api.query.expression.ParameterDescriptors"
-			  factory-method="getInstance">
-		</bean>
 
         <task:annotation-driven executor="taskExecutor"
                                 scheduler="taskScheduler"/>

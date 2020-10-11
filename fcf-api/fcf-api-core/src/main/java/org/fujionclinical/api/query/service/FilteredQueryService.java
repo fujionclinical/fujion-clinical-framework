@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.api.query.service;
 
+import edu.utah.kmm.model.cool.dao.query.QueryContext;
 import org.fujion.thread.ICancellable;
-import org.fujionclinical.api.query.core.IQueryContext;
 import org.fujionclinical.api.query.core.QueryUtil;
 import org.fujionclinical.api.query.filter.QueryFilterSet;
 
@@ -94,18 +94,18 @@ public class FilteredQueryService<T> implements IQueryService<T> {
     }
     
     @Override
-    public boolean hasRequired(IQueryContext context) {
+    public boolean hasRequired(QueryContext context) {
         return service.hasRequired(context);
     }
     
     @Override
-    public IQueryResult<T> fetch(IQueryContext context) {
+    public IQueryResult<T> fetch(QueryContext context) {
         filters.updateContext(context);
         return filteredResult(service.fetch(context));
     }
     
     @Override
-    public ICancellable fetch(IQueryContext context, IQueryCallback<T> callback) {
+    public ICancellable fetch(QueryContext context, IQueryCallback<T> callback) {
         filters.updateContext(context);
         return service.fetch(context, new QueryCallback(callback));
     }

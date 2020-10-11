@@ -29,10 +29,10 @@ import edu.utah.kmm.model.cool.core.BaseType;
 import edu.utah.kmm.model.cool.core.datatype.Identifier;
 import edu.utah.kmm.model.cool.core.datatype.IdentifierExImpl;
 import edu.utah.kmm.model.cool.core.datatype.Metadata;
+import edu.utah.kmm.model.cool.core.query.QueryParameter;
 import edu.utah.kmm.model.cool.foundation.entity.Entity;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.CollectionUtil;
-import org.fujionclinical.api.query.expression.QueryParameter;
 
 import java.net.URI;
 import java.util.Collections;

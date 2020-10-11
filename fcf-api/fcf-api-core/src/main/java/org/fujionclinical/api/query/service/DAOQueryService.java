@@ -25,13 +25,13 @@
  */
 package org.fujionclinical.api.query.service;
 
-import org.fujionclinical.api.model.core.IDomainType;
-import org.fujionclinical.api.model.dao.DomainDAOs;
-import org.fujionclinical.api.model.dao.IDomainDAO;
-import org.fujionclinical.api.query.core.IQueryContext;
+import edu.utah.kmm.model.cool.dao.core.EntityDAO;
+import edu.utah.kmm.model.cool.dao.core.EntityDAORegistry;
+import edu.utah.kmm.model.cool.dao.query.Expression;
+import edu.utah.kmm.model.cool.dao.query.ExpressionParser;
+import edu.utah.kmm.model.cool.dao.query.QueryContext;
+import edu.utah.kmm.model.cool.foundation.entity.Entity;
 import org.fujionclinical.api.query.core.QueryUtil;
-import org.fujionclinical.api.query.expression.Expression;
-import org.fujionclinical.api.query.expression.ExpressionParser;
 
 import java.util.List;
 
@@ -40,24 +40,24 @@ import java.util.List;
  *
  * @param <T> The type of domain object.
  */
-public class DAOQueryService<T extends IDomainType> extends AbstractQueryServiceEx<IDomainDAO<T>, T> {
+public class DAOQueryService<T extends Entity> extends AbstractQueryServiceEx<EntityDAO<T>, T> {
 
     private final Expression<T> queryExpression;
 
     public DAOQueryService(
             Class<T> domainClass,
             String queryString) {
-        super(DomainDAOs.getDAO(domainClass));
+        super(EntityDAORegistry.get(domainClass));
         this.queryExpression = ExpressionParser.getInstance().parse(domainClass, queryString);
     }
 
     @Override
-    public boolean hasRequired(IQueryContext context) {
+    public boolean hasRequired(QueryContext context) {
         return true;
     }
 
     @Override
-    public IQueryResult<T> fetch(IQueryContext queryContext) {
+    public IQueryResult<T> fetch(QueryContext queryContext) {
         List<T> results = service.search(queryExpression.resolve(queryContext));
         return QueryUtil.packageResult(results, IQueryResult.CompletionStatus.COMPLETED);
     }

@@ -25,9 +25,9 @@
  */
 package org.fujionclinical.api.query.filter;
 
+import edu.utah.kmm.model.cool.dao.query.QueryContext;
 import org.fujion.common.DateRange;
 import org.fujion.common.DateTimeWrapper;
-import org.fujionclinical.api.query.core.IQueryContext;
 
 public class DateQueryFilter<T> extends AbstractQueryFilter<T> {
 
@@ -68,7 +68,7 @@ public class DateQueryFilter<T> extends AbstractQueryFilter<T> {
     }
     
     @Override
-    public boolean updateContext(IQueryContext context) {
+    public boolean updateContext(QueryContext context) {
         context.setParam("dateType", dateType);
         DateRange oldDateRange = (DateRange) context.getParam("dateRange");
         

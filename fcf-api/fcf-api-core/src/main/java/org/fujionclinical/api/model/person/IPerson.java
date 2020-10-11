@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.api.model.person;
 
+import edu.utah.kmm.model.cool.core.query.QueryParameter;
 import edu.utah.kmm.model.cool.foundation.core.Party;
 import edu.utah.kmm.model.cool.terminology.ConceptReference;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
@@ -34,7 +35,6 @@ import org.fujionclinical.api.model.core.IAttachment;
 import org.fujionclinical.api.model.core.IContactPointType;
 import org.fujionclinical.api.model.core.IDomainType;
 import org.fujionclinical.api.model.core.IPostalAddressType;
-import org.fujionclinical.api.query.expression.QueryParameter;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;

@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.query.filter;
 
-import org.fujionclinical.api.query.core.IQueryContext;
+import edu.utah.kmm.model.cool.dao.query.QueryContext;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -90,7 +90,7 @@ public class QueryFilterSet<T> extends AbstractQueryFilter<T> implements IQueryF
      * {@inheritDoc}
      */
     @Override
-    public boolean updateContext(IQueryContext context) {
+    public boolean updateContext(QueryContext context) {
         boolean result = false;
         
         for (IQueryFilter<T> filter : filters) {

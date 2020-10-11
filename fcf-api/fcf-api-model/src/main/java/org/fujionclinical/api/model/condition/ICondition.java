@@ -26,6 +26,7 @@
 package org.fujionclinical.api.model.condition;
 
 import edu.utah.kmm.model.cool.core.datatype.Period;
+import edu.utah.kmm.model.cool.core.query.QueryParameter;
 import edu.utah.kmm.model.cool.foundation.common.Annotatable;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujionclinical.api.core.CoreUtil;
@@ -34,7 +35,6 @@ import org.fujionclinical.api.model.core.IReference;
 import org.fujionclinical.api.model.encounter.IEncounter;
 import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.person.IPerson;
-import org.fujionclinical.api.query.expression.QueryParameter;
 
 import java.time.LocalDateTime;
 

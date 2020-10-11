@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.api.query.service;
 
+import edu.utah.kmm.model.cool.dao.query.QueryContext;
 import org.fujion.thread.ICancellable;
-import org.fujionclinical.api.query.core.IQueryContext;
 
 /**
  * Strategy for fetching data asynchronously.
@@ -43,6 +43,6 @@ public interface IAsyncQueryStrategy<T> {
      * @param callback The callback to report the query result.
      * @return An object implementing ICancellable, or null if no such implementation is available.
      */
-    ICancellable fetch(IQueryService<T> service, IQueryContext context, IQueryCallback<T> callback);
+    ICancellable fetch(IQueryService<T> service, QueryContext context, IQueryCallback<T> callback);
     
 }

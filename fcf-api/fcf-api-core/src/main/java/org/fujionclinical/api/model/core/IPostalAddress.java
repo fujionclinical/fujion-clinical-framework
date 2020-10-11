@@ -27,9 +27,9 @@ package org.fujionclinical.api.model.core;
 
 import edu.utah.kmm.model.cool.core.BaseType;
 import edu.utah.kmm.model.cool.core.datatype.Period;
+import edu.utah.kmm.model.cool.core.query.QueryParameter;
 import org.fujion.common.CollectionUtil;
 import org.fujionclinical.api.core.CoreUtil;
-import org.fujionclinical.api.query.expression.QueryParameter;
 
 import java.util.Collections;
 import java.util.List;

@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.query.filter;
 
-import org.fujionclinical.api.query.core.IQueryContext;
+import edu.utah.kmm.model.cool.dao.query.QueryContext;
 
 /**
  * All data filters must implement this interface.
@@ -62,6 +62,6 @@ public interface IQueryFilter<T> {
      * @param context The filter context to update
      * @return True if the filter context was updated.
      */
-    boolean updateContext(IQueryContext context);
+    boolean updateContext(QueryContext context);
     
 }

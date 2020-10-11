@@ -25,9 +25,9 @@
  */
 package org.fujionclinical.api.query.service;
 
+import edu.utah.kmm.model.cool.dao.query.QueryContext;
 import org.fujion.thread.ICancellable;
 import org.fujion.thread.ThreadUtil;
-import org.fujionclinical.api.query.core.IQueryContext;
 import org.fujionclinical.api.query.core.QueryUtil;
 
 /**
@@ -41,13 +41,13 @@ public class ThreadedQueryStrategy<T> implements IAsyncQueryStrategy<T> {
         
         private final IQueryService<T> service;
         
-        private final IQueryContext context;
+        private final QueryContext context;
         
         private final IQueryCallback<T> callback;
         
         private boolean cancelled;
         
-        private Query(IQueryService<T> service, IQueryContext context, IQueryCallback<T> callback) {
+        private Query(IQueryService<T> service, QueryContext context, IQueryCallback<T> callback) {
             this.service = service;
             this.context = context;
             this.callback = callback;
@@ -83,7 +83,7 @@ public class ThreadedQueryStrategy<T> implements IAsyncQueryStrategy<T> {
     }
     
     @Override
-    public ICancellable fetch(IQueryService<T> service, IQueryContext context, IQueryCallback<T> callback) {
+    public ICancellable fetch(IQueryService<T> service, QueryContext context, IQueryCallback<T> callback) {
         Query query = new Query(service, context, callback);
         ThreadUtil.execute(query);
         return query;

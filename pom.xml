@@ -188,6 +188,11 @@
 			</dependency>
 			<dependency>
 				<groupId>edu.utah.kmm</groupId>
+				<artifactId>cool-dao</artifactId>
+				<version>${cool-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>edu.utah.kmm</groupId>
 				<artifactId>cool-transforms</artifactId>
 				<version>${cool-version}</version>
 			</dependency>

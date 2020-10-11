@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.api.query.service;
 
+import edu.utah.kmm.model.cool.dao.query.QueryContext;
 import org.fujion.thread.ICancellable;
-import org.fujionclinical.api.query.core.IQueryContext;
 
 /**
  * Data query services may either directly implement this interface or be wrapped by a class that
@@ -42,7 +42,7 @@ public interface IQueryService<T> {
      * @param context A query context.
      * @return True if context has all required parameters.
      */
-    boolean hasRequired(IQueryContext context);
+    boolean hasRequired(QueryContext context);
     
     /**
      * Synchronously fetches data from the query service.
@@ -50,7 +50,7 @@ public interface IQueryService<T> {
      * @param context The query context that supplies the query parameters.
      * @return The result of the fetch operation.
      */
-    IQueryResult<T> fetch(IQueryContext context);
+    IQueryResult<T> fetch(QueryContext context);
     
     /**
      * Asynchronously fetches data from the query service.
@@ -59,5 +59,5 @@ public interface IQueryService<T> {
      * @param callback The callback to receive the query result.
      * @return An object implementing ICancellable, or null if no such implementation is available.
      */
-    ICancellable fetch(IQueryContext context, IQueryCallback<T> callback);
+    ICancellable fetch(QueryContext context, IQueryCallback<T> callback);
 }

@@ -25,13 +25,13 @@
  */
 package org.fujionclinical.patientlist;
 
+import edu.utah.kmm.model.cool.dao.core.EntityDAO;
+import edu.utah.kmm.model.cool.dao.core.EntityDAORegistry;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.ConstructorUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.common.DateRange;
-import org.fujionclinical.api.model.dao.DomainDAOs;
-import org.fujionclinical.api.model.dao.IDomainDAO;
 import org.fujionclinical.api.model.patient.IPatient;
 
 import java.util.*;
@@ -88,8 +88,8 @@ public abstract class AbstractPatientList implements IPatientList {
         return getPatientDAO().read(patientId);
     }
 
-    protected IDomainDAO<IPatient> getPatientDAO() {
-        return DomainDAOs.getDAO(IPatient.class);
+    protected EntityDAO<IPatient> getPatientDAO() {
+        return EntityDAORegistry.get(IPatient.class);
     }
 
     /**

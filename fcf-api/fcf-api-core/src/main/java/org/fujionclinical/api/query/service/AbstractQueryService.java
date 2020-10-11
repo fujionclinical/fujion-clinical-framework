@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.api.query.service;
 
+import edu.utah.kmm.model.cool.dao.query.QueryContext;
 import org.fujion.thread.ICancellable;
-import org.fujionclinical.api.query.core.IQueryContext;
 
 /**
  * Base class for implementing a data query service implementing both synchronous and asynchronous
@@ -46,7 +46,7 @@ public abstract class AbstractQueryService<T> implements IQueryService<T> {
     private class NullAsyncQueryStrategy implements IAsyncQueryStrategy<T> {
         
         @Override
-        public ICancellable fetch(IQueryService<T> service, IQueryContext context, IQueryCallback<T> callback) {
+        public ICancellable fetch(IQueryService<T> service, QueryContext context, IQueryCallback<T> callback) {
             callback.onQueryStart(null);
             callback.onQueryFinish(null, service.fetch(context));
             return null;
@@ -74,7 +74,7 @@ public abstract class AbstractQueryService<T> implements IQueryService<T> {
     }
     
     @Override
-    public ICancellable fetch(IQueryContext context, IQueryCallback<T> callback) {
+    public ICancellable fetch(QueryContext context, IQueryCallback<T> callback) {
         context.reset();
         return strategy.fetch(this, context, callback);
     }

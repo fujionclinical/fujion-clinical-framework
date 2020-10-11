@@ -25,11 +25,13 @@
  */
 package org.fujionclinical.api.query.expression;
 
+import edu.utah.kmm.model.cool.dao.core.EntityDAORegistry;
+import edu.utah.kmm.model.cool.dao.query.ExpressionParser;
+import edu.utah.kmm.model.cool.dao.query.ExpressionTuple;
+import edu.utah.kmm.model.cool.dao.query.QueryContext;
+import edu.utah.kmm.model.cool.dao.query.QueryContextImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.fujionclinical.api.model.core.IDomainType;
-import org.fujionclinical.api.model.dao.DomainDAOs;
-import org.fujionclinical.api.query.core.IQueryContext;
-import org.fujionclinical.api.query.core.QueryContext;
 import org.fujionclinical.api.query.core.QueryException;
 
 import java.util.List;
@@ -42,19 +44,19 @@ public abstract class AbstractCriteria<T extends IDomainType> {
 
     private static final String MSG_ERROR_MISSING_REQUIRED = "A required search criterion is missing.";
 
-    protected final IQueryContext queryContext = new QueryContext();
+    protected final QueryContext queryContext = new QueryContextImpl();
 
-    private final Class<T> domainClass;
+    private final Class<T> entityType;
 
     private final String validationFailureMessage;
 
     private final Character criterionSeparator;
 
     protected AbstractCriteria(
-            Class<T> domainClass,
+            Class<T> entityType,
             Character criterionSeparator,
             String validationFailureMessage) {
-        this.domainClass = domainClass;
+        this.entityType = entityType;
         this.criterionSeparator = criterionSeparator;
         this.validationFailureMessage = validationFailureMessage == null ? MSG_ERROR_MISSING_REQUIRED : validationFailureMessage;
     }
@@ -87,7 +89,7 @@ public abstract class AbstractCriteria<T extends IDomainType> {
         StringBuilder sb = new StringBuilder();
         addFragment(sb, "id", "=");
         buildQueryString(sb);
-        return ExpressionParser.getInstance().parse(domainClass, sb.toString()).resolve(queryContext);
+        return ExpressionParser.getInstance().parse(entityType, sb.toString()).resolve(queryContext);
     }
 
     /**
@@ -96,7 +98,7 @@ public abstract class AbstractCriteria<T extends IDomainType> {
      * @return Resources matching the search criteria.
      */
     public List<T> search() {
-        return DomainDAOs.getDAO(domainClass).search(compile());
+        return EntityDAORegistry.get(entityType).search(compile());
     }
 
     /**

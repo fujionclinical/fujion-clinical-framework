@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.query.service;
 
-import org.fujionclinical.api.query.core.IQueryContext;
+import edu.utah.kmm.model.cool.dao.query.QueryContext;
 import org.fujionclinical.api.query.core.QueryUtil;
 
 import java.util.Collections;
@@ -62,12 +62,12 @@ public class InMemoryQueryService<T> extends AbstractQueryService<T> {
     }
 
     @Override
-    public boolean hasRequired(IQueryContext context) {
+    public boolean hasRequired(QueryContext context) {
         return true;
     }
 
     @Override
-    public IQueryResult<T> fetch(IQueryContext context) {
+    public IQueryResult<T> fetch(QueryContext context) {
         List<T> result = queryResult == null ? null : queryResult.get();
         return QueryUtil.packageResult(result == null ? Collections.emptyList() : result, IQueryResult.CompletionStatus.COMPLETED);
     }

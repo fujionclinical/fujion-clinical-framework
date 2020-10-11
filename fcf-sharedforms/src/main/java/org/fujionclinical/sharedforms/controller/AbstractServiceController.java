@@ -25,6 +25,8 @@
  */
 package org.fujionclinical.sharedforms.controller;
 
+import edu.utah.kmm.model.cool.dao.query.QueryContext;
+import edu.utah.kmm.model.cool.dao.query.QueryContextImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.annotation.EventHandler;
@@ -38,8 +40,6 @@ import org.fujion.component.Style;
 import org.fujion.event.Event;
 import org.fujion.event.EventUtil;
 import org.fujion.thread.ICancellable;
-import org.fujionclinical.api.query.core.IQueryContext;
-import org.fujionclinical.api.query.core.QueryContext;
 import org.fujionclinical.api.query.filter.IQueryFilter;
 import org.fujionclinical.api.query.filter.IQueryFilterChanged;
 import org.fujionclinical.api.query.filter.QueryFilterSet;
@@ -127,7 +127,7 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
          *
          * @param context The query context to initialize.
          */
-        protected void initContext(IQueryContext context) {
+        protected void initContext(QueryContext context) {
             context.setParam(paramName, paramValue);
         }
 
@@ -177,7 +177,7 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
             return null;
         }
 
-        void initContext(IQueryContext context) {
+        void initContext(QueryContext context) {
             params.forEach(param -> param.initContext(context));
         }
 
@@ -230,7 +230,7 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
     
     private boolean deferredFetch = true;
     
-    private final IQueryContext queryContext = new QueryContext();
+    private final QueryContext queryContext = new QueryContextImpl();
     
     private final QueryFilterSet<M> queryFilters = new QueryFilterSet<>();
 
@@ -319,7 +319,7 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
      *
      * @param context The query context.
      */
-    protected void prepareQueryContext(IQueryContext context) {
+    protected void prepareQueryContext(QueryContext context) {
     }
     
     // End override section.
