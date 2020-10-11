@@ -34,7 +34,7 @@ import org.fujionclinical.api.core.CoreUtil;
 import java.util.Collections;
 import java.util.List;
 
-public interface IPostalAddress extends BaseType {
+public interface Address extends BaseType {
 
     enum PostalAddressUse {
         HOME, WORK, TEMP, OLD, BILLING;

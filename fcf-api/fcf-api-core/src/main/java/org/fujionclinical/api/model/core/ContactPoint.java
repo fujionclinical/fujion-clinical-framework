@@ -29,7 +29,7 @@ import edu.utah.kmm.model.cool.core.BaseType;
 import edu.utah.kmm.model.cool.core.datatype.Period;
 import org.fujionclinical.api.core.CoreUtil;
 
-public interface IContactPoint extends BaseType {
+public interface ContactPoint extends BaseType {
 
     enum ContactPointSystem {
         PHONE, FAX, EMAIL, PAGER, URL, SMS, OTHER;

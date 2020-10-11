@@ -28,14 +28,14 @@ package org.fujionclinical.api.model.location;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.CollectionUtil;
 import org.fujionclinical.api.core.CoreUtil;
-import org.fujionclinical.api.model.core.IContactPointType;
+import org.fujionclinical.api.model.core.Addressable;
+import org.fujionclinical.api.model.core.ContactPointType;
 import org.fujionclinical.api.model.core.IDomainType;
-import org.fujionclinical.api.model.core.IPostalAddressType;
 
 import java.util.Collections;
 import java.util.List;
 
-public interface ILocation extends IDomainType, IPostalAddressType, IContactPointType {
+public interface ILocation extends IDomainType, Addressable, ContactPointType {
 
     enum LocationStatus {
         ACTIVE, SUSPENDED, INACTIVE;

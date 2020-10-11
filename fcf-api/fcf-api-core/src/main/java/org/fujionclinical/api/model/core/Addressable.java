@@ -30,18 +30,18 @@ import org.fujion.common.CollectionUtil;
 import java.util.Collections;
 import java.util.List;
 
-public interface IPostalAddressType {
+public interface Addressable {
 
     /**
      * Returns all addresses..
      *
      * @return A list of all addresses (never null)
      */
-    default List<IPostalAddress> getAddresses() {
+    default List<Address> getAddresses() {
         return Collections.emptyList();
     }
 
-    default void setAddresses(List<IPostalAddress> addresses) {
+    default void setAddresses(List<Address> addresses) {
         CollectionUtil.replaceElements(getAddresses(), addresses);
     }
 
@@ -50,8 +50,8 @@ public interface IPostalAddressType {
      *
      * @return The home address, or null if not found.
      */
-    default IPostalAddress getAddress() {
-        return getAddress(IPostalAddress.PostalAddressUse.HOME);
+    default Address getAddress() {
+        return getAddress(Address.PostalAddressUse.HOME);
     }
 
     /**
@@ -61,12 +61,12 @@ public interface IPostalAddressType {
      * @param uses Only addresses belonging to one of these uses will be returned.
      * @return The matching address, or null if not found.
      */
-    default IPostalAddress getAddress(IPostalAddress.PostalAddressUse... uses) {
+    default Address getAddress(Address.PostalAddressUse... uses) {
         return CollectionUtil.findMatch(getAddresses(), (address, use) ->
                 address.getUse() == use, uses);
     }
 
-    default void addAddresses(IPostalAddress... addresses) {
+    default void addAddresses(Address... addresses) {
         Collections.addAll(getAddresses(), addresses);
     }
 

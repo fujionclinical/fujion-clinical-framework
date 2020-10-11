@@ -26,12 +26,12 @@
 package org.fujionclinical.api.model.impl;
 
 import edu.utah.kmm.model.cool.core.datatype.Period;
-import org.fujionclinical.api.model.core.IPostalAddress;
+import org.fujionclinical.api.model.core.Address;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostalAddressImpl implements IPostalAddress {
+public class AddressImpl implements Address {
 
     private final List<String> lines = new ArrayList<>();
 

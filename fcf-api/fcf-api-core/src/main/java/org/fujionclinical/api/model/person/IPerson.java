@@ -31,17 +31,17 @@ import edu.utah.kmm.model.cool.terminology.ConceptReference;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujion.common.CollectionUtil;
 import org.fujionclinical.api.core.CoreUtil;
+import org.fujionclinical.api.model.core.Addressable;
+import org.fujionclinical.api.model.core.ContactPointType;
 import org.fujionclinical.api.model.core.IAttachment;
-import org.fujionclinical.api.model.core.IContactPointType;
 import org.fujionclinical.api.model.core.IDomainType;
-import org.fujionclinical.api.model.core.IPostalAddressType;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public interface IPerson extends IDomainType, Party, IPostalAddressType, IContactPointType, IPersonNameType {
+public interface IPerson extends IDomainType, Party, Addressable, ContactPointType, IPersonNameType {
 
     enum Gender {
         MALE, FEMALE, OTHER, UNKNOWN;

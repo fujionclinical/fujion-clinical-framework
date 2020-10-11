@@ -34,10 +34,10 @@ import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Div;
 import org.fujion.component.Image;
 import org.fujion.component.Label;
+import org.fujionclinical.api.model.core.Address;
+import org.fujionclinical.api.model.core.ContactPoint;
+import org.fujionclinical.api.model.core.ContactPointType;
 import org.fujionclinical.api.model.core.IAttachment;
-import org.fujionclinical.api.model.core.IContactPoint;
-import org.fujionclinical.api.model.core.IContactPointType;
-import org.fujionclinical.api.model.core.IPostalAddress;
 import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.ui.util.Formatters;
 
@@ -97,7 +97,7 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
         addContactPoint(root, "work_email", patient);
         addContactPoint(root, "work_fax", patient);
 
-        IPostalAddress address = patient.getAddress();
+        Address address = patient.getAddress();
 
         if (address != null) {
             root.addChild(new Div());
@@ -156,11 +156,11 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
     protected void addContactPoint(
             BaseUIComponent root,
             String type,
-            IContactPointType contactPoints) {
+            ContactPointType contactPoints) {
         String[] types = type.split("_", 2);
-        IContactPoint.ContactPointUse use = EnumUtils.getEnumIgnoreCase(IContactPoint.ContactPointUse.class, types[0]);
-        IContactPoint.ContactPointSystem system = EnumUtils.getEnumIgnoreCase(IContactPoint.ContactPointSystem.class, types[1]);
-        IContactPoint contactPoint = contactPoints.getContactPoint(use, system);
+        ContactPoint.ContactPointUse use = EnumUtils.getEnumIgnoreCase(ContactPoint.ContactPointUse.class, types[0]);
+        ContactPoint.ContactPointSystem system = EnumUtils.getEnumIgnoreCase(ContactPoint.ContactPointSystem.class, types[1]);
+        ContactPoint contactPoint = contactPoints.getContactPoint(use, system);
 
         if (contactPoint != null) {
             addDemographic(root, type, contactPoint.getValue());

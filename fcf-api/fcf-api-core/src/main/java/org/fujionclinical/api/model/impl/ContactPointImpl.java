@@ -26,9 +26,9 @@
 package org.fujionclinical.api.model.impl;
 
 import edu.utah.kmm.model.cool.core.datatype.Period;
-import org.fujionclinical.api.model.core.IContactPoint;
+import org.fujionclinical.api.model.core.ContactPoint;
 
-public class ContactPoint implements IContactPoint {
+public class ContactPointImpl implements ContactPoint {
 
     private ContactPointSystem system;
 

@@ -30,18 +30,18 @@ import org.fujion.common.CollectionUtil;
 import java.util.Collections;
 import java.util.List;
 
-public interface IContactPointType {
+public interface ContactPointType {
 
     /**
      * Returns all contact points for the entity.
      *
      * @return A list of all contact points (never null)
      */
-    default List<IContactPoint> getContactPoints() {
+    default List<ContactPoint> getContactPoints() {
         return Collections.emptyList();
     }
 
-    default void setContactPoints(List<IContactPoint> contactPoints) {
+    default void setContactPoints(List<ContactPoint> contactPoints) {
         CollectionUtil.replaceElements(getContactPoints(), contactPoints);
     }
 
@@ -52,7 +52,7 @@ public interface IContactPointType {
      * @param uses Only contact points belonging to one of these uses will be returned.
      * @return The entity's contact, or null if not found.
      */
-    default IContactPoint getContactPoint(IContactPoint.ContactPointUse... uses) {
+    default ContactPoint getContactPoint(ContactPoint.ContactPointUse... uses) {
         return CollectionUtil.findMatch(getContactPoints(), (contactPoint, use) ->
                 contactPoint.getUse() == use, uses);
     }
@@ -64,7 +64,7 @@ public interface IContactPointType {
      * @param systems Only contact points belonging to one of these systems will be returned.
      * @return The entity's contact, or null if not found.
      */
-    default IContactPoint getContactPoint(IContactPoint.ContactPointSystem... systems) {
+    default ContactPoint getContactPoint(ContactPoint.ContactPointSystem... systems) {
         return CollectionUtil.findMatch(getContactPoints(), (contactPoint, system) ->
                 contactPoint.getSystem() == system, systems);
     }
@@ -74,8 +74,8 @@ public interface IContactPointType {
      *
      * @return The entity's home phone, or null if not found.
      */
-    default IContactPoint getHomePhone() {
-        return getContactPoint(IContactPoint.ContactPointUse.HOME, IContactPoint.ContactPointSystem.PHONE);
+    default ContactPoint getHomePhone() {
+        return getContactPoint(ContactPoint.ContactPointUse.HOME, ContactPoint.ContactPointSystem.PHONE);
     }
 
     /**
@@ -85,14 +85,14 @@ public interface IContactPointType {
      * @param system The contact point system being sought.
      * @return The entity's contact point, or null if not found.
      */
-    default IContactPoint getContactPoint(
-            IContactPoint.ContactPointUse use,
-            IContactPoint.ContactPointSystem system) {
+    default ContactPoint getContactPoint(
+            ContactPoint.ContactPointUse use,
+            ContactPoint.ContactPointSystem system) {
         return CollectionUtil.findMatch(getContactPoints(), contactPoint ->
                 contactPoint.getUse() == use && contactPoint.getSystem() == system);
     }
 
-    default void addContactPoints(IContactPoint... contactPoints) {
+    default void addContactPoints(ContactPoint... contactPoints) {
         Collections.addAll(getContactPoints(), contactPoints);
     }
 
