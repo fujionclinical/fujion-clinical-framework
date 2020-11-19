@@ -25,7 +25,8 @@
  */
 package org.fujionclinical.plugin.documents;
 
-import edu.utah.kmm.model.cool.dao.query.QueryContext;
+import edu.utah.kmm.model.cool.clinical.finding.Document;
+import edu.utah.kmm.model.cool.mediator.query.QueryContext;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.common.DateTimeWrapper;
@@ -34,21 +35,22 @@ import org.fujion.component.Label;
 import org.fujion.component.Row;
 import org.fujion.event.EventUtil;
 import org.fujion.model.IListModel;
-import org.fujionclinical.api.model.document.IDocument;
 import org.fujionclinical.api.query.filter.DateQueryFilter;
 import org.fujionclinical.api.query.service.InMemoryQueryService;
 import org.fujionclinical.sharedforms.controller.AbstractGridController;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
  * Controller for displaying the contents of selected documents.
  */
-public class DocumentDisplayController extends AbstractGridController<IDocument, IDocument> {
+public class DocumentDisplayController extends AbstractGridController<Document, Document> {
 
     private final DocumentDisplayComboRenderer comboRenderer = new DocumentDisplayComboRenderer();
 
-    private List<IDocument> documents;
+    private List<Document> documents;
 
     @WiredComponent
     private Label lblInfo;
@@ -92,7 +94,7 @@ public class DocumentDisplayController extends AbstractGridController<IDocument,
     }
 
     @Override
-    protected List<IDocument> toModel(List<IDocument> results) {
+    protected List<Document> toModel(List<Document> results) {
         return results;
     }
 
@@ -101,10 +103,10 @@ public class DocumentDisplayController extends AbstractGridController<IDocument,
      */
     @EventHandler(value = "change", target = "@cboHeader")
     private void onChange$cboHeader() {
-        IDocument doc = (IDocument) cboHeader.getSelectedItem().getData();
+        Document doc = (Document) cboHeader.getSelectedItem().getData();
 
         for (Row row : grid.getRows().getChildren(Row.class)) {
-            IDocument doc2 = (IDocument) row.getData();
+            Document doc2 = (Document) row.getData();
 
             if (doc == doc2) {
                 row.scrollIntoView();
@@ -135,7 +137,7 @@ public class DocumentDisplayController extends AbstractGridController<IDocument,
      *
      * @param documents The documents to be displayed.
      */
-    protected void setDocuments(List<IDocument> documents) {
+    protected void setDocuments(List<Document> documents) {
         this.documents = documents;
         lblInfo.setLabel((documents == null ? 0 : documents.size()) + " document(s)");
         refresh();
@@ -145,15 +147,15 @@ public class DocumentDisplayController extends AbstractGridController<IDocument,
      * Updates the header selector when the model changes.
      */
     @Override
-    protected void setModel(IListModel<IDocument> model) {
+    protected void setModel(IListModel<Document> model) {
         super.setModel(model);
         cboHeader.setModel(model);
         cboHeader.setValue(null);
     }
 
     @Override
-    public DateTimeWrapper getDateByType(
-            IDocument result,
+    public LocalDateTime getDateByType(
+            Document result,
             DateQueryFilter.DateType dateType) {
         return null;
     }

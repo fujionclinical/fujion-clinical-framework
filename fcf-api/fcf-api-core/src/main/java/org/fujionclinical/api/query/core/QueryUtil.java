@@ -25,6 +25,10 @@
  */
 package org.fujionclinical.api.query.core;
 
+import edu.utah.kmm.model.cool.core.datatype.Period;
+import edu.utah.kmm.model.cool.core.datatype.PeriodImpl;
+import org.fujion.common.DateRange;
+import org.fujion.common.DateUtil;
 import org.fujionclinical.api.query.service.IQueryResult;
 import org.fujionclinical.api.query.service.IQueryResult.CompletionStatus;
 
@@ -148,6 +152,14 @@ public class QueryUtil {
                 .filter(element -> element.name().toUpperCase().startsWith(uc))
                 .collect(Collectors.toList());
         return result.size() == 1 ? result.get(0) : null;
+    }
+
+    public static DateRange periodToDateRange(Period period) {
+        return new DateRange(DateUtil.toDate(period.getStart()), DateUtil.toDate(period.getEnd()));
+    }
+
+    public static Period dateRangeToPeriod(DateRange dateRange) {
+        return new PeriodImpl(DateUtil.toLocalDateTime(dateRange.getStartDate()), DateUtil.toLocalDateTime(dateRange.getEndDate()));
     }
 
     /**

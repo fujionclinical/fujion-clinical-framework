@@ -25,18 +25,17 @@
  */
 package org.fujionclinical.plugin.encounters;
 
+import edu.utah.kmm.model.cool.clinical.encounter.Encounter;
+import edu.utah.kmm.model.cool.foundation.datatype.PersonName;
+import edu.utah.kmm.model.cool.foundation.entity.Location;
 import org.fujion.component.*;
 import org.fujion.event.DblclickEvent;
 import org.fujionclinical.api.event.IEventSubscriber;
-import org.fujionclinical.api.model.core.IReference;
 import org.fujionclinical.api.model.encounter.EncounterContext;
-import org.fujionclinical.api.model.encounter.IEncounter;
-import org.fujionclinical.api.model.location.ILocation;
-import org.fujionclinical.api.model.person.IPersonName;
-import org.fujionclinical.api.model.person.IPersonNameType;
 import org.fujionclinical.sharedforms.controller.ResourceListView;
 import org.fujionclinical.shell.elements.ElementPlugin;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -44,21 +43,21 @@ import java.util.stream.Collectors;
 /**
  * Controller for patient encounters display.
  */
-public class MainController extends ResourceListView<IEncounter, IEncounter> {
+public class MainController extends ResourceListView<Encounter, Encounter> {
 
-    private IEncounter lastEncounter;
+    private Encounter lastEncounter;
 
-    private final IEventSubscriber<IEncounter> encounterChangeListener = (eventName, encounter) -> setEncounter(encounter);
+    private final IEventSubscriber<Encounter> encounterChangeListener = (eventName, encounter) -> setEncounter(encounter);
 
     @Override
     protected void setup() {
-        setup(IEncounter.class, "Encounters", "Encounter Detail", "patient={{patient}}", 1, "", "Date", "Status", "Location", "Providers");
+        setup(Encounter.class, "Encounters", "Encounter Detail", "patient={{patient}}", 1, "", "Date", "Status", "Location", "Providers");
         columns.getFirstChild(Column.class).setStyles("width: 1%; min-width: 40px");
     }
 
     @Override
     protected void populate(
-            IEncounter encounter,
+            Encounter encounter,
             List<Object> columns) {
         columns.add(" ");
         columns.add(encounter.getPeriod());
@@ -67,29 +66,39 @@ public class MainController extends ResourceListView<IEncounter, IEncounter> {
         columns.add(getParticipants(encounter));
     }
 
-    private List<ILocation> getLocations(IEncounter encounter) {
-        return encounter.getLocations().stream()
-                .map(IReference::getReferenced)
+    private List<Location> getLocations(Encounter encounter) {
+        /* TODO:
+        return encounter.getLocation().stream()
+                .map(Reference::getReferenced)
                 .collect(Collectors.toList());
+
+         */
+
+        return Collections.emptyList();
     }
 
-    private List<IPersonName> getParticipants(IEncounter encounter) {
+    private List<PersonName> getParticipants(Encounter encounter) {
+        /*
         return encounter.getParticipants().stream()
-                .map(IReference::getReferenced)
-                .map(IPersonNameType::getName)
+                .map(Reference::getReferenced)
+                .map(PersonNameType::getName)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
+
+         */
+
+        return Collections.emptyList();
     }
 
     @Override
-    protected void initModel(List<IEncounter> entries) {
+    protected void initModel(List<Encounter> entries) {
         model.addAll(entries);
     }
 
     @Override
     protected void renderRow(
             Row row,
-            IEncounter encounter) {
+            Encounter encounter) {
         super.renderRow(row, encounter);
 
         row.addEventListener(DblclickEvent.class, event ->
@@ -115,16 +124,16 @@ public class MainController extends ResourceListView<IEncounter, IEncounter> {
         updateRowStatus(lastEncounter, true);
     }
 
-    private void setEncounter(IEncounter encounter) {
+    private void setEncounter(Encounter encounter) {
         updateRowStatus(lastEncounter, false);
         updateRowStatus(encounter, true);
         lastEncounter = encounter;
     }
 
     private void updateRowStatus(
-            IEncounter encounter,
+            Encounter encounter,
             boolean activeContext) {
-        Row row = encounter == null ? null : (Row) rows.findChild(child -> encounter.isSame((IEncounter) child.getData()));
+        Row row = encounter == null ? null : (Row) rows.findChild(child -> isSame(encounter, (Encounter) child.getData()));
 
         if (row != null) {
             Rowcell cell = row.getFirstChild(Rowcell.class);
@@ -140,4 +149,7 @@ public class MainController extends ResourceListView<IEncounter, IEncounter> {
         }
     }
 
+    private boolean isSame(Encounter e1, Encounter e2) {
+        return e1 == e2 || e1.getDefaultId().getId().equals(e2.getDefaultId().getId());
+    }
 }

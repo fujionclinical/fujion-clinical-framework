@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.query.filter;
 
-import edu.utah.kmm.model.cool.dao.query.QueryContext;
+import edu.utah.kmm.model.cool.mediator.query.QueryContext;
 
 import java.util.ArrayList;
 import java.util.HashSet;

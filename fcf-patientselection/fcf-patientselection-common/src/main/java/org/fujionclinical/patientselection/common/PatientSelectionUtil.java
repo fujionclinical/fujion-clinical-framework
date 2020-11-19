@@ -25,13 +25,14 @@
  */
 package org.fujionclinical.patientselection.common;
 
+import edu.utah.kmm.model.cool.foundation.datatype.PersonName;
+import edu.utah.kmm.model.cool.foundation.entity.Person;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.ancillary.IResponseCallback;
+import org.fujion.common.CollectionUtil;
 import org.fujion.common.StrUtil;
-import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.patient.PatientQueryCriteria;
-import org.fujionclinical.api.model.person.IPersonName;
 import org.fujionclinical.api.query.core.QueryException;
 import org.fujionclinical.ui.dialog.DialogUtil;
 import org.fujionclinical.ui.util.FCFUtil;
@@ -42,7 +43,7 @@ import java.util.List;
 import static org.fujionclinical.patientselection.common.Constants.*;
 
 /**
- * Patient search services.
+ * Person search services.
  */
 public class PatientSelectionUtil {
 
@@ -61,7 +62,7 @@ public class PatientSelectionUtil {
     public static void execute(
             String searchText,
             int maxMatches,
-            IResponseCallback<List<IPatient>> callback) {
+            IResponseCallback<List<Person>> callback) {
         PatientQueryCriteria criteria = new PatientQueryCriteria();
         criteria.reset(searchText);
         execute(criteria, maxMatches, callback);
@@ -82,14 +83,14 @@ public class PatientSelectionUtil {
     public static void execute(
             PatientQueryCriteria criteria,
             int maxMatches,
-            IResponseCallback<List<IPatient>> callback) {
+            IResponseCallback<List<Person>> callback) {
         if (criteria == null || criteria.isEmpty()) {
             doCallback(null, callback);
             return;
         }
 
         try {
-            List<IPatient> matches = criteria.search();
+            List<Person> matches = criteria.search();
 
             if (matches == null || matches.size() == 0) {
                 throw new QueryException(MSG_ERROR_PATIENT_NOT_FOUND.toString());
@@ -119,8 +120,8 @@ public class PatientSelectionUtil {
     }
 
     private static void doCallback(
-            List<IPatient> matches,
-            IResponseCallback<List<IPatient>> callback) {
+            List<Person> matches,
+            IResponseCallback<List<Person>> callback) {
         if (callback != null) {
             if (matches != null) {
                 matches.sort(patientComparator);
@@ -132,7 +133,7 @@ public class PatientSelectionUtil {
 
     private static final Log log = LogFactory.getLog(PatientSelectionUtil.class);
 
-    private static final Comparator<IPatient> patientComparator = new Comparator<IPatient>() {
+    private static final Comparator<Person> patientComparator = new Comparator<Person>() {
 
         /**
          * Sort by patient full name, ignoring case.
@@ -143,10 +144,10 @@ public class PatientSelectionUtil {
          */
         @Override
         public int compare(
-                IPatient patient1,
-                IPatient patient2) {
-            IPersonName name1 = patient1.getName();
-            IPersonName name2 = patient2.getName();
+                Person patient1,
+                Person patient2) {
+            PersonName name1 = CollectionUtil.getFirst(patient1.getName());
+            PersonName name2 = CollectionUtil.getFirst(patient2.getName());
             String cmp1 = name1 == null ? "" : name1.toString();
             String cmp2 = name2 == null ? "" : name2.toString();
             return cmp1.compareToIgnoreCase(cmp2);

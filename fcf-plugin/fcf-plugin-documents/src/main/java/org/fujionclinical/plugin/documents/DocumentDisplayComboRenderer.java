@@ -25,14 +25,14 @@
  */
 package org.fujionclinical.plugin.documents;
 
+import edu.utah.kmm.model.cool.clinical.finding.Document;
 import org.fujion.component.Comboitem;
 import org.fujion.model.IComponentRenderer;
-import org.fujionclinical.api.model.document.IDocument;
 
 /**
  * Renderer for the document display combo box selector.
  */
-public class DocumentDisplayComboRenderer implements IComponentRenderer<Comboitem, IDocument> {
+public class DocumentDisplayComboRenderer implements IComponentRenderer<Comboitem, Document> {
 
     /**
      * Render the combo item for the specified document.
@@ -40,7 +40,7 @@ public class DocumentDisplayComboRenderer implements IComponentRenderer<Comboite
      * @param doc The document associated with the list item.
      */
     @Override
-    public Comboitem render(IDocument doc) {
+    public Comboitem render(Document doc) {
         Comboitem item = new Comboitem(doc.getDescription());
         item.setData(doc);
         return item;

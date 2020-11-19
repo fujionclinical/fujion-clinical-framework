@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.security.controller;
 
-import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.security.SecurityUtil;
+import org.fujionclinical.api.user.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,14 +42,14 @@ public class AccessDeniedController {
 
     @RequestMapping("security/accessDenied")
     public String accessDenied(ModelMap model) {
-        IUser user = SecurityUtil.getAuthenticatedUser();
+        User user = SecurityUtil.getAuthenticatedUser();
         model.addAttribute("title", "Access Denied");
         model.addAttribute("authenticated", user != null);
 
         if (user == null) {
             model.addAttribute("message", MSG_DENIED_ANONYMOUS.toString());
         } else {
-            model.addAttribute("message", MSG_DENIED_AUTH.toString(user.getLoginName()));
+            model.addAttribute("message", MSG_DENIED_AUTH.toString(user.getUsername()));
         }
 
         return "classpath:/web/org/fujionclinical/security/accessDenied.htm";

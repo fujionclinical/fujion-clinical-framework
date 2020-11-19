@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.api.model.person;
 
+import edu.utah.kmm.model.cool.foundation.datatype.PersonName;
 import edu.utah.kmm.model.cool.foundation.datatype.PersonNameUse;
 import org.fujionclinical.api.context.ISerializer;
 
@@ -32,16 +33,16 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Serializer / deserializer for IPersonName class.
+ * Serializer / deserializer for PersonName class.
  */
-public class PersonNameSerializer implements ISerializer<IPersonName> {
+public class PersonNameSerializer implements ISerializer<PersonName> {
 
     private static final String COMPONENT_DELIM = "^";
 
     private static final String REPEAT_DELIM = "|";
 
     @Override
-    public String serialize(IPersonName value) {
+    public String serialize(PersonName value) {
         return (value.hasFamily() ? value.getFamily() : "") + COMPONENT_DELIM
                 + getComponent(value.getGiven()) + COMPONENT_DELIM
                 + getComponent(value.getPrefixes()) + COMPONENT_DELIM
@@ -50,9 +51,9 @@ public class PersonNameSerializer implements ISerializer<IPersonName> {
     }
 
     @Override
-    public IPersonName deserialize(
+    public PersonName deserialize(
             String value,
-            IPersonName name) {
+            PersonName name) {
         String[] components = value.split("\\" + COMPONENT_DELIM);
         int i = 0;
         name.setFamily(getComponent(components, i++));
@@ -64,8 +65,8 @@ public class PersonNameSerializer implements ISerializer<IPersonName> {
     }
 
     @Override
-    public Class<IPersonName> getType() {
-        return IPersonName.class;
+    public Class<PersonName> getType() {
+        return PersonName.class;
     }
 
     private PersonNameUse getUse(String use) {

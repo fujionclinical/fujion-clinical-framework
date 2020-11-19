@@ -25,9 +25,9 @@
  */
 package org.fujionclinical.patientlist;
 
+import edu.utah.kmm.model.cool.foundation.entity.Person;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.property.PropertyUtil;
 
 import java.util.ArrayList;
@@ -82,7 +82,7 @@ public abstract class PropertyBasedPatientList extends AbstractPatientList {
      *
      * @param patient The patient to remove.
      */
-    protected void removePatient(IPatient patient) {
+    protected void removePatient(Person patient) {
         getListItems();
         IPatientListItem item;
 
@@ -110,7 +110,7 @@ public abstract class PropertyBasedPatientList extends AbstractPatientList {
      *                is added to the end.
      */
     protected void addPatient(
-            IPatient patient,
+            Person patient,
             boolean top) {
         int max = getListSizeMax();
 
@@ -249,10 +249,10 @@ public abstract class PropertyBasedPatientList extends AbstractPatientList {
             trimList(getListSizeMax());
 
             for (IPatientListItem item : pplList) {
-                IPatient pat = item.getPatient();
+                Person pat = item.getPatient();
 
                 if (pat != null) {
-                    patids.add(pat.getId());
+                    patids.add(pat.getDefaultId().getId());
                 }
             }
 

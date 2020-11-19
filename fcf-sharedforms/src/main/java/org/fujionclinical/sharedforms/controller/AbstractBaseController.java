@@ -50,6 +50,7 @@ import org.fujionclinical.ui.util.FCFUtil;
 import org.springframework.beans.BeanUtils;
 
 import java.lang.reflect.Method;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -146,7 +147,7 @@ public abstract class AbstractBaseController<T, M> extends AbstractServiceContro
      * @return The extracted date.
      */
     @Override
-    public abstract DateTimeWrapper getDateByType(
+    public abstract LocalDateTime getDateByType(
             M result,
             DateType dateType);
 

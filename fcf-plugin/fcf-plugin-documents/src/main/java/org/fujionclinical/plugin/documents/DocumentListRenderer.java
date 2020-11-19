@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.plugin.documents;
 
+import edu.utah.kmm.model.cool.clinical.finding.Document;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.component.BaseComponent;
@@ -33,12 +34,11 @@ import org.fujion.component.Grid;
 import org.fujion.component.Row;
 import org.fujion.event.DblclickEvent;
 import org.fujion.model.IComponentRenderer;
-import org.fujionclinical.api.model.document.IDocument;
 
 /**
  * Renderer for the document list.
  */
-public class DocumentListRenderer implements IComponentRenderer<Row, IDocument> {
+public class DocumentListRenderer implements IComponentRenderer<Row, Document> {
     
     private static final Log log = LogFactory.getLog(DocumentListRenderer.class);
     
@@ -55,16 +55,16 @@ public class DocumentListRenderer implements IComponentRenderer<Row, IDocument> 
      * @return The rendered row.
      */
     @Override
-    public Row render(IDocument doc) {
+    public Row render(Document doc) {
         Row row = new Row();
         row.setData(doc);
         log.trace("item render");
         row.addEventForward(DblclickEvent.TYPE, grid, null);
         addCell(row, "");
-        addCell(row, doc.getCreationDate());
+        addCell(row, doc.getRecordedDate());
         addCell(row, doc.getDescription());
-        addCell(row, doc.hasEncounter() ? doc.getEncounter().getReferenced().getLocations() : null);
-        addCell(row, doc.getAuthors());
+        addCell(row, null); //TODO: doc.hasEncounter() ? doc.getEncounter().getLocation() : null);
+        addCell(row, doc.getRecorder());
         return row;
     }
     

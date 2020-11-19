@@ -27,6 +27,9 @@ package org.fujionclinical.plugin.patientheader;
 
 import edu.utah.kmm.model.cool.core.datatype.Identifier;
 import edu.utah.kmm.model.cool.core.datatype.IdentifierUse;
+import edu.utah.kmm.model.cool.foundation.datatype.PersonName;
+import edu.utah.kmm.model.cool.foundation.entity.Person;
+import edu.utah.kmm.model.cool.util.PersonUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -35,16 +38,14 @@ import org.fujion.annotation.WiredComponent;
 import org.fujion.common.DateUtil;
 import org.fujion.component.*;
 import org.fujionclinical.api.event.IEventSubscriber;
-import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.patient.PatientContext;
-import org.fujionclinical.api.model.person.IPersonName;
-import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.security.SecurityUtil;
+import org.fujionclinical.api.user.User;
 import org.fujionclinical.patientselection.common.PatientSelection;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.shell.plugins.PluginController;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * Controller for patient header plugin.
@@ -88,13 +89,13 @@ public class PatientHeader extends PluginController {
 
     private String noSelection;
 
-    private IPatient patient;
+    private Person patient;
 
     private String patientName;
 
     private boolean needsDetail = true;
 
-    private final IEventSubscriber<IPatient> patientChangeListener = (event, patient) -> setPatient(patient);
+    private final IEventSubscriber<Person> patientChangeListener = (event, patient) -> setPatient(patient);
 
     private boolean showUser = true;
 
@@ -102,7 +103,7 @@ public class PatientHeader extends PluginController {
     public void afterInitialized(BaseComponent comp) {
         super.afterInitialized(comp);
         noSelection = lblName.getLabel();
-        IUser user = SecurityUtil.getAuthenticatedUser();
+        User user = SecurityUtil.getAuthenticatedUser();
         lblUser.setVisible(showUser);
 
         if (user == null) {
@@ -137,7 +138,7 @@ public class PatientHeader extends PluginController {
         popDetail.open(btnDetail, "left top", "right bottom");
     }
 
-    private void setPatient(IPatient patient) {
+    private void setPatient(Person patient) {
         this.patient = patient;
         hideLabels();
         needsDetail = true;
@@ -154,15 +155,15 @@ public class PatientHeader extends PluginController {
         }
 
         btnDetail.setDisabled(false);
-        patientName = patient.getFullName();
-        Identifier mrn = patient.getMRN();
+        patientName = PersonUtils.getFullName(patient);
+        Identifier mrn = PersonUtils.getMRN(patient);
         lblName.setLabel(patientName + (mrn == null ? "" : "  (" + mrn.getId() + ")"));
         setLabel(lblDOB, formatDateAndAge(patient.getBirthDate()), lblDOBLabel);
-        setLabel(lblDOD, patient.getDeceasedDate(), lblDODLabel);
+        setLabel(lblDOD, patient.getDeathDate(), lblDODLabel);
         setLabel(lblGender, patient.getGender(), null);
     }
 
-    private String formatDateAndAge(LocalDateTime date) {
+    private String formatDateAndAge(LocalDate date) {
         return date == null ? null : date + " (" + DateUtil.formatAge(date) + ")";
     }
 
@@ -197,7 +198,7 @@ public class PatientHeader extends PluginController {
 
         // Names
 
-        for (IPersonName name : patient.getNames()) {
+        for (PersonName name : patient.getName()) {
 
             String nm = name.toString();
 
@@ -224,7 +225,7 @@ public class PatientHeader extends PluginController {
 
                 IdentifierUse categoryId = id.getUse();
                 String category = categoryId == null ? null : categoryId.name().toLowerCase();
-                String system = StringUtils.defaultString(id.hasSystem() ? id.getSystem().toString() : null);
+                String system = StringUtils.defaultString(id.getSystem().toString());
                 String value = StringUtils.defaultString(id.getId());
 
                 if (!StringUtils.isEmpty(system)) {
@@ -240,7 +241,7 @@ public class PatientHeader extends PluginController {
         header = null;
 
         /* TODO:
-        for (IPatient.Communication comm : patient.getCommunication()) {
+        for (Patient.Communication comm : patient.getCommunication()) {
             if (header == null) {
                 header = addHeader("Communication");
             }

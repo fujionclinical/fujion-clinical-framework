@@ -25,32 +25,15 @@
  */
 package org.fujionclinical.api.security.mock;
 
-import edu.utah.kmm.model.cool.core.datatype.Metadata;
-import org.fujionclinical.api.model.person.IPersonName;
-import org.fujionclinical.api.model.person.PersonNameParser;
-import org.fujionclinical.api.model.user.IUser;
+import edu.utah.kmm.model.cool.util.PersonNameParsers;
 import org.fujionclinical.api.security.ISecurityDomain;
 import org.fujionclinical.api.security.SecurityDomains;
-
-import java.util.Collections;
-import java.util.List;
+import org.fujionclinical.api.user.UserImpl;
 
 /**
  * Mock user for testing.
  */
-public class MockUser implements IUser {
-
-    private final String logicalId;
-
-    private final String fullName;
-
-    private final List<IPersonName> names;
-
-    private final String loginName;
-
-    private final String password;
-
-    private final ISecurityDomain securityDomain;
+public class MockUser extends UserImpl {
 
     public MockUser() {
         this("mockId", "User, Mock", "username", "password", new MockSecurityDomain());
@@ -59,73 +42,26 @@ public class MockUser implements IUser {
     public MockUser(
             String logicalId,
             String fullName,
-            String loginName,
+            String username,
             String password,
             String securityDomain) {
-        this(logicalId, fullName, loginName, password, SecurityDomains.getSecurityDomain(securityDomain));
+        this(logicalId, fullName, username, password, SecurityDomains.getSecurityDomain(securityDomain));
     }
 
     public MockUser(
             String logicalId,
             String fullName,
-            String loginName,
+            String username,
             String password,
             ISecurityDomain securityDomain) {
-        this.logicalId = logicalId;
-        this.fullName = fullName;
-        this.loginName = loginName;
-        this.password = password;
-        this.securityDomain = securityDomain;
-        this.names = fullName == null ? null : Collections.singletonList(PersonNameParser.instance.fromString(fullName));
+        super(username, password, securityDomain);
+        setDefaultId(logicalId);
+        addName(PersonNameParsers.get().fromString(fullName));
     }
 
     @Override
     public String toString() {
-        return fullName;
-    }
-
-    @Override
-    public String getFullName() {
-        return fullName;
-    }
-
-    public List<IPersonName> getNames() {
-        return names;
-    }
-
-    @Override
-    public String getLoginName() {
-        return loginName;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public ISecurityDomain getSecurityDomain() {
-        return securityDomain;
-    }
-
-    @Override
-    public String getId() {
-        return logicalId;
-    }
-
-    @Override
-    public Metadata getMetadata() {
-        return null;
-    }
-
-    @Override
-    public void setMetadata(Metadata metadata) {
-        notSupported();
-    }
-
-    @Override
-    public boolean hasMetadata() {
-        return false;
+        return getFullName();
     }
 
 }

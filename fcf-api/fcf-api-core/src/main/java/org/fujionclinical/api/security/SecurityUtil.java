@@ -26,8 +26,8 @@
 package org.fujionclinical.api.security;
 
 import org.apache.commons.lang3.RandomUtils;
-import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.spring.SpringUtil;
+import org.fujionclinical.api.user.User;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.Assert;
 
@@ -78,7 +78,7 @@ public class SecurityUtil {
      * @return The authenticated user, or null if none.
      * @see ISecurityService#getAuthenticatedUser()
      */
-    public static IUser getAuthenticatedUser() {
+    public static User getAuthenticatedUser() {
         return getSecurityService().getAuthenticatedUser();
     }
     

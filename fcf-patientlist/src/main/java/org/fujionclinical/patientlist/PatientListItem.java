@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.patientlist;
 
-import org.fujionclinical.api.model.patient.IPatient;
+import edu.utah.kmm.model.cool.foundation.entity.Person;
 
 /**
  * A list item that is associates a patient object with some additional arbitrary displayable
@@ -33,7 +33,7 @@ import org.fujionclinical.api.model.patient.IPatient;
  */
 public class PatientListItem implements IPatientListItem {
 
-    private final IPatient patient;
+    private final Person patient;
 
     private final String info;
 
@@ -42,7 +42,7 @@ public class PatientListItem implements IPatientListItem {
      *
      * @param patient A patient object.
      */
-    public PatientListItem(IPatient patient) {
+    public PatientListItem(Person patient) {
         this(patient, null);
     }
 
@@ -53,7 +53,7 @@ public class PatientListItem implements IPatientListItem {
      * @param info    Displayable information to be associated with the patient.
      */
     public PatientListItem(
-            IPatient patient,
+            Person patient,
             String info) {
         this.patient = patient;
         this.info = info;
@@ -64,7 +64,7 @@ public class PatientListItem implements IPatientListItem {
      *
      * @return The associated patient.
      */
-    public IPatient getPatient() {
+    public Person getPatient() {
         return patient;
     }
 

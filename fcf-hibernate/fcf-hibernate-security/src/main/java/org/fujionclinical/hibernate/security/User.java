@@ -25,11 +25,11 @@
  */
 package org.fujionclinical.hibernate.security;
 
+import edu.utah.kmm.model.cool.foundation.datatype.PersonName;
+import edu.utah.kmm.model.cool.util.PersonNameParsers;
 import org.fujion.common.StrUtil;
-import org.fujionclinical.api.model.person.IPersonName;
-import org.fujionclinical.api.model.person.PersonNameParser;
-import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.security.ISecurityDomain;
+import org.fujionclinical.api.user.UserImpl;
 
 import javax.persistence.*;
 import java.util.Collections;
@@ -37,9 +37,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "FCF_USER")
-public class User implements IUser {
-
-    private static final long serialVersionUID = 1L;
+public class User extends UserImpl {
 
     @Id
     @Column(name = "id")
@@ -54,7 +52,7 @@ public class User implements IUser {
     private String fullName;
 
     @Column(name = "username")
-    private String loginName;
+    private String username;
 
     @Column(name = "password")
     private String password;
@@ -67,7 +65,7 @@ public class User implements IUser {
     private SecurityDomain loginDomain;
 
     @Transient
-    private IPersonName name;
+    private PersonName name;
 
     protected User() {
     }
@@ -75,56 +73,22 @@ public class User implements IUser {
     public User(
             String id,
             String fullName,
-            String loginName,
+            String username,
             String password,
             SecurityDomain securityDomain,
             String authorities) {
         this.id = id;
         this.fullName = fullName;
-        this.loginName = loginName;
+        this.username = username;
         this.password = password;
         this.assignedDomain = securityDomain;
         this.authorities = authorities;
-        this.name = fullName == null ? null : PersonNameParser.instance.fromString(fullName);
-    }
-
-    @Override
-    public String toString() {
-        return fullName;
-    }
-
-    @Override
-    public List<IPersonName> getNames() {
-        return name == null ? null : Collections.singletonList(name);
-    }
-
-    @Override
-    public String getFullName() {
-        return fullName;
-    }
-
-    @Override
-    public String getLoginName() {
-        return loginName;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    protected void setPassword(String password) {
-        this.password = password;
+        postLoad();
     }
 
     @Override
     public ISecurityDomain getSecurityDomain() {
         return loginDomain != null ? loginDomain : assignedDomain;
-    }
-
-    @Override
-    public String getId() {
-        return id;
     }
 
     protected void setLoginDomain(SecurityDomain loginDomain) {
@@ -133,5 +97,27 @@ public class User implements IUser {
 
     public List<String> getGrantedAuthorities() {
         return StrUtil.toList(authorities, ",");
+    }
+
+    @Override
+    protected void setUsername(String username) {
+        super.setUsername(username);
+    }
+
+    @Override
+    protected void setPassword(String password) {
+        super.setPassword(password);
+    }
+
+    @PostLoad
+    protected void postLoad() {
+        setId(id);
+        setSecurityDomain(assignedDomain);
+        setUsername(username);
+        setPassword(password);
+
+        if (fullName != null) {
+            setName(Collections.singletonList(PersonNameParsers.get().fromString(fullName)));
+        }
     }
 }

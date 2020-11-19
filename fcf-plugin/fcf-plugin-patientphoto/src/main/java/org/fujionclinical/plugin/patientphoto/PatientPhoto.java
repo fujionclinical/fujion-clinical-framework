@@ -25,6 +25,9 @@
  */
 package org.fujionclinical.plugin.patientphoto;
 
+import edu.utah.kmm.model.cool.core.datatype.Attachment;
+import edu.utah.kmm.model.cool.foundation.entity.Person;
+import edu.utah.kmm.model.cool.util.PersonUtils;
 import org.fujion.ancillary.MimeContent;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.component.BaseComponent;
@@ -32,8 +35,6 @@ import org.fujion.component.Image;
 import org.fujion.component.Label;
 import org.fujion.component.Popup;
 import org.fujionclinical.api.context.ISurveyResponse;
-import org.fujionclinical.api.model.core.IAttachment;
-import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.patient.PatientContext;
 import org.fujionclinical.ui.controller.FrameworkController;
 import org.fujionclinical.patientselection.common.Constants;
@@ -67,9 +68,9 @@ public class PatientPhoto extends FrameworkController implements PatientContext.
 
     @Override
     public void committed() {
-        IPatient patient = PatientContext.getActivePatient();
-        IAttachment photo = patient == null || patient.getPhoto() == null ? null : patient.getPhoto();
-        MimeContent content = photo == null ? null : photo.getContent();
+        Person patient = PatientContext.getActivePatient();
+        Attachment photo = null;  // TODO: patient == null || patient.getPhoto() == null ? null : patient.getPhoto();
+        MimeContent content = null; // TODO: photo == null ? null : photo.getContent();
 
         if (patient == null) {
             imgPhoto.setSrc(Constants.IMAGE_NOPATIENT);
@@ -86,7 +87,7 @@ public class PatientPhoto extends FrameworkController implements PatientContext.
             imgPhoto.setHint(null);
             imgPhoto.setPopup(popup);
             imgFullPhoto.setContent(content);
-            lblCaption.setLabel(patient.getFullName());
+            lblCaption.setLabel(PersonUtils.getFullName(patient));
         }
 
     }

@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.hibernate.property;
 
-import org.fujionclinical.api.model.user.IUser;
+import org.fujionclinical.api.user.User;
 import org.fujionclinical.hibernate.core.AbstractDAO;
 import org.fujionclinical.hibernate.property.Property.PropertyId;
 import org.hibernate.Session;
@@ -45,12 +45,17 @@ public class PropertyDAO extends AbstractDAO<Property> {
         super(sessionFactory);
     }
 
-    public Property get(String propertyName, String instanceName, IUser user) {
+    public Property get(
+            String propertyName,
+            String instanceName,
+            User user) {
         PropertyId id = new PropertyId(propertyName, instanceName, user == null ? null : user.getId());
         return get(Property.class, id);
     }
 
-    public List<String> getInstances(String propertyName, IUser user) {
+    public List<String> getInstances(
+            String propertyName,
+            User user) {
         Session session = getSession();
         Transaction tx = session.beginTransaction();
 

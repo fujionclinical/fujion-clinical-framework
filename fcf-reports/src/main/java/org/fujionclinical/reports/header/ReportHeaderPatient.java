@@ -26,28 +26,29 @@
 package org.fujionclinical.reports.header;
 
 import edu.utah.kmm.model.cool.core.datatype.Identifier;
+import edu.utah.kmm.model.cool.foundation.entity.Person;
+import edu.utah.kmm.model.cool.util.PersonUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.fujion.annotation.OnFailure;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.common.DateUtil;
 import org.fujion.component.Label;
-import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.patient.PatientContext;
 import org.fujionclinical.ui.util.FCFUtil;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * This is the generic controller for the stock report headers.
  */
 public class ReportHeaderPatient extends ReportHeaderBase {
 
-    @WiredComponent(onFailure = OnFailure.IGNORE)
-    private Label lblPatientInfo;
-
     static {
         ReportHeaderRegistry.getInstance().register("patient", FCFUtil.getResourcePath(ReportHeaderPatient.class) + "patientReportHeader.fsp");
     }
+
+    @WiredComponent(onFailure = OnFailure.IGNORE)
+    private Label lblPatientInfo;
 
     public ReportHeaderPatient() {
         super("CONTEXT.CHANGED.Patient");
@@ -59,14 +60,14 @@ public class ReportHeaderPatient extends ReportHeaderBase {
      * @return Formatted header.
      */
     public String getPatientInfo() {
-        IPatient patient = PatientContext.getActivePatient();
+        Person patient = PatientContext.getActivePatient();
         String text;
 
         if (patient == null) {
             text = "No Patient Selected";
         } else {
-            Identifier mrn = patient.getMRN(); // May be null!
-            text = patient.getFullName();
+            Identifier mrn = PersonUtils.getMRN(patient); // May be null!
+            text = PersonUtils.getFullName(patient);
 
             if (mrn != null) {
                 text += "  #" + mrn.getId();
@@ -78,8 +79,8 @@ public class ReportHeaderPatient extends ReportHeaderBase {
                 text += "   (" + gender + ")";
             }
 
-            LocalDateTime dob = patient.getBirthDate();
-            LocalDateTime deceased = patient.getDeceasedDate();
+            LocalDate dob = patient.getBirthDate();
+            LocalDate deceased = patient.getDeathDate();
             String age = DateUtil.formatAge(dob == null ? null : dob, true, deceased == null ? null : deceased);
             text += "  Age: " + age;
 

@@ -19,6 +19,7 @@
 		<dependency>
 			<groupId>edu.utah.kmm</groupId>
 			<artifactId>cool-api-extensions</artifactId>
+			<version>${cool.version}</version>
 		</dependency>
         <dependency>
             <groupId>junit</groupId>

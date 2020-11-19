@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.query.service;
 
-import edu.utah.kmm.model.cool.dao.query.QueryContext;
+import edu.utah.kmm.model.cool.mediator.query.QueryContext;
 import org.fujion.thread.ICancellable;
 import org.fujion.thread.ThreadUtil;
 import org.fujionclinical.api.query.core.QueryUtil;

@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.patientselection.common;
 
+import edu.utah.kmm.model.cool.foundation.entity.Person;
 import org.fujion.ancillary.IResponseCallback;
-import org.fujionclinical.api.model.patient.IPatient;
 
 /**
  * This interface must be implemented by any patient selector.
@@ -40,5 +40,5 @@ public interface IPatientSelector {
      *            patient will be null if no patient was selected when the dialog was closed or if
      *            the selection was canceled by the user.
      */
-    void select(IResponseCallback<IPatient> callback);
+    void select(IResponseCallback<Person> callback);
 }

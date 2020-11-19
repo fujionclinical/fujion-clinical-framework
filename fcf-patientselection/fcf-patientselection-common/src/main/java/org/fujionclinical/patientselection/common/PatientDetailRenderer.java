@@ -25,6 +25,12 @@
  */
 package org.fujionclinical.patientselection.common;
 
+import edu.utah.kmm.model.cool.foundation.datatype.ContactPoint;
+import edu.utah.kmm.model.cool.foundation.datatype.ContactPointSystem;
+import edu.utah.kmm.model.cool.foundation.datatype.ContactPointUse;
+import edu.utah.kmm.model.cool.foundation.entity.Person;
+import edu.utah.kmm.model.cool.util.ContactPointUtils;
+import edu.utah.kmm.model.cool.util.PersonUtils;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.fujion.ancillary.MimeContent;
@@ -34,12 +40,9 @@ import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Div;
 import org.fujion.component.Image;
 import org.fujion.component.Label;
-import org.fujionclinical.api.model.core.Address;
-import org.fujionclinical.api.model.core.ContactPoint;
-import org.fujionclinical.api.model.core.ContactPointType;
-import org.fujionclinical.api.model.core.IAttachment;
-import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.ui.util.Formatters;
+
+import java.util.List;
 
 /**
  * Default class for rendering detail view of patient in patient selection dialog. This class may be
@@ -53,7 +56,7 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
      * @param patient Patient whose detail view is to be rendered.
      */
     @Override
-    public BaseUIComponent render(IPatient patient) {
+    public BaseUIComponent render(Person patient) {
         BaseUIComponent root = new Div();
         root.addClass("fujion-layout-vertical text-center");
         root.addStyle("align-items", "center");
@@ -66,13 +69,13 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
     }
 
     protected void renderDemographics(
-            IPatient patient,
+            Person patient,
             BaseUIComponent root) {
         root.addChild(new Div());
         Image photo = new Image();
         photo.setStyles("max-height:300px;max-width:300px;padding-bottom:10px");
-        IAttachment pix = patient.getPhoto();
-        MimeContent content = pix == null ? null : pix.getContent();
+        // TODO: Attachment pix = patient.getPhoto();
+        MimeContent content = null; //pix == null ? null : pix.getContent();
 
         if (content == null) {
             photo.setSrc(Constants.IMAGE_SILHOUETTE);
@@ -81,15 +84,16 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
         }
 
         root.addChild(photo);
-        addDemographic(root, null, patient.getFullName(), "font-weight: bold");
-        addDemographic(root, "mrn", patient.getMRN());
+        addDemographic(root, null, PersonUtils.getFullName(patient), "font-weight: bold");
+        addDemographic(root, "mrn", PersonUtils.getMRN(patient));
         addDemographic(root, "gender", patient.getGender());
         addDemographic(root, "race", patient.getRace());
         addDemographic(root, "age", DateUtil.formatAge(patient.hasBirthDate() ? patient.getBirthDate() : null));
         addDemographic(root, "dob", patient.getBirthDate());
-        addDemographic(root, "dod", patient.getDeceasedDate());
+        addDemographic(root, "dod", patient.getDeathDate());
         addDemographic(root, "marital_status", patient.getMaritalStatus());
-        addDemographic(root, "language", patient.hasLanguage() ? patient.getLanguages() : null);
+        addDemographic(root, "language", patient.hasLanguage() ? patient.getLanguage() : null);
+        /* TODO:
         addContactPoint(root, "home_phone", patient);
         addContactPoint(root, "home_email", patient);
         addContactPoint(root, "home_fax", patient);
@@ -97,7 +101,7 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
         addContactPoint(root, "work_email", patient);
         addContactPoint(root, "work_fax", patient);
 
-        Address address = patient.getAddress();
+        IPostalAddress address = patient.getAddress();
 
         if (address != null) {
             root.addChild(new Div());
@@ -114,7 +118,7 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
             String sep = city.isEmpty() || state.isEmpty() ? "" : ", ";
             addDemographic(root, null, city + sep + state + "  " + zip);
         }
-
+    */
     }
 
     /**
@@ -125,7 +129,7 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
      * @return True if access confirmed.
      */
     private boolean confirmAccess(
-            IPatient patient,
+            Person patient,
             BaseUIComponent root) {
         boolean allowed = confirmAccess(patient);
 
@@ -142,7 +146,7 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
      * @param patient The patient to check.
      * @return True if access confirmed.
      */
-    protected boolean confirmAccess(IPatient patient) {
+    protected boolean confirmAccess(Person patient) {
         return patient != null; //!patient.isRestricted();
     }
 
@@ -156,11 +160,11 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
     protected void addContactPoint(
             BaseUIComponent root,
             String type,
-            ContactPointType contactPoints) {
+            List<ContactPoint> contactPoints) {
         String[] types = type.split("_", 2);
-        ContactPoint.ContactPointUse use = EnumUtils.getEnumIgnoreCase(ContactPoint.ContactPointUse.class, types[0]);
-        ContactPoint.ContactPointSystem system = EnumUtils.getEnumIgnoreCase(ContactPoint.ContactPointSystem.class, types[1]);
-        ContactPoint contactPoint = contactPoints.getContactPoint(use, system);
+        ContactPointUse use = EnumUtils.getEnumIgnoreCase(ContactPointUse.class, types[0]);
+        ContactPointSystem system = EnumUtils.getEnumIgnoreCase(ContactPointSystem.class, types[1]);
+        ContactPoint contactPoint = ContactPointUtils.find(contactPoints, use, system);
 
         if (contactPoint != null) {
             addDemographic(root, type, contactPoint.getValue());

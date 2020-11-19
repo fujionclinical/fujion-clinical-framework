@@ -18,15 +18,8 @@
 		</dependency>
 		<dependency>
 			<groupId>edu.utah.kmm</groupId>
-			<artifactId>cool-impl-extensions</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>edu.utah.kmm</groupId>
-			<artifactId>cool-transforms</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>edu.utah.kmm</groupId>
-			<artifactId>cool-dao</artifactId>
+			<artifactId>cool-mediator-common</artifactId>
+			<version>2.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ehcache</groupId>

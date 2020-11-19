@@ -25,12 +25,14 @@
  */
 package org.fujionclinical.sharedforms.controller;
 
-import edu.utah.kmm.model.cool.dao.core.EntityDAO;
-import edu.utah.kmm.model.cool.dao.core.EntityDAORegistry;
-import edu.utah.kmm.model.cool.dao.query.Expression;
-import edu.utah.kmm.model.cool.dao.query.ExpressionParser;
-import edu.utah.kmm.model.cool.dao.query.QueryContext;
-import edu.utah.kmm.model.cool.dao.query.QueryContextImpl;
+import edu.utah.kmm.model.cool.foundation.core.Identifiable;
+import edu.utah.kmm.model.cool.foundation.entity.Person;
+import edu.utah.kmm.model.cool.mediator.dao.DomainDAO;
+import edu.utah.kmm.model.cool.mediator.dao.DomainDAOs;
+import edu.utah.kmm.model.cool.mediator.expression.Expression;
+import edu.utah.kmm.model.cool.mediator.expression.ExpressionParser;
+import edu.utah.kmm.model.cool.mediator.query.QueryContext;
+import edu.utah.kmm.model.cool.mediator.query.QueryContextImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -43,8 +45,6 @@ import org.fujion.page.PageUtil;
 import org.fujion.thread.ICancellable;
 import org.fujion.thread.ThreadedTask;
 import org.fujionclinical.api.event.IEventSubscriber;
-import org.fujionclinical.api.model.core.IDomainType;
-import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.patient.PatientContext;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.ui.dialog.DialogUtil;
@@ -61,7 +61,7 @@ import java.util.Map;
  * @param <R> Type of resource object.
  * @param <M> Type of model object.
  */
-public abstract class ResourceListView<R extends IDomainType, M> extends ListFormController<M> {
+public abstract class ResourceListView<R extends Identifiable, M> extends ListFormController<M> {
 
     private static final Log log = LogFactory.getLog(ResourceListView.class);
 
@@ -72,9 +72,9 @@ public abstract class ResourceListView<R extends IDomainType, M> extends ListFor
     @WiredComponent
     protected Html detailView;
 
-    protected IPatient patient;
+    protected Person patient;
 
-    private final IEventSubscriber<IPatient> patientChangeListener = (eventName, patient) -> setPatient(patient);
+    private final IEventSubscriber<Person> patientChangeListener = (eventName, patient) -> setPatient(patient);
 
     protected Class<R> resourceClass;
 
@@ -82,7 +82,7 @@ public abstract class ResourceListView<R extends IDomainType, M> extends ListFor
 
     private Expression queryExpression;
 
-    private EntityDAO<R> dao;
+    private DomainDAO<R> dao;
 
     protected void setup(
             Class<R> resourceClass,
@@ -94,7 +94,7 @@ public abstract class ResourceListView<R extends IDomainType, M> extends ListFor
         this.detailTitle = detailTitle;
         this.queryExpression = ExpressionParser.getInstance().parse(resourceClass, queryString);
         this.resourceClass = resourceClass;
-        this.dao = EntityDAORegistry.get(resourceClass);
+        this.dao = null; //TODO: DomainDAOs.getDAO(resourceClass);
         Assert.notNull(dao, () -> "Cannot find DAO for " + resourceClass);
         super.setup(title, sortBy, headers);
     }
@@ -201,9 +201,9 @@ public abstract class ResourceListView<R extends IDomainType, M> extends ListFor
         PatientContext.getPatientContext().removeListener(patientChangeListener);
     }
 
-    private void setPatient(IPatient patient) {
+    private void setPatient(Person patient) {
         this.patient = patient;
-        queryContext.setParam("patient", patient == null ? null : patient.getId());
+        queryContext.setParam("patient", patient == null ? null : patient.getDefaultId().getId());
         this.refresh();
     }
 

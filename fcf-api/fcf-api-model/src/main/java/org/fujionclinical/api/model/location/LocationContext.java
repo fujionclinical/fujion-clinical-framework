@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.api.model.location;
 
+import edu.utah.kmm.model.cool.foundation.entity.Location;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujionclinical.api.context.ContextItems;
@@ -35,7 +36,7 @@ import org.fujionclinical.api.context.ManagedContext;
 /**
  * Wrapper for shared location context.
  */
-public class LocationContext extends ManagedContext<ILocation> {
+public class LocationContext extends ManagedContext<Location> {
 
     private static final String SUBJECT_NAME = "Location";
 
@@ -44,6 +45,7 @@ public class LocationContext extends ManagedContext<ILocation> {
     private static final Log log = LogFactory.getLog(LocationContext.class);
 
     public interface ILocationContextEvent extends IContextSubscriber {
+
     }
 
     /**
@@ -54,12 +56,16 @@ public class LocationContext extends ManagedContext<ILocation> {
     }
 
     /**
-     * Create a shared location context with a specified initial state.
+     * Request a location context change.
      *
-     * @param location Location that will be the initial state.
+     * @param location New location.
      */
-    public LocationContext(ILocation location) {
-        super(SUBJECT_NAME, ILocationContextEvent.class, location);
+    public static void changeLocation(Location location) {
+        try {
+            getLocationContext().requestContextChange(location);
+        } catch (Exception e) {
+            log.error("Error during location context change.", e);
+        }
     }
 
     /**
@@ -72,32 +78,28 @@ public class LocationContext extends ManagedContext<ILocation> {
     }
 
     /**
-     * Request a location context change.
-     *
-     * @param location New location.
-     */
-    public static void changeLocation(ILocation location) {
-        try {
-            getLocationContext().requestContextChange(location);
-        } catch (Exception e) {
-            log.error("Error during location context change.", e);
-        }
-    }
-
-    /**
      * Returns the location in the current context.
      *
      * @return Location object (may be null).
      */
-    public static ILocation getActiveLocation() {
+    public static Location getActiveLocation() {
         return getLocationContext().getContextObject(false);
+    }
+
+    /**
+     * Create a shared location context with a specified initial state.
+     *
+     * @param location Location that will be the initial state.
+     */
+    public LocationContext(Location location) {
+        super(SUBJECT_NAME, ILocationContextEvent.class, location);
     }
 
     /**
      * Creates a CCOW context from the specified location object.
      */
     @Override
-    protected ContextItems toCCOWContext(ILocation location) {
+    protected ContextItems toCCOWContext(Location location) {
         //TODO: contextItems.setItem(...);
         return contextItems;
     }
@@ -106,7 +108,7 @@ public class LocationContext extends ManagedContext<ILocation> {
      * Returns a location object based on the specified CCOW context.
      */
     @Override
-    protected ILocation fromCCOWContext(ContextItems contextItems) {
+    protected Location fromCCOWContext(ContextItems contextItems) {
         return null;
     }
 

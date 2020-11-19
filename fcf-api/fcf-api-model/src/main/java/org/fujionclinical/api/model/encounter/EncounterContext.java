@@ -25,18 +25,20 @@
  */
 package org.fujionclinical.api.model.encounter;
 
+import edu.utah.kmm.model.cool.clinical.encounter.Encounter;
+import edu.utah.kmm.model.cool.foundation.entity.Person;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.fujion.common.MiscUtil;
 import org.fujionclinical.api.context.*;
-import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.patient.PatientContext;
 
 /**
  * Wrapper for shared encounter context.
  */
-public class EncounterContext extends ManagedContext<IEncounter> {
+public class EncounterContext extends ManagedContext<Encounter> {
 
-    public interface IEncounterContextSubscriber extends IContextSubscriber {
+    public interface EncounterContextSubscriber extends IContextSubscriber {
 
     }
 
@@ -46,11 +48,11 @@ public class EncounterContext extends ManagedContext<IEncounter> {
 
     private boolean fromEncounter;
 
-    private final IEncounterContextSubscriber encounterContextSubscriber = new IEncounterContextSubscriber() {
+    private final EncounterContextSubscriber encounterContextSubscriber = new EncounterContextSubscriber() {
         @Override
         public void pending(ISurveyResponse response) {
-            IEncounter encounter = getContextObject(true);
-            IPatient patient = encounter == null || !encounter.hasPatient() ? null : encounter.getPatient().getReferenced();
+            Encounter encounter = getContextObject(true);
+            Person patient = encounter == null || !encounter.hasSubject() ? null : MiscUtil.castTo(encounter.getSubject(), Person.class);
 
             if (patient != null) {
                 fromEncounter = true;
@@ -102,7 +104,7 @@ public class EncounterContext extends ManagedContext<IEncounter> {
      *
      * @param encounter New encounter.
      */
-    public static void changeEncounter(IEncounter encounter) {
+    public static void changeEncounter(Encounter encounter) {
         try {
             getEncounterContext().requestContextChange(encounter);
         } catch (Exception e) {
@@ -115,7 +117,7 @@ public class EncounterContext extends ManagedContext<IEncounter> {
      *
      * @return Encounter object (may be null).
      */
-    public static IEncounter getActiveEncounter() {
+    public static Encounter getActiveEncounter() {
         return getEncounterContext().getContextObject(false);
     }
 
@@ -131,8 +133,8 @@ public class EncounterContext extends ManagedContext<IEncounter> {
      *
      * @param encounter Encounter that will be the initial state.
      */
-    public EncounterContext(IEncounter encounter) {
-        super(SUBJECT_NAME, IEncounterContextSubscriber.class, encounter);
+    public EncounterContext(Encounter encounter) {
+        super(SUBJECT_NAME, EncounterContextSubscriber.class, encounter);
         PatientContext.getPatientContext().addSubscriber(patientContextSubscriber);
         addSubscriber(encounterContextSubscriber);
     }
@@ -141,7 +143,7 @@ public class EncounterContext extends ManagedContext<IEncounter> {
      * Creates a CCOW context from the specified encounter object.
      */
     @Override
-    protected ContextItems toCCOWContext(IEncounter encounter) {
+    protected ContextItems toCCOWContext(Encounter encounter) {
         //TODO: contextItems.setItem(...);
         return contextItems;
     }
@@ -150,7 +152,7 @@ public class EncounterContext extends ManagedContext<IEncounter> {
      * Returns a encounter object based on the specified CCOW context.
      */
     @Override
-    protected IEncounter fromCCOWContext(ContextItems contextItems) {
+    protected Encounter fromCCOWContext(ContextItems contextItems) {
         return null;
     }
 

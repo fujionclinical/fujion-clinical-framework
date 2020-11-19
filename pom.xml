@@ -59,7 +59,7 @@
 		<org.thymeleaf.version>3.0.11.RELEASE</org.thymeleaf.version>
 		<org.springframework.security.version>5.3.4.RELEASE</org.springframework.security.version>
 		<ehcache.version>3.8.1</ehcache.version>
-		<cool-version>2.0.0-SNAPSHOT</cool-version>
+		<cool.version>2.0.0-SNAPSHOT</cool.version>
 	</properties>
 
 	<modules>
@@ -159,47 +159,6 @@
 				<groupId>javax.cache</groupId>
 				<artifactId>cache-api</artifactId>
 				<version>1.1.1</version>
-			</dependency>
-			<!-- Cool Model -->
-			<dependency>
-				<groupId>edu.utah.kmm</groupId>
-				<artifactId>cool-api-generated</artifactId>
-				<version>${cool-version}</version>
-			</dependency>
-			<dependency>
-				<groupId>edu.utah.kmm</groupId>
-				<artifactId>cool-api-extensions</artifactId>
-				<version>${cool-version}</version>
-			</dependency>
-			<dependency>
-				<groupId>edu.utah.kmm</groupId>
-				<artifactId>cool-impl-generated</artifactId>
-				<version>${cool-version}</version>
-			</dependency>
-			<dependency>
-				<groupId>edu.utah.kmm</groupId>
-				<artifactId>cool-impl-extensions</artifactId>
-				<version>${cool-version}</version>
-			</dependency>
-			<dependency>
-				<groupId>edu.utah.kmm</groupId>
-				<artifactId>cool-core</artifactId>
-				<version>${cool-version}</version>
-			</dependency>
-			<dependency>
-				<groupId>edu.utah.kmm</groupId>
-				<artifactId>cool-dao</artifactId>
-				<version>${cool-version}</version>
-			</dependency>
-			<dependency>
-				<groupId>edu.utah.kmm</groupId>
-				<artifactId>cool-transforms</artifactId>
-				<version>${cool-version}</version>
-			</dependency>
-			<dependency>
-				<groupId>edu.utah.kmm</groupId>
-				<artifactId>coolbeans-common</artifactId>
-				<version>${cool-version}</version>
 			</dependency>
 			<!-- Thymeleaf -->
 			<dependency>

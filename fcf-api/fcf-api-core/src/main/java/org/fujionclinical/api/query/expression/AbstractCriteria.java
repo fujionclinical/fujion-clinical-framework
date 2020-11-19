@@ -25,14 +25,14 @@
  */
 package org.fujionclinical.api.query.expression;
 
-import edu.utah.kmm.model.cool.dao.core.EntityDAORegistry;
-import edu.utah.kmm.model.cool.dao.query.ExpressionParser;
-import edu.utah.kmm.model.cool.dao.query.ExpressionTuple;
-import edu.utah.kmm.model.cool.dao.query.QueryContext;
-import edu.utah.kmm.model.cool.dao.query.QueryContextImpl;
+import edu.utah.kmm.model.cool.foundation.core.Identifiable;
+import edu.utah.kmm.model.cool.mediator.dao.DomainDAOs;
+import edu.utah.kmm.model.cool.mediator.expression.ExpressionTuple;
+import edu.utah.kmm.model.cool.mediator.query.QueryContext;
+import edu.utah.kmm.model.cool.mediator.query.QueryContextImpl;
 import org.apache.commons.lang3.StringUtils;
-import org.fujionclinical.api.model.core.IDomainType;
 import org.fujionclinical.api.query.core.QueryException;
+import edu.utah.kmm.model.cool.mediator.expression.ExpressionParser;
 
 import java.util.List;
 
@@ -40,23 +40,23 @@ import java.util.List;
  * Base class for specifying search criteria for a given domain type.  Converts user input to a set of search criteria
  * that are then validated and compiled to a query expression.
  */
-public abstract class AbstractCriteria<T extends IDomainType> {
+public abstract class AbstractCriteria<L extends Identifiable> {
 
     private static final String MSG_ERROR_MISSING_REQUIRED = "A required search criterion is missing.";
 
     protected final QueryContext queryContext = new QueryContextImpl();
 
-    private final Class<T> entityType;
+    private final Class<L> logicalType;
 
     private final String validationFailureMessage;
 
     private final Character criterionSeparator;
 
     protected AbstractCriteria(
-            Class<T> entityType,
+            Class<L> logicalType,
             Character criterionSeparator,
             String validationFailureMessage) {
-        this.entityType = entityType;
+        this.logicalType = logicalType;
         this.criterionSeparator = criterionSeparator;
         this.validationFailureMessage = validationFailureMessage == null ? MSG_ERROR_MISSING_REQUIRED : validationFailureMessage;
     }
@@ -89,7 +89,7 @@ public abstract class AbstractCriteria<T extends IDomainType> {
         StringBuilder sb = new StringBuilder();
         addFragment(sb, "id", "=");
         buildQueryString(sb);
-        return ExpressionParser.getInstance().parse(entityType, sb.toString()).resolve(queryContext);
+        return ExpressionParser.getInstance().parse(logicalType, sb.toString()).resolve(queryContext);
     }
 
     /**
@@ -97,8 +97,8 @@ public abstract class AbstractCriteria<T extends IDomainType> {
      *
      * @return Resources matching the search criteria.
      */
-    public List<T> search() {
-        return EntityDAORegistry.get(entityType).search(compile());
+    public List<L> search() {
+        return null; // TODO: DomainDAOs.get(logicalType).search(compile());
     }
 
     /**

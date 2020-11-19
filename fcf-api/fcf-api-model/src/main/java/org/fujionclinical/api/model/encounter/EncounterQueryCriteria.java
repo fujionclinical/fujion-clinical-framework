@@ -25,17 +25,18 @@
  */
 package org.fujionclinical.api.model.encounter;
 
+import edu.utah.kmm.model.cool.clinical.encounter.Encounter;
+import edu.utah.kmm.model.cool.foundation.entity.Person;
 import org.fujion.common.DateRange;
-import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.query.expression.AbstractCriteria;
 
 /**
  * Search criteria for encounter lookup.
  */
-public class EncounterQueryCriteria extends AbstractCriteria<IEncounter> {
+public class EncounterQueryCriteria extends AbstractCriteria<Encounter> {
 
     public EncounterQueryCriteria() {
-        super(IEncounter.class, ';', null);
+        super(Encounter.class, ';', null);
     }
 
     /**
@@ -43,7 +44,7 @@ public class EncounterQueryCriteria extends AbstractCriteria<IEncounter> {
      *
      * @param patient Patient.
      */
-    public void setPatient(IPatient patient) {
+    public void setPatient(Person patient) {
         queryContext.setParam("patient", patient);
     }
 

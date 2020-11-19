@@ -25,19 +25,20 @@
  */
 package org.fujionclinical.patientlist;
 
-import org.fujionclinical.api.model.patient.IPatient;
+import edu.utah.kmm.model.cool.foundation.entity.Person;
+import edu.utah.kmm.model.cool.util.PersonUtils;
 
 public interface IPatientListItem extends Comparable<IPatientListItem> {
-    IPatient getPatient();
+    Person getPatient();
 
     String getInfo();
 
     @Override
     default int compareTo(IPatientListItem listItem) {
-        return getPatient().getFullName().compareTo(listItem.getPatient().getFullName());
+        return PersonUtils.getFullName(getPatient()).compareTo(PersonUtils.getFullName(listItem.getPatient()));
     }
 
     default boolean equalTo(Object object) {
-        return object instanceof IPatientListItem && getPatient().getId().equals(((IPatientListItem) object).getPatient().getId());
+        return object instanceof IPatientListItem && getPatient().getDefaultId().equals(((IPatientListItem) object).getPatient().getDefaultId());
     }
 }

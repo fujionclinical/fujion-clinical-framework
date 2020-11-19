@@ -36,9 +36,9 @@ import org.fujionclinical.api.alias.AliasType;
 import org.fujionclinical.api.alias.AliasTypes;
 import org.fujionclinical.api.context.ContextManager;
 import org.fujionclinical.api.context.IContextManager;
-import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.security.ISecurityService;
 import org.fujionclinical.api.security.SecurityUtil;
+import org.fujionclinical.api.user.User;
 import org.fujionclinical.security.controller.PasswordChangeController;
 import org.fujionclinical.ui.dialog.DialogUtil;
 import org.springframework.security.core.Authentication;
@@ -177,10 +177,10 @@ public abstract class AbstractSecurityService implements ISecurityService {
      * @return The authenticated user object, or null if none present.
      */
     @Override
-    public IUser getAuthenticatedUser() {
+    public User getAuthenticatedUser() {
         Authentication authentication = getAuthentication();
         Object details = authentication == null ? null : authentication.getDetails();
-        return (details instanceof FCFAuthenticationDetails) ? (IUser) ((FCFAuthenticationDetails) details).getDetail("user")
+        return (details instanceof FCFAuthenticationDetails) ? (User) ((FCFAuthenticationDetails) details).getDetail("user")
                 : null;
     }
 

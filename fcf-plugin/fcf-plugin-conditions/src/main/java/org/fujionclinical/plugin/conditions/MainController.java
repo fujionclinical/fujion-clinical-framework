@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.plugin.conditions;
 
-import org.fujionclinical.api.model.condition.ICondition;
+import edu.utah.kmm.model.cool.clinical.finding.Condition;
 import org.fujionclinical.sharedforms.controller.ResourceListView;
 
 import java.util.List;
@@ -33,24 +33,24 @@ import java.util.List;
 /**
  * Controller for patient conditions display.
  */
-public class MainController extends ResourceListView<ICondition, ICondition> {
+public class MainController extends ResourceListView<Condition, Condition> {
     
     @Override
     protected void setup() {
-        setup(ICondition.class, "Conditions", "Condition Detail", "patient={{patient}}", 1, "Condition", "Onset", "Status",
+        setup(Condition.class, "Conditions", "Condition Detail", "patient={{patient}}", 1, "Condition", "Onset", "Status",
                 "Notes");
     }
     
     @Override
-    protected void populate(ICondition condition, List<Object> columns) {
-        columns.add(condition.getCondition());
+    protected void populate(Condition condition, List<Object> columns) {
+        columns.add(condition.getCode().getDisplayText());
         columns.add(condition.getOnset());
         columns.add(condition.getClinicalStatus());
         columns.add(condition.getNotes());
     }
     
     @Override
-    protected void initModel(List<ICondition> entries) {
+    protected void initModel(List<Condition> entries) {
         model.addAll(entries);
     }
     

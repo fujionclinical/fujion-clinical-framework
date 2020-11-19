@@ -32,9 +32,9 @@ import org.fujion.annotation.WiredComponent;
 import org.fujion.component.Hyperlink;
 import org.fujion.component.Label;
 import org.fujionclinical.api.event.IEventSubscriber;
-import org.fujionclinical.api.model.user.IUser;
-import org.fujionclinical.api.model.user.UserContext;
 import org.fujionclinical.api.security.SecurityUtil;
+import org.fujionclinical.api.user.User;
+import org.fujionclinical.api.user.UserContext;
 import org.fujionclinical.shell.ShellUtil;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.shell.plugins.PluginController;
@@ -52,9 +52,9 @@ public class MainController extends PluginController {
     @WiredComponent
     private Hyperlink password;
 
-    private IUser currentUser;
+    private User currentUser;
 
-    private final IEventSubscriber<IUser> userChangeListener = (event, user) -> {
+    private final IEventSubscriber<User> userChangeListener = (event, user) -> {
         setUser(user);
     };
 
@@ -94,7 +94,7 @@ public class MainController extends PluginController {
         SecurityUtil.getSecurityService().changePassword();
     }
 
-    private void setUser(IUser user) {
+    private void setUser(User user) {
         if (log.isDebugEnabled()) {
             log.debug("user: " + user);
         }

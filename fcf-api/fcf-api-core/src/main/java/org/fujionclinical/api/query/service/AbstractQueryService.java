@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.query.service;
 
-import edu.utah.kmm.model.cool.dao.query.QueryContext;
+import edu.utah.kmm.model.cool.mediator.query.QueryContext;
 import org.fujion.thread.ICancellable;
 
 /**
@@ -44,9 +44,12 @@ public abstract class AbstractQueryService<T> implements IQueryService<T> {
      * a real asynchronous strategy would do, but returning null for the ICancellable instance.
      */
     private class NullAsyncQueryStrategy implements IAsyncQueryStrategy<T> {
-        
+
         @Override
-        public ICancellable fetch(IQueryService<T> service, QueryContext context, IQueryCallback<T> callback) {
+        public ICancellable fetch(
+                IQueryService<T> service,
+                QueryContext context,
+                IQueryCallback<T> callback) {
             callback.onQueryStart(null);
             callback.onQueryFinish(null, service.fetch(context));
             return null;

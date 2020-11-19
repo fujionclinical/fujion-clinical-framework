@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.security;
 
-import org.fujionclinical.api.model.user.IUser;
+import org.fujionclinical.api.user.User;
 
 /**
  * Interface implemented by the security service.
@@ -99,7 +99,7 @@ public interface ISecurityService {
      * 
      * @return The authenticated user object, or null if none present.
      */
-    IUser getAuthenticatedUser();
+    User getAuthenticatedUser();
     
     /**
      * Returns true if the Authentication object is granted debug privilege.

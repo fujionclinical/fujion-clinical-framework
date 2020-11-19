@@ -25,12 +25,12 @@
  */
 package org.fujionclinical.patientselection.common;
 
+import edu.utah.kmm.model.cool.foundation.entity.Person;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.component.Listitem;
 import org.fujionclinical.api.core.FrameworkUtil;
-import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.ui.controller.FrameworkController;
 
 import java.util.Comparator;
@@ -67,8 +67,8 @@ public class PatientMatchesController extends FrameworkController {
             if (log.isDebugEnabled()) {
                 log.debug("Listitem1: " + o1 + ", Listitem2: " + o2);
             }
-            IPatient pat1 = o1.getData(IPatient.class);
-            IPatient pat2 = o2.getData(IPatient.class);
+            Person pat1 = o1.getData(Person.class);
+            Person pat2 = o2.getData(Person.class);
             int result = ObjectUtils.compare(pat1.getBirthDate(), pat2.getBirthDate());
             return ascending ? result : -result;
         }
@@ -118,8 +118,8 @@ public class PatientMatchesController extends FrameworkController {
      * @return Patient list.
      */
     @SuppressWarnings("unchecked")
-    public List<IPatient> getResults() {
-        return (List<IPatient>) FrameworkUtil.getAttribute(Constants.RESULT_ATTRIB);
+    public List<Person> getResults() {
+        return (List<Person>) FrameworkUtil.getAttribute(Constants.RESULT_ATTRIB);
     }
     
     /**

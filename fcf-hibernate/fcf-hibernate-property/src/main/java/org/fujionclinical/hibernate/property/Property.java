@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.hibernate.property;
 
-import org.fujionclinical.api.model.user.IUser;
+import org.fujionclinical.api.user.User;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -87,7 +87,7 @@ public class Property implements Serializable {
         this(name, value, instance, null);
     }
     
-    public Property(String name, String value, String instance, IUser user) {
+    public Property(String name, String value, String instance, User user) {
         setName(name);
         setValue(value);
         setInstance(instance);

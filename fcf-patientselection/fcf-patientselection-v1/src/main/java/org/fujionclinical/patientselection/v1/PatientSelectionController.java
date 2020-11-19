@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.patientselection.v1;
 
+import edu.utah.kmm.model.cool.foundation.entity.Person;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -36,7 +37,6 @@ import org.fujion.component.Rows.Selectable;
 import org.fujion.component.Window.Mode;
 import org.fujion.event.*;
 import org.fujion.model.ListModel;
-import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.patient.PatientContext;
 import org.fujionclinical.patientlist.*;
 import org.fujionclinical.patientselection.common.*;
@@ -182,7 +182,7 @@ public class PatientSelectionController extends FrameworkController {
 
     private IPatientListFilter activeFilter;
 
-    private IPatient activePatient;
+    private Person activePatient;
 
     private boolean manageListMode;
 
@@ -386,7 +386,7 @@ public class PatientSelectionController extends FrameworkController {
             lblPatientList.setLabel(MSG_WARN_NO_LIST_SELECTED.toString());
         }
 
-        setActivePatient((IPatient) null);
+        setActivePatient((Person) null);
     }
 
     private void setActiveFilter(IPatientListFilter filter) {
@@ -418,7 +418,7 @@ public class PatientSelectionController extends FrameworkController {
         setActivePatient(pli == null ? null : pli.getPatient());
     }
 
-    private void setActivePatient(IPatient patient) {
+    private void setActivePatient(Person patient) {
         // Build the demographic display here
         activePatient = patient;
         root.setAttribute(Constants.SELECTED_PATIENT_ATTRIB, activePatient);
@@ -594,7 +594,7 @@ public class PatientSelectionController extends FrameworkController {
      * @param refresh If true, refresh the display.
      */
     private void managedListAdd(
-            IPatient patient,
+            Person patient,
             boolean refresh) {
         if (patient != null) {
             managedListAdd(new PatientListItem(patient, null), refresh);

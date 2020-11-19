@@ -23,7 +23,7 @@
  *
  * #L%
  */
-package org.fujionclinical.api.model.user;
+package org.fujionclinical.api.user;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -35,7 +35,7 @@ import org.fujionclinical.api.context.ManagedContext;
 /**
  * Wrapper for shared user context.
  */
-public class UserContext extends ManagedContext<IUser> {
+public class UserContext extends ManagedContext<User> {
 
     public interface IUserContextSubscriber extends IContextSubscriber {}
 
@@ -43,7 +43,7 @@ public class UserContext extends ManagedContext<IUser> {
     
     protected static final String SUBJECT_NAME = "User";
     
-    protected static final String CCOW_USERNM = SUBJECT_NAME + ".Id.Logon";
+    protected static final String CCOW_USERNMAME = SUBJECT_NAME + ".Id.Logon";
     
     protected static final String CCOW_FULLNAME = SUBJECT_NAME + ".Co.Name";
     
@@ -52,7 +52,7 @@ public class UserContext extends ManagedContext<IUser> {
      * 
      * @param user New user
      */
-    public static void changeUser(IUser user) {
+    public static void changeUser(User user) {
         try {
             getUserContext().requestContextChange(user);
         } catch (Exception e) {
@@ -66,8 +66,8 @@ public class UserContext extends ManagedContext<IUser> {
      * @return User context
      */
     @SuppressWarnings("unchecked")
-    public static ISharedContext<IUser> getUserContext() {
-        return (ISharedContext<IUser>) ContextManager.getInstance().getSharedContext(UserContext.class.getName());
+    public static ISharedContext<User> getUserContext() {
+        return (ISharedContext<User>) ContextManager.getInstance().getSharedContext(UserContext.class.getName());
     }
     
     /**
@@ -75,7 +75,7 @@ public class UserContext extends ManagedContext<IUser> {
      * 
      * @return User in current context.
      */
-    public static IUser getActiveUser() {
+    public static User getActiveUser() {
         return getUserContext().getContextObject(false);
     }
     
@@ -91,7 +91,7 @@ public class UserContext extends ManagedContext<IUser> {
      * 
      * @param user User that will be the initial state.
      */
-    public UserContext(IUser user) {
+    public UserContext(User user) {
         super(SUBJECT_NAME, IUserContextSubscriber.class, user);
     }
     

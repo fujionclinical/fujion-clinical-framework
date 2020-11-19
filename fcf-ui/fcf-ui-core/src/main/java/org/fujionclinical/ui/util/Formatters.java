@@ -7,15 +7,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ * 
  * This Source Code Form is also subject to the terms of the Health-Related
  * Additional Disclaimer of Warranty and Limitation of Liability available at
  *
@@ -27,12 +27,12 @@ package org.fujionclinical.ui.util;
 
 import edu.utah.kmm.model.cool.core.datatype.Identifier;
 import edu.utah.kmm.model.cool.core.datatype.Period;
+import edu.utah.kmm.model.cool.foundation.entity.Person;
 import edu.utah.kmm.model.cool.terminology.ConceptReference;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
+import edu.utah.kmm.model.cool.util.PersonNameParsers;
 import org.fujion.common.DateUtil;
 import org.fujion.common.MiscUtil;
-import org.fujionclinical.api.model.person.IPerson;
-import org.fujionclinical.api.model.person.IPersonNameType;
 
 import java.time.temporal.Temporal;
 import java.util.*;
@@ -52,10 +52,10 @@ public class Formatters {
         register(Date.class, DateUtil::formatDate);
         register(Temporal.class, DateUtil::formatDate);
         register(Period.class, FormatUtil::formatPeriod);
-        register(ConceptReferenceSet.class, FormatUtil::formatConcept);
-        register(ConceptReference.class, FormatUtil::formatConceptCode);
+        register(ConceptReferenceSet.class, FormatUtil::formatConceptReferenceSet);
+        register(ConceptReference.class, FormatUtil::formatConceptReference);
         register(Identifier.class, FormatUtil::formatIdentifier);
-        register(IPerson.class, IPersonNameType::getFullName);
+        register(Person.class, value -> PersonNameParsers.get().toString(value.getName().get(0)));
     }
 
     public static <T> void register(
@@ -84,9 +84,7 @@ public class Formatters {
         return format(object, null);
     }
 
-    public static <T> String format(
-            T object,
-            String deflt) {
+    public static <T> String format(T object, String deflt) {
         if (object == null) {
             return deflt;
         }

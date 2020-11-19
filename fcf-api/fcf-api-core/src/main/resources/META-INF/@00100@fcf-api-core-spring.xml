@@ -49,8 +49,10 @@
             <property name="propertyFile" value="classpath*:/META-INF/alias.properties,${org.fujionclinical.location.aliases}"/>
         </bean>
 
-        <!-- Initializer for CoolBeans. -->
-        <bean class="org.fujionclinical.api.model.core.CoolInitializer" />
+        <!-- A registry of all domain factories. -->
+        <bean id="domainFactoryRegistry" class="edu.utah.kmm.model.cool.mediator.dao.DomainDAOs"
+              factory-method="getInstance">
+        </bean>
 
         <!-- A registry of all security domains. -->
         <bean id="securityDomainRegistry" class="org.fujionclinical.api.security.SecurityDomains"
@@ -58,9 +60,14 @@
         </bean>
 
         <!-- A registry of all model transforms. -->
-        <bean id="modelTransformRegistry" class="org.fujionclinical.api.model.core.ModelTransforms"
+        <bean id="modelTransformRegistry" class="edu.utah.kmm.model.cool.mediator.transform.ModelTransforms"
 			  factory-method="getInstance">
         </bean>
+
+		<!-- A registry of all query parameter descriptors. -->
+		<bean id="parameterDescriptorRegistry" class="edu.utah.kmm.model.cool.mediator.expression.parameter.ParameterDescriptors"
+			  factory-method="getInstance">
+		</bean>
 
         <task:annotation-driven executor="taskExecutor"
                                 scheduler="taskScheduler"/>
@@ -171,7 +178,7 @@
 
 		<!-- Shared user context. -->
 		<bean id="userContext" parent="managedContext"
-			class="org.fujionclinical.api.model.user.UserContext">
+			class="org.fujionclinical.api.user.UserContext">
 			<constructor-arg value="#{securityService.authenticatedUser}" />
 		</bean>
 

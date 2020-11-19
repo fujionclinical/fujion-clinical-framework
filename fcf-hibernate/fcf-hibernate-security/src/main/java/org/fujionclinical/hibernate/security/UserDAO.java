@@ -25,7 +25,6 @@
  */
 package org.fujionclinical.hibernate.security;
 
-import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.hibernate.core.AbstractDAO;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -45,7 +44,7 @@ public class UserDAO extends AbstractDAO<User> {
         super(sessionFactory);
     }
     
-    public IUser authenticate(String username, String password, SecurityDomain domain) {
+    public User authenticate(String username, String password, SecurityDomain domain) {
         Session session = getSession();
         Transaction tx = session.beginTransaction();
         User user;

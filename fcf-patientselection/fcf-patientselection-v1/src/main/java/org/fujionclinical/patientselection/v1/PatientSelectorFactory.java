@@ -25,9 +25,9 @@
  */
 package org.fujionclinical.patientselection.v1;
 
+import edu.utah.kmm.model.cool.foundation.entity.Person;
 import org.fujion.ancillary.IResponseCallback;
 import org.fujion.component.Window;
-import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.patientselection.common.Constants;
 import org.fujionclinical.patientselection.common.IPatientSelector;
 import org.fujionclinical.patientselection.common.PatientSelectorFactoryBase;
@@ -42,8 +42,8 @@ public class PatientSelectorFactory extends PatientSelectorFactoryBase {
         private final Window dlg = PatientSelectionUtil.createSelectionDialog();
 
         @Override
-        public void select(IResponseCallback<IPatient> callback) {
-            dlg.modal(callback == null ? null : (event) -> callback.onComplete(dlg.getAttribute(Constants.SELECTED_PATIENT_ATTRIB, IPatient.class)));
+        public void select(IResponseCallback<Person> callback) {
+            dlg.modal(callback == null ? null : (event) -> callback.onComplete(dlg.getAttribute(Constants.SELECTED_PATIENT_ATTRIB, Person.class)));
         }
     }
 

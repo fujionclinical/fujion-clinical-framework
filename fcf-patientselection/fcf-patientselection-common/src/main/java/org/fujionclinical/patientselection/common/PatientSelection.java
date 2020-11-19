@@ -25,12 +25,12 @@
  */
 package org.fujionclinical.patientselection.common;
 
+import edu.utah.kmm.model.cool.foundation.entity.Person;
 import org.fujion.ancillary.IResponseCallback;
 import org.fujion.common.StrUtil;
 import org.fujion.component.Window;
 import org.fujion.page.PageUtil;
 import org.fujionclinical.api.core.FrameworkUtil;
-import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.patient.PatientContext;
 import org.fujionclinical.api.property.PropertyUtil;
 import org.fujionclinical.api.security.SecurityUtil;
@@ -119,7 +119,7 @@ public class PatientSelection {
      */
     public static void show(
             boolean changeContext,
-            IResponseCallback<IPatient> callback) {
+            IResponseCallback<Person> callback) {
         if (canSelect(true)) {
             IPatientSelector selector = getSelector();
 
@@ -139,8 +139,8 @@ public class PatientSelection {
     }
 
     private static void execCallback(
-            IResponseCallback<IPatient> callback,
-            IPatient patient) {
+            IResponseCallback<Person> callback,
+            Person patient) {
         if (callback != null) {
             callback.onComplete(patient);
         }
@@ -154,13 +154,13 @@ public class PatientSelection {
      *                    was canceled.
      */
     public static void selectFromList(
-            List<IPatient> patientList,
-            IResponseCallback<IPatient> callback) {
+            List<Person> patientList,
+            IResponseCallback<Person> callback) {
         Map<String, Object> args = new HashMap<>();
         args.put(Constants.RESULT_ATTRIB, patientList);
         Window window = (Window) PageUtil.createPage(Constants.RESOURCE_PATH + "patientMatches.fsp", null, args).get(0);
 
-        window.modal(callback == null ? null : (event) -> callback.onComplete(window.getAttribute(Constants.RESULT_ATTRIB, IPatient.class)));
+        window.modal(callback == null ? null : (event) -> callback.onComplete(window.getAttribute(Constants.RESULT_ATTRIB, Person.class)));
     }
 
     /**

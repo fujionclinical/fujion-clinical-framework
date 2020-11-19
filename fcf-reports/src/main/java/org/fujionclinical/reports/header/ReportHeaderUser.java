@@ -28,8 +28,8 @@ package org.fujionclinical.reports.header;
 import org.fujion.annotation.OnFailure;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.component.Label;
-import org.fujionclinical.api.model.user.IUser;
-import org.fujionclinical.api.model.user.UserContext;
+import org.fujionclinical.api.user.User;
+import org.fujionclinical.api.user.UserContext;
 import org.fujionclinical.ui.util.FCFUtil;
 
 /**
@@ -54,7 +54,7 @@ public class ReportHeaderUser extends ReportHeaderBase {
      * @return Formatted header.
      */
     public String getUserInfo() {
-        IUser user = UserContext.getActiveUser();
+        User user = UserContext.getActiveUser();
         return user == null ? "No User Selected" : user.getFullName();
     }
     

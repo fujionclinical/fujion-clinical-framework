@@ -25,7 +25,6 @@
  */
 package org.fujionclinical.hibernate.security;
 
-import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.security.ISecurityDomain;
 import org.fujionclinical.api.spring.SpringUtil;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -85,8 +84,8 @@ public class SecurityDomain implements ISecurityDomain {
     }
     
     @Override
-    public IUser authenticate(String username, String password) {
-        IUser user = getUserDAO().authenticate(username, password, this);
+    public User authenticate(String username, String password) {
+        User user = getUserDAO().authenticate(username, password, this);
         
         if (user == null) {
             throw new BadCredentialsException("Incorrect username or password.");
@@ -94,15 +93,15 @@ public class SecurityDomain implements ISecurityDomain {
         
         return user;
     }
-    
+
+    @Override
+    public List<String> getGrantedAuthorities(org.fujionclinical.api.user.User user) {
+        return user.getGrantedAuthorities();
+    }
+
     @Override
     public SecurityDomain getNativeSecurityDomain() {
         return this;
-    }
-    
-    @Override
-    public List<String> getGrantedAuthorities(IUser user) {
-        return ((User) user).getGrantedAuthorities();
     }
     
     private void initProperties() {

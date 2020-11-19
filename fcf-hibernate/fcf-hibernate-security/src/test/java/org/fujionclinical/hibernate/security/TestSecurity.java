@@ -25,7 +25,6 @@
  */
 package org.fujionclinical.hibernate.security;
 
-import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.security.SecurityDomains;
 import org.fujionclinical.api.spring.SpringUtil;
 import org.fujionclinical.ui.test.MockUITest;
@@ -74,7 +73,7 @@ public class TestSecurity extends MockUITest {
     
     private void authenticate(SecurityDomain domain, String username, String password, String expectedId) {
         try {
-            IUser user = domain.authenticate(username, password);
+            org.fujionclinical.api.user.User user = domain.authenticate(username, password);
             assertEquals(expectedId, user.getId());
         } catch (Exception e) {
             assertNull(expectedId);

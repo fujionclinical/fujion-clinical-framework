@@ -25,7 +25,8 @@
  */
 package org.fujionclinical.api.query.filter;
 
-import edu.utah.kmm.model.cool.dao.query.QueryContext;
+
+import edu.utah.kmm.model.cool.mediator.query.QueryContext;
 
 /**
  * All data filters must implement this interface.

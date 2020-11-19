@@ -25,8 +25,11 @@
  */
 package org.fujionclinical.api.model.condition;
 
-import org.fujionclinical.api.model.encounter.IEncounter;
-import org.fujionclinical.api.model.patient.IPatient;
+import edu.utah.kmm.model.cool.clinical.encounter.Encounter;
+import edu.utah.kmm.model.cool.clinical.finding.AssertionalFindingClinicalStatus;
+import edu.utah.kmm.model.cool.clinical.finding.Condition;
+import edu.utah.kmm.model.cool.foundation.entity.Person;
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import org.fujionclinical.api.query.expression.AbstractCriteria;
 
 import java.util.Date;
@@ -34,10 +37,10 @@ import java.util.Date;
 /**
  * Search criteria for encounter lookup.
  */
-public class ConditionQueryCriteria extends AbstractCriteria<ICondition> {
+public class ConditionQueryCriteria extends AbstractCriteria<Condition> {
 
     public ConditionQueryCriteria() {
-        super(ICondition.class, ';', null);
+        super(Condition.class, ';', null);
     }
 
     /**
@@ -45,19 +48,19 @@ public class ConditionQueryCriteria extends AbstractCriteria<ICondition> {
      *
      * @param patient Patient.
      */
-    public void setPatient(IPatient patient) {
+    public void setPatient(Person patient) {
         queryContext.setParam("patient", patient);
     }
 
-    public void setEncounter(IEncounter encounter) {
+    public void setEncounter(Encounter encounter) {
         queryContext.setParam("encounter", encounter);
     }
 
-    public void setStatus(ICondition.VerificationStatus status) {
+    public void setStatus(ConceptReferenceSet status) {
         queryContext.setParam("verificationStatus", status);
     }
 
-    public void setStatus(ICondition.ClinicalStatus status) {
+    public void setStatus(AssertionalFindingClinicalStatus status) {
         queryContext.setParam("clinicalStatus", status);
     }
 

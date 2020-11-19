@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.security;
 
-import org.fujionclinical.api.model.user.IUser;
+import org.fujionclinical.api.user.User;
 
 import java.io.Serializable;
 import java.util.List;
@@ -65,7 +65,7 @@ public interface ISecurityDomain extends Serializable {
      * @param password The password.
      * @return The authenticated user, or null if authentication failed.
      */
-    IUser authenticate(String username, String password);
+    User authenticate(String username, String password);
     
     /**
      * Returns a list of granted authorities for a user.
@@ -73,7 +73,7 @@ public interface ISecurityDomain extends Serializable {
      * @param user User whose granted authorities are sought.
      * @return A list of granted authorities (never null).
      */
-    List<String> getGrantedAuthorities(IUser user);
+    List<String> getGrantedAuthorities(User user);
     
     /**
      * Returns the native security domain object if this is a proxy.

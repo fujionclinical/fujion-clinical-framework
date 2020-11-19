@@ -25,16 +25,18 @@
  */
 package org.fujionclinical.api.model.condition;
 
+import edu.utah.kmm.model.cool.clinical.finding.Condition;
+import edu.utah.kmm.model.cool.common.MiscUtils;
+import edu.utah.kmm.model.cool.foundation.entity.Person;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujionclinical.api.context.*;
-import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.api.model.patient.PatientContext;
 
 /**
  * Wrapper for shared condition context.
  */
-public class ConditionContext extends ManagedContext<ICondition> {
+public class ConditionContext extends ManagedContext<Condition> {
 
     public interface IConditionContextSubscriber extends IContextSubscriber {
 
@@ -49,8 +51,8 @@ public class ConditionContext extends ManagedContext<ICondition> {
     private final IConditionContextSubscriber conditionContextSubscriber = new IConditionContextSubscriber() {
         @Override
         public void pending(ISurveyResponse response) {
-            ICondition condition = getContextObject(true);
-            IPatient patient = condition == null || !condition.hasPatient() ? null : condition.getPatient().getReferenced();
+            Condition condition = getContextObject(true);
+            Person patient = MiscUtils.cast(condition.getSubject(), Person.class);
 
             if (patient != null) {
                 fromCondition = true;
@@ -102,7 +104,7 @@ public class ConditionContext extends ManagedContext<ICondition> {
      *
      * @param condition New condition.
      */
-    public static void changeCondition(ICondition condition) {
+    public static void changeCondition(Condition condition) {
         try {
             getConditionContext().requestContextChange(condition);
         } catch (Exception e) {
@@ -115,7 +117,7 @@ public class ConditionContext extends ManagedContext<ICondition> {
      *
      * @return Condition object (may be null).
      */
-    public static ICondition getActiveCondition() {
+    public static Condition getActiveCondition() {
         return getConditionContext().getContextObject(false);
     }
 
@@ -131,7 +133,7 @@ public class ConditionContext extends ManagedContext<ICondition> {
      *
      * @param condition Condition that will be the initial state.
      */
-    public ConditionContext(ICondition condition) {
+    public ConditionContext(Condition condition) {
         super(SUBJECT_NAME, IConditionContextSubscriber.class, condition);
         PatientContext.getPatientContext().addSubscriber(patientContextSubscriber);
         addSubscriber(conditionContextSubscriber);
@@ -141,7 +143,7 @@ public class ConditionContext extends ManagedContext<ICondition> {
      * Creates a CCOW context from the specified condition object.
      */
     @Override
-    protected ContextItems toCCOWContext(ICondition condition) {
+    protected ContextItems toCCOWContext(Condition condition) {
         //TODO: contextItems.setItem(...);
         return contextItems;
     }
@@ -150,7 +152,7 @@ public class ConditionContext extends ManagedContext<ICondition> {
      * Returns a condition object based on the specified CCOW context.
      */
     @Override
-    protected ICondition fromCCOWContext(ContextItems contextItems) {
+    protected Condition fromCCOWContext(ContextItems contextItems) {
         return null;
     }
 

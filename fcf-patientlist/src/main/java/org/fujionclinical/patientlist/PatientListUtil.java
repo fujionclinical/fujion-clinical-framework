@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.patientlist;
 
-import org.fujionclinical.api.model.patient.IPatient;
+import edu.utah.kmm.model.cool.foundation.entity.Person;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -146,14 +146,14 @@ public class PatientListUtil {
      * @return The patient list item associated with the specified patient, or null if not found.
      */
     public static IPatientListItem findListItem(
-            IPatient patient,
+            Person patient,
             Iterable<IPatientListItem> items) {
         if (items == null || patient == null) {
             return null;
         }
 
         for (IPatientListItem item : items) {
-            if (patient.getId().equals(item.getPatient().getId())) {
+            if (patient.getDefaultId().equals(item.getPatient().getDefaultId())) {
                 return item;
             }
         }

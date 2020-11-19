@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.security.mock;
 
-import org.fujionclinical.api.model.user.IUser;
+import org.fujionclinical.api.user.User;
 import org.fujionclinical.api.security.ISecurityService;
 
 /**
@@ -33,13 +33,13 @@ import org.fujionclinical.api.security.ISecurityService;
  */
 public class MockSecurityService implements ISecurityService {
     
-    private final IUser mockUser;
+    private final MockUser mockUser;
     
     public MockSecurityService() {
         this(new MockUser());
     }
     
-    public MockSecurityService(IUser mockUser) {
+    public MockSecurityService(MockUser mockUser) {
         this.mockUser = mockUser;
     }
     
@@ -82,7 +82,7 @@ public class MockSecurityService implements ISecurityService {
     }
     
     @Override
-    public IUser getAuthenticatedUser() {
+    public User getAuthenticatedUser() {
         return mockUser;
     }
     

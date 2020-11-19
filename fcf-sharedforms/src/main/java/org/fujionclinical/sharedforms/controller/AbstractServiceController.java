@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.sharedforms.controller;
 
-import edu.utah.kmm.model.cool.dao.query.QueryContext;
-import edu.utah.kmm.model.cool.dao.query.QueryContextImpl;
+import edu.utah.kmm.model.cool.mediator.query.QueryContext;
+import edu.utah.kmm.model.cool.mediator.query.QueryContextImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.annotation.EventHandler;
@@ -229,7 +229,7 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
     private boolean backgroundFetch = false;
     
     private boolean deferredFetch = true;
-    
+
     private final QueryContext queryContext = new QueryContextImpl();
     
     private final QueryFilterSet<M> queryFilters = new QueryFilterSet<>();
@@ -313,7 +313,7 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
      */
     protected void modelChanged(List<M> filteredModel) {
     }
-    
+
     /**
      * Override to add additional parameters to query context.
      *

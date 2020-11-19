@@ -25,39 +25,39 @@
  */
 package org.fujionclinical.plugin.documents;
 
-import edu.utah.kmm.model.cool.dao.query.QueryContext;
+import edu.utah.kmm.model.cool.clinical.finding.Document;
+import edu.utah.kmm.model.cool.mediator.query.QueryContext;
 import edu.utah.kmm.model.cool.terminology.ConceptReference;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
-import org.fujion.common.DateTimeWrapper;
 import org.fujion.common.StrUtil;
 import org.fujion.component.*;
 import org.fujion.event.Event;
 import org.fujion.event.EventUtil;
 import org.fujion.model.IListModel;
-import org.fujionclinical.api.model.document.IDocument;
 import org.fujionclinical.api.query.filter.AbstractQueryFilter;
 import org.fujionclinical.api.query.filter.DateQueryFilter.DateType;
 import org.fujionclinical.api.query.service.DAOQueryService;
 import org.fujionclinical.sharedforms.controller.AbstractGridController;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * Controller for the list-based display of clinical documents.
  */
-public class DocumentListController extends AbstractGridController<IDocument, IDocument> {
+public class DocumentListController extends AbstractGridController<Document, Document> {
 
     /**
      * Handles filtering by document type.
      */
-    private class DocumentTypeFilter extends AbstractQueryFilter<IDocument> {
+    private class DocumentTypeFilter extends AbstractQueryFilter<Document> {
 
         @Override
-        public boolean include(IDocument document) {
+        public boolean include(Document document) {
             String filter = getCurrentFilter();
-            return filter == null || (document.hasType(filter));
+            return filter == null || (document.hasType() && filter.equals(document.getType().getDisplayText()));
         }
 
         @Override
@@ -97,7 +97,7 @@ public class DocumentListController extends AbstractGridController<IDocument, ID
     private final Collection<String> allTypes;
 
     public DocumentListController() {
-        super(new DAOQueryService<>(IDocument.class, DOCUMENT_QUERY), "fcfdocuments", "DOCUMENT", "documentsPrint.css", "patient");
+        super(new DAOQueryService<>(Document.class, DOCUMENT_QUERY), "fcfdocuments", "DOCUMENT", "documentsPrint.css", "patient");
         registerQueryFilter(new DocumentTypeFilter());
         allTypes = Collections.emptyList(); //service.getTypes();
     }
@@ -116,7 +116,7 @@ public class DocumentListController extends AbstractGridController<IDocument, ID
      * This is a good place to update the filter list.
      */
     @Override
-    protected List<IDocument> toModel(List<IDocument> queryResult) {
+    protected List<Document> toModel(List<Document> queryResult) {
         if (queryResult != null) {
             updateListFilter(queryResult);
         }
@@ -129,7 +129,7 @@ public class DocumentListController extends AbstractGridController<IDocument, ID
      *
      * @param documents The unfiltered document list.
      */
-    private void updateListFilter(List<IDocument> documents) {
+    private void updateListFilter(List<Document> documents) {
         if (fixedFilter != null) {
             return;
         }
@@ -153,7 +153,7 @@ public class DocumentListController extends AbstractGridController<IDocument, ID
         cboFilter.setSelectedIndex(0);
 
         if (documents != null) {
-            for (IDocument doc : documents) {
+            for (Document doc : documents) {
                 types.addAll(doc.getType().getConceptReferences().stream().map(ConceptReference::getCode).collect(Collectors.toList()));
             }
         }
@@ -269,7 +269,7 @@ public class DocumentListController extends AbstractGridController<IDocument, ID
      *
      * @return The currently selected documents.
      */
-    protected List<IDocument> getSelectedDocuments() {
+    protected List<Document> getSelectedDocuments() {
         return getObjects(grid.getRows().getSelectedCount() > 0);
     }
 
@@ -296,7 +296,7 @@ public class DocumentListController extends AbstractGridController<IDocument, ID
     }
 
     @Override
-    protected void setModel(IListModel<IDocument> model) {
+    protected void setModel(IListModel<Document> model) {
         super.setModel(model);
         int docCount = model == null ? 0 : model.size();
         lblInfo.setLabel(docCount + " document(s)");
@@ -305,8 +305,8 @@ public class DocumentListController extends AbstractGridController<IDocument, ID
     }
 
     @Override
-    public DateTimeWrapper getDateByType(IDocument result, DateType dateMode) {
-        return new DateTimeWrapper(result.getCreationDate());
+    public LocalDateTime getDateByType(Document result, DateType dateMode) {
+        return result.getRecordedDate();
     }
 
 }

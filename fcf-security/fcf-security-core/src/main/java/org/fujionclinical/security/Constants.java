@@ -47,7 +47,7 @@ public class Constants {
 
     public static final String DEFAULT_SECURITY_DOMAIN = "fcf_defaultDomain";
 
-    public static final String DEFAULT_USERNAME = "fcf_defaultUsername";
+    public static final String DEFAULT_USERNAME = "fcf_defaultUserName";
 
     public static final String DIALOG_ACCESS_DENIED = "/security/accessDenied";
 

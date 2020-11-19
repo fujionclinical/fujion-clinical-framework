@@ -27,9 +27,9 @@ package org.fujionclinical.security;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.security.ISecurityDomain;
 import org.fujionclinical.api.security.SecurityDomains;
+import org.fujionclinical.api.user.User;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -37,7 +37,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -107,20 +106,20 @@ public class BaseAuthenticationProvider implements AuthenticationProvider {
         if (username == null || password == null || securityDomain == null) {
             throw new BadCredentialsException("Missing security credentials.");
         }
-        
-        IUser user = securityDomain.authenticate(username, password);
+
+        User user = securityDomain.authenticate(username, password);
         details.setDetail("user", user);
         Set<String> mergedAuthorities = mergeAuthorities(securityDomain.getGrantedAuthorities(user),
-            systemGrantedAuthorities);
+                systemGrantedAuthorities);
         List<GrantedAuthority> userAuthorities = new ArrayList<>();
-        
+
         for (String authority : mergedAuthorities) {
             if (!authority.isEmpty()) {
                 userAuthorities.add(new SimpleGrantedAuthority(authority));
             }
         }
-        
-        User principal = new User(username, password, true, true, true, true, userAuthorities);
+
+        org.springframework.security.core.userdetails.User principal = new org.springframework.security.core.userdetails.User(username, password, true, true, true, true, userAuthorities);
         authentication = new UsernamePasswordAuthenticationToken(principal, principal.getPassword(),
                 principal.getAuthorities());
         ((UsernamePasswordAuthenticationToken) authentication).setDetails(details);

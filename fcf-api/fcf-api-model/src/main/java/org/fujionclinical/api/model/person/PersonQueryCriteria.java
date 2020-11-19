@@ -25,22 +25,27 @@
  */
 package org.fujionclinical.api.model.person;
 
-import edu.utah.kmm.model.cool.core.datatype.IdentifierExImpl;
+import edu.utah.kmm.model.cool.core.datatype.Identifier;
+import edu.utah.kmm.model.cool.core.datatype.IdentifierImpl;
 import edu.utah.kmm.model.cool.core.datatype.IdentifierUse;
+import edu.utah.kmm.model.cool.foundation.datatype.PersonName;
+import edu.utah.kmm.model.cool.foundation.entity.Person;
+import edu.utah.kmm.model.cool.terminology.ConceptReference;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceImpl;
-import edu.utah.kmm.model.cool.terminology.ConceptReferenceSetImpl;
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
+import edu.utah.kmm.model.cool.util.PersonNameParsers;
 import org.apache.commons.lang3.StringUtils;
 import org.fujion.common.DateTimeWrapper;
-import org.fujionclinical.api.query.core.QueryUtil;
 import org.fujionclinical.api.query.expression.AbstractCriteria;
+
+import java.net.URI;
 
 /**
  * Base search criteria for person lookups.
  */
-public abstract class PersonQueryCriteria<T extends IPerson> extends AbstractCriteria<T> {
+public abstract class PersonQueryCriteria<T extends Person> extends AbstractCriteria<T> {
 
-    private static final ConceptReferenceSetImpl SSN_TYPE = new ConceptReferenceSetImpl(
-            new ConceptReferenceImpl("http://hl7.org/fhir/identifier-type", "SB", "Social Security Number"));
+    private static final ConceptReference SSN_TYPE = new ConceptReferenceImpl("http://hl7.org/fhir/identifier-type", "SB");
 
     protected PersonQueryCriteria(
             Class<T> domainClass,
@@ -60,7 +65,7 @@ public abstract class PersonQueryCriteria<T extends IPerson> extends AbstractCri
             String criterion,
             int position) {
         DateTimeWrapper tempDate;
-        IPerson.Gender tempGender;
+        ConceptReferenceSet tempGender;
 
         if (position > 0 && (tempGender = asGender(criterion)) != null) {
             setGender(tempGender);
@@ -122,7 +127,7 @@ public abstract class PersonQueryCriteria<T extends IPerson> extends AbstractCri
      * @param name Person name.
      */
     public void setName(String name) {
-        setName(name == null ? null : PersonNameParser.instance.fromString(name));
+        setName(name == null ? null : PersonNameParsers.get().fromString(name));
     }
 
     /**
@@ -130,7 +135,7 @@ public abstract class PersonQueryCriteria<T extends IPerson> extends AbstractCri
      *
      * @param name Person name.
      */
-    public void setName(IPersonName name) {
+    public void setName(PersonName name) {
         queryContext.setParam("name", name == null ? null : name.getFamily());
     }
 
@@ -140,7 +145,15 @@ public abstract class PersonQueryCriteria<T extends IPerson> extends AbstractCri
      * @param ssn SSN.
      */
     public void setSSN(String ssn) {
-        queryContext.setParam("identifiers", ssn == null ? null : new IdentifierExImpl("http://hl7.org/fhir/sid/us-ssn", ssn, IdentifierUse.OFFICIAL, SSN_TYPE));
+        Identifier identifier = null;
+
+        if (ssn != null) {
+            identifier = new IdentifierImpl(URI.create("http://hl7.org/fhir/sid/us-ssn"), ssn);
+            identifier.setUse(IdentifierUse.OFFICIAL);
+            identifier.setType(null); // TODO: SSN_TYPE
+        }
+
+        queryContext.setParam("identifiers", identifier);
     }
 
     /**
@@ -148,7 +161,7 @@ public abstract class PersonQueryCriteria<T extends IPerson> extends AbstractCri
      *
      * @param gender Gender.
      */
-    public void setGender(IPerson.Gender gender) {
+    public void setGender(ConceptReferenceSet gender) {
         queryContext.setParam("gender", gender);
     }
 
@@ -158,8 +171,8 @@ public abstract class PersonQueryCriteria<T extends IPerson> extends AbstractCri
      * @param value The value to test.
      * @return The matching gender, or null if no match.
      */
-    private IPerson.Gender asGender(String value) {
-        return QueryUtil.findMatchingMember(IPerson.Gender.class, value);
+    private ConceptReferenceSet asGender(String value) {
+        return null;  // TODO: QueryUtil.findMatchingMember(IPerson.Gender.class, value);
     }
 
     /**

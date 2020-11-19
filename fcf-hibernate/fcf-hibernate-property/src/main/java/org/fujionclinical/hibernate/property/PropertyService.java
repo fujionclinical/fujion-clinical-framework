@@ -26,10 +26,10 @@
 package org.fujionclinical.hibernate.property;
 
 import org.fujion.common.StrUtil;
-import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.property.IPropertyService;
 import org.fujionclinical.api.security.ISecurityService;
 import org.fujionclinical.api.security.SecurityUtil;
+import org.fujionclinical.api.user.User;
 
 import java.util.List;
 
@@ -51,7 +51,7 @@ public class PropertyService implements IPropertyService {
     public void destroy() {
     }
     
-    private IUser getUser(boolean asGlobal) {
+    private User getUser(boolean asGlobal) {
         ISecurityService securityService = SecurityUtil.getSecurityService();
         return asGlobal || securityService == null ? null : securityService.getAuthenticatedUser();
     }

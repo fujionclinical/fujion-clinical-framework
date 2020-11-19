@@ -26,6 +26,8 @@
 package org.fujionclinical.patientselection.common;
 
 import edu.utah.kmm.model.cool.core.datatype.Identifier;
+import edu.utah.kmm.model.cool.foundation.entity.Person;
+import edu.utah.kmm.model.cool.util.PersonUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.fujion.component.Cell;
 import org.fujion.component.Columns;
@@ -33,10 +35,9 @@ import org.fujion.component.Grid;
 import org.fujion.component.Row;
 import org.fujion.event.ChangeEvent;
 import org.fujion.model.IComponentRenderer;
-import org.fujionclinical.api.model.patient.IPatient;
 import org.fujionclinical.patientlist.PatientListItem;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import static org.fujionclinical.patientselection.common.Constants.MSG_UNKNOWN_PATIENT;
 
@@ -67,8 +68,8 @@ public class PatientListItemRenderer implements IComponentRenderer<Row, Object> 
 
         if (object instanceof PatientListItem) {
             patientListItem = (PatientListItem) object;
-        } else if (object instanceof IPatient) {
-            patientListItem = new PatientListItem((IPatient) object, null);
+        } else if (object instanceof Person) {
+            patientListItem = new PatientListItem((Person) object, null);
         } else {
             throw new IllegalArgumentException("Invalid object type: " + object);
         }
@@ -76,14 +77,14 @@ public class PatientListItemRenderer implements IComponentRenderer<Row, Object> 
         Row row = new Row();
         row.addEventForward(ChangeEvent.TYPE, grid, null);
         row.setData(patientListItem);
-        IPatient patient = patientListItem.getPatient();
+        Person patient = patientListItem.getPatient();
         // If columns are defined, limit rendering to that number of cells.
         Columns columns = grid.getColumns();
         int max = columns == null ? 0 : columns.getChildCount();
         String info = patientListItem.getInfo();
 
         if (patient != null) {
-            String name = patient.getFullName();
+            String name = PersonUtils.getFullName(patient);
             String[] names;
 
             if (name == null) {
@@ -92,13 +93,13 @@ public class PatientListItemRenderer implements IComponentRenderer<Row, Object> 
                 names = name.split(",", 2);
             }
 
-            Identifier mrn = patient.getMRN();
+            Identifier mrn = PersonUtils.getMRN(patient);
             addCell(row, names[0].trim(), max);
             addCell(row, names.length == 1 ? "" : names[1].trim(), max);
             addCell(row, mrn == null ? "" : mrn.getId(), max);
 
             if (StringUtils.isEmpty(info)) {
-                LocalDateTime dob = patient.getBirthDate();
+                LocalDate dob = patient.getBirthDate();
                 info = dob == null ? "" : dob.toString();
             }
         }

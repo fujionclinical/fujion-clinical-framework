@@ -26,8 +26,8 @@
 package org.fujionclinical.api.security.mock;
 
 import org.fujion.common.StrUtil;
-import org.fujionclinical.api.model.user.IUser;
 import org.fujionclinical.api.security.ISecurityDomain;
+import org.fujionclinical.api.user.User;
 import org.fujionclinical.api.spring.SpringUtil;
 
 import java.util.List;
@@ -83,7 +83,7 @@ public class MockSecurityDomain implements ISecurityDomain {
     }
     
     @Override
-    public IUser authenticate(String username, String password) {
+    public User authenticate(String username, String password) {
         if (!check("org.fujionclinical.security.mock.username", username)
                 || !check("org.fujionclinical.security.mock.password", password)) {
             throw new RuntimeException("Authentication failed.");
@@ -99,7 +99,7 @@ public class MockSecurityDomain implements ISecurityDomain {
     }
     
     @Override
-    public List<String> getGrantedAuthorities(IUser user) {
+    public List<String> getGrantedAuthorities(User user) {
         return StrUtil.toList(mockAuthorities, ",");
     }
     

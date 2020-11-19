@@ -25,11 +25,13 @@
  */
 package org.fujionclinical.patientselection.common;
 
+import edu.utah.kmm.model.cool.foundation.entity.Person;
 import org.fujion.component.BaseUIComponent;
 import org.fujion.model.IComponentRenderer;
-import org.fujionclinical.api.model.patient.IPatient;
 
 /**
  * Interface for rendering detail view of patient in patient selection dialog.
  */
-public interface IPatientDetailRenderer extends IComponentRenderer<BaseUIComponent, IPatient> {}
+public interface IPatientDetailRenderer extends IComponentRenderer<BaseUIComponent, Person> {
+
+}

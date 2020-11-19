@@ -25,16 +25,16 @@
  */
 package org.fujionclinical.plugin.documents;
 
+import edu.utah.kmm.model.cool.clinical.finding.Document;
+import edu.utah.kmm.model.cool.core.datatype.Attachment;
 import org.fujion.component.*;
 import org.fujion.model.IComponentRenderer;
-import org.fujionclinical.api.model.core.IAttachment;
-import org.fujionclinical.api.model.document.IDocument;
 import org.fujionclinical.sharedforms.common.FormConstants;
 
 /**
  * Renderer for the document display.
  */
-public class DocumentDisplayRenderer implements IComponentRenderer<Row, IDocument> {
+public class DocumentDisplayRenderer implements IComponentRenderer<Row, Document> {
 
     /**
      * Render the list item for the specified document.
@@ -42,7 +42,7 @@ public class DocumentDisplayRenderer implements IComponentRenderer<Row, IDocumen
      * @param doc The document associated with the list item.
      */
     @Override
-    public Row render(IDocument doc) {
+    public Row render(Document doc) {
         Row row = new Row();
         row.setData(doc);
         Cell cell = new Cell();
@@ -60,7 +60,7 @@ public class DocumentDisplayRenderer implements IComponentRenderer<Row, IDocumen
         boxHeader.addChild(header);
         div.addChild(boxHeader);
 
-        for (IAttachment content : doc.getAttachments()) {
+        for (Attachment content : doc.getContent()) {
             if (content.getContentType().equals("text/html")) {
                 Html html = new Html();
                 html.setContent(content.toString());

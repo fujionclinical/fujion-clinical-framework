@@ -34,8 +34,8 @@ import org.fujion.component.BaseComponent;
 import org.fujion.component.Label;
 import org.fujion.component.Textbox;
 import org.fujion.component.Window;
-import org.fujionclinical.api.model.user.IUser;
-import org.fujionclinical.api.model.user.UserContext;
+import org.fujionclinical.api.user.User;
+import org.fujionclinical.api.user.UserContext;
 import org.fujionclinical.api.security.ISecurityService;
 import org.fujionclinical.ui.dialog.DialogUtil;
 import org.fujionclinical.ui.util.FCFUtil;
@@ -67,7 +67,7 @@ public class PasswordChangeController implements IAutoWired {
     @WiredComponent
     private Label lblMessage;
 
-    private IUser user;
+    private User user;
 
     private ISecurityService securityService;
 
