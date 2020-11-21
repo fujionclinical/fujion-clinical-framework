@@ -26,8 +26,7 @@
 package org.fujionclinical.api.query.service;
 
 import edu.utah.kmm.model.cool.foundation.core.Identifiable;
-import edu.utah.kmm.model.cool.mediator.dao.DomainDAO;
-import edu.utah.kmm.model.cool.mediator.dao.DomainDAOs;
+import edu.utah.kmm.model.cool.mediator.dao.ModelDAO;
 import edu.utah.kmm.model.cool.mediator.expression.Expression;
 import edu.utah.kmm.model.cool.mediator.expression.ExpressionParser;
 import edu.utah.kmm.model.cool.mediator.query.QueryContext;
@@ -40,14 +39,14 @@ import java.util.List;
  *
  * @param <T> The type of domain object.
  */
-public class DAOQueryService<T extends Identifiable> extends AbstractQueryServiceEx<DomainDAO<T>, T> {
+public class DAOQueryService<T extends Identifiable> extends AbstractQueryServiceEx<ModelDAO<T>, T> {
 
     private final Expression<T> queryExpression;
 
     public DAOQueryService(
             Class<T> domainClass,
             String queryString) {
-        super(null);//TODO: DomainDAOs.getDAO(domainClass));
+        super(null);//TODO: ModelDAOs.getDAO(domainClass));
         this.queryExpression = ExpressionParser.getInstance().parse(domainClass, queryString);
     }
 

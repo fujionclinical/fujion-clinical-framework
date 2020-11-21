@@ -49,34 +49,18 @@
             <property name="propertyFile" value="classpath*:/META-INF/alias.properties,${org.fujionclinical.location.aliases}"/>
         </bean>
 
-        <!-- A registry of all domain factories. -->
-        <bean id="domainFactoryRegistry" class="edu.utah.kmm.model.cool.mediator.dao.DomainDAOs"
-              factory-method="getInstance">
-        </bean>
-
         <!-- A registry of all security domains. -->
         <bean id="securityDomainRegistry" class="org.fujionclinical.api.security.SecurityDomains"
               factory-method="getInstance">
         </bean>
 
-        <!-- A registry of all model transforms. -->
-        <bean id="modelTransformRegistry" class="edu.utah.kmm.model.cool.mediator.transform.ModelTransforms"
-			  factory-method="getInstance">
-        </bean>
+		<!-- Provides automatic registration of beans to COOL registries -->
+		<bean class="org.fujionclinical.api.cool.CoolInitializer" />
 
-		<!-- A registry of all query parameter descriptors. -->
-		<bean id="parameterDescriptorRegistry" class="edu.utah.kmm.model.cool.mediator.expression.parameter.ParameterDescriptors"
-			  factory-method="getInstance">
-		</bean>
-
+		<!-- Thread pooling -->
         <task:annotation-driven executor="taskExecutor"
                                 scheduler="taskScheduler"/>
 
-        <!-- Unbound queues (default) can lead to memory exceptions. Shutdown is
-            called upon bean destruction. taskExecutor and taskScheduler will be of types
-            ExecutorService and ScheduledExecutorService respectively. When a task is
-            rejected, a thread pool executor will throw a RejectedExecutionException
-            (default policy). -->
 		<bean id="taskExecutor"
 			class="org.springframework.scheduling.concurrent.ThreadPoolExecutorFactoryBean"
 			init-method="initialize" destroy-method="destroy">
@@ -115,12 +99,11 @@
 		<bean id="mbeanExporter"
 			class="org.springframework.jmx.export.annotation.AnnotationMBeanExporter">
 			<property name="server" ref="mbeanServer" />
-			<property name="namingStrategy" ref="mbeanNamingStrategy" />
 			<property name="registrationPolicy" value="IGNORE_EXISTING" />
+			<property name="namingStrategy">
+				<bean class="org.springframework.jmx.export.naming.IdentityNamingStrategy" />
+			</property>
 		</bean>
-
-		<!-- Default NamingStrategy -->
-		<bean id="mbeanNamingStrategy" class="org.springframework.jmx.export.naming.IdentityNamingStrategy" />
 
 		<!-- Caching Support -->
 		<bean id="cacheManager" class="org.fujionclinical.api.cache.CacheManagerFactory" factory-method="newCacheManager">
@@ -140,7 +123,11 @@
 		</bean>
 		
 		<bean class="org.fujionclinical.api.messaging.SimpleConsumerProducer" />
-		
+
+		<!-- Data Source Configuration -->
+		<bean class="org.fujionclinical.api.cool.CoolUtil" factory-method="create">
+			<constructor-arg value="${org.fujionclinical.cool.datasource}" />
+		</bean>
 	</beans>
 
 	<beans profile="child">

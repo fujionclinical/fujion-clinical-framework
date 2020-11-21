@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.api.test;
 
+import edu.utah.kmm.model.cool.mediator.datasource.DataSources;
 import org.fujionclinical.api.context.ContextManager;
 import org.fujionclinical.api.core.AppFramework;
 import org.fujionclinical.api.event.EventManager;
@@ -44,6 +45,10 @@ public class CommonTest {
     public static ContextManager contextManager;
 
     private static int initCount;
+
+    static {
+        DataSources.register(new MockDataSource());
+    }
 
     @BeforeClass
     public static void beforeClass$CommonTest() {

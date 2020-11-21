@@ -26,13 +26,12 @@
 package org.fujionclinical.api.query.expression;
 
 import edu.utah.kmm.model.cool.foundation.core.Identifiable;
-import edu.utah.kmm.model.cool.mediator.dao.DomainDAOs;
+import edu.utah.kmm.model.cool.mediator.expression.ExpressionParser;
 import edu.utah.kmm.model.cool.mediator.expression.ExpressionTuple;
 import edu.utah.kmm.model.cool.mediator.query.QueryContext;
 import edu.utah.kmm.model.cool.mediator.query.QueryContextImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.fujionclinical.api.query.core.QueryException;
-import edu.utah.kmm.model.cool.mediator.expression.ExpressionParser;
 
 import java.util.List;
 
@@ -98,7 +97,7 @@ public abstract class AbstractCriteria<L extends Identifiable> {
      * @return Resources matching the search criteria.
      */
     public List<L> search() {
-        return null; // TODO: DomainDAOs.get(logicalType).search(compile());
+        return null; // TODO: ModelDAOs.get(logicalType).search(compile());
     }
 
     /**

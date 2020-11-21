@@ -25,14 +25,15 @@
  */
 package org.fujionclinical.patientlist;
 
+import edu.utah.kmm.model.cool.clinical.role.Patient;
 import edu.utah.kmm.model.cool.foundation.entity.Person;
-import edu.utah.kmm.model.cool.mediator.dao.DomainDAO;
-import edu.utah.kmm.model.cool.mediator.dao.DomainDAOs;
+import edu.utah.kmm.model.cool.mediator.dao.ModelDAO;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.ConstructorUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.common.DateRange;
+import org.fujionclinical.api.cool.CoolUtil;
 
 import java.util.*;
 
@@ -85,11 +86,11 @@ public abstract class AbstractPatientList implements IPatientList {
      * @return A patient object, or null if not found or access is forbidden or an error occurred.
      */
     protected Person getPatient(String patientId) {
-        return getPatientDAO().read(patientId);
+        return getPatientDAO().read(patientId).getActor();
     }
 
-    protected DomainDAO<Person> getPatientDAO() {
-        return DomainDAOs.get(Person.class, null);
+    protected ModelDAO<Patient> getPatientDAO() {
+        return CoolUtil.getDefaultDataSource().getModelDAO(Patient.class);
     }
 
     /**
@@ -114,11 +115,12 @@ public abstract class AbstractPatientList implements IPatientList {
         }
 
         String[] ary = new String[ids.size()];
-        List<Person> results = getPatientDAO().read(ids.keySet().toArray(ary));
+        List<Patient> results = getPatientDAO().read(ids.keySet().toArray(ary));
 
-        for (Person patient : results) {
-            String info = ids.get(patient.getDefaultId());
-            IPatientListItem item = new PatientListItem(patient, info);
+        for (Patient patient : results) {
+            Person person = patient.getActor();
+            String info = ids.get(person.getDefaultId());
+            IPatientListItem item = new PatientListItem(person, info);
 
             if (!items.contains(item)) {
                 items.add(item);

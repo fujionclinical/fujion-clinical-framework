@@ -37,8 +37,6 @@ import org.fujionclinical.shell.elements.ElementPlugin;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * Controller for patient encounters display.
@@ -51,7 +49,7 @@ public class MainController extends ResourceListView<Encounter, Encounter> {
 
     @Override
     protected void setup() {
-        setup(Encounter.class, "Encounters", "Encounter Detail", "patient={{patient}}", 1, "", "Date", "Status", "Location", "Providers");
+        setup(Encounter.class, "Encounters", "Encounter Detail", "subject={{patient}}", 1, "", "Date", "Status", "Location", "Providers");
         columns.getFirstChild(Column.class).setStyles("width: 1%; min-width: 40px");
     }
 

@@ -27,8 +27,7 @@ package org.fujionclinical.sharedforms.controller;
 
 import edu.utah.kmm.model.cool.foundation.core.Identifiable;
 import edu.utah.kmm.model.cool.foundation.entity.Person;
-import edu.utah.kmm.model.cool.mediator.dao.DomainDAO;
-import edu.utah.kmm.model.cool.mediator.dao.DomainDAOs;
+import edu.utah.kmm.model.cool.mediator.dao.ModelDAO;
 import edu.utah.kmm.model.cool.mediator.expression.Expression;
 import edu.utah.kmm.model.cool.mediator.expression.ExpressionParser;
 import edu.utah.kmm.model.cool.mediator.query.QueryContext;
@@ -82,7 +81,7 @@ public abstract class ResourceListView<R extends Identifiable, M> extends ListFo
 
     private Expression queryExpression;
 
-    private DomainDAO<R> dao;
+    private ModelDAO<R> dao;
 
     protected void setup(
             Class<R> resourceClass,
@@ -94,7 +93,7 @@ public abstract class ResourceListView<R extends Identifiable, M> extends ListFo
         this.detailTitle = detailTitle;
         this.queryExpression = ExpressionParser.getInstance().parse(resourceClass, queryString);
         this.resourceClass = resourceClass;
-        this.dao = null; //TODO: DomainDAOs.getDAO(resourceClass);
+        this.dao = null; //TODO: ModelDAOs.getDAO(resourceClass);
         Assert.notNull(dao, () -> "Cannot find DAO for " + resourceClass);
         super.setup(title, sortBy, headers);
     }
