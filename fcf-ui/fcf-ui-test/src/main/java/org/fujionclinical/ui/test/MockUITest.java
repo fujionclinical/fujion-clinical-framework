@@ -25,8 +25,10 @@
  */
 package org.fujionclinical.ui.test;
 
+import edu.utah.kmm.model.cool.mediator.datasource.DataSources;
 import org.fujion.test.MockConfig;
 import org.fujion.test.MockTest;
+import org.fujionclinical.api.test.MockDataSource;
 import org.junit.BeforeClass;
 
 public class MockUITest extends MockTest {
@@ -39,6 +41,10 @@ public class MockUITest extends MockTest {
     private static final String[] CHILD_CONFIG_LOCATIONS = { "classpath*:**/META-INF/*-spring.xml" };
 
     private static final String[] CHILD_PROFILES = { "child", "child-test" };
+
+    static {
+        DataSources.register(new MockDataSource());
+    }
 
     @BeforeClass
     public static void beforeClass() {

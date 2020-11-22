@@ -8,15 +8,29 @@ public class CoolUtil {
 
     private static CoolUtil instance = new CoolUtil();
 
-    private DataSource defaultDataSource;
+    private volatile DataSource defaultDataSource;
+
+    private String defaultDataSourceId;
 
     private static CoolUtil create(String defaultDataSourceId) {
-        instance.defaultDataSource = StringUtils.isBlank(defaultDataSourceId) ? null : DataSources.get(defaultDataSourceId);
+        instance.defaultDataSourceId = defaultDataSourceId;
         return instance;
     }
 
     public static DataSource getDefaultDataSource() {
-        return instance.defaultDataSource;
+        return instance._getDefaultDataSource();
+    }
+
+    public DataSource _getDefaultDataSource() {
+        return defaultDataSource == null ? _initDataSource() : defaultDataSource;
+    }
+
+    private synchronized DataSource _initDataSource() {
+        if (defaultDataSource == null) {
+            defaultDataSource = StringUtils.isBlank(defaultDataSourceId) ? null : DataSources.get(defaultDataSourceId);
+        }
+
+        return defaultDataSource;
     }
 
     private CoolUtil() {
