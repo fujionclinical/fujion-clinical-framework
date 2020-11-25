@@ -28,6 +28,7 @@ package org.fujionclinical.plugin.encounters;
 import edu.utah.kmm.model.cool.clinical.encounter.Encounter;
 import edu.utah.kmm.model.cool.foundation.datatype.PersonName;
 import edu.utah.kmm.model.cool.foundation.entity.Location;
+import edu.utah.kmm.model.cool.mediator.datasource.DataSource;
 import org.fujion.component.*;
 import org.fujion.event.DblclickEvent;
 import org.fujionclinical.api.event.IEventSubscriber;
@@ -41,7 +42,7 @@ import java.util.List;
 /**
  * Controller for patient encounters display.
  */
-public class MainController extends ResourceListView<Encounter, Encounter> {
+public class MainController extends ResourceListView<Encounter, Encounter, DataSource> {
 
     private Encounter lastEncounter;
 

@@ -25,7 +25,6 @@
  */
 package org.fujionclinical.ui.test;
 
-import edu.utah.kmm.model.cool.mediator.datasource.DataSources;
 import org.fujion.test.MockConfig;
 import org.fujion.test.MockTest;
 import org.fujionclinical.api.test.MockDataSource;
@@ -43,7 +42,7 @@ public class MockUITest extends MockTest {
     private static final String[] CHILD_PROFILES = { "child", "child-test" };
 
     static {
-        DataSources.register(new MockDataSource());
+        new MockDataSource();
     }
 
     @BeforeClass

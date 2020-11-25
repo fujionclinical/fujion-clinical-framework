@@ -26,6 +26,7 @@
 package org.fujionclinical.plugin.conditions;
 
 import edu.utah.kmm.model.cool.clinical.finding.Condition;
+import edu.utah.kmm.model.cool.mediator.datasource.DataSource;
 import org.fujionclinical.sharedforms.controller.ResourceListView;
 
 import java.util.List;
@@ -33,7 +34,7 @@ import java.util.List;
 /**
  * Controller for patient conditions display.
  */
-public class MainController extends ResourceListView<Condition, Condition> {
+public class MainController extends ResourceListView<Condition, Condition, DataSource> {
     
     @Override
     protected void setup() {

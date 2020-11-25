@@ -54,9 +54,6 @@
               factory-method="getInstance">
         </bean>
 
-		<!-- Provides automatic registration of beans to COOL registries -->
-		<bean class="org.fujionclinical.api.cool.CoolInitializer" />
-
 		<!-- Thread pooling -->
         <task:annotation-driven executor="taskExecutor"
                                 scheduler="taskScheduler"/>

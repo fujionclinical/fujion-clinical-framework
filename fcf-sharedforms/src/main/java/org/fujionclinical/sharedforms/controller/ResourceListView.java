@@ -28,182 +28,58 @@ package org.fujionclinical.sharedforms.controller;
 import edu.utah.kmm.model.cool.foundation.core.Identifiable;
 import edu.utah.kmm.model.cool.foundation.entity.Person;
 import edu.utah.kmm.model.cool.mediator.dao.ModelDAO;
+import edu.utah.kmm.model.cool.mediator.datasource.DataSource;
 import edu.utah.kmm.model.cool.mediator.expression.Expression;
 import edu.utah.kmm.model.cool.mediator.expression.ExpressionParser;
 import edu.utah.kmm.model.cool.mediator.query.QueryContext;
 import edu.utah.kmm.model.cool.mediator.query.QueryContextImpl;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.fujion.annotation.WiredComponent;
-import org.fujion.component.BaseComponent;
-import org.fujion.component.Html;
-import org.fujion.component.Row;
-import org.fujion.component.Window;
-import org.fujion.page.PageUtil;
-import org.fujion.thread.ICancellable;
 import org.fujion.thread.ThreadedTask;
-import org.fujionclinical.api.event.IEventSubscriber;
-import org.fujionclinical.api.model.patient.PatientContext;
-import org.fujionclinical.shell.elements.ElementPlugin;
-import org.fujionclinical.ui.dialog.DialogUtil;
-import org.fujionclinical.ui.util.FCFUtil;
 import org.springframework.util.Assert;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
- * Controller for displaying FHIR resources in a columnar format.
+ * Controller for displaying logical model resources in a columnar format.
  *
- * @param <R> Type of resource object.
+ * @param <L> Type of resource object.
  * @param <M> Type of model object.
+ * @param <S> Type of data source.
  */
-public abstract class ResourceListView<R extends Identifiable, M> extends ListFormController<M> {
-
-    private static final Log log = LogFactory.getLog(ResourceListView.class);
-
-    private static final String DETAIL_POPUP = FCFUtil.getResourcePath(ResourceListView.class) + "resourceListDetailPopup.fsp";
+public abstract class ResourceListView<L extends Identifiable, M, S extends DataSource> extends AbstractResourceListView<L, M, S> {
 
     private final QueryContext queryContext = new QueryContextImpl();
 
-    @WiredComponent
-    protected Html detailView;
+    private Expression<L> queryExpression;
 
-    protected Person patient;
-
-    private final IEventSubscriber<Person> patientChangeListener = (eventName, patient) -> setPatient(patient);
-
-    protected Class<R> resourceClass;
-
-    private String detailTitle;
-
-    private Expression queryExpression;
-
-    private ModelDAO<R> dao;
+    private ModelDAO<L> dao;
 
     protected void setup(
-            Class<R> resourceClass,
+            Class<L> resourceClass,
             String title,
             String detailTitle,
             String queryString,
             int sortBy,
             String... headers) {
-        this.detailTitle = detailTitle;
+        super.setup(resourceClass, title, detailTitle, queryString, sortBy, headers);
         this.queryExpression = ExpressionParser.getInstance().parse(resourceClass, queryString);
-        this.resourceClass = resourceClass;
-        this.dao = null; //TODO: ModelDAOs.getDAO(resourceClass);
+        this.dao = getDataSource().getModelDAO(resourceClass);
         Assert.notNull(dao, () -> "Cannot find DAO for " + resourceClass);
-        super.setup(title, sortBy, headers);
-    }
-
-    /**
-     * Override load list to clear display if no patient in context.
-     */
-    @Override
-    protected void loadData() {
-        if (patient == null) {
-            asyncAbort();
-            reset();
-            status("No patient selected.");
-        } else {
-            super.loadData();
-        }
-
-        detailView.setContent(null);
     }
 
     @Override
     protected void requestData() {
-        startBackgroundThread(map -> {
-            map.put("results", dao.search(queryExpression, queryContext));
-        });
+        startBackgroundThread(map -> map.put("results", dao.search(queryExpression, queryContext)));
     }
 
     @Override
-    protected void threadFinished(ICancellable thread) {
-        ThreadedTask task = (ThreadedTask) thread;
-
-        try {
-            task.rethrow();
-        } catch (Throwable e) {
-            status("An unexpected error was encountered:  " + FCFUtil.formatExceptionForDisplay(e));
-            return;
-        }
-
-        model.clear();
-        initModel((List<R>) task.getAttribute("results"));
-        renderData();
-    }
-
-    protected abstract void setup();
-
-    protected abstract void initModel(List<R> entries);
-
-    @Override
-    protected void asyncAbort() {
-        abortBackgroundThreads();
-    }
-
-    /**
-     * Show detail for specified component.
-     *
-     * @param item The component containing the model object.
-     */
-    protected void showDetail(BaseComponent item) {
-        @SuppressWarnings("unchecked")
-        M modelObject = item == null ? null : (M) item.getData();
-        String detail = modelObject == null ? null : getDetail(modelObject);
-
-        if (!StringUtils.isEmpty(detail)) {
-            if (getShowDetailPane()) {
-                detailView.setContent(detail);
-            } else {
-                Map<String, Object> map = new HashMap<>();
-                map.put("title", detailTitle);
-                map.put("content", detail);
-                map.put("allowPrint", getAllowPrint());
-                try {
-                    Window window = (Window) PageUtil
-                            .createPage(DETAIL_POPUP, null, map).get(0);
-                    window.modal(null);
-                } catch (Exception e) {
-                    DialogUtil.showError(e);
-                }
-            }
-        }
-    }
-
-    protected String getDetail(M modelObject) {
-        return null;
-    }
-
-    /**
-     * Display detail when row is selected.
-     */
-    @Override
-    protected void rowSelected(Row row) {
-        showDetail(row);
+    @SuppressWarnings("unchecked")
+    protected void initModel(ThreadedTask task) {
+        initModel((List<L>) task.getAttribute("results"));
     }
 
     @Override
-    public void onLoad(ElementPlugin plugin) {
-        super.onLoad(plugin);
-        setup();
-        PatientContext.getPatientContext().addListener(patientChangeListener);
-        setPatient(PatientContext.getActivePatient());
-    }
-
-    @Override
-    public void onUnload() {
-        PatientContext.getPatientContext().removeListener(patientChangeListener);
-    }
-
-    private void setPatient(Person patient) {
-        this.patient = patient;
+    protected void afterPatientChange(Person patient) {
         queryContext.setParam("patient", patient == null ? null : patient.getDefaultId().getId());
-        this.refresh();
     }
 
 }
