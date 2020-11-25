@@ -38,7 +38,7 @@ public class MainController extends ResourceListView<Condition, Condition, DataS
     
     @Override
     protected void setup() {
-        setup(Condition.class, "Conditions", "Condition Detail", "patient={{patient}}", 1, "Condition", "Onset", "Status",
+        setup(Condition.class, "Conditions", "Condition Detail", "subject={{patient}}", 1, "Condition", "Onset", "Status",
                 "Notes");
     }
     
