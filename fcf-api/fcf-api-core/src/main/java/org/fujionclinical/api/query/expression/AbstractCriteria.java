@@ -26,6 +26,7 @@
 package org.fujionclinical.api.query.expression;
 
 import edu.utah.kmm.model.cool.foundation.core.Identifiable;
+import edu.utah.kmm.model.cool.mediator.datasource.DataSource;
 import edu.utah.kmm.model.cool.mediator.expression.ExpressionParser;
 import edu.utah.kmm.model.cool.mediator.expression.ExpressionTuple;
 import edu.utah.kmm.model.cool.mediator.query.QueryContext;
@@ -43,7 +44,7 @@ public abstract class AbstractCriteria<L extends Identifiable> {
 
     private static final String MSG_ERROR_MISSING_REQUIRED = "A required search criterion is missing.";
 
-    protected final QueryContext queryContext = new QueryContextImpl();
+    private final QueryContext queryContext = new QueryContextImpl();
 
     private final Class<L> logicalType;
 
@@ -94,10 +95,11 @@ public abstract class AbstractCriteria<L extends Identifiable> {
     /**
      * Perform a search based on given criteria.
      *
+     * @param dataSource The data source
      * @return Resources matching the search criteria.
      */
-    public List<L> search() {
-        return null; // TODO: ModelDAOs.get(logicalType).search(compile());
+    public List<L> search(DataSource dataSource) {
+        return dataSource.getModelDAO(logicalType).search(compile());
     }
 
     /**
@@ -106,7 +108,7 @@ public abstract class AbstractCriteria<L extends Identifiable> {
      * @return True if minimum search requirements have been met.
      */
     protected boolean isValid() {
-        return queryContext.hasParam("id");
+        return hasContextParam("id");
     }
 
     /**
@@ -119,13 +121,25 @@ public abstract class AbstractCriteria<L extends Identifiable> {
         }
     }
 
+    public boolean hasContextParam(String parameter) {
+        return queryContext.hasParam(toContextParam(parameter));
+    }
+
+    public void setContextParam(String parameter, Object value) {
+        queryContext.setParam(toContextParam(parameter), value);
+    }
+
+    private String toContextParam(String parameter) {
+        return parameter.replace(".", "_");
+    }
+
     /**
      * Sets the maximum hits criterion.
      *
      * @param maximum Maximum.
      */
     public void setMaximum(Integer maximum) {
-        queryContext.setParam("_count", maximum);
+        setContextParam("_count", maximum);
     }
 
     /**
@@ -134,7 +148,7 @@ public abstract class AbstractCriteria<L extends Identifiable> {
      * @param id Domain identifier.
      */
     public void setId(String id) {
-        queryContext.setParam("id", StringUtils.trimToNull(id));
+        setContextParam("id", StringUtils.trimToNull(id));
     }
 
     /**
@@ -170,17 +184,19 @@ public abstract class AbstractCriteria<L extends Identifiable> {
 
     protected void addFragment(
             StringBuilder sb,
-            String parameter) {
-        addFragment(sb, parameter, "=");
+            String searchParam) {
+        addFragment(sb, searchParam, "=");
     }
 
     protected void addFragment(
             StringBuilder sb,
-            String parameter,
+            String searchParam,
             String operator) {
-        if (queryContext.hasParam(parameter)) {
+        String contextParam = toContextParam(searchParam);
+
+        if (hasContextParam(contextParam)) {
             sb.append(sb.length() == 0 ? "" : "&");
-            sb.append(parameter).append(" ").append(operator).append(" {{").append(parameter).append("}}");
+            sb.append(searchParam).append(" ").append(operator).append(" {{").append(contextParam).append("}}");
         }
     }
 

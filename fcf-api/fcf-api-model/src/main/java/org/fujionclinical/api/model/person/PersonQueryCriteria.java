@@ -30,10 +30,12 @@ import edu.utah.kmm.model.cool.core.datatype.IdentifierImpl;
 import edu.utah.kmm.model.cool.core.datatype.IdentifierUse;
 import edu.utah.kmm.model.cool.foundation.datatype.PersonName;
 import edu.utah.kmm.model.cool.foundation.entity.Person;
+import edu.utah.kmm.model.cool.foundation.role.Role;
 import edu.utah.kmm.model.cool.terminology.ConceptReference;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceImpl;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import edu.utah.kmm.model.cool.util.PersonNameParsers;
+import edu.utah.kmm.model.cool.util.PersonUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.query.expression.AbstractCriteria;
@@ -43,9 +45,17 @@ import java.net.URI;
 /**
  * Base search criteria for person lookups.
  */
-public abstract class PersonQueryCriteria<T extends Person> extends AbstractCriteria<T> {
+public abstract class PersonQueryCriteria<T extends Role<Person>> extends AbstractCriteria<T> {
 
     private static final ConceptReference SSN_TYPE = new ConceptReferenceImpl("http://hl7.org/fhir/identifier-type", "SB");
+
+    private static final String CRT_NAME = "name.family";
+
+    private static final String CRT_DOB = "birthDate";
+
+    private static final String CRT_GENDER = "gender";
+
+    private static final String CRT_IDENTIFIER = "identifier";
 
     protected PersonQueryCriteria(
             Class<T> domainClass,
@@ -86,10 +96,10 @@ public abstract class PersonQueryCriteria<T extends Person> extends AbstractCrit
 
     @Override
     protected void buildQueryString(StringBuilder sb) {
-        addFragment(sb, "name", "~");
-        addFragment(sb, "identifier", "=");
-        addFragment(sb, "gender", "=");
-        addFragment(sb, "birthDate", "=");
+        addFragment(sb, CRT_NAME, "~");
+        addFragment(sb, CRT_IDENTIFIER, "=");
+        addFragment(sb, CRT_GENDER, "=");
+        addFragment(sb, CRT_DOB, "=");
     }
 
     /**
@@ -118,7 +128,7 @@ public abstract class PersonQueryCriteria<T extends Person> extends AbstractCrit
      */
     @Override
     public boolean isValid() {
-        return super.isValid() || queryContext.hasParam("identifier") || queryContext.hasParam("name");
+        return super.isValid() || hasContextParam(CRT_IDENTIFIER) || hasContextParam(CRT_NAME);
     }
 
     /**
@@ -136,7 +146,7 @@ public abstract class PersonQueryCriteria<T extends Person> extends AbstractCrit
      * @param name Person name.
      */
     public void setName(PersonName name) {
-        queryContext.setParam("name", name == null ? null : name.getFamily());
+        setContextParam(CRT_NAME, name == null ? null : name.getFamily());
     }
 
     /**
@@ -153,7 +163,7 @@ public abstract class PersonQueryCriteria<T extends Person> extends AbstractCrit
             identifier.setType(null); // TODO: SSN_TYPE
         }
 
-        queryContext.setParam("identifiers", identifier);
+        setContextParam("identifiers", identifier);
     }
 
     /**
@@ -162,7 +172,7 @@ public abstract class PersonQueryCriteria<T extends Person> extends AbstractCrit
      * @param gender Gender.
      */
     public void setGender(ConceptReferenceSet gender) {
-        queryContext.setParam("gender", gender);
+        setContextParam(CRT_GENDER, gender);
     }
 
     /**
@@ -172,7 +182,7 @@ public abstract class PersonQueryCriteria<T extends Person> extends AbstractCrit
      * @return The matching gender, or null if no match.
      */
     private ConceptReferenceSet asGender(String value) {
-        return null;  // TODO: QueryUtil.findMatchingMember(IPerson.Gender.class, value);
+        return PersonUtils.genderAsConceptReferenceSet(value);
     }
 
     /**
@@ -181,7 +191,7 @@ public abstract class PersonQueryCriteria<T extends Person> extends AbstractCrit
      * @param birth Date of birth.
      */
     public void setBirth(DateTimeWrapper birth) {
-        queryContext.setParam("birthDate", birth);
+        setContextParam(CRT_DOB, birth);
     }
 
 }

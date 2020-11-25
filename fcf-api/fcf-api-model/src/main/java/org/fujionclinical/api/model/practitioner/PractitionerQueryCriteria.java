@@ -25,9 +25,9 @@
  */
 package org.fujionclinical.api.model.practitioner;
 
+import edu.utah.kmm.model.cool.clinical.role.Practitioner;
 import edu.utah.kmm.model.cool.core.datatype.Identifier;
 import edu.utah.kmm.model.cool.core.datatype.IdentifierImpl;
-import edu.utah.kmm.model.cool.foundation.entity.Person;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSetImpl;
 import org.fujionclinical.api.model.person.PersonQueryCriteria;
@@ -35,12 +35,12 @@ import org.fujionclinical.api.model.person.PersonQueryCriteria;
 /**
  * Criteria for practitioner searches.
  */
-public class PractitionerQueryCriteria extends PersonQueryCriteria<Person> {
+public class PractitionerQueryCriteria extends PersonQueryCriteria<Practitioner> {
 
     public static final ConceptReferenceSet DEA_CONCEPT_CODE = new ConceptReferenceSetImpl((String) null, "DEA", null);
 
     public PractitionerQueryCriteria() {
-        super(Person.class, null);
+        super(Practitioner.class, null);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class PractitionerQueryCriteria extends PersonQueryCriteria<Person> {
             identifier.setType(DEA_CONCEPT_CODE);
         }
 
-        queryContext.setParam("identifier", identifier);
+        setContextParam("identifier", identifier);
     }
 
 }

@@ -14,10 +14,11 @@
 	<beans profile="child">
 
 		<bean id="patientSelectionController"
-			class="org.fujionclinical.patientselection.v1.PatientSelectionController"
-			scope="prototype" init-method="init">
-			<constructor-arg ref="patientListRegistry" />
-			<constructor-arg ref="patientListFavorites" />
+			  class="org.fujionclinical.patientselection.v1.PatientSelectionController"
+			  scope="prototype" init-method="init">
+			<constructor-arg ref="patientListRegistry"/>
+			<constructor-arg ref="patientListFavorites"/>
+			<constructor-arg value="${org.fujionclinical.cool.datasource}"/>
 		</bean>
 
 	</beans>

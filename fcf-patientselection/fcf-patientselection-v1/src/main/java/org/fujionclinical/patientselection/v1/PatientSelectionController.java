@@ -26,6 +26,8 @@
 package org.fujionclinical.patientselection.v1;
 
 import edu.utah.kmm.model.cool.foundation.entity.Person;
+import edu.utah.kmm.model.cool.mediator.datasource.DataSource;
+import edu.utah.kmm.model.cool.mediator.datasource.DataSources;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -65,6 +67,22 @@ public class PatientSelectionController extends FrameworkController {
     private final FavoritePatientList favorites;
 
     private final PatientListRegistry registry;
+
+    private final DataSource dataSource;
+
+    private Window root;
+
+    private Radiobutton rbFavorites;
+
+    private IPatientList activeList;
+
+    private IPatientList managedList;
+
+    private IPatientList originalList;
+
+    private IPatientListItemManager itemManager;
+
+    private IPatientListFilterManager filterManager;
 
     @WiredComponent
     private Radiogroup rgrpLists;
@@ -156,19 +174,6 @@ public class PatientSelectionController extends FrameworkController {
     @WiredComponent
     private Pane paneDemographics;
 
-    private Window root;
-
-    private Radiobutton rbFavorites;
-
-    private IPatientList activeList;
-
-    private IPatientList managedList;
-
-    private IPatientList originalList;
-
-    private IPatientListItemManager itemManager;
-
-    private IPatientListFilterManager filterManager;
     /**
      * Handles drag/drop events for filters in filter management mode.
      */
@@ -192,9 +197,11 @@ public class PatientSelectionController extends FrameworkController {
 
     public PatientSelectionController(
             PatientListRegistry registry,
-            FavoritePatientList favorites) {
+            FavoritePatientList favorites,
+            String dataSourceId) {
         this.registry = registry;
         this.favorites = favorites;
+        this.dataSource = DataSources.get(dataSourceId);
     }
 
     /**
@@ -446,7 +453,7 @@ public class PatientSelectionController extends FrameworkController {
         grdPatientList.getRows().clearSelected();
 
         try {
-            PatientSelectionUtil.execute(edtSearch.getValue(), 100, matches -> {
+            PatientSelectionUtil.execute(edtSearch.getValue(), 100, dataSource, matches -> {
                 if (matches != null) {
                     grdSearch.getRows().setModel(new ListModel<>(matches));
                     grdSearch.getRows().setSelectable(Selectable.SINGLE);

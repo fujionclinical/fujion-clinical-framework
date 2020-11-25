@@ -25,7 +25,6 @@
  */
 package org.fujionclinical.api.context;
 
-import edu.utah.kmm.model.cool.foundation.core.Identifiable;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujionclinical.api.context.ISurveyResponse.ISurveyCallback;
@@ -144,12 +143,8 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
      * @param domainObject2 Second domain object for comparison.
      * @return True if the two objects represent the same context.
      */
-    //TODO: fix this
+    //TODO: fix this?
     protected boolean isSameContext(DomainClass domainObject1, DomainClass domainObject2) {
-        if (domainObject1 instanceof Identifiable && domainObject2 instanceof Identifiable) {
-            return ((Identifiable) domainObject1).equals(((Identifiable) domainObject2));
-        }
-
         return Objects.equals(domainObject1, domainObject2);
     }
     

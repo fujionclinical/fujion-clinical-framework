@@ -49,23 +49,23 @@ public class ConditionQueryCriteria extends AbstractCriteria<Condition> {
      * @param patient Patient.
      */
     public void setPatient(Person patient) {
-        queryContext.setParam("patient", patient);
+        setContextParam("patient", patient);
     }
 
     public void setEncounter(Encounter encounter) {
-        queryContext.setParam("encounter", encounter);
+        setContextParam("encounter", encounter);
     }
 
     public void setStatus(ConceptReferenceSet status) {
-        queryContext.setParam("verificationStatus", status);
+        setContextParam("verificationStatus", status);
     }
 
     public void setStatus(AssertionalFindingClinicalStatus status) {
-        queryContext.setParam("clinicalStatus", status);
+        setContextParam("clinicalStatus", status);
     }
 
     public void setCreationDate(Date creationDate) {
-        queryContext.setParam("creationDate", creationDate);
+        setContextParam("creationDate", creationDate);
     }
 
     @Override
@@ -89,7 +89,7 @@ public class ConditionQueryCriteria extends AbstractCriteria<Condition> {
      */
     @Override
     public boolean isValid() {
-        return super.isValid() || queryContext.hasParam("patient");
+        return super.isValid() || hasContextParam("patient");
     }
 
 }

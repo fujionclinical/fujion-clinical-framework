@@ -25,8 +25,10 @@
  */
 package org.fujionclinical.patientselection.common;
 
+import edu.utah.kmm.model.cool.clinical.role.Patient;
 import edu.utah.kmm.model.cool.foundation.datatype.PersonName;
 import edu.utah.kmm.model.cool.foundation.entity.Person;
+import edu.utah.kmm.model.cool.mediator.datasource.DataSource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.ancillary.IResponseCallback;
@@ -39,6 +41,7 @@ import org.fujionclinical.ui.util.FCFUtil;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.fujionclinical.patientselection.common.Constants.*;
 
@@ -54,6 +57,7 @@ public class PatientSelectionUtil {
      * @param maxMatches Maximum number of allowable matches. If this value is exceeded, the user
      *                   will be given the opportunity to cancel the search. A value of zero suppresses
      *                   this feature.
+     * @param dataSource The data source.
      * @param callback   Callback to receive a list of patients matching the specified search
      *                   criteria. The return value will be null if no search criteria are provided or the
      *                   search exceeds the maximum allowable matches and the user chooses to cancel the
@@ -62,10 +66,11 @@ public class PatientSelectionUtil {
     public static void execute(
             String searchText,
             int maxMatches,
+            DataSource dataSource,
             IResponseCallback<List<Person>> callback) {
         PatientQueryCriteria criteria = new PatientQueryCriteria();
         criteria.reset(searchText);
-        execute(criteria, maxMatches, callback);
+        execute(criteria, maxMatches, dataSource, callback);
     }
 
     /**
@@ -75,6 +80,7 @@ public class PatientSelectionUtil {
      * @param maxMatches Maximum number of allowable matches. If this value is exceeded, the user
      *                   will be given the opportunity to cancel the search. A value of zero suppresses
      *                   this feature.
+     * @param dataSource The data source.
      * @param callback   Callback to receive a list of patients matching the specified search
      *                   criteria. The return value will be null if no search criteria are provided or the
      *                   search exceeds the maximum allowable matches and the user chooses to cancel the
@@ -83,6 +89,7 @@ public class PatientSelectionUtil {
     public static void execute(
             PatientQueryCriteria criteria,
             int maxMatches,
+            DataSource dataSource,
             IResponseCallback<List<Person>> callback) {
         if (criteria == null || criteria.isEmpty()) {
             doCallback(null, callback);
@@ -90,7 +97,7 @@ public class PatientSelectionUtil {
         }
 
         try {
-            List<Person> matches = criteria.search();
+            List<Patient> matches = criteria.search(dataSource);
 
             if (matches == null || matches.size() == 0) {
                 throw new QueryException(MSG_ERROR_PATIENT_NOT_FOUND.toString());
@@ -119,15 +126,23 @@ public class PatientSelectionUtil {
         }
     }
 
+    private static List<Person> toPersons(List<Patient> patients) {
+        return patients == null ? null : patients.stream()
+                .map(patient -> patient.getActor())
+                .collect(Collectors.toList());
+    }
+
     private static void doCallback(
-            List<Person> matches,
+            List<Patient> matches,
             IResponseCallback<List<Person>> callback) {
         if (callback != null) {
-            if (matches != null) {
-                matches.sort(patientComparator);
+            List<Person> persons = toPersons(matches);
+
+            if (persons != null) {
+                persons.sort(patientComparator);
             }
 
-            callback.onComplete(matches);
+            callback.onComplete(persons);
         }
     }
 

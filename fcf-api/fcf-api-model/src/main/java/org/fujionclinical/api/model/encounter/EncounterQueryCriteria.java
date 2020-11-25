@@ -45,11 +45,11 @@ public class EncounterQueryCriteria extends AbstractCriteria<Encounter> {
      * @param patient Patient.
      */
     public void setPatient(Person patient) {
-        queryContext.setParam("patient", patient);
+        setContextParam("patient", patient);
     }
 
     public void setType(String type) {
-        queryContext.setParam("type", type);
+        setContextParam("type", type);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class EncounterQueryCriteria extends AbstractCriteria<Encounter> {
      */
     @Override
     public boolean isValid() {
-        return super.isValid() || queryContext.hasParam("patient");
+        return super.isValid() || hasContextParam("patient");
     }
 
     /**
@@ -81,7 +81,7 @@ public class EncounterQueryCriteria extends AbstractCriteria<Encounter> {
      * @param period Search time window.
      */
     public void setPeriod(DateRange period) {
-        queryContext.setParam("period", period);
+        setContextParam("period", period);
     }
 
 }

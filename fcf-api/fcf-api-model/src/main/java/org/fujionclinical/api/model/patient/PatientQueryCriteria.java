@@ -25,23 +25,26 @@
  */
 package org.fujionclinical.api.model.patient;
 
+import edu.utah.kmm.model.cool.clinical.role.Patient;
 import edu.utah.kmm.model.cool.core.datatype.Identifier;
 import edu.utah.kmm.model.cool.core.datatype.IdentifierImpl;
 import edu.utah.kmm.model.cool.core.datatype.IdentifierUse;
-import edu.utah.kmm.model.cool.foundation.entity.Person;
 import edu.utah.kmm.model.cool.terminology.ConceptReference;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceImpl;
+import edu.utah.kmm.model.cool.terminology.ConceptReferenceSetImpl;
 import org.fujionclinical.api.model.person.PersonQueryCriteria;
+
+import static edu.utah.kmm.model.cool.util.PersonUtils.IDENTIFIER_TYPE_URI;
 
 /**
  * Search criteria for patient lookup.
  */
-public class PatientQueryCriteria extends PersonQueryCriteria<Person> {
+public class PatientQueryCriteria extends PersonQueryCriteria<Patient> {
 
     private static final ConceptReference MRN_TYPE = new ConceptReferenceImpl("http://hl7.org/fhir/v2/0203", "MR");
 
     public PatientQueryCriteria() {
-        super(Person.class, null);
+        super(Patient.class, null);
     }
 
     /**
@@ -69,10 +72,12 @@ public class PatientQueryCriteria extends PersonQueryCriteria<Person> {
      * @param mrn MRN.
      */
     public void setMRN(String mrn) {
-        Identifier identifier = new IdentifierImpl(null, mrn);
-        identifier.setUse(IdentifierUse.OFFICIAL);
-        identifier.setType(null); // TODO: MRN type
-        queryContext.setParam("identifiers", mrn == null ? null : identifier);
+        if (mrn != null) {
+            Identifier identifier = new IdentifierImpl(null, mrn);
+            identifier.setUse(IdentifierUse.OFFICIAL);
+            identifier.setType(new ConceptReferenceSetImpl(IDENTIFIER_TYPE_URI, "MR", null));
+            setContextParam("identifiers", mrn == null ? null : identifier);
+        }
     }
 
 }

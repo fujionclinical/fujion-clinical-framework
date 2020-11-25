@@ -43,20 +43,20 @@ public class DocumentQueryCriteria extends AbstractCriteria<Document> {
      * @param patient Patient.
      */
     public void setPatient(Person patient) {
-        queryContext.setParam("patient", patient);
+        setContextParam("patient", patient);
     }
 
     public void setEncounter(Encounter encounter) {
-        queryContext.setParam("encounter", encounter);
+        setContextParam("encounter", encounter);
     }
 
     public void setStatus(DocumentStatus status) {
-        queryContext.setParam("documentStatus", status);
+        setContextParam("documentStatus", status);
     }
 
     /* TODO: what to do?
     public void setStatus(Document.CompositionStatus status) {
-        queryContext.setParam("compositionStatus", status);
+        setContextParam("compositionStatus", status);
     }
     */
 
