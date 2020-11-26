@@ -50,7 +50,9 @@
 	<beans profile="child">
 
 		<bean id="fcfConditionsController"
-			  class="org.fujionclinical.plugin.conditions.MainController" scope="prototype" />
+			  class="org.fujionclinical.plugin.conditions.MainController" scope="prototype">
+			<property name="dataSource" value="${org.fujionclinical.cool.datasource}" />
+		</bean>
 
 	</beans>
 

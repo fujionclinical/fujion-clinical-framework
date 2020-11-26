@@ -26,21 +26,44 @@
 package org.fujionclinical.api.model.practitioner;
 
 import edu.utah.kmm.model.cool.foundation.entity.Person;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.fujionclinical.api.context.ContextItems;
-import org.fujionclinical.api.context.ContextManager;
 import org.fujionclinical.api.context.IContextSubscriber;
-import org.fujionclinical.api.context.ManagedContext;
+import org.fujionclinical.api.model.person.AbstractPersonContext;
 
 /**
  * Wrapper for shared practitioner context.
  */
-public class PractitionerContext extends ManagedContext<Person> {
+public class PractitionerContext extends AbstractPersonContext {
 
-    private static final String SUBJECT_NAME = "Practitioner";
+    public interface IPractitionerContextEvent extends IContextSubscriber {
 
-    private static final Log log = LogFactory.getLog(PractitionerContext.class);
+    }
+
+    /**
+     * Request a practitioner context change.
+     *
+     * @param practitioner New practitioner.
+     */
+    public static void changePractitioner(Person practitioner) {
+        changePerson(practitioner, PractitionerContext.class);
+    }
+
+    /**
+     * Returns the practitioner in the current context.
+     *
+     * @return Practitioner object (may be null).
+     */
+    public static Person getActivePractitioner() {
+        return getActivePerson(PractitionerContext.class);
+    }
+
+    /**
+     * Returns the managed practitioner context.
+     *
+     * @return Practitioner context.
+     */
+    public static PractitionerContext getPractitionerContext() {
+        return getPersonContext((PractitionerContext.class));
+    }
 
     /**
      * Create a shared practitioner context with an initial null state.
@@ -50,73 +73,12 @@ public class PractitionerContext extends ManagedContext<Person> {
     }
 
     /**
-     * Request a practitioner context change.
-     *
-     * @param practitioner New practitioner.
-     */
-    public static void changePractitioner(Person practitioner) {
-        try {
-            getPractitionerContext().requestContextChange(practitioner);
-        } catch (Exception e) {
-            log.error("Error during practitioner context change.", e);
-        }
-    }
-
-    /**
-     * Returns the managed practitioner context.
-     *
-     * @return Practitioner context.
-     */
-    public static PractitionerContext getPractitionerContext() {
-        return (PractitionerContext) ContextManager.getInstance().getSharedContext(PractitionerContext.class.getName());
-    }
-
-    /**
-     * Returns the practitioner in the current context.
-     *
-     * @return Practitioner object (may be null).
-     */
-    public static Person getActivePractitioner() {
-        return getPractitionerContext().getContextObject(false);
-    }
-
-    /**
      * Create a shared practitioner context with a specified initial state.
      *
      * @param practitioner Practitioner that will be the initial state.
      */
     public PractitionerContext(Person practitioner) {
-        super(SUBJECT_NAME, IPractitionerContextEvent.class, practitioner);
-    }
-
-    /**
-     * Creates a CCOW context from the specified practitioner object.
-     */
-    @Override
-    protected ContextItems toCCOWContext(Person practitioner) {
-        //TODO: contextItems.setItem(...);
-        return contextItems;
-    }
-
-    /**
-     * Returns a practitioner object based on the specified CCOW context.
-     */
-    @Override
-    protected Person fromCCOWContext(ContextItems contextItems) {
-        return null;
-    }
-
-    /**
-     * Returns a priority value of 10.
-     *
-     * @return Priority value for context manager.
-     */
-    @Override
-    public int getPriority() {
-        return 10;
-    }
-
-    public interface IPractitionerContextEvent extends IContextSubscriber {
+        super("Practitioner", IPractitionerContextEvent.class, practitioner);
     }
 
 }

@@ -61,6 +61,8 @@ public abstract class ResourceListView<L extends Identifiable, M, S extends Data
             int sortBy,
             String... headers) {
         super.setup(resourceClass, title, detailTitle, queryString, sortBy, headers);
+        this.dao = getDataSource().getModelDAO(resourceClass);
+        Assert.notNull(dao, () -> "Cannot find DAO for " + getResourceClass());
         this.queryExpression = ExpressionParser.getInstance().parse(resourceClass, queryString);
     }
 
@@ -78,13 +80,6 @@ public abstract class ResourceListView<L extends Identifiable, M, S extends Data
     @Override
     protected void afterPatientChange(Person patient) {
         queryContext.setParam("patient", patient == null ? null : patient.getDefaultId().getId());
-    }
-
-    @Override
-    public void setDataSource(String dataSourceId) {
-        super.setDataSource(dataSourceId);
-        this.dao = getDataSource().getModelDAO(getResourceClass());
-        Assert.notNull(dao, () -> "Cannot find DAO for " + getResourceClass());
     }
 
 }

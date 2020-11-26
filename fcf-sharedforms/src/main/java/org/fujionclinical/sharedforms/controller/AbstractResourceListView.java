@@ -29,6 +29,8 @@ import edu.utah.kmm.model.cool.foundation.entity.Person;
 import edu.utah.kmm.model.cool.mediator.datasource.DataSource;
 import edu.utah.kmm.model.cool.mediator.datasource.DataSources;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.component.BaseComponent;
 import org.fujion.component.Html;
@@ -55,6 +57,8 @@ import java.util.Map;
  * @param <S> Type of data source.
  */
 public abstract class AbstractResourceListView<R, M, S extends DataSource> extends ListFormController<M> {
+
+    private static final Log log = LogFactory.getLog(AbstractResourceListView.class);
 
     private static final String DETAIL_POPUP = FCFUtil.getResourcePath(AbstractResourceListView.class) + "resourceListDetailPopup.fsp";
 
@@ -109,6 +113,7 @@ public abstract class AbstractResourceListView<R, M, S extends DataSource> exten
         try {
             task.rethrow();
         } catch (Throwable e) {
+            log.error(e);
             status("An unexpected error was encountered:  " + FCFUtil.formatExceptionForDisplay(e));
             return;
         }
