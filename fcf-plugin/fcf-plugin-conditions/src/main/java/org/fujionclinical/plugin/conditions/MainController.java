@@ -45,7 +45,7 @@ public class MainController extends ResourceListView<Condition, Condition, DataS
     @Override
     protected void populate(Condition condition, List<Object> columns) {
         columns.add(condition.getCode().getDisplayText());
-        columns.add(condition.getOnset());
+        columns.add(condition.getOnset().getValue());
         columns.add(condition.getClinicalStatus());
         columns.add(condition.getNotes());
     }

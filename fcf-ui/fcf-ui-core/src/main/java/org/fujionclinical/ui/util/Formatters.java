@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.ui.util;
 
+import edu.utah.kmm.model.cool.clinical.finding.Onset;
 import edu.utah.kmm.model.cool.core.datatype.Identifier;
 import edu.utah.kmm.model.cool.core.datatype.Period;
 import edu.utah.kmm.model.cool.foundation.entity.Person;
@@ -50,6 +51,7 @@ public class Formatters {
 
     static {
         register(Date.class, DateUtil::formatDate);
+        register(Onset.class, FormatUtil::formatOnset);
         register(Temporal.class, DateUtil::formatDate);
         register(Period.class, FormatUtil::formatPeriod);
         register(ConceptReferenceSet.class, FormatUtil::formatConceptReferenceSet);

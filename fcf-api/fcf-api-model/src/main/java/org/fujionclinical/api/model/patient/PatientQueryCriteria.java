@@ -26,15 +26,10 @@
 package org.fujionclinical.api.model.patient;
 
 import edu.utah.kmm.model.cool.clinical.role.Patient;
-import edu.utah.kmm.model.cool.core.datatype.Identifier;
-import edu.utah.kmm.model.cool.core.datatype.IdentifierImpl;
-import edu.utah.kmm.model.cool.core.datatype.IdentifierUse;
 import edu.utah.kmm.model.cool.terminology.ConceptReference;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceImpl;
-import edu.utah.kmm.model.cool.terminology.ConceptReferenceSetImpl;
+import edu.utah.kmm.model.cool.util.PersonUtils;
 import org.fujionclinical.api.model.person.PersonQueryCriteria;
-
-import static edu.utah.kmm.model.cool.util.PersonUtils.IDENTIFIER_TYPE_URI;
 
 /**
  * Search criteria for patient lookup.
@@ -73,10 +68,7 @@ public class PatientQueryCriteria extends PersonQueryCriteria<Patient> {
      */
     public void setMRN(String mrn) {
         if (mrn != null) {
-            Identifier identifier = new IdentifierImpl(null, mrn);
-            identifier.setUse(IdentifierUse.OFFICIAL);
-            identifier.setType(new ConceptReferenceSetImpl(IDENTIFIER_TYPE_URI, "MR", null));
-            setContextParam("identifiers", mrn == null ? null : identifier);
+            setContextParam("identifiers", PersonUtils.createMRN(null, mrn));
         }
     }
 

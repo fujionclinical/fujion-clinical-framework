@@ -25,14 +25,28 @@
  */
 package org.fujionclinical.ui.util;
 
+import edu.utah.kmm.model.cool.clinical.finding.Onset;
 import edu.utah.kmm.model.cool.core.datatype.Identifier;
 import edu.utah.kmm.model.cool.core.datatype.Period;
 import edu.utah.kmm.model.cool.terminology.ConceptReference;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
+import org.fujion.common.DateUtil;
 
 import java.time.LocalDateTime;
+import java.time.temporal.Temporal;
+import java.util.Objects;
 
 public class FormatUtil {
+
+    public static String formatOnset(Onset onset) {
+        Object value = onset == null ? null : onset.getValue();
+
+        if (value instanceof Temporal) {
+            return DateUtil.formatDate((Temporal) value);
+        }
+
+        return Objects.toString(value, "");
+    }
 
     public static String formatPeriod(Period period) {
         int i = 0;
