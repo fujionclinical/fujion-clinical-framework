@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.sharedforms.controller;
 
+import edu.utah.kmm.model.cool.mediator.common.Formatters;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.fujion.annotation.EventHandler;
@@ -40,7 +41,6 @@ import org.fujion.model.ListModel;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.ui.command.CommandUtil;
 import org.fujionclinical.ui.util.FCFUtil;
-import org.fujionclinical.ui.util.Formatters;
 
 import java.util.ArrayList;
 import java.util.List;

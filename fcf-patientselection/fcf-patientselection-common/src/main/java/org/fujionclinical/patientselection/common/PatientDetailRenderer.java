@@ -29,6 +29,7 @@ import edu.utah.kmm.model.cool.foundation.datatype.ContactPoint;
 import edu.utah.kmm.model.cool.foundation.datatype.ContactPointSystem;
 import edu.utah.kmm.model.cool.foundation.datatype.ContactPointUse;
 import edu.utah.kmm.model.cool.foundation.entity.Person;
+import edu.utah.kmm.model.cool.mediator.common.Formatters;
 import edu.utah.kmm.model.cool.util.ContactPointUtils;
 import edu.utah.kmm.model.cool.util.PersonUtils;
 import org.apache.commons.lang3.EnumUtils;
@@ -40,7 +41,6 @@ import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Div;
 import org.fujion.component.Image;
 import org.fujion.component.Label;
-import org.fujionclinical.ui.util.Formatters;
 
 import java.util.List;
 
