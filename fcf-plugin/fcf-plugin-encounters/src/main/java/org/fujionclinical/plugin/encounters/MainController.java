@@ -26,8 +26,6 @@
 package org.fujionclinical.plugin.encounters;
 
 import edu.utah.kmm.model.cool.clinical.encounter.Encounter;
-import edu.utah.kmm.model.cool.foundation.datatype.PersonName;
-import edu.utah.kmm.model.cool.foundation.entity.Location;
 import edu.utah.kmm.model.cool.mediator.datasource.DataSource;
 import org.fujion.component.*;
 import org.fujion.event.DblclickEvent;
@@ -36,7 +34,6 @@ import org.fujionclinical.api.model.encounter.EncounterContext;
 import org.fujionclinical.sharedforms.controller.ResourceListView;
 import org.fujionclinical.shell.elements.ElementPlugin;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -61,32 +58,8 @@ public class MainController extends ResourceListView<Encounter, Encounter, DataS
         columns.add(" ");
         columns.add(encounter.getPeriod());
         columns.add(encounter.getStatus());
-        columns.add(getLocations(encounter));
-        columns.add(getParticipants(encounter));
-    }
-
-    private List<Location> getLocations(Encounter encounter) {
-        /* TODO:
-        return encounter.getLocation().stream()
-                .map(Reference::getReferenced)
-                .collect(Collectors.toList());
-
-         */
-
-        return Collections.emptyList();
-    }
-
-    private List<PersonName> getParticipants(Encounter encounter) {
-        /*
-        return encounter.getParticipants().stream()
-                .map(Reference::getReferenced)
-                .map(PersonNameType::getName)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
-
-         */
-
-        return Collections.emptyList();
+        columns.add(encounter.getLocation());
+        columns.add(encounter.getParticipant());
     }
 
     @Override

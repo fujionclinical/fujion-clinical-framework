@@ -371,7 +371,7 @@ public abstract class ListFormController<T> extends CaptionedFormController {
      * @return Transformed data.
      */
     protected String transformData(Object data) {
-        return Formatters.format(data, "");
+        return Formatters.format(data);
     }
     
     /**

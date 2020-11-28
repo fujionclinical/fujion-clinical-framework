@@ -119,13 +119,11 @@ public abstract class AbstractResourceListView<R, M, S extends DataSource> exten
         }
 
         model.clear();
-        initModel(task);
+        initModel((List<R>) task.getAttribute("results"));
         renderData();
     }
 
     protected abstract void setup();
-
-    protected abstract void initModel(ThreadedTask task);
 
     protected abstract void initModel(List<R> entries);
 

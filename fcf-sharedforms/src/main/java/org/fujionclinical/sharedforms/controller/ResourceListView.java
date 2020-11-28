@@ -33,10 +33,7 @@ import edu.utah.kmm.model.cool.mediator.expression.Expression;
 import edu.utah.kmm.model.cool.mediator.expression.ExpressionParser;
 import edu.utah.kmm.model.cool.mediator.query.QueryContext;
 import edu.utah.kmm.model.cool.mediator.query.QueryContextImpl;
-import org.fujion.thread.ThreadedTask;
 import org.springframework.util.Assert;
-
-import java.util.List;
 
 /**
  * Controller for displaying logical model resources in a columnar format.
@@ -69,12 +66,6 @@ public abstract class ResourceListView<L extends Identifiable, M, S extends Data
     @Override
     protected void requestData() {
         startBackgroundThread(map -> map.put("results", dao.search(queryExpression, queryContext)));
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    protected void initModel(ThreadedTask task) {
-        initModel((List<L>) task.getAttribute("results"));
     }
 
     @Override
