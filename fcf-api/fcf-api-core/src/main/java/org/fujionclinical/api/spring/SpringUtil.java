@@ -199,7 +199,16 @@ public class SpringUtil {
             throw MiscUtil.toUnchecked(e);
         }
     }
-    
+
+    @SuppressWarnings("unchecked")
+    public static <T> Class<T> loadClass(Class<T> clazz) {
+        try {
+            return (Class<T>) Class.forName(clazz.getName());
+        } catch (ClassNotFoundException e) {
+            throw MiscUtil.toUnchecked(e);
+        }
+    }
+
     /**
      * Enforce static class.
      */
