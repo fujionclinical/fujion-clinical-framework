@@ -200,6 +200,13 @@ public class SpringUtil {
         }
     }
 
+    /**
+     * Can be used as a factory method to forcibly load a class.
+     *
+     * @param clazz The class to load.
+     * @param <T>   The class to load.
+     * @return The loaded class.
+     */
     @SuppressWarnings("unchecked")
     public static <T> Class<T> loadClass(Class<T> clazz) {
         try {
