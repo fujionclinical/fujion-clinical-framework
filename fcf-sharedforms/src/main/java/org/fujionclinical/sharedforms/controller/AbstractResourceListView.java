@@ -107,6 +107,7 @@ public abstract class AbstractResourceListView<R, M, S extends DataSource> exten
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void threadFinished(ICancellable thread) {
         ThreadedTask task = (ThreadedTask) thread;
 

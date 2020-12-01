@@ -23,6 +23,7 @@
 		<module>fcf-plugin-mockup</module>
 		<module>fcf-plugin-sessiontracker</module>
 		<module>fcf-plugin-settings</module>
+		<module>fcf-plugin-observations</module>
 		<module>fcf-plugin-patientphoto</module>
 		<module>fcf-plugin-patientheader</module>
 		<module>fcf-plugin-userheader</module>

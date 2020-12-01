@@ -51,16 +51,16 @@ public abstract class ResourceListView<L extends Identifiable, M, S extends Data
     private ModelDAO<L> dao;
 
     protected void setup(
-            Class<L> resourceClass,
+            Class<L> logicalType,
             String title,
             String detailTitle,
             String queryString,
             int sortBy,
             String... headers) {
-        super.setup(resourceClass, title, detailTitle, queryString, sortBy, headers);
-        this.dao = getDataSource().getModelDAO(resourceClass);
+        super.setup(logicalType, title, detailTitle, queryString, sortBy, headers);
+        this.dao = getDataSource().getModelDAO(logicalType);
         Assert.notNull(dao, () -> "Cannot find DAO for " + getResourceClass());
-        this.queryExpression = ExpressionParser.getInstance().parse(resourceClass, queryString);
+        this.queryExpression = ExpressionParser.getInstance().parse(logicalType, queryString);
     }
 
     @Override

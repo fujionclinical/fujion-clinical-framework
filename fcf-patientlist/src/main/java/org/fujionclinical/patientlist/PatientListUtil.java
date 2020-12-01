@@ -26,6 +26,7 @@
 package org.fujionclinical.patientlist;
 
 import edu.utah.kmm.model.cool.foundation.entity.Person;
+import edu.utah.kmm.model.cool.util.CoolUtils;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -153,7 +154,7 @@ public class PatientListUtil {
         }
 
         for (IPatientListItem item : items) {
-            if (patient.getDefaultId().equals(item.getPatient().getDefaultId())) {
+            if (CoolUtils.areSame(patient, item.getPatient())) {
                 return item;
             }
         }

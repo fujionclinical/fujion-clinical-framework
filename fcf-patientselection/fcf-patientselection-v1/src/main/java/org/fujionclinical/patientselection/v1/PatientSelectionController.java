@@ -777,6 +777,7 @@ public class PatientSelectionController extends FrameworkController {
         grdSearch.getRows().clearSelected();
         onChange$rgrpLists();
         edtSearch.focus();
+        setActivePatient(PatientContext.getActivePatient());
 
         if (root.getMode() != Mode.MODAL) {
             root.modal(null);
