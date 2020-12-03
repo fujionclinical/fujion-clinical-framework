@@ -28,6 +28,7 @@ package org.fujionclinical.sharedforms.controller;
 import edu.utah.kmm.model.cool.foundation.entity.Person;
 import edu.utah.kmm.model.cool.mediator.datasource.DataSource;
 import edu.utah.kmm.model.cool.mediator.datasource.DataSources;
+import edu.utah.kmm.model.cool.util.CoolUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -210,7 +211,7 @@ public abstract class AbstractResourceListView<R, M, S extends DataSource> exten
     }
 
     public String getQueryString() {
-        return queryString;
+        return queryString.replace("#", CoolUtils.getId(patient));
     }
 
     public Class<R> getResourceClass() {
