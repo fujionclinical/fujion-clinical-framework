@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>fcf-patientselection-v1</artifactId>
-    <name>Patient Selection</name>
+    <name>FCF Patient Selection Default</name>
 
     <dependencies>
         <dependency>

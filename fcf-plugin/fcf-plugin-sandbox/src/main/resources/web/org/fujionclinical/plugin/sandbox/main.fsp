@@ -1,4 +1,0 @@
-<page>
-	<import src="web/org/fujion/sandbox/main.fsp"
-		controller="org.fujionclinical.plugin.sandbox.MainController" />
-</page>

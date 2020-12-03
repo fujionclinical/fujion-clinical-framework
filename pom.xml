@@ -71,7 +71,6 @@
 		<module>fcf-security</module>
 		<module>fcf-messaging</module>
 		<module>fcf-hibernate</module>
-		<module>fcf-plugin</module>
 		<module>fcf-reports</module>
 		<module>fcf-sharedforms</module>
 		<module>fcf-testharness</module>

@@ -1,6 +1,0 @@
-
-<page>
-	
-	<iframe name="iframe" controller="${@fcfMockupController}" height="99%" width="99%" style="border: none" />
-	
-</page>
