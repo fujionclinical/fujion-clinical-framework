@@ -25,13 +25,12 @@
  */
 package org.fujionclinical.api.test;
 
-import edu.utah.kmm.model.cool.mediator.common.ModelDescriptorImpl;
 import edu.utah.kmm.model.cool.mediator.datasource.AbstractDataSource;
 
 public class MockDataSource extends AbstractDataSource {
 
     public MockDataSource() {
-        super("mock", new ModelDescriptorImpl("mock", "Mock data source"));
+        super("mock", new MockModelDescriptor());
     }
 
 }
