@@ -18,57 +18,8 @@
 	
 	<dependencies>
 		<!-- Insert any plugins to be tested here. -->
-		<dependency>
-			<groupId>org.fujionclinical</groupId>
-			<artifactId>fcf-plugin-mockup</artifactId>
-			<version>${project.parent.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.fujionclinical</groupId>
-			<artifactId>fcf-plugin-infopanel</artifactId>
-			<version>${project.parent.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.fujionclinical</groupId>
-			<artifactId>fcf-plugin-currentdatetime</artifactId>
-			<version>${project.parent.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.fujionclinical</groupId>
-			<artifactId>fcf-plugin-sandbox</artifactId>
-			<version>${project.parent.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.fujionclinical</groupId>
-			<artifactId>fcf-plugin-eventtesting</artifactId>
-			<version>${project.parent.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.fujionclinical</groupId>
-			<artifactId>fcf-plugin-messagetesting</artifactId>
-			<version>${project.parent.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.fujionclinical</groupId>
-			<artifactId>fcf-plugin-sessiontracker</artifactId>
-			<version>${project.parent.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.fujionclinical</groupId>
-			<artifactId>fcf-plugin-chat</artifactId>
-			<version>${project.parent.version}</version>
-		</dependency>
+
 		<!-- Fujion Clinical Framework Components -->
-		<dependency>
-			<groupId>org.fujionclinical</groupId>
-			<artifactId>fcf-plugin-userheader</artifactId>
-			<version>${project.parent.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.fujionclinical</groupId>
-			<artifactId>fcf-plugin-statuspanel</artifactId>
-			<version>${project.parent.version}</version>
-		</dependency>
 		<dependency>
 			<groupId>org.fujionclinical</groupId>
 			<artifactId>fcf-security-mock</artifactId>
