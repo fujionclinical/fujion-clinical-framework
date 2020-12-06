@@ -138,6 +138,7 @@ public class QueryUtil {
      * Returns an enum member if the value matches the start of one and only one member's name.
      * Matching is case-insensitive.
      *
+     * @param clazz The enum class.
      * @param value The value to test.
      * @param <T> The enum type.
      * @return The matching member, or null if no match.

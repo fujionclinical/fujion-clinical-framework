@@ -59,6 +59,7 @@ public class AbstractPersonContext extends ManagedContext<Person> {
      * Returns the managed practitioner context.
      *
      * @param contextClass The context class.
+     * @param <T> The context class.
      * @return Practitioner context.
      */
     @SuppressWarnings("unchecked")
@@ -70,6 +71,7 @@ public class AbstractPersonContext extends ManagedContext<Person> {
      * Returns the person in the current context.
      *
      * @param contextClass The context class.
+     * @param <T> The context class.
      * @return Person object (may be null).
      */
     protected static <T extends AbstractPersonContext> Person getActivePerson(Class<T> contextClass) {
@@ -98,7 +100,9 @@ public class AbstractPersonContext extends ManagedContext<Person> {
     /**
      * Create a shared person context with a specified initial state.
      *
-     * @param person Person that will be the initial state.
+     * @param contextName The unique context name.
+     * @param subscriberType The interface for context subscriptions.
+     * @param person The initial state.
      */
     protected AbstractPersonContext(
             String contextName,
@@ -109,6 +113,9 @@ public class AbstractPersonContext extends ManagedContext<Person> {
 
     /**
      * Create a shared person context with an initial null state.
+     *
+     * @param contextName The unique context name.
+     * @param subscriberType The interface for context subscriptions.
      */
     protected AbstractPersonContext(
             String contextName,
