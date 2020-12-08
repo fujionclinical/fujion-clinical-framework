@@ -27,15 +27,22 @@
 			<artifactId>fujion-test</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.fujionclinical</groupId>
-			<artifactId>fcf-help-chm-test-jar</artifactId>
-			<version>2.0.0-SNAPSHOT</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/src/test/resources/test-help.jar</systemPath>
-		</dependency>
-		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<additionalClasspathElements>
+						<additionalClasspathElement>src/test/resources/test-help.jar</additionalClasspathElement>
+					</additionalClasspathElements>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
