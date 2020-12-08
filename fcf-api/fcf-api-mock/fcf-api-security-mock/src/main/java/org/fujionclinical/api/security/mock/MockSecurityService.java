@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.api.security.mock;
 
-import org.fujionclinical.api.user.User;
 import org.fujionclinical.api.security.ISecurityService;
+import org.fujionclinical.api.user.User;
 
 /**
  * Mock security service for testing.

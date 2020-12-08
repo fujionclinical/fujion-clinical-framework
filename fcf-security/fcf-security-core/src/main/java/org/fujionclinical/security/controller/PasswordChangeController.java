@@ -34,9 +34,9 @@ import org.fujion.component.BaseComponent;
 import org.fujion.component.Label;
 import org.fujion.component.Textbox;
 import org.fujion.component.Window;
+import org.fujionclinical.api.security.ISecurityService;
 import org.fujionclinical.api.user.User;
 import org.fujionclinical.api.user.UserContext;
-import org.fujionclinical.api.security.ISecurityService;
 import org.fujionclinical.ui.dialog.DialogUtil;
 import org.fujionclinical.ui.util.FCFUtil;
 

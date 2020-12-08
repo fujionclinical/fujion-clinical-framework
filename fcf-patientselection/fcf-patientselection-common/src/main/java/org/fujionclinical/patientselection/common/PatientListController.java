@@ -33,9 +33,9 @@ import org.fujion.component.Rows;
 import org.fujion.event.Event;
 import org.fujion.event.IEventListener;
 import org.fujion.model.ListModel;
+import org.fujionclinical.api.spring.SpringUtil;
 import org.fujionclinical.patientlist.IPatientList;
 import org.fujionclinical.patientlist.IPatientListItem;
-import org.fujionclinical.api.spring.SpringUtil;
 import org.fujionclinical.ui.controller.FrameworkController;
 
 import java.util.Collection;

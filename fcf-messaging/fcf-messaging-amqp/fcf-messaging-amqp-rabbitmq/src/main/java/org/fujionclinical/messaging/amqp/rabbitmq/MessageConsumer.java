@@ -25,9 +25,9 @@
  */
 package org.fujionclinical.messaging.amqp.rabbitmq;
 
+import org.fujion.thread.ThreadUtil;
 import org.fujionclinical.api.messaging.IMessageConsumer;
 import org.fujionclinical.api.messaging.Message;
-import org.fujion.thread.ThreadUtil;
 import org.springframework.amqp.core.MessageListener;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 

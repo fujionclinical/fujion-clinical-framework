@@ -33,6 +33,7 @@ import org.fujion.component.Rows;
 import org.fujion.page.PageUtil;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.ui.test.MockUITest;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -40,6 +41,7 @@ import static org.junit.Assert.assertEquals;
 public class TestForms extends MockUITest {
     
     @Test
+    @Ignore
     public void testForm() {
         BaseComponent root = PageUtil.createPage("web/org/fujionclinical/sharedforms/listviewForm.fsp", null).get(0);
         TestController controller = new TestController();

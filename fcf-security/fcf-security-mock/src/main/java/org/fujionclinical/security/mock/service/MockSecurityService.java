@@ -28,7 +28,6 @@ package org.fujionclinical.security.mock.service;
 import org.fujion.client.ClientUtil;
 import org.fujion.client.ExecutionContext;
 import org.fujionclinical.api.security.mock.MockUser;
-import org.fujionclinical.api.user.User;
 
 public class MockSecurityService extends org.fujionclinical.api.security.mock.MockSecurityService {
     

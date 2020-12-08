@@ -27,8 +27,8 @@ package org.fujionclinical.api.security.mock;
 
 import org.fujion.common.StrUtil;
 import org.fujionclinical.api.security.ISecurityDomain;
-import org.fujionclinical.api.user.User;
 import org.fujionclinical.api.spring.SpringUtil;
+import org.fujionclinical.api.user.User;
 
 import java.util.List;
 import java.util.Map;
