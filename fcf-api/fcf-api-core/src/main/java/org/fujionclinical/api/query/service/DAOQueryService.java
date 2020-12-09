@@ -27,6 +27,7 @@ package org.fujionclinical.api.query.service;
 
 import edu.utah.kmm.model.cool.foundation.core.Identifiable;
 import edu.utah.kmm.model.cool.mediator.dao.ModelDAO;
+import edu.utah.kmm.model.cool.mediator.datasource.DataSource;
 import edu.utah.kmm.model.cool.mediator.expression.Expression;
 import edu.utah.kmm.model.cool.mediator.expression.ExpressionParser;
 import edu.utah.kmm.model.cool.mediator.query.QueryContext;
@@ -39,15 +40,19 @@ import java.util.List;
  *
  * @param <T> The type of domain object.
  */
-public class DAOQueryService<T extends Identifiable> extends AbstractQueryServiceEx<ModelDAO<T>, T> {
+public class DAOQueryService<T extends Identifiable> extends AbstractQueryServiceEx<T> {
 
     private final Expression<T> queryExpression;
 
+    private final ModelDAO<T> modelDAO;
+
     public DAOQueryService(
+            DataSource dataSource,
             Class<T> domainClass,
             String queryString) {
-        super(null);//TODO: ModelDAOs.getDAO(domainClass));
+        super(dataSource);
         this.queryExpression = ExpressionParser.getInstance().parse(domainClass, queryString);
+        this.modelDAO = dataSource.getModelDAO(domainClass);
     }
 
     @Override
@@ -57,7 +62,7 @@ public class DAOQueryService<T extends Identifiable> extends AbstractQueryServic
 
     @Override
     public IQueryResult<T> fetch(QueryContext queryContext) {
-        List<T> results = service.search(queryExpression.resolve(queryContext));
+        List<T> results = modelDAO.search(queryExpression.resolve(queryContext));
         return QueryUtil.packageResult(results, IQueryResult.CompletionStatus.COMPLETED);
     }
 

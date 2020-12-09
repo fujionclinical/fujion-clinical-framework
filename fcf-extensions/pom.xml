@@ -7,18 +7,17 @@
 		<version>2.0.0-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>fcf-patientlist</artifactId>
-	<name>FCF Patient List Support</name>
+	<groupId>org.fujionclinical</groupId>
+	<artifactId>fcf-extensions</artifactId>
+	<packaging>pom</packaging>
+	<name>FCF Extensions</name>
 	
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.fujionclinical</groupId>
-			<artifactId>fcf-api-model</artifactId>
-			<version>${project.parent.version}</version>
-		</dependency>
-	</dependencies>
+	<modules>
+		<module>fcf-patientlist</module>
+		<module>fcf-patientselection</module>
+		<module>fcf-personphoto</module>
+		<module>fcf-reports</module>
+		<module>fcf-sharedforms</module>
+	</modules>
+
 </project>

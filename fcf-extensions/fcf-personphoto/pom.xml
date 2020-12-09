@@ -3,27 +3,27 @@
 	
 	<parent>
 		<groupId>org.fujionclinical</groupId>
-		<artifactId>fcf-parent</artifactId>
+		<artifactId>fcf-extensions</artifactId>
 		<version>2.0.0-SNAPSHOT</version>
 	</parent>
 	
-	<name>FCF Report Generation</name>
-	<artifactId>fcf-reports</artifactId>
+	<artifactId>fcf-personphoto</artifactId>
+	<name>FCF Person Photo Component</name>
 	
 	<dependencies>
 		<dependency>
-			<groupId>org.fujionclinical</groupId>
-			<artifactId>fcf-ui-core</artifactId>
-			<version>${project.parent.version}</version>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.fujionclinical</groupId>
 			<artifactId>fcf-api-model</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.fujionclinical</groupId>
+            <artifactId>fcf-ui-core</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+    </dependencies>
 </project>

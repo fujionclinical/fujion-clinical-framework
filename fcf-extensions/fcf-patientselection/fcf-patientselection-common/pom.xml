@@ -24,6 +24,11 @@
             <artifactId>fcf-patientlist</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.fujionclinical</groupId>
+            <artifactId>fcf-personphoto</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
     </dependencies>
 
 

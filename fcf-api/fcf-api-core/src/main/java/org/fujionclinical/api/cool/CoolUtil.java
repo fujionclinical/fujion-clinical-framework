@@ -25,18 +25,21 @@
  */
 package org.fujionclinical.api.cool;
 
+import edu.utah.kmm.model.cool.core.datatype.Attachment;
 import edu.utah.kmm.model.cool.mediator.datasource.DataSource;
 import edu.utah.kmm.model.cool.mediator.datasource.DataSources;
 import org.apache.commons.lang3.StringUtils;
+import org.fujion.ancillary.MimeContent;
 
 public class CoolUtil {
 
-    private static CoolUtil instance = new CoolUtil();
+    private static final CoolUtil instance = new CoolUtil();
 
     private volatile DataSource defaultDataSource;
 
     private String defaultDataSourceId;
 
+    @SuppressWarnings("unused")
     private static CoolUtil create(String defaultDataSourceId) {
         instance.defaultDataSourceId = defaultDataSourceId;
         return instance;
@@ -58,6 +61,18 @@ public class CoolUtil {
         return defaultDataSource;
     }
 
+    public static MimeContent toMimeContent(Attachment attachment) {
+        if (attachment == null) {
+            return null;
+        }
+
+        MimeContent mimeContent =
+                new MimeContent(attachment.hasContentType() ? attachment.getContentType().getText() : null, attachment.getUrl());
+        mimeContent.setEncodedData(attachment.getContent());
+        return mimeContent;
+    }
+
     private CoolUtil() {
     }
+
 }

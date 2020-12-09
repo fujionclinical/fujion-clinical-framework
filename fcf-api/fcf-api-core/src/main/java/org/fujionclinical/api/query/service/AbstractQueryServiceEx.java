@@ -25,25 +25,30 @@
  */
 package org.fujionclinical.api.query.service;
 
+import edu.utah.kmm.model.cool.mediator.datasource.DataSource;
+
 /**
  * A convenience extension to the AbstractQueryService for query services that use an underlying
- * data provider service.
+ * data source.
  *
- * @param <S> Native data provider service.
  * @param <T> Class of query result.
  */
-public abstract class AbstractQueryServiceEx<S, T> extends AbstractQueryService<T> {
+public abstract class AbstractQueryServiceEx<T> extends AbstractQueryService<T> {
     
-    protected final S service;
+    private final DataSource dataSource;
     
-    public AbstractQueryServiceEx(S service) {
+    public AbstractQueryServiceEx(DataSource dataSource) {
         super();
-        this.service = service;
+        this.dataSource = dataSource;
     }
     
-    public AbstractQueryServiceEx(S service, IAsyncQueryStrategy<T> strategy) {
+    public AbstractQueryServiceEx(DataSource dataSource, IAsyncQueryStrategy<T> strategy) {
         super(strategy);
-        this.service = service;
+        this.dataSource = dataSource;
+    }
+
+    public DataSource getDataSource() {
+        return dataSource;
     }
     
 }
