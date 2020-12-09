@@ -38,10 +38,6 @@ public class Constants {
 
     public static final String FILTER_DROP_ID = "patientselection.filter.drop.id";
 
-    public static final String IMAGE_SILHOUETTE = RESOURCE_PATH + "silhouette1.png";
-
-    public static final String IMAGE_NOPATIENT = RESOURCE_PATH + "silhouette2.png";
-
     public static final String PROP_PREFIX = Constants.class.getName() + ".";
 
     public static final String RESULT_ATTRIB = Constants.PROP_PREFIX + "result";
@@ -51,10 +47,6 @@ public class Constants {
     public static final String SELECTED_PATIENT_ATTRIB = PROP_PREFIX + "patient";
 
     public static final String PATIENT_LIST_ATTRIB = PROP_PREFIX + "list";
-
-    public static final LocalizedMessage MSG_NO_PATIENT = new LocalizedMessage("patientphoto.no.patient");
-
-    public static final LocalizedMessage MSG_NO_PHOTO = new LocalizedMessage("patientphoto.no.photo");
 
     public static final LocalizedMessage MSG_CANNOT_SELECT_TITLE = new LocalizedMessage("patientselection.error.noselect.title");
 
@@ -115,4 +107,5 @@ public class Constants {
      */
     private Constants() {
     }
+
 }

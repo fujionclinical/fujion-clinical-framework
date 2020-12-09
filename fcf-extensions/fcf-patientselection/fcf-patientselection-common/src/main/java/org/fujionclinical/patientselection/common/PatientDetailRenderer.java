@@ -25,6 +25,8 @@
  */
 package org.fujionclinical.patientselection.common;
 
+import edu.utah.kmm.model.cool.common.MiscUtils;
+import edu.utah.kmm.model.cool.foundation.datatype.Address;
 import edu.utah.kmm.model.cool.foundation.datatype.ContactPoint;
 import edu.utah.kmm.model.cool.foundation.datatype.ContactPointSystem;
 import edu.utah.kmm.model.cool.foundation.datatype.ContactPointUse;
@@ -34,15 +36,12 @@ import edu.utah.kmm.model.cool.util.ContactPointUtils;
 import edu.utah.kmm.model.cool.util.PersonUtils;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.fujion.ancillary.MimeContent;
 import org.fujion.common.DateUtil;
 import org.fujion.common.StrUtil;
 import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Div;
-import org.fujion.component.Image;
 import org.fujion.component.Label;
-
-import java.util.List;
+import org.fujionclinical.personphoto.PersonPhoto;
 
 /**
  * Default class for rendering detail view of patient in patient selection dialog. This class may be
@@ -72,17 +71,8 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
             Person patient,
             BaseUIComponent root) {
         root.addChild(new Div());
-        Image photo = new Image();
+        PersonPhoto photo = new PersonPhoto(patient);
         photo.setStyles("max-height:300px;max-width:300px;padding-bottom:10px");
-        // TODO: Attachment pix = patient.getPhoto();
-        MimeContent content = null; //pix == null ? null : pix.getContent();
-
-        if (content == null) {
-            photo.setSrc(Constants.IMAGE_SILHOUETTE);
-        } else {
-            photo.setContent(content);
-        }
-
         root.addChild(photo);
         addDemographic(root, null, PersonUtils.getFullName(patient), "font-weight: bold");
         addDemographic(root, "mrn", PersonUtils.getMRN(patient));
@@ -93,7 +83,6 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
         addDemographic(root, "dod", patient.getDeathDate());
         addDemographic(root, "marital_status", patient.getMaritalStatus());
         addDemographic(root, "language", patient.hasLanguage() ? patient.getLanguage() : null);
-        /* TODO:
         addContactPoint(root, "home_phone", patient);
         addContactPoint(root, "home_email", patient);
         addContactPoint(root, "home_fax", patient);
@@ -101,13 +90,13 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
         addContactPoint(root, "work_email", patient);
         addContactPoint(root, "work_fax", patient);
 
-        IPostalAddress address = patient.getAddress();
+        Address address = MiscUtils.getFirst(patient.getAddress());
 
         if (address != null) {
             root.addChild(new Div());
 
-            if (address.hasLines()) {
-                for (String line : address.getLines()) {
+            if (address.hasLine()) {
+                for (String line : address.getLine()) {
                     addDemographic(root, null, line);
                 }
             }
@@ -118,7 +107,6 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
             String sep = city.isEmpty() || state.isEmpty() ? "" : ", ";
             addDemographic(root, null, city + sep + state + "  " + zip);
         }
-    */
     }
 
     /**
@@ -153,18 +141,18 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
     /**
      * Adds a contact point to the demographic panel. Uses default styling.
      *
-     * @param root          Root component.
-     * @param type          Type of contact point desired (e.g., "home_phone").
-     * @param contactPoints List of contact points from which to select.
+     * @param root   Root component.
+     * @param type   Type of contact point desired (e.g., "home_phone").
+     * @param person Person whose contact points are to be rendered..
      */
     protected void addContactPoint(
             BaseUIComponent root,
             String type,
-            List<ContactPoint> contactPoints) {
+            Person person) {
         String[] types = type.split("_", 2);
         ContactPointUse use = EnumUtils.getEnumIgnoreCase(ContactPointUse.class, types[0]);
         ContactPointSystem system = EnumUtils.getEnumIgnoreCase(ContactPointSystem.class, types[1]);
-        ContactPoint contactPoint = ContactPointUtils.find(contactPoints, use, system);
+        ContactPoint contactPoint = ContactPointUtils.find(person.getContact(), use, system);
 
         if (contactPoint != null) {
             addDemographic(root, type, contactPoint.getValue());
