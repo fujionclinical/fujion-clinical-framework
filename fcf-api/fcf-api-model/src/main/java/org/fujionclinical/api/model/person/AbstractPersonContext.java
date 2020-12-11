@@ -26,13 +26,9 @@
 package org.fujionclinical.api.model.person;
 
 import edu.utah.kmm.model.cool.foundation.entity.Person;
-import edu.utah.kmm.model.cool.foundation.entity.PersonImpl;
 import edu.utah.kmm.model.cool.util.CoolUtils;
-import edu.utah.kmm.model.cool.util.PersonNameParsers;
-import edu.utah.kmm.model.cool.util.PersonUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.fujionclinical.api.context.ContextItems;
 import org.fujionclinical.api.context.ContextManager;
 import org.fujionclinical.api.context.IContextSubscriber;
 import org.fujionclinical.api.context.ManagedContext;
@@ -44,23 +40,11 @@ public class AbstractPersonContext extends ManagedContext<Person> {
 
     private static final Log log = LogFactory.getLog(AbstractPersonContext.class);
 
-    private static final String CCOW_ID = "Id";
-
-    private static final String CCOW_MRN = CCOW_ID + ".MRN";
-
-    // protected static final String CCOW_MPI = CCOW_ID + ".MPI";
-
-    private static final String CCOW_GENDER = "Co.Sex";
-
-    private static final String CCOW_DOB = "Co.DateTimeOfBirth";
-
-    private static final String CCOW_NAM = "Co.PatientName"; // TODO: what about practitioner name?
-
     /**
      * Returns the managed practitioner context.
      *
      * @param contextClass The context class.
-     * @param <T> The context class.
+     * @param <T>          The context class.
      * @return Practitioner context.
      */
     @SuppressWarnings("unchecked")
@@ -121,39 +105,7 @@ public class AbstractPersonContext extends ManagedContext<Person> {
     protected AbstractPersonContext(
             String contextName,
             Class<? extends IContextSubscriber> subscriberType) {
-        super(contextName, subscriberType, null);
-    }
-
-    /**
-     * Creates a CCOW context from the specified person object.
-     */
-    @Override
-    public ContextItems toCCOWContext(Person person) {
-        setItem(CCOW_MRN, PersonUtils.hasMRN(person) ? PersonUtils.getMRN(person).getId() : null, "MRN");
-        setItem(CCOW_NAM, person.hasName() ? PersonNameParsers.get().toString(person.getName().get(0)) : null);
-        setItem(CCOW_GENDER, person.hasGender() ? person.getGender().getFirstConcept().getCode() : null);
-        setItem(CCOW_DOB, person.getBirthDate());
-        return contextItems;
-    }
-
-    /**
-     * Returns a person object based on the specified CCOW context.
-     */
-    @Override
-    public Person fromCCOWContext(ContextItems contextItems) {
-        Person person = new PersonImpl();
-        String id = contextItems.getItem(CCOW_ID);
-
-        if (id != null) {
-            person.setDefaultId(id);
-        }
-
-        person.setBirthDate(contextItems.getDate(CCOW_DOB));
-        person.setGender(PersonUtils.genderAsConceptReferenceSet(getItem(CCOW_GENDER)));
-        person.addName(PersonNameParsers.get().fromString(getItem(CCOW_NAM)));
-        String mrn = getItem(CCOW_MRN, "MRN");
-        PersonUtils.setMRN(person, mrn == null ? null : PersonUtils.createMRN(null, mrn));
-        return person;
+        this(contextName, subscriberType, null);
     }
 
     /**
