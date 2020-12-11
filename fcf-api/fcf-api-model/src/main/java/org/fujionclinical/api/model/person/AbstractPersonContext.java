@@ -27,6 +27,7 @@ package org.fujionclinical.api.model.person;
 
 import edu.utah.kmm.model.cool.foundation.entity.Person;
 import edu.utah.kmm.model.cool.foundation.entity.PersonImpl;
+import edu.utah.kmm.model.cool.util.CoolUtils;
 import edu.utah.kmm.model.cool.util.PersonNameParsers;
 import edu.utah.kmm.model.cool.util.PersonUtils;
 import org.apache.commons.logging.Log;
@@ -222,6 +223,13 @@ public class AbstractPersonContext extends ManagedContext<Person> {
     @Override
     public int getPriority() {
         return 10;
+    }
+
+    @Override
+    protected boolean isSameContext(
+            Person person1,
+            Person person2) {
+        return CoolUtils.areSame(person1, person2);
     }
 
 }

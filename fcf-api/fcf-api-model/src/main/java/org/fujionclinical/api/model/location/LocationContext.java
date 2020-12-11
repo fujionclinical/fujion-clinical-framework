@@ -26,6 +26,7 @@
 package org.fujionclinical.api.model.location;
 
 import edu.utah.kmm.model.cool.foundation.entity.Location;
+import edu.utah.kmm.model.cool.util.CoolUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujionclinical.api.context.ContextItems;
@@ -121,4 +122,12 @@ public class LocationContext extends ManagedContext<Location> {
     public int getPriority() {
         return 10;
     }
+
+    @Override
+    protected boolean isSameContext(
+            Location location1,
+            Location location2) {
+        return CoolUtils.areSame(location1, location2);
+    }
+
 }

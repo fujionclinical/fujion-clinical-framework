@@ -54,9 +54,10 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
     private static final int CONTEXT_CURRENT = 0;
     
     private static final int CONTEXT_PENDING = 1;
-    
+
+    @SuppressWarnings("unchecked")
     private final DomainClass[] domainObject = (DomainClass[]) new Object[2];
-    
+
     private final Class<? extends IContextSubscriber> subscriberType;
     
     private final String contextName;
@@ -143,7 +144,6 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
      * @param domainObject2 Second domain object for comparison.
      * @return True if the two objects represent the same context.
      */
-    //TODO: fix this?
     protected boolean isSameContext(DomainClass domainObject1, DomainClass domainObject2) {
         return Objects.equals(domainObject1, domainObject2);
     }

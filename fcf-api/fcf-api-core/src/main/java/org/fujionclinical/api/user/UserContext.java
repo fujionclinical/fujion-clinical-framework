@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.api.user;
 
+import edu.utah.kmm.model.cool.util.CoolUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujionclinical.api.context.ContextManager;
@@ -94,16 +95,23 @@ public class UserContext extends ManagedContext<User> {
     public UserContext(User user) {
         super(SUBJECT_NAME, IUserContextSubscriber.class, user);
     }
-    
+
     /**
      * Returns a priority value of 1000. Among concurrent context change transactions, a user
      * context change should generally occur last.
-     * 
+     *
      * @return Priority value for context manager.
      */
     @Override
     public int getPriority() {
         return 1000;
     }
-    
+
+    @Override
+    protected boolean isSameContext(
+            User user1,
+            User user2) {
+        return CoolUtils.areSame(user1, user2);
+    }
+
 }

@@ -28,6 +28,7 @@ package org.fujionclinical.api.model.condition;
 import edu.utah.kmm.model.cool.clinical.finding.Condition;
 import edu.utah.kmm.model.cool.common.MiscUtils;
 import edu.utah.kmm.model.cool.foundation.entity.Person;
+import edu.utah.kmm.model.cool.util.CoolUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujionclinical.api.context.*;
@@ -164,6 +165,13 @@ public class ConditionContext extends ManagedContext<Condition> {
     @Override
     public int getPriority() {
         return 10;
+    }
+
+    @Override
+    protected boolean isSameContext(
+            Condition condition1,
+            Condition condition2) {
+        return CoolUtils.areSame(condition1, condition2);
     }
 
 }

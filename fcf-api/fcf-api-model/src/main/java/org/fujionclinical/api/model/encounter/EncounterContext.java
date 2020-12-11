@@ -27,6 +27,7 @@ package org.fujionclinical.api.model.encounter;
 
 import edu.utah.kmm.model.cool.clinical.encounter.Encounter;
 import edu.utah.kmm.model.cool.foundation.entity.Person;
+import edu.utah.kmm.model.cool.util.CoolUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.common.MiscUtil;
@@ -164,6 +165,13 @@ public class EncounterContext extends ManagedContext<Encounter> {
     @Override
     public int getPriority() {
         return 10;
+    }
+
+    @Override
+    protected boolean isSameContext(
+            Encounter encounter1,
+            Encounter encounter2) {
+        return CoolUtils.areSame(encounter1, encounter2);
     }
 
 }
