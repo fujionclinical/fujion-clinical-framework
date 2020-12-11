@@ -101,6 +101,50 @@ public class ContextManager implements IContextManager, CCOWContextManager.ICCOW
     }
 
     /**
+     * Returns the shared context for the given class.
+     *
+     * @param contextClass The context class.
+     * @param <T>          The context class.
+     * @return The shared context.
+     */
+    @SuppressWarnings("unchecked")
+    public static <T extends ManagedContext<?>> T getSharedContext(Class<T> contextClass) {
+        return (T) ContextManager.getInstance().getSharedContext(contextClass.getName());
+    }
+
+    /**
+     * Returns the person in the current context.
+     *
+     * @param contextClass The context class.
+     * @param <S>          The context object type.
+     * @param <T>          The context class.
+     * @return Current context value (may be null).
+     */
+    public static <S, T extends ManagedContext<S>> S getCurrentValue(Class<T> contextClass) {
+        return getSharedContext(contextClass).getContextObject(false);
+    }
+
+    /**
+     * Change the value of the shared context.
+     *
+     * @param contextClass The context class.
+     * @param value        The new value.
+     * @param <S>          The context object type.
+     * @param <T>          The context class.
+     */
+    public static <S, T extends ManagedContext<S>> void changeContext(
+            Class<T> contextClass,
+            S value) {
+        T context = getSharedContext(contextClass);
+
+        try {
+            context.requestContextChange(value);
+        } catch (Exception e) {
+            log.error("Error during " + context.getContextName() + " context change.", e);
+        }
+    }
+
+    /**
      * Set the event manager instance.
      *
      * @param eventManager IEventManager

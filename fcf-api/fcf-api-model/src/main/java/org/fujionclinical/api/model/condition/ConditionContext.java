@@ -28,16 +28,18 @@ package org.fujionclinical.api.model.condition;
 import edu.utah.kmm.model.cool.clinical.finding.Condition;
 import edu.utah.kmm.model.cool.common.MiscUtils;
 import edu.utah.kmm.model.cool.foundation.entity.Person;
-import edu.utah.kmm.model.cool.util.CoolUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.fujionclinical.api.context.*;
+import org.fujionclinical.api.context.ContextManager;
+import org.fujionclinical.api.context.IContextSubscriber;
+import org.fujionclinical.api.context.ISurveyResponse;
+import org.fujionclinical.api.model.common.AbstractIdentifiableContext;
 import org.fujionclinical.api.model.patient.PatientContext;
 
 /**
  * Wrapper for shared condition context.
  */
-public class ConditionContext extends ManagedContext<Condition> {
+public class ConditionContext extends AbstractIdentifiableContext<Condition> {
 
     public interface IConditionContextSubscriber extends IContextSubscriber {
 
@@ -97,20 +99,7 @@ public class ConditionContext extends ManagedContext<Condition> {
      * @return Condition context.
      */
     public static ConditionContext getConditionContext() {
-        return (ConditionContext) ContextManager.getInstance().getSharedContext(ConditionContext.class.getName());
-    }
-
-    /**
-     * Request a condition context change.
-     *
-     * @param condition New condition.
-     */
-    public static void changeCondition(Condition condition) {
-        try {
-            getConditionContext().requestContextChange(condition);
-        } catch (Exception e) {
-            log.error("Error during condition context change.", e);
-        }
+        return ContextManager.getSharedContext(ConditionContext.class);
     }
 
     /**
@@ -119,7 +108,16 @@ public class ConditionContext extends ManagedContext<Condition> {
      * @return Condition object (may be null).
      */
     public static Condition getActiveCondition() {
-        return getConditionContext().getContextObject(false);
+        return ContextManager.getCurrentValue(ConditionContext.class);
+    }
+
+    /**
+     * Request a condition context change.
+     *
+     * @param condition New condition.
+     */
+    public static void changeCondition(Condition condition) {
+        ContextManager.changeContext(ConditionContext.class, condition);
     }
 
     /**
@@ -138,40 +136,6 @@ public class ConditionContext extends ManagedContext<Condition> {
         super(SUBJECT_NAME, IConditionContextSubscriber.class, condition);
         PatientContext.getPatientContext().addSubscriber(patientContextSubscriber);
         addSubscriber(conditionContextSubscriber);
-    }
-
-    /**
-     * Creates a CCOW context from the specified condition object.
-     */
-    @Override
-    protected ContextItems toCCOWContext(Condition condition) {
-        //TODO: contextItems.setItem(...);
-        return contextItems;
-    }
-
-    /**
-     * Returns a condition object based on the specified CCOW context.
-     */
-    @Override
-    protected Condition fromCCOWContext(ContextItems contextItems) {
-        return null;
-    }
-
-    /**
-     * Returns a priority value of 10.
-     *
-     * @return Priority value for context manager.
-     */
-    @Override
-    public int getPriority() {
-        return 10;
-    }
-
-    @Override
-    protected boolean isSameContext(
-            Condition condition1,
-            Condition condition2) {
-        return CoolUtils.areSame(condition1, condition2);
     }
 
 }

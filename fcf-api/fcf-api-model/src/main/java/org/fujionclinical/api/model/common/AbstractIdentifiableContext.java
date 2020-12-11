@@ -23,86 +23,43 @@
  *
  * #L%
  */
-package org.fujionclinical.api.model.person;
+package org.fujionclinical.api.model.common;
 
-import edu.utah.kmm.model.cool.foundation.entity.Person;
+import edu.utah.kmm.model.cool.foundation.core.Identifiable;
 import edu.utah.kmm.model.cool.util.CoolUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.fujionclinical.api.context.ContextManager;
 import org.fujionclinical.api.context.IContextSubscriber;
 import org.fujionclinical.api.context.ManagedContext;
 
 /**
- * Base context for shared person contexts.
+ * Base context for shared contexts of identifiable types.
  */
-public class AbstractPersonContext extends ManagedContext<Person> {
+public class AbstractIdentifiableContext<T extends Identifiable> extends ManagedContext<T> {
 
-    private static final Log log = LogFactory.getLog(AbstractPersonContext.class);
-
-    /**
-     * Returns the managed practitioner context.
-     *
-     * @param contextClass The context class.
-     * @param <T>          The context class.
-     * @return Practitioner context.
-     */
-    @SuppressWarnings("unchecked")
-    protected static <T extends AbstractPersonContext> T getPersonContext(Class<T> contextClass) {
-        return (T) ContextManager.getInstance().getSharedContext(contextClass.getName());
-    }
+    private static final Log log = LogFactory.getLog(AbstractIdentifiableContext.class);
 
     /**
-     * Returns the person in the current context.
+     * Create a shared context with a specified initial state.
      *
-     * @param contextClass The context class.
-     * @param <T> The context class.
-     * @return Person object (may be null).
-     */
-    protected static <T extends AbstractPersonContext> Person getActivePerson(Class<T> contextClass) {
-        return getPersonContext(contextClass).getContextObject(false);
-    }
-
-    /**
-     * Change the person in the shared context.
-     *
-     * @param person       The person.
-     * @param contextClass The context class.
-     * @param <T>          The context class.
-     */
-    protected static <T extends AbstractPersonContext> void changePerson(
-            Person person,
-            Class<T> contextClass) {
-        T personContext = getPersonContext(contextClass);
-
-        try {
-            personContext.requestContextChange(person);
-        } catch (Exception e) {
-            log.error("Error during " + personContext.getContextName() + " context change.", e);
-        }
-    }
-
-    /**
-     * Create a shared person context with a specified initial state.
-     *
-     * @param contextName The unique context name.
+     * @param contextName    The unique context name.
      * @param subscriberType The interface for context subscriptions.
-     * @param person The initial state.
+     * @param identifiable   The initial state.
      */
-    protected AbstractPersonContext(
+    protected AbstractIdentifiableContext(
             String contextName,
             Class<? extends IContextSubscriber> subscriberType,
-            Person person) {
-        super(contextName, subscriberType, person);
+            T identifiable) {
+        super(contextName, subscriberType, identifiable);
     }
 
     /**
-     * Create a shared person context with an initial null state.
+     * Create a shared context with an initial null state.
      *
-     * @param contextName The unique context name.
+     * @param contextName    The unique context name.
      * @param subscriberType The interface for context subscriptions.
      */
-    protected AbstractPersonContext(
+    protected AbstractIdentifiableContext(
             String contextName,
             Class<? extends IContextSubscriber> subscriberType) {
         this(contextName, subscriberType, null);
@@ -179,9 +136,9 @@ public class AbstractPersonContext extends ManagedContext<Person> {
 
     @Override
     protected boolean isSameContext(
-            Person person1,
-            Person person2) {
-        return CoolUtils.areSame(person1, person2);
+            Identifiable identifiable1,
+            Identifiable identifiable2) {
+        return CoolUtils.areSame(identifiable1, identifiable2);
     }
 
 }

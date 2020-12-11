@@ -23,7 +23,7 @@
  *
  * #L%
  */
-package org.fujionclinical.api.cool;
+package org.fujionclinical.api.model.common;
 
 import edu.utah.kmm.model.cool.core.datatype.Attachment;
 import edu.utah.kmm.model.cool.mediator.datasource.DataSource;

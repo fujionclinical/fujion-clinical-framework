@@ -121,10 +121,6 @@
 		
 		<bean class="org.fujionclinical.api.messaging.SimpleConsumerProducer" />
 
-		<!-- Data Source Configuration -->
-		<bean class="org.fujionclinical.api.cool.CoolUtil" factory-method="create">
-			<constructor-arg value="${org.fujionclinical.cool.datasource}" />
-		</bean>
 	</beans>
 
 	<beans profile="child">

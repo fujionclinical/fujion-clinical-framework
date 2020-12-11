@@ -27,25 +27,24 @@ package org.fujionclinical.api.model.encounter;
 
 import edu.utah.kmm.model.cool.clinical.encounter.Encounter;
 import edu.utah.kmm.model.cool.foundation.entity.Person;
-import edu.utah.kmm.model.cool.util.CoolUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.fujion.common.MiscUtil;
-import org.fujionclinical.api.context.*;
+import org.fujionclinical.api.context.ContextItems;
+import org.fujionclinical.api.context.ContextManager;
+import org.fujionclinical.api.context.IContextSubscriber;
+import org.fujionclinical.api.context.ISurveyResponse;
+import org.fujionclinical.api.model.common.AbstractIdentifiableContext;
 import org.fujionclinical.api.model.patient.PatientContext;
 
 /**
  * Wrapper for shared encounter context.
  */
-public class EncounterContext extends ManagedContext<Encounter> {
+public class EncounterContext extends AbstractIdentifiableContext<Encounter> {
 
     public interface EncounterContextSubscriber extends IContextSubscriber {
 
     }
 
     private static final String SUBJECT_NAME = "Encounter";
-
-    private static final Log log = LogFactory.getLog(EncounterContext.class);
 
     private boolean fromEncounter;
 
@@ -97,20 +96,7 @@ public class EncounterContext extends ManagedContext<Encounter> {
      * @return Encounter context.
      */
     public static EncounterContext getEncounterContext() {
-        return (EncounterContext) ContextManager.getInstance().getSharedContext(EncounterContext.class.getName());
-    }
-
-    /**
-     * Request a encounter context change.
-     *
-     * @param encounter New encounter.
-     */
-    public static void changeEncounter(Encounter encounter) {
-        try {
-            getEncounterContext().requestContextChange(encounter);
-        } catch (Exception e) {
-            log.error("Error during encounter context change.", e);
-        }
+        return ContextManager.getSharedContext(EncounterContext.class);
     }
 
     /**
@@ -119,7 +105,16 @@ public class EncounterContext extends ManagedContext<Encounter> {
      * @return Encounter object (may be null).
      */
     public static Encounter getActiveEncounter() {
-        return getEncounterContext().getContextObject(false);
+        return ContextManager.getCurrentValue(EncounterContext.class);
+    }
+
+    /**
+     * Request a encounter context change.
+     *
+     * @param encounter New encounter.
+     */
+    public static void changeEncounter(Encounter encounter) {
+        ContextManager.changeContext(EncounterContext.class, encounter);
     }
 
     /**
@@ -155,23 +150,6 @@ public class EncounterContext extends ManagedContext<Encounter> {
     @Override
     protected Encounter fromCCOWContext(ContextItems contextItems) {
         return null;
-    }
-
-    /**
-     * Returns a priority value of 10.
-     *
-     * @return Priority value for context manager.
-     */
-    @Override
-    public int getPriority() {
-        return 10;
-    }
-
-    @Override
-    protected boolean isSameContext(
-            Encounter encounter1,
-            Encounter encounter2) {
-        return CoolUtils.areSame(encounter1, encounter2);
     }
 
 }

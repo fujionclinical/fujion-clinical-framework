@@ -5,6 +5,16 @@
 		http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<beans profile="root">
+
+		<!-- Data Source Configuration -->
+
+		<bean class="org.fujionclinical.api.model.common.CoolUtil" factory-method="create">
+			<constructor-arg value="${org.fujionclinical.cool.datasource}" />
+		</bean>
+
+	</beans>
+
 	<beans profile="child">
 
 		<!-- Shared contexts -->

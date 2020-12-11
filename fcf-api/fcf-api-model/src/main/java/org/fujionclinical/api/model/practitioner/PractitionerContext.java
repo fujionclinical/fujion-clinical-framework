@@ -26,34 +26,17 @@
 package org.fujionclinical.api.model.practitioner;
 
 import edu.utah.kmm.model.cool.foundation.entity.Person;
+import org.fujionclinical.api.context.ContextManager;
 import org.fujionclinical.api.context.IContextSubscriber;
-import org.fujionclinical.api.model.person.AbstractPersonContext;
+import org.fujionclinical.api.model.common.AbstractIdentifiableContext;
 
 /**
  * Wrapper for shared practitioner context.
  */
-public class PractitionerContext extends AbstractPersonContext {
+public class PractitionerContext extends AbstractIdentifiableContext<Person> {
 
     public interface IPractitionerContextEvent extends IContextSubscriber {
 
-    }
-
-    /**
-     * Request a practitioner context change.
-     *
-     * @param practitioner New practitioner.
-     */
-    public static void changePractitioner(Person practitioner) {
-        changePerson(practitioner, PractitionerContext.class);
-    }
-
-    /**
-     * Returns the practitioner in the current context.
-     *
-     * @return Practitioner object (may be null).
-     */
-    public static Person getActivePractitioner() {
-        return getActivePerson(PractitionerContext.class);
     }
 
     /**
@@ -62,7 +45,25 @@ public class PractitionerContext extends AbstractPersonContext {
      * @return Practitioner context.
      */
     public static PractitionerContext getPractitionerContext() {
-        return getPersonContext((PractitionerContext.class));
+        return ContextManager.getSharedContext(PractitionerContext.class);
+    }
+
+    /**
+     * Returns the practitioner in the current context.
+     *
+     * @return Practitioner object (may be null).
+     */
+    public static Person getActivePractitioner() {
+        return ContextManager.getCurrentValue(PractitionerContext.class);
+    }
+
+    /**
+     * Request a practitioner context change.
+     *
+     * @param practitioner New practitioner.
+     */
+    public static void changePractitioner(Person practitioner) {
+        ContextManager.changeContext(PractitionerContext.class, practitioner);
     }
 
     /**

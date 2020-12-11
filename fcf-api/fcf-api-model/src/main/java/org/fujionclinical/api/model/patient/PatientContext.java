@@ -30,13 +30,14 @@ import edu.utah.kmm.model.cool.foundation.entity.PersonImpl;
 import edu.utah.kmm.model.cool.util.PersonNameParsers;
 import edu.utah.kmm.model.cool.util.PersonUtils;
 import org.fujionclinical.api.context.ContextItems;
+import org.fujionclinical.api.context.ContextManager;
 import org.fujionclinical.api.context.IContextSubscriber;
-import org.fujionclinical.api.model.person.AbstractPersonContext;
+import org.fujionclinical.api.model.common.AbstractIdentifiableContext;
 
 /**
  * Wrapper for shared patient context.
  */
-public class PatientContext extends AbstractPersonContext {
+public class PatientContext extends AbstractIdentifiableContext<Person> {
 
     public interface IPatientContextSubscriber extends IContextSubscriber {
 
@@ -57,10 +58,19 @@ public class PatientContext extends AbstractPersonContext {
     /**
      * Returns the managed patient context.
      *
-     * @return Person context.
+     * @return Patient context.
      */
     public static PatientContext getPatientContext() {
-        return getPersonContext(PatientContext.class);
+        return ContextManager.getSharedContext(PatientContext.class);
+    }
+
+    /**
+     * Returns the patient in the current context.
+     *
+     * @return Patient object (may be null).
+     */
+    public static Person getActivePatient() {
+        return ContextManager.getCurrentValue(PatientContext.class);
     }
 
     /**
@@ -69,16 +79,7 @@ public class PatientContext extends AbstractPersonContext {
      * @param patient New patient.
      */
     public static void changePatient(Person patient) {
-        changePerson(patient, PatientContext.class);
-    }
-
-    /**
-     * Returns the patient in the current context.
-     *
-     * @return Person object (may be null).
-     */
-    public static Person getActivePatient() {
-        return getActivePerson(PatientContext.class);
+        ContextManager.changeContext(PatientContext.class, patient);
     }
 
     /**
