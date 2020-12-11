@@ -27,8 +27,6 @@ package org.fujionclinical.api.cool.common;
 
 import edu.utah.kmm.model.cool.foundation.core.Identifiable;
 import edu.utah.kmm.model.cool.util.CoolUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.fujionclinical.api.context.IContextSubscriber;
 import org.fujionclinical.api.context.ManagedContext;
 
@@ -36,8 +34,6 @@ import org.fujionclinical.api.context.ManagedContext;
  * Base context for shared contexts of identifiable types.
  */
 public class AbstractIdentifiableContext<T extends Identifiable> extends ManagedContext<T> {
-
-    private static final Log log = LogFactory.getLog(AbstractIdentifiableContext.class);
 
     /**
      * Create a shared context with a specified initial state.
