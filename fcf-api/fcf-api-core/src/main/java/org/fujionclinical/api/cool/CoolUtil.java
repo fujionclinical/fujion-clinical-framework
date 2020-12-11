@@ -67,7 +67,7 @@ public class CoolUtil {
         }
 
         MimeContent mimeContent =
-                new MimeContent(attachment.hasContentType() ? attachment.getContentType().getText() : null, attachment.getUrl());
+                new MimeContent(attachment.hasContentType() ? attachment.getContentType().getCode() : null, attachment.getUrl());
         mimeContent.setEncodedData(attachment.getContent());
         return mimeContent;
     }
