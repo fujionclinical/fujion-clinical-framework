@@ -25,9 +25,6 @@
  */
 package org.fujionclinical.api.model.person;
 
-import edu.utah.kmm.model.cool.core.datatype.Identifier;
-import edu.utah.kmm.model.cool.core.datatype.IdentifierImpl;
-import edu.utah.kmm.model.cool.core.datatype.IdentifierUse;
 import edu.utah.kmm.model.cool.foundation.datatype.PersonName;
 import edu.utah.kmm.model.cool.foundation.entity.Person;
 import edu.utah.kmm.model.cool.foundation.role.Role;
@@ -39,8 +36,6 @@ import edu.utah.kmm.model.cool.util.PersonUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.query.expression.AbstractCriteria;
-
-import java.net.URI;
 
 /**
  * Base search criteria for person lookups.
@@ -155,15 +150,7 @@ public abstract class PersonQueryCriteria<T extends Role<Person>> extends Abstra
      * @param ssn SSN.
      */
     public void setSSN(String ssn) {
-        Identifier identifier = null;
-
-        if (ssn != null) {
-            identifier = new IdentifierImpl(URI.create("http://hl7.org/fhir/sid/us-ssn"), ssn);
-            identifier.setUse(IdentifierUse.OFFICIAL);
-            identifier.setType(null); // TODO: SSN_TYPE
-        }
-
-        setContextParam("identifiers", identifier);
+        setContextParam("identifiers", ssn == null ? null : PersonUtils.createSSN(ssn));
     }
 
     /**
