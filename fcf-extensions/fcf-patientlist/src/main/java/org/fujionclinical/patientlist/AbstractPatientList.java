@@ -33,7 +33,7 @@ import org.apache.commons.lang3.reflect.ConstructorUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.common.DateRange;
-import org.fujionclinical.api.model.common.CoolUtil;
+import org.fujionclinical.api.cool.common.CoolUtil;
 
 import java.util.*;
 

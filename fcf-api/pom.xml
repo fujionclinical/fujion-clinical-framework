@@ -13,7 +13,7 @@
 	
 	<modules>
 		<module>fcf-api-core</module>
-		<module>fcf-api-model</module>
+		<module>fcf-api-cool</module>
 		<module>fcf-api-mock</module>
 		<module>fcf-api-test</module>
     </modules>

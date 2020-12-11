@@ -27,7 +27,7 @@ package org.fujionclinical.patientselection.common;
 
 import org.fujion.event.EventUtil;
 import org.fujion.event.IEventListener;
-import org.fujionclinical.api.model.patient.PatientContext;
+import org.fujionclinical.api.cool.patient.PatientContext;
 import org.fujionclinical.shell.IShellStartup;
 import org.fujionclinical.shell.Shell;
 import org.fujionclinical.shell.ShellUtil;

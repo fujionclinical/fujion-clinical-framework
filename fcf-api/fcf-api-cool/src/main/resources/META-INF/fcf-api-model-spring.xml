@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<beans profile="root">
+
+		<!-- Data Source Configuration -->
+
+		<bean class="org.fujionclinical.api.cool.common.CoolUtil" factory-method="create">
+			<constructor-arg value="${org.fujionclinical.cool.datasource}" />
+		</bean>
+
+	</beans>
+
+	<beans profile="child">
+
+		<!-- Shared contexts -->
+
+		<bean id="patientContext" parent="managedContext"
+			  class="org.fujionclinical.api.cool.patient.PatientContext">
+		</bean>
+
+		<bean id="encounterContext" parent="managedContext"
+			  class="org.fujionclinical.api.cool.encounter.EncounterContext">
+		</bean>
+
+		<bean id="practitionerContext" parent="managedContext"
+			  class="org.fujionclinical.api.cool.practitioner.PractitionerContext">
+		</bean>
+
+	</beans>
+</beans>

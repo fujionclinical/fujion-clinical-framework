@@ -3,27 +3,28 @@
 	
 	<parent>
 		<groupId>org.fujionclinical</groupId>
-		<artifactId>fcf-extensions</artifactId>
+		<artifactId>fcf-api</artifactId>
 		<version>2.0.0-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>fcf-personphoto</artifactId>
-	<name>FCF Person Photo Component</name>
+	<artifactId>fcf-api-cool</artifactId>
+	<name>FCF Domain Model</name>
 	
 	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.fujionclinical</groupId>
-			<artifactId>fcf-api-cool</artifactId>
-			<version>${project.parent.version}</version>
-		</dependency>
         <dependency>
             <groupId>org.fujionclinical</groupId>
-            <artifactId>fcf-ui-core</artifactId>
+            <artifactId>fcf-api-core</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
-    </dependencies>
+		<dependency>
+			<groupId>edu.utah.kmm</groupId>
+			<artifactId>cool-impl-extensions</artifactId>
+			<version>${cool.version}</version>
+		</dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+	</dependencies>
+	
 </project>

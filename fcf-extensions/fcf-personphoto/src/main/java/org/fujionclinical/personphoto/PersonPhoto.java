@@ -6,7 +6,7 @@ import edu.utah.kmm.model.cool.util.PersonUtils;
 import org.fujion.ancillary.MimeContent;
 import org.fujion.common.LocalizedMessage;
 import org.fujion.component.Image;
-import org.fujionclinical.api.model.common.CoolUtil;
+import org.fujionclinical.api.cool.common.CoolUtil;
 import org.fujionclinical.ui.util.FCFUtil;
 
 public class PersonPhoto extends Image {

@@ -39,7 +39,7 @@ import org.fujion.component.Rows.Selectable;
 import org.fujion.component.Window.Mode;
 import org.fujion.event.*;
 import org.fujion.model.ListModel;
-import org.fujionclinical.api.model.patient.PatientContext;
+import org.fujionclinical.api.cool.patient.PatientContext;
 import org.fujionclinical.patientlist.*;
 import org.fujionclinical.patientselection.common.*;
 import org.fujionclinical.shell.ShellUtil;

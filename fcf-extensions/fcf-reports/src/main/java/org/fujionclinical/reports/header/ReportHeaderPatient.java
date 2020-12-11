@@ -33,7 +33,7 @@ import org.fujion.annotation.OnFailure;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.common.DateUtil;
 import org.fujion.component.Label;
-import org.fujionclinical.api.model.patient.PatientContext;
+import org.fujionclinical.api.cool.patient.PatientContext;
 import org.fujionclinical.ui.util.FCFUtil;
 
 import java.time.LocalDate;
