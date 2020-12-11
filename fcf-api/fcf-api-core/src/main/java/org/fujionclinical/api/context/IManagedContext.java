@@ -33,16 +33,16 @@ import org.fujionclinical.api.context.ISurveyResponse.ISurveyCallback;
  *
  * @param <DomainClass> This represents the domain class that is wrapped by this managed context.
  */
-public interface IManagedContext<DomainClass> extends ISharedContext<DomainClass> {
-    
+public interface IManagedContext<DomainClass> extends ISharedContext<DomainClass>, Comparable<IManagedContext<DomainClass>> {
+
     /**
      * Commits or rejects the pending context change.
      *
      * @param accept If true, the pending change is committed. If false, the pending change is
-     *            canceled.
+     *               canceled.
      */
     void commit(boolean accept);
-    
+
     /**
      * Returns the CCOW context that corresponds to the current or pending context.
      *
@@ -100,15 +100,27 @@ public interface IManagedContext<DomainClass> extends ISharedContext<DomainClass
      *            subscribers.
      */
     void notifySubscribers(boolean accept, boolean all);
-    
+
     /**
      * Survey all subscribers for context change response.
      *
-     * @param silent If true, subscribers should not request user interaction and all subscribers
-     *            will be surveyed regardless of their response. If false, a subscriber may request
-     *            user interaction and the first rejection response will terminate the survey.
+     * @param silent   If true, subscribers should not request user interaction and all subscribers
+     *                 will be surveyed regardless of their response. If false, a subscriber may request
+     *                 user interaction and the first rejection response will terminate the survey.
      * @param callback Callback to report subscriber responses to survey.
      */
-    void surveySubscribers(boolean silent, ISurveyCallback callback);
+    void surveySubscribers(
+            boolean silent,
+            ISurveyCallback callback);
+
+    /**
+     * Sort by priority.
+     *
+     * @param o Managed context to compare.
+     * @return The sort order.
+     */
+    default int compareTo(IManagedContext<DomainClass> o) {
+        return this == o ? 0 : o.getPriority() < getPriority() ? -1 : 1;
+    }
 
 }

@@ -47,12 +47,12 @@ import java.util.*;
  *
  * @param <DomainClass> Class of underlying domain object.
  */
-public class ManagedContext<DomainClass> implements Comparable<IManagedContext<DomainClass>>, IRegisterEvent, IManagedContext<DomainClass> {
-    
+public class ManagedContext<DomainClass> implements IRegisterEvent, IManagedContext<DomainClass> {
+
     private static final Log log = LogFactory.getLog(ManagedContext.class);
-    
+
     private static final int CONTEXT_CURRENT = 0;
-    
+
     private static final int CONTEXT_PENDING = 1;
 
     @SuppressWarnings("unchecked")
@@ -451,20 +451,6 @@ public class ManagedContext<DomainClass> implements Comparable<IManagedContext<D
     @Override
     public DomainClass getContextObject(boolean pending) {
         return domainObject[pending ? CONTEXT_PENDING : CONTEXT_CURRENT];
-    }
-    
-    // ************************************************************************************************
-    // * Comparable implementation
-    // ***********************************************************************************************/
-    
-    /**
-     * Compares by priority, with higher priorities collating first.
-     */
-    @Override
-    public int compareTo(IManagedContext<DomainClass> o) {
-        int pri1 = o.getPriority();
-        int pri2 = getPriority();
-        return this == o ? 0 : pri1 < pri2 ? -1 : 1;
     }
     
     // ************************************************************************************************
