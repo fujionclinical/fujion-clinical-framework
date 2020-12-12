@@ -23,7 +23,7 @@
  *
  * #L%
  */
-package org.fujionclinical.api.context;
+package org.fujionclinical.api.core;
 
 /**
  * Methods for serializing / deserializing an object.

@@ -43,7 +43,7 @@ public class PatientContext extends AbstractIdentifiableContext<Person> {
 
     }
 
-    private static final String CCOW_ID = "Id";
+    private static final String CCOW_ID = "Patient.Id";
 
     private static final String CCOW_MRN = CCOW_ID + ".MRN";
 
@@ -103,10 +103,10 @@ public class PatientContext extends AbstractIdentifiableContext<Person> {
      */
     @Override
     public ContextItems toCCOWContext(Person person) {
-        setItem(CCOW_MRN, PersonUtils.hasMRN(person) ? PersonUtils.getMRN(person).getId() : null, "MRN");
-        setItem(CCOW_NAM, person.hasName() ? PersonNameParsers.get().toString(person.getName().get(0)) : null);
-        setItem(CCOW_GENDER, person.hasGender() ? person.getGender().getFirstConcept().getCode() : null);
-        setItem(CCOW_DOB, person.getBirthDate());
+        contextItems.setItem(CCOW_MRN, PersonUtils.hasMRN(person) ? PersonUtils.getMRN(person).getId() : null, "MRN");
+        contextItems.setItem(CCOW_NAM, person.hasName() ? PersonNameParsers.get().toString(person.getName().get(0)) : null);
+        contextItems.setItem(CCOW_GENDER, person.hasGender() ? person.getGender().getFirstConcept().getCode() : null);
+        contextItems.setItem(CCOW_DOB, person.getBirthDate());
         return contextItems;
     }
 
@@ -123,9 +123,9 @@ public class PatientContext extends AbstractIdentifiableContext<Person> {
         }
 
         person.setBirthDate(contextItems.getDate(CCOW_DOB));
-        person.setGender(PersonUtils.genderAsConceptReferenceSet(getItem(CCOW_GENDER)));
-        person.addName(PersonNameParsers.get().fromString(getItem(CCOW_NAM)));
-        String mrn = getItem(CCOW_MRN, "MRN");
+        person.setGender(PersonUtils.genderAsConceptReferenceSet(contextItems.getItem(CCOW_GENDER)));
+        person.addName(PersonNameParsers.get().fromString(contextItems.getItem(CCOW_NAM)));
+        String mrn = contextItems.getItem(CCOW_MRN, "MRN");
         PersonUtils.setMRN(person, mrn == null ? null : PersonUtils.createMRN(null, mrn));
         return person;
     }

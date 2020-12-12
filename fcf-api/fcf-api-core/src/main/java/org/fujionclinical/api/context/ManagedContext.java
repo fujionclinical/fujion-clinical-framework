@@ -39,24 +39,16 @@ import org.fujionclinical.api.event.IEventSubscriber;
 import java.util.*;
 
 /**
- * Base class for creating context objects. Descendant classes wrap domain objects such as patient
- * or user that represent a shared context for other objects to reference. By implementing the
- * IManagedContext interface, the management of this shared context is delegated to the
- * ContextManager class which orchestrates polling and notifying subscribers when changes in the
- * shared context occur.
+ * Base class for creating managed contexts. Descendant classes wrap contexts such as patient
+ * or user that are shared across an application session. By implementing the IManagedContext 
+ * interface, the management of this shared context is delegated to the context manager 
+ * which orchestrates the polling and notification of subscribers when changes occur.
  *
- * @param <DomainClass> Class of underlying domain object.
+ * @param <T> Class of the wrapped context object.
  */
-public class ManagedContext<DomainClass> implements IRegisterEvent, IManagedContext<DomainClass> {
+public abstract class ManagedContext<T> implements IRegisterEvent, IManagedContext<T> {
 
     private static final Log log = LogFactory.getLog(ManagedContext.class);
-
-    private static final int CONTEXT_CURRENT = 0;
-
-    private static final int CONTEXT_PENDING = 1;
-
-    @SuppressWarnings("unchecked")
-    private final DomainClass[] domainObject = (DomainClass[]) new Object[2];
 
     private final Class<? extends IContextSubscriber> subscriberType;
     
@@ -75,7 +67,11 @@ public class ManagedContext<DomainClass> implements IRegisterEvent, IManagedCont
     protected AppFramework appFramework;
     
     protected final ContextItems contextItems = new ContextItems();
-    
+
+    private T pendingContext;
+
+    private T currentContext;
+
     /**
      * Every managed context must specify a unique context name and the context change event
      * interface it supports.
@@ -95,7 +91,7 @@ public class ManagedContext<DomainClass> implements IRegisterEvent, IManagedCont
      * @param subscriberType The type of context subscriber supported by this managed context.
      * @param initialContext The initial context state. May be null.
      */
-    protected ManagedContext(String contextName, Class<? extends IContextSubscriber> subscriberType, DomainClass initialContext) {
+    protected ManagedContext(String contextName, Class<? extends IContextSubscriber> subscriberType, T initialContext) {
         this.contextName = contextName;
         this.subscriberType = subscriberType;
         setPending(initialContext);
@@ -103,13 +99,13 @@ public class ManagedContext<DomainClass> implements IRegisterEvent, IManagedCont
     }
     
     /**
-     * Extracts and returns the CCOW context from the specified domain object. Each subclass should
+     * Extracts and returns the CCOW context from the specified context object. Each subclass should
      * override this and supply their own implementation.
      *
-     * @param domainObject The domain object.
-     * @return Context items extracted from the domain object.
+     * @param contextObject The context object.
+     * @return Context items extracted from the context object.
      */
-    protected ContextItems toCCOWContext(DomainClass domainObject) {
+    protected ContextItems toCCOWContext(T contextObject) {
         return contextItems;
     }
     
@@ -118,34 +114,34 @@ public class ManagedContext<DomainClass> implements IRegisterEvent, IManagedCont
      * this and supply their own implementation.
      *
      * @param contextItems Map containing CCOW-compliant context settings.
-     * @return Instance of the domain object that matches the CCOW context. Return null if this is
+     * @return Instance of the context object that matches the CCOW context. Return null if this is
      *         not supported or the CCOW context is not valid for this context object.
      */
-    protected DomainClass fromCCOWContext(ContextItems contextItems) {
+    protected T fromCCOWContext(ContextItems contextItems) {
         return null;
     }
     
     /**
-     * Sets the pending state to the specified domain object.
+     * Sets the pending state to the specified context object.
      *
-     * @param domainObject The domain object.
+     * @param contextObject The context object.
      */
-    protected void setPending(DomainClass domainObject) {
-        this.domainObject[CONTEXT_PENDING] = domainObject;
+    protected void setPending(T contextObject) {
+        pendingContext = contextObject;
         isPending = true;
     }
     
     /**
-     * Compares whether two domain objects are the same. This is used to determine whether a context
+     * Compares whether two context objects are the same. This is used to determine whether a context
      * change request really represents a different context. It may be overridden if the default
      * implementation is inadequate.
      *
-     * @param domainObject1 First domain object for comparison.
-     * @param domainObject2 Second domain object for comparison.
+     * @param contextObject1 First context object for comparison.
+     * @param contextObject2 Second context object for comparison.
      * @return True if the two objects represent the same context.
      */
-    protected boolean isSameContext(DomainClass domainObject1, DomainClass domainObject2) {
-        return Objects.equals(domainObject1, domainObject2);
+    protected boolean isSameContext(T contextObject1, T contextObject2) {
+        return Objects.equals(contextObject1, contextObject2);
     }
     
     /**
@@ -185,10 +181,10 @@ public class ManagedContext<DomainClass> implements IRegisterEvent, IManagedCont
     @Override
     public void commit(boolean accept) {
         if (accept) {
-            domainObject[CONTEXT_CURRENT] = domainObject[CONTEXT_PENDING];
+            currentContext = pendingContext;
         }
         
-        domainObject[CONTEXT_PENDING] = null;
+        pendingContext = null;
         isPending = false;
     }
     
@@ -198,8 +194,8 @@ public class ManagedContext<DomainClass> implements IRegisterEvent, IManagedCont
     @Override
     public ContextItems getContextItems(boolean pending) {
         contextItems.clear();
-        DomainClass domainObject = getContextObject(pending);
-        return domainObject == null ? contextItems : toCCOWContext(domainObject);
+        T contextObject = getContextObject(pending);
+        return contextObject == null ? contextItems : toCCOWContext(contextObject);
     }
     
     /**
@@ -247,13 +243,13 @@ public class ManagedContext<DomainClass> implements IRegisterEvent, IManagedCont
      */
     @Override
     public boolean setContextItems(ContextItems contextItems) {
-        DomainClass domainObject = fromCCOWContext(contextItems);
+        T contextObject = fromCCOWContext(contextItems);
         
-        if (domainObject == null) {
+        if (contextObject == null) {
             return false;
         }
         
-        setPending(domainObject);
+        setPending(contextObject);
         return true;
     }
     
@@ -413,12 +409,12 @@ public class ManagedContext<DomainClass> implements IRegisterEvent, IManagedCont
     }
 
     @Override
-    public void addListener(IEventSubscriber<DomainClass> listener) {
+    public void addListener(IEventSubscriber<T> listener) {
         eventManager.subscribe(getEventName(), listener);
     }
     
     @Override
-    public void removeListener(IEventSubscriber<DomainClass> listener) {
+    public void removeListener(IEventSubscriber<T> listener) {
         eventManager.unsubscribe(getEventName(), listener);
     }
     
@@ -430,7 +426,7 @@ public class ManagedContext<DomainClass> implements IRegisterEvent, IManagedCont
      * @see org.fujionclinical.api.context.ISharedContext#requestContextChange(Object)
      */
     @Override
-    public void requestContextChange(DomainClass newContextObject) throws ContextException {
+    public void requestContextChange(T newContextObject) throws ContextException {
         if (isSameContext(newContextObject, getContextObject(false))) {
             return;
         }
@@ -440,7 +436,7 @@ public class ManagedContext<DomainClass> implements IRegisterEvent, IManagedCont
         }
         
         contextManager.localChangeBegin(this);
-        domainObject[CONTEXT_PENDING] = newContextObject;
+        pendingContext = newContextObject;
         isPending = true;
         contextManager.localChangeEnd(this, null);
     }
@@ -449,8 +445,8 @@ public class ManagedContext<DomainClass> implements IRegisterEvent, IManagedCont
      * @see org.fujionclinical.api.context.ISharedContext#getContextObject(boolean)
      */
     @Override
-    public DomainClass getContextObject(boolean pending) {
-        return domainObject[pending ? CONTEXT_PENDING : CONTEXT_CURRENT];
+    public T getContextObject(boolean pending) {
+        return pending ? pendingContext : currentContext;
     }
     
     // ************************************************************************************************

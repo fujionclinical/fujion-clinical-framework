@@ -28,30 +28,30 @@ package org.fujionclinical.api.context;
 import org.fujionclinical.api.event.IEventSubscriber;
 
 /**
- * Every managed context must implement this interface to permit access to the wrapped domain
- * object.
+ * Every managed context must implement this interface to permit access to the wrapped
+ * context object.
  *
- * @param <DomainClass> This represents the domain class that is wrapped by this managed context.
+ * @param <T> The class of the context object that is wrapped by this managed context.
  */
-public interface ISharedContext<DomainClass> {
+public interface ISharedContext<T> {
     
     /**
-     * Returns the underlying domain object associated with the current or pending context.
+     * Returns the underlying context object associated with the current or pending context.
      *
-     * @param pending If true, the domain object associated with the pending context is returned. If
-     *            false, the domain object associated with the current context is returned.
+     * @param pending If true, the context object associated with the pending context is returned. If
+     *            false, the context object associated with the current context is returned.
      * @return Domain object in the specified context.
      */
-    DomainClass getContextObject(boolean pending);
+    T getContextObject(boolean pending);
     
     /**
-     * Sets the specified domain object into the pending context and invokes the context change
+     * Sets the specified context object into the pending context and invokes the context change
      * sequence.
      *
-     * @param newContextObject Domain object
+     * @param newContextObject New context object
      * @throws ContextException Context exception.
      */
-    void requestContextChange(DomainClass newContextObject) throws ContextException;
+    void requestContextChange(T newContextObject) throws ContextException;
     
     /**
      * Adds a context change subscriber to the subscription list for this context.
@@ -88,13 +88,13 @@ public interface ISharedContext<DomainClass> {
      *
      * @param listener The listener.
      */
-    void addListener(IEventSubscriber<DomainClass> listener);
+    void addListener(IEventSubscriber<T> listener);
     
     /**
      * Removes a listener for context change events.
      *
      * @param listener The listener.
      */
-    void removeListener(IEventSubscriber<DomainClass> listener);
+    void removeListener(IEventSubscriber<T> listener);
 
 }

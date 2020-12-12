@@ -26,8 +26,7 @@
 package org.fujionclinical.api.context;
 
 /**
- * Base interface for participating in context changes. All context objects should declare
- * a descendant of this interface.
+ * Base interface for participation in context changes.
  */
 public interface IContextSubscriber {
     

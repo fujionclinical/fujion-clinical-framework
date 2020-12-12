@@ -84,13 +84,13 @@ public class FrameworkCheckedException extends NestedCheckedException implements
             return false;
         }
         
-        FrameworkCheckedException otherBe = (FrameworkCheckedException) other;
-        return getMessage().equals(otherBe.getMessage()) && Objects.equals(getCause(), otherBe.getCause());
+        FrameworkCheckedException checked = (FrameworkCheckedException) other;
+        return Objects.equals(getMessage(), checked.getMessage()) && Objects.equals(getCause(), checked.getCause());
     }
     
     @Override
     public final int hashCode() {
-        return getMessage().hashCode();
+        return getMessage() == null ? 0 : getMessage().hashCode();
     }
     
     public final String getErrorCode() {

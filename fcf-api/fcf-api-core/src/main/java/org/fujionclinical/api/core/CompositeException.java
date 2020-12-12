@@ -68,13 +68,10 @@ public class CompositeException extends RuntimeException {
      * @return True if the exception class is present.
      */
     public boolean hasException(Class<? extends Throwable> type) {
-        for (Throwable exception : exceptions) {
-            if (type.isInstance(exception)) {
-                return true;
-            }
-        }
-        
-        return false;
+        return exceptions.stream()
+                .filter(type::isInstance)
+                .findAny()
+                .orElse(null) != null;
     }
     
     /**

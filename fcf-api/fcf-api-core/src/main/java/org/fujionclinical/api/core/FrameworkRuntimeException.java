@@ -97,8 +97,8 @@ public class FrameworkRuntimeException extends NestedRuntimeException implements
             return false;
         }
 
-        FrameworkRuntimeException otherBe = (FrameworkRuntimeException) other;
-        return getMessage().equals(otherBe.getMessage()) && Objects.equals(getCause(), otherBe.getCause());
+        FrameworkRuntimeException otherException = (FrameworkRuntimeException) other;
+        return Objects.equals(getMessage(), otherException.getMessage()) && Objects.equals(getCause(), otherException.getCause());
     }
 
     /**
@@ -106,7 +106,7 @@ public class FrameworkRuntimeException extends NestedRuntimeException implements
      */
     @Override
     public final int hashCode() {
-        return getMessage().hashCode();
+        return getMessage() == null ? 0 : getMessage().hashCode();
     }
 
     public String getErrorCode() {

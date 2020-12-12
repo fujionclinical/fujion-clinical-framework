@@ -26,6 +26,7 @@
 package org.fujionclinical.api.context;
 
 import org.fujion.common.DateUtil;
+import org.fujionclinical.api.core.ISerializer;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

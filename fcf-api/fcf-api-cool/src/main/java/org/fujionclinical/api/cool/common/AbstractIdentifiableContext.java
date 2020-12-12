@@ -33,7 +33,7 @@ import org.fujionclinical.api.context.ManagedContext;
 /**
  * Base context for shared contexts of identifiable types.
  */
-public class AbstractIdentifiableContext<T extends Identifiable> extends ManagedContext<T> {
+public abstract class AbstractIdentifiableContext<T extends Identifiable> extends ManagedContext<T> {
 
     /**
      * Create a shared context with a specified initial state.
@@ -58,66 +58,7 @@ public class AbstractIdentifiableContext<T extends Identifiable> extends Managed
     protected AbstractIdentifiableContext(
             String contextName,
             Class<? extends IContextSubscriber> subscriberType) {
-        this(contextName, subscriberType, null);
-    }
-
-    /**
-     * Get a context item.
-     *
-     * @param itemName The item name.
-     * @return The item value.
-     */
-    protected String getItem(String itemName) {
-        return contextItems.getItem(qualifyItemName(itemName));
-    }
-
-    /**
-     * Get a context item.
-     *
-     * @param itemName  The item name.
-     * @param qualifier The item qualifier.
-     * @return The item value.
-     */
-    protected String getItem(
-            String itemName,
-            String qualifier) {
-        return contextItems.getItem(qualifyItemName(itemName), qualifier);
-    }
-
-    /**
-     * Set a context item.
-     *
-     * @param itemName The item name.
-     * @param value    The item value.
-     */
-    protected void setItem(
-            String itemName,
-            Object value) {
-        contextItems.setItem(qualifyItemName(itemName), value);
-    }
-
-    /**
-     * Set a context item.
-     *
-     * @param itemName  The item name.
-     * @param value     The item value.
-     * @param qualifier The item qualifier.
-     */
-    protected void setItem(
-            String itemName,
-            String value,
-            String qualifier) {
-        contextItems.setItem(qualifyItemName(itemName), value, qualifier);
-    }
-
-    /**
-     * Prepends the subject name (i.e., the context name) to the item name.
-     *
-     * @param itemName The item name.
-     * @return The qualified item name.
-     */
-    private String qualifyItemName(String itemName) {
-        return getContextName() + "." + itemName;
+        super(contextName, subscriberType);
     }
 
     /**

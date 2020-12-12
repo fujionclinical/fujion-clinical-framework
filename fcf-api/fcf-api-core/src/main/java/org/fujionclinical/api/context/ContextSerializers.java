@@ -27,6 +27,7 @@ package org.fujionclinical.api.context;
 
 import org.fujion.common.AbstractRegistry;
 import org.fujion.common.RegistryMap.DuplicateAction;
+import org.fujionclinical.api.core.ISerializer;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.DestructionAwareBeanPostProcessor;
 

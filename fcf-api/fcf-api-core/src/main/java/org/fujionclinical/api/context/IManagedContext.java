@@ -28,12 +28,12 @@ package org.fujionclinical.api.context;
 import org.fujionclinical.api.context.ISurveyResponse.ISurveyCallback;
 
 /**
- * Every context object must implement this interface. The context manager uses this interface to
+ * Every managed context must implement this interface. The context manager uses this interface to
  * manage context changes.
  *
- * @param <DomainClass> This represents the domain class that is wrapped by this managed context.
+ * @param <T> The class of the context object wrapped by this managed context.
  */
-public interface IManagedContext<DomainClass> extends ISharedContext<DomainClass>, Comparable<IManagedContext<DomainClass>> {
+public interface IManagedContext<T> extends ISharedContext<T>, Comparable<IManagedContext<?>> {
 
     /**
      * Commits or rejects the pending context change.
@@ -105,8 +105,8 @@ public interface IManagedContext<DomainClass> extends ISharedContext<DomainClass
      * Survey all subscribers for context change response.
      *
      * @param silent   If true, subscribers should not request user interaction and all subscribers
-     *                 will be surveyed regardless of their response. If false, a subscriber may request
-     *                 user interaction and the first rejection response will terminate the survey.
+     *                 will be surveyed. If false, a subscriber may request user interaction and the
+     *                 first rejection response will terminate the survey.
      * @param callback Callback to report subscriber responses to survey.
      */
     void surveySubscribers(
@@ -114,12 +114,12 @@ public interface IManagedContext<DomainClass> extends ISharedContext<DomainClass
             ISurveyCallback callback);
 
     /**
-     * Sort by priority.
+     * Sort managed contexts by priority.
      *
      * @param o Managed context to compare.
      * @return The sort order.
      */
-    default int compareTo(IManagedContext<DomainClass> o) {
+    default int compareTo(IManagedContext<?> o) {
         return this == o ? 0 : o.getPriority() < getPriority() ? -1 : 1;
     }
 

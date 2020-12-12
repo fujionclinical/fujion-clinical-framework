@@ -27,7 +27,7 @@ package org.fujionclinical.api.cool.person;
 
 import edu.utah.kmm.model.cool.foundation.datatype.PersonName;
 import edu.utah.kmm.model.cool.foundation.datatype.PersonNameUse;
-import org.fujionclinical.api.context.ISerializer;
+import org.fujionclinical.api.core.ISerializer;
 
 import java.util.Arrays;
 import java.util.List;
