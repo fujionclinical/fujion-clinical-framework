@@ -27,6 +27,7 @@ package org.fujionclinical.shell.layout;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.fujion.client.ExecutionContext;
+import org.fujion.common.Assert;
 import org.fujion.common.MiscUtil;
 import org.fujion.common.Version;
 import org.fujion.common.XMLUtil;
@@ -37,7 +38,6 @@ import org.fujionclinical.shell.layout.LayoutElement.LayoutRoot;
 import org.fujionclinical.shell.plugins.PluginDefinition;
 import org.fujionclinical.shell.plugins.PluginRegistry;
 import org.fujionclinical.shell.property.PropertyInfo;
-import org.springframework.util.Assert;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -265,12 +265,10 @@ public class LayoutParser {
      *
      * @param node The DOM node.
      * @param parent The parent layout element.
-     * @return The newly created layout element.
      */
-    private LayoutElement parseElement(Element node, LayoutElement parent) {
+    private void parseElement(Element node, LayoutElement parent) {
         LayoutElement layoutElement = newLayoutElement(node, parent, null);
         parseChildren(node, layoutElement, Tag.ELEMENT, Tag.TRIGGER);
-        return layoutElement;
     }
 
     /**
@@ -347,7 +345,7 @@ public class LayoutParser {
             error = "Unrecognized tag '%s' in layout";
         }
 
-        throw new IllegalArgumentException(getInvalidTagError(error, name, tags));
+        return Assert.fail(getInvalidTagError(error, name, tags));
     }
 
     private String getInvalidTagError(String message, String tagName, Tag... tags) {

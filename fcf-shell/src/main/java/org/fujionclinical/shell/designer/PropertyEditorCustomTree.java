@@ -29,6 +29,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
+import org.fujion.common.Assert;
 import org.fujion.component.*;
 import org.fujion.event.*;
 import org.fujionclinical.shell.Constants;
@@ -38,7 +39,6 @@ import org.fujionclinical.shell.plugins.PluginDefinition;
 import org.fujionclinical.shell.property.PropertyInfo;
 import org.fujionclinical.ui.util.TreeUtil;
 import org.springframework.beans.BeanUtils;
-import org.springframework.util.Assert;
 
 import java.beans.PropertyDescriptor;
 import java.util.ArrayList;

@@ -33,7 +33,7 @@ import edu.utah.kmm.model.cool.mediator.expression.Expression;
 import edu.utah.kmm.model.cool.mediator.expression.ExpressionParser;
 import edu.utah.kmm.model.cool.mediator.query.QueryContext;
 import edu.utah.kmm.model.cool.mediator.query.QueryContextImpl;
-import org.springframework.util.Assert;
+import org.fujion.common.Assert;
 
 /**
  * Controller for displaying logical model resources in a columnar format.

@@ -31,11 +31,11 @@ import org.fujion.ancillary.INamespace;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.OnFailure;
 import org.fujion.annotation.WiredComponent;
+import org.fujion.common.Assert;
 import org.fujion.common.DateUtil;
 import org.fujion.component.*;
 import org.fujion.event.Event;
 import org.fujionclinical.ui.util.DateTimeUtil;
-import org.springframework.util.Assert;
 
 import java.util.Date;
 

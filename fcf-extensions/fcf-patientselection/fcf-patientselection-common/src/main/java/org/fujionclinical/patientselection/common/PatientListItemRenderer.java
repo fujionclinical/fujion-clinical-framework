@@ -29,6 +29,7 @@ import edu.utah.kmm.model.cool.core.datatype.Identifier;
 import edu.utah.kmm.model.cool.foundation.entity.Person;
 import edu.utah.kmm.model.cool.util.PersonUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.fujion.common.Assert;
 import org.fujion.component.Cell;
 import org.fujion.component.Columns;
 import org.fujion.component.Grid;
@@ -71,7 +72,7 @@ public class PatientListItemRenderer implements IComponentRenderer<Row, Object> 
         } else if (object instanceof Person) {
             patientListItem = new PatientListItem((Person) object, null);
         } else {
-            throw new IllegalArgumentException("Invalid object type: " + object);
+            return Assert.fail("Invalid object type: %s", object);
         }
 
         Row row = new Row();

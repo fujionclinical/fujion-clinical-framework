@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.shell.property;
 
+import org.fujion.common.Assert;
 import org.fujion.common.MiscUtil;
 import org.fujionclinical.api.spring.SpringUtil;
 
@@ -164,17 +165,17 @@ public abstract class PropertySerializer<T> {
      * Serializer class for iterables.
      */
     @SuppressWarnings("rawtypes")
-    public static class IterableSerializer extends PropertySerializer<Iterable>implements Iterable {
-        
+    public static class IterableSerializer extends PropertySerializer<Iterable> implements Iterable {
+
         private final Class<Iterable> iterClass;
-        
+
         private final String beanId;
-        
+
         public IterableSerializer(String beanId) {
             this.iterClass = null;
             this.beanId = beanId;
         }
-        
+
         public IterableSerializer(Class<Iterable> iterClass) {
             this.iterClass = iterClass;
             this.beanId = null;
@@ -187,8 +188,8 @@ public abstract class PropertySerializer<T> {
                     return member;
                 }
             }
-            
-            throw new IllegalArgumentException(value);
+
+            return Assert.fail("Unable to deserialize value: %s", value);
         }
         
         public Iterable getIterator() {

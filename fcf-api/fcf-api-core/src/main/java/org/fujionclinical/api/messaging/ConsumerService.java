@@ -25,11 +25,11 @@
  */
 package org.fujionclinical.api.messaging;
 
+import org.fujion.common.Assert;
 import org.fujionclinical.api.messaging.IMessageConsumer.IMessageCallback;
 import org.fujionclinical.api.messaging.Recipient.RecipientType;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.DestructionAwareBeanPostProcessor;
-import org.springframework.util.Assert;
 
 import javax.cache.Cache;
 import javax.cache.CacheManager;

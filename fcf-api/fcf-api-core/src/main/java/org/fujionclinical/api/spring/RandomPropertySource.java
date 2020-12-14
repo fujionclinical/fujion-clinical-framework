@@ -27,6 +27,7 @@ package org.fujionclinical.api.spring;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
+import org.fujion.common.Assert;
 import org.springframework.core.env.PropertySource;
 
 import java.util.UUID;
@@ -68,7 +69,7 @@ public class RandomPropertySource extends PropertySource<Object> {
                     return "";
             }
         } catch (Exception e) {
-            throw new IllegalArgumentException("Unknown random property type: " + name);
+            return Assert.fail("Unknown random property type '%s'", name);
         }
     }
     

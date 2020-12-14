@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.core;
 
-import org.springframework.util.Assert;
+import org.fujion.common.Assert;
 
 import java.util.Map;
 

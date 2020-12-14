@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.ui.command;
 
+import org.fujion.common.Assert;
 import org.fujion.component.BaseComponent;
 import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Div;
@@ -34,7 +35,6 @@ import org.fujion.event.IEventListener;
 import org.fujion.event.KeyEvent;
 import org.fujionclinical.ui.action.ActionUtil;
 import org.fujionclinical.ui.action.IAction;
-import org.springframework.util.Assert;
 
 import java.util.HashSet;
 import java.util.Set;

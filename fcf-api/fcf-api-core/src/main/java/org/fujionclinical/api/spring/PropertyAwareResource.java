@@ -157,7 +157,7 @@ public class PropertyAwareResource implements Resource, ApplicationContextAware 
             
             transformedResource = !transformed ? originalResource : createResource(sb.toString().getBytes());
         } catch (IOException e) {
-            throw MiscUtil.toUnchecked(e);
+            MiscUtil.throwUnchecked(e);
         }
     }
 

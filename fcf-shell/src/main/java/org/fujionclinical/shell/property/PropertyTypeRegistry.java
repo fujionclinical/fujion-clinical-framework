@@ -26,8 +26,8 @@
 package org.fujionclinical.shell.property;
 
 import org.fujion.common.AbstractRegistry;
+import org.fujion.common.Assert;
 import org.fujionclinical.shell.designer.*;
-import org.springframework.util.Assert;
 
 /**
  * Registry of all supported property types.
@@ -129,7 +129,7 @@ public class PropertyTypeRegistry extends AbstractRegistry<String, PropertyType>
                         : Iterable.class.isAssignableFrom(clazz)
                                 ? new PropertySerializer.IterableSerializer((Class<Iterable>) clazz) : null;
             } catch (ClassNotFoundException e) {
-                throw new IllegalArgumentException(e);
+                return Assert.fail("Class '%s' could not be found", pcs[2]);
             }
         }
 

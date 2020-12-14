@@ -26,10 +26,10 @@
 package org.fujionclinical.api.security;
 
 import org.apache.commons.lang3.RandomUtils;
+import org.fujion.common.Assert;
 import org.fujionclinical.api.spring.SpringUtil;
 import org.fujionclinical.api.user.User;
 import org.springframework.util.AntPathMatcher;
-import org.springframework.util.Assert;
 
 import java.util.Map;
 
@@ -171,17 +171,17 @@ public class SecurityUtil {
      * @return A random password.
      */
     public static String generateRandomPassword(int minLength, int maxLength, String[] constraints) {
-        if (constraints == null || constraints.length == 0 || minLength <= 0 || maxLength < minLength) {
-            throw new IllegalArgumentException();
-        }
-        
+        int numConstraints = constraints == null ? 0 : constraints.length;
+        Assert.isTrue(numConstraints > 0, "You must specify at least one constraint.");
+        Assert.isTrue(minLength > 0, "Minimum length must be greater than 0.");
+        Assert.isTrue(maxLength >= minLength, "Maximum length must be greater than or equal to minimum length.");
         int pwdLength = RandomUtils.nextInt(0, maxLength - minLength + 1) + minLength;
-        int[] min = new int[constraints.length];
-        String[] chars = new String[constraints.length];
+        int[] min = new int[numConstraints];
+        String[] chars = new String[numConstraints];
         char[] pwd = new char[pwdLength];
         int totalRequired = 0;
         
-        for (int i = 0; i < constraints.length; i++) {
+        for (int i = 0; i < numConstraints; i++) {
             String[] pcs = constraints[i].split(",", 2);
             min[i] = Integer.parseInt(pcs[0]);
             chars[i] = pcs[1];

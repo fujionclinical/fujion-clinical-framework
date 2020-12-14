@@ -27,7 +27,7 @@ package org.fujionclinical.api.logging;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.util.Assert;
+import org.fujion.common.Assert;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -25,11 +25,11 @@
  */
 package org.fujionclinical.ui.command;
 
+import org.fujion.common.Assert;
 import org.fujion.component.BaseUIComponent;
 import org.fujion.event.Event;
 import org.fujion.event.KeyEvent;
 import org.fujionclinical.api.spring.SpringUtil;
-import org.springframework.util.Assert;
 
 import java.util.HashMap;
 import java.util.Iterator;

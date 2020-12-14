@@ -25,13 +25,13 @@
  */
 package org.fujionclinical.api.spring;
 
+import org.fujion.common.Assert;
 import org.fujion.common.MiscUtil;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.support.DefaultConversionService;
-import org.springframework.util.Assert;
 
 import java.lang.annotation.*;
 import java.lang.reflect.Field;

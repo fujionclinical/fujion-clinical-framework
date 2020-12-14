@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.ui.action;
 
+import org.fujion.common.Assert;
 import org.fujionclinical.api.spring.BeanRegistry;
 
 /**
@@ -52,7 +53,7 @@ public class ActionTypeRegistry extends BeanRegistry<String, IActionType> {
             }
         }
 
-        throw new IllegalArgumentException("Script type was not recognized: " + script);
+        return Assert.fail("Script type '%s' was not recognized", script);
     }
 
     private ActionTypeRegistry() {

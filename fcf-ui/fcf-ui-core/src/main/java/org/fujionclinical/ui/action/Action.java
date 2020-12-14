@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.ui.action;
 
+import org.fujion.common.Assert;
 import org.fujion.common.StrUtil;
-import org.springframework.util.Assert;
 
 /**
  * Class used for registered actions.

@@ -25,10 +25,10 @@
  */
 package org.fujionclinical.ui.action;
 
+import org.fujion.common.Assert;
 import org.fujion.script.IScriptLanguage;
 import org.fujion.script.IScriptLanguage.IParsedScript;
 import org.fujion.script.ScriptRegistry;
-import org.springframework.util.Assert;
 
 /**
  * Action type is a server-side script.

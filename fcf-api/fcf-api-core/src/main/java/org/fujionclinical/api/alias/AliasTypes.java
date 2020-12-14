@@ -29,11 +29,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.common.AbstractRegistry;
+import org.fujion.common.Assert;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.io.Resource;
-import org.springframework.util.Assert;
 
 import java.io.IOException;
 import java.io.InputStream;
