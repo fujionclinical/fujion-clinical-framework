@@ -27,6 +27,7 @@ package org.fujionclinical.api.cool.person;
 
 import edu.utah.kmm.model.cool.foundation.datatype.PersonName;
 import edu.utah.kmm.model.cool.foundation.datatype.PersonNameUse;
+import edu.utah.kmm.model.cool.terminology.ConceptReference;
 import org.fujionclinical.api.core.ISerializer;
 
 import java.util.Arrays;
@@ -69,9 +70,9 @@ public class PersonNameSerializer implements ISerializer<PersonName> {
         return PersonName.class;
     }
 
-    private PersonNameUse getUse(String use) {
+    private ConceptReference getUse(String use) {
         try {
-            return PersonNameUse.valueOf(use);
+            return PersonNameUse.valueOf(use).getCode();
         } catch (Exception e) {
             return null;
         }
