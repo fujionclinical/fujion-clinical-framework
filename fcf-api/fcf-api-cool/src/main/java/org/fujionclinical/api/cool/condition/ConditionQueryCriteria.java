@@ -30,14 +30,14 @@ import edu.utah.kmm.model.cool.clinical.finding.AssertionalFindingClinicalStatus
 import edu.utah.kmm.model.cool.clinical.finding.Condition;
 import edu.utah.kmm.model.cool.foundation.entity.Person;
 import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
-import org.fujionclinical.api.query.expression.AbstractCriteria;
+import org.fujionclinical.api.query.AbstractSearchCriteria;
 
 import java.util.Date;
 
 /**
  * Search criteria for encounter lookup.
  */
-public class ConditionQueryCriteria extends AbstractCriteria<Condition> {
+public class ConditionQueryCriteria extends AbstractSearchCriteria<Condition> {
 
     public ConditionQueryCriteria() {
         super(Condition.class, ';', null);

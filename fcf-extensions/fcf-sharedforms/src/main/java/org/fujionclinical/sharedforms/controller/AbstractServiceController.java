@@ -27,6 +27,12 @@ package org.fujionclinical.sharedforms.controller;
 
 import edu.utah.kmm.model.cool.mediator.query.QueryContext;
 import edu.utah.kmm.model.cool.mediator.query.QueryContextImpl;
+import edu.utah.kmm.model.cool.mediator.query.filter.IQueryFilter;
+import edu.utah.kmm.model.cool.mediator.query.filter.IQueryFilterChanged;
+import edu.utah.kmm.model.cool.mediator.query.filter.QueryFilterSet;
+import edu.utah.kmm.model.cool.mediator.query.service.IQueryCallback;
+import edu.utah.kmm.model.cool.mediator.query.service.IQueryResult;
+import edu.utah.kmm.model.cool.mediator.query.service.IQueryService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.annotation.EventHandler;
@@ -39,13 +45,6 @@ import org.fujion.component.Label;
 import org.fujion.component.Style;
 import org.fujion.event.Event;
 import org.fujion.event.EventUtil;
-import org.fujion.thread.ICancellable;
-import org.fujionclinical.api.query.filter.IQueryFilter;
-import org.fujionclinical.api.query.filter.IQueryFilterChanged;
-import org.fujionclinical.api.query.filter.QueryFilterSet;
-import org.fujionclinical.api.query.service.IQueryCallback;
-import org.fujionclinical.api.query.service.IQueryResult;
-import org.fujionclinical.api.query.service.IQueryService;
 import org.fujionclinical.sharedforms.common.FormConstants;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.shell.plugins.PluginController;
@@ -54,6 +53,7 @@ import org.fujionclinical.ui.util.FCFUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Future;
 import java.util.function.Consumer;
 
 import static org.fujionclinical.sharedforms.common.FormConstants.MSG_ERROR_UNEXPECTED;
@@ -188,18 +188,20 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
     }
 
     protected class QueryFinishedEvent extends Event {
-        
-        private final ICancellable thread;
-        
-        public QueryFinishedEvent(ICancellable thread, IQueryResult<T> result, BaseComponent target) {
-            super("queryFinished", target, result);
+
+        private final Future<IQueryResult<T>> thread;
+
+        public QueryFinishedEvent(
+                Future<IQueryResult<T>> thread,
+                BaseComponent target) {
+            super("queryFinished", target);
             this.thread = thread;
         }
-        
-        public ICancellable getThread() {
+
+        public Future<IQueryResult<T>> getThread() {
             return thread;
         }
-        
+
         @SuppressWarnings("unchecked")
         public IQueryResult<T> getResult() {
             return (IQueryResult<T>) getData();
@@ -211,15 +213,15 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
      * event thread.
      */
     private final IQueryCallback<T> queryListener = new IQueryCallback<T>() {
-        
+
         @Override
-        public void onQueryFinish(ICancellable thread, IQueryResult<T> result) {
-            EventUtil.post(new QueryFinishedEvent(thread, result, root));
+        public void onQueryStart(Future<IQueryResult<T>> future) {
+            addThread(future);
         }
-        
+
         @Override
-        public void onQueryStart(ICancellable thread) {
-            addThread(thread);
+        public void onQueryFinish(Future<IQueryResult<T>> future) {
+            EventUtil.post(new QueryFinishedEvent(future, root));
         }
     };
     

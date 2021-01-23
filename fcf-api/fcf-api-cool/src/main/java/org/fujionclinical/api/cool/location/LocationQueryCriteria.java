@@ -26,12 +26,12 @@
 package org.fujionclinical.api.cool.location;
 
 import edu.utah.kmm.model.cool.foundation.entity.Location;
-import org.fujionclinical.api.query.expression.AbstractCriteria;
+import org.fujionclinical.api.query.AbstractSearchCriteria;
 
 /**
  * Represents location search criteria.
  */
-public class LocationQueryCriteria extends AbstractCriteria<Location> {
+public class LocationQueryCriteria extends AbstractSearchCriteria<Location> {
 
     public LocationQueryCriteria() {
         super(Location.class, ';', null);

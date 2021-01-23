@@ -38,7 +38,6 @@ import org.fujion.component.Html;
 import org.fujion.component.Row;
 import org.fujion.component.Window;
 import org.fujion.page.PageUtil;
-import org.fujion.thread.ICancellable;
 import org.fujion.thread.ThreadedTask;
 import org.fujionclinical.api.cool.patient.PatientContext;
 import org.fujionclinical.api.event.IEventSubscriber;
@@ -49,6 +48,7 @@ import org.fujionclinical.ui.util.FCFUtil;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Future;
 
 /**
  * Controller for displaying resources in a columnar format.
@@ -109,7 +109,7 @@ public abstract class AbstractResourceListView<R, M, S extends DataSource> exten
 
     @Override
     @SuppressWarnings("unchecked")
-    protected void threadFinished(ICancellable thread) {
+    protected void threadFinished(Future<?> thread) {
         ThreadedTask task = (ThreadedTask) thread;
 
         try {

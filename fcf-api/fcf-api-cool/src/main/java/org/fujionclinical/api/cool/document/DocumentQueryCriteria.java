@@ -29,9 +29,9 @@ import edu.utah.kmm.model.cool.clinical.encounter.Encounter;
 import edu.utah.kmm.model.cool.clinical.finding.Document;
 import edu.utah.kmm.model.cool.clinical.finding.DocumentStatus;
 import edu.utah.kmm.model.cool.foundation.entity.Person;
-import org.fujionclinical.api.query.expression.AbstractCriteria;
+import org.fujionclinical.api.query.AbstractSearchCriteria;
 
-public class DocumentQueryCriteria extends AbstractCriteria<Document> {
+public class DocumentQueryCriteria extends AbstractSearchCriteria<Document> {
 
     protected DocumentQueryCriteria() {
         super(Document.class, ';', null);

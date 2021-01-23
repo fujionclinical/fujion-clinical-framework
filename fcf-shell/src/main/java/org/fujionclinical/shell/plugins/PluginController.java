@@ -27,11 +27,12 @@ package org.fujionclinical.shell.plugins;
 
 import org.fujion.ancillary.IAutoWired;
 import org.fujion.component.BaseComponent;
-import org.fujion.thread.ICancellable;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.shell.elements.ElementPlugin.PluginContainer;
 import org.fujionclinical.shell.elements.ElementUI;
 import org.fujionclinical.ui.controller.FrameworkController;
+
+import java.util.concurrent.Future;
 
 /**
  * Base controller for plugins. Offers convenience methods for determining activation state,
@@ -110,7 +111,7 @@ public class PluginController extends FrameworkController implements IPluginCont
      * @return The thread that was removed.
      */
     @Override
-    protected ICancellable removeThread(ICancellable thread) {
+    protected Future<?> removeThread(Future<?> thread) {
         super.removeThread(thread);
 
         if (!hasActiveThreads()) {

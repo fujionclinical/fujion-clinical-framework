@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.sharedforms.controller;
 
+import edu.utah.kmm.model.cool.mediator.query.service.IQueryService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.annotation.EventHandler;
@@ -34,7 +35,6 @@ import org.fujion.component.Checkbox;
 import org.fujion.component.Grid;
 import org.fujion.component.Row;
 import org.fujion.component.Rows;
-import org.fujionclinical.api.query.service.IQueryService;
 import org.fujionclinical.sharedforms.common.FormConstants;
 
 import java.util.ArrayList;

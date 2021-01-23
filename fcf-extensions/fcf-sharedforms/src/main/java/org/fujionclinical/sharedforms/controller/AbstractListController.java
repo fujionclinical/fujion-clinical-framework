@@ -25,12 +25,12 @@
  */
 package org.fujionclinical.sharedforms.controller;
 
+import edu.utah.kmm.model.cool.mediator.query.service.IQueryService;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.OnFailure;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.component.Listbox;
 import org.fujion.component.Listitem;
-import org.fujionclinical.api.query.service.IQueryService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +46,8 @@ public abstract class AbstractListController<T, M> extends AbstractBaseControlle
     @WiredComponent
     protected Listbox listbox;
 
-    public AbstractListController(IQueryService<T> service, String labelPrefix, String propertyPrefix,
+    public AbstractListController(
+            IQueryService<T> service, String labelPrefix, String propertyPrefix,
         String printStyleSheet, String reportHeader, SupplementalQueryParam<?> ...params) {
         super(service, labelPrefix, propertyPrefix, printStyleSheet, reportHeader, params);
     }

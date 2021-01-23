@@ -25,6 +25,9 @@
  */
 package org.fujionclinical.sharedforms.controller;
 
+import edu.utah.kmm.model.cool.mediator.query.filter.DateQueryFilter;
+import edu.utah.kmm.model.cool.mediator.query.filter.DateQueryFilter.DateType;
+import edu.utah.kmm.model.cool.mediator.query.service.IQueryService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -37,11 +40,8 @@ import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Combobox;
 import org.fujion.component.Comboitem;
 import org.fujion.model.*;
+import org.fujionclinical.api.cool.common.CoolUtil;
 import org.fujionclinical.api.property.PropertyUtil;
-import org.fujionclinical.api.query.filter.DateQueryFilter;
-import org.fujionclinical.api.query.filter.DateQueryFilter.DateType;
-import org.fujionclinical.api.query.filter.DateQueryFilter.IDateTypeExtractor;
-import org.fujionclinical.api.query.service.IQueryService;
 import org.fujionclinical.reports.common.ReportUtil;
 import org.fujionclinical.sharedforms.common.FormConstants;
 import org.fujionclinical.ui.dialog.DateRangePicker;
@@ -59,7 +59,7 @@ import java.util.List;
  * @param <T> Query result class
  * @param <M> Model result class
  */
-public abstract class AbstractBaseController<T, M> extends AbstractServiceController<T, M> implements IDateTypeExtractor<M> {
+public abstract class AbstractBaseController<T, M> extends AbstractServiceController<T, M> implements DateQueryFilter.IDateTypeExtractor<M> {
 
     private static final Log log = LogFactory.getLog(AbstractBaseController.class);
 
@@ -102,7 +102,8 @@ public abstract class AbstractBaseController<T, M> extends AbstractServiceContro
      * @param reportHeader The text header for the report.
      * @param params Optional supplemental query parameters.
      */
-    public AbstractBaseController(IQueryService<T> service, String labelPrefix, String propertyPrefix,
+    public AbstractBaseController(
+            IQueryService<T> service, String labelPrefix, String propertyPrefix,
                                   String printStyleSheet, String reportHeader, SupplementalQueryParam<?> ...params) {
         super(service, labelPrefix, params);
         this.propertyPrefix = propertyPrefix;
@@ -275,7 +276,7 @@ public abstract class AbstractBaseController<T, M> extends AbstractServiceContro
         if (dateRangePicker != null) {
             String deflt = getPropertyValue(FormConstants.PROPERTY_ID_DATE_RANGE, String.class, "Last Two Years");
             dateRangePicker.setSelectedItem(dateRangePicker.findMatchingItem(deflt));
-            initDateFilter().setDateRange(dateRangePicker.getSelectedRange());
+            initDateFilter().setDateRange(CoolUtil.dateRangeToPeriod(dateRangePicker.getSelectedRange()));
         }
 
         if (dateTypePicker != null) {
@@ -343,7 +344,7 @@ public abstract class AbstractBaseController<T, M> extends AbstractServiceContro
             log.trace("DatePicker range: " + dateRange);
         }
 
-        dateFilter.setDateRange(dateRange);
+        dateFilter.setDateRange(CoolUtil.dateRangeToPeriod(dateRange));
     }
 
     @Override

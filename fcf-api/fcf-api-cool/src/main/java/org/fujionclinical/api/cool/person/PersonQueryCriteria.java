@@ -35,12 +35,12 @@ import edu.utah.kmm.model.cool.util.PersonNameParsers;
 import edu.utah.kmm.model.cool.util.PersonUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.fujion.common.DateTimeWrapper;
-import org.fujionclinical.api.query.expression.AbstractCriteria;
+import org.fujionclinical.api.query.AbstractSearchCriteria;
 
 /**
  * Base search criteria for person lookups.
  */
-public abstract class PersonQueryCriteria<T extends Role<Person>> extends AbstractCriteria<T> {
+public abstract class PersonQueryCriteria<T extends Role<Person>> extends AbstractSearchCriteria<T> {
 
     private static final ConceptReference SSN_TYPE = new ConceptReferenceImpl("http://hl7.org/fhir/identifier-type", "SB");
 

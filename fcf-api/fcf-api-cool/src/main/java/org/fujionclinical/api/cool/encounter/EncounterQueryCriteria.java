@@ -28,12 +28,12 @@ package org.fujionclinical.api.cool.encounter;
 import edu.utah.kmm.model.cool.clinical.encounter.Encounter;
 import edu.utah.kmm.model.cool.foundation.entity.Person;
 import org.fujion.common.DateRange;
-import org.fujionclinical.api.query.expression.AbstractCriteria;
+import org.fujionclinical.api.query.AbstractSearchCriteria;
 
 /**
  * Search criteria for encounter lookup.
  */
-public class EncounterQueryCriteria extends AbstractCriteria<Encounter> {
+public class EncounterQueryCriteria extends AbstractSearchCriteria<Encounter> {
 
     public EncounterQueryCriteria() {
         super(Encounter.class, ';', null);

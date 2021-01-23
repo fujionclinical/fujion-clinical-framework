@@ -30,7 +30,6 @@ import org.fujion.component.BaseComponent;
 import org.fujion.component.BaseUIComponent;
 import org.fujion.event.Event;
 import org.fujion.event.IEventListener;
-import org.fujion.thread.ICancellable;
 import org.fujion.thread.ThreadUtil;
 import org.fujion.thread.ThreadedTask;
 import org.fujionclinical.api.core.AppFramework;
@@ -44,6 +43,7 @@ import org.springframework.context.ApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Future;
 
 /**
  * Can be subclassed to be used as a controller with convenience methods for accessing the
@@ -52,21 +52,21 @@ import java.util.List;
  * context change interfaces.
  */
 public class FrameworkController implements IAutoWired {
-    
+
     private ApplicationContext appContext;
-    
+
     private AppFramework appFramework;
-    
+
     private IEventManager eventManager;
-    
+
     protected BaseUIComponent root;
-    
+
     private BaseUIComponent comp;
-    
-    private final List<ICancellable> threads = new ArrayList<>();
-    
+
+    private final List<Future<?>> threads = new ArrayList<>();
+
     private final IEventListener threadCompletionListener = new IEventListener() {
-        
+
         /**
          * Background thread completion will be notified via this event listener. The listener will
          * in turn invoke either the threadFinished or threadAborted methods, as appropriate.
@@ -212,9 +212,7 @@ public class FrameworkController implements IAutoWired {
     protected void initialize() {
         eventManager.subscribe(Constants.REFRESH_EVENT, refreshListener);
         appFramework.registerObject(FrameworkController.this);
-        comp.addEventListener("destroy", (event) -> {
-            cleanup();
-        });
+        comp.addEventListener("destroy", event -> cleanup());
     }
     
     /**
@@ -225,34 +223,34 @@ public class FrameworkController implements IAutoWired {
             abortBackgroundThread(threads.get(0));
         }
     }
-    
+
     /**
      * Abort background thread if it is running.
      *
      * @param thread Thread to abort.
      */
-    protected void abortBackgroundThread(ICancellable thread) {
-        removeThread(thread).cancel();
+    protected void abortBackgroundThread(Future<?> thread) {
+        removeThread(thread).cancel(true);
     }
-    
+
     /**
      * Add a thread to the active list.
      *
      * @param thread Thread to add.
      * @return The thread that was added.
      */
-    protected ICancellable addThread(ICancellable thread) {
+    protected Future<?> addThread(Future<?> thread) {
         threads.add(thread);
         return thread;
     }
-    
+
     /**
      * Remove a thread from the active list.
      *
      * @param thread Thread to remove.
      * @return The thread that was removed.
      */
-    protected ICancellable removeThread(ICancellable thread) {
+    protected Future<?> removeThread(Future<?> thread) {
         threads.remove(thread);
         return thread;
     }
@@ -278,22 +276,22 @@ public class FrameworkController implements IAutoWired {
         ThreadUtil.execute(thread);
         return thread;
     }
-    
+
     /**
      * Called when a background thread has completed.
      *
      * @param thread The background thread.
      */
-    protected void threadFinished(ICancellable thread) {
+    protected void threadFinished(Future<?> thread) {
         removeThread(thread);
     }
-    
+
     /**
      * Called when a background thread has aborted.
      *
      * @param thread The background thread.
      */
-    protected void threadAborted(ICancellable thread) {
+    protected void threadAborted(Future<?> thread) {
         removeThread(thread);
     }
     

@@ -23,7 +23,7 @@
  *
  * #L%
  */
-package org.fujionclinical.api.query.expression;
+package org.fujionclinical.api.query;
 
 import edu.utah.kmm.model.cool.foundation.core.Identifiable;
 import edu.utah.kmm.model.cool.mediator.datasource.DataSource;
@@ -32,7 +32,7 @@ import edu.utah.kmm.model.cool.mediator.expression.ExpressionTuple;
 import edu.utah.kmm.model.cool.mediator.query.QueryContext;
 import edu.utah.kmm.model.cool.mediator.query.QueryContextImpl;
 import org.apache.commons.lang3.StringUtils;
-import org.fujionclinical.api.query.core.QueryException;
+import org.springframework.util.Assert;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ import java.util.List;
  * Base class for specifying search criteria for a given domain type.  Converts user input to a set of search criteria
  * that are then validated and compiled to a query expression.
  */
-public abstract class AbstractCriteria<L extends Identifiable> {
+public abstract class AbstractSearchCriteria<L extends Identifiable> {
 
     private static final String MSG_ERROR_MISSING_REQUIRED = "A required search criterion is missing.";
 
@@ -52,7 +52,7 @@ public abstract class AbstractCriteria<L extends Identifiable> {
 
     private final Character criterionSeparator;
 
-    protected AbstractCriteria(
+    protected AbstractSearchCriteria(
             Class<L> logicalType,
             Character criterionSeparator,
             String validationFailureMessage) {
@@ -116,9 +116,7 @@ public abstract class AbstractCriteria<L extends Identifiable> {
      * not, throws a run-time exception describing the deficiency.
      */
     public void validate() {
-        if (!isValid()) {
-            throw new QueryException(validationFailureMessage);
-        }
+        Assert.state(isValid(), validationFailureMessage);
     }
 
     public boolean hasContextParam(String parameter) {
@@ -173,11 +171,8 @@ public abstract class AbstractCriteria<L extends Identifiable> {
             criterion = StringUtils.trimToNull(criterion);
 
             if (criterion != null) {
-                boolean processed = parseCriterion(criterion.trim(), position++);
-
-                if (!processed) {
-                    throw new QueryException("Unrecognized search criterion '" + criterion + "'.");
-                }
+                boolean processed = parseCriterion(criterion, position++);
+                Assert.isTrue(processed, "Unrecognized search criterion '" + criterion + "'.");
             }
         }
     }
