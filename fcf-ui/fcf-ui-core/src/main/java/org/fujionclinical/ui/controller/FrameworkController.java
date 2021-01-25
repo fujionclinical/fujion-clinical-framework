@@ -43,7 +43,6 @@ import org.springframework.context.ApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Future;
 
 /**
  * Can be subclassed to be used as a controller with convenience methods for accessing the
@@ -63,7 +62,7 @@ public class FrameworkController implements IAutoWired {
 
     private BaseUIComponent comp;
 
-    private final List<Future<?>> threads = new ArrayList<>();
+    private final List<ThreadedTask> threads = new ArrayList<>();
 
     private final IEventListener threadCompletionListener = new IEventListener() {
 
@@ -79,7 +78,7 @@ public class FrameworkController implements IAutoWired {
             
             if (thread != null) {
                 removeThread(thread);
-                
+
                 if (thread.isCancelled()) {
                     threadAborted(thread);
                 } else {
@@ -87,13 +86,11 @@ public class FrameworkController implements IAutoWired {
                 }
             }
         }
-        
+
     };
-    
-    private final IEventSubscriber<Object> refreshListener = (eventName, eventData) -> {
-        refresh();
-    };
-    
+
+    private final IEventSubscriber<Object> refreshListener = (eventName, eventData) -> refresh();
+
     /**
      * Returns the controller associated with the specified component, if any.
      *
@@ -229,19 +226,18 @@ public class FrameworkController implements IAutoWired {
      *
      * @param thread Thread to abort.
      */
-    protected void abortBackgroundThread(Future<?> thread) {
-        removeThread(thread).cancel(true);
+    protected void abortBackgroundThread(ThreadedTask thread) {
+        removeThread(thread);
+        thread.cancel(true);
     }
 
     /**
      * Add a thread to the active list.
      *
      * @param thread Thread to add.
-     * @return The thread that was added.
      */
-    protected Future<?> addThread(Future<?> thread) {
+    protected void addThread(ThreadedTask thread) {
         threads.add(thread);
-        return thread;
     }
 
     /**
@@ -250,9 +246,8 @@ public class FrameworkController implements IAutoWired {
      * @param thread Thread to remove.
      * @return The thread that was removed.
      */
-    protected Future<?> removeThread(Future<?> thread) {
-        threads.remove(thread);
-        return thread;
+    protected boolean removeThread(ThreadedTask thread) {
+        return threads.remove(thread);
     }
     
     /**
@@ -282,8 +277,7 @@ public class FrameworkController implements IAutoWired {
      *
      * @param thread The background thread.
      */
-    protected void threadFinished(Future<?> thread) {
-        removeThread(thread);
+    protected void threadFinished(ThreadedTask thread) {
     }
 
     /**
@@ -291,8 +285,7 @@ public class FrameworkController implements IAutoWired {
      *
      * @param thread The background thread.
      */
-    protected void threadAborted(Future<?> thread) {
-        removeThread(thread);
+    protected void threadAborted(ThreadedTask thread) {
     }
     
 }

@@ -48,7 +48,6 @@ import org.fujionclinical.ui.util.FCFUtil;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Future;
 
 /**
  * Controller for displaying resources in a columnar format.
@@ -109,9 +108,7 @@ public abstract class AbstractResourceListView<R, M, S extends DataSource> exten
 
     @Override
     @SuppressWarnings("unchecked")
-    protected void threadFinished(Future<?> thread) {
-        ThreadedTask task = (ThreadedTask) thread;
-
+    protected void threadFinished(ThreadedTask task) {
         try {
             task.rethrow();
         } catch (Throwable e) {

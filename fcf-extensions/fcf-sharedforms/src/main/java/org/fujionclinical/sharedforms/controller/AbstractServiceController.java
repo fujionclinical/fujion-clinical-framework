@@ -28,9 +28,7 @@ package org.fujionclinical.sharedforms.controller;
 import edu.utah.kmm.model.cool.mediator.query.QueryContext;
 import edu.utah.kmm.model.cool.mediator.query.QueryContextImpl;
 import edu.utah.kmm.model.cool.mediator.query.filter.IQueryFilter;
-import edu.utah.kmm.model.cool.mediator.query.filter.IQueryFilterChanged;
 import edu.utah.kmm.model.cool.mediator.query.filter.QueryFilterSet;
-import edu.utah.kmm.model.cool.mediator.query.service.IQueryCallback;
 import edu.utah.kmm.model.cool.mediator.query.service.IQueryResult;
 import edu.utah.kmm.model.cool.mediator.query.service.IQueryService;
 import org.apache.commons.logging.Log;
@@ -43,8 +41,8 @@ import org.fujion.component.BaseComponent;
 import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Label;
 import org.fujion.component.Style;
-import org.fujion.event.Event;
 import org.fujion.event.EventUtil;
+import org.fujion.thread.ThreadedTask;
 import org.fujionclinical.sharedforms.common.FormConstants;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.shell.plugins.PluginController;
@@ -53,7 +51,7 @@ import org.fujionclinical.ui.util.FCFUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.Future;
+import java.util.Map;
 import java.util.function.Consumer;
 
 import static org.fujionclinical.sharedforms.common.FormConstants.MSG_ERROR_UNEXPECTED;
@@ -187,44 +185,16 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
         }
     }
 
-    protected class QueryFinishedEvent extends Event {
+    private class BackgroundTask implements ThreadedTask.TaskExecutor {
 
-        private final Future<IQueryResult<T>> thread;
-
-        public QueryFinishedEvent(
-                Future<IQueryResult<T>> thread,
-                BaseComponent target) {
-            super("queryFinished", target);
-            this.thread = thread;
+        @Override
+        public void execute(Map<String, Object> result) {
+            IQueryResult<T> queryResult = service.fetch(queryContext);
+            result.put("result", queryResult);
         }
 
-        public Future<IQueryResult<T>> getThread() {
-            return thread;
-        }
-
-        @SuppressWarnings("unchecked")
-        public IQueryResult<T> getResult() {
-            return (IQueryResult<T>) getData();
-        }
     }
-    
-    /**
-     * Listener for query completion callbacks. Ensures that result callbacks occur in the main
-     * event thread.
-     */
-    private final IQueryCallback<T> queryListener = new IQueryCallback<T>() {
 
-        @Override
-        public void onQueryStart(Future<IQueryResult<T>> future) {
-            addThread(future);
-        }
-
-        @Override
-        public void onQueryFinish(Future<IQueryResult<T>> future) {
-            EventUtil.post(new QueryFinishedEvent(future, root));
-        }
-    };
-    
     @WiredComponent(onFailure = OnFailure.IGNORE)
     /*package*/Label lblMessage;
     
@@ -249,17 +219,6 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
     private boolean fetchPending;
     
     private BaseUIComponent hideOnShowMessage;
-
-    /**
-     * Listener for query filter changes.
-     */
-    private final IQueryFilterChanged<M> queryFilterChangedListener = filter -> {
-        if (filter.updateContext(queryContext)) {
-            refresh(); // hit database
-        } else {
-            applyFilters();
-        }
-    };
 
     /**
      * Create the controller.
@@ -476,7 +435,7 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
         if (msg == null) {
             if (backgroundFetch) {
                 log.trace("Starting background data retrieval.");
-                service.fetch(queryContext, queryListener);
+                startBackgroundThread(new BackgroundTask());
             } else {
                 EventUtil.post("fetchData", root, null);
             }
@@ -495,15 +454,16 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
         showBusy(null);
         queryFinished(service.fetch(queryContext));
     }
-    
+
     /**
-     * Event listener to ensure that query callbacks are delivered on the main thread.
+     * Callback for query completion.
      *
-     * @param event Event containing the query result.
+     * @param thread The thread containing the result.
      */
-    public void onQueryFinished(QueryFinishedEvent event) {
-        removeThread(event.getThread());
-        queryFinished(event.getResult());
+    @Override
+    @SuppressWarnings("unchecked")
+    protected void threadFinished(ThreadedTask thread) {
+        queryFinished((IQueryResult<T>) thread.getAttribute("results"));
     }
     
     /**
@@ -517,11 +477,11 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
         
         switch (result.getStatus()) {
             case COMPLETED:
-                model = toModel(result.getResults());
+                model = toModel(result.get());
                 applyFilters();
                 break;
-                
-            case ABORTED:
+
+            case CANCELLED:
                 showMessage(MSG_STATUS_ABORTED.toString());
                 break;
                 
