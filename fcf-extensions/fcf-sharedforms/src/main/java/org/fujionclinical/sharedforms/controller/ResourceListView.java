@@ -29,8 +29,8 @@ import edu.utah.kmm.model.cool.foundation.core.Identifiable;
 import edu.utah.kmm.model.cool.foundation.entity.Person;
 import edu.utah.kmm.model.cool.mediator.dao.ModelDAO;
 import edu.utah.kmm.model.cool.mediator.datasource.DataSource;
-import edu.utah.kmm.model.cool.mediator.expression.Expression;
-import edu.utah.kmm.model.cool.mediator.expression.ExpressionParser;
+import edu.utah.kmm.model.cool.mediator.expression.parser.Expression;
+import edu.utah.kmm.model.cool.mediator.expression.parser.ExpressionParser;
 import edu.utah.kmm.model.cool.mediator.query.QueryContext;
 import edu.utah.kmm.model.cool.mediator.query.QueryContextImpl;
 import org.fujion.common.Assert;
@@ -65,7 +65,7 @@ public abstract class ResourceListView<L extends Identifiable, M, S extends Data
 
     @Override
     protected void requestData() {
-        startBackgroundThread(map -> map.put("results", dao.search(queryExpression, queryContext)));
+        startBackgroundThread(map -> map.put("results", dao.search(queryExpression, queryContext).getElement()));
     }
 
     @Override

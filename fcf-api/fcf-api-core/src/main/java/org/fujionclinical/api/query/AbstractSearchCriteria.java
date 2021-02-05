@@ -27,8 +27,8 @@ package org.fujionclinical.api.query;
 
 import edu.utah.kmm.model.cool.foundation.core.Identifiable;
 import edu.utah.kmm.model.cool.mediator.datasource.DataSource;
-import edu.utah.kmm.model.cool.mediator.expression.ExpressionParser;
-import edu.utah.kmm.model.cool.mediator.expression.ExpressionTuple;
+import edu.utah.kmm.model.cool.mediator.expression.parser.ExpressionParser;
+import edu.utah.kmm.model.cool.mediator.expression.parser.ResolvedExpression;
 import edu.utah.kmm.model.cool.mediator.query.QueryContext;
 import edu.utah.kmm.model.cool.mediator.query.QueryContextImpl;
 import org.apache.commons.lang3.StringUtils;
@@ -84,7 +84,7 @@ public abstract class AbstractSearchCriteria<L extends Identifiable> {
      *
      * @return The compiled search criteria (as a list of query expression tuples).
      */
-    public List<ExpressionTuple> compile() {
+    public ResolvedExpression<L> compile() {
         validate();
         StringBuilder sb = new StringBuilder();
         addFragment(sb, "id", "=");
@@ -99,7 +99,7 @@ public abstract class AbstractSearchCriteria<L extends Identifiable> {
      * @return Resources matching the search criteria.
      */
     public List<L> search(DataSource dataSource) {
-        return dataSource.getModelDAO(logicalType).search(compile());
+        return dataSource.getModelDAO(logicalType).search(compile()).getElement();
     }
 
     /**
