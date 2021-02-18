@@ -33,8 +33,4 @@ public class MockModelDescriptor extends AbstractModelDescriptor {
         super("mock", "Mock data source", null, null);
     }
 
-    @Override
-    protected void initialize() {
-    }
-
 }

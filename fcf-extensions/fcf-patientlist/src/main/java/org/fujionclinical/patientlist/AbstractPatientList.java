@@ -26,6 +26,7 @@
 package org.fujionclinical.patientlist;
 
 import edu.utah.kmm.model.cool.clinical.role.Patient;
+import edu.utah.kmm.model.cool.foundation.core.IdentifiableCollection;
 import edu.utah.kmm.model.cool.foundation.entity.Person;
 import edu.utah.kmm.model.cool.mediator.dao.ModelDAO;
 import org.apache.commons.lang3.StringUtils;
@@ -115,7 +116,7 @@ public abstract class AbstractPatientList implements IPatientList {
         }
 
         String[] ary = new String[ids.size()];
-        List<Patient> results = getPatientDAO().read(ids.keySet().toArray(ary));
+        IdentifiableCollection<Patient> results = getPatientDAO().read(ids.keySet().toArray(ary));
 
         for (Patient patient : results) {
             Person person = patient.getActor();
