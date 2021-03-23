@@ -59,7 +59,7 @@
 		<org.thymeleaf.version>3.0.11.RELEASE</org.thymeleaf.version>
 		<org.springframework.security.version>5.3.4.RELEASE</org.springframework.security.version>
 		<ehcache.version>3.8.1</ehcache.version>
-		<cool.version>2.0.0-SNAPSHOT</cool.version>
+		<cool.version>3.0.0-SNAPSHOT</cool.version>
 	</properties>
 
 	<modules>
