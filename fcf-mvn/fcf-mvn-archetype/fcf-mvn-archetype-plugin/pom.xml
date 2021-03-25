@@ -23,9 +23,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-archetype-plugin</artifactId>
-				<configuration>
-					<goalPrefix>plugin-extensions</goalPrefix>
-				</configuration>
 			</plugin>
 		</plugins>
 		<resources>

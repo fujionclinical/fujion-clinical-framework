@@ -27,8 +27,8 @@ package org.fujionclinical.api.cool.person;
 
 import edu.utah.kmm.model.cool.foundation.datatype.PersonName;
 import edu.utah.kmm.model.cool.foundation.datatype.PersonNameUse;
-import edu.utah.kmm.model.cool.terminology.ConceptReference;
 import org.fujionclinical.api.core.ISerializer;
+import org.opencds.tools.terminology.api.model.ConceptReference;
 
 import java.util.Arrays;
 import java.util.List;

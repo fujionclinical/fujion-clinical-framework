@@ -28,14 +28,14 @@ package org.fujionclinical.api.cool.person;
 import edu.utah.kmm.model.cool.foundation.datatype.PersonName;
 import edu.utah.kmm.model.cool.foundation.entity.Person;
 import edu.utah.kmm.model.cool.foundation.role.Role;
-import edu.utah.kmm.model.cool.terminology.ConceptReference;
-import edu.utah.kmm.model.cool.terminology.ConceptReferenceImpl;
-import edu.utah.kmm.model.cool.terminology.ConceptReferenceSet;
 import edu.utah.kmm.model.cool.util.PersonNameParsers;
 import edu.utah.kmm.model.cool.util.PersonUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.query.AbstractSearchCriteria;
+import org.opencds.tools.terminology.api.model.ConceptReference;
+import org.opencds.tools.terminology.api.model.ConceptReferenceImpl;
+import org.opencds.tools.terminology.api.model.ConceptReferenceSet;
 
 /**
  * Base search criteria for person lookups.
