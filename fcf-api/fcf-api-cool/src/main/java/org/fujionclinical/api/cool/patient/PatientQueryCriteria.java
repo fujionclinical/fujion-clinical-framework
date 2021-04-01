@@ -27,9 +27,9 @@ package org.fujionclinical.api.cool.patient;
 
 import edu.utah.kmm.model.cool.clinical.role.Patient;
 import edu.utah.kmm.model.cool.util.PersonUtils;
+import edu.utah.kmm.terminology.api.model.ConceptReference;
+import edu.utah.kmm.terminology.api.model.ConceptReferenceImpl;
 import org.fujionclinical.api.cool.person.PersonQueryCriteria;
-import org.opencds.tools.terminology.api.model.ConceptReference;
-import org.opencds.tools.terminology.api.model.ConceptReferenceImpl;
 
 /**
  * Search criteria for patient lookup.

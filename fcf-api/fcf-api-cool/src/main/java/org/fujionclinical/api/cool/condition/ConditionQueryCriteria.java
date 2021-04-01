@@ -29,8 +29,8 @@ import edu.utah.kmm.model.cool.clinical.encounter.Encounter;
 import edu.utah.kmm.model.cool.clinical.finding.AssertionalFindingClinicalStatus;
 import edu.utah.kmm.model.cool.clinical.finding.Condition;
 import edu.utah.kmm.model.cool.foundation.entity.Person;
+import edu.utah.kmm.terminology.api.model.ConceptReferenceSet;
 import org.fujionclinical.api.query.AbstractSearchCriteria;
-import org.opencds.tools.terminology.api.model.ConceptReferenceSet;
 
 import java.util.Date;
 

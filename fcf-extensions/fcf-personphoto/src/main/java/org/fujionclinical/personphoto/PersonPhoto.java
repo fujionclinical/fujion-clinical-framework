@@ -1,6 +1,6 @@
 package org.fujionclinical.personphoto;
 
-import edu.utah.kmm.model.cool.common.MiscUtils;
+import edu.utah.kmm.common.utils.CommonUtils;
 import edu.utah.kmm.model.cool.foundation.entity.Person;
 import edu.utah.kmm.model.cool.util.PersonUtils;
 import org.fujion.ancillary.MimeContent;
@@ -53,7 +53,7 @@ public class PersonPhoto extends Image {
             setContent(CONTENT_NO_PERSON);
             setHint(MSG_NO_PERSON.toString());
         } else {
-            MimeContent content = CoolUtil.toMimeContent(MiscUtils.getFirst(person.getPhoto()));
+            MimeContent content = CoolUtil.toMimeContent(CommonUtils.getFirst(person.getPhoto()));
             hasPhoto = content != null;
             setContent(content == null ? CONTENT_NO_PHOTO : content);
             setHint(content == null ? MSG_NO_PHOTO.toString() : PersonUtils.getFullName(person));

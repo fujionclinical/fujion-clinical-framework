@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.patientselection.common;
 
-import edu.utah.kmm.model.cool.common.MiscUtils;
+import edu.utah.kmm.common.utils.CommonUtils;
 import edu.utah.kmm.model.cool.foundation.datatype.Address;
 import edu.utah.kmm.model.cool.foundation.datatype.ContactPoint;
 import edu.utah.kmm.model.cool.foundation.datatype.ContactPointSystem;
@@ -90,7 +90,7 @@ public class PatientDetailRenderer implements IPatientDetailRenderer {
         addContactPoint(root, "work_email", patient);
         addContactPoint(root, "work_fax", patient);
 
-        Address address = MiscUtils.getFirst(patient.getAddress());
+        Address address = CommonUtils.getFirst(patient.getAddress());
 
         if (address != null) {
             root.addChild(new Div());

@@ -33,9 +33,9 @@ import edu.utah.kmm.model.cool.util.PersonUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.query.AbstractSearchCriteria;
-import org.opencds.tools.terminology.api.model.ConceptReference;
-import org.opencds.tools.terminology.api.model.ConceptReferenceImpl;
-import org.opencds.tools.terminology.api.model.ConceptReferenceSet;
+import edu.utah.kmm.terminology.api.model.ConceptReference;
+import edu.utah.kmm.terminology.api.model.ConceptReferenceImpl;
+import edu.utah.kmm.terminology.api.model.ConceptReferenceSet;
 
 /**
  * Base search criteria for person lookups.

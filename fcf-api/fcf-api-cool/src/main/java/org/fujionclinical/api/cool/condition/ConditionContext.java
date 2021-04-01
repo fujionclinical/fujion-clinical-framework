@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.api.cool.condition;
 
+import edu.utah.kmm.common.utils.CommonUtils;
 import edu.utah.kmm.model.cool.clinical.finding.Condition;
-import edu.utah.kmm.model.cool.common.MiscUtils;
 import edu.utah.kmm.model.cool.foundation.entity.Person;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -55,7 +55,7 @@ public class ConditionContext extends AbstractIdentifiableContext<Condition> {
         @Override
         public void pending(ISurveyResponse response) {
             Condition condition = getContextObject(true);
-            Person patient = MiscUtils.cast(condition.getSubject(), Person.class);
+            Person patient = CommonUtils.cast(condition.getSubject(), Person.class);
 
             if (patient != null) {
                 fromCondition = true;

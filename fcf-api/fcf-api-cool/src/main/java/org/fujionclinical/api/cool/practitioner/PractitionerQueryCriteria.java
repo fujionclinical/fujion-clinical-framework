@@ -29,8 +29,8 @@ import edu.utah.kmm.model.cool.clinical.role.Practitioner;
 import edu.utah.kmm.model.cool.core.datatype.Identifier;
 import edu.utah.kmm.model.cool.core.datatype.IdentifierImpl;
 import org.fujionclinical.api.cool.person.PersonQueryCriteria;
-import org.opencds.tools.terminology.api.model.ConceptReferenceSet;
-import org.opencds.tools.terminology.api.model.ConceptReferenceSetImpl;
+import edu.utah.kmm.terminology.api.model.ConceptReferenceSet;
+import edu.utah.kmm.terminology.api.model.ConceptReferenceSetImpl;
 
 /**
  * Criteria for practitioner searches.
