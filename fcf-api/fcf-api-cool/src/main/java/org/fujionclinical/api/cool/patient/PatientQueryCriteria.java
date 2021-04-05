@@ -36,8 +36,6 @@ import org.fujionclinical.api.cool.person.PersonQueryCriteria;
  */
 public class PatientQueryCriteria extends PersonQueryCriteria<Patient> {
 
-    private static final ConceptReference MRN_TYPE = new ConceptReferenceImpl("http://hl7.org/fhir/v2/0203", "MR");
-
     public PatientQueryCriteria() {
         super(Patient.class, null);
     }
