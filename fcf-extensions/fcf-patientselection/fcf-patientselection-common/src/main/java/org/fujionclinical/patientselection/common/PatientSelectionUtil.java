@@ -34,10 +34,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.ancillary.IResponseCallback;
 import org.fujion.common.CollectionUtil;
+import org.fujion.common.MiscUtil;
 import org.fujion.common.StrUtil;
+import org.fujion.dialog.DialogUtil;
 import org.fujionclinical.api.cool.patient.PatientQueryCriteria;
-import org.fujionclinical.ui.dialog.DialogUtil;
-import org.fujionclinical.ui.util.FCFUtil;
 
 import java.util.Comparator;
 import java.util.List;
@@ -122,7 +122,7 @@ public class PatientSelectionUtil {
             throw e;
         } catch (Exception e) {
             log.error("Error during patient search.", e);
-            throw new QueryException(MSG_ERROR_NOT_FOUND.toString(FCFUtil.formatExceptionForDisplay(e)), e);
+            throw new QueryException(MSG_ERROR_NOT_FOUND.toString(MiscUtil.formatExceptionForDisplay(e)), e);
         }
     }
 

@@ -30,14 +30,14 @@ import org.fujion.ancillary.IAutoWired;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.component.*;
+import org.fujion.core.CoreUtil;
+import org.fujion.dialog.PopupDialog;
 import org.fujion.event.ChangeEvent;
 import org.fujion.event.Event;
 import org.fujion.model.IListModel;
 import org.fujion.model.IModelAndView;
 import org.fujion.model.ListModel;
 import org.fujionclinical.api.core.ManifestIterator;
-import org.fujionclinical.ui.dialog.PopupDialog;
-import org.fujionclinical.ui.util.FCFUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -95,8 +95,8 @@ public class ManifestViewer implements IAutoWired {
     private static void execute(ManifestItem manifestItem) {
         Map<String, Object> args = new HashMap<>();
         args.put("manifestItem", manifestItem);
-        PopupDialog.show(FCFUtil.getResourcePath(ManifestViewer.class) + "manifestViewer.fsp", args, true, false, true,
-            null);
+        PopupDialog.show(CoreUtil.getResourceClassPath(ManifestViewer.class) + "manifestViewer.fsp", args, true, false, true,
+                null);
     }
 
     /**

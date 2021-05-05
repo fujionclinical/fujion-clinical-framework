@@ -26,11 +26,11 @@
 package org.fujionclinical.shell.designer;
 
 import org.fujion.annotation.EventHandler;
+import org.fujion.common.MiscUtil;
 import org.fujion.component.BaseUIComponent;
 import org.fujion.event.ChangeEvent;
 import org.fujion.page.PageUtil;
 import org.fujionclinical.shell.property.PropertyInfo;
-import org.fujionclinical.ui.util.FCFUtil;
 
 /**
  * All property editors must descend from this abstract class.
@@ -196,7 +196,7 @@ public abstract class PropertyEditorBase<T extends BaseUIComponent> implements C
      * @param exc The exception to display.
      */
     public void setWrongValueException(Throwable exc) {
-        setWrongValueMessage(FCFUtil.formatExceptionForDisplay(exc));
+        setWrongValueMessage(MiscUtil.formatExceptionForDisplay(exc));
     }
 
     /**

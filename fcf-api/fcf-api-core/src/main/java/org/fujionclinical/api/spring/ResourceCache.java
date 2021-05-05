@@ -55,7 +55,7 @@ public class ResourceCache implements ResourcePatternResolver {
     public static final Comparator<Resource> resourceComparator = (r1, r2) -> {
         String f1 = r1.getFilename();
         String f2 = r2.getFilename();
-        return StrUtil.compareToIgnoreCase(f1, f2);
+        return StrUtil.compareIgnoreCase(f1, f2);
     };
 
     public ResourceCache(ResourceLoader resourceLoader) {

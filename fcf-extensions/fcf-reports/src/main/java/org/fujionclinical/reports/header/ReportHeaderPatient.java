@@ -33,8 +33,8 @@ import org.fujion.annotation.OnFailure;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.common.DateUtil;
 import org.fujion.component.Label;
+import org.fujion.core.CoreUtil;
 import org.fujionclinical.api.cool.patient.PatientContext;
-import org.fujionclinical.ui.util.FCFUtil;
 
 import java.time.LocalDate;
 
@@ -44,7 +44,7 @@ import java.time.LocalDate;
 public class ReportHeaderPatient extends ReportHeaderBase {
 
     static {
-        ReportHeaderRegistry.getInstance().register("patient", FCFUtil.getResourcePath(ReportHeaderPatient.class) + "patientReportHeader.fsp");
+        ReportHeaderRegistry.getInstance().register("patient", CoreUtil.getResourceClassPath(ReportHeaderPatient.class) + "patientReportHeader.fsp");
     }
 
     @WiredComponent(onFailure = OnFailure.IGNORE)

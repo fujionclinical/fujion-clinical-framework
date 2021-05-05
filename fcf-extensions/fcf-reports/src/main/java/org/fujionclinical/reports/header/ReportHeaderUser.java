@@ -28,9 +28,9 @@ package org.fujionclinical.reports.header;
 import org.fujion.annotation.OnFailure;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.component.Label;
+import org.fujion.core.CoreUtil;
 import org.fujionclinical.api.user.User;
 import org.fujionclinical.api.user.UserContext;
-import org.fujionclinical.ui.util.FCFUtil;
 
 /**
  * This is a user-based header for reports.
@@ -38,7 +38,7 @@ import org.fujionclinical.ui.util.FCFUtil;
 public class ReportHeaderUser extends ReportHeaderBase {
 
     static {
-        ReportHeaderRegistry.getInstance().register("user", FCFUtil.getResourcePath(ReportHeaderUser.class) + "userReportHeader.fsp");
+        ReportHeaderRegistry.getInstance().register("user", CoreUtil.getResourceClassPath(ReportHeaderUser.class) + "userReportHeader.fsp");
     }
 
     @WiredComponent(onFailure = OnFailure.IGNORE)

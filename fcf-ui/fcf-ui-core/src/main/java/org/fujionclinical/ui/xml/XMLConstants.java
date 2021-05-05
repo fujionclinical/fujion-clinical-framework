@@ -25,14 +25,14 @@
  */
 package org.fujionclinical.ui.xml;
 
-import org.fujionclinical.ui.util.FCFUtil;
+import org.fujion.core.CoreUtil;
 
 /**
  * Static utility class for XML viewing constants.
  */
 public class XMLConstants {
 
-    protected static final String RESOURCE_PATH = FCFUtil.getResourcePath(XMLConstants.class);
+    protected static final String RESOURCE_PATH = CoreUtil.getResourceClassPath(XMLConstants.class);
 
     protected static final String VIEW_DIALOG = RESOURCE_PATH + "xmlViewer.fsp";
 

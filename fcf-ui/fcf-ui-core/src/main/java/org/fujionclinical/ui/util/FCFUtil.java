@@ -26,21 +26,12 @@
 package org.fujionclinical.ui.util;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.apache.commons.lang3.reflect.FieldUtils;
-import org.fujion.client.ExecutionContext;
 import org.fujion.common.MiscUtil;
 import org.fujion.component.*;
-import org.fujion.event.Event;
-import org.fujion.event.EventUtil;
-import org.fujion.event.IEventListener;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 public class FCFUtil {
     
@@ -54,129 +45,10 @@ public class FCFUtil {
         CASE_INSENSITIVE // Case insensitive by node label.
     }
     
-    private static final IEventListener deferredDelivery = EventUtil::send;
-    
-    /**
-     * Fires an event, deferring delivery if the page of the target is not currently active.
-     *
-     * @param event The event to fire.
-     */
-    public static void fireEvent(Event event) {
-        fireEvent(event, deferredDelivery);
-    }
-    
-    /**
-     * Fires an event to the specified listener, deferring delivery if the page of the target is not
-     * currently active.
-     *
-     * @param event The event to fire.
-     * @param listener The listener to receive the event.
-     */
-    public static void fireEvent(Event event, IEventListener listener) {
-        Page page = event.getTarget() == null ? null : event.getTarget().getPage();
-        
-        if (page != null && page != ExecutionContext.getPage()) {
-            page.getEventQueue().queue(event);
-        } else {
-            try {
-                listener.onEvent(event);
-            } catch (Exception e) {
-                throw MiscUtil.toUnchecked(e);
-            }
-        }
-    }
-    
-    /**
-     * Returns the FCF resource path for the specified class.
-     *
-     * @param clazz Class to evaluate
-     * @return String representing resource path
-     */
-    public static String getResourcePath(Class<?> clazz) {
-        return getResourcePath(clazz.getPackage());
-    }
-    
-    /**
-     * Returns the FCF resource path for the specified class.
-     *
-     * @param clazz Class to evaluate
-     * @param up Number of path levels to remove
-     * @return String representing resource path
-     */
-    public static String getResourcePath(Class<?> clazz, int up) {
-        return getResourcePath(clazz.getPackage(), up);
-    }
-    
-    /**
-     * Returns the FCF resource path for the specified package.
-     *
-     * @param pkg Package to evaluate
-     * @return String representing resource path
-     */
-    public static String getResourcePath(Package pkg) {
-        return getResourcePath(pkg.getName());
-    }
-    
-    /**
-     * Returns the FCF resource path for the specified package.
-     *
-     * @param pkg Package to evaluate
-     * @param up Number of path levels to remove
-     * @return String representing resource path
-     */
-    public static String getResourcePath(Package pkg, int up) {
-        return getResourcePath(pkg.getName(), up);
-    }
-    
-    /**
-     * Returns the FCF resource path for the package name.
-     *
-     * @param name Package name
-     * @return String representing resource path
-     */
-    public static String getResourcePath(String name) {
-        return getResourcePath(name, 0);
-    }
-    
-    /**
-     * Returns the FCF resource path for the package name.
-     *
-     * @param name Package name
-     * @param up Number of path levels to remove
-     * @return String representing resource path
-     */
-    public static String getResourcePath(String name, int up) {
-        String path = StringUtils.removeEnd(name.replace('.', '/'), "/");
-        
-        while (up > 0) {
-            int i = path.lastIndexOf("/");
-            
-            if (i <= 0) {
-                break;
-            } else {
-                path = path.substring(0, i);
-                up--;
-            }
-        }
-        
-        return "web/" + path + "/";
-    }
-    
-    /**
-     * Formats an exception for display.
-     *
-     * @param exc Exception to format.
-     * @return The displayable form of the exception.
-     */
-    public static String formatExceptionForDisplay(Throwable exc) {
-        Throwable root = ExceptionUtils.getRootCause(exc);
-        return exc == null ? null : ExceptionUtils.getMessage(root == null ? exc : root);
-    }
-    
     /**
      * Returns a component of a type suitable for displaying the specified text. For text that is a
      * URL, returns a hyperlink. For text that begins with &lt;html&gt;, returns an HTML component.
-     * All other text returns a label.
+     * All other text returns a cell.
      *
      * @param text Text to be displayed.
      * @return BaseComponent of the appropriate type.
@@ -196,35 +68,6 @@ public class FCFUtil {
         }
         
         return new Cell(text);
-    }
-    
-    /**
-     * Wires variables from a map into a controller. Useful to inject parameters passed in an
-     * argument map.
-     *
-     * @param map The argument map.
-     * @param controller The controller to be wired.
-     */
-    public static void wireController(Map<?, ?> map, Object controller) {
-        if (map == null || map.isEmpty() || controller == null) {
-            return;
-        }
-        
-        for (Entry<?, ?> entry : map.entrySet()) {
-            String key = entry.getKey().toString();
-            Object value = entry.getValue();
-            
-            try {
-                PropertyUtils.setProperty(controller, key, value);
-            } catch (Exception e) {
-                try {
-                    FieldUtils.writeField(controller, key, value, true);
-                } catch (Exception e1) {
-                    // NOP
-                }
-            }
-            
-        }
     }
     
     /**

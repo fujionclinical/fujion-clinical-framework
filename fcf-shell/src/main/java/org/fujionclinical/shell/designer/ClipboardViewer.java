@@ -28,13 +28,13 @@ package org.fujionclinical.shell.designer;
 import org.fujion.ancillary.IAutoWired;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
+import org.fujion.common.MiscUtil;
 import org.fujion.component.BaseComponent;
 import org.fujion.component.Button;
 import org.fujion.component.Memobox;
 import org.fujion.component.Window;
 import org.fujion.page.PageUtil;
 import org.fujionclinical.shell.Constants;
-import org.fujionclinical.ui.util.FCFUtil;
 
 import java.util.Collections;
 import java.util.Map;
@@ -93,7 +93,7 @@ public class ClipboardViewer implements IAutoWired {
                 clipboard.copy(data instanceof String ? text
                         : data instanceof IClipboardAware ? ((IClipboardAware<?>) data).fromClipboard(text) : null);
             } catch (Exception e) {
-                txtData.setBalloon(FCFUtil.formatExceptionForDisplay(e));
+                txtData.setBalloon(MiscUtil.formatExceptionForDisplay(e));
                 txtData.focus();
                 return false;
             }

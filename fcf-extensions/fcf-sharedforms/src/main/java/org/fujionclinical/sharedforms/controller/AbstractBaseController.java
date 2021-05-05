@@ -39,13 +39,13 @@ import org.fujion.component.BaseComponent;
 import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Combobox;
 import org.fujion.component.Comboitem;
+import org.fujion.core.CoreUtil;
 import org.fujion.model.*;
 import org.fujionclinical.api.cool.common.CoolUtil;
 import org.fujionclinical.api.property.PropertyUtil;
 import org.fujionclinical.reports.common.ReportUtil;
 import org.fujionclinical.sharedforms.common.FormConstants;
 import org.fujionclinical.ui.dialog.DateRangePicker;
-import org.fujionclinical.ui.util.FCFUtil;
 import org.springframework.beans.BeanUtils;
 
 import java.lang.reflect.Method;
@@ -109,7 +109,7 @@ public abstract class AbstractBaseController<T, M> extends AbstractServiceContro
         this.propertyPrefix = propertyPrefix;
 
         if (printStyleSheet != null && !printStyleSheet.startsWith("web/")) {
-            printStyleSheet = FCFUtil.getResourcePath(getClass()) + printStyleSheet;
+            printStyleSheet = CoreUtil.getResourceClassPath(getClass()) + printStyleSheet;
         }
 
         this.printStyleSheet = printStyleSheet;

@@ -34,6 +34,7 @@ import org.fujion.common.DateUtil;
 import org.fujion.component.BaseComponent;
 import org.fujion.component.Datebox;
 import org.fujion.component.Window;
+import org.fujion.core.CoreUtil;
 import org.fujion.page.PageUtil;
 
 import java.util.Date;
@@ -45,11 +46,13 @@ import java.util.Map;
  */
 public class DateRangeDialog implements IAutoWired {
 
+    private static final String RESOURCE_PREFIX = CoreUtil.getResourceClassPath(DateRangeDialog.class);
+
     /**
      * Displays the date range dialog.
      *
      * @param callback Callback for returning a date range reflecting the inputs from the dialog.
-     *            This will be null if the input is cancelled or if an unexpected error occurs.
+     *                 This will be null if the input is cancelled or if an unexpected error occurs.
      */
     public static void show(IResponseCallback<DateRange> callback) {
         Date today = DateUtil.today();
@@ -78,7 +81,7 @@ public class DateRangeDialog implements IAutoWired {
     public static void show(DateRange dateRange, IResponseCallback<DateRange> callback) {
         Map<String, Object> args = new HashMap<>();
         args.put("dateRange", dateRange);
-        Window dlg = (Window) PageUtil.createPage(DialogConstants.RESOURCE_PREFIX + "dateRangeDialog.fsp", null, args)
+        Window dlg = (Window) PageUtil.createPage(RESOURCE_PREFIX + "dateRangeDialog.fsp", null, args)
                 .get(0);
         dlg.modal((event) -> {
             callback.onComplete((DateRange) dlg.getAttribute("result"));

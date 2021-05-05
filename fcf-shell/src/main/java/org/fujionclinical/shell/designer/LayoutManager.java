@@ -32,6 +32,8 @@ import org.fujion.annotation.WiredComponent;
 import org.fujion.client.ClientUtil;
 import org.fujion.common.StrUtil;
 import org.fujion.component.*;
+import org.fujion.dialog.DialogUtil;
+import org.fujion.dialog.PopupDialog;
 import org.fujion.event.ClickEvent;
 import org.fujion.event.DblclickEvent;
 import org.fujion.event.IEventListener;
@@ -46,8 +48,6 @@ import org.fujionclinical.shell.layout.Layout;
 import org.fujionclinical.shell.layout.LayoutIdentifier;
 import org.fujionclinical.shell.layout.LayoutParser;
 import org.fujionclinical.shell.layout.LayoutUtil;
-import org.fujionclinical.ui.dialog.DialogUtil;
-import org.fujionclinical.ui.dialog.PopupDialog;
 
 import java.io.InputStream;
 import java.util.HashMap;

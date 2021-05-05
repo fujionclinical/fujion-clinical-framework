@@ -166,13 +166,7 @@ public class TreeUtil {
      * @return The matching tree item, or null if not found.
      */
     public static Treenode findNodeByLabel(Treeview tree, String label, boolean caseSensitive) {
-        for (Treenode item : tree.getChildren(Treenode.class)) {
-            if (caseSensitive ? label.equals(item.getLabel()) : label.equalsIgnoreCase(item.getLabel())) {
-                return item;
-            }
-        }
-
-        return null;
+        return (Treenode) tree.findChildByLabel(label, caseSensitive);
     }
 
     /**
@@ -254,7 +248,7 @@ public class TreeUtil {
     private static int compare(Treenode item1, Treenode item2) {
         String label1 = item1.getLabel();
         String label2 = item2.getLabel();
-        return StrUtil.compareToIgnoreCase(label1, label2);
+        return StrUtil.compareIgnoreCase(label1, label2);
     }
 
     /**

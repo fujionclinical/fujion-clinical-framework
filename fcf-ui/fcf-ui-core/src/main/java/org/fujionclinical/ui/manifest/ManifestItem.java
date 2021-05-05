@@ -78,9 +78,9 @@ public class ManifestItem implements IMatchable<ManifestItem> {
     
     @Override
     public int compareTo(ManifestItem o) {
-        int result = StrUtil.compareToIgnoreCase(implModule, o.implModule);
-        result = result == 0 ? StrUtil.compareToIgnoreCase(implVendor, o.implVendor) : result;
-        result = result == 0 ? StrUtil.compareToIgnoreCase(implVersion, o.implVersion) : result;
+        int result = StrUtil.compareIgnoreCase(implModule, o.implModule);
+        result = result == 0 ? StrUtil.compareIgnoreCase(implVendor, o.implVendor) : result;
+        result = result == 0 ? StrUtil.compareIgnoreCase(implVersion, o.implVersion) : result;
         return result;
     }
     

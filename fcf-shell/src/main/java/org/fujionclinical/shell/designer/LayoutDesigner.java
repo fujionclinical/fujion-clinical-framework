@@ -32,6 +32,7 @@ import org.fujion.annotation.WiredComponent;
 import org.fujion.client.ExecutionContext;
 import org.fujion.component.*;
 import org.fujion.component.Window.CloseAction;
+import org.fujion.dialog.DialogUtil;
 import org.fujion.event.*;
 import org.fujionclinical.shell.Constants;
 import org.fujionclinical.shell.elements.ElementBase;
@@ -39,7 +40,6 @@ import org.fujionclinical.shell.elements.ElementUI;
 import org.fujionclinical.shell.layout.Layout;
 import org.fujionclinical.shell.layout.LayoutParser;
 import org.fujionclinical.shell.plugins.PluginDefinition;
-import org.fujionclinical.ui.dialog.DialogUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;

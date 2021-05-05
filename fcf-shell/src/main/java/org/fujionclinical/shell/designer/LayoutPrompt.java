@@ -30,12 +30,12 @@ import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.common.StrUtil;
 import org.fujion.component.*;
+import org.fujion.dialog.DialogUtil;
 import org.fujion.event.IEventListener;
 import org.fujion.page.PageUtil;
 import org.fujionclinical.shell.Constants;
 import org.fujionclinical.shell.layout.LayoutIdentifier;
 import org.fujionclinical.shell.layout.LayoutUtil;
-import org.fujionclinical.ui.dialog.DialogUtil;
 
 import java.util.HashMap;
 import java.util.Map;

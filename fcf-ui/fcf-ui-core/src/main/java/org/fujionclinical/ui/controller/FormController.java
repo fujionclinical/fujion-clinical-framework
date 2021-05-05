@@ -31,11 +31,11 @@ import org.fujion.common.StrUtil;
 import org.fujion.component.BaseComponent;
 import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Button;
+import org.fujion.dialog.DialogUtil;
+import org.fujion.dialog.PopupDialog;
 import org.fujion.event.Event;
 import org.fujion.event.EventUtil;
 import org.fujion.event.IEventListener;
-import org.fujionclinical.ui.dialog.DialogUtil;
-import org.fujionclinical.ui.dialog.PopupDialog;
 import org.fujionclinical.ui.util.FCFUtil;
 
 import java.util.HashMap;

@@ -28,6 +28,7 @@ package org.fujionclinical.testharness;
 import org.apache.commons.lang3.StringUtils;
 import org.fujion.common.MiscUtil;
 import org.fujion.component.BaseComponent;
+import org.fujion.core.CoreUtil;
 import org.fujionclinical.shell.ShellEx;
 import org.fujionclinical.shell.plugins.PluginDefinition;
 import org.fujionclinical.shell.plugins.PluginRegistry;
@@ -35,7 +36,6 @@ import org.fujionclinical.ui.action.ActionRegistry;
 import org.fujionclinical.ui.action.ActionRegistry.ActionScope;
 import org.fujionclinical.ui.action.IAction;
 import org.fujionclinical.ui.controller.FrameworkController;
-import org.fujionclinical.ui.util.FCFUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -59,7 +59,7 @@ public class TestHarnessController extends FrameworkController {
             ShellEx shell = (ShellEx) comp;
             
             if (shell.getLayout() == null) {
-                shell.setLayout(FCFUtil.getResourcePath(TestHarnessController.class) + "testharness-layout.xml");
+                shell.setLayout(CoreUtil.getResourceClassPath(TestHarnessController.class) + "testharness-layout.xml");
             }
             
             List<PluginDefinition> plugins = new ArrayList<>();

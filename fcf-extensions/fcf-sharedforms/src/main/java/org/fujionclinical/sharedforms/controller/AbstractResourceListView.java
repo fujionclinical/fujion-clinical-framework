@@ -33,17 +33,18 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.annotation.WiredComponent;
+import org.fujion.common.MiscUtil;
 import org.fujion.component.BaseComponent;
 import org.fujion.component.Html;
 import org.fujion.component.Row;
 import org.fujion.component.Window;
+import org.fujion.core.CoreUtil;
+import org.fujion.dialog.DialogUtil;
 import org.fujion.page.PageUtil;
 import org.fujion.thread.ThreadedTask;
 import org.fujionclinical.api.cool.patient.PatientContext;
 import org.fujionclinical.api.event.IEventSubscriber;
 import org.fujionclinical.shell.elements.ElementPlugin;
-import org.fujionclinical.ui.dialog.DialogUtil;
-import org.fujionclinical.ui.util.FCFUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -60,7 +61,7 @@ public abstract class AbstractResourceListView<R, M, S extends DataSource> exten
 
     private static final Log log = LogFactory.getLog(AbstractResourceListView.class);
 
-    private static final String DETAIL_POPUP = FCFUtil.getResourcePath(AbstractResourceListView.class) + "resourceListDetailPopup.fsp";
+    private static final String DETAIL_POPUP = CoreUtil.getResourceClassPath(AbstractResourceListView.class) + "resourceListDetailPopup.fsp";
 
     @WiredComponent
     protected Html detailView;
@@ -113,7 +114,7 @@ public abstract class AbstractResourceListView<R, M, S extends DataSource> exten
             task.rethrow();
         } catch (Throwable e) {
             log.error(e);
-            status("An unexpected error was encountered:  " + FCFUtil.formatExceptionForDisplay(e));
+            status("An unexpected error was encountered:  " + MiscUtil.formatExceptionForDisplay(e));
             return;
         }
 

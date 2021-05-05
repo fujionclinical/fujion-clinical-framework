@@ -36,6 +36,7 @@ import org.fujion.annotation.Component.PropertyGetter;
 import org.fujion.annotation.Component.PropertySetter;
 import org.fujion.common.MiscUtil;
 import org.fujion.component.*;
+import org.fujion.dialog.DialogUtil;
 import org.fujion.event.KeycaptureEvent;
 import org.fujionclinical.api.context.ISurveyResponse;
 import org.fujionclinical.api.core.AppFramework;
@@ -60,7 +61,6 @@ import org.fujionclinical.shell.plugins.PluginResourceHelp;
 import org.fujionclinical.ui.command.CommandEvent;
 import org.fujionclinical.ui.command.CommandRegistry;
 import org.fujionclinical.ui.command.CommandUtil;
-import org.fujionclinical.ui.dialog.DialogUtil;
 import org.fujionclinical.ui.session.SessionControl;
 
 import java.util.*;

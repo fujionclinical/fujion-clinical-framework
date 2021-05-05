@@ -41,12 +41,12 @@ import org.fujion.component.BaseComponent;
 import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Label;
 import org.fujion.component.Style;
+import org.fujion.core.CoreUtil;
 import org.fujion.event.EventUtil;
 import org.fujion.thread.ThreadedTask;
 import org.fujionclinical.sharedforms.common.FormConstants;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.shell.plugins.PluginController;
-import org.fujionclinical.ui.util.FCFUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -254,7 +254,7 @@ public abstract class AbstractServiceController<T, M> extends PluginController {
         }
 
         Style style = new Style();
-        style.setSrc(FCFUtil.getResourcePath(AbstractServiceController.class, 1) + "common.css");
+        style.setSrc(CoreUtil.getResourceClassPath(AbstractServiceController.class, 1) + "common.css");
         root.getPage().addChild(style);
     }
 

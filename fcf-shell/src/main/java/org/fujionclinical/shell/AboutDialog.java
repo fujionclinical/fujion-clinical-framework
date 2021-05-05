@@ -28,13 +28,14 @@ package org.fujionclinical.shell;
 import org.apache.commons.lang3.StringUtils;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
+import org.fujion.common.MiscUtil;
 import org.fujion.common.StrUtil;
 import org.fujion.component.*;
+import org.fujion.dialog.DialogUtil;
 import org.fujion.page.PageUtil;
 import org.fujionclinical.shell.elements.ElementBase;
 import org.fujionclinical.shell.plugins.PluginDefinition;
 import org.fujionclinical.ui.controller.FrameworkController;
-import org.fujionclinical.ui.dialog.DialogUtil;
 import org.fujionclinical.ui.manifest.ManifestViewer;
 import org.fujionclinical.ui.util.FCFUtil;
 
@@ -199,7 +200,7 @@ public class AboutDialog extends FrameworkController {
             Window dlg = (Window) PageUtil.createPage(Constants.RESOURCE_PREFIX_SHELL + "aboutDialog.fsp", null, args).get(0);
             dlg.modal(null);
         } catch (Exception e) {
-            DialogUtil.showError(FCFUtil.formatExceptionForDisplay(e));
+            DialogUtil.showError(MiscUtil.formatExceptionForDisplay(e));
         }
     }
 

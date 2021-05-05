@@ -32,47 +32,9 @@ import org.fujion.component.Hyperlink;
 import org.fujionclinical.ui.util.FCFUtil;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class UtilTest {
-
-    public interface ArgumentMapTest {
-
-        void doAssertions();
-
-        void setTest2Variable(String value);
-    }
-
-    @Test
-    public void wireArgumentMapTest() {
-        Map<Object, Object> map = new HashMap<>();
-        map.put("test1Variable", 123);
-        map.put("test2Variable", "testing");
-        ArgumentMapTest controller = new ArgumentMapTest() {
-
-            public int test1Variable;
-
-            public String test2;
-
-            @Override
-            public void setTest2Variable(String value) {
-                test2 = value;
-            }
-
-            @Override
-            public void doAssertions() {
-                assertEquals(123, test1Variable);
-                assertEquals("testing", test2);
-            }
-        };
-
-        FCFUtil.wireController(map, controller);
-        controller.doAssertions();
-    }
 
     @Test
     public void getTextComponentTest() {
@@ -87,14 +49,4 @@ public class UtilTest {
         assertTrue(cmp instanceof Hyperlink);
     }
 
-    @Test
-    public void getResourcePathTest() {
-        assertEquals("web/org/fujionclinical/ui/core/", FCFUtil.getResourcePath(UtilTest.class));
-        assertEquals("web/org/fujionclinical/ui/", FCFUtil.getResourcePath(UtilTest.class, 1));
-        assertEquals("web/org/fujionclinical/ui/core/", FCFUtil.getResourcePath(UtilTest.class.getPackage()));
-        assertEquals("web/org/fujionclinical/", FCFUtil.getResourcePath(UtilTest.class.getPackage(), 2));
-        assertEquals("web/org/fujionclinical/ui/core/", FCFUtil.getResourcePath("org.fujionclinical.ui.core"));
-        assertEquals("web/org/fujionclinical/ui/core/", FCFUtil.getResourcePath("org.fujionclinical.ui.core", -2));
-        assertEquals("web/org/fujionclinical/ui/", FCFUtil.getResourcePath("org.fujionclinical.ui.core", 1));
-    }
 }

@@ -32,6 +32,7 @@ import org.fujion.component.BaseComponent;
 import org.fujion.component.BaseLabeledComponent;
 import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Menupopup;
+import org.fujion.core.CoreUtil;
 import org.fujion.page.PageUtil;
 import org.fujionclinical.shell.Constants;
 import org.fujionclinical.shell.ancillary.FCFException;
@@ -41,7 +42,6 @@ import org.fujionclinical.shell.designer.DesignMask;
 import org.fujionclinical.shell.designer.DesignMask.MaskMode;
 import org.fujionclinical.shell.designer.PropertyEditorTriggers;
 import org.fujionclinical.shell.property.PropertyTypeRegistry;
-import org.fujionclinical.ui.util.FCFUtil;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -161,7 +161,7 @@ public abstract class ElementUI extends ElementBase {
         if (StringUtils.isEmpty(template)) {
             template = getTemplateUrl();
         } else if (!template.startsWith("web/")) {
-            template = FCFUtil.getResourcePath(getClass()) + template;
+            template = CoreUtil.getResourceClassPath(getClass()) + template;
         }
         
         BaseUIComponent top = null;

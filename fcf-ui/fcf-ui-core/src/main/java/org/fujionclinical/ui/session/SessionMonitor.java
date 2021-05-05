@@ -39,6 +39,7 @@ import org.fujion.common.DateUtil;
 import org.fujion.common.DateUtil.TimeUnit;
 import org.fujion.common.StrUtil;
 import org.fujion.component.*;
+import org.fujion.dialog.DialogUtil;
 import org.fujion.event.EventUtil;
 import org.fujion.event.TimerEvent;
 import org.fujion.websocket.ISessionListener;
@@ -47,7 +48,6 @@ import org.fujionclinical.api.event.IEventSubscriber;
 import org.fujionclinical.api.security.ISecurityService;
 import org.fujionclinical.api.user.User;
 import org.fujionclinical.ui.controller.FrameworkController;
-import org.fujionclinical.ui.dialog.DialogUtil;
 
 import java.util.HashMap;
 import java.util.Map;

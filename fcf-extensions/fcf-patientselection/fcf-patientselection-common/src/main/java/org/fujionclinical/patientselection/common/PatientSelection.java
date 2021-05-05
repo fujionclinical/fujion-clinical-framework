@@ -29,12 +29,12 @@ import edu.utah.kmm.model.cool.foundation.entity.Person;
 import org.fujion.ancillary.IResponseCallback;
 import org.fujion.common.StrUtil;
 import org.fujion.component.Window;
+import org.fujion.dialog.DialogUtil;
 import org.fujion.page.PageUtil;
 import org.fujionclinical.api.cool.patient.PatientContext;
 import org.fujionclinical.api.core.FrameworkUtil;
 import org.fujionclinical.api.property.PropertyUtil;
 import org.fujionclinical.api.security.SecurityUtil;
-import org.fujionclinical.ui.dialog.DialogUtil;
 
 import java.util.HashMap;
 import java.util.Iterator;

@@ -37,6 +37,7 @@ import org.fujion.common.DateRange;
 import org.fujion.component.*;
 import org.fujion.component.Rows.Selectable;
 import org.fujion.component.Window.Mode;
+import org.fujion.dialog.DialogUtil;
 import org.fujion.event.*;
 import org.fujion.model.ListModel;
 import org.fujionclinical.api.cool.patient.PatientContext;
@@ -45,7 +46,6 @@ import org.fujionclinical.patientselection.common.*;
 import org.fujionclinical.shell.ShellUtil;
 import org.fujionclinical.ui.controller.FrameworkController;
 import org.fujionclinical.ui.dialog.DateRangePicker;
-import org.fujionclinical.ui.dialog.DialogUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;

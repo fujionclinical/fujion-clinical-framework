@@ -26,7 +26,7 @@
 package org.fujionclinical.ui.core;
 
 import org.fujion.common.LocalizedMessage;
-import org.fujionclinical.ui.util.FCFUtil;
+import org.fujion.core.CoreUtil;
 
 /**
  * Constants class
@@ -36,7 +36,7 @@ public class Constants {
     /**
      * Primarily used to locate the embedded 'web' resources.
      */
-    public static final String RESOURCE_PREFIX = FCFUtil.getResourcePath(Constants.class);
+    public static final String RESOURCE_PREFIX = CoreUtil.getResourceClassPath(Constants.class);
 
     /**
      * Attribute name under which a component's associated composer is stored.

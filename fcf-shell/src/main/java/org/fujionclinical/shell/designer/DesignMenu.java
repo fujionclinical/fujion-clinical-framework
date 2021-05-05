@@ -34,6 +34,7 @@ import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Menu;
 import org.fujion.component.Menuitem;
 import org.fujion.core.WebUtil;
+import org.fujion.dialog.DialogUtil;
 import org.fujion.page.PageUtil;
 import org.fujionclinical.api.security.SecurityUtil;
 import org.fujionclinical.shell.Constants;
@@ -42,7 +43,6 @@ import org.fujionclinical.shell.elements.ElementDesktop;
 import org.fujionclinical.shell.layout.Layout;
 import org.fujionclinical.shell.layout.LayoutIdentifier;
 import org.fujionclinical.shell.layout.LayoutParser;
-import org.fujionclinical.ui.dialog.DialogUtil;
 import org.fujionclinical.ui.xml.XMLViewer;
 
 import java.util.Collections;

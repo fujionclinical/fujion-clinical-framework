@@ -30,13 +30,13 @@ import org.fujion.component.Label;
 import org.fujion.component.Page;
 import org.fujion.component.Window;
 import org.fujion.component.Window.Mode;
+import org.fujion.core.CoreUtil;
 import org.fujion.event.Event;
 import org.fujion.event.IEventListener;
 import org.fujion.page.PageDefinition;
 import org.fujion.page.PageParser;
 import org.fujionclinical.api.event.EventManager;
 import org.fujionclinical.api.event.IEventSubscriber;
-import org.fujionclinical.ui.util.FCFUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,8 +46,8 @@ import java.util.List;
  * Displays a popup message when a POPUP generic event is received.
  */
 public class PopupSupport implements IEventSubscriber<Object>, IEventListener {
-    
-    private static final String RESOURCE_PREFIX = FCFUtil.getResourcePath(PopupSupport.class);
+
+    private static final String RESOURCE_PREFIX = CoreUtil.getResourceClassPath(PopupSupport.class);
     
     private static final String EVENT_POPUP = "POPUP";
     

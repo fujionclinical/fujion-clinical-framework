@@ -26,14 +26,14 @@
 package org.fujionclinical.sharedforms.common;
 
 import org.fujion.common.LocalizedMessage;
-import org.fujionclinical.ui.util.FCFUtil;
+import org.fujion.core.CoreUtil;
 
 /**
  * Package-specific constants.
  */
 public class FormConstants {
 
-    public static final String RESOURCE_PREFIX = FCFUtil.getResourcePath(FormConstants.class, 1);
+    public static final String RESOURCE_PREFIX = CoreUtil.getResourceClassPath(FormConstants.class, 1);
 
     public static final String PROPERTY_ID_DATE_RANGE = "%.DATERANGE";
 

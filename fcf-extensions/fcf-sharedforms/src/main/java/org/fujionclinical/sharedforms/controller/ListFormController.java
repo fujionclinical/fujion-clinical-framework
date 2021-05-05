@@ -30,6 +30,7 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
+import org.fujion.common.MiscUtil;
 import org.fujion.common.StrUtil;
 import org.fujion.component.*;
 import org.fujion.component.Paneview.Orientation;
@@ -40,7 +41,6 @@ import org.fujion.model.IComponentRenderer;
 import org.fujion.model.ListModel;
 import org.fujionclinical.shell.elements.ElementPlugin;
 import org.fujionclinical.ui.command.CommandUtil;
-import org.fujionclinical.ui.util.FCFUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -335,7 +335,7 @@ public abstract class ListFormController<T> extends CaptionedFormController {
             populate(object, columns);
         } catch (Exception e) {
             columns.clear();
-            columns.add(FCFUtil.formatExceptionForDisplay(e));
+            columns.add(MiscUtil.formatExceptionForDisplay(e));
             error = true;
         }
         

@@ -32,6 +32,7 @@ import org.fujion.component.BaseComponent;
 import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Image;
 import org.fujion.component.Page;
+import org.fujion.core.CoreUtil;
 import org.fujion.ipc.InvocationRequest;
 import org.fujion.page.PageUtil;
 import org.fujionclinical.api.spring.SpringUtil;
@@ -41,7 +42,6 @@ import org.fujionclinical.help.IHelpSearch;
 import org.fujionclinical.help.IHelpViewer;
 import org.fujionclinical.help.viewer.HelpViewer.HelpViewerMode;
 import org.fujionclinical.ui.command.CommandUtil;
-import org.fujionclinical.ui.util.FCFUtil;
 
 import javax.servlet.ServletContext;
 
@@ -52,7 +52,7 @@ public class HelpUtil {
 
     private static HelpViewerMode defaultMode = HelpViewerMode.POPUP;
 
-    protected static final String RESOURCE_PREFIX = FCFUtil.getResourcePath(HelpUtil.class);
+    protected static final String RESOURCE_PREFIX = CoreUtil.getResourceClassPath(HelpUtil.class);
 
     protected static final String IMAGES_ROOT = RESOURCE_PREFIX + "images/";
 

@@ -6,12 +6,12 @@ import edu.utah.kmm.model.cool.util.PersonUtils;
 import org.fujion.ancillary.MimeContent;
 import org.fujion.common.LocalizedMessage;
 import org.fujion.component.Image;
+import org.fujion.core.CoreUtil;
 import org.fujionclinical.api.cool.common.CoolUtil;
-import org.fujionclinical.ui.util.FCFUtil;
 
 public class PersonPhoto extends Image {
 
-    private static final String RESOURCE_PATH = FCFUtil.getResourcePath(PersonPhoto.class);
+    private static final String RESOURCE_PATH = CoreUtil.getResourceClassPath(PersonPhoto.class);
 
     private static final String IMAGE_NO_PHOTO = RESOURCE_PATH + "silhouette1.png";
 

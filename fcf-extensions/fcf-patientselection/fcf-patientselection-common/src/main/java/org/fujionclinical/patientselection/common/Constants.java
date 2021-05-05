@@ -27,14 +27,14 @@ package org.fujionclinical.patientselection.common;
 
 
 import org.fujion.common.LocalizedMessage;
-import org.fujionclinical.ui.util.FCFUtil;
+import org.fujion.core.CoreUtil;
 
 /**
  * Constants for patient selection.
  */
 public class Constants {
 
-    public static final String RESOURCE_PATH = FCFUtil.getResourcePath(Constants.class, 1);
+    public static final String RESOURCE_PATH = CoreUtil.getResourceClassPath(Constants.class, 1);
 
     public static final String FILTER_DROP_ID = "patientselection.filter.drop.id";
 

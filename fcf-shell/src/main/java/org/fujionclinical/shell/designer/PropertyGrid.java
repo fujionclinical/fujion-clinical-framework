@@ -31,6 +31,7 @@ import org.fujion.ancillary.IAutoWired;
 import org.fujion.ancillary.INamespace;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
+import org.fujion.common.MiscUtil;
 import org.fujion.common.StrUtil;
 import org.fujion.component.*;
 import org.fujion.event.ChangeEvent;
@@ -47,7 +48,6 @@ import org.fujionclinical.shell.elements.ElementBase;
 import org.fujionclinical.shell.plugins.PluginDefinition;
 import org.fujionclinical.shell.property.PropertyInfo;
 import org.fujionclinical.shell.property.PropertyType;
-import org.fujionclinical.ui.util.FCFUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -123,7 +123,7 @@ public class PropertyGrid implements IAutoWired {
         try {
             editor.setValue(propInfo.getPropertyValue(target));
         } catch (Exception e) {
-            lbl = new Label(FCFUtil.formatExceptionForDisplay(e));
+            lbl = new Label(MiscUtil.formatExceptionForDisplay(e));
             lbl.setHint(lbl.getLabel());
             cmpt = lbl;
         }

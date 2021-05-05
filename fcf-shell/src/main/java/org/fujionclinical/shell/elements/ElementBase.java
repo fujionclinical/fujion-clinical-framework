@@ -29,6 +29,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.common.CollectionUtil;
 import org.fujion.component.BaseUIComponent;
+import org.fujion.dialog.DialogUtil;
 import org.fujionclinical.api.event.EventManager;
 import org.fujionclinical.api.event.IEventManager;
 import org.fujionclinical.shell.AboutDialog;
@@ -44,7 +45,6 @@ import org.fujionclinical.shell.plugins.IPluginResource;
 import org.fujionclinical.shell.plugins.PluginDefinition;
 import org.fujionclinical.shell.plugins.PluginRegistry;
 import org.fujionclinical.shell.property.PropertyInfo;
-import org.fujionclinical.ui.dialog.DialogUtil;
 
 import java.util.ArrayList;
 import java.util.List;

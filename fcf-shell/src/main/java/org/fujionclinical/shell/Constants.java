@@ -26,7 +26,7 @@
 package org.fujionclinical.shell;
 
 import org.fujion.common.LocalizedMessage;
-import org.fujionclinical.ui.util.FCFUtil;
+import org.fujion.core.CoreUtil;
 
 /**
  * Package-wide constants.
@@ -46,7 +46,7 @@ public class Constants {
 
     // ---------------------------- Resources ----------------------------
 
-    public static final String RESOURCE_PREFIX_SHELL = FCFUtil.getResourcePath(Constants.class);
+    public static final String RESOURCE_PREFIX_SHELL = CoreUtil.getResourceClassPath(Constants.class);
     public static final String ICON_PATH = "webjars/fcf-shell/icons/";
     public static final String DESIGN_ICON_ACTIVE = ICON_PATH + "designOn.png";
     public static final String DESIGN_ICON_INACTIVE = ICON_PATH + "designOff.png";

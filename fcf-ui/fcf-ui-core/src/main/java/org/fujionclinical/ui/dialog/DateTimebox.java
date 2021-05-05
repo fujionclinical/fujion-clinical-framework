@@ -33,6 +33,7 @@ import org.fujion.annotation.OnFailure;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.common.Assert;
 import org.fujion.common.DateUtil;
+import org.fujion.common.LocalizedMessage;
 import org.fujion.component.*;
 import org.fujion.event.Event;
 import org.fujionclinical.ui.util.DateTimeUtil;
@@ -43,6 +44,10 @@ import java.util.Date;
  * Presents a date/time input element.
  */
 public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
+
+    private static final LocalizedMessage MSG_REQUIRE_TIME = new LocalizedMessage("fcf.datetime.error.no.time");
+
+    private static final LocalizedMessage MSG_REQUIRE_DATE = new LocalizedMessage("fcf.datetime.error.no.date");
 
     @WiredComponent
     private Popup popup;
@@ -157,7 +162,7 @@ public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
      * @param value The date value.
      */
     public void validateDate(Date value) {
-        Assert.isTrue(!requireTime || DateUtil.hasTime(value), DialogConstants.MSG_REQUIRE_TIME.toString());
+        Assert.isTrue(!requireTime || DateUtil.hasTime(value), MSG_REQUIRE_TIME.toString());
     }
 
     /**
@@ -191,9 +196,9 @@ public class DateTimebox extends Popupbox implements INamespace, IAutoWired {
         boolean hasTime = timebox.getValue() != null;
 
         if (datebox.getValue() == null && hasTime) {
-            showError(DialogConstants.MSG_REQUIRE_DATE.toString(), datebox);
+            showError(MSG_REQUIRE_DATE.toString(), datebox);
         } else if (requireTime && !hasTime) {
-            showError(DialogConstants.MSG_REQUIRE_TIME.toString(), timebox);
+            showError(MSG_REQUIRE_TIME.toString(), timebox);
         }
 
         return ok;

@@ -13,7 +13,7 @@
 	</paneview>
 	<toolbar name="toolbar" width="100%" visible="false" />
 	<menupopup name="menupopup">
-		<menuitem name="mnuRefresh" label="${@msg.fcf.btn.refresh.label}" />
+		<menuitem name="mnuRefresh" label="${@msg.org.fujion.dialog.btn.refresh.label}" />
 	</menupopup>
 	<style src="web/org/fujionclinical/sharedforms/sharedForms.css" />
 </window>

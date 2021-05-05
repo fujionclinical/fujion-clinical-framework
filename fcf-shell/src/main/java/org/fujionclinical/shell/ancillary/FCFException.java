@@ -25,14 +25,14 @@
  */
 package org.fujionclinical.shell.ancillary;
 
-import org.fujionclinical.ui.util.FCFUtil;
+import org.fujion.common.MiscUtil;
 
 public class FCFException extends RuntimeException {
     
     private static final long serialVersionUID = 1L;
     
     public static void raise(String text, Throwable t) throws FCFException {
-        raise(text + "\n" + FCFUtil.formatExceptionForDisplay(t));
+        raise(text + "\n" + MiscUtil.formatExceptionForDisplay(t));
     }
     
     public static void raise(String text) throws FCFException {

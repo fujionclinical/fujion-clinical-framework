@@ -86,7 +86,9 @@
 		<!-- Component scans -->
 		
 		<ffc:component-scan package="org.fujionclinical.ui.dialog" />
-		
+
+		<bean class="org.fujionclinical.ui.dialog.DialogReponseProvider" />
+
 	</beans>
 
 	<beans profile="child">

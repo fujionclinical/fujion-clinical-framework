@@ -29,16 +29,17 @@ import org.apache.commons.lang3.StringUtils;
 import org.fujion.ancillary.IAutoWired;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
+import org.fujion.common.MiscUtil;
 import org.fujion.common.StrUtil;
 import org.fujion.component.BaseComponent;
 import org.fujion.component.Label;
 import org.fujion.component.Textbox;
 import org.fujion.component.Window;
+import org.fujion.core.CoreUtil;
+import org.fujion.dialog.DialogUtil;
 import org.fujionclinical.api.security.ISecurityService;
 import org.fujionclinical.api.user.User;
 import org.fujionclinical.api.user.UserContext;
-import org.fujionclinical.ui.dialog.DialogUtil;
-import org.fujionclinical.ui.util.FCFUtil;
 
 import static org.fujionclinical.security.Constants.*;
 
@@ -51,7 +52,7 @@ public class PasswordChangeController implements IAutoWired {
         DialogUtil.popup(DIALOG);
     }
 
-    private static final String DIALOG = FCFUtil.getResourcePath(PasswordChangeController.class, 1) + "passwordChange.fsp";
+    private static final String DIALOG = CoreUtil.getResourceClassPath(PasswordChangeController.class, 1) + "passwordChange.fsp";
 
     private Window window;
 
@@ -135,7 +136,7 @@ public class PasswordChangeController implements IAutoWired {
                             MSG_PASSWORD_CHANGED_TITLE.toString());
                 }
             } catch (Exception e) {
-                showMessage(MSG_PASSWORD_CHANGE_ERROR.toString(FCFUtil.formatExceptionForDisplay(e)));
+                showMessage(MSG_PASSWORD_CHANGE_ERROR.toString(MiscUtil.formatExceptionForDisplay(e)));
             }
         }
     }

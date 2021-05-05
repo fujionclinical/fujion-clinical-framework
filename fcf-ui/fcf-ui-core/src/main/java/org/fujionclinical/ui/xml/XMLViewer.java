@@ -28,7 +28,7 @@ package org.fujionclinical.ui.xml;
 import org.fujion.component.BaseComponent;
 import org.fujion.component.BaseUIComponent;
 import org.fujion.component.Window;
-import org.fujionclinical.ui.dialog.PopupDialog;
+import org.fujion.dialog.PopupDialog;
 import org.w3c.dom.Document;
 
 import java.util.Collections;
