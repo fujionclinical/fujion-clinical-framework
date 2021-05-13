@@ -1,5 +1,5 @@
 {
-  "paths": {
+  "imports": {
     "fcf-login": "js/login.js",
     "fcf-login-css": "css/login.css"
   }
