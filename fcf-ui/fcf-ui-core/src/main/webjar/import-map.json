@@ -1,5 +1,5 @@
 {
-  "map": {
+  "imports": {
     "fcf-core": "js/fcf-core.js",
     "fcf-core-css": "css/fcf-core.css"
   }

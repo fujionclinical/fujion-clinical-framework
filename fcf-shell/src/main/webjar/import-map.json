@@ -1,5 +1,5 @@
 {
-  "map": {
+  "imports": {
     "fcf-shell": "js/fcf-shell.js",
     "fcf-shell-css": "css/fcf-shell.css"
   }
