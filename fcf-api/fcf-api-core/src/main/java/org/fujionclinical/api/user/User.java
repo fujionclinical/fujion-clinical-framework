@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.api.user;
 
-import edu.utah.kmm.model.cool.foundation.entity.Person;
-import edu.utah.kmm.model.cool.util.PersonUtils;
+import org.coolmodel.foundation.entity.Person;
+import org.coolmodel.util.PersonUtils;
 import org.fujionclinical.api.security.ISecurityDomain;
 
 import java.util.List;

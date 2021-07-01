@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.cool.practitioner;
 
-import edu.utah.kmm.model.cool.foundation.entity.Person;
+import org.coolmodel.foundation.entity.Person;
 import org.fujionclinical.api.context.ContextManager;
 import org.fujionclinical.api.context.IContextSubscriber;
 import org.fujionclinical.api.cool.common.AbstractIdentifiableContext;

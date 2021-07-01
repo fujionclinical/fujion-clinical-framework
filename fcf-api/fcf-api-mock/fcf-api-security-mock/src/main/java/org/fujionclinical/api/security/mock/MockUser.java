@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.security.mock;
 
-import edu.utah.kmm.model.cool.util.PersonNameParsers;
+import org.coolmodel.util.PersonNameParsers;
 import org.fujionclinical.api.security.ISecurityDomain;
 import org.fujionclinical.api.security.SecurityDomains;
 import org.fujionclinical.api.user.UserImpl;

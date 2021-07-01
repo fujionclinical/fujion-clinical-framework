@@ -25,9 +25,9 @@
  */
 package org.fujionclinical.sharedforms.controller;
 
-import edu.utah.kmm.model.cool.mediator.query.service.IQueryService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.coolmodel.mediator.query.service.IQueryService;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.OnFailure;
 import org.fujion.annotation.WiredComponent;

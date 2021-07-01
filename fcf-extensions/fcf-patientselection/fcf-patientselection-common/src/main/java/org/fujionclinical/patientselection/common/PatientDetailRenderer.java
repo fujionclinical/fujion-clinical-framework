@@ -26,16 +26,16 @@
 package org.fujionclinical.patientselection.common;
 
 import edu.utah.kmm.common.utils.CommonUtils;
-import edu.utah.kmm.model.cool.foundation.datatype.Address;
-import edu.utah.kmm.model.cool.foundation.datatype.ContactPoint;
-import edu.utah.kmm.model.cool.foundation.datatype.ContactPointSystem;
-import edu.utah.kmm.model.cool.foundation.datatype.ContactPointUse;
-import edu.utah.kmm.model.cool.foundation.entity.Person;
-import edu.utah.kmm.model.cool.mediator.common.Formatters;
-import edu.utah.kmm.model.cool.util.ContactPointUtils;
-import edu.utah.kmm.model.cool.util.PersonUtils;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.coolmodel.foundation.datatype.Address;
+import org.coolmodel.foundation.datatype.ContactPoint;
+import org.coolmodel.foundation.datatype.ContactPointSystem;
+import org.coolmodel.foundation.datatype.ContactPointUse;
+import org.coolmodel.foundation.entity.Person;
+import org.coolmodel.mediator.common.Formatters;
+import org.coolmodel.util.ContactPointUtils;
+import org.coolmodel.util.PersonUtils;
 import org.fujion.common.DateUtil;
 import org.fujion.common.StrUtil;
 import org.fujion.component.BaseUIComponent;

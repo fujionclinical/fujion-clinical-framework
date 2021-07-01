@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.user;
 
-import edu.utah.kmm.model.cool.foundation.entity.PersonImpl;
+import org.coolmodel.foundation.entity.PersonImpl;
 import org.fujionclinical.api.security.ISecurityDomain;
 
 public class UserImpl extends PersonImpl implements User {

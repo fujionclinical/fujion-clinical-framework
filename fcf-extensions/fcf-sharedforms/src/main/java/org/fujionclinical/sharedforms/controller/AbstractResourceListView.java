@@ -25,13 +25,13 @@
  */
 package org.fujionclinical.sharedforms.controller;
 
-import edu.utah.kmm.model.cool.foundation.entity.Person;
-import edu.utah.kmm.model.cool.mediator.datasource.DataSource;
-import edu.utah.kmm.model.cool.mediator.datasource.DataSources;
-import edu.utah.kmm.model.cool.util.CoolUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.coolmodel.foundation.entity.Person;
+import org.coolmodel.mediator.datasource.DataSource;
+import org.coolmodel.mediator.datasource.DataSources;
+import org.coolmodel.util.CoolUtils;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.common.MiscUtil;
 import org.fujion.component.BaseComponent;

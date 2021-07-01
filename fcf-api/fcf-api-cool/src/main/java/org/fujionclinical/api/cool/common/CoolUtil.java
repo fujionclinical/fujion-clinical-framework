@@ -25,12 +25,12 @@
  */
 package org.fujionclinical.api.cool.common;
 
-import edu.utah.kmm.model.cool.core.datatype.Attachment;
-import edu.utah.kmm.model.cool.core.datatype.Period;
-import edu.utah.kmm.model.cool.core.datatype.PeriodImpl;
-import edu.utah.kmm.model.cool.mediator.datasource.DataSource;
-import edu.utah.kmm.model.cool.mediator.datasource.DataSources;
 import org.apache.commons.lang3.StringUtils;
+import org.coolmodel.core.datatype.Attachment;
+import org.coolmodel.core.datatype.Period;
+import org.coolmodel.core.datatype.PeriodImpl;
+import org.coolmodel.mediator.datasource.DataSource;
+import org.coolmodel.mediator.datasource.DataSources;
 import org.fujion.ancillary.MimeContent;
 import org.fujion.common.DateRange;
 import org.fujion.common.DateUtil;

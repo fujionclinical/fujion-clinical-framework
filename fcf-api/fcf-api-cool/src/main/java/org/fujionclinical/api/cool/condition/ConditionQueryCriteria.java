@@ -25,11 +25,11 @@
  */
 package org.fujionclinical.api.cool.condition;
 
-import edu.utah.kmm.model.cool.clinical.encounter.Encounter;
-import edu.utah.kmm.model.cool.clinical.finding.AssertionalFindingClinicalStatus;
-import edu.utah.kmm.model.cool.clinical.finding.Condition;
-import edu.utah.kmm.model.cool.foundation.entity.Person;
-import edu.utah.kmm.terminology.api.model.ConceptReferenceSet;
+import org.coolmodel.clinical.encounter.Encounter;
+import org.coolmodel.clinical.finding.AssertionalFindingClinicalStatus;
+import org.coolmodel.clinical.finding.Condition;
+import org.coolmodel.core.terminology.ConceptSet;
+import org.coolmodel.foundation.entity.Person;
 import org.fujionclinical.api.query.AbstractSearchCriteria;
 
 import java.util.Date;
@@ -56,7 +56,7 @@ public class ConditionQueryCriteria extends AbstractSearchCriteria<Condition> {
         setContextParam("encounter", encounter);
     }
 
-    public void setStatus(ConceptReferenceSet status) {
+    public void setStatus(ConceptSet status) {
         setContextParam("verificationStatus", status);
     }
 

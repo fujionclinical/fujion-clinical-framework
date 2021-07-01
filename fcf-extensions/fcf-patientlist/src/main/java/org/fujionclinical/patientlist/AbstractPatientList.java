@@ -25,14 +25,14 @@
  */
 package org.fujionclinical.patientlist;
 
-import edu.utah.kmm.model.cool.clinical.role.Patient;
-import edu.utah.kmm.model.cool.foundation.core.IdentifiableCollection;
-import edu.utah.kmm.model.cool.foundation.entity.Person;
-import edu.utah.kmm.model.cool.mediator.dao.ModelDAO;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.ConstructorUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.coolmodel.clinical.role.Patient;
+import org.coolmodel.foundation.core.IdentifiableCollection;
+import org.coolmodel.foundation.entity.Person;
+import org.coolmodel.mediator.dao.ModelDAO;
 import org.fujion.common.DateRange;
 import org.fujionclinical.api.cool.common.CoolUtil;
 

@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.api.cool.common;
 
-import edu.utah.kmm.model.cool.foundation.core.Identifiable;
-import edu.utah.kmm.model.cool.util.CoolUtils;
+import org.coolmodel.foundation.core.Identifiable;
+import org.coolmodel.util.CoolUtils;
 import org.fujionclinical.api.context.IContextSubscriber;
 import org.fujionclinical.api.context.ManagedContext;
 

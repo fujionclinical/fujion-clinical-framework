@@ -25,13 +25,13 @@
  */
 package org.fujionclinical.api.query;
 
-import edu.utah.kmm.model.cool.foundation.core.Identifiable;
-import edu.utah.kmm.model.cool.mediator.datasource.DataSource;
-import edu.utah.kmm.model.cool.mediator.expression.parser.ExpressionParser;
-import edu.utah.kmm.model.cool.mediator.expression.parser.ResolvedExpression;
-import edu.utah.kmm.model.cool.mediator.query.QueryContext;
-import edu.utah.kmm.model.cool.mediator.query.QueryContextImpl;
 import org.apache.commons.lang3.StringUtils;
+import org.coolmodel.foundation.core.Identifiable;
+import org.coolmodel.mediator.datasource.DataSource;
+import org.coolmodel.mediator.expression.parser.ExpressionParser;
+import org.coolmodel.mediator.expression.parser.ResolvedExpression;
+import org.coolmodel.mediator.query.QueryContext;
+import org.coolmodel.mediator.query.QueryContextImpl;
 import org.fujion.common.Assert;
 
 import java.util.List;

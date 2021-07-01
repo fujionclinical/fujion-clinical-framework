@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.test;
 
-import edu.utah.kmm.model.cool.mediator.common.AbstractModelDescriptor;
+import org.coolmodel.mediator.common.AbstractModelDescriptor;
 
 public class MockModelDescriptor extends AbstractModelDescriptor {
 

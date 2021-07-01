@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.api.cool.encounter;
 
-import edu.utah.kmm.model.cool.clinical.encounter.Encounter;
-import edu.utah.kmm.model.cool.foundation.entity.Person;
+import org.coolmodel.clinical.encounter.Encounter;
+import org.coolmodel.foundation.entity.Person;
 import org.fujion.common.MiscUtil;
 import org.fujionclinical.api.context.ContextItems;
 import org.fujionclinical.api.context.ContextManager;

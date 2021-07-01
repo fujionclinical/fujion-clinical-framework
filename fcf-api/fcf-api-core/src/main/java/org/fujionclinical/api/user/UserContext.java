@@ -25,9 +25,9 @@
  */
 package org.fujionclinical.api.user;
 
-import edu.utah.kmm.model.cool.util.CoolUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.coolmodel.util.CoolUtils;
 import org.fujionclinical.api.context.ContextManager;
 import org.fujionclinical.api.context.IContextSubscriber;
 import org.fujionclinical.api.context.ISharedContext;

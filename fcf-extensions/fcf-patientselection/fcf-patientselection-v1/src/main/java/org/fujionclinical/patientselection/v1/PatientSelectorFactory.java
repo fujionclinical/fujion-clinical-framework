@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.patientselection.v1;
 
-import edu.utah.kmm.model.cool.foundation.entity.Person;
+import org.coolmodel.foundation.entity.Person;
 import org.fujion.ancillary.IResponseCallback;
 import org.fujion.component.Window;
 import org.fujionclinical.patientselection.common.Constants;

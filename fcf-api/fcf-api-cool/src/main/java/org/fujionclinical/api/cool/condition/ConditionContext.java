@@ -26,10 +26,10 @@
 package org.fujionclinical.api.cool.condition;
 
 import edu.utah.kmm.common.utils.CommonUtils;
-import edu.utah.kmm.model.cool.clinical.finding.Condition;
-import edu.utah.kmm.model.cool.foundation.entity.Person;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.coolmodel.clinical.finding.Condition;
+import org.coolmodel.foundation.entity.Person;
 import org.fujionclinical.api.context.ContextManager;
 import org.fujionclinical.api.context.IContextSubscriber;
 import org.fujionclinical.api.context.ISurveyResponse;

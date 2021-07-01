@@ -25,13 +25,13 @@
  */
 package org.fujionclinical.patientselection.common;
 
-import edu.utah.kmm.model.cool.clinical.role.Patient;
-import edu.utah.kmm.model.cool.foundation.datatype.PersonName;
-import edu.utah.kmm.model.cool.foundation.entity.Person;
-import edu.utah.kmm.model.cool.mediator.datasource.DataSource;
-import edu.utah.kmm.model.cool.mediator.query.QueryException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.coolmodel.clinical.role.Patient;
+import org.coolmodel.foundation.datatype.PersonName;
+import org.coolmodel.foundation.entity.Person;
+import org.coolmodel.mediator.datasource.DataSource;
+import org.coolmodel.mediator.query.QueryException;
 import org.fujion.ancillary.IResponseCallback;
 import org.fujion.common.CollectionUtil;
 import org.fujion.common.MiscUtil;

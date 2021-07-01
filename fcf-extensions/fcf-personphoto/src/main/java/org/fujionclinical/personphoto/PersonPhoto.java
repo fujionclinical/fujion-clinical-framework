@@ -1,8 +1,8 @@
 package org.fujionclinical.personphoto;
 
 import edu.utah.kmm.common.utils.CommonUtils;
-import edu.utah.kmm.model.cool.foundation.entity.Person;
-import edu.utah.kmm.model.cool.util.PersonUtils;
+import org.coolmodel.foundation.entity.Person;
+import org.coolmodel.util.PersonUtils;
 import org.fujion.ancillary.MimeContent;
 import org.fujion.common.LocalizedMessage;
 import org.fujion.component.Image;

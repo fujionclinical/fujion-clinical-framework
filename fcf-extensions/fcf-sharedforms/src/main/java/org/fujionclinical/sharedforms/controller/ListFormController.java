@@ -25,9 +25,9 @@
  */
 package org.fujionclinical.sharedforms.controller;
 
-import edu.utah.kmm.model.cool.mediator.common.Formatters;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.coolmodel.mediator.common.Formatters;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.common.MiscUtil;

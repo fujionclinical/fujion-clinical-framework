@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.hibernate.security;
 
-import edu.utah.kmm.model.cool.foundation.datatype.PersonName;
-import edu.utah.kmm.model.cool.util.PersonNameParsers;
+import org.coolmodel.foundation.datatype.PersonName;
+import org.coolmodel.util.PersonNameParsers;
 import org.fujion.common.StrUtil;
 import org.fujionclinical.api.security.ISecurityDomain;
 import org.fujionclinical.api.user.UserImpl;

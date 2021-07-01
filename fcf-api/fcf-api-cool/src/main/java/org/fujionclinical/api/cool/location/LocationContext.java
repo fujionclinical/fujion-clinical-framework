@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.cool.location;
 
-import edu.utah.kmm.model.cool.foundation.entity.Location;
+import org.coolmodel.foundation.entity.Location;
 import org.fujionclinical.api.context.ContextItems;
 import org.fujionclinical.api.context.ContextManager;
 import org.fujionclinical.api.context.IContextSubscriber;

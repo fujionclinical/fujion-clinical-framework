@@ -25,10 +25,10 @@
  */
 package org.fujionclinical.reports.header;
 
-import edu.utah.kmm.model.cool.core.datatype.Identifier;
-import edu.utah.kmm.model.cool.foundation.entity.Person;
-import edu.utah.kmm.model.cool.util.PersonUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.coolmodel.core.datatype.Identifier;
+import org.coolmodel.foundation.entity.Person;
+import org.coolmodel.util.PersonUtils;
 import org.fujion.annotation.OnFailure;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.common.DateUtil;

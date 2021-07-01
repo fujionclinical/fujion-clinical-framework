@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.patientlist;
 
-import edu.utah.kmm.model.cool.foundation.entity.Person;
+import org.coolmodel.foundation.entity.Person;
 
 /**
  * A list item that is associates a patient object with some additional arbitrary displayable

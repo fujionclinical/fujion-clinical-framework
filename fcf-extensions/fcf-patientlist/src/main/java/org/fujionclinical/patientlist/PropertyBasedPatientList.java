@@ -25,9 +25,9 @@
  */
 package org.fujionclinical.patientlist;
 
-import edu.utah.kmm.model.cool.foundation.entity.Person;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.coolmodel.foundation.entity.Person;
 import org.fujionclinical.api.property.PropertyUtil;
 
 import java.util.ArrayList;

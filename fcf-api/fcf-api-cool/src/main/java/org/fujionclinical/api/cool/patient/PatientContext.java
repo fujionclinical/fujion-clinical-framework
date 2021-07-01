@@ -25,10 +25,10 @@
  */
 package org.fujionclinical.api.cool.patient;
 
-import edu.utah.kmm.model.cool.foundation.entity.Person;
-import edu.utah.kmm.model.cool.foundation.entity.PersonImpl;
-import edu.utah.kmm.model.cool.util.PersonNameParsers;
-import edu.utah.kmm.model.cool.util.PersonUtils;
+import org.coolmodel.foundation.entity.Person;
+import org.coolmodel.foundation.entity.PersonImpl;
+import org.coolmodel.util.PersonNameParsers;
+import org.coolmodel.util.PersonUtils;
 import org.fujionclinical.api.context.ContextItems;
 import org.fujionclinical.api.context.ContextManager;
 import org.fujionclinical.api.context.IContextSubscriber;
@@ -123,7 +123,7 @@ public class PatientContext extends AbstractIdentifiableContext<Person> {
         }
 
         person.setBirthDate(contextItems.getDate(CCOW_DOB));
-        person.setGender(PersonUtils.genderAsConceptReferenceSet(contextItems.getItem(CCOW_GENDER)));
+        person.setGender(PersonUtils.genderAsConceptSet(contextItems.getItem(CCOW_GENDER)));
         person.addName(PersonNameParsers.get().fromString(contextItems.getItem(CCOW_NAM)));
         String mrn = contextItems.getItem(CCOW_MRN, "MRN");
         PersonUtils.setMRN(person, mrn == null ? null : PersonUtils.createMRN(null, mrn));

@@ -25,10 +25,10 @@
  */
 package org.fujionclinical.api.cool.document;
 
-import edu.utah.kmm.model.cool.clinical.encounter.Encounter;
-import edu.utah.kmm.model.cool.clinical.finding.Document;
-import edu.utah.kmm.model.cool.clinical.finding.DocumentStatus;
-import edu.utah.kmm.model.cool.foundation.entity.Person;
+import org.coolmodel.clinical.encounter.Encounter;
+import org.coolmodel.clinical.finding.Document;
+import org.coolmodel.clinical.finding.DocumentStatus;
+import org.coolmodel.foundation.entity.Person;
 import org.fujionclinical.api.query.AbstractSearchCriteria;
 
 public class DocumentQueryCriteria extends AbstractSearchCriteria<Document> {

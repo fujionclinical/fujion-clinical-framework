@@ -25,10 +25,8 @@
  */
 package org.fujionclinical.api.cool.patient;
 
-import edu.utah.kmm.model.cool.clinical.role.Patient;
-import edu.utah.kmm.model.cool.util.PersonUtils;
-import edu.utah.kmm.terminology.api.model.ConceptReference;
-import edu.utah.kmm.terminology.api.model.ConceptReferenceImpl;
+import org.coolmodel.clinical.role.Patient;
+import org.coolmodel.util.PersonUtils;
 import org.fujionclinical.api.cool.person.PersonQueryCriteria;
 
 /**

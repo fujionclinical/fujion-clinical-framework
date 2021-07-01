@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.patientlist;
 
-import edu.utah.kmm.model.cool.foundation.entity.Person;
-import edu.utah.kmm.model.cool.util.PersonUtils;
+import org.coolmodel.foundation.entity.Person;
+import org.coolmodel.util.PersonUtils;
 
 public interface IPatientListItem extends Comparable<IPatientListItem> {
     Person getPatient();

@@ -25,19 +25,19 @@
  */
 package org.fujionclinical.api.cool.practitioner;
 
-import edu.utah.kmm.model.cool.clinical.role.Practitioner;
-import edu.utah.kmm.model.cool.core.datatype.Identifier;
-import edu.utah.kmm.model.cool.core.datatype.IdentifierImpl;
+import org.coolmodel.clinical.role.Practitioner;
+import org.coolmodel.core.datatype.Identifier;
+import org.coolmodel.core.datatype.IdentifierImpl;
+import org.coolmodel.core.terminology.ConceptSet;
+import org.coolmodel.core.terminology.ConceptSetImpl;
 import org.fujionclinical.api.cool.person.PersonQueryCriteria;
-import edu.utah.kmm.terminology.api.model.ConceptReferenceSet;
-import edu.utah.kmm.terminology.api.model.ConceptReferenceSetImpl;
 
 /**
  * Criteria for practitioner searches.
  */
 public class PractitionerQueryCriteria extends PersonQueryCriteria<Practitioner> {
 
-    public static final ConceptReferenceSet DEA_CONCEPT_CODE = new ConceptReferenceSetImpl((String) null, "DEA", null);
+    public static final ConceptSet DEA_CONCEPT_CODE = new ConceptSetImpl((String) null, "DEA", null);
 
     public PractitionerQueryCriteria() {
         super(Practitioner.class, null);

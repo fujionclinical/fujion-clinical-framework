@@ -25,10 +25,10 @@
  */
 package org.fujionclinical.patientselection.common;
 
-import edu.utah.kmm.model.cool.foundation.entity.Person;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.coolmodel.foundation.entity.Person;
 import org.fujion.component.Listitem;
 import org.fujionclinical.api.core.FrameworkUtil;
 import org.fujionclinical.ui.controller.FrameworkController;

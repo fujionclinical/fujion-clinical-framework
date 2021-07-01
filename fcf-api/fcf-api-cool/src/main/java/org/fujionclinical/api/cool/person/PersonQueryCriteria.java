@@ -25,24 +25,24 @@
  */
 package org.fujionclinical.api.cool.person;
 
-import edu.utah.kmm.model.cool.foundation.datatype.PersonName;
-import edu.utah.kmm.model.cool.foundation.entity.Person;
-import edu.utah.kmm.model.cool.foundation.role.Role;
-import edu.utah.kmm.model.cool.util.PersonNameParsers;
-import edu.utah.kmm.model.cool.util.PersonUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.coolmodel.core.terminology.Concept;
+import org.coolmodel.core.terminology.ConceptImpl;
+import org.coolmodel.core.terminology.ConceptSet;
+import org.coolmodel.foundation.datatype.PersonName;
+import org.coolmodel.foundation.entity.Person;
+import org.coolmodel.foundation.role.Role;
+import org.coolmodel.util.PersonNameParsers;
+import org.coolmodel.util.PersonUtils;
 import org.fujion.common.DateTimeWrapper;
 import org.fujionclinical.api.query.AbstractSearchCriteria;
-import edu.utah.kmm.terminology.api.model.ConceptReference;
-import edu.utah.kmm.terminology.api.model.ConceptReferenceImpl;
-import edu.utah.kmm.terminology.api.model.ConceptReferenceSet;
 
 /**
  * Base search criteria for person lookups.
  */
 public abstract class PersonQueryCriteria<T extends Role<Person>> extends AbstractSearchCriteria<T> {
 
-    private static final ConceptReference SSN_TYPE = new ConceptReferenceImpl("http://hl7.org/fhir/identifier-type", "SB");
+    private static final Concept SSN_TYPE = new ConceptImpl("http://hl7.org/fhir/identifier-type", "SB");
 
     private static final String CRT_NAME = "name.family";
 
@@ -70,7 +70,7 @@ public abstract class PersonQueryCriteria<T extends Role<Person>> extends Abstra
             String criterion,
             int position) {
         DateTimeWrapper tempDate;
-        ConceptReferenceSet tempGender;
+        ConceptSet tempGender;
 
         if (position > 0 && (tempGender = asGender(criterion)) != null) {
             setGender(tempGender);
@@ -158,7 +158,7 @@ public abstract class PersonQueryCriteria<T extends Role<Person>> extends Abstra
      *
      * @param gender Gender.
      */
-    public void setGender(ConceptReferenceSet gender) {
+    public void setGender(ConceptSet gender) {
         setContextParam(CRT_GENDER, gender);
     }
 
@@ -168,8 +168,8 @@ public abstract class PersonQueryCriteria<T extends Role<Person>> extends Abstra
      * @param value The value to test.
      * @return The matching gender, or null if no match.
      */
-    private ConceptReferenceSet asGender(String value) {
-        return PersonUtils.genderAsConceptReferenceSet(value);
+    private ConceptSet asGender(String value) {
+        return PersonUtils.genderAsConceptSet(value);
     }
 
     /**
