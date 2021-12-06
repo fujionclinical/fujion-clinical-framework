@@ -26,7 +26,7 @@
 package org.fujionclinical.reports.header;
 
 import org.apache.commons.lang3.StringUtils;
-import org.coolmodel.core.datatype.Identifier;
+import org.coolmodel.core.complex.Identifier;
 import org.coolmodel.foundation.entity.Person;
 import org.coolmodel.util.PersonUtils;
 import org.fujion.annotation.OnFailure;

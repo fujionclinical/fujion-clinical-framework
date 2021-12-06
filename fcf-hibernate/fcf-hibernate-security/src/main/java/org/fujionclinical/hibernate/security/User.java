@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.hibernate.security;
 
-import org.coolmodel.foundation.datatype.PersonName;
+import org.coolmodel.foundation.common.PersonName;
 import org.coolmodel.util.PersonNameParsers;
 import org.fujion.common.StrUtil;
 import org.fujionclinical.api.security.ISecurityDomain;

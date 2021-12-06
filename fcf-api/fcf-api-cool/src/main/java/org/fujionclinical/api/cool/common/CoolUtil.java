@@ -26,9 +26,9 @@
 package org.fujionclinical.api.cool.common;
 
 import org.apache.commons.lang3.StringUtils;
-import org.coolmodel.core.datatype.Attachment;
-import org.coolmodel.core.datatype.Period;
-import org.coolmodel.core.datatype.PeriodImpl;
+import org.coolmodel.core.complex.Attachment;
+import org.coolmodel.core.complex.Period;
+import org.coolmodel.core.complex.PeriodImpl;
 import org.coolmodel.mediator.datasource.DataSource;
 import org.coolmodel.mediator.datasource.DataSources;
 import org.fujion.ancillary.MimeContent;
@@ -71,7 +71,8 @@ public class CoolUtil {
         }
 
         MimeContent mimeContent =
-                new MimeContent(attachment.hasContentType() ? attachment.getContentType().getCode() : null, attachment.getUrl());
+                new MimeContent(attachment.hasContentType() ? attachment.getContentType().getCode() : null,
+                        attachment.hasUrl() ? attachment.getUrl().toString() : null);
         mimeContent.setEncodedData(attachment.getContent());
         return mimeContent;
     }
@@ -81,7 +82,7 @@ public class CoolUtil {
     }
 
     public static Period dateRangeToPeriod(DateRange dateRange) {
-        return new PeriodImpl(DateUtil.toLocalDateTime(dateRange.getStartDate()), DateUtil.toLocalDateTime(dateRange.getEndDate()));
+        return new PeriodImpl(DateUtil.toOffsetDateTime(dateRange.getStartDate()), DateUtil.toOffsetDateTime(dateRange.getEndDate()));
     }
 
     private CoolUtil() {

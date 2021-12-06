@@ -27,7 +27,7 @@ package org.fujionclinical.api.cool.condition;
 
 import org.coolmodel.clinical.finding.Condition;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Comparator;
 
 /**
@@ -36,8 +36,8 @@ import java.util.Comparator;
 public class ConditionComparators {
 
     public static final Comparator<Condition> CONDITION_RECORDED_DATE = (o1, o2) -> {
-        LocalDateTime d1 = o1 == null ? null : o1.getRecordedDate();
-        LocalDateTime d2 = o2 == null ? null : o2.getRecordedDate();
+        OffsetDateTime d1 = o1 == null ? null : o1.getRecordedOn();
+        OffsetDateTime d2 = o2 == null ? null : o2.getRecordedOn();
         return d1 == d2 ? 0 : d1 == null ? -1 : d2 == null ? 1 : d1.compareTo(d2);
     };
 

@@ -26,8 +26,8 @@
 package org.fujionclinical.api.cool.person;
 
 import org.coolmodel.core.terminology.Concept;
-import org.coolmodel.foundation.datatype.PersonName;
-import org.coolmodel.foundation.datatype.PersonNameUse;
+import org.coolmodel.foundation.common.PersonName;
+import org.coolmodel.foundation.common.PersonNameUse;
 import org.fujionclinical.api.core.ISerializer;
 
 import java.util.Arrays;

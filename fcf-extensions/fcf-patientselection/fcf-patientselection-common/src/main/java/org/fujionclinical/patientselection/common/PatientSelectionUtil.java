@@ -28,7 +28,7 @@ package org.fujionclinical.patientselection.common;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.coolmodel.clinical.role.Patient;
-import org.coolmodel.foundation.datatype.PersonName;
+import org.coolmodel.foundation.common.PersonName;
 import org.coolmodel.foundation.entity.Person;
 import org.coolmodel.mediator.datasource.DataSource;
 import org.coolmodel.mediator.query.QueryException;

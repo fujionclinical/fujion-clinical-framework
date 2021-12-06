@@ -28,8 +28,7 @@ package org.fujionclinical.api.cool.person;
 import org.apache.commons.lang3.StringUtils;
 import org.coolmodel.core.terminology.Concept;
 import org.coolmodel.core.terminology.ConceptImpl;
-import org.coolmodel.core.terminology.ConceptSet;
-import org.coolmodel.foundation.datatype.PersonName;
+import org.coolmodel.foundation.common.PersonName;
 import org.coolmodel.foundation.entity.Person;
 import org.coolmodel.foundation.role.Role;
 import org.coolmodel.util.PersonNameParsers;
@@ -70,7 +69,7 @@ public abstract class PersonQueryCriteria<T extends Role<Person>> extends Abstra
             String criterion,
             int position) {
         DateTimeWrapper tempDate;
-        ConceptSet tempGender;
+        Concept tempGender;
 
         if (position > 0 && (tempGender = asGender(criterion)) != null) {
             setGender(tempGender);
@@ -158,7 +157,7 @@ public abstract class PersonQueryCriteria<T extends Role<Person>> extends Abstra
      *
      * @param gender Gender.
      */
-    public void setGender(ConceptSet gender) {
+    public void setGender(Concept gender) {
         setContextParam(CRT_GENDER, gender);
     }
 
@@ -168,8 +167,8 @@ public abstract class PersonQueryCriteria<T extends Role<Person>> extends Abstra
      * @param value The value to test.
      * @return The matching gender, or null if no match.
      */
-    private ConceptSet asGender(String value) {
-        return PersonUtils.genderAsConceptSet(value);
+    private Concept asGender(String value) {
+        return PersonUtils.genderAsConcept(value);
     }
 
     /**

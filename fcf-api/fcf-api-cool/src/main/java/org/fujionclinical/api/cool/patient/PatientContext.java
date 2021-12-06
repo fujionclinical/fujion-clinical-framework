@@ -105,7 +105,7 @@ public class PatientContext extends AbstractIdentifiableContext<Person> {
     public ContextItems toCCOWContext(Person person) {
         contextItems.setItem(CCOW_MRN, PersonUtils.hasMRN(person) ? PersonUtils.getMRN(person).getId() : null, "MRN");
         contextItems.setItem(CCOW_NAM, person.hasName() ? PersonNameParsers.get().toString(person.getName().get(0)) : null);
-        contextItems.setItem(CCOW_GENDER, person.hasGender() ? person.getGender().getFirstConcept().getCode() : null);
+        contextItems.setItem(CCOW_GENDER, person.hasGender() ? person.getGender().getCode() : null);
         contextItems.setItem(CCOW_DOB, person.getBirthDate());
         return contextItems;
     }
@@ -123,7 +123,7 @@ public class PatientContext extends AbstractIdentifiableContext<Person> {
         }
 
         person.setBirthDate(contextItems.getDate(CCOW_DOB));
-        person.setGender(PersonUtils.genderAsConceptSet(contextItems.getItem(CCOW_GENDER)));
+        person.setGender(PersonUtils.genderAsConcept(contextItems.getItem(CCOW_GENDER)));
         person.addName(PersonNameParsers.get().fromString(contextItems.getItem(CCOW_NAM)));
         String mrn = contextItems.getItem(CCOW_MRN, "MRN");
         PersonUtils.setMRN(person, mrn == null ? null : PersonUtils.createMRN(null, mrn));

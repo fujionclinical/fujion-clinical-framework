@@ -49,7 +49,7 @@ import org.fujionclinical.ui.dialog.DateRangePicker;
 import org.springframework.beans.BeanUtils;
 
 import java.lang.reflect.Method;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 /**
@@ -147,7 +147,7 @@ public abstract class AbstractBaseController<T, M> extends AbstractServiceContro
      * @return The extracted date.
      */
     @Override
-    public abstract LocalDateTime getDateByType(
+    public abstract OffsetDateTime getDateByType(
             M result,
             DateType dateType);
 
