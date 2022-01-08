@@ -60,6 +60,12 @@ public class MessageConsumer implements IMessageConsumer {
                 callback.onMessage(channel, msg);
             }
         }
+
+        @Override
+        public boolean isAsyncReplies() {
+            return MessageListener.super.isAsyncReplies();
+        }
+
     }
     
     private final Map<String, Subscriber> subscribers = Collections.synchronizedMap(new HashMap<>());
