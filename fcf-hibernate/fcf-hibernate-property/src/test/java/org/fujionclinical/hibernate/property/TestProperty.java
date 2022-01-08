@@ -25,9 +25,11 @@
  */
 package org.fujionclinical.hibernate.property;
 
+import org.apache.commons.io.FileUtils;
 import org.fujionclinical.api.test.CommonTest;
 import org.junit.Test;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +41,8 @@ public class TestProperty extends CommonTest {
     
     @Test
     public void testService() {
-        String dir = System.getProperty("java.io.tmpdir") + "fcf";
+        File dir = new File(System.getProperty("java.io.tmpdir") + "fcf");
+        FileUtils.deleteQuietly(dir);
         System.out.println("Test database is at: " + dir);
         PropertyService service = appContext.getBean(PropertyService.class);
         test1(service, null);
@@ -51,6 +54,7 @@ public class TestProperty extends CommonTest {
         test3(service, "prop2", false, 2);
         test3(service, "prop1", true, 0);
         service.destroy();
+        FileUtils.deleteQuietly(dir);
     }
     
     private void test1(PropertyService service, String instanceName) {

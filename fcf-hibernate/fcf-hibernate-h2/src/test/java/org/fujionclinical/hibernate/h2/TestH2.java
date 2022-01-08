@@ -30,6 +30,7 @@ import org.fujionclinical.hibernate.h2.H2DataSource.DBMode;
 import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -42,7 +43,7 @@ public class TestH2 {
     
     @Test
     public void test() throws Exception {
-        String database = System.getProperty("java.io.tmpdir") + "/fcf/database";
+        String database = Files.createTempDirectory("h2-test").toFile().getAbsolutePath();
         Map<String, Object> params = new HashMap<>();
 
         params.put("url", "jdbc:h2:" + database);
