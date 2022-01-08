@@ -33,7 +33,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
 
-import java.util.Collections;
 import java.util.List;
 
 public class PropertyDAO extends AbstractDAO<Property> {
@@ -64,7 +63,7 @@ public class PropertyDAO extends AbstractDAO<Property> {
             NativeQuery<String> query = session.createNativeQuery(GET_INSTANCES);
             query.setParameter("name", propertyName).setParameter("user", user == null ? "" : user.getId());
             List<String> result = query.list();
-            Collections.sort(result, String.CASE_INSENSITIVE_ORDER);
+            result.sort(String.CASE_INSENSITIVE_ORDER);
             tx.commit();
             return result;
         } catch (Exception e) {
