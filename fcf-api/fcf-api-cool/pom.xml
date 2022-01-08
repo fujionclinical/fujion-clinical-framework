@@ -21,11 +21,6 @@
 			<artifactId>cool-impl-extensions</artifactId>
 			<version>${cool.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>edu.utah.kmm</groupId>
-			<artifactId>kmm-terminology-api</artifactId>
-			<version>1.0.0</version>
-		</dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
