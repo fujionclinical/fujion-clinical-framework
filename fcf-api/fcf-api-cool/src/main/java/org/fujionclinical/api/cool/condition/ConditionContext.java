@@ -28,7 +28,7 @@ package org.fujionclinical.api.cool.condition;
 import edu.utah.kmm.common.utils.ClassUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.coolmodel.clinical.finding.Condition;
+import org.coolmodel.clinical.finding.AssertionalFindingEntry;
 import org.coolmodel.foundation.entity.Person;
 import org.fujionclinical.api.context.ContextManager;
 import org.fujionclinical.api.context.IContextSubscriber;
@@ -39,7 +39,7 @@ import org.fujionclinical.api.cool.patient.PatientContext;
 /**
  * Wrapper for shared condition context.
  */
-public class ConditionContext extends AbstractIdentifiableContext<Condition> {
+public class ConditionContext extends AbstractIdentifiableContext<AssertionalFindingEntry> {
 
     public interface IConditionContextSubscriber extends IContextSubscriber {
 
@@ -54,8 +54,8 @@ public class ConditionContext extends AbstractIdentifiableContext<Condition> {
     private final IConditionContextSubscriber conditionContextSubscriber = new IConditionContextSubscriber() {
         @Override
         public void pending(ISurveyResponse response) {
-            Condition condition = getContextObject(true);
-            Person patient = ClassUtils.cast(condition.getSubject(), Person.class);
+            AssertionalFindingEntry condition = getContextObject(true);
+            Person patient = ClassUtils.cast(condition.getAssertion().getSubject(), Person.class);
 
             if (patient != null) {
                 fromCondition = true;
@@ -107,7 +107,7 @@ public class ConditionContext extends AbstractIdentifiableContext<Condition> {
      *
      * @return Condition object (may be null).
      */
-    public static Condition getActiveCondition() {
+    public static AssertionalFindingEntry getActiveCondition() {
         return ContextManager.getCurrentValue(ConditionContext.class);
     }
 
@@ -116,7 +116,7 @@ public class ConditionContext extends AbstractIdentifiableContext<Condition> {
      *
      * @param condition New condition.
      */
-    public static void changeCondition(Condition condition) {
+    public static void changeCondition(AssertionalFindingEntry condition) {
         ContextManager.changeContext(ConditionContext.class, condition);
     }
 
@@ -132,7 +132,7 @@ public class ConditionContext extends AbstractIdentifiableContext<Condition> {
      *
      * @param condition Condition that will be the initial state.
      */
-    public ConditionContext(Condition condition) {
+    public ConditionContext(AssertionalFindingEntry condition) {
         super(SUBJECT_NAME, IConditionContextSubscriber.class, condition);
         PatientContext.getPatientContext().addSubscriber(patientContextSubscriber);
         addSubscriber(conditionContextSubscriber);

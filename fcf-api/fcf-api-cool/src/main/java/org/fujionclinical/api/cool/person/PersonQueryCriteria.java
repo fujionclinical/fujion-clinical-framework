@@ -26,8 +26,8 @@
 package org.fujionclinical.api.cool.person;
 
 import org.apache.commons.lang3.StringUtils;
-import org.coolmodel.core.terminology.Concept;
-import org.coolmodel.core.terminology.ConceptImpl;
+import org.clinicalontology.terminology.api.Concept;
+import org.clinicalontology.terminology.impl.ConceptImpl;
 import org.coolmodel.foundation.common.PersonName;
 import org.coolmodel.foundation.entity.Person;
 import org.coolmodel.foundation.role.Role;

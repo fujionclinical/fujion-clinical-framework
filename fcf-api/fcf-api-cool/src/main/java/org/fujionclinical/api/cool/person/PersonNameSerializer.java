@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.api.cool.person;
 
-import org.coolmodel.core.terminology.Concept;
+import org.clinicalontology.terminology.api.Concept;
 import org.coolmodel.foundation.common.PersonName;
 import org.coolmodel.foundation.common.PersonNameUse;
 import org.fujionclinical.api.core.ISerializer;

@@ -25,10 +25,10 @@
  */
 package org.fujionclinical.api.cool.condition;
 
+import org.clinicalontology.terminology.api.ConceptSet;
 import org.coolmodel.clinical.encounter.Encounter;
 import org.coolmodel.clinical.finding.AssertionalFindingClinicalStatus;
-import org.coolmodel.clinical.finding.Condition;
-import org.coolmodel.core.terminology.ConceptSet;
+import org.coolmodel.clinical.finding.AssertionalFindingEntry;
 import org.coolmodel.foundation.entity.Person;
 import org.fujionclinical.api.query.AbstractSearchCriteria;
 
@@ -37,10 +37,10 @@ import java.util.Date;
 /**
  * Search criteria for encounter lookup.
  */
-public class ConditionQueryCriteria extends AbstractSearchCriteria<Condition> {
+public class ConditionQueryCriteria extends AbstractSearchCriteria<AssertionalFindingEntry> {
 
     public ConditionQueryCriteria() {
-        super(Condition.class, ';', null);
+        super(AssertionalFindingEntry.class, ';', null);
     }
 
     /**

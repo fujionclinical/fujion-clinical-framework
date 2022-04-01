@@ -25,11 +25,11 @@
  */
 package org.fujionclinical.api.cool.practitioner;
 
+import org.clinicalontology.terminology.api.ConceptSet;
+import org.clinicalontology.terminology.impl.ConceptSetImpl;
 import org.coolmodel.clinical.role.Practitioner;
 import org.coolmodel.core.complex.Identifier;
 import org.coolmodel.core.complex.IdentifierImpl;
-import org.coolmodel.core.terminology.ConceptSet;
-import org.coolmodel.core.terminology.ConceptSetImpl;
 import org.fujionclinical.api.cool.person.PersonQueryCriteria;
 
 /**
