@@ -99,7 +99,7 @@ public abstract class AbstractSearchCriteria<L extends Identifiable> {
      * @return Resources matching the search criteria.
      */
     public List<L> search(DataSource dataSource) {
-        return dataSource.getModelDAO(logicalType).search(compile()).getElement();
+        return dataSource.getDAO(logicalType).search(compile()).getElements();
     }
 
     /**

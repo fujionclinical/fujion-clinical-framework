@@ -27,7 +27,7 @@ package org.fujionclinical.sharedforms.controller;
 
 import org.coolmodel.foundation.core.Identifiable;
 import org.coolmodel.foundation.entity.Person;
-import org.coolmodel.mediator.dao.ModelDAO;
+import org.coolmodel.mediator.dao.DAO;
 import org.coolmodel.mediator.datasource.DataSource;
 import org.coolmodel.mediator.expression.parser.Expression;
 import org.coolmodel.mediator.expression.parser.ExpressionParser;
@@ -48,7 +48,7 @@ public abstract class ResourceListView<L extends Identifiable, M, S extends Data
 
     private Expression<L> queryExpression;
 
-    private ModelDAO<L> dao;
+    private DAO<L> dao;
 
     protected void setup(
             Class<L> logicalType,
@@ -58,14 +58,14 @@ public abstract class ResourceListView<L extends Identifiable, M, S extends Data
             int sortBy,
             String... headers) {
         super.setup(logicalType, title, detailTitle, queryString, sortBy, headers);
-        this.dao = getDataSource().getModelDAO(logicalType);
+        this.dao = getDataSource().getDAO(logicalType);
         Assert.notNull(dao, () -> "Cannot find DAO for " + getResourceClass());
         this.queryExpression = ExpressionParser.getInstance().parse(logicalType, queryString);
     }
 
     @Override
     protected void requestData() {
-        startBackgroundThread(map -> map.put("results", dao.search(queryExpression, queryContext).getElement()));
+        startBackgroundThread(map -> map.put("results", dao.search(queryExpression, queryContext).getElements()));
     }
 
     @Override

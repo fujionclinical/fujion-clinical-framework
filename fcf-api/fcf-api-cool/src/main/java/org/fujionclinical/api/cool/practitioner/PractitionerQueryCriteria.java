@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.api.cool.practitioner;
 
-import org.clinicalontology.terminology.api.ConceptSet;
-import org.clinicalontology.terminology.impl.ConceptSetImpl;
+import org.clinicalontology.terminology.api.model.ConceptSet;
+import org.clinicalontology.terminology.impl.model.ConceptSetImpl;
 import org.coolmodel.clinical.role.Practitioner;
 import org.coolmodel.core.complex.Identifier;
 import org.coolmodel.core.complex.IdentifierImpl;

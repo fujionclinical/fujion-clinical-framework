@@ -32,7 +32,7 @@ import org.apache.commons.logging.LogFactory;
 import org.coolmodel.clinical.role.Patient;
 import org.coolmodel.foundation.core.IdentifiableCollection;
 import org.coolmodel.foundation.entity.Person;
-import org.coolmodel.mediator.dao.ModelDAO;
+import org.coolmodel.mediator.dao.DAO;
 import org.fujion.common.DateRange;
 import org.fujionclinical.api.cool.common.CoolUtil;
 
@@ -90,8 +90,8 @@ public abstract class AbstractPatientList implements IPatientList {
         return getPatientDAO().read(patientId).getActor();
     }
 
-    protected ModelDAO<Patient> getPatientDAO() {
-        return CoolUtil.getDefaultDataSource().getModelDAO(Patient.class);
+    protected DAO<Patient> getPatientDAO() {
+        return CoolUtil.getDefaultDataSource().getDAO(Patient.class);
     }
 
     /**

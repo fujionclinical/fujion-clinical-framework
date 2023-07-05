@@ -25,9 +25,9 @@
  */
 package org.fujionclinical.api.cool.condition;
 
-import org.clinicalontology.terminology.api.ConceptSet;
+import org.clinicalontology.terminology.api.model.ConceptSet;
 import org.coolmodel.clinical.encounter.Encounter;
-import org.coolmodel.clinical.finding.AssertionalFindingClinicalStatus;
+import org.coolmodel.clinical.finding.AssertionOfPresenceClinicalStatus;
 import org.coolmodel.clinical.finding.AssertionalFindingEntry;
 import org.coolmodel.foundation.entity.Person;
 import org.fujionclinical.api.query.AbstractSearchCriteria;
@@ -60,7 +60,7 @@ public class ConditionQueryCriteria extends AbstractSearchCriteria<AssertionalFi
         setContextParam("verificationStatus", status);
     }
 
-    public void setStatus(AssertionalFindingClinicalStatus status) {
+    public void setStatus(AssertionOfPresenceClinicalStatus status) {
         setContextParam("clinicalStatus", status);
     }
 
