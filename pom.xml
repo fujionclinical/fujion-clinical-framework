@@ -57,7 +57,7 @@
 	<properties>
 		<org.fujion.version>3.1.0</org.fujion.version>
 		<org.thymeleaf.version>3.0.14.RELEASE</org.thymeleaf.version>
-		<org.springframework.security.version>5.6.1</org.springframework.security.version>
+		<org.springframework.security.version>5.6.12</org.springframework.security.version>
 		<ehcache.version>3.9.9</ehcache.version>
 		<cool.version>7.1.0</cool.version>
 	</properties>
