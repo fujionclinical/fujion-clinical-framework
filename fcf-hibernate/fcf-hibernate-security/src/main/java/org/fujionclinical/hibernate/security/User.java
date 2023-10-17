@@ -25,13 +25,13 @@
  */
 package org.fujionclinical.hibernate.security;
 
+import jakarta.persistence.*;
 import org.coolmodel.foundation.common.PersonName;
 import org.coolmodel.util.PersonNameParsers;
 import org.fujion.common.StrUtil;
 import org.fujionclinical.api.security.ISecurityDomain;
 import org.fujionclinical.api.user.UserImpl;
 
-import jakarta.persistence.*;
 import java.util.Collections;
 import java.util.List;
 

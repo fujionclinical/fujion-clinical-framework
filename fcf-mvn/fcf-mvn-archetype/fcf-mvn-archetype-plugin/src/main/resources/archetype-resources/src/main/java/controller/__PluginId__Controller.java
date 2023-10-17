@@ -1,12 +1,4 @@
-package ${package}.controller;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.fujionclinical.shell.elements.ElementPlugin;
-import org.fujionclinical.shell.plugins.PluginController;
-
-import org.fujion.component.BaseComponent;
+package $
 
 public class ${PluginId}Controller extends PluginController {
 

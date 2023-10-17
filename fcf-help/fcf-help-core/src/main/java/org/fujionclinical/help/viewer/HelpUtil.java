@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.help.viewer;
 
+import jakarta.servlet.ServletContext;
 import org.fujion.client.ClientUtil;
 import org.fujion.client.ExecutionContext;
 import org.fujion.common.LocalizedMessage;
@@ -42,8 +43,6 @@ import org.fujionclinical.help.IHelpSearch;
 import org.fujionclinical.help.IHelpViewer;
 import org.fujionclinical.help.viewer.HelpViewer.HelpViewerMode;
 import org.fujionclinical.ui.command.CommandUtil;
-
-import jakarta.servlet.ServletContext;
 
 /**
  * Utility class containing helper methods in support of online help infrastructure.

@@ -27,7 +27,6 @@ package org.fujionclinical.hibernate.property;
 
 import org.fujionclinical.api.test.CommonTest;
 import org.junit.Test;
-import org.springframework.test.context.TestPropertySource;
 
 import java.util.ArrayList;
 import java.util.List;

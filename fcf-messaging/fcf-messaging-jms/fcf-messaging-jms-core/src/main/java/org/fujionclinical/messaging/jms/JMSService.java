@@ -26,7 +26,6 @@
 package org.fujionclinical.messaging.jms;
 
 import jakarta.jms.*;
-import jakarta.jms.TopicSession;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

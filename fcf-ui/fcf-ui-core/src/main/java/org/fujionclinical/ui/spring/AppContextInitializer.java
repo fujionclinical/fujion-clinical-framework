@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.ui.spring;
 
+import jakarta.servlet.ServletContext;
 import org.apache.commons.lang3.ArrayUtils;
 import org.fujion.client.ExecutionContext;
 import org.fujion.component.Page;
@@ -41,7 +42,6 @@ import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
-import jakarta.servlet.ServletContext;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;

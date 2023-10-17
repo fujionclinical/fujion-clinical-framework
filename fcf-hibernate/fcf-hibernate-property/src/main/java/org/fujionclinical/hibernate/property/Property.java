@@ -25,33 +25,16 @@
  */
 package org.fujionclinical.hibernate.property;
 
-import jakarta.persistence.*;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Lob;
+import jakarta.persistence.Table;
 
 import java.io.Serializable;
 
 @Entity
 @Table(name = "FCF_PROPERTY")
 public class Property implements Serializable {
-
-    @Embeddable
-    public static class PropertyId implements Serializable {
-
-        private String name;
-
-        private String instance;
-
-        private String user;
-
-        public PropertyId(String name, String instance, String user) {
-            this.name = name;
-            this.instance = instance == null ? "" : instance;
-            this.user = user == null ? "" : user;
-        }
-
-        protected PropertyId() {
-
-        }
-    }
 
     @EmbeddedId
     private final PropertyId id;
@@ -81,11 +64,7 @@ public class Property implements Serializable {
     }
 
     public String getName() {
-        return id.name;
-    }
-
-    public void setName(String name) {
-        id.name = name;
+        return id.getName();
     }
 
     public String getValue() {
@@ -97,18 +76,11 @@ public class Property implements Serializable {
     }
 
     public String getInstance() {
-        return id.instance;
-    }
-
-    public void setInstance(String instance) {
-        id.instance = instance == null ? "" : instance;
+        return id.getInstance();
     }
 
     public String getUser() {
-        return id.user;
+        return id.getUser();
     }
 
-    public void setUser(String user) {
-        this.id.user = user == null ? "" : user;
-    }
 }

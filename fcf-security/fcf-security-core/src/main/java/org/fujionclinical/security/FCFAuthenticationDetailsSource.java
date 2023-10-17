@@ -25,11 +25,10 @@
  */
 package org.fujionclinical.security;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.authentication.AuthenticationDetailsSource;
-
-import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * Generates the details object to associate with the authentication object.

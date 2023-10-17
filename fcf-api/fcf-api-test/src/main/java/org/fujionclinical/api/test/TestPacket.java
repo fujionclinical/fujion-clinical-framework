@@ -25,7 +25,6 @@
  */
 package org.fujionclinical.api.test;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 public class TestPacket implements Serializable {

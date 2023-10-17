@@ -27,7 +27,6 @@ package org.fujionclinical.hibernate.property;
 
 import org.fujionclinical.api.user.User;
 import org.fujionclinical.hibernate.core.AbstractDAO;
-import org.fujionclinical.hibernate.property.Property.PropertyId;
 import org.hibernate.Session;
 import org.hibernate.query.SelectionQuery;
 import org.springframework.stereotype.Repository;

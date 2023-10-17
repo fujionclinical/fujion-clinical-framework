@@ -27,7 +27,6 @@ package org.fujionclinical.hibernate.security;
 
 import org.fujionclinical.hibernate.core.AbstractDAO;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 

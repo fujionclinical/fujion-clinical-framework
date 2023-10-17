@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.security.basic.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.fujion.common.StrUtil;
 import org.fujion.core.RequestUtil;
 import org.fujion.webjar.WebJarLocator;
@@ -36,7 +37,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import jakarta.servlet.http.HttpServletRequest;
 import java.util.Collection;
 
 /**

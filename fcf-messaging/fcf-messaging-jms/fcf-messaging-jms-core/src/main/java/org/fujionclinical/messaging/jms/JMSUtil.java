@@ -25,12 +25,11 @@
  */
 package org.fujionclinical.messaging.jms;
 
+import jakarta.jms.Connection;
+import jakarta.jms.JMSException;
 import org.fujionclinical.api.messaging.IPublisherInfo;
 import org.fujionclinical.api.spring.SpringUtil;
 import org.springframework.jms.core.JmsTemplate;
-
-import jakarta.jms.Connection;
-import jakarta.jms.JMSException;
 
 /**
  * JMS utility methods.

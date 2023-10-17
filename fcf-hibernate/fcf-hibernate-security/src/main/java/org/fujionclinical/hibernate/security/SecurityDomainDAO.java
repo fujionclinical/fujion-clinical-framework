@@ -25,14 +25,13 @@
  */
 package org.fujionclinical.hibernate.security;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
 import org.fujionclinical.api.security.SecurityDomains;
 import org.fujionclinical.hibernate.core.AbstractDAO;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 /**

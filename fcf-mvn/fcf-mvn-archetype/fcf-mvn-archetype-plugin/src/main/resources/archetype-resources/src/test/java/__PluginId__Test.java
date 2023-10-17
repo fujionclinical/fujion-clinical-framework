@@ -1,14 +1,4 @@
-package ${package};
-
-import static org.junit.Assert.assertEquals;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.fujionclinical.ui.test.MockUITest;
-
-import org.junit.Before;
-import org.junit.Test;
+package $
 
 /**
  * Unit tests for ${pluginName}

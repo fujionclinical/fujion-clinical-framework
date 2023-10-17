@@ -25,13 +25,13 @@
  */
 package org.fujionclinical.messaging.jms;
 
+import jakarta.jms.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fujion.common.MiscUtil;
 import org.fujionclinical.api.messaging.IMessageConsumer;
 import org.fujionclinical.api.messaging.Message;
 
-import jakarta.jms.*;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;

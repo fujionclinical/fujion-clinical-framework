@@ -25,11 +25,10 @@
  */
 package org.fujionclinical.hibernate.security;
 
+import jakarta.persistence.*;
 import org.fujionclinical.api.security.ISecurityDomain;
 import org.fujionclinical.api.spring.SpringUtil;
 import org.springframework.security.authentication.BadCredentialsException;
-
-import jakarta.persistence.*;
 
 import java.io.Serial;
 import java.io.StringReader;

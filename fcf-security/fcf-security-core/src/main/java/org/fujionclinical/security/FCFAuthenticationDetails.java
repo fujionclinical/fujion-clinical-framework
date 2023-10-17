@@ -25,11 +25,10 @@
  */
 package org.fujionclinical.security;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
-
-import jakarta.servlet.http.HttpServletRequest;
 
 import java.io.Serial;
 import java.util.HashMap;
