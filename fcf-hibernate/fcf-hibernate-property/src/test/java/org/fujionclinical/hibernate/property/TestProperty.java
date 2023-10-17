@@ -48,7 +48,6 @@ public class TestProperty extends CommonTest {
         test3(service, "prop2", true, 2);
         test3(service, "prop2", false, 2);
         test3(service, "prop1", true, 0);
-        service.destroy();
     }
 
     private void test1(PropertyService service, String instanceName) {

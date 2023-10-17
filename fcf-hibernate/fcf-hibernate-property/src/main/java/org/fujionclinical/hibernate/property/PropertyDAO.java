@@ -29,27 +29,26 @@ import org.fujionclinical.api.user.User;
 import org.fujionclinical.hibernate.core.AbstractDAO;
 import org.fujionclinical.hibernate.property.Property.PropertyId;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.query.SelectionQuery;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Repository
 public class PropertyDAO extends AbstractDAO<Property> {
-
-    // private static final String GET_INSTANCES = "SELECT DISTINCT INSTANCE FROM FCF_PROPERTY WHERE NAME=:name AND USER=:user AND INSTANCE<>''";
 
     private static final String GET_INSTANCES = "SELECT distinct p.instance FROM Property p WHERE p.name=:name AND p.user=:user AND p.instance<>''";
 
     public PropertyDAO() {
     }
 
+    @Transactional
     public Property get(
             String propertyName,
             String instanceName,
-            User user) {
-        PropertyId id = new PropertyId(propertyName, instanceName, user == null ? null : user.getId());
+            String userId) {
+        PropertyId id = new PropertyId(propertyName, instanceName, userId);
         return get(Property.class, id);
     }
 

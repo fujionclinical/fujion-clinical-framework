@@ -25,6 +25,8 @@
  */
 package org.fujionclinical.hibernate.core;
 
+import org.hibernate.FlushMode;
+import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,8 +59,8 @@ public class AbstractDAO<T> {
     }
 
     @Transactional
-    public void merge(T entity) {
-        getSession().merge(entity);
+    public T merge(T entity) {
+        return getSession().merge(entity);
     }
 
     @Transactional
@@ -67,7 +69,7 @@ public class AbstractDAO<T> {
     }
 
     @Transactional(readOnly = true)
-    public T get(Class<T> clazz, Serializable id) {
+    public T get(Class<T> clazz, Object id) {
         return getSession().get(clazz, id);
     }
 

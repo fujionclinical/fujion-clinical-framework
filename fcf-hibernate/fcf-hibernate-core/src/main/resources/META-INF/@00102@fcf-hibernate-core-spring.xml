@@ -12,12 +12,6 @@
 
         <context:component-scan base-package="org.fujionclinical.hibernate"/>
 
-        <bean id="fcfHibernateConfigurator"
-              class="org.fujionclinical.hibernate.core.Configurator"/>
-
-        <bean id="fcfHibernateSessionFactory"
-               class="org.fujionclinical.hibernate.core.SessionFactory"/>
-
     </beans>
 
 </beans>
