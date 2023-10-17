@@ -27,11 +27,14 @@ package org.fujionclinical.security;
 
 import org.springframework.security.core.AuthenticationException;
 
+import java.io.Serial;
+
 /**
  * Exception thrown when user cancels an authentication attempt.
  */
 public class AuthenticationCancelledException extends AuthenticationException {
-    
+
+    @Serial
     private static final long serialVersionUID = 1L;
     
     public AuthenticationCancelledException(String msg) {

@@ -31,6 +31,7 @@ import org.springframework.core.io.Resource;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serial;
 import java.util.Properties;
 
 /**
@@ -39,7 +40,8 @@ import java.util.Properties;
 public class CommandShortcuts extends Properties {
     
     private static final Log log = LogFactory.getLog(CommandShortcuts.class);
-    
+
+    @Serial
     private static final long serialVersionUID = 1L;
     
     public CommandShortcuts(Resource mappings) {

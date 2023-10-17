@@ -8,13 +8,13 @@
 
 		<!-- Common JmsTemplates -->
 		<bean id="jmsTopicTemplate" class="org.springframework.jms.core.JmsTemplate">
-			<constructor-arg type="javax.jms.ConnectionFactory"
+			<constructor-arg type="jakarta.jms.ConnectionFactory"
 				ref="jmsLocalConnectionFactory" />
 			<property name="pubSubDomain" value="true" />
 		</bean>
 
 		<bean id="jmsQueueTemplate" class="org.springframework.jms.core.JmsTemplate">
-			<constructor-arg type="javax.jms.ConnectionFactory"
+			<constructor-arg type="jakarta.jms.ConnectionFactory"
 				ref="jmsLocalConnectionFactory" />
 		</bean>
 

@@ -52,7 +52,7 @@ public class SecurityService extends AbstractSecurityService {
         User user = (User) getAuthenticatedUser();
         user.setPassword(newPassword);
         try {
-            userDAO.update(user);
+            userDAO.persist(user);
             return null;
         } catch (Exception e) {
             user.setPassword(oldPassword);

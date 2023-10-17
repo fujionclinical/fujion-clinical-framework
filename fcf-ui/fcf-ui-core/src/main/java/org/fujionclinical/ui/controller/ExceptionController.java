@@ -42,7 +42,7 @@ import org.springframework.core.NestedCheckedException;
 import org.springframework.core.NestedRuntimeException;
 import org.springframework.web.util.WebUtils;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**

@@ -30,6 +30,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.fujionclinical.api.messaging.Recipient.RecipientType;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +39,8 @@ import java.util.Map;
  * Class for holding information about a publisher.
  */
 public class PublisherInfo implements IPublisherInfo, Serializable {
-    
+
+    @Serial
     private static final long serialVersionUID = 1L;
     
     private String userName;

@@ -7,15 +7,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * This Source Code Form is also subject to the terms of the Health-Related
  * Additional Disclaimer of Warranty and Limitation of Liability available at
  *
@@ -34,11 +34,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 public class TestSecurity extends MockUITest {
-    
+
     @Test
     public void testService() {
-        String dir = System.getProperty("java.io.tmpdir") + "fcf";
-        System.out.println("Test database is at: " + dir);
         SecurityDomainDAO sdao = SpringUtil.getAppContext().getBean(SecurityDomainDAO.class);
         setupDomains(sdao);
         sdao.init();
@@ -50,27 +48,27 @@ public class TestSecurity extends MockUITest {
         authenticate(domain, "DOCTOR123", "DOCTOR321$XXX", null);
         authenticate(domain, "USER123", "USER321$", "2");
     }
-    
+
     private void setupDomains(SecurityDomainDAO sc) {
         SecurityDomain domain = new SecurityDomain("1", "General Medicine Clinic", null);
-        sc.saveOrUpdate(domain);
+        sc.merge(domain);
         domain = new SecurityDomain("2", "Emergency Room", null);
-        sc.saveOrUpdate(domain);
+        sc.merge(domain);
         domain = new SecurityDomain("3", "Test Hospital", "default=true");
-        sc.saveOrUpdate(domain);
+        sc.merge(domain);
         domain = new SecurityDomain("*", "All Domains", null);
-        sc.saveOrUpdate(domain);
+        sc.merge(domain);
     }
-    
+
     private void setupUsers(UserDAO udao) {
         SecurityDomain domain = getSecurityDomain("1");
         User user = new User("1", "Doctor, Test", "DOCTOR123", "DOCTOR321$", domain, "PRIV_PATIENT_SELECT");
-        udao.saveOrUpdate(user);
+        udao.merge(user);
         user = new User("2", "User, Test", "USER123", "USER321$", domain,
                 "PRIV_DEBUG,PRIV_FCF_DESIGNER,PRIV_PATIENT_SELECT");
-        udao.saveOrUpdate(user);
+        udao.merge(user);
     }
-    
+
     private void authenticate(SecurityDomain domain, String username, String password, String expectedId) {
         try {
             org.fujionclinical.api.user.User user = domain.authenticate(username, password);
@@ -79,7 +77,7 @@ public class TestSecurity extends MockUITest {
             assertNull(expectedId);
         }
     }
-    
+
     private SecurityDomain getSecurityDomain(String id) {
         return (SecurityDomain) SecurityDomains.getInstance().get(id);
     }

@@ -29,8 +29,8 @@ import org.fujionclinical.api.messaging.IPublisherInfo;
 import org.fujionclinical.api.spring.SpringUtil;
 import org.springframework.jms.core.JmsTemplate;
 
-import javax.jms.Connection;
-import javax.jms.JMSException;
+import jakarta.jms.Connection;
+import jakarta.jms.JMSException;
 
 /**
  * JMS utility methods.

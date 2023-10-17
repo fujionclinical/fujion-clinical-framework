@@ -48,8 +48,6 @@ import java.util.Set;
  * It is your job to interpret the results, build meaningful sets of data, etc. This tailer simply
  * fires notifications containing new file lines, one at a time.
  * 
- * @author Steven Haines
- *         <a href="http://www.informit.com/guides/content.aspx?g=java&seqNum=226">project</a>
  */
 public class LogFileTailer implements Runnable {
     

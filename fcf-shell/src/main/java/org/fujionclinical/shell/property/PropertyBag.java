@@ -27,6 +27,7 @@ package org.fujionclinical.shell.property;
 
 import org.fujionclinical.api.property.IPropertyProvider;
 
+import java.io.Serial;
 import java.util.Properties;
 
 /**
@@ -34,7 +35,8 @@ import java.util.Properties;
  * deserialization.
  */
 public class PropertyBag extends Properties implements IPropertyProvider {
-    
+
+    @Serial
     private static final long serialVersionUID = 1L;
     
     /**

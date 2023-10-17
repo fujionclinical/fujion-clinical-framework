@@ -35,13 +35,11 @@ import org.hibernate.query.Query;
  * DAO for User class.
  */
 public class UserDAO extends AbstractDAO<User> {
-    
-    
-    private static final String HQL_AUTHENTICATE = "FROM org.fujionclinical.hibernate.security.User "
+
+    private static final String HQL_AUTHENTICATE = "FROM User "
             + "WHERE LOWER(username)=:username AND password=:password AND (domain=:domain OR domain='*')";
     
-    public UserDAO(SessionFactory sessionFactory) {
-        super(sessionFactory);
+    public UserDAO() {
     }
     
     public User authenticate(String username, String password, SecurityDomain domain) {
@@ -50,8 +48,7 @@ public class UserDAO extends AbstractDAO<User> {
         User user;
         
         try {
-            @SuppressWarnings("unchecked")
-            Query<User> query = getSession().createQuery(HQL_AUTHENTICATE);
+            Query<User> query = getSession().createQuery(HQL_AUTHENTICATE, User.class);
             query.setParameter("password", password);
             query.setParameter("username", username.toLowerCase());
             query.setParameter("domain", domain.getLogicalId());

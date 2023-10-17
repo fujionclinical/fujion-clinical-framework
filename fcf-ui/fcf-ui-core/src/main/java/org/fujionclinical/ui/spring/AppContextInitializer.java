@@ -41,7 +41,7 @@ import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;

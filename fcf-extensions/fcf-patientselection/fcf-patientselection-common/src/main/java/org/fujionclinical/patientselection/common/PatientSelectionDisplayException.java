@@ -26,12 +26,15 @@
 package org.fujionclinical.patientselection.common;
 
 
+import java.io.Serial;
+
 /**
  * Exception class for patient selection related exceptions.
  * 
  */
 public class PatientSelectionDisplayException extends RuntimeException {
-    
+
+    @Serial
     private static final long serialVersionUID = 1L;
     
     public PatientSelectionDisplayException(String msg) {

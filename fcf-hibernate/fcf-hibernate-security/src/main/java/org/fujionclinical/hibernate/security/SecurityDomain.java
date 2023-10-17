@@ -29,7 +29,9 @@ import org.fujionclinical.api.security.ISecurityDomain;
 import org.fujionclinical.api.spring.SpringUtil;
 import org.springframework.security.authentication.BadCredentialsException;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
+import java.io.Serial;
 import java.io.StringReader;
 import java.util.List;
 import java.util.Properties;
@@ -39,7 +41,7 @@ import java.util.Properties;
 @EntityListeners({ SecurityDomain.class })
 public class SecurityDomain implements ISecurityDomain {
     
-    
+    @Serial
     private static final long serialVersionUID = 1L;
     
     @Id

@@ -27,6 +27,8 @@ package org.fujionclinical.shell.plugins;
 
 import org.fujionclinical.api.core.FrameworkRuntimeException;
 
+import java.io.Serial;
+
 /**
  * Superclass for all exceptions thrown due to a plugin-related error.
  * <p>
@@ -34,7 +36,8 @@ import org.fujionclinical.api.core.FrameworkRuntimeException;
  * no reason for them to be checked.
  */
 public class PluginException extends FrameworkRuntimeException {
-    
+
+    @Serial
     private static final long serialVersionUID = 1L;
     
     /**

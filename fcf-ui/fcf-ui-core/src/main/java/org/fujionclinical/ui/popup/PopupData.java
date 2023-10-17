@@ -27,13 +27,15 @@ package org.fujionclinical.ui.popup;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
  * Represents a single popup data item.
  */
 public class PopupData implements Serializable {
-    
+
+    @Serial
     private static final long serialVersionUID = 1L;
     
     private String title;

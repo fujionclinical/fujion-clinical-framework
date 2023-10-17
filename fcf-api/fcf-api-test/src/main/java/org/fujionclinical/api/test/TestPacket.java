@@ -25,12 +25,11 @@
  */
 package org.fujionclinical.api.test;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class TestPacket implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
-    
+
     private String eventName;
     
     private int eventId;

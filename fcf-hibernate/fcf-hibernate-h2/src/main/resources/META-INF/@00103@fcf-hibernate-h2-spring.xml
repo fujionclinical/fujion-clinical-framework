@@ -1,25 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:fcf="http://www.fujionclinical.org/schema/spring"
-	xsi:schemaLocation="
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
 		http://www.springframework.org/schema/beans 
-		http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.fujionclinical.org/schema/spring
-        http://www.fujionclinical.org/schema/spring/spring-extensions.xsd">
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<beans profile="root">
-		
-		<bean id="fcfHibernateDataSource" class="org.fujionclinical.hibernate.h2.H2DataSource"
-			init-method="init" destroy-method="destroy" fcf:override="always">
-			<property name="driverClassName" value="org.h2.Driver" />
-			<property name="url" value="${org.fujionclinical.hibernate.url}" />
-			<property name="username" value="${org.fujionclinical.hibernate.username:}" />
-			<property name="password" value="${org.fujionclinical.hibernate.password:}" />
-			<property name="connectionProperties" value="${org.fujionclinical.hibernate.connectionproperties:" />
-			<property name="mode" value="${org.fujionclinical.hibernate.h2.mode:embedded}" />
-		</bean>
-		
-	</beans>
+    <beans profile="root">
+
+        <bean id="fcfHibernateDataSource"
+              class="org.fujionclinical.hibernate.h2.H2DataSource">
+            <property name="mode" value="${org.fujionclinical.hibernate.h2.mode:embedded}"/>
+        </bean>
+
+    </beans>
 
 </beans>

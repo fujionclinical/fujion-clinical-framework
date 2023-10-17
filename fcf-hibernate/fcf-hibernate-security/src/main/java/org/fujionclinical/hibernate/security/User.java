@@ -31,7 +31,7 @@ import org.fujion.common.StrUtil;
 import org.fujionclinical.api.security.ISecurityDomain;
 import org.fujionclinical.api.user.UserImpl;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Collections;
 import java.util.List;
 

@@ -7,15 +7,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * This Source Code Form is also subject to the terms of the Health-Related
  * Additional Disclaimer of Warranty and Limitation of Liability available at
  *
@@ -25,104 +25,90 @@
  */
 package org.fujionclinical.hibernate.property;
 
-import org.fujionclinical.api.user.User;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "FCF_PROPERTY")
-@IdClass(Property.PropertyId.class)
 public class Property implements Serializable {
-    
-    
+
+    @Embeddable
     public static class PropertyId implements Serializable {
-        
-        
-        private static final long serialVersionUID = 1L;
-        
-        protected String name;
-        
-        protected String instance;
-        
-        protected String user;
-        
-        public PropertyId() {
-            
-        }
-        
+
+        private String name;
+
+        private String instance;
+
+        private String user;
+
         public PropertyId(String name, String instance, String user) {
             this.name = name;
             this.instance = instance == null ? "" : instance;
             this.user = user == null ? "" : user;
         }
+
+        protected PropertyId() {
+
+        }
     }
-    
-    private static final long serialVersionUID = 1L;
-    
-    @Id
-    private String name;
-    
-    @Id
-    private String instance;
-    
-    @Id
-    private String user;
-    
+
+    @EmbeddedId
+    private final PropertyId id;
+
     @Lob
     private String value;
-    
+
     public Property() {
+        id = new PropertyId();
     }
-    
+
     public Property(String name) {
         this(name, null, null);
     }
-    
+
     public Property(String name, String value) {
         this(name, value, null);
     }
-    
+
     public Property(String name, String value, String instance) {
         this(name, value, instance, null);
     }
-    
-    public Property(String name, String value, String instance, User user) {
-        setName(name);
+
+    public Property(String name, String value, String instance, String user) {
+        id = new PropertyId(name, instance, user);
         setValue(value);
-        setInstance(instance);
-        setUser(user == null ? null : user.getId());
     }
-    
+
     public String getName() {
-        return name;
+        return id.name;
     }
-    
+
     public void setName(String name) {
-        this.name = name;
+        id.name = name;
     }
-    
+
     public String getValue() {
         return value;
     }
-    
+
     public void setValue(String value) {
         this.value = value;
     }
-    
+
     public String getInstance() {
-        return instance;
+        return id.instance;
     }
-    
+
     public void setInstance(String instance) {
-        this.instance = instance == null ? "" : instance;
+        id.instance = instance == null ? "" : instance;
     }
-    
+
     public String getUser() {
-        return user;
+        return id.user;
     }
-    
+
     public void setUser(String user) {
-        this.user = user == null ? "" : user;
+        this.id.user = user == null ? "" : user;
     }
 }

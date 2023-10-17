@@ -25,11 +25,14 @@
  */
 package org.fujionclinical.patientlist;
 
+import java.io.Serial;
+
 /**
  * Runtime exception for patient list operations.
  */
 public class PatientListException extends RuntimeException {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     public PatientListException(String message) {

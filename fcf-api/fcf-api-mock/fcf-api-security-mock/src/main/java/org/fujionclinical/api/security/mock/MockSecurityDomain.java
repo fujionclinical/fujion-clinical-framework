@@ -30,6 +30,7 @@ import org.fujionclinical.api.security.ISecurityDomain;
 import org.fujionclinical.api.spring.SpringUtil;
 import org.fujionclinical.api.user.User;
 
+import java.io.Serial;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +38,8 @@ import java.util.Map;
  * Mock user for testing.
  */
 public class MockSecurityDomain implements ISecurityDomain {
-    
+
+    @Serial
     private static final long serialVersionUID = 1L;
     
     private final String logicalId;

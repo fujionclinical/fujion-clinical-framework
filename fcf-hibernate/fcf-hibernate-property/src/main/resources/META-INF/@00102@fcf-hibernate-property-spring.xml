@@ -9,7 +9,7 @@
         http://www.fujionclinical.org/schema/spring/spring-extensions.xsd">
 
 	<beans profile="root">
-		<bean id="propertyDAO" parent="fcfHibernateAbstractDAO"
+		<bean id="propertyDAO"
 			class="org.fujionclinical.hibernate.property.PropertyDAO" />
 		
 		<bean id="propertyService" fcf:override="always"

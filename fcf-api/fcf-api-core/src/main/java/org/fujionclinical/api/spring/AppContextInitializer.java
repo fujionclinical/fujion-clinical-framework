@@ -57,7 +57,7 @@ public class AppContextInitializer implements ApplicationContextInitializer<Abst
         env.getPropertySources().addLast(new ExternalPropertySource(ctx));
         env.setDefaultProfiles(Constants.PROFILE_ROOT_DEFAULT);
         ctx.setConfigLocations(Constants.DEFAULT_LOCATIONS);
-        env.setActiveProfiles(aps.toArray(new String[aps.size()]));
+        env.setActiveProfiles(aps.toArray(new String[0]));
     }
 
 }

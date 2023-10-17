@@ -28,6 +28,7 @@ package org.fujionclinical.api.messaging;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -35,7 +36,8 @@ import java.io.Serializable;
  * specific subscribers of a topic.
  */
 public class Recipient implements Serializable {
-    
+
+    @Serial
     private static final long serialVersionUID = 1L;
     
     // @formatter:off

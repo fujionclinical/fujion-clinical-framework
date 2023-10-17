@@ -31,8 +31,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 /**
@@ -41,8 +41,7 @@ import java.util.List;
 public class SecurityDomainDAO extends AbstractDAO<SecurityDomain> {
 
 
-    public SecurityDomainDAO(SessionFactory sessionFactory) {
-        super(sessionFactory);
+    public SecurityDomainDAO() {
     }
 
     public void init() {

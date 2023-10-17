@@ -55,6 +55,11 @@ public class PropertyService implements IPropertyService {
         ISecurityService securityService = SecurityUtil.getSecurityService();
         return asGlobal || securityService == null ? null : securityService.getAuthenticatedUser();
     }
+
+    private String getUserId(boolean asGlobal) {
+        User user = getUser(asGlobal);
+        return user == null ? null : user.getId();
+    }
     
     @Override
     public boolean isAvailable() {
@@ -82,12 +87,12 @@ public class PropertyService implements IPropertyService {
     
     @Override
     public void saveValue(String propertyName, String instanceName, boolean asGlobal, String value) {
-        Property property = new Property(propertyName, value, instanceName, getUser(asGlobal));
+        Property property = new Property(propertyName, value, instanceName, getUserId(asGlobal));
         
         if (value == null) {
-            propertyDAO.delete(property);
+            propertyDAO.remove(property);
         } else {
-            propertyDAO.saveOrUpdate(property);
+            propertyDAO.merge(property);
         }
     }
     

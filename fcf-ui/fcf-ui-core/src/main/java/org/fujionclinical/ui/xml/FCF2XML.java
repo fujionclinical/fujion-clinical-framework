@@ -7,15 +7,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * This Source Code Form is also subject to the terms of the Health-Related
  * Additional Disclaimer of Warranty and Limitation of Liability available at
  *
@@ -25,11 +25,11 @@
  */
 package org.fujionclinical.ui.xml;
 
-import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.fujion.annotation.ComponentDefinition;
 import org.fujion.common.XMLUtil;
 import org.fujion.component.BaseComponent;
+import org.springframework.beans.BeanUtils;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -56,12 +56,12 @@ public class FCF2XML {
     /**
      * Returns an XML document that mirrors the FCF component tree starting at the specified root.
      *
-     * @param root BaseComponent whose subtree is to be traversed.
+     * @param root               BaseComponent whose subtree is to be traversed.
      * @param excludedProperties An optional list of properties that should be excluded from the
-     *            output. These may either be the property name (e.g., "uuid") or a property name
-     *            qualified by a component name (e.g., "window.uuid"). Optionally, an entry may be
-     *            followed by an "=" and a value to exclude matches with a specific value. Note that
-     *            "innerAttrs" and "outerAttrs" are always excluded.
+     *                           output. These may either be the property name (e.g., "uuid") or a property name
+     *                           qualified by a component name (e.g., "window.uuid"). Optionally, an entry may be
+     *                           followed by an "=" and a value to exclude matches with a specific value. Note that
+     *                           "innerAttrs" and "outerAttrs" are always excluded.
      * @return An XML document that represents the component subtree.
      */
     public static Document toDocument(BaseComponent root, String... excludedProperties) {
@@ -78,12 +78,12 @@ public class FCF2XML {
      * Returns an XML-formatted string that mirrors the FCF component tree starting at the specified
      * root.
      *
-     * @param root BaseComponent whose subtree is to be traversed.
+     * @param root               BaseComponent whose subtree is to be traversed.
      * @param excludedProperties An optional list of properties that should be excluded from the
-     *            output. These may either be the property name (e.g., "uuid") or a property name
-     *            qualified by a component name (e.g., "window.uuid"). Optionally, an entry may be
-     *            followed by an "=" and a value to exclude matches with a specific value. Note that
-     *            "innerAttrs" and "outerAttrs" are always excluded.
+     *                           output. These may either be the property name (e.g., "uuid") or a property name
+     *                           qualified by a component name (e.g., "window.uuid"). Optionally, an entry may be
+     *                           followed by an "=" and a value to exclude matches with a specific value. Note that
+     *                           "innerAttrs" and "outerAttrs" are always excluded.
      * @return The XML text representation of the component subtree.
      */
     public static String toXML(BaseComponent root, String... excludedProperties) {
@@ -94,10 +94,10 @@ public class FCF2XML {
      * Private constructor to limit access to static methods.
      *
      * @param excludedProperties An optional list of properties that should be excluded from the
-     *            output. These may either be the property name (e.g., "uuid") or a property name
-     *            qualified by a component name (e.g., "window.uuid"). Optionally, an entry may be
-     *            followed by an "=" and a value to exclude matches with a specific value. Note that
-     *            "innerAttrs" and "outerAttrs" are always excluded.
+     *                           output. These may either be the property name (e.g., "uuid") or a property name
+     *                           qualified by a component name (e.g., "window.uuid"). Optionally, an entry may be
+     *                           followed by an "=" and a value to exclude matches with a specific value. Note that
+     *                           "innerAttrs" and "outerAttrs" are always excluded.
      * @throws ParserConfigurationException On parser exception.
      */
     private FCF2XML(String[] excludedProperties) throws ParserConfigurationException {
@@ -116,7 +116,7 @@ public class FCF2XML {
      * properties that return String or primitive types. Then, recurses over all of the root
      * component's children.
      *
-     * @param root The root component.
+     * @param root   The root component.
      * @param parent The parent XML node.
      */
     private void toXML(BaseComponent root, Node parent) {
@@ -132,7 +132,7 @@ public class FCF2XML {
         Node child = doc.createElement(cmpname.replace("#", "_"));
         parent.appendChild(child);
 
-        for (PropertyDescriptor propDx : PropertyUtils.getPropertyDescriptors(root)) {
+        for (PropertyDescriptor propDx : BeanUtils.getPropertyDescriptors(clazz)) {
             Method getter = propDx.getReadMethod();
             Method setter = propDx.getWriteMethod();
             String name = propDx.getName();
@@ -170,9 +170,9 @@ public class FCF2XML {
     /**
      * Returns true if the property is to be excluded.
      *
-     * @param name The property name.
+     * @param name    The property name.
      * @param cmpname The component name (may be null).
-     * @param value The property value (may be null).
+     * @param value   The property value (may be null).
      * @return True if the property should be excluded.
      */
     private boolean isExcluded(String name, String cmpname, String value) {
@@ -182,9 +182,9 @@ public class FCF2XML {
     /**
      * Returns the exclusion lookup key for the property.
      *
-     * @param name The property name.
+     * @param name    The property name.
      * @param cmpname The component name (may be null).
-     * @param value The property value (may be null).
+     * @param value   The property value (may be null).
      * @return The exclusion lookup key.
      */
     private String excludeKey(String name, String cmpname, String value) {

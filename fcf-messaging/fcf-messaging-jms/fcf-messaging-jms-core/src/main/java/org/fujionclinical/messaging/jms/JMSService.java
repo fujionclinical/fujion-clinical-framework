@@ -25,6 +25,8 @@
  */
 package org.fujionclinical.messaging.jms;
 
+import jakarta.jms.*;
+import jakarta.jms.TopicSession;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -32,7 +34,6 @@ import org.fujion.common.MiscUtil;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jmx.export.annotation.ManagedResource;
 
-import javax.jms.*;
 import java.io.Serializable;
 
 /**

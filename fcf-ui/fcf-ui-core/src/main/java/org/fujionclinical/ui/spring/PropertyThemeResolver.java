@@ -29,8 +29,8 @@ import org.fujionclinical.api.property.PropertyUtil;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.ThemeResolver;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Resolves theme name from property named <code>FCF.THEME</code>.

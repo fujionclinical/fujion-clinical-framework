@@ -31,7 +31,7 @@ import org.fujion.common.MiscUtil;
 import org.fujionclinical.api.messaging.IMessageConsumer;
 import org.fujionclinical.api.messaging.Message;
 
-import javax.jms.*;
+import jakarta.jms.*;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,7 +52,7 @@ public class MessageConsumer implements IMessageConsumer {
         }
         
         @Override
-        public void onMessage(javax.jms.Message message) {
+        public void onMessage(jakarta.jms.Message message) {
             try {
                 Object payload;
                 

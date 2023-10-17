@@ -43,7 +43,7 @@ import org.fujionclinical.help.IHelpViewer;
 import org.fujionclinical.help.viewer.HelpViewer.HelpViewerMode;
 import org.fujionclinical.ui.command.CommandUtil;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 
 /**
  * Utility class containing helper methods in support of online help infrastructure.

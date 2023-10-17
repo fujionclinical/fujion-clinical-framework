@@ -29,7 +29,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
+
+import java.io.Serial;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,7 +40,8 @@ import java.util.Map;
  * detail objects to it.
  */
 public class FCFAuthenticationDetails extends WebAuthenticationDetails {
-    
+
+    @Serial
     private static final long serialVersionUID = 1L;
     
     private static final Log log = LogFactory.getLog(FCFAuthenticationDetails.class);

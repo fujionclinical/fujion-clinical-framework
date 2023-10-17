@@ -28,8 +28,6 @@ package org.fujionclinical.api.logging;
 /**
  * Provides listener notification methods when a tailed file is updated
  * 
- * @author Steven Haines
- *         <a href="http://www.informit.com/guides/content.aspx?g=java&seqNum=226">project</a>
  */
 public interface LogFileTailerListener {
     

@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.help.javahelp;
 
-import org.apache.commons.beanutils.MethodUtils;
+import org.apache.commons.lang3.reflect.MethodUtils;
 import org.fujionclinical.help.HelpTopic;
 import org.fujionclinical.help.HelpTopicNode;
 import org.fujionclinical.help.HelpViewType;
@@ -122,7 +122,7 @@ public class HelpView implements IHelpView {
      */
     protected DefaultMutableTreeNode getDataAsTree() {
         try {
-            return (DefaultMutableTreeNode) MethodUtils.invokeMethod(view, "getDataAsTree", null);
+            return (DefaultMutableTreeNode) MethodUtils.invokeMethod(view, "getDataAsTree");
         } catch (Exception e) {
             return null;
         }

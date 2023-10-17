@@ -30,7 +30,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.fujion.ancillary.ConvertUtil;
 import org.fujion.annotation.EventHandler;
 import org.fujion.annotation.WiredComponent;
 import org.fujion.client.ClientInvocation;
@@ -39,6 +38,7 @@ import org.fujion.common.DateUtil;
 import org.fujion.common.DateUtil.TimeUnit;
 import org.fujion.common.StrUtil;
 import org.fujion.component.*;
+import org.fujion.convert.ConversionService;
 import org.fujion.dialog.DialogUtil;
 import org.fujion.event.EventUtil;
 import org.fujion.event.TimerEvent;
@@ -184,11 +184,11 @@ public class SessionMonitor extends FrameworkController {
         if (applicationControl != null) {
             switch (applicationControl) {
                 case SHUTDOWN_ABORT:
-                    abortShutdown(ConvertUtil.convert(eventData, String.class));
+                    abortShutdown(ConversionService.getInstance().convert(eventData, String.class));
                     break;
                 
                 case SHUTDOWN_START:
-                    startShutdown(ConvertUtil.convert(eventData, Long.class));
+                    startShutdown(ConversionService.getInstance().convert(eventData, Long.class));
                     break;
                 
                 case SHUTDOWN_PROGRESS:
@@ -196,7 +196,7 @@ public class SessionMonitor extends FrameworkController {
                     break;
 
                 case LOCK:
-                    lockPage(eventData == null || ConvertUtil.convert(eventData, Boolean.class));
+                    lockPage(eventData == null || ConversionService.getInstance().convert(eventData, Boolean.class));
                     break;
             }
         }

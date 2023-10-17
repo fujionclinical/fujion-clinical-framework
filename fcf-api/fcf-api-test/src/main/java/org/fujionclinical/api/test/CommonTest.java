@@ -71,11 +71,13 @@ public class CommonTest {
     @AfterClass
     public static void afterClass$CommonTest() {
         if (--initCount == 0) {
-            System.out.println("Closing test IOC container...");
-            try {
-                appContext.close();
-            } catch (Throwable e) {
-                e.printStackTrace();
+            if (appContext != null) {
+                System.out.println("Closing test IOC container...");
+                try {
+                    appContext.close();
+                } catch (Throwable e) {
+                    e.printStackTrace();
+                }
             }
             appContext = null;
             appFramework = null;

@@ -7,15 +7,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * This Source Code Form is also subject to the terms of the Health-Related
  * Additional Disclaimer of Warranty and Limitation of Liability available at
  *
@@ -25,7 +25,7 @@
  */
 package org.fujionclinical.shell.test;
 
-import org.apache.commons.beanutils.PropertyUtils;
+import org.fujion.core.BeanUtil;
 import org.fujion.event.ClickEvent;
 import org.fujion.event.EventUtil;
 import org.fujion.test.MockTest;
@@ -44,7 +44,7 @@ import static org.fujionclinical.shell.Constants.MSG_PLUGIN_TREEVIEW_DX;
 import static org.junit.Assert.*;
 
 public class LayoutParserTest extends ShellTest {
-    
+
     private Shell shell;
 
     private ElementUI element;
@@ -56,18 +56,18 @@ public class LayoutParserTest extends ShellTest {
         parserTestFile("layout-v3.xml", false);
         parserTestFile("layout-v4.xml", true);
     }
-    
+
     private void parserTestFile(String file, boolean hasTrigger) throws Exception {
         Layout layout = parserTestXML(getTextFromResource(file), hasTrigger);
         parserTestXML(layout.toString(), hasTrigger);
     }
-    
+
     private Layout parserTestXML(String xml, boolean hasTrigger) throws Exception {
         Layout layout = LayoutParser.parseText(xml);
         parserTestLayout(layout, hasTrigger);
         return layout;
     }
-    
+
     private void parserTestLayout(Layout layout, boolean hasTrigger) throws Exception {
         assertFalse(layout.isEmpty());
         assertEquals(layout.getName(), "test");
@@ -99,13 +99,13 @@ public class LayoutParserTest extends ShellTest {
         assertNotNull(plugin1);
         assertEquals(hasTrigger ? 1 : 0, plugin1.getTriggers().size());
         assertEquals(hasTrigger ? "triggered" : null, plugin1.getHint());
-        
+
         if (hasTrigger) {
             ElementTrigger trigger = plugin1.getTriggers().iterator().next();
             assertTrue(trigger.getAction() instanceof TestTriggerAction);
             assertTrue(trigger.getCondition() instanceof TriggerConditionActivate);
         }
-        
+
         PluginContainer container1 = (PluginContainer) plugin1.getOuterComponent();
         TestPluginController controller = (TestPluginController) FrameworkController
                 .getController(container1.getFirstChild());
@@ -130,22 +130,22 @@ public class LayoutParserTest extends ShellTest {
         root.removeChildren();
         testPlugin(controller, 1, 2, 1, 1);
     }
-    
+
     private void testProperty(ElementPlugin plugin, String propertyName, Object expectedValue) throws Exception {
         PluginDefinition def = plugin.getDefinition();
         PropertyInfo propInfo = null;
-        
+
         for (PropertyInfo pi : def.getProperties()) {
             if (pi.getId().equals(propertyName)) {
                 propInfo = pi;
                 break;
             }
         }
-        
+
         assertNotNull("Property not found: " + propertyName, propInfo);
         assertEquals(expectedValue, plugin.getPropertyValue(propInfo));
     }
-    
+
     private void testPlugin(TestPluginController controller, int loadCount, int activateCount, int inactivateCount,
                             int unloadCount) {
         getMockEnvironment().flushEvents();
@@ -154,27 +154,27 @@ public class LayoutParserTest extends ShellTest {
         assertEquals(inactivateCount, controller.getInactivateCount());
         assertEquals(unloadCount, controller.getUnloadCount());
     }
-    
+
     private void testNode(int dir, Class<? extends ElementUI> clazz) {
         switch (dir) {
             case 1:
                 element = (ElementUI) element.getFirstChild();
                 break;
-            
+
             case -1:
                 element = element.getParent();
                 break;
-            
+
             case 0:
                 element = element.getNextSibling(false);
                 break;
         }
-        
+
         assertTrue(clazz.isInstance(element));
     }
-    
-    private void testProperty(String key, Object value) throws Exception {
-        Object prop = PropertyUtils.getProperty(element, key);
+
+    private void testProperty(String key, Object value) {
+        Object prop = BeanUtil.getPropertyValue(element, key);
         assertEquals(prop, value);
     }
 }

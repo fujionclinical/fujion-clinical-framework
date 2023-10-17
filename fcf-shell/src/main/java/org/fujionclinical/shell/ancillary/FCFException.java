@@ -27,8 +27,11 @@ package org.fujionclinical.shell.ancillary;
 
 import org.fujion.common.MiscUtil;
 
+import java.io.Serial;
+
 public class FCFException extends RuntimeException {
-    
+
+    @Serial
     private static final long serialVersionUID = 1L;
     
     public static void raise(String text, Throwable t) throws FCFException {
