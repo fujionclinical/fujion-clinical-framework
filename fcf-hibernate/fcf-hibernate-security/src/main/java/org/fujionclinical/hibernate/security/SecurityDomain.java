@@ -120,6 +120,6 @@ public class SecurityDomain implements ISecurityDomain {
     }
     
     private UserDAO getUserDAO() {
-        return SpringUtil.getAppContext().getBean(UserDAO.class);
+        return SpringUtil.getBean(UserDAO.class);
     }
 }

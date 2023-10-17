@@ -12,19 +12,12 @@
 
 		<bean id="securityService" fcf:override="always"
 			class="org.fujionclinical.hibernate.security.SecurityService">
-			<constructor-arg ref="fcfHibernateUserDAO" />
 			<property name="logoutTarget" value="${org.fujionclinical.security.logout.success.url}" />
 		</bean>
-		
-		<bean id="fcfHibernateUserDAO"
-			class="org.fujionclinical.hibernate.security.UserDAO">
-			<constructor-arg ref="fcfHibernateSessionFactory" />
-		</bean>
-		
-		<bean init-method="init"
-			class="org.fujionclinical.hibernate.security.SecurityDomainDAO">
-			<constructor-arg ref="fcfHibernateSessionFactory" />
-		</bean>
+
+		<bean class="org.fujionclinical.hibernate.security.UserDAO"/>
+
+		<bean class="org.fujionclinical.hibernate.security.SecurityDomainDAO"/>
 
 	</beans>
 

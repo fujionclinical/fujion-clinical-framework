@@ -4,12 +4,10 @@ import jakarta.persistence.Embeddable;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Embeddable
-public class PropertyId implements Serializable {
-
-    @Serial
-    private static final long serialVersionUID = 1L;
+public class PropertyId {
 
     private String name;
 
@@ -37,5 +35,18 @@ public class PropertyId implements Serializable {
 
     public String getUser() {
         return user;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PropertyId that = (PropertyId) o;
+        return Objects.equals(name, that.name) && Objects.equals(instance, that.instance) && Objects.equals(user, that.user);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, instance, user);
     }
 }

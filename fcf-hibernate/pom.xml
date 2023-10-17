@@ -10,7 +10,21 @@
 	<artifactId>fcf-hibernate</artifactId>
 	<packaging>pom</packaging>
 	<name>FCF Hibernate Components Aggregator POM</name>
-	
+
+	<properties>
+		<hibernate.version>6.3.1.Final</hibernate.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.hibernate.orm</groupId>
+				<artifactId>hibernate-core</artifactId>
+				<version>${hibernate.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<modules>
 		<module>fcf-hibernate-core</module>
 		<module>fcf-hibernate-h2</module>

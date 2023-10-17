@@ -25,17 +25,38 @@
  */
 package org.fujionclinical.hibernate.security;
 
+import jakarta.annotation.PostConstruct;
+import org.fujionclinical.api.security.SecurityDomains;
 import org.fujionclinical.security.AbstractSecurityService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
+import java.util.List;
 
 /**
  * Hibernate-based security service.
  */
 public class SecurityService extends AbstractSecurityService {
-    
-    private final UserDAO userDAO;
 
-    public SecurityService(UserDAO userDAO) {
-        this.userDAO = userDAO;
+    @Autowired
+    private UserDAO userDAO;
+
+    @Autowired
+    private SecurityDomainDAO securityDomainDAO;
+
+    public SecurityService() {
+    }
+
+    @PostConstruct
+    public void init() {
+        List<SecurityDomain> domains = securityDomainDAO.getSecurityDomains();
+
+        for (SecurityDomain domain : domains) {
+            if (!"*".equals(domain.getLogicalId())) {
+                SecurityDomains.registerSecurityDomain(domain);
+            }
+        }
+
     }
 
     @Override

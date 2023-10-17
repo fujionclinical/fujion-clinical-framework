@@ -25,8 +25,8 @@
  */
 package org.fujionclinical.api.security;
 
+import org.apache.commons.lang3.StringUtils;
 import org.fujion.common.AbstractRegistry;
-import org.springframework.util.StringUtils;
 
 /**
  * Tracks all security domains.
@@ -40,7 +40,7 @@ public class SecurityDomains extends AbstractRegistry<String, ISecurityDomain> {
     }
     
     public static ISecurityDomain getSecurityDomain(String name) {
-        return StringUtils.isEmpty(name) ? null : instance.get(name);
+        return StringUtils.isBlank(name) ? null : instance.get(name);
     }
     
     public static void registerSecurityDomain(ISecurityDomain securityDomain) {

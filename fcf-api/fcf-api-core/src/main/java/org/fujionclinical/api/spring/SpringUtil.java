@@ -124,7 +124,7 @@ public class SpringUtil {
         try {
             return appContext == null ? null : appContext.getBean(clazz);
         } catch (Exception e) {
-            return null;
+            return getBean(clazz.getName(), clazz);
         }
     }
 

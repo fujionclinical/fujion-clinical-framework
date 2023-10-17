@@ -37,11 +37,12 @@ public class TestSecurity extends MockUITest {
 
     @Test
     public void testService() {
-        SecurityDomainDAO sdao = SpringUtil.getAppContext().getBean(SecurityDomainDAO.class);
+        SecurityDomainDAO sdao = SpringUtil.getBean(SecurityDomainDAO.class);
         setupDomains(sdao);
-        sdao.init();
+        SecurityService sc = SpringUtil.getBean(SecurityService.class);
+        sc.init();
         assertEquals(3, SecurityDomains.getInstance().getAll().size());
-        UserDAO udao = SpringUtil.getAppContext().getBean(UserDAO.class);
+        UserDAO udao = SpringUtil.getBean(UserDAO.class);
         setupUsers(udao);
         SecurityDomain domain = getSecurityDomain("1");
         authenticate(domain, "DOCTOR123", "DOCTOR321$", "1");
