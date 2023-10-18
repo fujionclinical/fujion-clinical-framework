@@ -29,6 +29,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import org.fujionclinical.hibernate.core.AbstractDAO;
 import org.hibernate.Session;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,6 +39,7 @@ import java.util.List;
  * Loader for Hibernate-based security domains.
  */
 @Component
+@Profile("root")
 public class SecurityDomainDAO extends AbstractDAO<SecurityDomain> {
 
     public SecurityDomainDAO() {

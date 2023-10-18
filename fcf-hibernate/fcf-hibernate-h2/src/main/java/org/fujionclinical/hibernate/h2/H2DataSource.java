@@ -28,12 +28,14 @@ package org.fujionclinical.hibernate.h2;
 import org.apache.commons.lang3.StringUtils;
 import org.fujionclinical.hibernate.core.AbstractDataSource;
 import org.h2.tools.Server;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 /**
  * H2-based data source that also handles starting the database in the appropriate mode.
  */
 @Component("fcfHibernateDataSource")
+@Profile("root")
 public class H2DataSource extends AbstractDataSource {
 
     /**

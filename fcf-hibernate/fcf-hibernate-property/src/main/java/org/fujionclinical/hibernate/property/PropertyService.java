@@ -32,6 +32,7 @@ import org.fujionclinical.api.security.ISecurityService;
 import org.fujionclinical.api.security.SecurityUtil;
 import org.fujionclinical.api.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +42,7 @@ import java.util.List;
  * Hibernate implementation of a property service.
  */
 @Component
+@Profile("root")
 public class PropertyService implements IPropertyService {
 
     @Autowired
