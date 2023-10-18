@@ -2,7 +2,7 @@
  * #%L
  * Fujion Clinical Framework
  * %%
- * Copyright (C) 2020 fujionclinical.org
+ * Copyright (C) 2023 fujionclinical.org
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,12 +59,16 @@ public class Property implements Serializable {
     }
 
     public Property(String name, String value, String instance, String user) {
-        id = new PropertyId(name, instance, user);
-        setValue(value);
+        this(new PropertyId(name, instance, user), value);
     }
 
-    public String getName() {
-        return id.getName();
+    public Property(PropertyId id) {
+        this(id, null);
+    }
+
+    public Property(PropertyId id, String value) {
+        this.id = id;
+        setValue(value);
     }
 
     public String getValue() {
@@ -73,6 +77,10 @@ public class Property implements Serializable {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public String getName() {
+        return id.getName();
     }
 
     public String getInstance() {

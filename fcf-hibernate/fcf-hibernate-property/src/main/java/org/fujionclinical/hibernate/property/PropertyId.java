@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class PropertyId {
+public class PropertyId implements Serializable {
 
     private String name;
 
