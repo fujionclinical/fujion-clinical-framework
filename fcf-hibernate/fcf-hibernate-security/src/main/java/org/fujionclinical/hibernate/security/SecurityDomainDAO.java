@@ -25,13 +25,11 @@
  */
 package org.fujionclinical.hibernate.security;
 
-import jakarta.annotation.PostConstruct;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
-import org.fujionclinical.api.security.SecurityDomains;
 import org.fujionclinical.hibernate.core.AbstractDAO;
 import org.hibernate.Session;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -39,7 +37,7 @@ import java.util.List;
 /**
  * Loader for Hibernate-based security domains.
  */
-@Repository
+@Component
 public class SecurityDomainDAO extends AbstractDAO<SecurityDomain> {
 
     public SecurityDomainDAO() {

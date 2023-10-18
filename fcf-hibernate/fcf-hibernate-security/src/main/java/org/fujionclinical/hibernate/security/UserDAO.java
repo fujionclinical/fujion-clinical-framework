@@ -28,13 +28,14 @@ package org.fujionclinical.hibernate.security;
 import org.fujionclinical.hibernate.core.AbstractDAO;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * DAO for User class.
  */
-@Repository
+@Component
 public class UserDAO extends AbstractDAO<User> {
 
     private static final String HQL_AUTHENTICATE = "FROM User "

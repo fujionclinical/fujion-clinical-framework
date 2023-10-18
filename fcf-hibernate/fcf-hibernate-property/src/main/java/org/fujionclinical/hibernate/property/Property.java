@@ -25,12 +25,11 @@
  */
 package org.fujionclinical.hibernate.property;
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Lob;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.time.OffsetDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "FCF_PROPERTY")
@@ -38,6 +37,9 @@ public class Property implements Serializable {
 
     @EmbeddedId
     private final PropertyId id;
+
+    @Version
+    private OffsetDateTime timestamp;
 
     @Lob
     private String value;

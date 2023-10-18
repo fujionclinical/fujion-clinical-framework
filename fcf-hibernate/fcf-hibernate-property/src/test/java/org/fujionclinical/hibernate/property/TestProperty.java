@@ -26,6 +26,7 @@
 package org.fujionclinical.hibernate.property;
 
 import org.fujionclinical.api.test.CommonTest;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -36,45 +37,59 @@ import static org.junit.Assert.assertNull;
 
 public class TestProperty extends CommonTest {
 
+    private static PropertyService service;
+
+    @BeforeClass
+    public static void init() {
+        service = service != null ? service : appContext.getBean(PropertyService.class);
+    }
+
     @Test
     public void testService() {
-        PropertyService service = appContext.getBean(PropertyService.class);
-        test1(service, null);
-        test1(service, "instance1");
-        test1(service, "instance2");
-        test2(service, "instance1");
-        test2(service, "instance2");
-        test3(service, "prop2", true, 2);
-        test3(service, "prop2", false, 2);
-        test3(service, "prop1", true, 0);
+        test1(null);
+        test1("instance1");
+        test1("instance2");
+        test2("instance1");
+        test2("instance2");
+        test3("prop2", true, 2);
+        test3("prop2", false, 2);
+        test3("prop1", true, 0);
     }
 
-    private void test1(PropertyService service, String instanceName) {
-        service.saveValue("prop1", instanceName, false, "local1");
-        service.saveValue("prop1", instanceName, true, "global1");
-        service.saveValue("prop1", instanceName, false, null);
+    private void test1(String instanceName) {
+        saveValue("prop1", instanceName, false, "local1", 1);
+        saveValue("prop1", instanceName, true, "global1", 2);
+        saveValue("prop1", instanceName, false, null, 1);
         assertEquals("global1", service.getValue("prop1", instanceName));
-        service.saveValue("prop1", instanceName, false, "local1");
+        saveValue("prop1", instanceName, false, "local1", 2);
         assertEquals("local1", service.getValue("prop1", instanceName));
-        service.saveValue("prop1", instanceName, true, null);
+        saveValue("prop1", instanceName, true, null, 1);
         assertEquals("local1", service.getValue("prop1", instanceName));
-        service.saveValue("prop1", instanceName, false, null);
+        saveValue("prop1", instanceName, false, null, 0);
         assertNull(service.getValue("prop1", instanceName));
-        service.saveValue("prop2", instanceName, false, "local2");
-        service.saveValue("prop2", instanceName, true, "global2");
+        saveValue("prop2", instanceName, false, "local2", 1);
+        saveValue("prop2", instanceName, true, "global2", 2);
     }
 
-    private void test2(PropertyService service, String instanceName) {
-        List<String> local = initList("local");
-        service.saveValues("multi1", instanceName, false, local);
-        List<String> global = initList("global");
-        service.saveValues("multi1", instanceName, true, global);
-        assertEquals(local, service.getValues("multi1", instanceName));
+    private void saveValue(String propertyName, String instanceName, boolean asGlobal, String value, int expectedCount) {
+        service.saveValue(propertyName, instanceName, asGlobal, value);
+        List<String> localValues = service.getInstances(propertyName, false);
+        List<String> globalValues = service.getInstances(propertyName, true);
+        assertEquals(expectedCount, localValues.size() + globalValues.size());
+    }
+
+    private void test2(String instanceName) {
+        List<String> localValues = createValueList(false);
+        service.saveValues("multi1", instanceName, false, localValues);
+        List<String> globalValues = createValueList(true);
+        service.saveValues("multi1", instanceName, true, globalValues);
+        assertEquals(localValues, service.getValues("multi1", instanceName));
         service.saveValues("multi1", instanceName, false, null);
-        assertEquals(global, service.getValues("multi1", instanceName));
+        assertEquals(globalValues, service.getValues("multi1", instanceName));
     }
 
-    private List<String> initList(String value) {
+    private List<String> createValueList(boolean asGlobal) {
+        String value = asGlobal ? "global" : "local";
         List<String> list = new ArrayList<>();
 
         for (int i = 1; i < 10; i++) {
@@ -84,7 +99,7 @@ public class TestProperty extends CommonTest {
         return list;
     }
 
-    private void test3(PropertyService service, String propertyName, boolean asGlobal, int count) {
+    private void test3(String propertyName, boolean asGlobal, int count) {
         List<String> instances = service.getInstances(propertyName, asGlobal);
         assertEquals(count, instances.size());
     }

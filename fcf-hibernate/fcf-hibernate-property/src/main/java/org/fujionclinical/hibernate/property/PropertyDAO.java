@@ -25,19 +25,19 @@
  */
 package org.fujionclinical.hibernate.property;
 
-import org.fujionclinical.api.user.User;
+import jakarta.persistence.LockModeType;
 import org.fujionclinical.hibernate.core.AbstractDAO;
 import org.hibernate.Session;
 import org.hibernate.query.SelectionQuery;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Repository
+@Component
 public class PropertyDAO extends AbstractDAO<Property> {
 
-    private static final String GET_INSTANCES = "SELECT distinct p.instance FROM Property p WHERE p.name=:name AND p.user=:user AND p.instance<>''";
+    private static final String GET_INSTANCES = "SELECT distinct p.id.instance FROM Property p WHERE p.id.name=:name AND p.id.user=:user AND p.id.instance<>''";
 
     public PropertyDAO() {
     }
@@ -54,10 +54,11 @@ public class PropertyDAO extends AbstractDAO<Property> {
     @Transactional(readOnly = true)
     public List<String> getInstances(
             String propertyName,
-            User user) {
+            String userId) {
         Session session = getSession();
         SelectionQuery<String> query = session.createSelectionQuery(GET_INSTANCES, String.class);
-        query.setParameter("name", propertyName).setParameter("user", user == null ? null : user.getId());
+        query.setParameter("name", propertyName).setParameter("user", userId);
+        query.setLockMode(LockModeType.READ);
         List<String> result = query.list();
         result.sort(String.CASE_INSENSITIVE_ORDER);
         return result;

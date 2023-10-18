@@ -33,7 +33,7 @@ import org.springframework.stereotype.Component;
 /**
  * H2-based data source that also handles starting the database in the appropriate mode.
  */
-@Component
+@Component("fcfHibernateDataSource")
 public class H2DataSource extends AbstractDataSource {
 
     /**
@@ -58,6 +58,7 @@ public class H2DataSource extends AbstractDataSource {
      *
      * @throws Exception Unspecified exception
      */
+    @Override
     public void init() throws Exception {
         super.init();
 

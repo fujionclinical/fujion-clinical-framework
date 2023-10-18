@@ -6,6 +6,8 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.sql.SQLException;
+
 public abstract class AbstractDataSource extends BasicDataSource {
 
     @Autowired
@@ -31,10 +33,15 @@ public abstract class AbstractDataSource extends BasicDataSource {
 
     @PreDestroy
     public void destroy() throws Exception {
-        close();
+        super.close();
     }
 
     public String getDialect() {
         return dialect;
+    }
+
+    @Override
+    public void close() throws SQLException {
+        // NOP
     }
 }

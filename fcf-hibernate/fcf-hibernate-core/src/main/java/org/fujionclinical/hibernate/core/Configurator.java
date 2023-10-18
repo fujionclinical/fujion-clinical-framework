@@ -1,5 +1,6 @@
 package org.fujionclinical.hibernate.core;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -62,7 +63,7 @@ public class Configurator {
 
     @Bean("fcfHibernateSessionFactory")
     protected LocalSessionFactoryBean sessionFactory(
-            @Qualifier("fcfHibernateDataSource") AbstractDataSource dataSource) {
+            @Autowired @Qualifier("fcfHibernateDataSource") AbstractDataSource dataSource) {
         LocalSessionFactoryBean bean = new LocalSessionFactoryBean();
         Properties props = new Properties();
         String debug = Boolean.toString(getDebug());

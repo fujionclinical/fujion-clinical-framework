@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.hibernate.core;
 
+import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @param <T> The data class.
  */
-@Component
-public class AbstractDAO<T> {
+public abstract class AbstractDAO<T> {
 
     @Autowired
     @Qualifier("fcfHibernateSessionFactory")
@@ -65,7 +65,7 @@ public class AbstractDAO<T> {
 
     @Transactional(readOnly = true)
     public T get(Class<T> clazz, Object id) {
-        return getSession().get(clazz, id);
+        return getSession().get(clazz, id, LockMode.READ);
     }
 
 }

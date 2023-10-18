@@ -7,8 +7,8 @@
 
 	<beans profile="root">
 
-		<bean id="propertyService"
-			class="org.fujionclinical.hibernate.property.PropertyService"/>
+<!--		<bean id="propertyService"-->
+<!--			class="org.fujionclinical.hibernate.property.PropertyService"/>-->
 
 	</beans>
 

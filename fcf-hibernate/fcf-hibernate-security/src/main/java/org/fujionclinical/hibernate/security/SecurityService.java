@@ -30,12 +30,14 @@ import org.fujionclinical.api.security.SecurityDomains;
 import org.fujionclinical.security.AbstractSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * Hibernate-based security service.
  */
+@Component
 public class SecurityService extends AbstractSecurityService {
 
     @Autowired

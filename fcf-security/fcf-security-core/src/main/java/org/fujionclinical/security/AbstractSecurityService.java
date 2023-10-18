@@ -7,15 +7,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * This Source Code Form is also subject to the terms of the Health-Related
  * Additional Disclaimer of Warranty and Limitation of Liability available at
  *
@@ -25,6 +25,7 @@
  */
 package org.fujionclinical.security;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -41,6 +42,7 @@ import org.fujionclinical.api.security.ISecurityService;
 import org.fujionclinical.api.security.SecurityUtil;
 import org.fujionclinical.api.user.User;
 import org.fujionclinical.security.controller.PasswordChangeController;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
@@ -70,12 +72,11 @@ public abstract class AbstractSecurityService implements ISecurityService {
      */
     public static SecurityContext getSecurityContext() {
         Session session = ExecutionContext.getSession();
-        @SuppressWarnings("resource")
         WebSocketSession ws = session == null ? null : session.getSocket();
         return ws == null ? null
                 : (SecurityContext) ws.getAttributes().get(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY);
     }
-    
+
     /**
      * Returns Spring security Authentication object via
      * <code>SpringContextHolder.getContext().getAuthentication()</code>.
@@ -96,8 +97,8 @@ public abstract class AbstractSecurityService implements ISecurityService {
     /**
      * Logout out the current page instance.
      *
-     * @param force If true, force logout without user interaction.
-     * @param target Optional target url for next login.
+     * @param force   If true, force logout without user interaction.
+     * @param target  Optional target url for next login.
      * @param message Optional message to indicate reason for logout.
      */
     @Override
@@ -124,7 +125,7 @@ public abstract class AbstractSecurityService implements ISecurityService {
     /**
      * Replaces the inline parameter with the specified value.
      *
-     * @param text Text containing parameter placeholder.
+     * @param text  Text containing parameter placeholder.
      * @param param Parameter name.
      * @param value Value to replace (will be url-encoded).
      * @return Updated text.
@@ -145,7 +146,7 @@ public abstract class AbstractSecurityService implements ISecurityService {
      * Register an alias for an authority.
      *
      * @param authority String representation of an authority.
-     * @param alias String representation of an authority alias. If null, removes an existing alias.
+     * @param alias     String representation of an authority alias. If null, removes an existing alias.
      */
     @Override
     public void setAuthorityAlias(String authority, String alias) {
@@ -217,8 +218,8 @@ public abstract class AbstractSecurityService implements ISecurityService {
      * Checks the current SecurityContext for the specified authorities.
      *
      * @param grantedAuthorities Comma-delimited string of granted authorities
-     * @param checkAllRoles boolean true-specified roles must be found in security context
-     *            authorities, false-security context must contain at least 1 specified authority
+     * @param checkAllRoles      boolean true-specified roles must be found in security context
+     *                           authorities, false-security context must contain at least 1 specified authority
      * @return True if Authentication is granted authorities
      */
     @Override
@@ -250,7 +251,7 @@ public abstract class AbstractSecurityService implements ISecurityService {
      * Determine if the granted authority exists within the authentication context.
      *
      * @param grantedAuthority The granted authority to check.
-     * @param authentication The authentication context.
+     * @param authentication   The authentication context.
      * @return True if the granted authority exists within the authentication context.
      */
     private boolean isGranted(String grantedAuthority, Authentication authentication) {
@@ -291,12 +292,9 @@ public abstract class AbstractSecurityService implements ISecurityService {
      *
      * @param logoutTarget Logout target url.
      */
+    @Value("${org.fujionclinical.security.logout.success.url}")
     public void setLogoutTarget(String logoutTarget) {
-        if (logoutTarget != null && !logoutTarget.startsWith("/")) {
-            logoutTarget = "/" + logoutTarget;
-        }
-
-        this.logoutTarget = logoutTarget;
+        this.logoutTarget = StringUtils.prependIfMissing(logoutTarget, "/");
     }
 
     /**
@@ -330,7 +328,7 @@ public abstract class AbstractSecurityService implements ISecurityService {
     public String generateRandomPassword() {
         int len = getRandomPasswordLength();
         return SecurityUtil.generateRandomPassword(len, len,
-            Constants.MSG_PASSWORD_RANDOM_CONSTRAINTS.toString().split("\n"));
+                Constants.MSG_PASSWORD_RANDOM_CONSTRAINTS.toString().split("\n"));
     }
 
     /**

@@ -25,18 +25,22 @@
  */
 package org.fujionclinical.hibernate.property;
 
+import org.apache.commons.lang3.StringUtils;
 import org.fujion.common.StrUtil;
 import org.fujionclinical.api.property.IPropertyService;
 import org.fujionclinical.api.security.ISecurityService;
 import org.fujionclinical.api.security.SecurityUtil;
 import org.fujionclinical.api.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Hibernate implementation of a property service.
  */
+@Component
 public class PropertyService implements IPropertyService {
 
     @Autowired
@@ -72,7 +76,7 @@ public class PropertyService implements IPropertyService {
         List<String> results = null;
         String result = getValue(propertyName, instanceName);
 
-        if (result != null && !result.isEmpty()) {
+        if (StringUtils.isNotEmpty(result)) {
             results = StrUtil.toList(result);
         }
 
@@ -86,8 +90,9 @@ public class PropertyService implements IPropertyService {
         if (value == null) {
             propertyDAO.remove(property);
         } else {
-            propertyDAO.merge(property);
+            property = propertyDAO.merge(property);
         }
+
     }
 
     @Override
@@ -97,7 +102,7 @@ public class PropertyService implements IPropertyService {
 
     @Override
     public List<String> getInstances(String propertyName, boolean asGlobal) {
-        return propertyDAO.getInstances(propertyName, getUser(asGlobal));
+        return propertyDAO.getInstances(propertyName, getUserId(asGlobal));
     }
 
 }
