@@ -25,12 +25,12 @@
  */
 package org.fujionclinical.hibernate.core;
 
+import jakarta.persistence.LockModeType;
 import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -65,7 +65,7 @@ public abstract class AbstractDAO<T> {
 
     @Transactional(readOnly = true)
     public T get(Class<T> clazz, Object id) {
-        return getSession().get(clazz, id, LockMode.READ);
+        return getSession().get(clazz, id);
     }
 
 }

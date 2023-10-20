@@ -37,6 +37,8 @@ import static org.junit.Assert.assertNull;
 
 public class TestProperty extends CommonTest {
 
+    private static final String GET_ALL_PROPERTIES = "FROM Property";
+
     private static PropertyService service;
 
     @BeforeClass
@@ -57,10 +59,11 @@ public class TestProperty extends CommonTest {
     }
 
     private void test1(String instanceName) {
-        saveValue("prop1", instanceName, false, "local1", 1);
-        saveValue("prop1", instanceName, true, "global1", 2);
-        saveValue("prop1", instanceName, false, null, 1);
+        saveValue("prop1", instanceName, true, "global1", 1);
+        //saveValue("prop1", instanceName, false, null, 1);
         assertEquals("global1", service.getValue("prop1", instanceName));
+        saveValue("prop1", instanceName, false, "local1", 2);
+        assertEquals("local1", service.getValue("prop1", instanceName));
         saveValue("prop1", instanceName, false, "local1", 2);
         assertEquals("local1", service.getValue("prop1", instanceName));
         saveValue("prop1", instanceName, true, null, 1);
@@ -73,9 +76,8 @@ public class TestProperty extends CommonTest {
 
     private void saveValue(String propertyName, String instanceName, boolean asGlobal, String value, int expectedCount) {
         service.saveValue(propertyName, instanceName, asGlobal, value);
-        List<String> localValues = service.getInstances(propertyName, false);
-        List<String> globalValues = service.getInstances(propertyName, true);
-        assertEquals(expectedCount, localValues.size() + globalValues.size());
+        List<Property> all = service.getAllProperties();
+        assertEquals(expectedCount, all.size());
     }
 
     private void test2(String instanceName) {

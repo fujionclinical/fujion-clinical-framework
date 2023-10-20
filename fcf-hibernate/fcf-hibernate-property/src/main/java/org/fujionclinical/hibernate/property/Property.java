@@ -29,7 +29,6 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
-import java.util.Date;
 
 @Entity
 @Table(name = "FCF_PROPERTY")
@@ -81,6 +80,10 @@ public class Property implements Serializable {
         this.value = value;
     }
 
+    public PropertyId getId() {
+        return id;
+
+    }
     public String getName() {
         return id.getName();
     }

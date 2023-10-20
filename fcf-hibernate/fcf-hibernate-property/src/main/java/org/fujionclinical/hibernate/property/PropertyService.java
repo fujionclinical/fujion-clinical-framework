@@ -34,7 +34,6 @@ import org.fujionclinical.api.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -87,14 +86,21 @@ public class PropertyService implements IPropertyService {
 
     @Override
     public void saveValue(String propertyName, String instanceName, boolean asGlobal, String value) {
-         Property property = new Property(propertyName, value, instanceName, getUserId(asGlobal));
+        String userId = getUserId(asGlobal);
+        Property property = propertyDAO.get(propertyName, instanceName, userId);
 
-        if (value == null) {
-            propertyDAO.remove(property);
+        if (property == null) {
+            if (value != null) {
+                property = new Property(propertyName, value, instanceName, userId);
+                propertyDAO.persist(property);
+            }
+        } else if (value == null) {
+            int rowcount = propertyDAO.remove(property.getId());
+            System.out.println(rowcount);
         } else {
-            property = propertyDAO.merge(property);
+            property.setValue(value);
+            propertyDAO.merge(property);
         }
-
     }
 
     @Override
@@ -107,4 +113,7 @@ public class PropertyService implements IPropertyService {
         return propertyDAO.getInstances(propertyName, getUserId(asGlobal));
     }
 
+    public List<Property> getAllProperties() {
+        return propertyDAO.getAll();
+    }
 }

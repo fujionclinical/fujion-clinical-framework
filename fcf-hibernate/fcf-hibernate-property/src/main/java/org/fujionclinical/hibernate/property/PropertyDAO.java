@@ -26,11 +26,14 @@
 package org.fujionclinical.hibernate.property;
 
 import jakarta.persistence.LockModeType;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaDelete;
 import org.fujionclinical.hibernate.core.AbstractDAO;
+import org.hibernate.LockMode;
 import org.hibernate.Session;
+import org.hibernate.query.MutationQuery;
 import org.hibernate.query.SelectionQuery;
 import org.springframework.context.annotation.Profile;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,6 +44,8 @@ import java.util.List;
 public class PropertyDAO extends AbstractDAO<Property> {
 
     private static final String GET_INSTANCES = "SELECT distinct p.id.instance FROM Property p WHERE p.id.name=:name AND p.id.user=:user AND p.id.instance<>''";
+
+    private static final String DELETE_PROPERTY = "DELETE FROM Property p WHERE p.id.name=:name AND p.id.user=:user AND p.id.instance=:instance";
 
     public PropertyDAO() {
     }
@@ -58,13 +63,42 @@ public class PropertyDAO extends AbstractDAO<Property> {
     public List<String> getInstances(
             String propertyName,
             String userId) {
-        Session session = getSession();
-        SelectionQuery<String> query = session.createSelectionQuery(GET_INSTANCES, String.class);
+        SelectionQuery<String> query = getSession().createSelectionQuery(GET_INSTANCES, String.class);
         query.setParameter("name", propertyName).setParameter("user", userId);
         query.setLockMode(LockModeType.READ);
         List<String> result = query.list();
         result.sort(String.CASE_INSENSITIVE_ORDER);
         return result;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Property> getAll() {
+        SelectionQuery<Property> query = getSession().createSelectionQuery("FROM Property ", Property.class);
+       // query.setLockMode(LockModeType.PESSIMISTIC_READ);
+        return query.list();
+    }
+
+    @Override
+    @Transactional
+    public void remove(Property entity) {
+        remove(entity.getId());
+    }
+
+    @Transactional
+    public int remove(PropertyId id) {
+        MutationQuery query = getSession().createMutationQuery(DELETE_PROPERTY);
+        query.setParameter("name", id.getName());
+        query.setParameter("user", id.getUser());
+        query.setParameter("instance", id.getInstance());
+        return query.executeUpdate();
+    }
+
+    @Transactional
+    public int remove(
+            String propertyName,
+            String instanceName,
+            String userId) {
+        return remove(new PropertyId(propertyName, instanceName, userId));
     }
 
 }

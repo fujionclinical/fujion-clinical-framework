@@ -2,7 +2,6 @@ package org.fujionclinical.hibernate.property;
 
 import jakarta.persistence.Embeddable;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
