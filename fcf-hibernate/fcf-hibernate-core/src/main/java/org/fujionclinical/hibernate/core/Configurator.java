@@ -45,7 +45,7 @@ public class Configurator {
     @Value("${org.fujionclinical.hibernate.driver}")
     private String driverClass;
 
-    @Value("${org.fujionclinical.hibernate.dialect:#{null}}")
+    @Value("${org.fujionclinical.hibernate.dialect}")
     private String dialect;
 
     @Bean("fcfHibernateSessionFactory")

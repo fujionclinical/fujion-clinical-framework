@@ -28,6 +28,7 @@ package org.fujionclinical.hibernate.h2;
 import org.apache.commons.io.file.PathUtils;
 import org.fujionclinical.api.test.TestUtil;
 import org.fujionclinical.hibernate.core.Configurator;
+import org.fujionclinical.hibernate.core.HibernateDataSource;
 import org.fujionclinical.hibernate.h2.H2DataSource.DBMode;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -46,11 +47,18 @@ import static org.junit.Assert.*;
 
 public class TestH2 {
 
+    private static class TestConfigurator extends Configurator {
+        @Override
+        public HibernateDataSource dataSource() throws Exception {
+            return super.dataSource();
+        }
+    }
+
     private static Path databaseFile;
 
     private static String database;
 
-    private static final Configurator config = new Configurator();
+    private static final TestConfigurator config = new TestConfigurator();
 
     private static Map<String, Object> savedConfigState;
 
@@ -60,6 +68,9 @@ public class TestH2 {
         database = databaseFile.toFile().getAbsolutePath();
         TestUtil.initValueAnnotatedFields(config);
         savedConfigState = TestUtil.getFieldValues(config);
+        savedConfigState.put("driverClass", "org.h2.Driver");
+        savedConfigState.put("dialect", "org.hibernate.dialect.H2Dialect");
+        savedConfigState.put("dataSourceClass", "org.fujionclinical.hibernate.h2.H2DataSource");
     }
 
     @AfterClass
@@ -89,7 +100,7 @@ public class TestH2 {
     private void testDB(Map<String, Object> params, DBMode dbMode, String expectedException) throws Exception {
         TestUtil.setFields(config, savedConfigState);
         TestUtil.setFields(config, params);
-        H2DataSource h2 = new H2DataSource();
+        H2DataSource h2 = (H2DataSource) config.dataSource();
         ReflectionTestUtils.setField(h2, "dbModeStr", dbMode.toString());
         h2.init();
         String error = null;
