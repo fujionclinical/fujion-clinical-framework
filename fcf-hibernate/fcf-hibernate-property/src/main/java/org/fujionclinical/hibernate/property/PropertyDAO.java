@@ -45,7 +45,7 @@ import static org.fujionclinical.api.spring.Constants.PROFILE_ROOT;
 @Profile(PROFILE_ROOT)
 public class PropertyDAO extends AbstractDAO<Property> {
 
-    private static final String GET_INSTANCES = "SELECT distinct p.id.instance FROM Property p WHERE p.id.name=:name AND p.id.user=:user AND p.id.instance<>''";
+    private static final String GET_INSTANCES = "SELECT distinct p.id.instance FROM Property p WHERE p.id.name=:name AND p.id.user=:user";
 
     private static final String DELETE_PROPERTY = "DELETE FROM Property p WHERE p.id.name=:name AND p.id.user=:user AND p.id.instance=:instance";
 
@@ -66,8 +66,8 @@ public class PropertyDAO extends AbstractDAO<Property> {
             String propertyName,
             String userId) {
         SelectionQuery<String> query = getSession().createSelectionQuery(GET_INSTANCES, String.class);
-        query.setParameter("name", propertyName).setParameter("user", userId);
-        query.setLockMode(LockModeType.READ);
+        query.setParameter("name", propertyName).setParameter("user",  userId == null ? "" : userId);
+        //query.setLockMode(LockModeType.READ);
         List<String> result = query.list();
         result.sort(String.CASE_INSENSITIVE_ORDER);
         return result;
@@ -76,7 +76,6 @@ public class PropertyDAO extends AbstractDAO<Property> {
     @Transactional(readOnly = true)
     public List<Property> getAll() {
         SelectionQuery<Property> query = getSession().createSelectionQuery("FROM Property ", Property.class);
-       // query.setLockMode(LockModeType.PESSIMISTIC_READ);
         return query.list();
     }
 

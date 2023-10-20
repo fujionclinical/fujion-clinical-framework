@@ -47,30 +47,32 @@ public class TestProperty extends MockUITest {
 
     @Test
     public void testService() {
-        test1(null);
-        test1("instance1");
-        test1("instance2");
-        test2("instance1");
-        test2("instance2");
-        test3("prop2", true, 2);
-        test3("prop2", false, 2);
+        int count = 0;
+        count = test1(null, count);
+        count = test1("instance1", count);
+        count = test1("instance2", count);
+        count = test2("instance1", count);
+        count = test2("instance2", count);
+        test3("prop2", true, 3);
+        test3("prop2", false, 3);
         test3("prop1", true, 0);
     }
 
-    private void test1(String instanceName) {
-        saveValue("prop1", instanceName, true, "global1", 1);
-        //saveValue("prop1", instanceName, false, null, 1);
+    private int test1(String instanceName, int count) {
+        saveValue("prop1", instanceName, true, "global1", ++count);
+        saveValue("prop1", instanceName, false, null, count);
         assertEquals("global1", service.getValue("prop1", instanceName));
-        saveValue("prop1", instanceName, false, "local1", 2);
+        saveValue("prop1", instanceName, false, "local1", ++count);
         assertEquals("local1", service.getValue("prop1", instanceName));
-        saveValue("prop1", instanceName, false, "local1", 2);
-        assertEquals("local1", service.getValue("prop1", instanceName));
-        saveValue("prop1", instanceName, true, null, 1);
-        assertEquals("local1", service.getValue("prop1", instanceName));
-        saveValue("prop1", instanceName, false, null, 0);
+        saveValue("prop1", instanceName, false, "local2", count);
+        assertEquals("local2", service.getValue("prop1", instanceName));
+        saveValue("prop1", instanceName, true, null, --count);
+        assertEquals("local2", service.getValue("prop1", instanceName));
+        saveValue("prop1", instanceName, false, null, --count);
         assertNull(service.getValue("prop1", instanceName));
-        saveValue("prop2", instanceName, false, "local2", 1);
-        saveValue("prop2", instanceName, true, "global2", 2);
+        saveValue("prop2", instanceName, false, "local2", ++count);
+        saveValue("prop2", instanceName, true, "global2", ++count);
+        return count;
     }
 
     private void saveValue(String propertyName, String instanceName, boolean asGlobal, String value, int expectedCount) {
@@ -79,14 +81,21 @@ public class TestProperty extends MockUITest {
         assertEquals(expectedCount, all.size());
     }
 
-    private void test2(String instanceName) {
+    private void saveValues(String propertyName, String instanceName, boolean asGlobal, List<String> values, int expectedCount) {
+        service.saveValues(propertyName, instanceName, asGlobal, values);
+        List<Property> all = service.getAllProperties();
+        assertEquals(expectedCount, all.size());
+    }
+
+    private int test2(String instanceName, int count) {
         List<String> localValues = createValueList(false);
-        service.saveValues("multi1", instanceName, false, localValues);
+        saveValues("multi1", instanceName, false, localValues, ++count);
         List<String> globalValues = createValueList(true);
-        service.saveValues("multi1", instanceName, true, globalValues);
+        saveValues("multi1", instanceName, true, globalValues, ++count);
         assertEquals(localValues, service.getValues("multi1", instanceName));
-        service.saveValues("multi1", instanceName, false, null);
+        saveValues("multi1", instanceName, false, null, --count);
         assertEquals(globalValues, service.getValues("multi1", instanceName));
+        return count;
     }
 
     private List<String> createValueList(boolean asGlobal) {

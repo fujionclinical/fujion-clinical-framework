@@ -84,6 +84,7 @@ public class Property implements Serializable {
         return id;
 
     }
+
     public String getName() {
         return id.getName();
     }
