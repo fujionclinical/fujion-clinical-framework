@@ -58,19 +58,12 @@ public class RandomPropertySource extends PropertySource<Object> {
         }
 
         try {
-            switch (RandomType.valueOf(name.substring(RANDOM_PREFIX.length()).toUpperCase())) {
-                case INT:
-                case INTEGER:
-                    return Integer.toString(RANDOM_PROVIDER.nextInt());
-                case LONG:
-                    return Long.toString(RANDOM_PROVIDER.nextLong());
-                case VALUE:
-                    return RandomStringUtils.randomAlphanumeric(32);
-                case UUID:
-                    return UUID.randomUUID().toString();
-                default:
-                    return "";
-            }
+            return switch (RandomType.valueOf(name.substring(RANDOM_PREFIX.length()).toUpperCase())) {
+                case INT, INTEGER -> Integer.toString(RANDOM_PROVIDER.nextInt());
+                case LONG -> Long.toString(RANDOM_PROVIDER.nextLong());
+                case VALUE -> RandomStringUtils.randomAlphanumeric(32);
+                case UUID -> UUID.randomUUID().toString();
+            };
         } catch (Exception e) {
             return Assert.fail("Unknown random property type '%s'", name);
         }
