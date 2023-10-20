@@ -37,11 +37,13 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+import static org.fujionclinical.api.spring.Constants.PROFILE_ROOT;
+
 /**
  * Hibernate implementation of a property service.
  */
 @Component
-@Profile("root")
+@Profile(PROFILE_ROOT)
 public class PropertyService implements IPropertyService {
 
     @Autowired

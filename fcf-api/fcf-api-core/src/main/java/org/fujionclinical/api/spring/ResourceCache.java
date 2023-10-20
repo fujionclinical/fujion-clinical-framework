@@ -95,12 +95,7 @@ public class ResourceCache implements ResourcePatternResolver {
             throw MiscUtil.toUnchecked(e);
         }
 
-        if (resources == null) {
-            resources = new Resource[0];
-        } else {
-            Arrays.sort(resources, resourceComparator);
-        }
-
+        Arrays.sort(resources, resourceComparator);
         cache.put(pattern, resources);
         return resources;
     }

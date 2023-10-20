@@ -34,11 +34,13 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+import static org.fujionclinical.api.spring.Constants.PROFILE_ROOT;
+
 /**
  * Hibernate-based security service.
  */
 @Component
-@Profile("root")
+@Profile(PROFILE_ROOT)
 public class SecurityService extends AbstractSecurityService {
 
     @Autowired

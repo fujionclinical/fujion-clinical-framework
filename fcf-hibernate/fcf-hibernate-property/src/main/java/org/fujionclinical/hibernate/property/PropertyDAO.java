@@ -39,8 +39,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static org.fujionclinical.api.spring.Constants.PROFILE_ROOT;
+
 @Component
-@Profile("root")
+@Profile(PROFILE_ROOT)
 public class PropertyDAO extends AbstractDAO<Property> {
 
     private static final String GET_INSTANCES = "SELECT distinct p.id.instance FROM Property p WHERE p.id.name=:name AND p.id.user=:user AND p.id.instance<>''";

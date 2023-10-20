@@ -35,11 +35,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static org.fujionclinical.api.spring.Constants.PROFILE_ROOT;
+
 /**
  * Loader for Hibernate-based security domains.
  */
 @Component
-@Profile("root")
+@Profile(PROFILE_ROOT)
 public class SecurityDomainDAO extends AbstractDAO<SecurityDomain> {
 
     public SecurityDomainDAO() {

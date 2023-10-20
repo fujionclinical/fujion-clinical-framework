@@ -25,18 +25,16 @@
  */
 package org.fujionclinical.hibernate.h2;
 
-import org.apache.commons.lang3.StringUtils;
-import org.fujionclinical.hibernate.core.AbstractDataSource;
+import jakarta.annotation.PostConstruct;
+import org.apache.commons.lang3.EnumUtils;
+import org.fujionclinical.hibernate.core.HibernateDataSource;
 import org.h2.tools.Server;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * H2-based data source that also handles starting the database in the appropriate mode.
  */
-@Component("fcfHibernateDataSource")
-@Profile("root")
-public class H2DataSource extends AbstractDataSource {
+public class H2DataSource extends HibernateDataSource {
 
     /**
      * Server modes.
@@ -49,20 +47,19 @@ public class H2DataSource extends AbstractDataSource {
 
     private Server server;
 
-    private DBMode dbMode = DBMode.EMBEDDED;
+    @Value("${org.fujionclinical.hibernate.h2.mode:embedded}")
+    private String dbModeStr;
 
-    public H2DataSource() {
-        super("org.h2.Driver", "org.hibernate.dialect.H2Dialect");
-    }
+    private DBMode dbMode;
 
     /**
      * If running H2 in local mode, starts the server.
      *
      * @throws Exception Unspecified exception
      */
-    @Override
+    @PostConstruct
     public void init() throws Exception {
-        super.init();
+        dbMode = EnumUtils.getEnumIgnoreCase(DBMode.class, dbModeStr);
 
         if (dbMode == DBMode.LOCAL) {
             String port = getPort();
@@ -102,16 +99,6 @@ public class H2DataSource extends AbstractDataSource {
 
     public DBMode getMode() {
         return dbMode;
-    }
-
-    public void setMode(String value) {
-        dbMode = StringUtils.isBlank(value) ? DBMode.EMBEDDED : DBMode.valueOf(value.toUpperCase());
-    }
-
-    @Override
-    public void setUrl(String connectionString) {
-        connectionString += ";NON_KEYWORDS=USER,VALUE";
-        super.setUrl(connectionString);
     }
 
 }

@@ -25,8 +25,9 @@
  */
 package org.fujionclinical.hibernate.property;
 
-import org.fujionclinical.api.test.CommonTest;
-import org.junit.BeforeClass;
+import org.fujionclinical.api.spring.SpringUtil;
+import org.fujionclinical.ui.test.MockUITest;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -35,15 +36,13 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-public class TestProperty extends CommonTest {
-
-    private static final String GET_ALL_PROPERTIES = "FROM Property";
+public class TestProperty extends MockUITest {
 
     private static PropertyService service;
 
-    @BeforeClass
-    public static void init() {
-        service = service != null ? service : appContext.getBean(PropertyService.class);
+    @Before
+    public void init() {
+        service = service != null ? service : SpringUtil.getBean(PropertyService.class);
     }
 
     @Test

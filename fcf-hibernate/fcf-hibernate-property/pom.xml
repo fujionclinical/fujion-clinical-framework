@@ -30,7 +30,7 @@
 		<!-- Unit testing -->
 		<dependency>
 			<groupId>org.fujionclinical</groupId>
-			<artifactId>fcf-api-test</artifactId>
+			<artifactId>fcf-ui-test</artifactId>
 			<version>${project.parent.version}</version>
 			<scope>test</scope>
 		</dependency>

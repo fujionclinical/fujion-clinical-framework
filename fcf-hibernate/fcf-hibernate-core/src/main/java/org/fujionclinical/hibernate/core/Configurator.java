@@ -1,5 +1,7 @@
 package org.fujionclinical.hibernate.core;
 
+import edu.utah.kmm.common.utils.ClassUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,18 +15,19 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.Properties;
 
+import static org.fujionclinical.api.spring.Constants.PROFILE_ROOT;
+
 @Configuration
 @EnableTransactionManagement
-@Profile("root")
 public class Configurator {
 
     @Value("${org.fujionclinical.hibernate.url}")
     private String url;
 
-    @Value("${org.fujionclinical.hibernate.password:}")
+    @Value("${org.fujionclinical.hibernate.username:}")
     private String username;
 
-    @Value("${org.fujionclinical.hibernate.username:}")
+    @Value("${org.fujionclinical.hibernate.password:}")
     private String password;
 
     @Value("${org.fujionclinical.hibernate.connectionproperties:}")
@@ -36,43 +39,27 @@ public class Configurator {
     @Value("${org.fujionclinical.hibernate.hbm2ddl.auto:update}")
     private String hbm2ddl_auto;
 
-    public Configurator() {
-    }
+    @Value("${org.fujionclinical.hibernate.datasource:}")
+    private String dataSourceClass;
 
-    public String getUrl() {
-        return url;
-    }
+    @Value("${org.fujionclinical.hibernate.driver}")
+    private String driverClass;
 
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getConnectionProperties() {
-        return connectionProperties;
-    }
-
-    public String getHbm2ddlAuto() {
-        return hbm2ddl_auto;
-    }
-
-    public boolean getDebug() {
-        return debug;
-    }
+    @Value("${org.fujionclinical.hibernate.dialect:#{null}}")
+    private String dialect;
 
     @Bean("fcfHibernateSessionFactory")
+    @Profile(PROFILE_ROOT)
     protected LocalSessionFactoryBean sessionFactory(
-            @Autowired @Qualifier("fcfHibernateDataSource") AbstractDataSource dataSource) {
+            @Autowired @Qualifier("fcfHibernateDataSource") HibernateDataSource dataSource) {
         LocalSessionFactoryBean bean = new LocalSessionFactoryBean();
         Properties props = new Properties();
-        String debug = Boolean.toString(getDebug());
-        props.setProperty("hibernate.dialect", dataSource.getDialect());
-        props.setProperty("hibernate.hbm2ddl.auto", getHbm2ddlAuto());
-        props.setProperty("hibernate.show_sql", debug);
-        props.setProperty("hibernate.format_sql", debug);
+        String debugStr = Boolean.toString(debug);
+        props.setProperty("hibernate.dialect", dialect);
+        props.setProperty("hibernate.hbm2ddl.auto", hbm2ddl_auto);
+        props.setProperty("hibernate.show_sql", debugStr);
+        props.setProperty("hibernate.format_sql", debugStr);
+        props.setProperty("hibernate.globally_quoted_identifiers", "true");
         bean.setHibernateProperties(props);
         bean.setPackagesToScan("org.fujionclinical.hibernate");
         bean.setDataSource(dataSource);
@@ -80,6 +67,7 @@ public class Configurator {
     }
 
     @Bean("fcfHibernateTransactionManager")
+    @Profile(PROFILE_ROOT)
     protected HibernateTransactionManager hibernateTransactionManager(
             @Qualifier("fcfHibernateSessionFactory") LocalSessionFactoryBean sessionFactory) {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
@@ -88,8 +76,32 @@ public class Configurator {
     }
 
     @Bean("fcfHibernatePersistenceExceptionTranslationPostProcessor")
+    @Profile(PROFILE_ROOT)
     protected PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
+    }
+
+    @Bean("fcfHibernateDataSource")
+    @Profile(PROFILE_ROOT)
+    protected HibernateDataSource dataSource() throws Exception {
+        HibernateDataSource dataSource;
+
+        if (StringUtils.isBlank(dataSourceClass)) {
+            dataSource = new HibernateDataSource();
+        } else {
+            dataSource = (HibernateDataSource) ClassUtils.newInstance(Class.forName(dataSourceClass));
+        }
+
+        dataSource.setDriverClassName(driverClass);
+        dataSource.setUrl(url);
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
+
+        if (StringUtils.isNotBlank(connectionProperties)) {
+            dataSource.setConnectionProperties(connectionProperties);
+        }
+
+        return dataSource;
     }
 
 }

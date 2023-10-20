@@ -31,11 +31,13 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import static org.fujionclinical.api.spring.Constants.PROFILE_ROOT;
+
 /**
  * DAO for User class.
  */
 @Component
-@Profile("root")
+@Profile(PROFILE_ROOT)
 public class UserDAO extends AbstractDAO<User> {
 
     private static final String HQL_AUTHENTICATE = "FROM User "

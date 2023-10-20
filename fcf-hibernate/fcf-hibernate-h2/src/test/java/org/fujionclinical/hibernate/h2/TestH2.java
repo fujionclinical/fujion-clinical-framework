@@ -90,8 +90,7 @@ public class TestH2 {
         TestUtil.setFields(config, savedConfigState);
         TestUtil.setFields(config, params);
         H2DataSource h2 = new H2DataSource();
-        ReflectionTestUtils.setField(h2, "configurator", config);
-        h2.setMode(dbMode.toString());
+        ReflectionTestUtils.setField(h2, "dbModeStr", dbMode.toString());
         h2.init();
         String error = null;
 
