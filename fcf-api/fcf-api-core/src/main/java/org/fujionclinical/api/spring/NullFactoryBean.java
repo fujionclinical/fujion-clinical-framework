@@ -43,8 +43,4 @@ public class NullFactoryBean implements FactoryBean<Void> {
         return null;
     }
     
-    @Override
-    public boolean isSingleton() {
-        return true;
-    }
 }
