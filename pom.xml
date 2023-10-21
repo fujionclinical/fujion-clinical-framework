@@ -78,16 +78,52 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- Spring Framework -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context-support</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jms</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-messaging</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-orm</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
 			<!-- Apache Libraries -->
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>1.16.0</version>
+			</dependency>
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-dbcp2</artifactId>
 				<version>2.10.0</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.commons</groupId>
-				<artifactId>commons-compress</artifactId>
-				<version>1.24.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.commons</groupId>
@@ -97,47 +133,12 @@
 			<!-- Spring Security -->
 			<dependency>
 				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-acl</artifactId>
-				<version>${org.springframework.security.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-aspects</artifactId>
-				<version>${org.springframework.security.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-cas</artifactId>
-				<version>${org.springframework.security.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-config</artifactId>
 				<version>${org.springframework.security.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-core</artifactId>
-				<version>${org.springframework.security.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-crypto</artifactId>
-				<version>${org.springframework.security.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-ldap</artifactId>
-				<version>${org.springframework.security.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-openid</artifactId>
-				<version>${org.springframework.security.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-taglibs</artifactId>
 				<version>${org.springframework.security.version}</version>
 			</dependency>
 			<dependency>
@@ -170,11 +171,11 @@
 				<artifactId>jaxb-runtime</artifactId>
 				<version>3.0.2</version>
 			</dependency>
-			<dependency>
-				<groupId>javax.cache</groupId>
-				<artifactId>cache-api</artifactId>
-				<version>1.1.1</version>
-			</dependency>
+<!--			<dependency>-->
+<!--				<groupId>javax.cache</groupId>-->
+<!--				<artifactId>cache-api</artifactId>-->
+<!--				<version>1.1.1</version>-->
+<!--			</dependency>-->
 			<!-- Thymeleaf -->
 			<dependency>
 				<groupId>org.thymeleaf</groupId>
@@ -216,7 +217,6 @@
 				<artifactId>jakarta.persistence-api</artifactId>
 				<version>3.1.0</version>
 			</dependency>
-
 		</dependencies>
 	</dependencyManagement>
 
